@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This is a customized copyright.</copyright>
-    <lastBuildDate>Tue, 13 Aug 2019 22:20:53 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2020 14:15:46 +0800</lastBuildDate>
     
 	<atom:link href="https://weepingdogel.github.io/tags/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一个C语言的小程序</title>
+      <link>https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Sun, 29 Mar 2020 14:15:46 +0800</pubDate>
+      
+      <guid>https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/</guid>
+      <description>简介 嘛&amp;hellip;学了一会儿C语言弄了这么个玩意👑
+其实就是基础语法和简单的判断👑
+代码 废话不多说直接上代码👑
+/* 标准体重计算器 By WeepingDogel 世卫计算方法 男性：(身高cm－80)×70﹪=标准体重 女性：(身高cm－70)×60﹪=标准体重 标准体重正负10﹪为正常体重 标准体重正负10﹪~ 20﹪为体重过重或过轻 标准体重正负20﹪以上为肥胖或体重不足 超重计算公式 超重%=[（实际体重－理想体重）/（理想体重）]×100% */ /*导入标准库stdio.h （必须）*/ #include &amp;lt;stdio.h&amp;gt;/*标准体重*/ int weight; /*声明函数*/ float judge(float parameter1,float parameter2); float Count_M(float parameter); float Count_F(float parameter); /*声明主函数main() (这个都不写，那写个屁)*/ int main() { printf(&amp;#34;欢迎使用.&amp;#34;); /*身高*/ int height; /*声明变量sex表示性别*/ char sex; /*声明变量：实际体重*/ int real_weight; /*提示用户输入性别*/ printf(&amp;#34;请输入你的性别\n（M为男性,F为女性,注意大小写）&amp;#34;); printf(&amp;#34;\n\n:&amp;#34;); /*读取用户输入的数据并赋值给sex*/ scanf(&amp;#34;%c&amp;#34;,&amp;amp;sex); /*进入判断，并判断变量sex的值是否为M*/ if(sex == &amp;#39;M&amp;#39;) { /*当变量sex=M时，判断为男性，将执行以下代码*/ printf(&amp;#34;你是男性&amp;#34;); printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); printf(&amp;#34;\n\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); weight = (int) Count_M((float) height); printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); printf(&amp;#34;\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); judge((float) real_weight,(float) weight); } /*进入判断，并判断变量sex的值是否为F*/ else if(sex == &amp;#39;F&amp;#39;) { /*当变量sex=F时，判断为女性，将执行以下代码*/ printf(&amp;#34;你是女性&amp;#34;); printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); printf(&amp;#34;\n\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); weight = (int) Count_F((float) height); printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); printf(&amp;#34;\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); judge((float) real_weight,(float) weight); } return 0; } /*计算出男性标准体重*/ float Count_M(float parameter) { /*男性：(身高cm－80)×70﹪=标准体重*/ /*定义变量:结果*/ float result; result = (int)(parameter - 80.</description>
+    </item>
     
     <item>
       <title>Python学习笔记 简单爬虫</title>

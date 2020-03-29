@@ -6,9 +6,143 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This is a customized copyright.</copyright>
-    <lastBuildDate>Fri, 27 Mar 2020 22:17:58 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Mar 2020 14:15:46 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>一个C语言的小程序</title>
+        <link>https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
+        <pubDate>Sun, 29 Mar 2020 14:15:46 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;嘛&amp;hellip;学了一会儿C语言弄了这么个玩意👑&lt;/p&gt;
+&lt;p&gt;其实就是基础语法和简单的判断👑&lt;/p&gt;
+&lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
+&lt;p&gt;废话不多说直接上代码👑&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;标准体重计算器
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;By WeepingDogel
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;世卫计算方法
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;男性：(身高cm－80)×70﹪=标准体重
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;女性：(身高cm－70)×60﹪=标准体重
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;标准体重正负10﹪为正常体重
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;标准体重正负10﹪~ 20﹪为体重过重或过轻
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;标准体重正负20﹪以上为肥胖或体重不足
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;超重计算公式
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;超重%=[（实际体重－理想体重）/（理想体重）]×100%
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;*/&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;/*导入标准库stdio.h （必须）*/&lt;/span&gt;
+&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*标准体重*/&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; weight;
+&lt;span style=&#34;color:#75715e&#34;&gt;/*声明函数*/&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;judge&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter1,&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter2);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Count_M&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter);
+&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Count_F&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter);
+&lt;span style=&#34;color:#75715e&#34;&gt;/*声明主函数main() (这个都不写，那写个屁)*/&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;()
+{
+    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;欢迎使用.&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*身高*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; height;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*声明变量sex表示性别*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; sex;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*声明变量：实际体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; real_weight;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*提示用户输入性别*/&lt;/span&gt;
+    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请输入你的性别&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;（M为男性,F为女性,注意大小写）&amp;#34;&lt;/span&gt;);
+    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*读取用户输入的数据并赋值给sex*/&lt;/span&gt;
+    scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%c&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;sex);
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*进入判断，并判断变量sex的值是否为M*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(sex &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;M&amp;#39;&lt;/span&gt;)
+    {
+        &lt;span style=&#34;color:#75715e&#34;&gt;/*当变量sex=M时，判断为男性，将执行以下代码*/&lt;/span&gt;
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你是男性&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;输入你的身高(单位:厘米)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;height);
+        weight &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;) Count_M((&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt;) height);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你的身高对应的标准体重为%dkg&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;,weight);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;real_weight);
+        judge((&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt;) real_weight,(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt;) weight);
+    }
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*进入判断，并判断变量sex的值是否为F*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(sex &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;F&amp;#39;&lt;/span&gt;)
+    {
+        &lt;span style=&#34;color:#75715e&#34;&gt;/*当变量sex=F时，判断为女性，将执行以下代码*/&lt;/span&gt;
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你是女性&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;输入你的身高(单位:厘米)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;height);
+        weight &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;) Count_F((&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt;) height);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你的身高对应的标准体重为%dkg&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;,weight);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;real_weight);
+        judge((&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt;) real_weight,(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt;) weight);
+    }
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+}
+&lt;span style=&#34;color:#75715e&#34;&gt;/*计算出男性标准体重*/&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Count_M&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter)
+{
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*男性：(身高cm－80)×70﹪=标准体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*定义变量:结果*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; result;
+    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)(parameter &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;80.0&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.7&lt;/span&gt;;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result;
+}
+&lt;span style=&#34;color:#75715e&#34;&gt;/*计算出女性标准体重*/&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Count_F&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter)
+{
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*女性：(身高cm－70)×60﹪=标准体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*定义变量:结果*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; result;
+    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)(parameter &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;70.0&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.6&lt;/span&gt;;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result;
+}
+&lt;span style=&#34;color:#75715e&#34;&gt;/*检测实际体重是否符合标准*/&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;judge&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter1,&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; parameter2)
+{
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*标准体重正负10﹪为正常体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你的体重符合正常标准&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*标准体重正负10﹪~ 20﹪为体重过重或过轻*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你的体重过重&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*标准体重正负10﹪~ 20﹪为体重过重或过轻*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你的体重过轻&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*标准体重正负20﹪以上为肥胖或体重不足*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你太胖了。&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#75715e&#34;&gt;/*标准体重正负20﹪以上为肥胖或体重不足*/&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;你太瘦了。&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/ - This is a customized copyright.</description>
+        </item>
     
     
     
@@ -2347,124 +2481,6 @@ Priv: Timestomp Commands
 &lt;p&gt;其次，ms17-010这类的漏洞都是十分危险的，Windows用户一定要注意及时更新，打好补丁，不要给坏人可乘之机，最好是干脆直接日用Linux，windows仅用于娱乐即可。&lt;/p&gt;
 &lt;p&gt;然后这篇博客也带有很多水的成分，谢谢浏览。&lt;/p&gt;
 - https://weepingdogel.github.io/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/ - This is a customized copyright.</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Linux Mint 安装教程</title>
-        <link>https://weepingdogel.github.io/posts/linux_mint_%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</link>
-        <pubDate>Sun, 23 Jun 2019 20:10:29 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/linux_mint_%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/linux_mint_%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-&lt;p&gt;Linux Mint是一款由Linux Mint Team团队从2006年开始发行，是基于Debian和Ubuntu的发行版。&lt;/p&gt;
-&lt;p&gt;其目的是提供一种更加完整的即刻可用体验，它诞生的目的是为家庭用户和企业提供一个免费的，易用的，舒适而优雅的桌面操作系统。&lt;/p&gt;
-&lt;p&gt;包括了浏览器 多媒体播放器 DVD播放支持 Java和其他组件，它有三个桌面环境版本，分别是Cinnamon，MATE，xfce。&lt;/p&gt;
-&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;
-&lt;p&gt;Linux Mint可以去官网下载，官网有两种下载方式，一种是通过所在国家对应的镜像站进行HTTP下载，还有一种就是通过种子下载的。&lt;/p&gt;
-&lt;p&gt;由于官网上的上海大学开源镜像站进不去所以我只好选择了种子下载，但是本篇博客将会提供xfce版本的下载地址。&lt;/p&gt;
-&lt;p&gt;Linux Mint官网：&lt;a href=&#34;https://www.linuxmint.com/&#34;&gt;https://www.linuxmint.com/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;墙内用户可以从以下两个镜像源快速下载Linux Mint:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://mirrors.tuna.tsinghua.edu.cn/linuxmint-cd/stable/&#34;&gt;清华开源镜像站&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://mirrors.ustc.edu.cn/linuxmint-cd/stable/&#34;&gt;中科大开源镜像站&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_13-59-22.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_14-07-11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;xfce版本安装条件：至少512MB或以上的内存，15GB或以上的磁盘空间&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;你可以选择安装在&lt;strong&gt;物理机&lt;/strong&gt;上，也可以安装在&lt;strong&gt;虚拟机&lt;/strong&gt;上。&lt;/p&gt;
-&lt;p&gt;如果你需要安装在&lt;strong&gt;物理机&lt;/strong&gt;则需要使用&lt;strong&gt;refus&lt;/strong&gt;等类似的&lt;strong&gt;U盘启动制作工具&lt;/strong&gt;制作&lt;strong&gt;启动盘&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;本篇博客将使用虚拟机作为演示。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_14-09-13.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_15-44-12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;安装过程&#34;&gt;安装过程&lt;/h3&gt;
-&lt;h4 id=&#34;挂载安装介质&#34;&gt;挂载安装介质&lt;/h4&gt;
-&lt;p&gt;首先将下载好的&lt;strong&gt;镜像文件&lt;/strong&gt;加入&lt;strong&gt;虚拟机&lt;/strong&gt;的启动，如果是&lt;strong&gt;物理机&lt;/strong&gt;则插入你&lt;strong&gt;制作好的启动盘&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_15-47-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_15-49-43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_15-51-26.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;选择好之后，点击&lt;strong&gt;确定&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;然后启动虚拟机即可。而物理机则需要重启然后按相应的键，ESC F12 F11之类的，这些百度上都有，搜索“你电脑的品牌或者主板的品牌+U盘启动”就可以查到&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_15-59-20.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后虚拟机将会自动切换到虚拟CD进行启动，等待即可。&lt;/p&gt;
-&lt;p&gt;接下来就会出现这个画面，等待10秒后进入了CD Live即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_15-59-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;10秒后，将会进入开机动画，不用多解释（还挺好看的哈）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-00-08.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;再过了一会儿，就进入这个界面了，这就是我上文说的CD Live。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-00-31.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;哈哈哈哈吐嘈一下这个时间显示，为什么是8点呢，而我发布这篇博客的时间是下午两点啊，其实是因为这个CD Live的默认时区不一样，不用理会他，我们继续操作即可。&lt;/p&gt;
-&lt;h4 id=&#34;选择语言习惯和安装需要&#34;&gt;选择语言，习惯和安装需要&lt;/h4&gt;
-&lt;p&gt;那么接下来点击这个 &lt;strong&gt;“Install Linux Mint”&lt;/strong&gt; ，然后就会弹出这个安装界面了，第一页这里是选择语言，我们选择简体中文（当然你看得懂什么语言就选什么语言）。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-06-03.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-06-26.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-06-39.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后就是选择键盘布局了，这里默认就好，或者选择美式，但都差不多是一样的。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-06-58.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-14-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-15-18.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h4 id=&#34;分区&#34;&gt;分区&lt;/h4&gt;
-&lt;p&gt;然后就是一个&lt;strong&gt;重头戏&lt;/strong&gt;了,你一定要&lt;strong&gt;认真看！认真看！认真看！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;（重要的事情说三遍）&lt;/p&gt;
-&lt;p&gt;这里会给你两个选项来进行分区，其中第一个单选框的意思是把你的&lt;strong&gt;整个硬盘全部格式化&lt;/strong&gt;然后再安装Linux Mint，如果你是虚拟机的话选这个无所谓，但是如果你是&lt;strong&gt;物理机&lt;/strong&gt;的话就要&lt;strong&gt;慎重&lt;/strong&gt;了,无论安装成功或失败你的原有数据都会丢失。&lt;/p&gt;
-&lt;p&gt;下面两个勾不用理会，因为大部分人都不会选择第一个单选框，所以这两个勾毫无意义了。本篇博客也将选择 &lt;strong&gt;“其他选项”&lt;/strong&gt; 。 那么我们选择下面那个 &lt;strong&gt;“其他选项”&lt;/strong&gt; 。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-15-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;选择其他选项后，就会进入这个页面，这里就是建立分区表的地方（废话，下面都写着呢，还用你说）了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-33-55.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;那么，因为教程演示是虚拟机，所以点击新建分区表，如果是物理机则不需要了。&lt;/p&gt;
-&lt;p&gt;这时候会弹出一个提示，这个也不必理会它，直接点&lt;code&gt;继续&lt;/code&gt;即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-35-03.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来一个空的分区表就建立好了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-35-14.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;那么，要怎样分区呢？&lt;/p&gt;
-&lt;p&gt;我们知道Linux必须分的区有&lt;code&gt;根(/)分区&lt;/code&gt;、&lt;code&gt;/boot分区&lt;/code&gt;和&lt;code&gt;swap分区&lt;/code&gt;，那么该分多少呢?&lt;/p&gt;
-&lt;p&gt;从&lt;code&gt;/boot&lt;/code&gt;说起，这个分区是存放系统启动引导文件的，只需要500MB左右，但别小看了这个小分区，如果没有这个，根分区一旦被写满，系统将无法启动。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;SWAP分区&lt;/code&gt;：用于给内存交换空间，当内存要爆了的时候系统会把一部分进程转移到SWAP里面，它所需的大小可以是内存大小的一半，也可以与内存大小相等，也可以是内存的两倍，但是太大也不好，如果内存够用的话，swap分太大会浪费不少的硬盘存储空间。&lt;/p&gt;
-&lt;p&gt;最后是根分区了，这个好理解，就是系统分区，应该将剩下的全都分给它。&lt;/p&gt;
-&lt;p&gt;那么具体怎么分呢，参考我操作咯&lt;/p&gt;
-&lt;p&gt;点击那个&lt;code&gt;+&lt;/code&gt;,将会弹出一个创建分区的窗口&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-55-46.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_16-56-14.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;先创建一个&lt;code&gt;/boot&lt;/code&gt;分区，大小500MB，文件系统为EXT4文件系统，挂载点为&lt;code&gt;/boot&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-00-20.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后发现左下角的&lt;code&gt;+&lt;/code&gt;，变成了灰色？不用怕，继续选择空闲空间它就会变成可选择的了。&lt;/p&gt;
-&lt;p&gt;那么同上操作，我们分SWAP，但是注意了：SWAP不是挂载点，应该在文件系统里选择 &lt;strong&gt;“交换空间”&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;类型为主分区，大小1024MB，文件系统为交换空间，挂载点不用选择&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-13-14.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-13-28.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;那么同上操作，我们来分&lt;code&gt;根分区&lt;/code&gt;，类型主分区，文件系统EXT4，挂载点&lt;code&gt;/&lt;/code&gt;，大小将剩下的容量全部给它。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-19-40.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;之后分区基本上就完成了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-19-59.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h4 id=&#34;开始全自动安装&#34;&gt;开始全自动安装&lt;/h4&gt;
-&lt;p&gt;现在我们可以安装了，点击 &lt;strong&gt;“现在安装”&lt;/strong&gt; 即可，接下来会弹出一个提示，内容如图，点击 &lt;strong&gt;“继续”&lt;/strong&gt; 即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-23-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来就会要你选择地区了，这个决定了系统的时区，一定要根据实际情况选择，我们选择上海。然后点击 &lt;strong&gt;“继续”&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-27-27.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后设置什么姓名啊计算机名啊用户名啊密码啊什么的，这些可以随便写，但是你一定要记住你写的用户名和密码是什么。&lt;/p&gt;
-&lt;p&gt;下面有一个加密主目录，可选可不选，意思是把你的用户目录进行加密，我就不选了，没必要。&lt;/p&gt;
-&lt;p&gt;写好选好以后，点击继续即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-32-21.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来就会开始安装了，全自动哦～去喝杯奶茶慢慢等吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-34-43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-35-02.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;一直等就好。&lt;/p&gt;
-&lt;p&gt;直到出现了这个窗口&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-53-00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;那么恭喜你，你安装成功了！点击&lt;strong&gt;现在重启&lt;/strong&gt;。 如果你出现了这个，虚拟机把虚拟光驱卸掉按回车即可，物理机则拔掉U盘按回车即可。&lt;/p&gt;
-&lt;p&gt;（物理机一般不会出现这个）&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_17-58-03.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来如果没出问题的话，就进入系统了。&lt;/p&gt;
-&lt;p&gt;登录你刚刚设置的用户和密码，好好享受吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-06-23_18-05-27.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;p&gt;稍微总结一下，Linux Mint是对新手比较友好的一份Linux发行版，它的安装过程也是非常简单的，基本上都是图形操作点点点。所以非常推荐新手学习使用&lt;/p&gt;
-&lt;p&gt;另外，本博客仅供参考和学习，如果出现其他问题请自行百度。&lt;/p&gt;
-&lt;p&gt;如需转载，请注明出处。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/linux_mint_%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/ - This is a customized copyright.</description>
         </item>
     
     

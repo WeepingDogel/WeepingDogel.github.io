@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html><head>
+<title>一个C语言的小程序</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/journal.min.9acc073e23d58075a12c35f99d3c9f06e827aae9b21e8c5297df279ab14f4660.css" integrity="sha256-mswHPiPVgHWhLDX5nTyfBugnqumyHoxSl98nmrFPRmA=" media="screen">
+
+<script src="https://weepingdogel.github.io//js/loadCSS.js"></script>
+<script src="https://weepingdogel.github.io//js/table.js"></script>
+
+
+<script src="https://weepingdogel.github.io//js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'a1e928de856334c726b3',
+  clientSecret: 'f509df81e9d11e081635dbd9ebba466964694e48',
+  repo: 'WeepingDogel.github.io',
+  owner: 'weepingdogel',
+  admin: ['weepingdogel'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            WeepingDogel&#39;s Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Themed by Diary.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+                
+                
+                    
+                
+                <a class="a-block nav-link-item active" href="/posts">
+                    Posts
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/categories">
+                    分类
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/tags">
+                    标签
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/index.xml">
+                    RSS订阅
+                </a>
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%ae%80%e4%bb%8b" v-on:click="closeDrawer" id="简介-nav">
+										 简介
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e7%a0%81" v-on:click="closeDrawer" id="代码-nav">
+										 代码
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+                
+                    
+                    
+                        
+                    
+                    <a class="a-block drawer-menu-item active" href="/posts">
+                        Posts
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/categories">
+                        分类
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/tags">
+                        标签
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/index.xml">
+                        RSS订阅
+                    </a>
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%ae%80%e4%bb%8b" v-on:click="closeDrawer" id="简介-nav">
+										 简介
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e4%bb%a3%e7%a0%81" v-on:click="closeDrawer" id="代码-nav">
+										 代码
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+            WeepingDogel&#39;s Blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://weepingdogel.github.io/">
+        <div class="single-column-header-title">WeepingDogel&#39;s Blog</div>
+        
+        <div class="single-column-header-subtitle">Themed by Diary.</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                 style="background-image: url('/images/wallhaven-j5qjqy.png')">
+                
+                <img src="https://weepingdogel.github.io/images/wallhaven-j5qjqy.png" style="display: none;"></img>
+                <div class="post-title">
+                    一个C语言的小程序
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-03-29 14:15
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/c%E8%AF%AD%E8%A8%80">C语言</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B">编程</a>
+                                &nbsp;
+                            
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h2 id="简介">简介</h2>
+<p>嘛&hellip;学了一会儿C语言弄了这么个玩意👑</p>
+<p>其实就是基础语法和简单的判断👑</p>
+<h2 id="代码">代码</h2>
+<p>废话不多说直接上代码👑</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e">标准体重计算器
+</span><span style="color:#75715e">By WeepingDogel
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">世卫计算方法
+</span><span style="color:#75715e">男性：(身高cm－80)×70﹪=标准体重
+</span><span style="color:#75715e">女性：(身高cm－70)×60﹪=标准体重
+</span><span style="color:#75715e">标准体重正负10﹪为正常体重
+</span><span style="color:#75715e">标准体重正负10﹪~ 20﹪为体重过重或过轻
+</span><span style="color:#75715e">标准体重正负20﹪以上为肥胖或体重不足
+</span><span style="color:#75715e">超重计算公式
+</span><span style="color:#75715e">超重%=[（实际体重－理想体重）/（理想体重）]×100%
+</span><span style="color:#75715e">*/</span>
+<span style="color:#75715e">/*导入标准库stdio.h （必须）*/</span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">/*标准体重*/</span>
+<span style="color:#66d9ef">int</span> weight;
+<span style="color:#75715e">/*声明函数*/</span>
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">judge</span>(<span style="color:#66d9ef">float</span> parameter1,<span style="color:#66d9ef">float</span> parameter2);
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">Count_M</span>(<span style="color:#66d9ef">float</span> parameter);
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">Count_F</span>(<span style="color:#66d9ef">float</span> parameter);
+<span style="color:#75715e">/*声明主函数main() (这个都不写，那写个屁)*/</span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    printf(<span style="color:#e6db74">&#34;欢迎使用.&#34;</span>);
+    <span style="color:#75715e">/*身高*/</span>
+    <span style="color:#66d9ef">int</span> height;
+    <span style="color:#75715e">/*声明变量sex表示性别*/</span>
+    <span style="color:#66d9ef">char</span> sex;
+    <span style="color:#75715e">/*声明变量：实际体重*/</span>
+    <span style="color:#66d9ef">int</span> real_weight;
+    <span style="color:#75715e">/*提示用户输入性别*/</span>
+    printf(<span style="color:#e6db74">&#34;请输入你的性别</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">（M为男性,F为女性,注意大小写）&#34;</span>);
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">:&#34;</span>);
+    <span style="color:#75715e">/*读取用户输入的数据并赋值给sex*/</span>
+    scanf(<span style="color:#e6db74">&#34;%c&#34;</span>,<span style="color:#f92672">&amp;</span>sex);
+    <span style="color:#75715e">/*进入判断，并判断变量sex的值是否为M*/</span>
+    <span style="color:#66d9ef">if</span>(sex <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;M&#39;</span>)
+    {
+        <span style="color:#75715e">/*当变量sex=M时，判断为男性，将执行以下代码*/</span>
+        printf(<span style="color:#e6db74">&#34;你是男性&#34;</span>);
+        printf(<span style="color:#e6db74">&#34;输入你的身高(单位:厘米)&#34;</span>);
+        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">:&#34;</span>);
+        scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>height);
+        weight <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) Count_M((<span style="color:#66d9ef">float</span>) height);
+        printf(<span style="color:#e6db74">&#34;你的身高对应的标准体重为%dkg</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,weight);
+        printf(<span style="color:#e6db74">&#34;请输入你的实际体重(单位:kg)&#34;</span>);
+        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">:&#34;</span>);
+        scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>real_weight);
+        judge((<span style="color:#66d9ef">float</span>) real_weight,(<span style="color:#66d9ef">float</span>) weight);
+    }
+    <span style="color:#75715e">/*进入判断，并判断变量sex的值是否为F*/</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(sex <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;F&#39;</span>)
+    {
+        <span style="color:#75715e">/*当变量sex=F时，判断为女性，将执行以下代码*/</span>
+        printf(<span style="color:#e6db74">&#34;你是女性&#34;</span>);
+        printf(<span style="color:#e6db74">&#34;输入你的身高(单位:厘米)&#34;</span>);
+        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">:&#34;</span>);
+        scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>height);
+        weight <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) Count_F((<span style="color:#66d9ef">float</span>) height);
+        printf(<span style="color:#e6db74">&#34;你的身高对应的标准体重为%dkg</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,weight);
+        printf(<span style="color:#e6db74">&#34;请输入你的实际体重(单位:kg)&#34;</span>);
+        printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">:&#34;</span>);
+        scanf(<span style="color:#e6db74">&#34;%d&#34;</span>,<span style="color:#f92672">&amp;</span>real_weight);
+        judge((<span style="color:#66d9ef">float</span>) real_weight,(<span style="color:#66d9ef">float</span>) weight);
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+<span style="color:#75715e">/*计算出男性标准体重*/</span>
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">Count_M</span>(<span style="color:#66d9ef">float</span> parameter)
+{
+    <span style="color:#75715e">/*男性：(身高cm－80)×70﹪=标准体重*/</span>
+    <span style="color:#75715e">/*定义变量:结果*/</span>
+    <span style="color:#66d9ef">float</span> result;
+    result <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)(parameter <span style="color:#f92672">-</span> <span style="color:#ae81ff">80.0</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.7</span>;
+
+    <span style="color:#66d9ef">return</span> result;
+}
+<span style="color:#75715e">/*计算出女性标准体重*/</span>
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">Count_F</span>(<span style="color:#66d9ef">float</span> parameter)
+{
+    <span style="color:#75715e">/*女性：(身高cm－70)×60﹪=标准体重*/</span>
+    <span style="color:#75715e">/*定义变量:结果*/</span>
+    <span style="color:#66d9ef">float</span> result;
+    result <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)(parameter <span style="color:#f92672">-</span> <span style="color:#ae81ff">70.0</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.6</span>;
+
+    <span style="color:#66d9ef">return</span> result;
+}
+<span style="color:#75715e">/*检测实际体重是否符合标准*/</span>
+<span style="color:#66d9ef">float</span> <span style="color:#a6e22e">judge</span>(<span style="color:#66d9ef">float</span> parameter1,<span style="color:#66d9ef">float</span> parameter2)
+{
+    <span style="color:#75715e">/*标准体重正负10﹪为正常体重*/</span>
+    <span style="color:#66d9ef">if</span>(parameter1 <span style="color:#f92672">&lt;=</span> parameter2 <span style="color:#f92672">+</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.1</span> <span style="color:#f92672">&amp;&amp;</span> parameter1 <span style="color:#f92672">&gt;=</span> parameter2 <span style="color:#f92672">-</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.1</span>)
+    {
+        printf(<span style="color:#e6db74">&#34;你的体重符合正常标准&#34;</span>);
+    }
+    <span style="color:#75715e">/*标准体重正负10﹪~ 20﹪为体重过重或过轻*/</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(parameter1 <span style="color:#f92672">&gt;=</span> parameter2 <span style="color:#f92672">+</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.1</span> <span style="color:#f92672">&amp;&amp;</span> parameter1 <span style="color:#f92672">&lt;=</span> parameter2 <span style="color:#f92672">+</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.2</span>)
+    {
+        printf(<span style="color:#e6db74">&#34;你的体重过重&#34;</span>);
+    }
+    <span style="color:#75715e">/*标准体重正负10﹪~ 20﹪为体重过重或过轻*/</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(parameter1 <span style="color:#f92672">&lt;=</span> parameter2 <span style="color:#f92672">-</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.1</span> <span style="color:#f92672">&amp;&amp;</span> parameter1 <span style="color:#f92672">&gt;=</span> parameter2 <span style="color:#f92672">-</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.2</span>)
+    {
+        printf(<span style="color:#e6db74">&#34;你的体重过轻&#34;</span>);
+    }
+    <span style="color:#75715e">/*标准体重正负20﹪以上为肥胖或体重不足*/</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(parameter1 <span style="color:#f92672">&gt;</span> parameter2 <span style="color:#f92672">+</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.2</span>)
+    {
+        printf(<span style="color:#e6db74">&#34;你太胖了。&#34;</span>);
+    }
+    <span style="color:#75715e">/*标准体重正负20﹪以上为肥胖或体重不足*/</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(parameter1 <span style="color:#f92672">&lt;</span> parameter2 <span style="color:#f92672">-</span> parameter2 <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.2</span>)
+    {
+        printf(<span style="color:#e6db74">&#34;你太瘦了。&#34;</span>);
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2020-03-29</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+                    Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://weepingdogel.github.io/posts/2020-3-29/">
+                    Previous<br>加冕日
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	</div>
+    	</div>
+    <script src="https://weepingdogel.github.io//js/journal.js"></script>
+    </body>
+</html>
