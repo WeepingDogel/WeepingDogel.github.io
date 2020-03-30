@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html><head>
+<title>FreeBSD初♂体验</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/journal.min.9acc073e23d58075a12c35f99d3c9f06e827aae9b21e8c5297df279ab14f4660.css" integrity="sha256-mswHPiPVgHWhLDX5nTyfBugnqumyHoxSl98nmrFPRmA=" media="screen">
+
+<script src="https://weepingdogel.github.io//js/loadCSS.js"></script>
+<script src="https://weepingdogel.github.io//js/table.js"></script>
+
+
+<script src="https://weepingdogel.github.io//js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'a1e928de856334c726b3',
+  clientSecret: 'f509df81e9d11e081635dbd9ebba466964694e48',
+  repo: 'WeepingDogel.github.io',
+  owner: 'weepingdogel',
+  admin: ['weepingdogel'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            👑 WeepingDogel&#39;s Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Themed by Diary.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+                
+                
+                    
+                
+                <a class="a-block nav-link-item active" href="/posts">
+                    Posts
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/categories">
+                    分类
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/tags">
+                    标签
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/index.xml">
+                    RSS订阅
+                </a>
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%9c%ba%e7%99%bd" v-on:click="closeDrawer" id="开场白-nav">
+										 开场白
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#freebsd%e4%bb%8b%e7%bb%8d" v-on:click="closeDrawer" id="freebsd介绍-nav">
+										 FreeBSD介绍
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85" v-on:click="closeDrawer" id="安装-nav">
+										 安装
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c" v-on:click="closeDrawer" id="准备工作-nav">
+										 准备工作
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85%e8%bf%87%e7%a8%8b" v-on:click="closeDrawer" id="安装过程-nav">
+										 安装过程
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%a3%85%e5%ae%8c%e5%90%8e%e7%9a%84%e6%84%9f%e6%83%b3" v-on:click="closeDrawer" id="装完后的感想-nav">
+										 装完后的感想
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" v-on:click="closeDrawer" id="参考链接-nav">
+										 参考链接
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+                
+                    
+                    
+                        
+                    
+                    <a class="a-block drawer-menu-item active" href="/posts">
+                        Posts
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/categories">
+                        分类
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/tags">
+                        标签
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/index.xml">
+                        RSS订阅
+                    </a>
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%9c%ba%e7%99%bd" v-on:click="closeDrawer" id="开场白-nav">
+										 开场白
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#freebsd%e4%bb%8b%e7%bb%8d" v-on:click="closeDrawer" id="freebsd介绍-nav">
+										 FreeBSD介绍
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85" v-on:click="closeDrawer" id="安装-nav">
+										 安装
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c" v-on:click="closeDrawer" id="准备工作-nav">
+										 准备工作
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85%e8%bf%87%e7%a8%8b" v-on:click="closeDrawer" id="安装过程-nav">
+										 安装过程
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%a3%85%e5%ae%8c%e5%90%8e%e7%9a%84%e6%84%9f%e6%83%b3" v-on:click="closeDrawer" id="装完后的感想-nav">
+										 装完后的感想
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" v-on:click="closeDrawer" id="参考链接-nav">
+										 参考链接
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+            👑 WeepingDogel&#39;s Blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://weepingdogel.github.io/">
+        <div class="single-column-header-title">👑 WeepingDogel&#39;s Blog</div>
+        
+        <div class="single-column-header-subtitle">Themed by Diary.</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                 style="background-image: url('/images/wallhaven-r2pdxw.png')">
+                
+                <img src="https://weepingdogel.github.io/images/wallhaven-r2pdxw.png" style="display: none;"></img>
+                <div class="post-title">
+                    FreeBSD初♂体验
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-03-30 15:49
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/bsd">BSD</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/unix">Unix</a>
+                                &nbsp;
+                            
+                                <a href="/tags/freebsd">FreeBSD</a>
+                                &nbsp;
+                            
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h2 id="开场白">开场白</h2>
+<p>闲着无聊我又来<del>水文章</del>更新了，这次准备<del>水</del>写一篇比较长的，然后就想对FreeBSD下手了,嘿嘿。👑</p>
+<h2 id="freebsd介绍">FreeBSD介绍</h2>
+<p>FreeBSD是一个类Unix的操作系统，它与Linux还是有区别的&hellip;&hellip;👑</p>
+<p>Unix&hellip;感觉很少人用吧..估计比Linux还少，不过服务器用用应该还不错吧&hellip;👑</p>
+<p>维基百科是这么说的👑:</p>
+<blockquote>
+<p>FreeBSD是一个类Unix的操作系统，也是FreeBSD项目的发展成果。[2]FreeBSD是第一个开放源代码的系统，他是由基于BSD Unix的源代码派生而来的。BSD Unix是加州大学伯克利分校在1975年至1993年开发的操作系统。FreeBSD被开发为自由软件，这意味着其源代码开放，人人都可以使用FreeBSD。任何人都可以获得并使用它来满足各种需求，也可以修改它，然后再重发布它。此功能专为个人和公司量身定制，可用于创建各种基于FreeBSD的商业和非商业产品。尽管FreeBSD直接从BSD派生，但是从法律的角度来看，FreeBSD为 unix 系统，但它并不是“UNIX”。因为现在“UNIX”商标是属于国际开放标准组织的。[3]FreeBSD的第一个版本于1993年发布。</p>
+</blockquote>
+<blockquote>
+<p>FreeBSD是一个支持许多硬件和体系架构的企业级系统。和其他BSD家族的操作系统一样， FreeBSD其核心、驱动程序以及所有的用户层（Userland）应用程序（如Unix shell和cat和ps等命令）都存储在源代码库中。[4]FreeBSD也可以运行其他二进制软件，比如Linux的。借助ports和FreeBSD软件包管理器，你可以在其上安装各种应用程序。根据2005年的调查，77％的BSD用户使用FreeBSD，因此FreeBSD拥有BSD系列中最大的用户社区。[5]</p>
+</blockquote>
+<blockquote>
+<p>在今天，个人和企业都将FreeBSD用于多种用途，包括Yahoo! [6]，苹果[7]，Juniper网络公司，诺基亚，IBM， Yandex的，Apache软件基金会，Hotmail，索尼和许多其他用途</p>
+<p><a href="https://zh.wikipedia.org/wiki/FreeBSD">[Read More]</a></p>
+</blockquote>
+<h2 id="安装">安装</h2>
+<h3 id="准备工作">准备工作</h3>
+<p>我打算在虚拟机里玩玩就好啦～👑</p>
+<blockquote>
+<p>问:是VirtualBox吗？</p>
+</blockquote>
+<p>对，之前介绍过的<strong>VirtualBox</strong>，也应该没什么好讲的了，创建一个虚拟机应该不是问题，问题是接下来如何进行安装。👑</p>
+<p>除了虚拟机我们还要准备的东西就是FreeBSD的安装镜像了，可以去官方的源下载，但是考虑到速度问题，也可以去墙内的一些镜像站下载。👑</p>
+<p><a href="http://mirrors.ustc.edu.cn/freebsd/releases/">USTC Mirror</a></p>
+<p><strong>注意：下载的时候要确定你的架构，别下错了</strong>(应该大部分都是amd64吧)👑</p>
+<p>什么？你说配置要求？嘛&hellip;👑</p>
+<p>看看官网怎么说👑</p>
+<blockquote>
+<p>FreeBSD/i386 和 FreeBSD/pc98 版本， 都需要 486 或更高的处理器，以及至少 24 MB 的 RAM。 您需要至少 150 MB 的空闲硬盘空间， 才能完成最小的安装配置。</p>
+</blockquote>
+<p>至于amd64架构嘛，一句话，你有处理器有内存有硬盘就能用，而且我们都用虚拟机了👑</p>
+<h3 id="安装过程">安装过程</h3>
+<p>首先肯定是先把镜像导入虚拟机啦，这个我就不再写一遍了，百度谷歌能搜到的&hellip;👑</p>
+<p>然后我们启动，就会看到这个可爱的画面..👑</p>
+<p>你可以直接按回车，也可以等10秒让它自动启动&hellip;👑</p>
+<p><img src="/img/freebsd.png" alt=""></p>
+<p>启动之后就会来到这个界面👑</p>
+<p><img src="/img/FreeBSD_Install.png" alt=""></p>
+<p>选择Install按回车啦👑</p>
+<p>然后是选择键盘类型，这里选<code>United States Of America</code>
+<img src="/img/FreeBSD_keymap.png" alt=""></p>
+<p>选完以后回到第一项回车即可，当然你也可以在第二项那里测试你的键盘是否有效👑</p>
+<p><img src="/img/2020-03-30_17-02.png" alt=""></p>
+<p>什么？你看不懂英文？👑</p>
+<p>第一项是<code>继续</code>👑</p>
+<p>第二项是<code>测试键盘</code>👑</p>
+<p>下面的就是地区或者国家名称了👑</p>
+<p>接下来输入你的主机名👑</p>
+<p><img src="/img/2020-03-30_17-08.png" alt=""></p>
+<p>我就随便输入一个<code>localhost</code>吧👑</p>
+<p>然后回车👑</p>
+<p>然后我就懵逼了。。👑</p>
+<p><img src="/img/2020-03-30_17-11.png" alt=""></p>
+<p>然后看了下英文手册，这里是选择要安装的组件👑</p>
+<p>根据官方的指引，这里来翻译一下&hellip;</p>
+<ul>
+<li>base-dbg</li>
+</ul>
+<blockquote>
+<p>一些基础的软件包,比如&rsquo;cat'这样的（debugging）</p>
+</blockquote>
+<ul>
+<li>kernel-dbg</li>
+</ul>
+<blockquote>
+<p>内核和内核模块（debugging）</p>
+</blockquote>
+<ul>
+<li>lib32-dbg</li>
+</ul>
+<blockquote>
+<p>32位的依赖吧好像是，带（debugging）的</p>
+</blockquote>
+<ul>
+<li>lib32</li>
+</ul>
+<blockquote>
+<p>同上，但是不带（debugging）</p>
+</blockquote>
+<ul>
+<li>ports</li>
+</ul>
+<blockquote>
+<p>嗯..类似于Gentoo的portage，必须装</p>
+</blockquote>
+<ul>
+<li>src</li>
+</ul>
+<blockquote>
+<p>一些源代码，最好选上吧</p>
+</blockquote>
+<ul>
+<li>tests</li>
+</ul>
+<blockquote>
+<p>一些测试代码，没必要选了</p>
+</blockquote>
+<p>想了一会儿，然后决定这样选了，你问凭什么这样选，我凭经验👑</p>
+<p>那你就应该凭借翻译软件把官方的手册翻译完看一遍了👑</p>
+<p><img src="/img/2020-03-30_17-36.png" alt=""></p>
+<p>接下来是分区👑</p>
+<p><img src="/img/2020-03-30_17-48.png" alt=""></p>
+<p>这里有四种方式啊&hellip;👑</p>
+<ul>
+<li>Auto(UFS)</li>
+</ul>
+<blockquote>
+<p>以<code>UFS</code>文件系统自动进行分区</p>
+</blockquote>
+<ul>
+<li>Manual</li>
+</ul>
+<blockquote>
+<p>手动对硬盘进行分区</p>
+</blockquote>
+<ul>
+<li>shell</li>
+</ul>
+<blockquote>
+<p>使用命令对硬盘进行分区</p>
+</blockquote>
+<ul>
+<li>Auto(ZFS)</li>
+</ul>
+<blockquote>
+<p>用<code>ZFS</code>文件系统自动分区</p>
+</blockquote>
+<p>行吧，选第二项，手动👑</p>
+<p>然后就进了这里👑</p>
+<p><img src="/img/2020-03-30_18-00.png" alt=""></p>
+<p>然后，选<code>create</code>创建一个分区表，官方手册有说明要创建一个<code>GPT</code>分区表，但这里由于我没有开启<code>EFI</code>所以我用<code>MBR</code> 👑</p>
+<p><img src="/img/2020-03-30_18-12.png" alt=""></p>
+<p>这里的图形操作会有提示的，看不懂英文的可以用翻译器看一下👑</p>
+<p>什么？还是不会？这玩意跟cfdisk差不多的👑</p>
+<p>总之详细过程我就不截图出来了，只需要把分区分成这样就行👑</p>
+<p><img src="/img/2020-03-30_18-21.png" alt=""></p>
+<p>接下来选择<code>Finish</code>,再选择<code>Commit</code> 👑</p>
+<p><img src="/img/2020-03-30_18-22.png" alt=""></p>
+<p>然后就会慢慢安装了👑</p>
+<p><img src="/img/2020-03-30_18-23.png" alt=""></p>
+<p>接下来就需要设置一个密码了，毕竟Unix的系统是不能空口令登录的👑</p>
+<p><img src="/img/2020-03-30_18-35.png" alt=""></p>
+<p>跟Linux一样，设置一个能记住的就可以了，然后会让你确认网卡👑</p>
+<p><img src="/img/2020-03-30_18-43.png" alt=""></p>
+<p>后面一路选<code>yes</code>，不多说👑</p>
+<p><img src="/img/2020-03-30_18-56.png" alt=""></p>
+<p>这里直接全选👑</p>
+<p><img src="/img/2020-03-30_19-40.png" alt=""></p>
+<p>然后回车，这里把<code>6</code>勾选上，继续按回车👑</p>
+<p><img src="/img/2020-03-30_19-47.png" alt=""></p>
+<p>最后一个提示，<code>yes</code>，然后回车👑</p>
+<p>然后重启，自动启动，再登录root，就完成啦👑</p>
+<p><img src="/img/2020-03-30_19-56.png" alt=""></p>
+<h2 id="装完后的感想">装完后的感想</h2>
+<p>FreeBSD注定是适合服务器的，或许也适合拿来玩，但日常使用的话就会出现很多问题让人头疼👑</p>
+<p>反正我是不会玩啦..连个顺手的文本编辑器都没有&hellip;vi我是真用不来&hellip;要修改很多配置文件的说..👑</p>
+<p>如果你有什么主意的话，就在下面留言吧👑</p>
+<h2 id="参考链接">参考链接</h2>
+<p><a href="https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/using-bsdinstall.html">FreeBSD 使用手册（英文）</a></p>
+<p><a href="https://www.freebsd.org/">FreeBSD 官网</a></p>
+
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2020-03-30</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+                    Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+                    Previous<br>一个C语言的小程序
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	</div>
+    	</div>
+    <script src="https://weepingdogel.github.io//js/journal.js"></script>
+    </body>
+</html>
