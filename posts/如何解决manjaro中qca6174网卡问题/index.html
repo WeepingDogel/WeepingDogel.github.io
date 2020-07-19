@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html><head>
+<title>如何解决 Manjaro 中 QCA6174 网卡问题</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/journal.min.c17891877555d1cf6f8eadd3719235a750d8bd754e57f066434db832e3215fc8.css" integrity="sha256-wXiRh3VV0c9vjq3TcZI1p1DYvXVOV/BmQ024MuMhX8g=" media="screen">
+
+<script src="https://weepingdogel.github.io//js/loadCSS.js"></script>
+<script src="https://weepingdogel.github.io//js/table.js"></script>
+
+
+<script src="https://weepingdogel.github.io//js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'a1e928de856334c726b3',
+  clientSecret: 'f509df81e9d11e081635dbd9ebba466964694e48',
+  repo: 'WeepingDogel.github.io',
+  owner: 'weepingdogel',
+  admin: ['weepingdogel'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            👑 WeepingDogel&#39;s Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Themed by Diary.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+                
+                
+                    
+                
+                <a class="a-block nav-link-item active" href="/posts">
+                    Posts
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/categories">
+                    分类
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/tags">
+                    标签
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/index.xml">
+                    RSS订阅
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/discuss">
+                    讨论(Discuss)
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/about">
+                    关于(About)
+                </a>
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%9c%ba%e7%99%bd" v-on:click="closeDrawer" id="开场白-nav">
+										 开场白
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%b0%9d%e8%af%95%e4%bd%bf%e7%94%a8%e5%85%b6%e4%bb%96%e6%96%b9%e6%b3%95%e8%bf%9e%e6%8e%a5%e7%bd%91%e7%bb%9c" v-on:click="closeDrawer" id="尝试使用其他方法连接网络-nav">
+										 尝试使用其他方法连接网络
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%a7%a3%e5%86%b3%e8%bf%87%e7%a8%8b" v-on:click="closeDrawer" id="解决过程-nav">
+										 解决过程
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%bd%af%e4%bb%b6%e6%ba%90" v-on:click="closeDrawer" id="软件源-nav">
+										 软件源
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85-linux-firmware" v-on:click="closeDrawer" id="安装-linux-firmware-nav">
+										 安装 linux-firmware
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%89%8b%e5%8a%a8%e6%9b%bf%e6%8d%a2%e9%a9%b1%e5%8a%a8%e6%96%87%e4%bb%b6" v-on:click="closeDrawer" id="手动替换驱动文件-nav">
+										 手动替换驱动文件
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%80%bb%e7%bb%93" v-on:click="closeDrawer" id="总结-nav">
+										 总结
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+                
+                    
+                    
+                        
+                    
+                    <a class="a-block drawer-menu-item active" href="/posts">
+                        Posts
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/categories">
+                        分类
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/tags">
+                        标签
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/index.xml">
+                        RSS订阅
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/discuss">
+                        讨论(Discuss)
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/about">
+                        关于(About)
+                    </a>
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%bc%80%e5%9c%ba%e7%99%bd" v-on:click="closeDrawer" id="开场白-nav">
+										 开场白
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%b0%9d%e8%af%95%e4%bd%bf%e7%94%a8%e5%85%b6%e4%bb%96%e6%96%b9%e6%b3%95%e8%bf%9e%e6%8e%a5%e7%bd%91%e7%bb%9c" v-on:click="closeDrawer" id="尝试使用其他方法连接网络-nav">
+										 尝试使用其他方法连接网络
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%a7%a3%e5%86%b3%e8%bf%87%e7%a8%8b" v-on:click="closeDrawer" id="解决过程-nav">
+										 解决过程
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e8%bd%af%e4%bb%b6%e6%ba%90" v-on:click="closeDrawer" id="软件源-nav">
+										 软件源
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85-linux-firmware" v-on:click="closeDrawer" id="安装-linux-firmware-nav">
+										 安装 linux-firmware
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%89%8b%e5%8a%a8%e6%9b%bf%e6%8d%a2%e9%a9%b1%e5%8a%a8%e6%96%87%e4%bb%b6" v-on:click="closeDrawer" id="手动替换驱动文件-nav">
+										 手动替换驱动文件
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e6%80%bb%e7%bb%93" v-on:click="closeDrawer" id="总结-nav">
+										 总结
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+            👑 WeepingDogel&#39;s Blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://weepingdogel.github.io/">
+        <div class="single-column-header-title">👑 WeepingDogel&#39;s Blog</div>
+        
+        <div class="single-column-header-subtitle">Themed by Diary.</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                 style="background-image: url('/img/photo_2020-07-16_23-54-59.jpg')">
+                
+                <img src="https://weepingdogel.github.io/img/photo_2020-07-16_23-54-59.jpg" style="display: none;"></img>
+                <div class="post-title">
+                    如何解决 Manjaro 中 QCA6174 网卡问题
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-07-17 10:30
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">问题解决</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/manjaro">Manjaro</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">问题解决</a>
+                                &nbsp;
+                            
+                                <a href="/tags/linux">Linux</a>
+                                &nbsp;
+                            
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h2 id="开场白">开场白</h2>
+<p>尝试在 Redmibook 14 中安装了 Manjaro, 装完发现 WIFI 不能用</p>
+<p>此时陷入了疑惑, 难道 Manjaro 也不自带 linux-firmware ?</p>
+<p>总之经过了一系列折腾, 最后还是解决了, 写篇东西来记录一下解决的过程</p>
+<h2 id="尝试使用其他方法连接网络">尝试使用其他方法连接网络</h2>
+<p>既然 WIFI 不能用, 那也要想别的办法联网, 不然这问题就很棘手了</p>
+<p>我能想到的是插网线, 可这是轻薄本, 没有有限网卡, 那么我们还有一种办法, 使用手机的 USB 网络共享</p>
+<p>这个过程很简单, 按照以下步骤走</p>
+<ol>
+<li>
+<p><strong>使用 USB 数据线将电脑与手机连接, 并打开 USB 网络共享</strong></p>
+<ul>
+<li><del>这个都不会的, 可以执行 <code>sudo rm -rf /</code></del></li>
+<li><del>这智商, 玩你妈的 Linux</del></li>
+<li>不会的, 请<a href="https://jingyan.baidu.com/article/09ea3ede1cfbf1c0aede391d.html">参考这里</a></li>
+</ul>
+</li>
+<li>
+<p><strong>打开终端, 执行</strong></p>
+</li>
+</ol>
+<pre><code>$ sudo ip link
+</code></pre><p>然后它会返回这样的东西, 如图</p>
+<p><img src="/img/2020-07-17_11-16.png" alt=""></p>
+<p>设置网卡</p>
+<pre><code>$ sudo ip link set enp3s0f4u2 up
+</code></pre><p>运行 <code>dhcpcd</code></p>
+<pre><code>$ sudo dhcpcd
+</code></pre><p>接下来, 我试着运行 <code>ifconfig</code>, 可是不能用, 但是看了一眼 <code>network manager</code></p>
+<p>嗯 能上网了</p>
+<p><img src="/img/photo_2020-07-16_23-31-07.jpg" alt=""></p>
+<h2 id="解决过程">解决过程</h2>
+<h3 id="软件源">软件源</h3>
+<p>我们会进行软件包的装卸, 所以我们首先需要做的是选择合适的软件源&hellip;.</p>
+<p>ok, 现在我们需要修改的文件是这个</p>
+<pre><code>/etc/pacman.d/mirrorlist
+</code></pre><p>我们用 <code>nano</code> 改, 记得加 <code>sudo</code></p>
+<pre><code>$ sudo nano /etc/pacman.d/mirrorlist
+</code></pre><p>将 <code># China</code> 下面的内容 放到第一行</p>
+<p>至于 <code>nano</code> 的用法, 请自行查找资料, 会用记事本就会用这个</p>
+<p>修改完后, 如图</p>
+<p><img src="/img/photo_2020-07-16_23-48-54.jpg" alt=""></p>
+<p>然后执行</p>
+<pre><code>$ sudo pacman -Sy
+</code></pre><h3 id="安装-linux-firmware">安装 <code>linux-firmware</code></h3>
+<p>执行</p>
+<pre><code>$ sudo pacman -S linux-firmware
+</code></pre><p>重启之后, 发现还是无效, 此时我去谷歌查了一下.</p>
+<p>发现, 我们需要手动从 <a href="https://github.com/FireWalkerX/ath10k-firmware/tree/master/QCA6174/hw3.0">Github</a> 下载它的驱动文件</p>
+<h3 id="手动替换驱动文件">手动替换驱动文件</h3>
+<p>到上面那个链接指向的 Github 仓库, 下载 <code>board-2.bin</code> 和 <code>firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1</code>, 分别将它们重命名为: <code>board.bin</code> 和 <code>firmware-4.bin</code></p>
+<pre><code>$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/board-2.bin
+</code></pre><pre><code>$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1
+</code></pre><p>然后把这两个文件复制到 <code>/lib/firmware/ath10k/QCA6174/hw3.0/</code> 目录下</p>
+<pre><code>$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+</code></pre><pre><code>$ sudo cp firmware-4.bin /lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin
+</code></pre><p>然后重启系统, WIFI 就能用了.</p>
+<p><img src="/img/photo_2020-07-19_23-12-18.jpg" alt=""></p>
+<h2 id="总结">总结</h2>
+<p>以上内容均为 Redmibook 14 的解决过程, 并不一定适用于其他设备, 因此仅供参考.</p>
+
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2020-07-17</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+                    Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://weepingdogel.github.io/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/">
+                    Previous<br>怎样安装Arch Linux
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	</div>
+    	</div>
+    <script src="https://weepingdogel.github.io//js/journal.js"></script>
+    </body>
+</html>
