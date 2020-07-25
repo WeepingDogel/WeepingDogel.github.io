@@ -6,9 +6,129 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This is a customized copyright.</copyright>
-    <lastBuildDate>Fri, 17 Jul 2020 10:30:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2020 13:25:46 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>关于 fcitx5 ，以及最近的环境变量问题</title>
+        <link>https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/</link>
+        <pubDate>Sat, 25 Jul 2020 13:25:46 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/</guid>
+        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/ -&lt;h2 id=&#34;发生了啥&#34;&gt;发生了啥&lt;/h2&gt;
+&lt;p&gt;最近我收到了一条这样的消息&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用 &lt;code&gt;$HOME/.pam_environment&lt;/code&gt; 设置环境变量的用户注意啦！由于 &lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708&#34;&gt;CVE-2010-4708&lt;/a&gt;, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。&lt;/p&gt;
+&lt;p&gt;ref: &lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;Linux 的环境变量怎么设 依云&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;del&gt;为什么十年的漏洞现在才修啊喂！！！&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;Emmmm, 这么说就是 &lt;code&gt;.pam_environment&lt;/code&gt; 这个文件不能用了&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;这里感谢 &lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;依云&lt;/a&gt; 写出了各种情况的应对方法&lt;/p&gt;
+&lt;p&gt;我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西&amp;hellip; 其他具体的可以参考云云写的.. (逃&lt;/p&gt;
+&lt;h2 id=&#34;fcitx5-与-fcitx&#34;&gt;fcitx5 与 fcitx&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Fcitx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Fcitx&#34;&gt;Fcitx&lt;/a&gt; (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的&lt;a href=&#34;https://en.wikipedia.org/wiki/Input_method&#34;&gt;输入法&lt;/a&gt;平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。&lt;/p&gt;
+&lt;p&gt;&amp;mdash; &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Fcitx5&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fcitx5 是继 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx&#34;&gt;Fcitx&lt;/a&gt; 后的新一代输入法框架。&lt;/p&gt;
+&lt;p&gt;&amp;mdash; &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;日常偷懒，直接引用(逃&lt;/p&gt;
+&lt;h2 id=&#34;好啦直接开始吧&#34;&gt;好啦，直接开始吧&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;先贴出我的系统情况&lt;/p&gt;
+&lt;p&gt;操作系统：Arch Linux&lt;/p&gt;
+&lt;p&gt;桌面环境：xfce&lt;/p&gt;
+&lt;p&gt;显示管理器：lightdm&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;实际上，只要把原来写 &lt;code&gt;.pam_environment&lt;/code&gt; 中的输入法环境变量写到 &lt;code&gt;.xprofile&lt;/code&gt; 里面就可以解决这个问题，但是我想试试 fcitx5。&lt;/p&gt;
+&lt;h3 id=&#34;卸载掉-fcitx&#34;&gt;卸载掉 fcitx&lt;/h3&gt;
+&lt;p&gt;首先我们要先卸载掉原来的 fcitx ，我之前用的是 &lt;code&gt;fcitx-googlepinyin&lt;/code&gt; 这个输入法，所以这个包也要卸掉，因为会有依赖&lt;/p&gt;
+&lt;p&gt;除此之外，与 fcitx 有一定关系的都要卸掉，不然 &lt;code&gt;pacman&lt;/code&gt; 会报错，所以你要执行这个&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;（PS：你可能用的不是谷歌输入法，所以请把 &lt;code&gt;fcitx-googlepinyin&lt;/code&gt; 改成你装的输入法的包名）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来，将这个文件删除，反正也没用了 (逃&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo rm -rf ./.pam_environment
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;安装-fcitx5&#34;&gt;安装 fcitx5&lt;/h3&gt;
+&lt;p&gt;现在来安装 fcitx5，这样子弄&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;fcitx5&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主包，不用多解释啦～&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;fcitx5-chinese-addons&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;中文输入法包&amp;hellip;. Arch Wiki 里面是这样解释的:
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.archlinux.org/packages/?name=fcitx5-chinese-addons&#34;&gt;fcitx5-chinese-addons&lt;/a&gt; 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;fcitx5-im&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;环境依赖包，要装的，不然在一些软件上打不出字&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;fcitx5-config-qt-git&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那么，执行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-config-qt-git
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;环境变量&#34;&gt;环境变量&lt;/h3&gt;
+&lt;p&gt;嗯哼，最后就是设置环境变量了，既然 &lt;code&gt;.pam_environment&lt;/code&gt; 不能用了，那要写在哪里呢？&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;云云&lt;/a&gt;说：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用 X11 的桌面环境，通常通过 display manager 来登录，比如 lightdm 和 sddm。这俩都支持 &lt;code&gt;~/.xprofile&lt;/code&gt;。这个文件会在启动过程中被 source，使用的 shell 是由 dm 自己确定的。lightdm 和 sddm 都是用的 &lt;code&gt;/bin/sh&lt;/code&gt;（分别位于 &lt;code&gt;/etc/lightdm/Xsession&lt;/code&gt; 和 &lt;code&gt;/usr/share/sddm/scripts/Xsession&lt;/code&gt; 文件里）。可以看到，除了读取 &lt;code&gt;.xprofile&lt;/code&gt; 外，lightdm 也会读取 &lt;code&gt;.profile&lt;/code&gt;。sddm 甚至连 bash、zsh、tcsh、fish 的启动配置脚本都给读了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;也就是说，我们需要把 fcitx5 的环境变量写在 &lt;code&gt;.xprofile&lt;/code&gt; 这个文件里面&lt;/p&gt;
+&lt;p&gt;然后&amp;hellip;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ vim ./.xprofile
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在里面写入这些东西&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;export INPUT_METHOD&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
+export GTK_IM_MODULE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
+export QT_IM_MODULE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
+export XMODIFIERS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@im&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来你可以选择重启 &lt;code&gt;lightdm&lt;/code&gt; ，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo systemctl restart lightdm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者重启系统&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时，xfce 的状态栏出现了一个键盘，但是按 &lt;!-- raw HTML omitted --&gt;&lt;code&gt;CTRL&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;&lt;code&gt;SPACE&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; 无法弹出中文输入法，这下怎么办呢？&lt;/p&gt;
+&lt;p&gt;直接右键那个键盘图标，点击配置，然后进入内个 QT 写的配置工具里添加中文输入法就可以啦～～！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-07-25_15-52.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;只需要双击就可以添加到左边哦～&lt;/p&gt;
+&lt;p&gt;然后点击 OK，开始享受 fcitx5 吧&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;Linux 的环境变量怎么设 - 依云&amp;rsquo;s Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Fcitx5 (简体中文) - ArchWiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Fcitx&#34;&gt;Fcitx - Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Fcitx (简体中文) - ArchWiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+- https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/ - This is a customized copyright.</description>
+        </item>
     
     
     
@@ -84,7 +204,7 @@
     
     
         <item>
-        <title>怎样安装Arch Linux</title>
+        <title>怎样安装 Arch Linux</title>
         <link>https://weepingdogel.github.io/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/</link>
         <pubDate>Sat, 13 Jun 2020 12:53:25 +0800</pubDate>
         
@@ -744,8 +864,14 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
 &lt;p&gt;反正我是不会玩啦..连个顺手的文本编辑器都没有&amp;hellip;vi我是真用不来&amp;hellip;要修改很多配置文件的说..👑&lt;/p&gt;
 &lt;p&gt;如果你有什么主意的话，就在下面留言吧👑&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/using-bsdinstall.html&#34;&gt;FreeBSD 使用手册（英文）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.freebsd.org/&#34;&gt;FreeBSD 官网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 - https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/ - This is a customized copyright.</description>
         </item>
     
@@ -1765,9 +1891,17 @@ Table: users
 &lt;p&gt;写了一个礼拜，全是即操作即写&lt;/p&gt;
 &lt;p&gt;看完还不会的，，，在下面留言吧..&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Main_page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://sourceforge.net/projects/metasploitable/&#34;&gt;Metasploitable下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/av59729967&#34;&gt;由帝的sqlmap视频&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;注意：转载请注明出处，禁止用本博客去干一些作死的事情，否则后果自负，与我无关&lt;/strong&gt;&lt;/p&gt;
 - https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/ - This is a customized copyright.</description>
@@ -1914,10 +2048,20 @@ Table: users
 &lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
 &lt;p&gt;以上就是使用github搭建简单网页的全过程了，由于时间关系所以只能写这么多了，下期可能又会拖一段时间。&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.runoob.com/git/git-tutorial.html&#34;&gt;git教程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Vim_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Archwiki|vim&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Git_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Archwiki|git&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.runoob.com/html/html-tutorial.html&#34;&gt;html教程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 - https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/ - This is a customized copyright.</description>
         </item>
     
@@ -2031,287 +2175,6 @@ numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; soup&lt;span st
 &lt;h2 id=&#34;最后&#34;&gt;最后&lt;/h2&gt;
 &lt;p&gt;写得比较仓促，所以可能不够详细，请谅解。&lt;del&gt;下方有评论区，欢迎评论(Tu Cao)。&lt;/del&gt;&lt;/p&gt;
 - https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ - This is a customized copyright.</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Linux基础命令</title>
-        <link>https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</link>
-        <pubDate>Mon, 05 Aug 2019 15:05:06 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/ -&lt;p&gt;&lt;em&gt;&lt;strong&gt;提示：面向萌新，大佬勿喷&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;刚入门Linux难免会觉得很麻烦，因为不知道如何使用命令去操作，这样的话在Linux系统是寸步难行的，但是学会了一些基础命令以后就能无压力的操作了，想不想学会Linux？那就让我们从简单的文件操作开始吧。&lt;/p&gt;
-&lt;h2 id=&#34;如何使用命令行&#34;&gt;如何使用命令行&lt;/h2&gt;
-&lt;p&gt;如果你的发行版自带图形界面的话，可以从图形界面的菜单中找到一个叫 &lt;strong&gt;“终端”&lt;/strong&gt; 的东西，打开它，就可以使用命令了。如果你的发行版不带图形界面，那么在tty登录用户以后就可以直接使用了。&lt;/p&gt;
-&lt;p&gt;注意，这个终端不等于&lt;strong&gt;DOS&lt;/strong&gt;也不等于&lt;strong&gt;cmd&lt;/strong&gt;，它和windows是没有办毛钱关系的，是另一种东西。&lt;/p&gt;
-&lt;h2 id=&#34;cd命令&#34;&gt;cd命令&lt;/h2&gt;
-&lt;p&gt;如果你之前用过DOS或者经常使用windows的cmd，你就会知道这个命令了，这个命令在大多数操作系统中都有。&lt;/p&gt;
-&lt;p&gt;cd命令是”change directory”的缩写，也就是改变你当前所在的目录，后面可以加相对路径，也可以加上绝对路径。&lt;/p&gt;
-&lt;p&gt;简单的理解，就是进入一个文件夹。&lt;/p&gt;
-&lt;h3 id=&#34;用法&#34;&gt;用法&lt;/h3&gt;
-&lt;p&gt;测试目录:&lt;code&gt;/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id=&#34;进入某个目录&#34;&gt;进入某个目录:&lt;/h4&gt;
-&lt;p&gt;绝对路径：指定一个完整的路径，与自己当前所在的目录无关&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd /a/b/c &lt;span style=&#34;color:#75715e&#34;&gt;# 进入/a/b/c这个路径中的目录c&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost b&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ./c &lt;span style=&#34;color:#75715e&#34;&gt;# 进入当前所在/a/b目录下面的目录c&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;指定上一级&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost b&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ../xxx &lt;span style=&#34;color:#75715e&#34;&gt;#进入当前所在目录/a/b中的/a目录下的其他目录&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost xxx&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;退出某个目录&#34;&gt;退出某个目录:&lt;/h4&gt;
-&lt;p&gt;有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。&lt;/p&gt;
-&lt;p&gt;返回上一级&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd .. &lt;span style=&#34;color:#75715e&#34;&gt;# 从当前所在的目录/a/b/c返回上一级的目录/a/b&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost b&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;返回上两级&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ../.. &lt;span style=&#34;color:#75715e&#34;&gt;# 从当前所在的目录/a/b/c返回上两级的目录/a&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;pwd命令&#34;&gt;pwd命令&lt;/h2&gt;
-&lt;p&gt;这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。&lt;/p&gt;
-&lt;h3 id=&#34;用法-1&#34;&gt;用法&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ pwd
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-/home/weepingdogel
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;假如当前所在目录为/a/b/c&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ pwd
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-/a/b/c
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;虽然只有一个作用，但是却很重要，因为新手每天都会用到，bash或者部分zsh主题是不会显示绝对路就的，如果你不知道你当前在操作哪个目录，你就得用上pwd这个命令了。&lt;/p&gt;
-&lt;h2 id=&#34;ls命令&#34;&gt;ls命令&lt;/h2&gt;
-&lt;p&gt;这个命令相当于windows中的&lt;strong&gt;dir&lt;/strong&gt;，作用是显示当前目录下的所有的文件和目录。&lt;/p&gt;
-&lt;h3 id=&#34;用法-2&#34;&gt;用法&lt;/h3&gt;
-&lt;p&gt;测试目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;直接查看&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls &lt;span style=&#34;color:#75715e&#34;&gt;# 查看当前目录下面的文件&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-&lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;  文本.txt  test  wiaori &lt;span style=&#34;color:#75715e&#34;&gt;# 被列出的文件&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;列表式查看，参数-l&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -l
-&lt;span style=&#34;color:#75715e&#34;&gt;#按下回车后&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;易读列表查看，参数-lh&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按时间排序的易读列表查看，参数-lh &amp;ndash;sort=time&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh --sort&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-总用量 4.0K
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按文件大小排序的易读列表查看，参数-lh &amp;ndash;sort=size&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh --sort&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;size
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后&lt;/span&gt;
-总用量 4.0K
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更多用法等你自己去摸索了&lt;/p&gt;
-&lt;h2 id=&#34;文件复制与移动&#34;&gt;文件复制与移动&lt;/h2&gt;
-&lt;h3 id=&#34;mv命令&#34;&gt;mv命令&lt;/h3&gt;
-&lt;p&gt;这个命令是英文单词&lt;strong&gt;move&lt;/strong&gt;的缩写。&lt;/p&gt;
-&lt;p&gt;它的作用主要是移动某些文件到指定的位置，你可以指定绝对路径，但是如果离得比较近的话就可以使用相对路径。&lt;/p&gt;
-&lt;h4 id=&#34;用法-3&#34;&gt;用法&lt;/h4&gt;
-&lt;h5 id=&#34;绝对路径用法&#34;&gt;绝对路径用法：&lt;/h5&gt;
-&lt;p&gt;比如我们把 &lt;strong&gt;“目录c”&lt;/strong&gt; 下面的 &lt;strong&gt;“文本.txt”&lt;/strong&gt; 移动到&lt;code&gt;/tmp/a/&lt;/code&gt;下面&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ mv /tmp/a/b/c/文本.txt /tmp/a/
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后，文件就被移动了&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们切换到&lt;code&gt;/tmp/a/&lt;/code&gt;下面看看吧&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd /tmp/a
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls
-文本.txt  b
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时我们就看到了那个 &lt;strong&gt;“文本.txt”&lt;/strong&gt; 被移动到了&lt;code&gt;/tmp/a/&lt;/code&gt;下面了。&lt;/p&gt;
-&lt;h5 id=&#34;相对路径用法&#34;&gt;相对路径用法：&lt;/h5&gt;
-&lt;p&gt;那么我们用另一种方法把这个文件移回去吧，首先我们还在这个&lt;code&gt;/tmp/a/&lt;/code&gt;下面，那么命令如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ mv ./文本.txt ./b/c/
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后，文件就被移动了&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们回到&lt;code&gt;/tmp/a/b/c/&lt;/code&gt;下面看看吧。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ./b/c
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls
-&lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;  文本.txt  test  wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看到了没有，它又回来了。&lt;/p&gt;
-&lt;h3 id=&#34;cp命令&#34;&gt;cp命令&lt;/h3&gt;
-&lt;p&gt;哈哈，这个命令也不是那个cp的意思，它是  &lt;strong&gt;“copy”&lt;/strong&gt; 的缩写，复制的意思。&lt;/p&gt;
-&lt;p&gt;顾名思义，它的作用就是把一个文件复制到另一个地方。它同样有指定绝对路径和相对路径的两种用法。来尝试一下？&lt;/p&gt;
-&lt;h4 id=&#34;用法-4&#34;&gt;用法&lt;/h4&gt;
-&lt;h5 id=&#34;绝对路径&#34;&gt;绝对路径：&lt;/h5&gt;
-&lt;p&gt;我们来试试把&lt;code&gt;/tmp/a/b/c/文本.txt&lt;/code&gt;这个文件复制到&lt;code&gt;/tmp/a/&lt;/code&gt;下面&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cp /tmp/a/b/c/文本.txt /tmp/a/
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后，文件就被复制了&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ../.. &lt;span style=&#34;color:#75715e&#34;&gt;# 我们来看看它是否被复制成功&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh &lt;span style=&#34;color:#75715e&#34;&gt;# 使用ls命令看一下，可见他是被复制成功的，创建日期与上面不一样。&lt;/span&gt;
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:36 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:37 b
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;注意：此命令如果不使用高级用法是无法复制创建时间和所有者的&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h5 id=&#34;相对路径&#34;&gt;相对路径：&lt;/h5&gt;
-&lt;p&gt;嘿嘿，我们尝试给/tmp/a/的每一级目录都复制一份吧。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cp ./文本.txt ./b/ &lt;span style=&#34;color:#75715e&#34;&gt;# 先复制到目录b&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cp ./文本.txt ./b/c/ &lt;span style=&#34;color:#75715e&#34;&gt;# 复制到目录c&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cp ./文本.txt ../ &lt;span style=&#34;color:#75715e&#34;&gt;# 复制到/tmp/下面&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost a&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd .. &lt;span style=&#34;color:#75715e&#34;&gt;# 回到/tmp下面&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost tmp&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh &lt;span style=&#34;color:#75715e&#34;&gt;# 查看是否复制成功，可见第一个就是该文件&lt;/span&gt;
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:48  文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:36  a
-&lt;span style=&#34;color:#75715e&#34;&gt;# 接下来一级一级往下看&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost tmp&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh ./a
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:36 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:45 b
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost tmp&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh ./a/b
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:45 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;120&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:25 c
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost tmp&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh ./a/b/c
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:47 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可见，复制是成功的。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意：如果要复制目录，请在指定目录前加上参数-r，否则将无法复制&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;mkdir命令&#34;&gt;mkdir命令&lt;/h2&gt;
-&lt;p&gt;这个命令是 &lt;strong&gt;“make directory”&lt;/strong&gt; 的缩写，意为创建一个目录它一般情况下有两种用法&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;一般创建，直接在已存在的绝对路径或相对路径创建一个目录&lt;/li&gt;
-&lt;li&gt;递归创建，创建一连串目录，在创建之前有一级或以上的目录未被创建&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;同样也是可以指定绝对路径和相对路径的，接下来我就只写出相对路径的示例了，因为方便。&lt;/p&gt;
-&lt;p&gt;来尝试一下？&lt;/p&gt;
-&lt;h3 id=&#34;用法-5&#34;&gt;用法&lt;/h3&gt;
-&lt;h4 id=&#34;一般创建&#34;&gt;一般创建&lt;/h4&gt;
-&lt;p&gt;假设目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;我们要创建一个目录&lt;code&gt;d&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ mkdir ./d &lt;span style=&#34;color:#75715e&#34;&gt;# 在/tmp/a/b/c/下面创建一个目录d&lt;/span&gt;
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车之后，目录就创建了，我们可以用ls来检查一下&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:47 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可见，目录被成功创建了。&lt;/p&gt;
-&lt;h4 id=&#34;递归创建&#34;&gt;递归创建&lt;/h4&gt;
-&lt;p&gt;假设目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;我们要在当前目录下创建一串目录，比如&lt;code&gt;./go/for/it&lt;/code&gt;，此时我们就要加个参数&lt;code&gt;-p&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ mkdir -p ./go/fot/it
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车之后，一串目录就被创建了，接下来我们会一级一级的查看&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh 
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 18:47 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 19:14 go
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#75715e&#34;&gt;# 可见我们看见了目录go&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ./go &lt;span style=&#34;color:#75715e&#34;&gt;# 我们试着进入这个目录，可见我们成功进入了目录&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost go&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh &lt;span style=&#34;color:#75715e&#34;&gt;#继续查看下一级&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 19:14 &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost go&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ./for &lt;span style=&#34;color:#75715e&#34;&gt;#进入目录for&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh &lt;span style=&#34;color:#75715e&#34;&gt;# 继续查看下一级&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 19:14 it
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ cd ./it &lt;span style=&#34;color:#75715e&#34;&gt;#接下来我们进入这个目录it，由于it里面是空的，所以就不用ls查看了&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost it&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ pwd &lt;span style=&#34;color:#75715e&#34;&gt;#使用pwd查看当前位置&lt;/span&gt;
-/tmp/a/b/c/go/for/it
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost it&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可见这一串目录也创建成功了。&lt;/p&gt;
-&lt;h2 id=&#34;rm命令&#34;&gt;rm命令&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意:此命令如果使用不当十分危险&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这个命令是 &lt;strong&gt;“remove”&lt;/strong&gt; 的缩写，意为删除，作用上和windows中的del命令差不多，但是用法和参数却有所不同，而且诶这个命令如果使用不当是十分危险的，因为在Linux中，就算是正在被使用的文件也可以被删除，并不会有windows那种保姆级别的”拒绝访问”。&lt;/p&gt;
-&lt;h3 id=&#34;用法-6&#34;&gt;用法&lt;/h3&gt;
-&lt;p&gt;假设目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id=&#34;删除文件&#34;&gt;删除文件&lt;/h4&gt;
-&lt;p&gt;我们来尝试删除一下&lt;code&gt;文本.txt&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ rm ./文本.txt
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车之后这个文件就被删除了&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls
-&lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;  d  go  test  wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除目录&#34;&gt;删除目录&lt;/h4&gt;
-&lt;p&gt;如果你要删除一个目录，比如go，就需要加一个参数-r&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ rm -r ./go
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车之后，这个目录就被删除了&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh &lt;span style=&#34;color:#75715e&#34;&gt;#查看一下就可以看到，go也不见了&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#ae81ff&#34;&gt;223333&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;强制删除危险&#34;&gt;强制删除|危险|&lt;/h4&gt;
-&lt;p&gt;如果你需要强制删除一个文件，则需要调用root权限，并且使用&lt;code&gt;-rf&lt;/code&gt;参数。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意，千万不要用这个命令去删除 &lt;code&gt;/&lt;/code&gt;目录，否则你的系统将会自杀&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;比如我们要删除&lt;code&gt;223333&lt;/code&gt;这个文件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo rm -rf ./223333
-&lt;span style=&#34;color:#75715e&#34;&gt;# 按下回车后会要你输入一次密码，输入密码后按回车，这个文件就删除了，Linux的安全保护机制使密码不会显示在屏幕上&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;sudo&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; weepingdogel 的密码：
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ ls -lh &lt;span style=&#34;color:#75715e&#34;&gt;# 查看一下文件的情况，可见这个文件不见了&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;包管理器&#34;&gt;包管理器&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意：不同发行版之间可能有差异&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;一般情况下，新手使用的&lt;strong&gt;deb系发行版&lt;/strong&gt;的包管理器是&lt;strong&gt;apt&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;那么这些就是&lt;strong&gt;apt&lt;/strong&gt;常用的用法了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo apt-get update &lt;span style=&#34;color:#75715e&#34;&gt;# 更新软件源&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo apt-get install &amp;lt;包名&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 安装一个软件、软件包&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo apt-get search &amp;lt;软件名称&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 搜索软件&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo apt-get upgrade &lt;span style=&#34;color:#75715e&#34;&gt;# 升级你已安装的软件，通常消耗时间比较长&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo apt-get remove &amp;lt;包名&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 卸载软件&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo apt-get autoremove &lt;span style=&#34;color:#75715e&#34;&gt;# 自动处理依赖&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;如果要安装本地包，则需要使用本地包管理器dpkg，用法如下
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;weepingdogel@localhost c&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;$ sudo dpkg -i &amp;lt;包名&amp;gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 安装本地包&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
-&lt;p&gt;本期博客中的内容并不是很详细，我已经尽力写得让大多数人能看懂，也许还有少数人无法理解内容，没关系，你可以在下面的评论区提问。&lt;/p&gt;
-&lt;p&gt;那么，欢迎评论。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/ - This is a customized copyright.</description>
         </item>
     
     

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html><head>
+<title>关于 fcitx5 ，以及最近的环境变量问题</title>
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/journal.min.c17891877555d1cf6f8eadd3719235a750d8bd754e57f066434db832e3215fc8.css" integrity="sha256-wXiRh3VV0c9vjq3TcZI1p1DYvXVOV/BmQ024MuMhX8g=" media="screen">
+
+<script src="https://weepingdogel.github.io//js/loadCSS.js"></script>
+<script src="https://weepingdogel.github.io//js/table.js"></script>
+
+
+<script src="https://weepingdogel.github.io//js/toc.js"></script>
+
+
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'a1e928de856334c726b3',
+  clientSecret: 'f509df81e9d11e081635dbd9ebba466964694e48',
+  repo: 'WeepingDogel.github.io',
+  owner: 'weepingdogel',
+  admin: ['weepingdogel'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+</head><body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            👑 WeepingDogel&#39;s Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Themed by Diary.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+                
+                
+                    
+                
+                <a class="a-block nav-link-item active" href="/posts">
+                    Posts
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/categories">
+                    分类
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/tags">
+                    标签
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/index.xml">
+                    RSS订阅
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/discuss">
+                    讨论(Discuss)
+                </a>
+        
+            
+                
+                
+                <a class="a-block nav-link-item false" href="/about">
+                    关于(About)
+                </a>
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%91%e7%94%9f%e4%ba%86%e5%95%a5" v-on:click="closeDrawer" id="发生了啥-nav">
+										 发生了啥
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#fcitx5-%e4%b8%8e-fcitx" v-on:click="closeDrawer" id="fcitx5-与-fcitx-nav">
+										 fcitx5 与 fcitx
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%a5%bd%e5%95%a6%e7%9b%b4%e6%8e%a5%e5%bc%80%e5%a7%8b%e5%90%a7" v-on:click="closeDrawer" id="好啦直接开始吧-nav">
+										 好啦，直接开始吧
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8d%b8%e8%bd%bd%e6%8e%89-fcitx" v-on:click="closeDrawer" id="卸载掉-fcitx-nav">
+										 卸载掉 fcitx
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85-fcitx5" v-on:click="closeDrawer" id="安装-fcitx5-nav">
+										 安装 fcitx5
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" v-on:click="closeDrawer" id="环境变量-nav">
+										 环境变量
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" v-on:click="closeDrawer" id="参考链接-nav">
+										 参考链接
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+    </div>
+</div><div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+                
+                    
+                    
+                        
+                    
+                    <a class="a-block drawer-menu-item active" href="/posts">
+                        Posts
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/categories">
+                        分类
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/tags">
+                        标签
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/index.xml">
+                        RSS订阅
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/discuss">
+                        讨论(Discuss)
+                    </a>
+            
+                
+                    
+                    
+                    <a class="a-block drawer-menu-item false" href="/about">
+                        关于(About)
+                    </a>
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- CATALOG -</center>
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%91%e7%94%9f%e4%ba%86%e5%95%a5" v-on:click="closeDrawer" id="发生了啥-nav">
+										 发生了啥
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#fcitx5-%e4%b8%8e-fcitx" v-on:click="closeDrawer" id="fcitx5-与-fcitx-nav">
+										 fcitx5 与 fcitx
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%a5%bd%e5%95%a6%e7%9b%b4%e6%8e%a5%e5%bc%80%e5%a7%8b%e5%90%a7" v-on:click="closeDrawer" id="好啦直接开始吧-nav">
+										 好啦，直接开始吧
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8d%b8%e8%bd%bd%e6%8e%89-fcitx" v-on:click="closeDrawer" id="卸载掉-fcitx-nav">
+										 卸载掉 fcitx
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%ae%89%e8%a3%85-fcitx5" v-on:click="closeDrawer" id="安装-fcitx5-nav">
+										 安装 fcitx5
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" v-on:click="closeDrawer" id="环境变量-nav">
+										 环境变量
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+				
+				
+					
+						
+						
+							<ul>
+						
+							<ul>
+						
+						
+								<li>
+				 					<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" v-on:click="closeDrawer" id="参考链接-nav">
+										 参考链接
+									</a>
+								</li>
+						
+							</ul>
+						
+							</ul>
+						
+					
+				
+			
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+            👑 WeepingDogel&#39;s Blog
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://weepingdogel.github.io/">
+        <div class="single-column-header-title">👑 WeepingDogel&#39;s Blog</div>
+        
+        <div class="single-column-header-subtitle">Themed by Diary.</div>
+        
+
+    </a>
+</div>
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                 style="background-image: url('https://w.wallhaven.cc/full/g8/wallhaven-g8e9oq.jpg')">
+                
+                <img src="https://w.wallhaven.cc/full/g8/wallhaven-g8e9oq.jpg" style="display: none;"></img>
+                <div class="post-title">
+                    关于 fcitx5 ，以及最近的环境变量问题
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-07-25 13:25
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">问题解决</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/arch-linux">Arch Linux</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95">输入法</a>
+                                &nbsp;
+                            
+                                <a href="/tags/fcitx">fcitx</a>
+                                &nbsp;
+                            
+                                <a href="/tags/fcitx5">fcitx5</a>
+                                &nbsp;
+                            
+                                <a href="/tags/cve-2010-4708">CVE-2010-4708</a>
+                                &nbsp;
+                            
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <h2 id="发生了啥">发生了啥</h2>
+<p>最近我收到了一条这样的消息</p>
+<blockquote>
+<p>使用 <code>$HOME/.pam_environment</code> 设置环境变量的用户注意啦！由于 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708">CVE-2010-4708</a>, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。</p>
+<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html">Linux 的环境变量怎么设 依云&rsquo;s Blog</a></p>
+</blockquote>
+<p><del>为什么十年的漏洞现在才修啊喂！！！</del></p>
+<p>Emmmm, 这么说就是 <code>.pam_environment</code> 这个文件不能用了&hellip;&hellip;</p>
+<p>这里感谢 <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html">依云</a> 写出了各种情况的应对方法</p>
+<p>我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西&hellip; 其他具体的可以参考云云写的.. (逃</p>
+<h2 id="fcitx5-与-fcitx">fcitx5 与 fcitx</h2>
+<ul>
+<li>Fcitx</li>
+</ul>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Fcitx">Fcitx</a> (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的<a href="https://en.wikipedia.org/wiki/Input_method">输入法</a>平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Arch Wiki</a></p>
+</blockquote>
+<ul>
+<li>Fcitx5</li>
+</ul>
+<blockquote>
+<p>Fcitx5 是继 <a href="https://wiki.archlinux.org/index.php/Fcitx">Fcitx</a> 后的新一代输入法框架。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Arch Wiki</a></p>
+</blockquote>
+<p>日常偷懒，直接引用(逃</p>
+<h2 id="好啦直接开始吧">好啦，直接开始吧</h2>
+<blockquote>
+<p>先贴出我的系统情况</p>
+<p>操作系统：Arch Linux</p>
+<p>桌面环境：xfce</p>
+<p>显示管理器：lightdm</p>
+</blockquote>
+<p>实际上，只要把原来写 <code>.pam_environment</code> 中的输入法环境变量写到 <code>.xprofile</code> 里面就可以解决这个问题，但是我想试试 fcitx5。</p>
+<h3 id="卸载掉-fcitx">卸载掉 fcitx</h3>
+<p>首先我们要先卸载掉原来的 fcitx ，我之前用的是 <code>fcitx-googlepinyin</code> 这个输入法，所以这个包也要卸掉，因为会有依赖</p>
+<p>除此之外，与 fcitx 有一定关系的都要卸掉，不然 <code>pacman</code> 会报错，所以你要执行这个</p>
+<blockquote>
+<p>（PS：你可能用的不是谷歌输入法，所以请把 <code>fcitx-googlepinyin</code> 改成你装的输入法的包名）</p>
+</blockquote>
+<pre><code>sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
+</code></pre><p>接下来，将这个文件删除，反正也没用了 (逃</p>
+<pre><code>$ sudo rm -rf ./.pam_environment
+</code></pre><h3 id="安装-fcitx5">安装 fcitx5</h3>
+<p>现在来安装 fcitx5，这样子弄</p>
+<ul>
+<li>
+<p>fcitx5</p>
+<ul>
+<li>主包，不用多解释啦～</li>
+</ul>
+</li>
+<li>
+<p>fcitx5-chinese-addons</p>
+<ul>
+<li>中文输入法包&hellip;. Arch Wiki 里面是这样解释的:
+<blockquote>
+<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons">fcitx5-chinese-addons</a> 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>fcitx5-im</p>
+<ul>
+<li>环境依赖包，要装的，不然在一些软件上打不出字</li>
+</ul>
+</li>
+<li>
+<p>fcitx5-config-qt-git</p>
+<ul>
+<li>fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。</li>
+</ul>
+</li>
+</ul>
+<p>那么，执行</p>
+<pre><code>$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-config-qt-git
+</code></pre><p>软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个</p>
+<pre><code>$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
+</code></pre><h3 id="环境变量">环境变量</h3>
+<p>嗯哼，最后就是设置环境变量了，既然 <code>.pam_environment</code> 不能用了，那要写在哪里呢？</p>
+<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html">云云</a>说：</p>
+<blockquote>
+<p>使用 X11 的桌面环境，通常通过 display manager 来登录，比如 lightdm 和 sddm。这俩都支持 <code>~/.xprofile</code>。这个文件会在启动过程中被 source，使用的 shell 是由 dm 自己确定的。lightdm 和 sddm 都是用的 <code>/bin/sh</code>（分别位于 <code>/etc/lightdm/Xsession</code> 和 <code>/usr/share/sddm/scripts/Xsession</code> 文件里）。可以看到，除了读取 <code>.xprofile</code> 外，lightdm 也会读取 <code>.profile</code>。sddm 甚至连 bash、zsh、tcsh、fish 的启动配置脚本都给读了。</p>
+</blockquote>
+<p>也就是说，我们需要把 fcitx5 的环境变量写在 <code>.xprofile</code> 这个文件里面</p>
+<p>然后&hellip;</p>
+<pre><code>$ vim ./.xprofile
+</code></pre><p>在里面写入这些东西</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export INPUT_METHOD<span style="color:#f92672">=</span>fcitx5
+export GTK_IM_MODULE<span style="color:#f92672">=</span>fcitx5
+export QT_IM_MODULE<span style="color:#f92672">=</span>fcitx5
+export XMODIFIERS<span style="color:#f92672">=</span>@im<span style="color:#f92672">=</span>fcitx5
+</code></pre></div><p>接下来你可以选择重启 <code>lightdm</code> ，</p>
+<pre><code>$ sudo systemctl restart lightdm
+</code></pre><p>或者重启系统</p>
+<pre><code>$ sudo reboot
+</code></pre><p>此时，xfce 的状态栏出现了一个键盘，但是按 <!-- raw HTML omitted --><code>CTRL</code><!-- raw HTML omitted --> + <!-- raw HTML omitted --><code>SPACE</code><!-- raw HTML omitted --> 无法弹出中文输入法，这下怎么办呢？</p>
+<p>直接右键那个键盘图标，点击配置，然后进入内个 QT 写的配置工具里添加中文输入法就可以啦～～！</p>
+<p><img src="/img/2020-07-25_15-52.png" alt=""></p>
+<p>只需要双击就可以添加到左边哦～</p>
+<p>然后点击 OK，开始享受 fcitx5 吧</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html">Linux 的环境变量怎么设 - 依云&rsquo;s Blog</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Fcitx5 (简体中文) - ArchWiki</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fcitx">Fcitx - Wikipedia</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">Fcitx (简体中文) - ArchWiki</a></li>
+</ul>
+
+                    
+                    <HR width="100%" id="EOF">
+                    <p style="color:#777;">Last modified on 2020-07-25</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+                    Next<br>No newer posts.
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/">
+                    Previous<br>如何解决 Manjaro 中 QCA6174 网卡问题
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+&copy;
+	
+	This is a customized copyright.
+	</div>
+    	</div>
+    <script src="https://weepingdogel.github.io//js/journal.js"></script>
+    </body>
+</html>
