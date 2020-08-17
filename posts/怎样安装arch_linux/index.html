@@ -1947,12 +1947,16 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 </tbody>
 </table>
 <p>Live CD 里面有几种分区工具 <code>fdisk</code>、<code>parted</code>、<code>cfdisk</code> 等，具体过程我就不写出来了，我推荐用cfdisk，操作简单。</p>
+<blockquote>
+<p>注意：nvme 协议的硬盘设备名可能不是表上这个，也许是 <code>nvme0p1</code> 之类的。</p>
+</blockquote>
 <h4 id="格式化">格式化</h4>
 <p>当你的分区建好了，这些分区要进行格式化</p>
 <p>BIOS + MBR:</p>
 <pre><code># mkfs.ext4 /dev/sdX1
 </code></pre><p>UEFI with GPT:</p>
 <pre><code># mkfs.ext4 /dev/sdX2
+</code></pre><pre><code># mkfs.vfat -F 32 /dev/sdX1
 </code></pre><p>不同的分区需要选择不同的文件系统，这个你需要去搜索引擎搜索了，篇幅有限，解释不了这么多。</p>
 <p>对于交换分区(第一个表中的 <code>/dev/sdx2</code>、第二个表中的 <code>/dev/sdX3</code>)，需要使用 <code>mkswap</code> 将其初始化：</p>
 <pre><code># mkswap /dev/sdX2
@@ -2048,9 +2052,9 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 </code></pre><p><strong>第二种情况: UEFI  + GPT</strong>
 这种情况的比较复杂一些,</p>
 <p>首先挂载你的EFI分区</p>
-<pre><code># mount /dev/sdX1 /boot
+<pre><code># mount /dev/sdX1 /boot/EFI 
 </code></pre><p>接下来执行</p>
-<pre><code># grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+<pre><code># grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
 </code></pre><p>然后还是一样的生成配置文件</p>
 <pre><code># grub-mkconfig -o /boot/grub/grub.cfg
 </code></pre><p>接下来就可以拔掉 U 盘重启了</p>

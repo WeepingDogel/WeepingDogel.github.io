@@ -89,14 +89,16 @@
 &lt;li&gt;
 &lt;p&gt;fcitx5-config-qt-git&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。&lt;/li&gt;
+&lt;li&gt;fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。在上面三个装完之后装。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;那么，执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-config-qt-git
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来需要安装配置工具&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -S fcitx5-config-qt-git
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;环境变量&#34;&gt;环境变量&lt;/h3&gt;
 &lt;p&gt;嗯哼，最后就是设置环境变量了，既然 &lt;code&gt;.pam_environment&lt;/code&gt; 不能用了，那要写在哪里呢？&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;云云&lt;/a&gt;说：&lt;/p&gt;
@@ -517,12 +519,16 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Live CD 里面有几种分区工具 &lt;code&gt;fdisk&lt;/code&gt;、&lt;code&gt;parted&lt;/code&gt;、&lt;code&gt;cfdisk&lt;/code&gt; 等，具体过程我就不写出来了，我推荐用cfdisk，操作简单。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：nvme 协议的硬盘设备名可能不是表上这个，也许是 &lt;code&gt;nvme0p1&lt;/code&gt; 之类的。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;格式化&#34;&gt;格式化&lt;/h4&gt;
 &lt;p&gt;当你的分区建好了，这些分区要进行格式化&lt;/p&gt;
 &lt;p&gt;BIOS + MBR:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# mkfs.ext4 /dev/sdX1
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;UEFI with GPT:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# mkfs.ext4 /dev/sdX2
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;# mkfs.vfat -F 32 /dev/sdX1
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不同的分区需要选择不同的文件系统，这个你需要去搜索引擎搜索了，篇幅有限，解释不了这么多。&lt;/p&gt;
 &lt;p&gt;对于交换分区(第一个表中的 &lt;code&gt;/dev/sdx2&lt;/code&gt;、第二个表中的 &lt;code&gt;/dev/sdX3&lt;/code&gt;)，需要使用 &lt;code&gt;mkswap&lt;/code&gt; 将其初始化：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# mkswap /dev/sdX2
@@ -618,9 +624,9 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;第二种情况: UEFI  + GPT&lt;/strong&gt;
 这种情况的比较复杂一些,&lt;/p&gt;
 &lt;p&gt;首先挂载你的EFI分区&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# mount /dev/sdX1 /boot
+&lt;pre&gt;&lt;code&gt;# mount /dev/sdX1 /boot/EFI 
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+&lt;pre&gt;&lt;code&gt;# grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后还是一样的生成配置文件&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来就可以拔掉 U 盘重启了&lt;/p&gt;
