@@ -6,9 +6,226 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This is a customized copyright.</copyright>
-    <lastBuildDate>Sat, 05 Sep 2020 12:10:07 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2020 22:12:05 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Python 学习笔记——文件操作</title>
+        <link>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+        <pubDate>Sat, 05 Sep 2020 22:12:05 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/ -&lt;h2 id=&#34;文件操作&#34;&gt;文件操作&lt;/h2&gt;
+&lt;h3 id=&#34;open&#34;&gt;open&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;open()&lt;/code&gt; 是 Python 进行文件操作的关键函数，它有连个参数需要设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文件名 - 文件的名称，不多解释&lt;/li&gt;
+&lt;li&gt;模式 - 决定打开的文件是否可读写以及其他属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;filename&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;mode&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;读&#34;&gt;读&lt;/h3&gt;
+&lt;p&gt;仅以只读方式打开一个文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;filename.txt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样写也是一样的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;filename&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;rt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&amp;ldquo;r&amp;rdquo;&lt;/strong&gt; 表示读&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;t&amp;rdquo;&lt;/strong&gt; 表示文本，这是函数默认设定好的，所以可以省略。&lt;/p&gt;
+&lt;p&gt;这里引入一下 &lt;a href=&#34;https://www.w3schools.com/python/python_file_handling.asp&#34;&gt;w3school&lt;/a&gt; 的一个列表&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are four different methods (modes) for opening a file:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;r&amp;rdquo; - Read - Default value. Opens a file for reading, error if the file does not exist&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;a&amp;rdquo; - Append - Opens a file for appending, creates the file if it does not exist&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;w&amp;rdquo; - Write - Opens a file for writing, creates the file if it does not exist&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;x&amp;rdquo; - Create - Creates the specified file, returns an error if the file exists&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In addition you can specify if the file should be handled as binary or text mode&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;t&amp;rdquo; - Text - Default value. Text mode&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;b&amp;rdquo; - Binary - Binary mode (e.g. images)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以一个文件举例&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/home/weepingdogel/test.txt
+---
+Hello!I love Python.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们不写 mode 参数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们将它加上：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;结果是一模一样的。&lt;/p&gt;
+&lt;h4 id=&#34;读行&#34;&gt;读行&lt;/h4&gt;
+&lt;p&gt;文件:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/home/weepingdogel/test.txt
+---
+Hello!I love Python.
+Have a nice day!
+Good luck!
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
+&lt;code&gt;f.readline()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;例如:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们需要两行的时候：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+Have a nice day!
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果我们需要三行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+Have a nice day!
+
+Good luck!
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个用法它会逐行读取，并且打印输出的时候是会换行的&lt;/p&gt;
+&lt;p&gt;在读配置文件的时候也许会用到吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;当然我们也可以用 &lt;code&gt;for&lt;/code&gt; 循环读一次性读全部：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; f:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(x)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+Have a nice day!
+
+Good luck!
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我觉得用 &lt;code&gt;for&lt;/code&gt; 应该更有效率点&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;关闭文件&#34;&gt;关闭文件&lt;/h3&gt;
+&lt;p&gt;这个没什么好讲的&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read())
+f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行了也是跟上面差不多的效果&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下面不给出调试结果了，太晚了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;创建&#34;&gt;创建&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;x&amp;rdquo;&lt;/strong&gt; 表示创建一个新文件，如果文件名指的那个文件已经存在就会报错&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;x&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;自己去试试啦，这个没什么好说的。&lt;/p&gt;
+&lt;h3 id=&#34;写&#34;&gt;写&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;a&amp;rdquo;&lt;/strong&gt; 表示在已有文件上添加内容，它不会使文件原有的内容被删除或者被覆盖&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;)
+f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;加入内容 / content added.&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 这段字符串将会被添加到这个文件里&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&amp;ldquo;w&amp;rdquo;&lt;/strong&gt; 表示将会覆盖那个文件，它将会覆盖原有的内容&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;w&amp;#34;&lt;/span&gt;)
+f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;加入内容 / content added.&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 文件将只会存在这段字符串&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;删&#34;&gt;删&lt;/h3&gt;
+&lt;p&gt;这里需要用到 &lt;code&gt;os&lt;/code&gt; 这个模块，并用到里面的 &lt;code&gt;os.remove()&lt;/code&gt; 函数，直接 &lt;code&gt;import os&lt;/code&gt; 即可&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;remove(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;典型例子&#34;&gt;典型例子&lt;/h4&gt;
+&lt;p&gt;检测一个文件是否存在，如果存在就删除，不存在就提示&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exists(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;):
+    os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;remove(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;文件不存在&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除目录&#34;&gt;删除目录&lt;/h4&gt;
+&lt;p&gt;用 &lt;code&gt;os.rmdir()&lt;/code&gt; 即可&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;rmdir(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;foldername&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;这些就是基础的文件读写操作需要知道的东西啦&amp;hellip;&lt;/p&gt;
+&lt;p&gt;如果看完没什么概念的话，可以试试下面这一大串代码&lt;/p&gt;
+&lt;p&gt;可以改改里面 &lt;code&gt;open()&lt;/code&gt; 的 mode 参数试试&lt;/p&gt;
+&lt;p&gt;总结代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; datetime
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sign&lt;/span&gt;():
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 程序标识&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(
+&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;╭╮╭╮╭╮╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━━━╮╱╱╱╱╱╱╱╱╭╮
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;┃┃┃┃┃┃╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╮╭╮┃╱╱╱╱╱╱╱╱┃┃
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;┃┃┃┃┃┣━━┳━━┳━━┳┳━╮╭━━╮┃┃┃┣━━┳━━┳━━┫┃
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;┃╰╯╰╯┃┃━┫┃━┫╭╮┣┫╭╮┫╭╮┃┃┃┃┃╭╮┃╭╮┃┃━┫┃
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;╰╮╭╮╭┫┃━┫┃━┫╰╯┃┃┃┃┃╰╯┣╯╰╯┃╰╯┃╰╯┃┃━┫╰╮
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;╱╰╯╰╯╰━━┻━━┫╭━┻┻╯╰┻━╮┣━━━┻━━┻━╮┣━━┻━╯
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;╱╱╱╱╱╱╱╱╱╱╱┃┃╱╱╱╱╱╭━╯┃╱╱╱╱╱╱╭━╯┃
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;╱╱╱╱╱╱╱╱╱╱╱╰╯╱╱╱╱╱╰━━╯╱╱╱╱╱╱╰━━╯
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    )
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;filecrt&lt;/span&gt;(filename):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 文件创建&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exists(filename): &lt;span style=&#34;color:#75715e&#34;&gt;#检查文件是否存在&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(str(datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now())&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;: 文件已存在&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(filename,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;x&amp;#39;&lt;/span&gt;)
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(str(datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;: 已创建文件: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; filename)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;filewrt&lt;/span&gt;(filename):
+    fruits &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;apple&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;banana&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;strawbarry&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;orange&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#75715e&#34;&gt;# 给出要写的内容&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 文件写入操作&lt;/span&gt;
+    f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(filename, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; fruit &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; fruits:
+        f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(fruit &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(str(datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;: 已写入&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; fruit)
+    f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;filedel&lt;/span&gt;(filename):
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 删除文件操作&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exists(filename):
+        os&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;remove(filename)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(str(datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;: 已删除&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; filename)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(str(datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; filename &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;不存在&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fileread&lt;/span&gt;(filename):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(str(datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;datetime&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;now()) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;: 读取中..&amp;#34;&lt;/span&gt; )
+    f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(filename,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;文件内容&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read())
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;文件内容&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+sign()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; filecrt(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+    fileread(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+    filedel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    filewrt(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+    fileread(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+    filedel(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/ - This is a customized copyright.</description>
+        </item>
     
     
     
@@ -2132,118 +2349,6 @@ Table: users
 &lt;/li&gt;
 &lt;/ul&gt;
 - https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/ - This is a customized copyright.</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Python学习笔记 简单爬虫</title>
-        <link>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</link>
-        <pubDate>Tue, 13 Aug 2019 22:20:53 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</guid>
-        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ -&lt;h2 id=&#34;一如既往不正经的前言&#34;&gt;一如既往不正经的前言&lt;/h2&gt;
-&lt;p&gt;嘿嘿，我又回来了，今天在U盘里弄好了hexo，现在可以继续更新了&lt;/p&gt;
-&lt;p&gt;&lt;del&gt;并且这次博客添加了访问量统计，欢迎扩～&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;那么，本期更新一个简单的Python爬虫&lt;/p&gt;
-&lt;h2 id=&#34;爬虫原理&#34;&gt;爬虫原理&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;小白: 大佬大佬～爬虫是啥啊？&lt;/p&gt;
-&lt;p&gt;大佬: 去搜索引擎查呀&lt;/p&gt;
-&lt;p&gt;小白: 查了，还是看不懂&lt;/p&gt;
-&lt;p&gt;大佬: emmmmm..那你继续往下看吧…&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;概述&#34;&gt;概述&lt;/h3&gt;
-&lt;p&gt;2333,爬虫其实很好理解&lt;/p&gt;
-&lt;p&gt;我们都知道上网是用浏览器的，那么我们具体是怎样访问一个网页的呢？看下面吧(懒得画图了)&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;浏览器 –发送一个请求www.bing.com –&amp;gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;服务器 &amp;lt;–接受到请求-–&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;服务器 –做出响应–&amp;gt; –返回数据–&amp;gt; 浏览器&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;什么？还是不了解？那我们用浏览器来看一下吧，我们随便打开一个网页&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-05-37.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;以Chrome/Chromiun为例，接下来依次点击 &lt;code&gt;鼠标右键——检查——NetWork——将Preserve log打上勾 &lt;/code&gt;，然后刷新 就会发现出现了以下内容&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-12-19.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;我们可以看到浏览器很详细的把请求内容显示出来了，而左边那些列表，你已经获取了这个网站的内容。&lt;/p&gt;
-&lt;p&gt;爬虫的原理就是把这些过程自动化，不需要我们去手动访问，就可以把网页中你想要的信息和内容爬取下来。&lt;/p&gt;
-&lt;h3 id=&#34;爬虫的作用&#34;&gt;爬虫的作用&lt;/h3&gt;
-&lt;p&gt;举个例子，这里有一个 &lt;del&gt;&lt;a href=&#34;http://www.hiphop8.com/&#34;&gt;全国号码段(链接已失效)&lt;/a&gt;&lt;/del&gt; 的网站，我们需要取一个城市中其中一个号码段的所有的号码。比如西安市&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-18-42.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-20-17.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;可以看到，号码段有很多，每个段有一万个号码。这个时候怎么办呢？总不可能用鼠标一条一条的去复制粘贴吧？这个时候爬虫就派上用场了。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;其实也可以用来爬取我的博客，当更新的时候就可以及时收到更新信息&lt;/p&gt;
-&lt;p&gt;啊啊别打我，疼疼疼&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;编程语言的选择&#34;&gt;编程语言的选择&lt;/h2&gt;
-&lt;p&gt;我们如果要进行爬虫工作，那么就必须使用编程语言，用得最多的是&lt;strong&gt;Python&lt;/strong&gt;，因为Python进行爬虫是比较简便的，当然也可以选择其他的比如&lt;strong&gt;C/C++&lt;/strong&gt;、&lt;strong&gt;Java&lt;/strong&gt;等，甚至是&lt;strong&gt;易语言&lt;/strong&gt;都可以做到，只不过难易度和写法不同，目的和功能都是一样的。本期我们选择Python&lt;/p&gt;
-&lt;h2 id=&#34;python的安装&#34;&gt;Python的安装&lt;/h2&gt;
-&lt;p&gt;Python是跨平台的语言，所以平台不同安装方法也有所不同。&lt;/p&gt;
-&lt;h3 id=&#34;windows&#34;&gt;Windows&lt;/h3&gt;
-&lt;p&gt;可以到&lt;a href=&#34;https://www.python.org/&#34;&gt;Python的官网&lt;/a&gt;去下载安装程序并安装，建议下载Python3&lt;/p&gt;
-&lt;h3 id=&#34;mac-osx&#34;&gt;Mac OSX&lt;/h3&gt;
-&lt;p&gt;同样到&lt;a href=&#34;https://www.python.org/&#34;&gt;Python的官网&lt;/a&gt;下载&lt;/p&gt;
-&lt;h3 id=&#34;linux&#34;&gt;Linux&lt;/h3&gt;
-&lt;p&gt;Linux则在包管理器安装即可&lt;/p&gt;
-&lt;h4 id=&#34;deb系&#34;&gt;deb系&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo apt-get install python3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arch系&#34;&gt;Arch系&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S python
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;rpm系&#34;&gt;rpm系&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo yum install python3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;android&#34;&gt;Android&lt;/h3&gt;
-&lt;p&gt;Android平台则安装QPython即可，&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.coolapk.com/apk/com.hipipal.qpy3&#34;&gt;到酷安安装&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.qpython.com/&#34;&gt;QPython官网&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;安装pip&#34;&gt;安装pip&lt;/h2&gt;
-&lt;p&gt;Windows和Mac OSX的安装程序会自动装上pip，而Linux则不会，需要手动安装。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;什么？你问我Android？我也不知道2333&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;首先打开&lt;a href=&#34;https://pypi.org/project/pip/#files&#34;&gt;这个网页&lt;/a&gt;，然后点击&lt;strong&gt;Download&lt;/strong&gt;，下载第二个tar.gz文件，这是个Linux压缩文件。&lt;/p&gt;
-&lt;p&gt;然后解压它，就会得到一个&lt;code&gt;pip-19.2.2目录&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ tar -xvf pip-19.2.2.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;cd进去&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd ./pip-19.2.2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;下面有一个 &lt;strong&gt;&lt;code&gt;setup.py&lt;/code&gt;&lt;/strong&gt; 文件，用python执行它即可&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo python setup.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后就会自动安装好pip了。&lt;/p&gt;
-&lt;h2 id=&#34;需要安装的模块&#34;&gt;需要安装的模块&lt;/h2&gt;
-&lt;p&gt;我的爬虫用到了以下模块：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;requests，网页请求模块&lt;/li&gt;
-&lt;li&gt;BeautifulSoup，分析模块&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;安装命令：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pip install requests BeautifulSoup
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果感觉到速度很慢，则参考&lt;a href=&#34;https://www.cnblogs.com/microman/p/6107879.html&#34;&gt;这里&lt;/a&gt;更换国内镜像源。&lt;/p&gt;
-&lt;h2 id=&#34;代码公开&#34;&gt;代码公开&lt;/h2&gt;
-&lt;p&gt;这里公开一下获取手机号的简单爬虫代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; bs4 &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; BeautifulSoup
-&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
-&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;简易手机号码抓取工具 By WeepingDogel&amp;#34;&lt;/span&gt;)
-url&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://www.hiphop8.com/mobile/xian_1319339.html&amp;#34;&lt;/span&gt;
-page&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url)
-page_info&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;page&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;content
-soup &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BeautifulSoup(page_info, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;html.parser&amp;#34;&lt;/span&gt;)
-numbers &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; soup&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;find_all(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1319339.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;w&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; file:
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; number &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; numbers:
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(number&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;string)
-        file&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;write(str(number&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;string)&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将代码复制到一个py文件中运行或修改即可。&lt;/p&gt;
-&lt;h2 id=&#34;最后&#34;&gt;最后&lt;/h2&gt;
-&lt;p&gt;写得比较仓促，所以可能不够详细，请谅解。&lt;del&gt;下方有评论区，欢迎评论(Tu Cao)。&lt;/del&gt;&lt;/p&gt;
-- https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ - This is a customized copyright.</description>
         </item>
     
     
