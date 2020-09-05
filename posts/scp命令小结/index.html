@@ -724,9 +724,9 @@ weepingdogel@WeepingDogel ~&gt; ls /tmp/*.html -lh
 <p>而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。</p>
 <p>我这里用的是 <a href="https://www.natfrp.com/">SakuraFRP</a> ，非常好用的免费内网穿透服务！</p>
 <p><strong>上传：</strong></p>
-<pre><code>scp -P [端口]  [本对文件名] 用户名@地址:[文件名]
+<pre><code>scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
 </code></pre><p><strong>下载：</strong></p>
-<pre><code>scp -P [端口] 用户名@地址:[文件名] [本对文件名]
+<pre><code>scp -P [端口] 用户名@地址:[文件名] [本地文件名]
 </code></pre><p>上面已经提示过很多次<strong>这个<code>[文件名]</code>是个路径了</strong>。这里就不再多废话啦。</p>
 <p>嗯&hellip; 具体就是这样子的：</p>
 <pre><code>weepingdogel@WeepingDogel ~&gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py

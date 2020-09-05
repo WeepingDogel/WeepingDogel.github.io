@@ -280,9 +280,9 @@ weepingdogel@WeepingDogel ~&amp;gt; ls /tmp/*.html -lh
 &lt;p&gt;而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。&lt;/p&gt;
 &lt;p&gt;我这里用的是 &lt;a href=&#34;https://www.natfrp.com/&#34;&gt;SakuraFRP&lt;/a&gt; ，非常好用的免费内网穿透服务！&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;上传：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;scp -P [端口]  [本对文件名] 用户名@地址:[文件名]
+&lt;pre&gt;&lt;code&gt;scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;scp -P [端口] 用户名@地址:[文件名] [本对文件名]
+&lt;pre&gt;&lt;code&gt;scp -P [端口] 用户名@地址:[文件名] [本地文件名]
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
 &lt;p&gt;嗯&amp;hellip; 具体就是这样子的：&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
