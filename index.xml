@@ -1,14 +1,90 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>👑 WeepingDogel&#39;s Blog</title>
+    <title> WeepingDogel&#39;s Blog</title>
     <link>https://weepingdogel.github.io/</link>
-    <description>Recent content on 👑 WeepingDogel&#39;s Blog</description>
+    <description>Recent content on  WeepingDogel&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This is a customized copyright.</copyright>
-    <lastBuildDate>Sat, 25 Jul 2020 13:25:46 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 05 Sep 2020 12:10:07 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>scp 命令小结</title>
+        <link>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</link>
+        <pubDate>Sat, 05 Sep 2020 12:10:07 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</guid>
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ -&lt;h2 id=&#34;scp-命令是什么&#34;&gt;scp 命令是什么&lt;/h2&gt;
+&lt;p&gt;是传文件用的..&lt;/p&gt;
+&lt;p&gt;我们用 &lt;code&gt;ssh&lt;/code&gt; 操作服务器，当我们需要给服务器传输文件的时候，&lt;code&gt;scp&lt;/code&gt; 命令会通过 &lt;code&gt;ssh&lt;/code&gt; 的端口进行文件传输。&lt;/p&gt;
+&lt;h2 id=&#34;用法&#34;&gt;用法&lt;/h2&gt;
+&lt;p&gt;当我们在终端输入 &lt;code&gt;scp&lt;/code&gt; 后，我们会得到这些&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; scp
+usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
+            [-J destination] [-l limit] [-o ssh_option] [-P port]
+            [-S program] source ... target
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;很显然我们很快就知道了一些参数&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;p&gt;这里举一些例子，来展示清楚具体的使用方法&amp;hellip;&lt;/p&gt;
+&lt;p&gt;先说明一下我的测试环境&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Arch Linux&lt;/p&gt;
+&lt;p&gt;IP: 192.168.0.105&lt;/p&gt;
+&lt;p&gt;CentOS8 虚拟机&lt;/p&gt;
+&lt;p&gt;IP: 192.168.0.108&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;上传一个文件&#34;&gt;上传一个文件&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;$ scp [本地文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是一般用法，但是&lt;strong&gt;请确保路径正确！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;即：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
+root@192.168.0.108&#39;s password: 
+7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个很简单的，没什么多说的了..&lt;/p&gt;
+&lt;h3 id=&#34;下载一个文件&#34;&gt;下载一个文件&lt;/h3&gt;
+&lt;p&gt;如果我们要从服务器里取一个文件下来修改，而服务器没有 &lt;code&gt;ftp&lt;/code&gt; 时该怎么办呢？&lt;/p&gt;
+&lt;p&gt;我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ scp 用户名@地址:[文件名] [本地文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;还是要提醒一下，这个&lt;strong&gt;文件名&lt;/strong&gt;， &lt;strong&gt;是一个路径！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;是一个&lt;strong&gt;相对路径&lt;/strong&gt;或&lt;strong&gt;绝对路径&lt;/strong&gt;！具体依情况而定，但&lt;strong&gt;它一定是个路径！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
+root@192.168.0.108&#39;s password: 
+index.html                                                   100%   46KB 728.6KB/s   00:00
+weepingdogel@WeepingDogel ~&amp;gt; ls /tmp/*.html -lh
+-rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了&lt;/p&gt;
+&lt;h3 id=&#34;指定一个-ip&#34;&gt;指定一个 IP&lt;/h3&gt;
+&lt;p&gt;一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。&lt;/p&gt;
+&lt;p&gt;而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。&lt;/p&gt;
+&lt;p&gt;我这里用的是 &lt;a href=&#34;https://www.natfrp.com/&#34;&gt;SakuraFRP&lt;/a&gt; ，非常好用的免费内网穿透服务！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;上传：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;scp -P [端口]  [本对文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;scp -P [端口] 用户名@地址:[文件名] [本对文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
+&lt;p&gt;嗯&amp;hellip; 具体就是这样子的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是这里我来个组合命令&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;amp;&amp;amp; cd /tmp &amp;amp;&amp;amp; python test.py
+The authenticity of host &#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&#39; can&#39;t be established.
+ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added &#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&#39; (ECDSA) to the list of known hosts.
+root@cn-zj-dx-2.sakurafrp.com&#39;s password: 
+test.py                                                      100%   21     0.2KB/s   00:00    
+Hello World
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦&lt;/p&gt;
+&lt;p&gt;写完啦！&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;啥？这次没有，自己试出来的&amp;hellip;&lt;/p&gt;
+&lt;p&gt;唔啊！准确来说也有，那就是各种搜索引擎啦～&lt;/p&gt;
+- https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ - This is a customized copyright.</description>
+        </item>
     
     
     
@@ -18,7 +94,7 @@
         <pubDate>Sat, 25 Jul 2020 13:25:46 +0800</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/ -&lt;h2 id=&#34;发生了啥&#34;&gt;发生了啥&lt;/h2&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/ -&lt;h2 id=&#34;发生了啥&#34;&gt;发生了啥&lt;/h2&gt;
 &lt;p&gt;最近我收到了一条这样的消息&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;使用 &lt;code&gt;$HOME/.pam_environment&lt;/code&gt; 设置环境变量的用户注意啦！由于 &lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708&#34;&gt;CVE-2010-4708&lt;/a&gt;, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。&lt;/p&gt;
@@ -140,7 +216,7 @@ export XMODIFIERS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@im&lt;
         <pubDate>Fri, 17 Jul 2020 10:30:59 +0800</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/ -&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/ -&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
 &lt;p&gt;尝试在 Redmibook 14 中安装了 Manjaro, 装完发现 WIFI 不能用&lt;/p&gt;
 &lt;p&gt;此时陷入了疑惑, 难道 Manjaro 也不自带 linux-firmware ?&lt;/p&gt;
 &lt;p&gt;总之经过了一系列折腾, 最后还是解决了, 写篇东西来记录一下解决的过程&lt;/p&gt;
@@ -211,7 +287,7 @@ export XMODIFIERS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@im&lt;
         <pubDate>Sat, 13 Jun 2020 12:53:25 +0800</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/ -&lt;h2 id=&#34;arch-linux是什么&#34;&gt;Arch Linux是什么？&lt;/h2&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/ -&lt;h2 id=&#34;arch-linux是什么&#34;&gt;Arch Linux是什么？&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Linux&lt;/a&gt;&lt;/strong&gt; 是一个通用 x86_64_ GNU/Linux 发行版，它采用滚动升级模式，尽权力给用户提供最新版本的稳定软件，因其&amp;quot;简洁、现代、实用、以用户为中心&amp;quot;的原则而得名。&lt;/p&gt;
 &lt;p&gt;Arch Wiki 上已经写明其原则&lt;/p&gt;
 &lt;blockquote&gt;
@@ -711,12 +787,12 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
         <pubDate>Mon, 30 Mar 2020 15:49:34 +0800</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/ -&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
-&lt;p&gt;闲着无聊我又来&lt;del&gt;水文章&lt;/del&gt;更新了，这次准备&lt;del&gt;水&lt;/del&gt;写一篇比较长的，然后就想对FreeBSD下手了,嘿嘿。👑&lt;/p&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/ -&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
+&lt;p&gt;闲着无聊我又来&lt;del&gt;水文章&lt;/del&gt;更新了，这次准备&lt;del&gt;水&lt;/del&gt;写一篇比较长的，然后就想对FreeBSD下手了,嘿嘿。&lt;/p&gt;
 &lt;h2 id=&#34;freebsd介绍&#34;&gt;FreeBSD介绍&lt;/h2&gt;
-&lt;p&gt;FreeBSD是一个类Unix的操作系统，它与Linux还是有区别的&amp;hellip;&amp;hellip;👑&lt;/p&gt;
-&lt;p&gt;Unix&amp;hellip;感觉很少人用吧..估计比Linux还少，不过服务器用用应该还不错吧&amp;hellip;👑&lt;/p&gt;
-&lt;p&gt;维基百科是这么说的👑:&lt;/p&gt;
+&lt;p&gt;FreeBSD是一个类Unix的操作系统，它与Linux还是有区别的&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Unix&amp;hellip;感觉很少人用吧..估计比Linux还少，不过服务器用用应该还不错吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;维基百科是这么说的 :&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;FreeBSD是一个类Unix的操作系统，也是FreeBSD项目的发展成果。[2]FreeBSD是第一个开放源代码的系统，他是由基于BSD Unix的源代码派生而来的。BSD Unix是加州大学伯克利分校在1975年至1993年开发的操作系统。FreeBSD被开发为自由软件，这意味着其源代码开放，人人都可以使用FreeBSD。任何人都可以获得并使用它来满足各种需求，也可以修改它，然后再重发布它。此功能专为个人和公司量身定制，可用于创建各种基于FreeBSD的商业和非商业产品。尽管FreeBSD直接从BSD派生，但是从法律的角度来看，FreeBSD为 unix 系统，但它并不是“UNIX”。因为现在“UNIX”商标是属于国际开放标准组织的。[3]FreeBSD的第一个版本于1993年发布。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -729,43 +805,43 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
 &lt;h3 id=&#34;准备工作&#34;&gt;准备工作&lt;/h3&gt;
-&lt;p&gt;我打算在虚拟机里玩玩就好啦～👑&lt;/p&gt;
+&lt;p&gt;我打算在虚拟机里玩玩就好啦～&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;问:是VirtualBox吗？&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;对，之前介绍过的&lt;strong&gt;VirtualBox&lt;/strong&gt;，也应该没什么好讲的了，创建一个虚拟机应该不是问题，问题是接下来如何进行安装。👑&lt;/p&gt;
-&lt;p&gt;除了虚拟机我们还要准备的东西就是FreeBSD的安装镜像了，可以去官方的源下载，但是考虑到速度问题，也可以去墙内的一些镜像站下载。👑&lt;/p&gt;
+&lt;p&gt;对，之前介绍过的&lt;strong&gt;VirtualBox&lt;/strong&gt;，也应该没什么好讲的了，创建一个虚拟机应该不是问题，问题是接下来如何进行安装。&lt;/p&gt;
+&lt;p&gt;除了虚拟机我们还要准备的东西就是FreeBSD的安装镜像了，可以去官方的源下载，但是考虑到速度问题，也可以去墙内的一些镜像站下载。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://mirrors.ustc.edu.cn/freebsd/releases/&#34;&gt;USTC Mirror&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;注意：下载的时候要确定你的架构，别下错了&lt;/strong&gt;(应该大部分都是amd64吧)👑&lt;/p&gt;
-&lt;p&gt;什么？你说配置要求？嘛&amp;hellip;👑&lt;/p&gt;
-&lt;p&gt;看看官网怎么说👑&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：下载的时候要确定你的架构，别下错了&lt;/strong&gt;(应该大部分都是amd64吧)&lt;/p&gt;
+&lt;p&gt;什么？你说配置要求？嘛&amp;hellip;&lt;/p&gt;
+&lt;p&gt;看看官网怎么说&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;FreeBSD/i386 和 FreeBSD/pc98 版本， 都需要 486 或更高的处理器，以及至少 24 MB 的 RAM。 您需要至少 150 MB 的空闲硬盘空间， 才能完成最小的安装配置。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;至于amd64架构嘛，一句话，你有处理器有内存有硬盘就能用，而且我们都用虚拟机了👑&lt;/p&gt;
+&lt;p&gt;至于amd64架构嘛，一句话，你有处理器有内存有硬盘就能用，而且我们都用虚拟机了&lt;/p&gt;
 &lt;h3 id=&#34;安装过程&#34;&gt;安装过程&lt;/h3&gt;
-&lt;p&gt;首先肯定是先把镜像导入虚拟机啦，这个我就不再写一遍了，百度谷歌能搜到的&amp;hellip;👑&lt;/p&gt;
-&lt;p&gt;然后我们启动，就会看到这个可爱的画面..👑&lt;/p&gt;
-&lt;p&gt;你可以直接按回车，也可以等10秒让它自动启动&amp;hellip;👑&lt;/p&gt;
+&lt;p&gt;首先肯定是先把镜像导入虚拟机啦，这个我就不再写一遍了，百度谷歌能搜到的&amp;hellip;&lt;/p&gt;
+&lt;p&gt;然后我们启动，就会看到这个可爱的画面..&lt;/p&gt;
+&lt;p&gt;你可以直接按回车，也可以等10秒让它自动启动&amp;hellip;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/freebsd.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;启动之后就会来到这个界面👑&lt;/p&gt;
+&lt;p&gt;启动之后就会来到这个界面&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/FreeBSD_Install.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;选择Install按回车啦👑&lt;/p&gt;
+&lt;p&gt;选择Install按回车啦&lt;/p&gt;
 &lt;p&gt;然后是选择键盘类型，这里选&lt;code&gt;United States Of America&lt;/code&gt;
 &lt;img src=&#34;https://weepingdogel.github.io/img/FreeBSD_keymap.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;选完以后回到第一项回车即可，当然你也可以在第二项那里测试你的键盘是否有效👑&lt;/p&gt;
+&lt;p&gt;选完以后回到第一项回车即可，当然你也可以在第二项那里测试你的键盘是否有效&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-02.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;什么？你看不懂英文？👑&lt;/p&gt;
-&lt;p&gt;第一项是&lt;code&gt;继续&lt;/code&gt;👑&lt;/p&gt;
-&lt;p&gt;第二项是&lt;code&gt;测试键盘&lt;/code&gt;👑&lt;/p&gt;
-&lt;p&gt;下面的就是地区或者国家名称了👑&lt;/p&gt;
-&lt;p&gt;接下来输入你的主机名👑&lt;/p&gt;
+&lt;p&gt;什么？你看不懂英文？&lt;/p&gt;
+&lt;p&gt;第一项是&lt;code&gt;继续&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;第二项是&lt;code&gt;测试键盘&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;下面的就是地区或者国家名称了&lt;/p&gt;
+&lt;p&gt;接下来输入你的主机名&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-08.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;我就随便输入一个&lt;code&gt;localhost&lt;/code&gt;吧👑&lt;/p&gt;
-&lt;p&gt;然后回车👑&lt;/p&gt;
-&lt;p&gt;然后我就懵逼了。。👑&lt;/p&gt;
+&lt;p&gt;我就随便输入一个&lt;code&gt;localhost&lt;/code&gt;吧&lt;/p&gt;
+&lt;p&gt;然后回车&lt;/p&gt;
+&lt;p&gt;然后我就懵逼了。。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后看了下英文手册，这里是选择要安装的组件👑&lt;/p&gt;
+&lt;p&gt;然后看了下英文手册，这里是选择要安装的组件&lt;/p&gt;
 &lt;p&gt;根据官方的指引，这里来翻译一下&amp;hellip;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;base-dbg&lt;/li&gt;
@@ -809,12 +885,12 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
 &lt;blockquote&gt;
 &lt;p&gt;一些测试代码，没必要选了&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;想了一会儿，然后决定这样选了，你问凭什么这样选，我凭经验👑&lt;/p&gt;
-&lt;p&gt;那你就应该凭借翻译软件把官方的手册翻译完看一遍了👑&lt;/p&gt;
+&lt;p&gt;想了一会儿，然后决定这样选了，你问凭什么这样选，我凭经验&lt;/p&gt;
+&lt;p&gt;那你就应该凭借翻译软件把官方的手册翻译完看一遍了&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-36.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来是分区👑&lt;/p&gt;
+&lt;p&gt;接下来是分区&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-48.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这里有四种方式啊&amp;hellip;👑&lt;/p&gt;
+&lt;p&gt;这里有四种方式啊&amp;hellip;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Auto(UFS)&lt;/li&gt;
 &lt;/ul&gt;
@@ -839,36 +915,36 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
 &lt;blockquote&gt;
 &lt;p&gt;用&lt;code&gt;ZFS&lt;/code&gt;文件系统自动分区&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;行吧，选第二项，手动👑&lt;/p&gt;
-&lt;p&gt;然后就进了这里👑&lt;/p&gt;
+&lt;p&gt;行吧，选第二项，手动&lt;/p&gt;
+&lt;p&gt;然后就进了这里&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后，选&lt;code&gt;create&lt;/code&gt;创建一个分区表，官方手册有说明要创建一个&lt;code&gt;GPT&lt;/code&gt;分区表，但这里由于我没有开启&lt;code&gt;EFI&lt;/code&gt;所以我用&lt;code&gt;MBR&lt;/code&gt; 👑&lt;/p&gt;
+&lt;p&gt;然后，选&lt;code&gt;create&lt;/code&gt;创建一个分区表，官方手册有说明要创建一个&lt;code&gt;GPT&lt;/code&gt;分区表，但这里由于我没有开启&lt;code&gt;EFI&lt;/code&gt;所以我用&lt;code&gt;MBR&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这里的图形操作会有提示的，看不懂英文的可以用翻译器看一下👑&lt;/p&gt;
-&lt;p&gt;什么？还是不会？这玩意跟cfdisk差不多的👑&lt;/p&gt;
-&lt;p&gt;总之详细过程我就不截图出来了，只需要把分区分成这样就行👑&lt;/p&gt;
+&lt;p&gt;这里的图形操作会有提示的，看不懂英文的可以用翻译器看一下&lt;/p&gt;
+&lt;p&gt;什么？还是不会？这玩意跟cfdisk差不多的&lt;/p&gt;
+&lt;p&gt;总之详细过程我就不截图出来了，只需要把分区分成这样就行&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-21.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来选择&lt;code&gt;Finish&lt;/code&gt;,再选择&lt;code&gt;Commit&lt;/code&gt; 👑&lt;/p&gt;
+&lt;p&gt;接下来选择&lt;code&gt;Finish&lt;/code&gt;,再选择&lt;code&gt;Commit&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-22.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后就会慢慢安装了👑&lt;/p&gt;
+&lt;p&gt;然后就会慢慢安装了&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来就需要设置一个密码了，毕竟Unix的系统是不能空口令登录的👑&lt;/p&gt;
+&lt;p&gt;接下来就需要设置一个密码了，毕竟Unix的系统是不能空口令登录的&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-35.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;跟Linux一样，设置一个能记住的就可以了，然后会让你确认网卡👑&lt;/p&gt;
+&lt;p&gt;跟Linux一样，设置一个能记住的就可以了，然后会让你确认网卡&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;后面一路选&lt;code&gt;yes&lt;/code&gt;，不多说👑&lt;/p&gt;
+&lt;p&gt;后面一路选&lt;code&gt;yes&lt;/code&gt;，不多说&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这里直接全选👑&lt;/p&gt;
+&lt;p&gt;这里直接全选&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-40.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后回车，这里把&lt;code&gt;6&lt;/code&gt;勾选上，继续按回车👑&lt;/p&gt;
+&lt;p&gt;然后回车，这里把&lt;code&gt;6&lt;/code&gt;勾选上，继续按回车&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;最后一个提示，&lt;code&gt;yes&lt;/code&gt;，然后回车👑&lt;/p&gt;
-&lt;p&gt;然后重启，自动启动，再登录root，就完成啦👑&lt;/p&gt;
+&lt;p&gt;最后一个提示，&lt;code&gt;yes&lt;/code&gt;，然后回车&lt;/p&gt;
+&lt;p&gt;然后重启，自动启动，再登录root，就完成啦&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;装完后的感想&#34;&gt;装完后的感想&lt;/h2&gt;
-&lt;p&gt;FreeBSD注定是适合服务器的，或许也适合拿来玩，但日常使用的话就会出现很多问题让人头疼👑&lt;/p&gt;
-&lt;p&gt;反正我是不会玩啦..连个顺手的文本编辑器都没有&amp;hellip;vi我是真用不来&amp;hellip;要修改很多配置文件的说..👑&lt;/p&gt;
-&lt;p&gt;如果你有什么主意的话，就在下面留言吧👑&lt;/p&gt;
+&lt;p&gt;FreeBSD注定是适合服务器的，或许也适合拿来玩，但日常使用的话就会出现很多问题让人头疼&lt;/p&gt;
+&lt;p&gt;反正我是不会玩啦..连个顺手的文本编辑器都没有&amp;hellip;vi我是真用不来&amp;hellip;要修改很多配置文件的说..&lt;/p&gt;
+&lt;p&gt;如果你有什么主意的话，就在下面留言吧&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -889,7 +965,7 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
         <pubDate>Sun, 29 Mar 2020 14:15:46 +0800</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;嘛&amp;hellip;学了一会儿C语言弄了这么个玩意👑&lt;/p&gt;
 &lt;p&gt;其实就是基础语法和简单的判断👑&lt;/p&gt;
 &lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
@@ -1018,25 +1094,12 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
     
     
         <item>
-        <title>加冕日</title>
-        <link>https://weepingdogel.github.io/posts/2020-3-29/</link>
-        <pubDate>Fri, 27 Mar 2020 22:17:58 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/2020-3-29/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/2020-3-29/ -&lt;h2 id=&#34;2020年3月27日&#34;&gt;2020年3月27日&lt;/h2&gt;
-&lt;p&gt;每年的这天定为加冕周年庆。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/2020-3-29/ - This is a customized copyright.</description>
-        </item>
-    
-    
-    
-        <item>
         <title>[笔记整理]将来进行时</title>
         <link>https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/</link>
         <pubDate>Thu, 19 Dec 2019 02:01:58 +0530</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
 &lt;p&gt;个人笔记，仅供参考。&lt;/p&gt;
 &lt;h2 id=&#34;基本结构&#34;&gt;基本结构&lt;/h2&gt;
 &lt;ul&gt;
@@ -1145,7 +1208,7 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
         <pubDate>Sun, 20 Oct 2019 23:44:37 +0800</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/ -&lt;p&gt;&lt;strong&gt;注意事项：本期内容中的IP地址可能与你的实际情况不同！！请根据实际情况更改对应IP地址！！&lt;/strong&gt;&lt;/p&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/ -&lt;p&gt;&lt;strong&gt;注意事项：本期内容中的IP地址可能与你的实际情况不同！！请根据实际情况更改对应IP地址！！&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
 &lt;p&gt;诶嘿～！我又回来了，我看到很多萌新不知道怎么过锏幕的新人考核，特意为此写篇博客做个教程。&lt;/p&gt;
 &lt;p&gt;好让你们看完过一下，那么…&lt;/p&gt;
@@ -1921,7 +1984,7 @@ Table: users
         <pubDate>Sun, 13 Oct 2019 02:01:58 +0530</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/ -&lt;h2 id=&#34;不正经的前言&#34;&gt;不正经的前言&lt;/h2&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/ -&lt;h2 id=&#34;不正经的前言&#34;&gt;不正经的前言&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;我又回来啦～&lt;/p&gt;
 &lt;p&gt;嘿嘿，我绝对不会告诉你我又回来水啦～&lt;/p&gt;
@@ -2079,7 +2142,7 @@ Table: users
         <pubDate>Tue, 13 Aug 2019 22:20:53 +0800</pubDate>
         
         <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</guid>
-        <description>👑 WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ -&lt;h2 id=&#34;一如既往不正经的前言&#34;&gt;一如既往不正经的前言&lt;/h2&gt;
+        <description> WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ -&lt;h2 id=&#34;一如既往不正经的前言&#34;&gt;一如既往不正经的前言&lt;/h2&gt;
 &lt;p&gt;嘿嘿，我又回来了，今天在U盘里弄好了hexo，现在可以继续更新了&lt;/p&gt;
 &lt;p&gt;&lt;del&gt;并且这次博客添加了访问量统计，欢迎扩～&lt;/del&gt;&lt;/p&gt;
 &lt;p&gt;那么，本期更新一个简单的Python爬虫&lt;/p&gt;
