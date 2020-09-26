@@ -757,18 +757,16 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </ul>
 </li>
 <li>
-<p>fcitx5-config-qt-git</p>
+<p>fcitx5-configtool</p>
 <ul>
 <li>fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。在上面三个装完之后装。</li>
 </ul>
 </li>
 </ul>
 <p>那么，执行</p>
-<pre><code>$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im 
+<pre><code>$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
 </code></pre><p>软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个</p>
 <pre><code>$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
-</code></pre><p>接下来需要安装配置工具</p>
-<pre><code>$ sudo pacman -S fcitx5-config-qt-git
 </code></pre><h3 id="环境变量">环境变量</h3>
 <p>嗯哼，最后就是设置环境变量了，既然 <code>.pam_environment</code> 不能用了，那要写在哪里呢？</p>
 <p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html">云云</a>说：</p>
