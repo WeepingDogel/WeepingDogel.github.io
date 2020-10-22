@@ -899,76 +899,76 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </blockquote>
 </blockquote>
 <p>以一个文件举例</p>
-<pre><code>/home/weepingdogel/test.txt
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">/home/weepingdogel/test.txt
 ---
 Hello!I love Python.
-</code></pre><p>我们不写 mode 参数：</p>
+</code></pre></div><p>我们不写 mode 参数：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>read())
 </code></pre></div><p>执行后：</p>
-<pre><code>weepingdogel@WeepingDogel ~&gt; python test.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; python test.py
 Hello!I love Python.
-</code></pre><p>我们将它加上：</p>
+</code></pre></div><p>我们将它加上：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;rt&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>read())
 </code></pre></div><p>执行后：</p>
-<pre><code>weepingdogel@WeepingDogel ~&gt; python test.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; python test.py
 Hello!I love Python.
-</code></pre><p>结果是一模一样的。</p>
+</code></pre></div><p>结果是一模一样的。</p>
 <h4 id="读行">读行</h4>
 <p>文件:</p>
-<pre><code>/home/weepingdogel/test.txt
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">/home/weepingdogel/test.txt
 ---
 Hello!I love Python.
 Have a nice day!
 Good luck!
-</code></pre><p>当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
+</code></pre></div><p>当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
 <code>f.readline()</code></p>
 <p>例如:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>readline())
 </code></pre></div><p>执行后：</p>
-<pre><code>weepingdogel@WeepingDogel ~&gt; python test.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; python test.py
 Hello!I love Python.
 
-</code></pre><p>我们需要两行的时候：</p>
+</code></pre></div><p>我们需要两行的时候：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>readline())
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>readline())
 </code></pre></div><p>执行后：</p>
-<pre><code>weepingdogel@WeepingDogel ~&gt; python test.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; python test.py
 Hello!I love Python.
 
 Have a nice day!
 
-</code></pre><p>如果我们需要三行：</p>
+</code></pre></div><p>如果我们需要三行：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>)
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>readline())
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>readline())
 <span style="color:#66d9ef">print</span>(f<span style="color:#f92672">.</span>readline())
 </code></pre></div><p>执行后：</p>
-<pre><code>weepingdogel@WeepingDogel ~&gt; python test.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; python test.py
 Hello!I love Python.
 
 Have a nice day!
 
 Good luck!
 
-</code></pre><p>这个用法它会逐行读取，并且打印输出的时候是会换行的</p>
+</code></pre></div><p>这个用法它会逐行读取，并且打印输出的时候是会换行的</p>
 <p>在读配置文件的时候也许会用到吧&hellip;</p>
 <p>当然我们也可以用 <code>for</code> 循环读一次性读全部：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>)
 <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> f:
     <span style="color:#66d9ef">print</span>(x)
 </code></pre></div><p>执行后：</p>
-<pre><code>weepingdogel@WeepingDogel ~&gt; python test.py
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; python test.py
 Hello!I love Python.
 
 Have a nice day!
 
 Good luck!
 
-</code></pre><p>我觉得用 <code>for</code> 应该更有效率点&hellip;</p>
+</code></pre></div><p>我觉得用 <code>for</code> 应该更有效率点&hellip;</p>
 <h3 id="关闭文件">关闭文件</h3>
 <p>这个没什么好讲的&hellip;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">f <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>)

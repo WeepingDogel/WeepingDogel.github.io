@@ -1837,9 +1837,9 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 <h3 id="确认是否连接到网络">确认是否连接到网络</h3>
 <p>启动Arch ISO之后，你将操作一个运行在 tty 上的 Live CD，这个时候第一件事就是检查有没有连接到网络。</p>
 <p>你可以使用 <code>ping</code> 这个命令来确认是否连接到网络，随便一个非局域网地址都可以</p>
-<pre><code># ping weepingdogel.github.io
-</code></pre><p>若返回出类似这样的信息，则说明网络连接是正常的</p>
-<pre><code>PING weepingdogel.github.io (185.199.111.153) 56(84) bytes of data.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># ping weepingdogel.github.io
+</code></pre></div><p>若返回出类似这样的信息，则说明网络连接是正常的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">PING weepingdogel.github.io (185.199.111.153) 56(84) bytes of data.
 64 bytes from 185.199.111.153 (185.199.111.153): icmp_seq=2 ttl=48 time=113 ms
 64 bytes from 185.199.111.153 (185.199.111.153): icmp_seq=3 ttl=48 time=110 ms
 64 bytes from 185.199.111.153 (185.199.111.153): icmp_seq=4 ttl=48 time=114 ms
@@ -1853,29 +1853,29 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 --- weepingdogel.github.io ping statistics ---
 11 packets transmitted, 9 received, 18.1818% packet loss, time 10801ms
 rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
-</code></pre><p>如果返回的不是类似于上面的信息，那么你可能没有正确连接到网络，你需要这样做</p>
+</code></pre></div><p>如果返回的不是类似于上面的信息，那么你可能没有正确连接到网络，你需要这样做</p>
 <p>检查网卡</p>
-<pre><code># ip link
-</code></pre><p>将会返回这些</p>
-<pre><code>1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># ip link
+</code></pre></div><p>将会返回这些</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: enp3s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
     link/ether bc:5f:f4:aa:04:c9 brd ff:ff:ff:ff:ff:ff
-</code></pre><p><code>lo</code> 是指 localhost ，一般情况下，如果你只有一个网卡的话，类似于 <code>enp3s0</code> 的名称就是你的网卡了，但不同品牌的网卡显示的也不同，如 Intel 网卡可能显示为 <code>ens33</code> 之类的。下面用 <code>&lt;网卡名&gt;</code> 来指代吧</p>
+</code></pre></div><p><code>lo</code> 是指 localhost ，一般情况下，如果你只有一个网卡的话，类似于 <code>enp3s0</code> 的名称就是你的网卡了，但不同品牌的网卡显示的也不同，如 Intel 网卡可能显示为 <code>ens33</code> 之类的。下面用 <code>&lt;网卡名&gt;</code> 来指代吧</p>
 <p>设置网卡</p>
-<pre><code># ip link set &lt;网卡名&gt; up
-</code></pre><p>使用 <code>dhcpcd</code> 命令来自动匹配 DHCP 地址</p>
-<pre><code># dhcpcd
-</code></pre><p>它会自动帮你获取到 DHCP 地址，然后你就能连接到网络了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># ip link set &lt;网卡名&gt; up
+</code></pre></div><p>使用 <code>dhcpcd</code> 命令来自动匹配 DHCP 地址</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># dhcpcd
+</code></pre></div><p>它会自动帮你获取到 DHCP 地址，然后你就能连接到网络了</p>
 <h3 id="同步系统时间">同步系统时间</h3>
 <p>你需要保证 Live CD 目前的时间是准确的</p>
 <p>这里执行 <code>timedatectl</code> 命令</p>
-<pre><code># timedatectl set-ntp true
-</code></pre><h3 id="分区">分区</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># timedatectl set-ntp true
+</code></pre></div><h3 id="分区">分区</h3>
 <p>这里一直都是比较关键的部分，分区..</p>
 <p>首先，你需要查看你的硬盘是否被识别</p>
-<pre><code># fdisk -l
-</code></pre><p>这里引入一个 <strong>块设备的概念</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># fdisk -l
+</code></pre></div><p>这里引入一个 <strong>块设备的概念</strong></p>
 <p><img src="/img/2020-06-13_15-44.png" alt=""></p>
 <p>也就是说如果被识别到，就会以 <code>/dev/sda</code> 或者 <code>/dev/nvme0n1</code> 这样，来表示你的硬盘。</p>
 <p><code>rom</code>，<code>loop</code>，或者<code>airoot</code> 这样的，可以忽略不管。</p>
@@ -1956,19 +1956,19 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 <h4 id="格式化">格式化</h4>
 <p>当你的分区建好了，这些分区要进行格式化</p>
 <p>BIOS + MBR:</p>
-<pre><code># mkfs.ext4 /dev/sdX1
-</code></pre><p>UEFI with GPT:</p>
-<pre><code># mkfs.ext4 /dev/sdX2
-</code></pre><pre><code># mkfs.vfat -F 32 /dev/sdX1
-</code></pre><p>不同的分区需要选择不同的文件系统，这个你需要去搜索引擎搜索了，篇幅有限，解释不了这么多。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># mkfs.ext4 /dev/sdX1
+</code></pre></div><p>UEFI with GPT:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># mkfs.ext4 /dev/sdX2
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># mkfs.vfat -F 32 /dev/sdX1
+</code></pre></div><p>不同的分区需要选择不同的文件系统，这个你需要去搜索引擎搜索了，篇幅有限，解释不了这么多。</p>
 <p>对于交换分区(第一个表中的 <code>/dev/sdx2</code>、第二个表中的 <code>/dev/sdX3</code>)，需要使用 <code>mkswap</code> 将其初始化：</p>
-<pre><code># mkswap /dev/sdX2
-</code></pre><p>挂载 swap</p>
-<pre><code># swapon /dev/sdX2
-</code></pre><h4 id="挂载分区">挂载分区</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># mkswap /dev/sdX2
+</code></pre></div><p>挂载 swap</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># swapon /dev/sdX2
+</code></pre></div><h4 id="挂载分区">挂载分区</h4>
 <p>将根分区挂载到<code>/mnt</code>，参考命令:</p>
-<pre><code># mount /dev/sdX1 /mnt
-</code></pre><h3 id="安装基本系统">安装基本系统</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># mount /dev/sdX1 /mnt
+</code></pre></div><h3 id="安装基本系统">安装基本系统</h3>
 <p>这个时候我们就已经可以安装基本系统了，但仍需要按照下面的步骤做</p>
 <h4 id="选择镜像">选择镜像</h4>
 <p>Arch Linux是通过网络安装的，它会通过镜像源直接在所在的分区下载需要的安装文件，安装速度较快，这也是为什么要确认网络是否连接。</p>
@@ -1980,102 +1980,102 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 <h4 id="安装必要软件包">安装必要软件包</h4>
 <p>Linux是由软件包组成的操作系统，而如果要启动它，就必须具备必要的软件包。</p>
 <p>这个时候我们使用 <code>pacstrap</code> 脚本，安装 <code>base</code> 软件包 和 Linux 内核还有硬件的固件，这样基本系统很快就构建完成了。</p>
-<pre><code># pacstrap /mnt base linux linux-firmware
-</code></pre><p>我推荐这样</p>
-<pre><code># pacstrap /mnt base base-devel linux linux-firmware linux-headers
-</code></pre><p>这样能够尽可能的安装上更多的基本软件。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># pacstrap /mnt base linux linux-firmware
+</code></pre></div><p>我推荐这样</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># pacstrap /mnt base base-devel linux linux-firmware linux-headers
+</code></pre></div><p>这样能够尽可能的安装上更多的基本软件。</p>
 <p>一顿文字输出过后，基本系统就安装完成了。</p>
 <h3 id="配置系统">配置系统</h3>
 <p>基本系统刚安装完是没有灵魂的，需要进行配置才能完美地使用</p>
 <h4 id="fstab">Fstab</h4>
 <p>首先肯定要生成一个fstab文件，否则系统连硬盘都不认识。
 用 <code>genfstab</code> 来生成</p>
-<pre><code># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
-</code></pre><p>最好在执行完以上命令后查看一下生成的 <code>/mnt/etc/fstab</code> 文件是否正确。</p>
-<pre><code># cat /mnt/etc/fstab
-</code></pre><h4 id="chroot">Chroot</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre></div><p>最好在执行完以上命令后查看一下生成的 <code>/mnt/etc/fstab</code> 文件是否正确。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># cat /mnt/etc/fstab
+</code></pre></div><h4 id="chroot">Chroot</h4>
 <p>Chroot 是 &ldquo;Change root&rdquo; 的缩写，意思是更改根目录，而我们需要将 Live CD 的根目录更改为你安装好的系统的目录，这样才能操作它</p>
 <p>用 <code>arch-chroot</code> 这个命令就可以了</p>
-<pre><code># arch-chroot /mnt
-</code></pre><h4 id="时区">时区</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># arch-chroot /mnt
+</code></pre></div><h4 id="时区">时区</h4>
 <p>chroot 完以后，第一步要修改时区</p>
-<pre><code># ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
-</code></pre><p>例如</p>
-<pre><code># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-</code></pre><p>接下来运行 <code>hwclock</code> 生成 <code>/etc/adjtime</code></p>
-<pre><code># hwclock --systohc
-</code></pre><h4 id="本地化">本地化</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+</code></pre></div><p>例如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre></div><p>接下来运行 <code>hwclock</code> 生成 <code>/etc/adjtime</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># hwclock --systohc
+</code></pre></div><h4 id="本地化">本地化</h4>
 <blockquote>
 <p>本地化的程序与库若要本地化文本，都依赖 Locale，后者明确规定地域、货币、时区日期的格式、字符排列方式和其他本地化标准等等。在下面两个文件设置：<code>locale.gen</code> 与 <code>locale.conf</code>。 —— Arch Wiki</p>
 </blockquote>
 <p>所以不用多解释了&hellip;</p>
 <p>编辑这个文件 <code>/etc/locale.gen</code> ，移除需要语言前面的 <code>#</code></p>
-<pre><code># vim /etc/locale.gen
-</code></pre><p>然后执行 <code>locale-gen</code> 生成 locale 讯息:</p>
-<pre><code># locale-gen
-</code></pre><p>在 <code>/etc/</code> 目录下创建 一个叫 <code>locale.conf</code> 的文件</p>
-<pre><code># vim /etc/locale.conf
-</code></pre><p>写入以下内容</p>
-<pre><code>LANG=en_US.UTF-8
-</code></pre><h4 id="网络">网络</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># vim /etc/locale.gen
+</code></pre></div><p>然后执行 <code>locale-gen</code> 生成 locale 讯息:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># locale-gen
+</code></pre></div><p>在 <code>/etc/</code> 目录下创建 一个叫 <code>locale.conf</code> 的文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># vim /etc/locale.conf
+</code></pre></div><p>写入以下内容</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">LANG</span><span style="color:#f92672">=</span><span style="color:#e6db74">en_US.UTF-8</span>
+</code></pre></div><h4 id="网络">网络</h4>
 <p>首先需要安装的是 <code>dhcpcd</code> 这个包，不然安装完成重启后就需要手动配置网络了。</p>
-<pre><code># pacman -S dhcpcd
-</code></pre><p>接下来创建一个 <code>hostname</code> 文件，这个文件存储你的主机名</p>
-<pre><code># vim /etc/hostname
-</code></pre><p>写入以下内容，随便写，<strong>但是要记住</strong>，这里以 <code>myhostname</code> 代替了，</p>
-<pre><code>myhostname
-</code></pre><p>接下来编辑 <code>/etc/hosts</code> 这个文件</p>
-<pre><code># vim /etc/hosts
-</code></pre><p>写入以下内容</p>
-<pre><code>127.0.0.1	localhost
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># pacman -S dhcpcd
+</code></pre></div><p>接下来创建一个 <code>hostname</code> 文件，这个文件存储你的主机名</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># vim /etc/hostname
+</code></pre></div><p>写入以下内容，随便写，<strong>但是要记住</strong>，这里以 <code>myhostname</code> 代替了，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">myhostname
+</code></pre></div><p>接下来编辑 <code>/etc/hosts</code> 这个文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># vim /etc/hosts
+</code></pre></div><p>写入以下内容</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	myhostname.localdomain	myhostname
-</code></pre><p>接下来，执行</p>
-<pre><code># systemctl enable dhcpcd
-</code></pre><p>然后在安装完成之后就不需要担心网络连接问题了</p>
+</code></pre></div><p>接下来，执行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># systemctl enable dhcpcd
+</code></pre></div><p>然后在安装完成之后就不需要担心网络连接问题了</p>
 <h4 id="root-密码">Root 密码</h4>
 <p>你需要设置一个 root 密码</p>
-<pre><code># passwd
-</code></pre><p>这样基本系统就差不多完成了，但是现在还不能重启，因为它目前无法被引导。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># passwd
+</code></pre></div><p>这样基本系统就差不多完成了，但是现在还不能重启，因为它目前无法被引导。</p>
 <h3 id="安装启动引导器">安装启动引导器</h3>
 <p>如上面所说，你需要一个启动引导程序才能启动系统，Linux 有很多类似于这样的软件，可以在<a href="https://wiki.archlinux.org/index.php/Boot_loaders_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">这个页面</a>参考.</p>
 <p>我推荐使用 <code>GRUB</code></p>
 <h4 id="安装grub">安装Grub</h4>
 <p>先安装 <code>grub</code> 这个软件包</p>
-<pre><code># pacman -S grub
-</code></pre><p>这里要考虑到两种情况了,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># pacman -S grub
+</code></pre></div><p>这里要考虑到两种情况了,</p>
 <p><strong>第一种情况: BIOS + MBR</strong></p>
 <p>直接执行这条即可</p>
-<pre><code># grub-install --target=i386-pc /dev/sdX
-</code></pre><p>如果它返回出 <code>no erros</code> 之类的,那么就可以执行下面的了.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># grub-install --target=i386-pc /dev/sdX
+</code></pre></div><p>如果它返回出 <code>no erros</code> 之类的,那么就可以执行下面的了.</p>
 <p>生成 grub 配置文件</p>
-<pre><code># grub-mkconfig -o /boot/grub/grub.cfg
-</code></pre><p>接下来就可以拔掉 U 盘重启了</p>
-<pre><code># reboot
-</code></pre><p><strong>第二种情况: UEFI  + GPT</strong>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre></div><p>接下来就可以拔掉 U 盘重启了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># reboot
+</code></pre></div><p><strong>第二种情况: UEFI  + GPT</strong>
 这种情况的比较复杂一些,</p>
 <p>首先挂载你的EFI分区</p>
-<pre><code># mount /dev/sdX1 /boot/EFI 
-</code></pre><p>接下来执行</p>
-<pre><code># grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
-</code></pre><p>然后还是一样的生成配置文件</p>
-<pre><code># grub-mkconfig -o /boot/grub/grub.cfg
-</code></pre><p>接下来就可以拔掉 U 盘重启了</p>
-<pre><code># reboot
-</code></pre><h2 id="安装后工作">安装后工作</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># mount /dev/sdX1 /boot/EFI 
+</code></pre></div><p>接下来执行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
+</code></pre></div><p>然后还是一样的生成配置文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre></div><p>接下来就可以拔掉 U 盘重启了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># reboot
+</code></pre></div><h2 id="安装后工作">安装后工作</h2>
 <p>装完后要做的一些事情.</p>
 <h3 id="创建普通用户">创建普通用户</h3>
 <p>装完以后, 不建议直接使用 root 用户,需要创建一个普通用户</p>
 <p>先使用 root 用户登录,执行这条命令创建一个普通用户</p>
-<pre><code># useradd -G wheel -m -s /bin/bash &lt;用户名&gt;
-</code></pre><p>接下来给你的用户设置密码</p>
-<pre><code># passwd &lt;用户名&gt;
-</code></pre><p>将其添加到 <code>sudoers</code> 列表, 如果你没有安装 <code>sudo</code> 或 <code>base-devel</code> 请先执行</p>
-<pre><code># sudo pacman -S sudo
-</code></pre><p>然后编辑 <code>/etc/sudoers</code> 这个文件</p>
-<pre><code># vim /etc/sudoers
-</code></pre><p>将你的用户名添加到 <code>root</code> 的下面,照抄即可</p>
-<pre><code># Defaults!/usr/bin/sudoreplay !log_output
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># useradd -G wheel -m -s /bin/bash &lt;用户名&gt;
+</code></pre></div><p>接下来给你的用户设置密码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># passwd &lt;用户名&gt;
+</code></pre></div><p>将其添加到 <code>sudoers</code> 列表, 如果你没有安装 <code>sudo</code> 或 <code>base-devel</code> 请先执行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># sudo pacman -S sudo
+</code></pre></div><p>然后编辑 <code>/etc/sudoers</code> 这个文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># vim /etc/sudoers
+</code></pre></div><p>将你的用户名添加到 <code>root</code> 的下面,照抄即可</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"># Defaults!/usr/bin/sudoreplay !log_output
 # Defaults!/usr/local/bin/sudoreplay !log_output
 # Defaults!REBOOT !log_output
 
@@ -2088,17 +2088,17 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 ##
 root ALL=(ALL) ALL
 &lt;用户名&gt; ALL=(ALL) ALL
-</code></pre><p>重启即可登录普通用户了.</p>
+</code></pre></div><p>重启即可登录普通用户了.</p>
 <h3 id="安装图形界面">安装图形界面</h3>
 <p>在安装图形界面之前,我们需要安装的是 xorg , 它是大多数图形界面的依赖&hellip;</p>
 <p>算了,这么一大堆说完肯定&hellip;.直接一套安排上吧(xfce)</p>
 <p>安装软件包</p>
-<pre><code>$ sudo pacman -S xorg xfce4 lightdm lightdm-greeter-gtk
-</code></pre><p>设置lightdm启动权限</p>
-<pre><code>$ sudo systemctl enable lightdm
-</code></pre><h3 id="安装显卡驱动">安装显卡驱动</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S xorg xfce4 lightdm lightdm-greeter-gtk
+</code></pre></div><p>设置lightdm启动权限</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo systemctl enable lightdm
+</code></pre></div><h3 id="安装显卡驱动">安装显卡驱动</h3>
 <p>显卡驱动软件包列表.</p>
-<pre><code>extra/xf86-video-amdgpu 19.1.0-2 (xorg-drivers) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">extra/xf86-video-amdgpu 19.1.0-2 (xorg-drivers) 
     X.org amdgpu video driver
 extra/xf86-video-ati 1:19.1.0-2 (xorg-drivers)
     X.org ati video driver
@@ -2122,14 +2122,14 @@ extra/xf86-video-voodoo 1.2.5-11 (xorg-drivers)
     X.org 3dfx Voodoo1/Voodoo2 2D video driver
 community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
     Xorg X11 qxl video driver
-</code></pre><p>vesa 会自动装上, 自己是什么显卡就装什么, 不需要过多解释了吧&hellip;</p>
+</code></pre></div><p>vesa 会自动装上, 自己是什么显卡就装什么, 不需要过多解释了吧&hellip;</p>
 <p>Intel 核显</p>
-<pre><code>$ sudo pacman -S xf86-video-intel
-</code></pre><p>NVIDIA</p>
-<pre><code>$ sudo pacman -S xf86-video-nouveau
-</code></pre><p>AMD</p>
-<pre><code>$ sudo pacman -S xf86-video-amdgpu
-</code></pre><p>好啦 装完啦~</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S xf86-video-intel
+</code></pre></div><p>NVIDIA</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S xf86-video-nouveau
+</code></pre></div><p>AMD</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S xf86-video-amdgpu
+</code></pre></div><p>好啦 装完啦~</p>
 <p>接下来系统就可以使用啦~</p>
 
                     

