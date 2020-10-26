@@ -16,7 +16,20 @@
 
 
 
+<meta property="og:title" content="关于 fcitx5 ，以及最近的环境变量问题" />
+<meta property="og:description" content="更新后输入法失效了的，看这里！！" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/" />
+<meta property="article:published_time" content="2020-07-25T13:25:46+08:00" />
+<meta property="article:modified_time" content="2020-07-25T13:25:46+08:00" /><meta property="og:site_name" content="WeepingDogel&#39;s Blog" />
 
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="关于 fcitx5 ，以及最近的环境变量问题"/>
+<meta name="twitter:description" content="更新后输入法失效了的，看这里！！"/>
 
 
 
@@ -171,7 +184,7 @@
         
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
-Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
 <br>
 
 &copy;
@@ -192,7 +205,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 		
 		
 		
-		<center>- CATALOG -</center>
+		<center>- 目录 -</center>
 		
 		
 		<ul>
@@ -437,7 +450,7 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 		
 		
 		
-		<center>- CATALOG -</center>
+		<center>- 目录 -</center>
 		
 		
 		<ul>
@@ -731,9 +744,9 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 <blockquote>
 <p>（PS：你可能用的不是谷歌输入法，所以请把 <code>fcitx-googlepinyin</code> 改成你装的输入法的包名）</p>
 </blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
 </code></pre></div><p>接下来，将这个文件删除，反正也没用了 (逃</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo rm -rf ./.pam_environment
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo rm -rf ./.pam_environment
 </code></pre></div><h3 id="安装-fcitx5">安装 fcitx5</h3>
 <p>现在来安装 fcitx5，这样子弄</p>
 <ul>
@@ -767,9 +780,9 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </li>
 </ul>
 <p>那么，执行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
 </code></pre></div><p>软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
 </code></pre></div><h3 id="环境变量">环境变量</h3>
 <p>嗯哼，最后就是设置环境变量了，既然 <code>.pam_environment</code> 不能用了，那要写在哪里呢？</p>
 <p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html">云云</a>说：</p>
@@ -778,16 +791,16 @@ Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopene
 </blockquote>
 <p>也就是说，我们需要把 fcitx5 的环境变量写在 <code>.xprofile</code> 这个文件里面</p>
 <p>然后&hellip;</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ vim ./.xprofile
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ vim ./.xprofile
 </code></pre></div><p>在里面写入这些东西</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export INPUT_METHOD<span style="color:#f92672">=</span>fcitx5
-export GTK_IM_MODULE<span style="color:#f92672">=</span>fcitx5
-export QT_IM_MODULE<span style="color:#f92672">=</span>fcitx5
-export XMODIFIERS<span style="color:#f92672">=</span>@im<span style="color:#f92672">=</span>fcitx5
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export <span style="color:#fb660a">INPUT_METHOD</span>=fcitx5
+export <span style="color:#fb660a">GTK_IM_MODULE</span>=fcitx5
+export <span style="color:#fb660a">QT_IM_MODULE</span>=fcitx5
+export <span style="color:#fb660a">XMODIFIERS</span>=@im=fcitx5
 </code></pre></div><p>接下来你可以选择重启 <code>lightdm</code> ，</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo systemctl restart lightdm
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo systemctl restart lightdm
 </code></pre></div><p>或者重启系统</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo reboot
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo reboot
 </code></pre></div><p>此时，xfce 的状态栏出现了一个键盘，但是按 <!-- raw HTML omitted --><code>CTRL</code><!-- raw HTML omitted --> + <!-- raw HTML omitted --><code>SPACE</code><!-- raw HTML omitted --> 无法弹出中文输入法，这下怎么办呢？</p>
 <p>直接右键那个键盘图标，点击配置，然后进入内个 QT 写的配置工具里添加中文输入法就可以啦～～！</p>
 <p><img src="/img/2020-07-25_15-52.png" alt=""></p>
@@ -803,7 +816,7 @@ export XMODIFIERS<span style="color:#f92672">=</span>@im<span style="color:#f926
 
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">Last modified on 2020-07-25</p>
+		    <p style="color:#777;">最后修改于 2020-07-25</p>
                     
                 </div>
             </div>
@@ -813,13 +826,13 @@ export XMODIFIERS<span style="color:#f92672">=</span>@im<span style="color:#f926
 
                 
                 <a class="newer-posts" href="https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/">
-			Next<br>scp 命令小结
+			下回<br>scp 命令小结
                 </a>
                 
                 
                 
                 <a class="older-posts" href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/">
-			Previous<br>如何解决 Manjaro 中 QCA6174 网卡问题
+			上回<br>如何解决 Manjaro 中 QCA6174 网卡问题
                 </a>
                 
             </nav>
@@ -842,7 +855,7 @@ export XMODIFIERS<span style="color:#f92672">=</span>@im<span style="color:#f926
             </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
-Ported from <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
 <br>
 
 &copy;
