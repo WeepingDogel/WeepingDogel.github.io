@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html><head>
+<title>Linux Mint 如何修改软件源</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="EGsIpghqjISluKEkLB7IF_JGYSK3RSBt-nZwTiaQcrM">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="写给 Green Hands">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="Linux Mint 如何修改软件源" />
+<meta property="og:description" content="写给 Green Hands" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://weepingdogel.github.io/posts/2020-nov-6/" />
+<meta property="article:published_time" content="2020-11-06T22:54:23+08:00" />
+<meta property="article:modified_time" content="2020-11-06T22:54:23+08:00" /><meta property="og:site_name" content="WeepingDogel&#39;s Blog" />
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Mint 如何修改软件源"/>
+<meta name="twitter:description" content="写给 Green Hands"/>
+
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'G-NMWMSQB0MF', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="icon" href="https://avatars.githubusercontent.com/u/44858874">
+
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/journal.min.c116bc90d171283f099f173854157ec8f183f9073b93443b2c8ad82899ee9025.css" integrity="sha256-wRa8kNFxKD8Jnxc4VBV&#43;yPGD&#43;Qc7k0Q7LIrYKJnukCU=" media="screen">
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/dark-mode.min.552aae4638a84aa57cf0b195750a49ea9131d3bb621d1ed3ebc9b14b18166536.css" integrity="sha256-VSquRjioSqV88LGVdQpJ6pEx07tiHR7T68mxSxgWZTY=" media="screen">
+
+
+<script src="https://weepingdogel.github.io//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="https://weepingdogel.github.io//js/toc-collapse.js"></script>
+  
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'a1e928de856334c726b3',
+  clientSecret: 'f509df81e9d11e081635dbd9ebba466964694e48',
+  repo: 'WeepingDogel.github.io',
+  owner: 'weepingdogel',
+  admin: ['weepingdogel'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            WeepingDogel&#39;s Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Write to share.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Posts
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                标签
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                RSS订阅
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/friends">
+                Friends
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about">
+                关于(About)
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	WeepingDogel 本站遵循 CC-BY-NC 4.0 协议
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e7%bb%88%e7%ab%af%e6%b3%95" onclick="onNavClick(`#一终端法-nav`)" id="一终端法-nav">
+									一、终端法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%bd%bf%e7%94%a8%e8%87%aa%e5%b8%a6%e7%9a%84%e6%9b%b4%e6%96%b0%e7%ae%a1%e7%90%86%e5%99%a8" onclick="onNavClick(`#二使用自带的更新管理器-nav`)" id="二使用自带的更新管理器-nav">
+									二、使用自带的更新管理器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9b%b4%e6%96%b0%e8%bd%af%e4%bb%b6%e5%8c%85" onclick="onNavClick(`#更新软件包-nav`)" id="更新软件包-nav">
+									更新软件包
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e7%bb%88%e7%ab%af%e6%b3%95-1" onclick="onNavClick(`#一终端法-1-nav`)" id="一终端法-1-nav">
+									一、终端法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%bd%bf%e7%94%a8%e8%bf%99%e4%b8%aa%e6%9b%b4%e6%96%b0%e7%ae%a1%e7%90%86%e5%99%a8" onclick="onNavClick(`#二使用这个更新管理器-nav`)" id="二使用这个更新管理器-nav">
+									二、使用这个更新管理器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
+									结语
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Posts
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    标签
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    RSS订阅
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/friends">
+                    Friends
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about">
+                    关于(About)
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e7%bb%88%e7%ab%af%e6%b3%95" onclick="onNavClick(`#一终端法-nav`)" id="一终端法-nav">
+									一、终端法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%bd%bf%e7%94%a8%e8%87%aa%e5%b8%a6%e7%9a%84%e6%9b%b4%e6%96%b0%e7%ae%a1%e7%90%86%e5%99%a8" onclick="onNavClick(`#二使用自带的更新管理器-nav`)" id="二使用自带的更新管理器-nav">
+									二、使用自带的更新管理器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%9b%b4%e6%96%b0%e8%bd%af%e4%bb%b6%e5%8c%85" onclick="onNavClick(`#更新软件包-nav`)" id="更新软件包-nav">
+									更新软件包
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e7%bb%88%e7%ab%af%e6%b3%95-1" onclick="onNavClick(`#一终端法-1-nav`)" id="一终端法-1-nav">
+									一、终端法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%ba%8c%e4%bd%bf%e7%94%a8%e8%bf%99%e4%b8%aa%e6%9b%b4%e6%96%b0%e7%ae%a1%e7%90%86%e5%99%a8" onclick="onNavClick(`#二使用这个更新管理器-nav`)" id="二使用这个更新管理器-nav">
+									二、使用这个更新管理器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
+									结语
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+            WeepingDogel&#39;s Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://weepingdogel.github.io/">
+        <div class="single-column-header-title">WeepingDogel&#39;s Blog</div>
+        
+        <div class="single-column-header-subtitle">Write to share.</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                
+                    
+                    
+                    style="background-image: url('https://weepingdogel.github.io/img/2020-11-07_14-33.png')"
+                    
+                
+            >
+                <div class="post-title">
+                    Linux Mint 如何修改软件源
+                    
+                    <div class="post-subtitle">
+                        写给 Green Hands
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2020-11-06 22:54
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/linux">Linux</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/%E6%95%99%E7%A8%8B">教程</a>
+                                &nbsp;
+                            
+                                <a href="/tags/linux-mint">Linux Mint</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E4%BF%AE%E6%94%B9%E8%BD%AF%E4%BB%B6%E6%BA%90">修改软件源 </a>
+                                &nbsp;
+                            
+                                <a href="/tags/linux-%E5%85%A5%E9%97%A8">Linux 入门</a>
+                                &nbsp;
+                            
+                                <a href="/tags/apt">apt</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h2 id="序">序</h2>
+<p>由于 Linux Mint 在安装完之后..</p>
+<p><del>唔啊！ 不许笑！！ 我我我当然早就会！写给萌新看的！喂！不许笑！！</del></p>
+<p><img src="/img/2020-11-07_14-12.png" alt=""></p>
+<p>默认的软件源是官方的，在安装软件包和更新的时候得 <del>跨过山河大海，也要穿过人山人海</del> ，因此我们得把它修改为离我们最近的镜像源</p>
+<p>对于 Mint 来说，无非就两种办法</p>
+<p><strong>注意：二选一</strong></p>
+<h2 id="一终端法">一、终端法</h2>
+<p>我们先去 TUNA 镜像站看看<a href="https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/">帮助文档</a></p>
+<p>内容是这样的</p>
+<p><img src="/img/2020-11-07_15-07.png" alt=""></p>
+<p>嗯&hellip; 也许你看不太懂，具体怎么操作&hellip;</p>
+<p>首先把鼠标移到左下角，打开终端</p>
+<p><img src="/img/%E6%88%AA%E5%9B%BE_2020-11-07_14-28-48.png" alt=""></p>
+<p>就是封面上那个东西..</p>
+<p><img src="/img/2020-11-07_14-34.png" alt=""></p>
+<p>我们先要编辑 <code>/etc/apt/sources.list</code> 这个文件。</p>
+<p>Mint 似乎不自带 <code>vim</code>，所以我们这里使用 <code>nano</code>。</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo nano /etc/apt/sources.list
+</code></pre></div><p><strong>注意：<code>sudo</code> 不能丢！ 而且按下回车之后要输入密码才能有权限。</strong></p>
+<p><img src="/img/2020-11-07_14-39.png" alt=""></p>
+<p>我们打开才发现里面是空的，除了一大堆英文注释什么都没有..</p>
+<p>我们往里面写入</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
+</code></pre></div><p>接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">Ubuntu 的帮助文档</a></p>
+<p><img src="/img/2020-11-07_14-46.png" alt=""></p>
+<p>我知道怎么做了，把这些当中的<code>archive.ubuntu.com</code> 等域名全部改成<code>mirrors.tuna.tsinghua.edu.cn</code> 即可</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main
+
+# This system was installed using small removable media
+# (e.g. netinst, live or single CD). The matching &#34;deb cdrom&#34;
+# entries were disabled at the end of the installation process.
+# For information about how to configure apt package sources,
+# see the sources.list(5) manual.
+
+deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal main restricted universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-updates main restricted universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-backports main restricted universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+</code></pre></div><p>如图：</p>
+<p><img src="/img/2020-11-07_14-49.png" alt=""></p>
+<p>接下来，执行</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt update
+</code></pre></div><p>就会比最开始快很多了</p>
+<h2 id="二使用自带的更新管理器">二、使用自带的更新管理器</h2>
+<p>首先点击开始菜单，找到设置管理器</p>
+<p><img src="/img/%E6%88%AA%E5%9B%BE_2020-11-07_15-06-34.png" alt=""></p>
+<p>滚轮滑下去，找到<code>软件源</code></p>
+<p><img src="/img/2020-11-07_15-08.png" alt=""></p>
+<p>输入你的用户密码</p>
+<p><img src="/img/2020-11-07_15-09.png" alt=""></p>
+<p>嗯哼，是不是在开头看到过？
+<img src="/img/2020-11-07_15-10.png" alt=""></p>
+<p>然后用这个软件把这些都改成国内的就好了，具体怎么操作&hellip; 我也不好讲啊&hellip;</p>
+<p><img src="/img/2020-11-07_15-12.png" alt=""></p>
+<p>唔啊！总之这个就是&hellip; 拿鼠标点点点就好了&hellip;</p>
+<p>总之这样就好啦～</p>
+<p><img src="/img/2020-11-07_15-14.png" alt=""></p>
+<p>接下來它会提示你是否更新 apt 缓存，点击确定就可以啦～</p>
+<p><img src="/img/2020-11-07_15-15.png" alt=""></p>
+<p>等它跑完就好啦～</p>
+<p><img src="/img/2020-11-07_15-16.png" alt=""></p>
+<h2 id="更新软件包">更新软件包</h2>
+<p>当我们设置好 apt 软件源后，我们要做的就是进行必要的软件包更新..</p>
+<p>还是两种方法</p>
+<p><strong>注意：还是二选一</strong></p>
+<h3 id="一终端法-1">一、终端法</h3>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt upgrade
+</code></pre></div><p><img src="/img/2020-11-07_15-26.png" alt=""></p>
+<p><img src="/img/2020-11-07_15-28.png" alt=""></p>
+<p><img src="/img/2020-11-07_16-44.png" alt=""></p>
+<p>搞定</p>
+<p>接下来重启虚拟机就可以了</p>
+<h3 id="二使用这个更新管理器">二、使用这个更新管理器</h3>
+<p><img src="/img/2020-11-07_15-19.png" alt=""></p>
+<p>点击就好～</p>
+<p><img src="/img/2020-11-07_15-20.png" alt=""></p>
+<p>然后输入密码就可以了</p>
+<p><img src="/img/2020-11-07_15-21.png" alt=""></p>
+<p>点击安装更新就好了
+<img src="/img/2020-11-07_15-24.png" alt=""></p>
+<p>确定</p>
+<p><img src="/img/2020-11-07_15-25.png" alt=""></p>
+<p>截图累死了&hellip;</p>
+<p>然后等它跑完就好了</p>
+<p><img src="/img/2020-11-07_15-25_1.png" alt=""></p>
+<p>接下来重启虚拟机就可以了</p>
+<h2 id="结语">结语</h2>
+<p>首先要说的是，我是使用 Linux Mint 20 来演示的，在未来它会更新，也许本文章的有些细节与实情不相同，但操作是大同小异的。请根据实际情况随机应变。</p>
+<p>其次，<del>不许笑</del> ，本文章是面向刚接触 Linux 的初学者，不喜勿喷。</p>
+<p>如果有什么不足之处，或一些粗心造成的小错误，请在下面的 gitalk 中留言</p>
+<p>最后，本站遵循 <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0 协议</a>，转载请注明出处</p>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/">linuxmint | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+</li>
+<li>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">ubuntu | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+</li>
+</ul>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2020-11-06</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+			下回<br>已经到头啦。
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/">
+			上回<br>如何使用 GitHub 搭建博客
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	WeepingDogel 本站遵循 CC-BY-NC 4.0 协议
+	
+</div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="https://weepingdogel.github.io//js/journal.js"></script>
+    </body>
+</html>
