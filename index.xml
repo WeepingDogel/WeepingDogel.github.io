@@ -6,9 +6,233 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</copyright>
-    <lastBuildDate>Sun, 29 Nov 2020 23:04:02 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 02 Dec 2020 23:20:22 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>帮做大学计算机作业</title>
+        <link>https://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/</link>
+        <pubDate>Wed, 02 Dec 2020 23:20:22 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/ -&lt;h2 id=&#34;序&#34;&gt;序&lt;/h2&gt;
+&lt;p&gt;帮做作业 qwq&amp;hellip;&lt;/p&gt;
+&lt;p&gt;我也好久没玩 C 语言了，试试看我会不会做&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PS: 我这里是 Linux，运行方式可能不同，如果你是 Windows ，你得用编辑器来运行。&lt;/p&gt;
+&lt;p&gt;例如 Dev C++ 、 VS 2019 等。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;实验十一&#34;&gt;实验十一&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;实验十一&lt;/p&gt;
+&lt;p&gt;实验目的:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;了解 C 程序设计思想&lt;/li&gt;
+&lt;li&gt;了解 C 程序设计框架
+实验内容:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;输入一个成绩，输出它的等级评分&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个很简单，我们需要列几个等级区间。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优秀
+&lt;ul&gt;
+&lt;li&gt;80 ~ 100 分 [80,100]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;及格
+&lt;ul&gt;
+&lt;li&gt;60~79 分 [60,79]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不及格
+&lt;ul&gt;
+&lt;li&gt;60 以下 [0,60)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在代码中，我们可以直接用运算表达式来表达区间，例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;score &amp;gt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;80&lt;/span&gt; &amp;amp;&amp;amp; score &amp;lt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我们用 &lt;code&gt;if()&lt;/code&gt; 来判断成绩等级。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(){
+    &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; score = &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;85&lt;/span&gt;;
+     &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(score &amp;gt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;80&lt;/span&gt; &amp;amp;&amp;amp; score &amp;lt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;100&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;成绩为优秀&amp;#34;&lt;/span&gt;);
+    }&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(score &amp;gt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;60&lt;/span&gt; &amp;amp;&amp;amp; score &amp;lt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;79&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;成绩为及格&amp;#34;&lt;/span&gt;);
+    }&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(score &amp;gt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt; &amp;amp;&amp;amp; score &amp;lt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;60&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;成绩不及格&amp;#34;&lt;/span&gt;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来执行程序&lt;/p&gt;
+&lt;p&gt;输出如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel /tmp&amp;gt; make test
+cc     test.c   -o test
+weepingdogel@WeepingDogel /tmp&amp;gt; ./test
+成绩为优秀⏎     
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我们需要获取用户输入的成绩，像这样，使用 &lt;code&gt;scanf()&lt;/code&gt; 函数获取用户输入的数据然后赋值给整型变量 &lt;code&gt;score&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(){
+    &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; score;
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;输入你的成绩:&amp;#34;&lt;/span&gt;);
+    scanf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&amp;amp;score);
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,score);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来就是将这两段代码组合到一起。&lt;/p&gt;
+&lt;p&gt;完整代码如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(){
+    &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; score;
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;输入你的成绩:&amp;#34;&lt;/span&gt;);
+    scanf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&amp;amp;score);
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(score &amp;gt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;80&lt;/span&gt; &amp;amp;&amp;amp; score &amp;lt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;100&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;成绩为优秀&amp;#34;&lt;/span&gt;);
+    }&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(score &amp;gt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;60&lt;/span&gt; &amp;amp;&amp;amp; score &amp;lt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;79&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;成绩为及格&amp;#34;&lt;/span&gt;);
+    }&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(score &amp;gt;= &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt; &amp;amp;&amp;amp; score &amp;lt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;60&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;成绩不及格&amp;#34;&lt;/span&gt;);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;思路：
+先用 &lt;code&gt;scanf()&lt;/code&gt; 函数获取用户输入的成绩，再用 &lt;code&gt;if()&lt;/code&gt; 进行比对，最后输出结果。&lt;/p&gt;
+&lt;p&gt;这是输出：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel /tmp&amp;gt; make test
+cc     test.c   -o test
+weepingdogel@WeepingDogel /tmp&amp;gt; ./test
+输入你的成绩:99
+成绩为优秀⏎                                                        
+weepingdogel@WeepingDogel /tmp&amp;gt; ./test
+输入你的成绩:85
+成绩为优秀⏎                                                        
+weepingdogel@WeepingDogel /tmp&amp;gt; ./test
+输入你的成绩:60
+成绩为及格⏎                                                        
+weepingdogel@WeepingDogel /tmp&amp;gt; ./test
+输入你的成绩:59
+成绩不及格⏎                                
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;实验十二&#34;&gt;实验十二&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;实验十二&lt;/p&gt;
+&lt;p&gt;实验目的:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;了解 C 程序设计思想&lt;/li&gt;
+&lt;li&gt;了解 C 程序设计框架&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;任务内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;要求编写一个先注册然后再登录的程序，输出格式如下图所示：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;--------------------------------------
+               注册界面
+请输入您的注册用户名: Ly
+请输入您的注册密码: 123
+恭喜您！注册成功！
+--------------------------------------
+
+--------------------------------------
+               登录界面
+请输入您的登录用户名: Ly
+请输入您的登录密码: 123
+登录成功！
+--------------------------------------
+
+--------------------------------------
+               登录界面
+请输入您的登录用户名: Ly
+请输入您的登录密码: 1234
+登录失败！
+--------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;定义 &lt;strong&gt;4&lt;/strong&gt; 个变量，分别保存注册时的用户名、密码以及登录时的用户名、密码&lt;/li&gt;
+&lt;li&gt;使用 &lt;strong&gt;&lt;code&gt;if ... else&lt;/code&gt;&lt;/strong&gt; 语句完成用户名、密码的判断&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;怎么说呢.. 我连说都懒得说了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;跟上面一样，先用 &lt;code&gt;scanf()&lt;/code&gt; 获取内容，然后赋值给变量再来判断&amp;hellip;&lt;/p&gt;
+&lt;p&gt;噗！算了，上代码，不想解释..&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(){
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;/*定义4个变量，分别保存注册时的用户名、密码以及登录时的用户名、密码*/&lt;/span&gt;
+    &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; username_sign[&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;];
+    &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; password_sign[&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;16&lt;/span&gt;];
+    &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; username_login[&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;];
+    &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; password_login[&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;16&lt;/span&gt;];
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;/*定义4个变量，分别保存注册时的用户名、密码以及登录时的用户名、密码*/&lt;/span&gt;
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;--------------------------------------&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;               注册界面&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;);
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;请输入您的注册用户名:&amp;#34;&lt;/span&gt;);
+    scanf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;, username_sign);
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;请输入您的注册密码:&amp;#34;&lt;/span&gt;);
+    scanf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;, password_sign);
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;恭喜您！注册成功！&amp;#34;&lt;/span&gt;);
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;--------------------------------------&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;/*先用 scanf() 获取内容*/&lt;/span&gt;
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;--------------------------------------&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;               登录界面&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;);
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;请输入您的登录用户名:&amp;#34;&lt;/span&gt;);
+    scanf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;,username_login);
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;请输入您的登录密码:&amp;#34;&lt;/span&gt;);
+    scanf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;,password_login);
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;/*使用 if ... else 语句完成用户名、密码的判断*/&lt;/span&gt;
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;/*这里用 strcmp() 函数*/&lt;/span&gt;
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(strcmp(username_login,username_sign) == &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt; &amp;amp;&amp;amp; strcmp(password_login,password_sign) == &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;登录成功！&amp;#34;&lt;/span&gt;);
+    }&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;{
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;登录失败！&amp;#34;&lt;/span&gt;);
+    }
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;--------------------------------------&amp;#34;&lt;/span&gt;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过值得一提的是，这个字符串的判断方法有所不同，它需要使用&lt;code&gt;strcmp()&lt;/code&gt; 函数，大概是这样&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(strcmp(username_login,username_sign) == &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt; &amp;amp;&amp;amp; strcmp(password_login,password_sign) == &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;){
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;登录成功！&amp;#34;&lt;/span&gt;);
+    }&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;{
+        printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;登录失败！&amp;#34;&lt;/span&gt;);
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;它似乎会计算出一个数值，如果等于 0 就表示这两段字符串是一样的。大概就是这样。&lt;/p&gt;
+&lt;p&gt;看看输出吧&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel /tmp&amp;gt; make test2
+cc     test2.c   -o test2
+weepingdogel@WeepingDogel /tmp&amp;gt; ./test2
+--------------------------------------
+               注册界面
+请输入您的注册用户名:Ly
+请输入您的注册密码:123
+恭喜您！注册成功！
+--------------------------------------
+
+--------------------------------------
+               登录界面
+请输入您的登录用户名:Ly
+请输入您的登录密码:123
+登录成功！
+--------------------------------------⏎                              
+
+weepingdogel@WeepingDogel /tmp&amp;gt; ./test2
+--------------------------------------
+               注册界面
+请输入您的注册用户名:Ly
+请输入您的注册密码:123
+恭喜您！注册成功！
+--------------------------------------
+
+--------------------------------------
+               登录界面
+请输入您的登录用户名:Ly
+请输入您的登录密码:1234
+登录失败！
+--------------------------------------⏎                                 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;做完了～&lt;/p&gt;
+&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
+&lt;p&gt;其实细节上还是涉及到一些我可能会粗心大意忘掉的东西，使用我不敢说 &amp;ldquo;就这？就这？&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;不过，相对来说还是比较简单的&amp;hellip; 嗯&amp;hellip;&lt;/p&gt;
+- https://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
+        </item>
     
     
     
@@ -1738,184 +1962,6 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;好啦 装完啦~&lt;/p&gt;
 &lt;p&gt;接下来系统就可以使用啦~&lt;/p&gt;
 - https://weepingdogel.github.io/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>FreeBSD 初♂体验</title>
-        <link>https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
-        <pubDate>Mon, 30 Mar 2020 15:49:34 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/ -&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
-&lt;p&gt;闲着无聊我又来&lt;del&gt;水文章&lt;/del&gt;更新了，这次准备&lt;del&gt;水&lt;/del&gt;写一篇比较长的，然后就想对FreeBSD下手了,嘿嘿。&lt;/p&gt;
-&lt;h2 id=&#34;freebsd介绍&#34;&gt;FreeBSD介绍&lt;/h2&gt;
-&lt;p&gt;FreeBSD是一个类Unix的操作系统，它与Linux还是有区别的&amp;hellip;&amp;hellip;&lt;/p&gt;
-&lt;p&gt;Unix&amp;hellip;感觉很少人用吧..估计比Linux还少，不过服务器用用应该还不错吧&amp;hellip;&lt;/p&gt;
-&lt;p&gt;维基百科是这么说的 :&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;FreeBSD是一个类Unix的操作系统，也是FreeBSD项目的发展成果。[2]FreeBSD是第一个开放源代码的系统，他是由基于BSD Unix的源代码派生而来的。BSD Unix是加州大学伯克利分校在1975年至1993年开发的操作系统。FreeBSD被开发为自由软件，这意味着其源代码开放，人人都可以使用FreeBSD。任何人都可以获得并使用它来满足各种需求，也可以修改它，然后再重发布它。此功能专为个人和公司量身定制，可用于创建各种基于FreeBSD的商业和非商业产品。尽管FreeBSD直接从BSD派生，但是从法律的角度来看，FreeBSD为 unix 系统，但它并不是“UNIX”。因为现在“UNIX”商标是属于国际开放标准组织的。[3]FreeBSD的第一个版本于1993年发布。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;FreeBSD是一个支持许多硬件和体系架构的企业级系统。和其他BSD家族的操作系统一样， FreeBSD其核心、驱动程序以及所有的用户层（Userland）应用程序（如Unix shell和cat和ps等命令）都存储在源代码库中。[4]FreeBSD也可以运行其他二进制软件，比如Linux的。借助ports和FreeBSD软件包管理器，你可以在其上安装各种应用程序。根据2005年的调查，77％的BSD用户使用FreeBSD，因此FreeBSD拥有BSD系列中最大的用户社区。[5]&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在今天，个人和企业都将FreeBSD用于多种用途，包括Yahoo! [6]，苹果[7]，Juniper网络公司，诺基亚，IBM， Yandex的，Apache软件基金会，Hotmail，索尼和许多其他用途&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/FreeBSD&#34;&gt;[Read More]&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
-&lt;h3 id=&#34;准备工作&#34;&gt;准备工作&lt;/h3&gt;
-&lt;p&gt;我打算在虚拟机里玩玩就好啦～&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;问:是VirtualBox吗？&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;对，之前介绍过的&lt;strong&gt;VirtualBox&lt;/strong&gt;，也应该没什么好讲的了，创建一个虚拟机应该不是问题，问题是接下来如何进行安装。&lt;/p&gt;
-&lt;p&gt;除了虚拟机我们还要准备的东西就是FreeBSD的安装镜像了，可以去官方的源下载，但是考虑到速度问题，也可以去墙内的一些镜像站下载。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://mirrors.ustc.edu.cn/freebsd/releases/&#34;&gt;USTC Mirror&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;注意：下载的时候要确定你的架构，别下错了&lt;/strong&gt;(应该大部分都是amd64吧)&lt;/p&gt;
-&lt;p&gt;什么？你说配置要求？嘛&amp;hellip;&lt;/p&gt;
-&lt;p&gt;看看官网怎么说&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;FreeBSD/i386 和 FreeBSD/pc98 版本， 都需要 486 或更高的处理器，以及至少 24 MB 的 RAM。 您需要至少 150 MB 的空闲硬盘空间， 才能完成最小的安装配置。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;至于amd64架构嘛，一句话，你有处理器有内存有硬盘就能用，而且我们都用虚拟机了&lt;/p&gt;
-&lt;h3 id=&#34;安装过程&#34;&gt;安装过程&lt;/h3&gt;
-&lt;p&gt;首先肯定是先把镜像导入虚拟机啦，这个我就不再写一遍了，百度谷歌能搜到的&amp;hellip;&lt;/p&gt;
-&lt;p&gt;然后我们启动，就会看到这个可爱的画面..&lt;/p&gt;
-&lt;p&gt;你可以直接按回车，也可以等10秒让它自动启动&amp;hellip;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/freebsd.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;启动之后就会来到这个界面&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/FreeBSD_Install.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;选择Install按回车啦&lt;/p&gt;
-&lt;p&gt;然后是选择键盘类型，这里选&lt;code&gt;United States Of America&lt;/code&gt;
-&lt;img src=&#34;https://weepingdogel.github.io/img/FreeBSD_keymap.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;选完以后回到第一项回车即可，当然你也可以在第二项那里测试你的键盘是否有效&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-02.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;什么？你看不懂英文？&lt;/p&gt;
-&lt;p&gt;第一项是&lt;code&gt;继续&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;第二项是&lt;code&gt;测试键盘&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;下面的就是地区或者国家名称了&lt;/p&gt;
-&lt;p&gt;接下来输入你的主机名&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-08.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;我就随便输入一个&lt;code&gt;localhost&lt;/code&gt;吧&lt;/p&gt;
-&lt;p&gt;然后回车&lt;/p&gt;
-&lt;p&gt;然后我就懵逼了。。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后看了下英文手册，这里是选择要安装的组件&lt;/p&gt;
-&lt;p&gt;根据官方的指引，这里来翻译一下&amp;hellip;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;base-dbg&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;一些基础的软件包,比如&amp;rsquo;cat&amp;rsquo;这样的（debugging）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;kernel-dbg&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;内核和内核模块（debugging）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;lib32-dbg&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;32位的依赖吧好像是，带（debugging）的&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;lib32&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;同上，但是不带（debugging）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;ports&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;嗯..类似于Gentoo的portage，必须装&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;src&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;一些源代码，最好选上吧&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;tests&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;一些测试代码，没必要选了&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;想了一会儿，然后决定这样选了，你问凭什么这样选，我凭经验&lt;/p&gt;
-&lt;p&gt;那你就应该凭借翻译软件把官方的手册翻译完看一遍了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-36.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来是分区&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-48.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这里有四种方式啊&amp;hellip;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Auto(UFS)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;以&lt;code&gt;UFS&lt;/code&gt;文件系统自动进行分区&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Manual&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;手动对硬盘进行分区&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;shell&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;使用命令对硬盘进行分区&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Auto(ZFS)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;用&lt;code&gt;ZFS&lt;/code&gt;文件系统自动分区&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;行吧，选第二项，手动&lt;/p&gt;
-&lt;p&gt;然后就进了这里&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后，选&lt;code&gt;create&lt;/code&gt;创建一个分区表，官方手册有说明要创建一个&lt;code&gt;GPT&lt;/code&gt;分区表，但这里由于我没有开启&lt;code&gt;EFI&lt;/code&gt;所以我用&lt;code&gt;MBR&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这里的图形操作会有提示的，看不懂英文的可以用翻译器看一下&lt;/p&gt;
-&lt;p&gt;什么？还是不会？这玩意跟cfdisk差不多的&lt;/p&gt;
-&lt;p&gt;总之详细过程我就不截图出来了，只需要把分区分成这样就行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-21.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来选择&lt;code&gt;Finish&lt;/code&gt;,再选择&lt;code&gt;Commit&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-22.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后就会慢慢安装了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来就需要设置一个密码了，毕竟Unix的系统是不能空口令登录的&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-35.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;跟Linux一样，设置一个能记住的就可以了，然后会让你确认网卡&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;后面一路选&lt;code&gt;yes&lt;/code&gt;，不多说&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这里直接全选&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-40.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后回车，这里把&lt;code&gt;6&lt;/code&gt;勾选上，继续按回车&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;最后一个提示，&lt;code&gt;yes&lt;/code&gt;，然后回车&lt;/p&gt;
-&lt;p&gt;然后重启，自动启动，再登录root，就完成啦&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;装完后的感想&#34;&gt;装完后的感想&lt;/h2&gt;
-&lt;p&gt;FreeBSD注定是适合服务器的，或许也适合拿来玩，但日常使用的话就会出现很多问题让人头疼&lt;/p&gt;
-&lt;p&gt;反正我是不会玩啦..连个顺手的文本编辑器都没有&amp;hellip;vi我是真用不来&amp;hellip;要修改很多配置文件的说..&lt;/p&gt;
-&lt;p&gt;如果你有什么主意的话，就在下面留言吧&lt;/p&gt;
-&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/using-bsdinstall.html&#34;&gt;FreeBSD 使用手册（英文）&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.freebsd.org/&#34;&gt;FreeBSD 官网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-- https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
         </item>
     
     
