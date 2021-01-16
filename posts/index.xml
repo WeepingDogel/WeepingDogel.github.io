@@ -7,7 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</copyright>
-    <lastBuildDate>Wed, 02 Dec 2020 23:20:22 +0800</lastBuildDate><atom:link href="https://weepingdogel.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jan 2021 23:59:59 +0800</lastBuildDate><atom:link href="https://weepingdogel.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何解决 gvfs 在 i3wm 下无法挂载的问题</title>
+      <link>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sat, 16 Jan 2021 23:59:59 +0800</pubDate>
+      
+      <guid>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>序 呃&amp;hellip; 前面其实没什么可以说的废话，就是出问题了嘛&amp;hellip;
+然后就去群里问了，弄好了，然后写一下怎么弄好的&amp;hellip;
+换 i3wm 了，然后使用文件管理器挂载别的分区的时候，突然弹出这个报错&amp;hellip;
+这个问题一般是缺包，
+好吧其实就是少装了东西。
+我们需要装的是 polkit 这个东西&amp;hellip;
+如果不知道它是啥的话，看 Arch Wiki 的这个页面。
+ Polkit - ArchWiki  解决过程 首先安装 polkit ，
+$ sudo pacman -S polkit 装完后，我们还需要安装其对应的图形前端。
+如图，我们有很多可以选择。
+我这里选择 Gnome 的，比较习惯..
+用 pacman 就可以装了，
+$ sudo pacman -S polkit-gnome 如果想用其他的，把 polkit-gnome 替换成其他包名即可。
+但是装完还不行，还得设置启动项，原因？ 在这：
+ If you are using a graphical environment, make sure that a graphical authentication agent is installed and autostarted on login.
+——Arch Wiki 里写的</description>
+    </item>
+    
     <item>
       <title>帮做大学计算机作业</title>
       <link>https://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/</link>
