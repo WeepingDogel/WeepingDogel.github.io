@@ -6,9 +6,123 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Mon, 15 Mar 2021 00:24:06 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 09 Apr 2021 22:50:18 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>学 GTK 记</title>
+        <link>https://weepingdogel.github.io/posts/%E5%AD%A6gtk%E8%AE%B0/</link>
+        <pubDate>Fri, 09 Apr 2021 22:50:18 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E5%AD%A6gtk%E8%AE%B0/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%AD%A6gtk%E8%AE%B0/ -&lt;h2 id=&#34;序&#34;&gt;序&lt;/h2&gt;
+&lt;p&gt;心血来潮想玩玩 GTK, 于是..&lt;/p&gt;
+&lt;p&gt;我就尝试了一下， 用 &lt;code&gt;C&lt;/code&gt; 试着捏了一个。&lt;/p&gt;
+&lt;p&gt;总的来说其实不是很难， 也是套用函数就好&amp;hellip;&lt;/p&gt;
+&lt;p&gt;但是，很长.. 真的很长..&lt;/p&gt;
+&lt;h2 id=&#34;gtkh&#34;&gt;gtk.h&lt;/h2&gt;
+&lt;p&gt;要写 gtk 程序， 首先得导入这个库， 不过它得在安装 gtk 之后才行。&lt;/p&gt;
+&lt;p&gt;并且编译的时候还要加一些参数..&lt;/p&gt;
+&lt;h3 id=&#34;安装-gtk&#34;&gt;安装 gtk&lt;/h3&gt;
+&lt;p&gt;现在已经 gtk 已经更新到 4 了， 不过我这里用的是 3..&lt;/p&gt;
+&lt;p&gt;这边 Arch 的话， 直接装上就好。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S gtk3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;头文件&#34;&gt;头文件&lt;/h3&gt;
+&lt;p&gt;然后在程序的开头写上这个就可以开始编程了。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;gtk/gtk.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;构建一个空白窗口&#34;&gt;构建一个空白窗口&lt;/h2&gt;
+&lt;p&gt;C 可能稍微比较复杂， 在它能够加载出窗口之前， 我们需要在主函数里定义两个参数&amp;hellip;&lt;/p&gt;
+&lt;p&gt;我也不太懂， 就当作标准格式了。&lt;/p&gt;
+&lt;p&gt;一个是 &lt;strong&gt;整型(&lt;code&gt;int&lt;/code&gt;)&lt;/strong&gt; 的， 命名为 &lt;code&gt;argc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; main(&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; argc, )
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;另一个是 &lt;strong&gt;&lt;code&gt;char&lt;/code&gt; 类型的&lt;/strong&gt;, 命名为 &lt;code&gt;argv&lt;/code&gt;, 但是这个有所不同， 我们得这么写 &amp;ldquo;&lt;code&gt;char *argv&lt;/code&gt;&amp;rdquo; :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; main(&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; argc, &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; *argv[])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来写上大括号，我们就可以开始写了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;gtk/gtk.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; argc, &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; *argv[])
+{
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;首先我们要进行的是让 gtk 初始化&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;gtk_init(&amp;amp;argc, &amp;amp;argv);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;写入这两个参数， 记得前面变量要加 &lt;code&gt;&amp;amp;&lt;/code&gt;, 这个似乎是指针吧.. 还是什么..&lt;/p&gt;
+&lt;p&gt;呜呜呜， C 学得不怎么好&amp;hellip;&lt;/p&gt;
+&lt;p&gt;好啦我们继续.. 就这样写在**主函数(main)**里面&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;gtk/gtk.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; argc, &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; *argv[])
+{
+    gtk_init(&amp;amp;argc, &amp;amp;argv);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&amp;quot;&lt;code&gt;;&lt;/code&gt;&amp;quot;&lt;/strong&gt; 这个一定不能丢！！ 别问为什么！&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;如果你不写 &lt;strong&gt;&amp;quot;&lt;code&gt;;&lt;/code&gt;&amp;quot;&lt;/strong&gt; 能把 C 语言程序跑起来, 我就一口气喝1L的肥宅快乐水&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;然后我们需要创建一个窗口&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;*window&lt;/code&gt; 为控件名称， 后面是 &lt;code&gt;gtk.h&lt;/code&gt; 里面的函数， 没错， 就是像这样的调用，但是很长。&lt;/p&gt;
+&lt;p&gt;你也可以把 &lt;code&gt;*window&lt;/code&gt; 写成别的， 只要你接下来输对了就可以..&lt;/p&gt;
+&lt;p&gt;那么接下来我们的代码变成了这样&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;gtk/gtk.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; argc, &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; *argv[])
+{
+    gtk_init(&amp;amp;argc, &amp;amp;argv);
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我们要让窗口显示出来， 需要写入这行&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;gtk_widget_show_all(window);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以及这行， 让 gtk 完全启动&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;gtk_main();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后我们加上 &lt;code&gt;return 0;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;完整代码变成了这样:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;gtk/gtk.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;int&lt;/span&gt; argc, &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; *argv[])
+{
+    gtk_init(&amp;amp;argc, &amp;amp;argv);
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_widget_show_all(window);
+    gtk_main();
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我们得编译了， 上面提到过编译要写一长串&lt;/p&gt;
+&lt;p&gt;首先要 &lt;code&gt;cd&lt;/code&gt; 到代码文件所在的位置， 然后敲这些&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ gcc -o test $(pkg-config --cflags --libs gtk+-3.0) 文件名.c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;文件名.c&lt;/code&gt; 改为你的代码文件名， test 也可以改为你需要命名的名称&lt;/p&gt;
+&lt;p&gt;如果没有任何报错，那么大概是编译成功了&lt;/p&gt;
+&lt;p&gt;接下来在终端敲&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ ./test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;一个 gtk 窗口程序就此诞生了! 不过它需要使用 &lt;code&gt;CTRL + C&lt;/code&gt; 来结束， 因为此时只是一个外观的渲染， 窗口按钮是无效的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-04-09_23-49.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;接下来你可以添加更多的细节，一切可以参考 gtk 官方文档..&lt;/p&gt;
+&lt;p&gt;以及我这里也写了个实例可以参考。&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;也是瞎捏的&lt;/del&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Aozaki-Club/about-doggy&#34;&gt;GitHub - Aozaki-Club/about-doggy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;总体上来讲它似乎并不是特别的难..&lt;/p&gt;
+&lt;p&gt;就是太长了..&lt;/p&gt;
+&lt;p&gt;上文写的可能看不出来它有多长， 但是真正控件多了的时候就&amp;hellip;&lt;/p&gt;
+&lt;p&gt;不过我还是会试着继续学的。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.gtk.org/&#34;&gt;The GTK Project - A free and open-source cross-platform widget toolkit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/tennysonsky/article/details/42740865&#34;&gt;C语言也能做界面：踏上GTK+学习之旅_秋叶原 &amp;amp;&amp;amp; Mike || 麦克-CSDN博客_c语言gtk&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://developer.gnome.org/gtk3/stable/&#34;&gt;GTK+ 3 Reference Manual: GTK+ 3 Reference Manual&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://developer.gnome.org/gtk3/stable/GtkWindow.html&#34;&gt;GtkWindow: GTK+ 3 Reference Manual&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- https://weepingdogel.github.io/posts/%E5%AD%A6gtk%E8%AE%B0/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
     
     
     
@@ -1587,126 +1701,6 @@ Hello World
 &lt;p&gt;啥？这次没有，自己试出来的&amp;hellip;&lt;/p&gt;
 &lt;p&gt;唔啊！准确来说也有，那就是各种搜索引擎啦～&lt;/p&gt;
 - https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>关于 fcitx5 ，以及最近的环境变量问题</title>
-        <link>https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/</link>
-        <pubDate>Sat, 25 Jul 2020 13:25:46 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/ -&lt;h2 id=&#34;发生了啥&#34;&gt;发生了啥&lt;/h2&gt;
-&lt;p&gt;最近我收到了一条这样的消息&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;使用 &lt;code&gt;$HOME/.pam_environment&lt;/code&gt; 设置环境变量的用户注意啦！由于 &lt;a href=&#34;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708&#34;&gt;CVE-2010-4708&lt;/a&gt;, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。&lt;/p&gt;
-&lt;p&gt;ref: &lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;Linux 的环境变量怎么设 依云&amp;rsquo;s Blog&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;del&gt;为什么十年的漏洞现在才修啊喂！！！&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;Emmmm, 这么说就是 &lt;code&gt;.pam_environment&lt;/code&gt; 这个文件不能用了&amp;hellip;&amp;hellip;&lt;/p&gt;
-&lt;p&gt;这里感谢 &lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;依云&lt;/a&gt; 写出了各种情况的应对方法&lt;/p&gt;
-&lt;p&gt;我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西&amp;hellip; 其他具体的可以参考云云写的.. (逃&lt;/p&gt;
-&lt;h2 id=&#34;fcitx5-与-fcitx&#34;&gt;fcitx5 与 fcitx&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Fcitx&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Fcitx&#34;&gt;Fcitx&lt;/a&gt; (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的&lt;a href=&#34;https://en.wikipedia.org/wiki/Input_method&#34;&gt;输入法&lt;/a&gt;平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。&lt;/p&gt;
-&lt;p&gt;&amp;mdash; &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Fcitx5&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Fcitx5 是继 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx&#34;&gt;Fcitx&lt;/a&gt; 后的新一代输入法框架。&lt;/p&gt;
-&lt;p&gt;&amp;mdash; &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;日常偷懒，直接引用(逃&lt;/p&gt;
-&lt;h2 id=&#34;好啦直接开始吧&#34;&gt;好啦，直接开始吧&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;先贴出我的系统情况&lt;/p&gt;
-&lt;p&gt;操作系统：Arch Linux&lt;/p&gt;
-&lt;p&gt;桌面环境：xfce&lt;/p&gt;
-&lt;p&gt;显示管理器：lightdm&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;实际上，只要把原来写 &lt;code&gt;.pam_environment&lt;/code&gt; 中的输入法环境变量写到 &lt;code&gt;.xprofile&lt;/code&gt; 里面就可以解决这个问题，但是我想试试 fcitx5。&lt;/p&gt;
-&lt;h3 id=&#34;卸载掉-fcitx&#34;&gt;卸载掉 fcitx&lt;/h3&gt;
-&lt;p&gt;首先我们要先卸载掉原来的 fcitx ，我之前用的是 &lt;code&gt;fcitx-googlepinyin&lt;/code&gt; 这个输入法，所以这个包也要卸掉，因为会有依赖&lt;/p&gt;
-&lt;p&gt;除此之外，与 fcitx 有一定关系的都要卸掉，不然 &lt;code&gt;pacman&lt;/code&gt; 会报错，所以你要执行这个&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;（PS：你可能用的不是谷歌输入法，所以请把 &lt;code&gt;fcitx-googlepinyin&lt;/code&gt; 改成你装的输入法的包名）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来，将这个文件删除，反正也没用了 (逃&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo rm -rf ./.pam_environment
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装-fcitx5&#34;&gt;安装 fcitx5&lt;/h3&gt;
-&lt;p&gt;现在来安装 fcitx5，这样子弄&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;fcitx5&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;主包，不用多解释啦～&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;fcitx5-chinese-addons&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;中文输入法包&amp;hellip;. Arch Wiki 里面是这样解释的:
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.archlinux.org/packages/?name=fcitx5-chinese-addons&#34;&gt;fcitx5-chinese-addons&lt;/a&gt; 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;fcitx5-im&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;环境依赖包，要装的，不然在一些软件上打不出字&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;fcitx5-configtool&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。在上面三个装完之后装。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;那么，执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;环境变量&#34;&gt;环境变量&lt;/h3&gt;
-&lt;p&gt;嗯哼，最后就是设置环境变量了，既然 &lt;code&gt;.pam_environment&lt;/code&gt; 不能用了，那要写在哪里呢？&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;云云&lt;/a&gt;说：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;使用 X11 的桌面环境，通常通过 display manager 来登录，比如 lightdm 和 sddm。这俩都支持 &lt;code&gt;~/.xprofile&lt;/code&gt;。这个文件会在启动过程中被 source，使用的 shell 是由 dm 自己确定的。lightdm 和 sddm 都是用的 &lt;code&gt;/bin/sh&lt;/code&gt;（分别位于 &lt;code&gt;/etc/lightdm/Xsession&lt;/code&gt; 和 &lt;code&gt;/usr/share/sddm/scripts/Xsession&lt;/code&gt; 文件里）。可以看到，除了读取 &lt;code&gt;.xprofile&lt;/code&gt; 外，lightdm 也会读取 &lt;code&gt;.profile&lt;/code&gt;。sddm 甚至连 bash、zsh、tcsh、fish 的启动配置脚本都给读了。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;也就是说，我们需要把 fcitx5 的环境变量写在 &lt;code&gt;.xprofile&lt;/code&gt; 这个文件里面&lt;/p&gt;
-&lt;p&gt;然后&amp;hellip;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ vim ./.xprofile
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在里面写入这些东西&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;export &lt;span style=&#34;color:#fb660a&#34;&gt;INPUT_METHOD&lt;/span&gt;=fcitx5
-export &lt;span style=&#34;color:#fb660a&#34;&gt;GTK_IM_MODULE&lt;/span&gt;=fcitx5
-export &lt;span style=&#34;color:#fb660a&#34;&gt;QT_IM_MODULE&lt;/span&gt;=fcitx5
-export &lt;span style=&#34;color:#fb660a&#34;&gt;XMODIFIERS&lt;/span&gt;=@im=fcitx5
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来你可以选择重启 &lt;code&gt;lightdm&lt;/code&gt; ，&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo systemctl restart lightdm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者重启系统&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ sudo reboot
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时，xfce 的状态栏出现了一个键盘，但是按 &lt;!-- raw HTML omitted --&gt;&lt;code&gt;CTRL&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; + &lt;!-- raw HTML omitted --&gt;&lt;code&gt;SPACE&lt;/code&gt;&lt;!-- raw HTML omitted --&gt; 无法弹出中文输入法，这下怎么办呢？&lt;/p&gt;
-&lt;p&gt;直接右键那个键盘图标，点击配置，然后进入内个 QT 写的配置工具里添加中文输入法就可以啦～～！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-07-25_15-52.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;只需要双击就可以添加到左边哦～&lt;/p&gt;
-&lt;p&gt;然后点击 OK，开始享受 fcitx5 吧&lt;/p&gt;
-&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html&#34;&gt;Linux 的环境变量怎么设 - 依云&amp;rsquo;s Blog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Fcitx5 (简体中文) - ArchWiki&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Fcitx&#34;&gt;Fcitx - Wikipedia&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Fcitx (简体中文) - ArchWiki&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-- https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     
