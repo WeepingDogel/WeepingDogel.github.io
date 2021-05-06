@@ -67,11 +67,15 @@ drwxr-xr-x 8 weepingdogel weepingdogel 4.0K Apr 26 14:39 .git
 -rw-r--r-- 1 weepingdogel weepingdogel  26K Apr 26 14:39 LICENSE
 -rw-r--r-- 1 weepingdogel weepingdogel   95 Apr 26 14:39 README.md
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们需要安装 &lt;code&gt;mingw-w64-gtk3&lt;/code&gt; 这个包，否则就会报错&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ x86_64-w64-mingw32-gcc about-doggy.c -o test.exe
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;about-doggy.c:1:10: 致命错误：gtk/gtk.h：没有那个文件或目录
-    1 | #include &amp;lt;gtk/gtk.h&amp;gt;
-      |          ^~~~~~~~~~~
-编译中断。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ x86_64-w64-mingw32-gcc text.c -o test.exe `pkg-config --cflags --libs gtk+-3.0`
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lgtk-3
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lgdk-3
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lpangocairo-1.0
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lpango-1.0
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lharfbuzz
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lcairo-gobject
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lcairo
+collect2: 错误：ld 返回 1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Arch 的话，需要使用 &lt;code&gt;yay&lt;/code&gt; 从 aur 中安装这个包，但是&amp;hellip;.. 我试了一下，大多数依赖都在 aur 里，然后要编译一百多个&amp;hellip;. 实在过于难受，因此我选择了 &lt;code&gt;mingw-w64-gtk3-bin&lt;/code&gt; 这个包。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ yay -S mingw-w64-gtk3-bin
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>

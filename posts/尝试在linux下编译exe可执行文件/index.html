@@ -610,11 +610,15 @@ drwxr-xr-x 8 weepingdogel weepingdogel 4.0K Apr 26 14:39 .git
 -rw-r--r-- 1 weepingdogel weepingdogel  26K Apr 26 14:39 LICENSE
 -rw-r--r-- 1 weepingdogel weepingdogel   95 Apr 26 14:39 README.md
 </code></pre></div><p>接下来我们需要安装 <code>mingw-w64-gtk3</code> 这个包，否则就会报错</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ x86_64-w64-mingw32-gcc about-doggy.c -o test.exe
-</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">about-doggy.c:1:10: 致命错误：gtk/gtk.h：没有那个文件或目录
-    1 | #include &lt;gtk/gtk.h&gt;
-      |          ^~~~~~~~~~~
-编译中断。
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ x86_64-w64-mingw32-gcc text.c -o test.exe `pkg-config --cflags --libs gtk+-3.0`
+</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lgtk-3
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lgdk-3
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lpangocairo-1.0
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lpango-1.0
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lharfbuzz
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lcairo-gobject
+/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lcairo
+collect2: 错误：ld 返回 1
 </code></pre></div><p>Arch 的话，需要使用 <code>yay</code> 从 aur 中安装这个包，但是&hellip;.. 我试了一下，大多数依赖都在 aur 里，然后要编译一百多个&hellip;. 实在过于难受，因此我选择了 <code>mingw-w64-gtk3-bin</code> 这个包。</p>
 <div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ yay -S mingw-w64-gtk3-bin
 </code></pre></div>
