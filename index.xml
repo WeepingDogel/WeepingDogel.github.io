@@ -6,9 +6,76 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Fri, 09 Apr 2021 22:50:18 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 26 Apr 2021 14:09:13 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>尝试在 Linux下编译 exe 可执行文件</title>
+        <link>https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/</link>
+        <pubDate>Mon, 26 Apr 2021 14:09:13 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/ -&lt;h2 id=&#34;序&#34;&gt;序&lt;/h2&gt;
+&lt;p&gt;最近一直在想有没有什么办法可以在 Linux 环境下编译 Windows 中可以运行的 exe 文件，由于自己没有 Windows 环境， 就算开虚拟机也多多少少有些不方便..&lt;/p&gt;
+&lt;p&gt;于是就去谷歌了一下.. 发现办法是有的.&lt;/p&gt;
+&lt;p&gt;这种办法叫做交叉编译, 要用到交叉编译器&lt;/p&gt;
+&lt;p&gt;我们看看维基百科上怎么说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;交叉编译器（英语：Cross compiler）是指一个在某个系统平台下可以产生另一个系统平台的可执行文件的编译器。交叉编译器在目标系统平台（开发出来的应用程序序所运行的平台）难以或不容易编译时非常有用。&lt;/p&gt;
+&lt;p&gt;交叉编译器的存在对于从一个开发主机为多个平台编译代码是非常有必要的。直接在平台上编译有时行不通，例如在一个嵌入式系统的单片机 ，因为它们没有操作系统，所以直接编译行不通。&lt;/p&gt;
+&lt;p&gt;交叉编译器和源代码至源代码编译器不同，交叉编译器用于二进制代码的跨平台软件开发，而源到源编译器是将某种编程语言的程序源代码作为输入，生成以另一种编程语言构成的等效源代码的编译器，但两者都是编程工具。&lt;/p&gt;
+&lt;p&gt;rel: &lt;a href=&#34;https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8&#34;&gt;https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;概念就是这样..&lt;/p&gt;
+&lt;h2 id=&#34;mingw-w64&#34;&gt;mingw-w64&lt;/h2&gt;
+&lt;p&gt;这大概是个交叉编译器了&lt;/p&gt;
+&lt;p&gt;看看官网怎么说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mingw-w64 is an advancement of the original mingw.org project, created to support the GCC compiler on Windows systems. It has forked it in 2007 in order to provide support for 64 bits and new APIs. It has since then gained widespread use and distribution.&lt;/p&gt;
+&lt;p&gt;rel: &lt;a href=&#34;https://mingw-w64.org/doku.php&#34;&gt;https://mingw-w64.org/doku.php&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;好的接下来我们就安装它， 这里 Arch 就直接从 pacman 装上了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;$ sudo pacman -S mingw-w64
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-04-26-14-32-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://weepingdogel.github.io/img/2021-04-26-14-33-58%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我这里选择 1 2 3 4 5&lt;/p&gt;
+&lt;h2 id=&#34;开始编译&#34;&gt;开始编译&lt;/h2&gt;
+&lt;p&gt;那么， 装完之后就可以开始编译了&lt;/p&gt;
+&lt;p&gt;这次我打算把上次糊的一个东西编译一下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Aozaki-Club/about-doggy&#34;&gt;GitHub - Aozaki-Club/about-doggy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;嗯&amp;hellip; 就是这玩意&lt;/p&gt;
+&lt;p&gt;新建一个目录然后 cd 进去&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ mkdir build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ cd build
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;把代码拉下来&lt;/p&gt;
+&lt;p&gt;别问为什么不从自己硬盘里找，问就是懒（不是&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ git clone https://github.com/Aozaki-Club/about-doggy.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;再 cd 进去&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ cd about-doggy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们可以看到这些文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ ls -ahl
+总用量 48K
+drwxr-xr-x 3 weepingdogel weepingdogel 4.0K Apr 26 14:39 .
+drwxr-xr-x 3 weepingdogel weepingdogel 4.0K Apr 26 14:39 ..
+-rw-r--r-- 1 weepingdogel weepingdogel 2.1K Apr 26 14:39 about-doggy.c
+drwxr-xr-x 8 weepingdogel weepingdogel 4.0K Apr 26 14:39 .git
+-rw-r--r-- 1 weepingdogel weepingdogel  26K Apr 26 14:39 LICENSE
+-rw-r--r-- 1 weepingdogel weepingdogel   95 Apr 26 14:39 README.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们需要安装 &lt;code&gt;mingw-w64-gtk3&lt;/code&gt; 这个包，否则就会报错&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ x86_64-w64-mingw32-gcc about-doggy.c -o test.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;about-doggy.c:1:10: 致命错误：gtk/gtk.h：没有那个文件或目录
+    1 | #include &amp;lt;gtk/gtk.h&amp;gt;
+      |          ^~~~~~~~~~~
+编译中断。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Arch 的话，需要使用 &lt;code&gt;yay&lt;/code&gt; 从 aur 中安装这个包，但是&amp;hellip;.. 我试了一下，大多数依赖都在 aur 里，然后要编译一百多个&amp;hellip;. 实在过于难受，因此我选择了 &lt;code&gt;mingw-w64-gtk3-bin&lt;/code&gt; 这个包。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ yay -S mingw-w64-gtk3-bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
     
     
     
@@ -694,6 +761,38 @@ weepingdogel@WeepingDogel /tmp&amp;gt; ./test2
 &lt;p&gt;其实细节上还是涉及到一些我可能会粗心大意忘掉的东西，所以我不敢说 &amp;ldquo;就这？就这？&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;不过，相对来说还是比较简单的&amp;hellip; 嗯&amp;hellip;&lt;/p&gt;
 - https://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>If Only I...</title>
+        <link>https://weepingdogel.github.io/posts/2020-dec-29/</link>
+        <pubDate>Sun, 29 Nov 2020 23:04:02 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/2020-dec-29/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/2020-dec-29/ -&lt;h3 id=&#34;past&#34;&gt;PAST&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;If only I had been stronger,&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have been damaged by the WIND.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If only I had been smarter,&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have been cheated by the CROWD.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If only I had been more brave,&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have been thought to be a SLAVE.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;present&#34;&gt;PRESENT&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;If only I were more fortunate,&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t drop into a CAGE.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If only I were more cautious,&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t have to be sure if it&amp;rsquo;s DANGEROUS.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;If only I worked harder,&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I wouldn&amp;rsquo;t be said to be a LOSER.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;future&#34;&gt;Future&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;If only I should have a future&amp;hellip;.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I would write the story continuously&amp;hellip;&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;If only I&amp;hellip;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I would&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+- https://weepingdogel.github.io/posts/2020-dec-29/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     
@@ -1408,299 +1507,6 @@ uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
 &lt;p&gt;甚至是，像看到我刚刚讲的笑话那样，被一个送外卖的脚本小子轻松破坏掉了..&lt;/p&gt;
 &lt;p&gt;以上，只是个人想法，若有不当之处，请在下面的 gitalk 评论插件中 &lt;del&gt;喷我&lt;/del&gt; 纠正。&lt;/p&gt;
 - https://weepingdogel.github.io/posts/2020-09-26/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Python 学习笔记——文件操作</title>
-        <link>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
-        <pubDate>Sat, 05 Sep 2020 22:12:05 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/ -&lt;h2 id=&#34;文件操作&#34;&gt;文件操作&lt;/h2&gt;
-&lt;h3 id=&#34;open&#34;&gt;open&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;open()&lt;/code&gt; 是 Python 进行文件操作的关键函数，它有连个参数需要设置&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;文件名 - 文件的名称，不多解释&lt;/li&gt;
-&lt;li&gt;模式 - 决定打开的文件是否可读写以及其他属性&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;filename&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;mode&amp;#39;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;读&#34;&gt;读&lt;/h3&gt;
-&lt;p&gt;仅以只读方式打开一个文件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;filename.txt&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样写也是一样的&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;filename&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;rt&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&amp;ldquo;r&amp;rdquo;&lt;/strong&gt; 表示读&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&amp;ldquo;t&amp;rdquo;&lt;/strong&gt; 表示文本，这是函数默认设定好的，所以可以省略。&lt;/p&gt;
-&lt;p&gt;这里引入一下 &lt;a href=&#34;https://www.w3schools.com/python/python_file_handling.asp&#34;&gt;w3school&lt;/a&gt; 的一个列表&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;There are four different methods (modes) for opening a file:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;r&amp;rdquo; - Read - Default value. Opens a file for reading, error if the file does not exist&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;a&amp;rdquo; - Append - Opens a file for appending, creates the file if it does not exist&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;w&amp;rdquo; - Write - Opens a file for writing, creates the file if it does not exist&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;x&amp;rdquo; - Create - Creates the specified file, returns an error if the file exists&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In addition you can specify if the file should be handled as binary or text mode&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;t&amp;rdquo; - Text - Default value. Text mode&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;b&amp;rdquo; - Binary - Binary mode (e.g. images)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;以一个文件举例&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/home/weepingdogel/test.txt
----
-Hello!I love Python.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们不写 mode 参数：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
-Hello!I love Python.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们将它加上：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;rt&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
-Hello!I love Python.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;结果是一模一样的。&lt;/p&gt;
-&lt;h4 id=&#34;读行&#34;&gt;读行&lt;/h4&gt;
-&lt;p&gt;文件:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/home/weepingdogel/test.txt
----
-Hello!I love Python.
-Have a nice day!
-Good luck!
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
-&lt;code&gt;f.readline()&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;例如:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
-Hello!I love Python.
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们需要两行的时候：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
-Hello!I love Python.
-
-Have a nice day!
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果我们需要三行：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
-Hello!I love Python.
-
-Have a nice day!
-
-Good luck!
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个用法它会逐行读取，并且打印输出的时候是会换行的&lt;/p&gt;
-&lt;p&gt;在读配置文件的时候也许会用到吧&amp;hellip;&lt;/p&gt;
-&lt;p&gt;当然我们也可以用 &lt;code&gt;for&lt;/code&gt; 循环读一次性读全部：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt; x in f:
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(x)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
-Hello!I love Python.
-
-Have a nice day!
-
-Good luck!
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我觉得用 &lt;code&gt;for&lt;/code&gt; 应该更有效率点&amp;hellip;&lt;/p&gt;
-&lt;h3 id=&#34;关闭文件&#34;&gt;关闭文件&lt;/h3&gt;
-&lt;p&gt;这个没什么好讲的&amp;hellip;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
-f.close()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行了也是跟上面差不多的效果&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;下面不给出调试结果了，太晚了。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;创建&#34;&gt;创建&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;&amp;ldquo;x&amp;rdquo;&lt;/strong&gt; 表示创建一个新文件，如果文件名指的那个文件已经存在就会报错&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;x&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;自己去试试啦，这个没什么好说的。&lt;/p&gt;
-&lt;h3 id=&#34;写&#34;&gt;写&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;&amp;ldquo;a&amp;rdquo;&lt;/strong&gt; 表示在已有文件上添加内容，它不会使文件原有的内容被删除或者被覆盖&lt;/p&gt;
-&lt;p&gt;例如：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;)
-f.write(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;加入内容 / content added.&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 这段字符串将会被添加到这个文件里&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&amp;ldquo;w&amp;rdquo;&lt;/strong&gt; 表示将会覆盖那个文件，它将会覆盖原有的内容&lt;/p&gt;
-&lt;p&gt;例如：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;w&amp;#34;&lt;/span&gt;)
-f.write(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;加入内容 / content added.&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 文件将只会存在这段字符串&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;删&#34;&gt;删&lt;/h3&gt;
-&lt;p&gt;这里需要用到 &lt;code&gt;os&lt;/code&gt; 这个模块，并用到里面的 &lt;code&gt;os.remove()&lt;/code&gt; 函数，直接 &lt;code&gt;import os&lt;/code&gt; 即可&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
-os.remove(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;典型例子&#34;&gt;典型例子&lt;/h4&gt;
-&lt;p&gt;检测一个文件是否存在，如果存在就删除，不存在就提示&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; os.path.exists(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;):
-    os.remove(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;文件不存在&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除目录&#34;&gt;删除目录&lt;/h4&gt;
-&lt;p&gt;用 &lt;code&gt;os.rmdir()&lt;/code&gt; 即可&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
-os.rmdir(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;foldername&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;p&gt;这些就是基础的文件读写操作需要知道的东西啦&amp;hellip;&lt;/p&gt;
-&lt;p&gt;如果看完没什么概念的话，可以试试下面这一大串代码&lt;/p&gt;
-&lt;p&gt;可以改改里面 &lt;code&gt;open()&lt;/code&gt; 的 mode 参数试试&lt;/p&gt;
-&lt;p&gt;总结代码：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; datetime
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;sign&lt;/span&gt;():
-    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 程序标识&lt;/span&gt;
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(
-&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╭╮╭╮╭╮╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━━━╮╱╱╱╱╱╱╱╱╭╮
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;┃┃┃┃┃┃╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╮╭╮┃╱╱╱╱╱╱╱╱┃┃
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;┃┃┃┃┃┣━━┳━━┳━━┳┳━╮╭━━╮┃┃┃┣━━┳━━┳━━┫┃
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;┃╰╯╰╯┃┃━┫┃━┫╭╮┣┫╭╮┫╭╮┃┃┃┃┃╭╮┃╭╮┃┃━┫┃
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╰╮╭╮╭┫┃━┫┃━┫╰╯┃┃┃┃┃╰╯┣╯╰╯┃╰╯┃╰╯┃┃━┫╰╮
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╱╰╯╰╯╰━━┻━━┫╭━┻┻╯╰┻━╮┣━━━┻━━┻━╮┣━━┻━╯
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╱╱╱╱╱╱╱╱╱╱╱┃┃╱╱╱╱╱╭━╯┃╱╱╱╱╱╱╭━╯┃
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╱╱╱╱╱╱╱╱╱╱╱╰╯╱╱╱╱╱╰━━╯╱╱╱╱╱╱╰━━╯
-&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-    )
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;filecrt&lt;/span&gt;(filename):
-    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 文件创建&lt;/span&gt;
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; os.path.exists(filename): &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#检查文件是否存在&lt;/span&gt;
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now())+ &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 文件已存在&amp;#34;&lt;/span&gt;)
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
-        f = open(filename,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;x&amp;#39;&lt;/span&gt;)
-        f.close()
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 已创建文件: &amp;#34;&lt;/span&gt; + filename)
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt;
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;filewrt&lt;/span&gt;(filename):
-    fruits = [&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;apple&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;banana&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;strawbarry&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;orange&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 给出要写的内容&lt;/span&gt;
-    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 文件写入操作&lt;/span&gt;
-    f = open(filename, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;)
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt; fruit in fruits:
-        f.write(fruit + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&lt;/span&gt;)
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 已写入&amp;#34;&lt;/span&gt; + fruit)
-    f.close()
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;filedel&lt;/span&gt;(filename):
-    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 删除文件操作&lt;/span&gt;
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; os.path.exists(filename):
-        os.remove(filename)
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 已删除&amp;#34;&lt;/span&gt; + filename)
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + filename + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;不存在&amp;#34;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;fileread&lt;/span&gt;(filename):
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 读取中..&amp;#34;&lt;/span&gt; )
-    f = open(filename,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;)
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;文件内容&amp;#34;&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;)
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;文件内容&amp;#34;&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;)
-sign()
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; filecrt(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;) == &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;:
-    fileread(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
-    filedel(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
-    filewrt(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
-    fileread(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
-    filedel(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>scp 命令小结</title>
-        <link>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</link>
-        <pubDate>Sat, 05 Sep 2020 12:10:07 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ -&lt;h2 id=&#34;scp-命令是什么&#34;&gt;scp 命令是什么&lt;/h2&gt;
-&lt;p&gt;是传文件用的..&lt;/p&gt;
-&lt;p&gt;我们用 &lt;code&gt;ssh&lt;/code&gt; 操作服务器，当我们需要给服务器传输文件的时候，&lt;code&gt;scp&lt;/code&gt; 命令会通过 &lt;code&gt;ssh&lt;/code&gt; 的端口进行文件传输。&lt;/p&gt;
-&lt;h2 id=&#34;用法&#34;&gt;用法&lt;/h2&gt;
-&lt;p&gt;当我们在终端输入 &lt;code&gt;scp&lt;/code&gt; 后，我们会得到这些&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp
-usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
-            [-J destination] [-l limit] [-o ssh_option] [-P port]
-            [-S program] source ... target
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;很显然我们很快就知道了一些参数&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
-&lt;p&gt;这里举一些例子，来展示清楚具体的使用方法&amp;hellip;&lt;/p&gt;
-&lt;p&gt;先说明一下我的测试环境&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Arch Linux&lt;/p&gt;
-&lt;p&gt;IP: 192.168.0.105&lt;/p&gt;
-&lt;p&gt;CentOS8 虚拟机&lt;/p&gt;
-&lt;p&gt;IP: 192.168.0.108&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;上传一个文件&#34;&gt;上传一个文件&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp [本地文件名] 用户名@地址:[文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是一般用法，但是&lt;strong&gt;请确保路径正确！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;即：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
-root@192.168.0.108&amp;#39;s password: 
-7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个很简单的，没什么多说的了..&lt;/p&gt;
-&lt;h3 id=&#34;下载一个文件&#34;&gt;下载一个文件&lt;/h3&gt;
-&lt;p&gt;如果我们要从服务器里取一个文件下来修改，而服务器没有 &lt;code&gt;ftp&lt;/code&gt; 时该怎么办呢？&lt;/p&gt;
-&lt;p&gt;我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp 用户名@地址:[文件名] [本地文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还是要提醒一下，这个&lt;strong&gt;文件名&lt;/strong&gt;， &lt;strong&gt;是一个路径！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;是一个&lt;strong&gt;相对路径&lt;/strong&gt;或&lt;strong&gt;绝对路径&lt;/strong&gt;！具体依情况而定，但&lt;strong&gt;它一定是个路径！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;如：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
-root@192.168.0.108&amp;#39;s password: 
-index.html                                                   100%   46KB 728.6KB/s   00:00
-weepingdogel@WeepingDogel ~&amp;gt; ls /tmp/*.html -lh
--rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了&lt;/p&gt;
-&lt;h3 id=&#34;指定一个-ip&#34;&gt;指定一个 IP&lt;/h3&gt;
-&lt;p&gt;一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。&lt;/p&gt;
-&lt;p&gt;而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。&lt;/p&gt;
-&lt;p&gt;我这里用的是 &lt;a href=&#34;https://www.natfrp.com/&#34;&gt;SakuraFRP&lt;/a&gt; ，非常好用的免费内网穿透服务！&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;上传：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口] 用户名@地址:[文件名] [本地文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
-&lt;p&gt;嗯&amp;hellip; 具体就是这样子的：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是这里我来个组合命令&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;amp;&amp;amp; cd /tmp &amp;amp;&amp;amp; python test.py
-The authenticity of host &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&amp;#39; can&amp;#39;t be established.
-ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&amp;#39; (ECDSA) to the list of known hosts.
-root@cn-zj-dx-2.sakurafrp.com&amp;#39;s password: 
-test.py                                                      100%   21     0.2KB/s   00:00    
-Hello World
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦&lt;/p&gt;
-&lt;p&gt;写完啦！&lt;/p&gt;
-&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
-&lt;p&gt;啥？这次没有，自己试出来的&amp;hellip;&lt;/p&gt;
-&lt;p&gt;唔啊！准确来说也有，那就是各种搜索引擎啦～&lt;/p&gt;
-- https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     

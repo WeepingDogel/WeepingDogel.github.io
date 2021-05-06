@@ -6,9 +6,302 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Fri, 09 Apr 2021 22:50:18 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 26 Apr 2021 14:09:13 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Python 学习笔记——文件操作</title>
+        <link>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+        <pubDate>Sat, 05 Sep 2020 22:12:05 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/ -&lt;h2 id=&#34;文件操作&#34;&gt;文件操作&lt;/h2&gt;
+&lt;h3 id=&#34;open&#34;&gt;open&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;open()&lt;/code&gt; 是 Python 进行文件操作的关键函数，它有连个参数需要设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文件名 - 文件的名称，不多解释&lt;/li&gt;
+&lt;li&gt;模式 - 决定打开的文件是否可读写以及其他属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;filename&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;mode&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;读&#34;&gt;读&lt;/h3&gt;
+&lt;p&gt;仅以只读方式打开一个文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;filename.txt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样写也是一样的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;filename&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;rt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&amp;ldquo;r&amp;rdquo;&lt;/strong&gt; 表示读&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;t&amp;rdquo;&lt;/strong&gt; 表示文本，这是函数默认设定好的，所以可以省略。&lt;/p&gt;
+&lt;p&gt;这里引入一下 &lt;a href=&#34;https://www.w3schools.com/python/python_file_handling.asp&#34;&gt;w3school&lt;/a&gt; 的一个列表&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There are four different methods (modes) for opening a file:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;r&amp;rdquo; - Read - Default value. Opens a file for reading, error if the file does not exist&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;a&amp;rdquo; - Append - Opens a file for appending, creates the file if it does not exist&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;w&amp;rdquo; - Write - Opens a file for writing, creates the file if it does not exist&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;x&amp;rdquo; - Create - Creates the specified file, returns an error if the file exists&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In addition you can specify if the file should be handled as binary or text mode&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;t&amp;rdquo; - Text - Default value. Text mode&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;b&amp;rdquo; - Binary - Binary mode (e.g. images)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以一个文件举例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/home/weepingdogel/test.txt
+---
+Hello!I love Python.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们不写 mode 参数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们将它加上：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;rt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;结果是一模一样的。&lt;/p&gt;
+&lt;h4 id=&#34;读行&#34;&gt;读行&lt;/h4&gt;
+&lt;p&gt;文件:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/home/weepingdogel/test.txt
+---
+Hello!I love Python.
+Have a nice day!
+Good luck!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
+&lt;code&gt;f.readline()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;例如:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们需要两行的时候：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+Have a nice day!
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果我们需要三行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.readline())
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+Have a nice day!
+
+Good luck!
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个用法它会逐行读取，并且打印输出的时候是会换行的&lt;/p&gt;
+&lt;p&gt;在读配置文件的时候也许会用到吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;当然我们也可以用 &lt;code&gt;for&lt;/code&gt; 循环读一次性读全部：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt; x in f:
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(x)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行后：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; python test.py
+Hello!I love Python.
+
+Have a nice day!
+
+Good luck!
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我觉得用 &lt;code&gt;for&lt;/code&gt; 应该更有效率点&amp;hellip;&lt;/p&gt;
+&lt;h3 id=&#34;关闭文件&#34;&gt;关闭文件&lt;/h3&gt;
+&lt;p&gt;这个没什么好讲的&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
+f.close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行了也是跟上面差不多的效果&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下面不给出调试结果了，太晚了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;创建&#34;&gt;创建&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;x&amp;rdquo;&lt;/strong&gt; 表示创建一个新文件，如果文件名指的那个文件已经存在就会报错&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;x&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;自己去试试啦，这个没什么好说的。&lt;/p&gt;
+&lt;h3 id=&#34;写&#34;&gt;写&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&amp;ldquo;a&amp;rdquo;&lt;/strong&gt; 表示在已有文件上添加内容，它不会使文件原有的内容被删除或者被覆盖&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;)
+f.write(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;加入内容 / content added.&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 这段字符串将会被添加到这个文件里&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;&amp;ldquo;w&amp;rdquo;&lt;/strong&gt; 表示将会覆盖那个文件，它将会覆盖原有的内容&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;f = open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;w&amp;#34;&lt;/span&gt;)
+f.write(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;加入内容 / content added.&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 文件将只会存在这段字符串&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;删&#34;&gt;删&lt;/h3&gt;
+&lt;p&gt;这里需要用到 &lt;code&gt;os&lt;/code&gt; 这个模块，并用到里面的 &lt;code&gt;os.remove()&lt;/code&gt; 函数，直接 &lt;code&gt;import os&lt;/code&gt; 即可&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
+os.remove(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;典型例子&#34;&gt;典型例子&lt;/h4&gt;
+&lt;p&gt;检测一个文件是否存在，如果存在就删除，不存在就提示&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; os.path.exists(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;):
+    os.remove(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;文件不存在&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除目录&#34;&gt;删除目录&lt;/h4&gt;
+&lt;p&gt;用 &lt;code&gt;os.rmdir()&lt;/code&gt; 即可&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
+os.rmdir(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;foldername&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;这些就是基础的文件读写操作需要知道的东西啦&amp;hellip;&lt;/p&gt;
+&lt;p&gt;如果看完没什么概念的话，可以试试下面这一大串代码&lt;/p&gt;
+&lt;p&gt;可以改改里面 &lt;code&gt;open()&lt;/code&gt; 的 mode 参数试试&lt;/p&gt;
+&lt;p&gt;总结代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; os
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; datetime
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;sign&lt;/span&gt;():
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 程序标识&lt;/span&gt;
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&amp;#39;&amp;#39;
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╭╮╭╮╭╮╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━━━╮╱╱╱╱╱╱╱╱╭╮
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;┃┃┃┃┃┃╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰╮╭╮┃╱╱╱╱╱╱╱╱┃┃
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;┃┃┃┃┃┣━━┳━━┳━━┳┳━╮╭━━╮┃┃┃┣━━┳━━┳━━┫┃
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;┃╰╯╰╯┃┃━┫┃━┫╭╮┣┫╭╮┫╭╮┃┃┃┃┃╭╮┃╭╮┃┃━┫┃
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╰╮╭╮╭┫┃━┫┃━┫╰╯┃┃┃┃┃╰╯┣╯╰╯┃╰╯┃╰╯┃┃━┫╰╮
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╱╰╯╰╯╰━━┻━━┫╭━┻┻╯╰┻━╮┣━━━┻━━┻━╮┣━━┻━╯
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╱╱╱╱╱╱╱╱╱╱╱┃┃╱╱╱╱╱╭━╯┃╱╱╱╱╱╱╭━╯┃
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;╱╱╱╱╱╱╱╱╱╱╱╰╯╱╱╱╱╱╰━━╯╱╱╱╱╱╱╰━━╯
+&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    )
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;filecrt&lt;/span&gt;(filename):
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 文件创建&lt;/span&gt;
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; os.path.exists(filename): &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#检查文件是否存在&lt;/span&gt;
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now())+ &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 文件已存在&amp;#34;&lt;/span&gt;)
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
+        f = open(filename,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;x&amp;#39;&lt;/span&gt;)
+        f.close()
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 已创建文件: &amp;#34;&lt;/span&gt; + filename)
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;filewrt&lt;/span&gt;(filename):
+    fruits = [&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;apple&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;banana&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;strawbarry&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;orange&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 给出要写的内容&lt;/span&gt;
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 文件写入操作&lt;/span&gt;
+    f = open(filename, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt; fruit in fruits:
+        f.write(fruit + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;&lt;/span&gt;)
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 已写入&amp;#34;&lt;/span&gt; + fruit)
+    f.close()
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;filedel&lt;/span&gt;(filename):
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 删除文件操作&lt;/span&gt;
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; os.path.exists(filename):
+        os.remove(filename)
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 已删除&amp;#34;&lt;/span&gt; + filename)
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
+        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + filename + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;不存在&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;fileread&lt;/span&gt;(filename):
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(str(datetime.datetime.now()) + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;: 读取中..&amp;#34;&lt;/span&gt; )
+    f = open(filename,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;)
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;文件内容&amp;#34;&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(f.read())
+    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;文件内容&amp;#34;&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt; * &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; + &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;)
+sign()
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;if&lt;/span&gt; filecrt(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;) == &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;:
+    fileread(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+    filedel(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;else&lt;/span&gt;:
+    filewrt(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+    fileread(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+    filedel(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>scp 命令小结</title>
+        <link>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</link>
+        <pubDate>Sat, 05 Sep 2020 12:10:07 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ -&lt;h2 id=&#34;scp-命令是什么&#34;&gt;scp 命令是什么&lt;/h2&gt;
+&lt;p&gt;是传文件用的..&lt;/p&gt;
+&lt;p&gt;我们用 &lt;code&gt;ssh&lt;/code&gt; 操作服务器，当我们需要给服务器传输文件的时候，&lt;code&gt;scp&lt;/code&gt; 命令会通过 &lt;code&gt;ssh&lt;/code&gt; 的端口进行文件传输。&lt;/p&gt;
+&lt;h2 id=&#34;用法&#34;&gt;用法&lt;/h2&gt;
+&lt;p&gt;当我们在终端输入 &lt;code&gt;scp&lt;/code&gt; 后，我们会得到这些&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp
+usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
+            [-J destination] [-l limit] [-o ssh_option] [-P port]
+            [-S program] source ... target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;很显然我们很快就知道了一些参数&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;p&gt;这里举一些例子，来展示清楚具体的使用方法&amp;hellip;&lt;/p&gt;
+&lt;p&gt;先说明一下我的测试环境&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Arch Linux&lt;/p&gt;
+&lt;p&gt;IP: 192.168.0.105&lt;/p&gt;
+&lt;p&gt;CentOS8 虚拟机&lt;/p&gt;
+&lt;p&gt;IP: 192.168.0.108&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;上传一个文件&#34;&gt;上传一个文件&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp [本地文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是一般用法，但是&lt;strong&gt;请确保路径正确！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;即：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
+root@192.168.0.108&amp;#39;s password: 
+7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个很简单的，没什么多说的了..&lt;/p&gt;
+&lt;h3 id=&#34;下载一个文件&#34;&gt;下载一个文件&lt;/h3&gt;
+&lt;p&gt;如果我们要从服务器里取一个文件下来修改，而服务器没有 &lt;code&gt;ftp&lt;/code&gt; 时该怎么办呢？&lt;/p&gt;
+&lt;p&gt;我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp 用户名@地址:[文件名] [本地文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还是要提醒一下，这个&lt;strong&gt;文件名&lt;/strong&gt;， &lt;strong&gt;是一个路径！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;是一个&lt;strong&gt;相对路径&lt;/strong&gt;或&lt;strong&gt;绝对路径&lt;/strong&gt;！具体依情况而定，但&lt;strong&gt;它一定是个路径！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
+root@192.168.0.108&amp;#39;s password: 
+index.html                                                   100%   46KB 728.6KB/s   00:00
+weepingdogel@WeepingDogel ~&amp;gt; ls /tmp/*.html -lh
+-rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了&lt;/p&gt;
+&lt;h3 id=&#34;指定一个-ip&#34;&gt;指定一个 IP&lt;/h3&gt;
+&lt;p&gt;一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。&lt;/p&gt;
+&lt;p&gt;而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。&lt;/p&gt;
+&lt;p&gt;我这里用的是 &lt;a href=&#34;https://www.natfrp.com/&#34;&gt;SakuraFRP&lt;/a&gt; ，非常好用的免费内网穿透服务！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;上传：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口] 用户名@地址:[文件名] [本地文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
+&lt;p&gt;嗯&amp;hellip; 具体就是这样子的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是这里我来个组合命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;amp;&amp;amp; cd /tmp &amp;amp;&amp;amp; python test.py
+The authenticity of host &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&amp;#39; can&amp;#39;t be established.
+ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&amp;#39; (ECDSA) to the list of known hosts.
+root@cn-zj-dx-2.sakurafrp.com&amp;#39;s password: 
+test.py                                                      100%   21     0.2KB/s   00:00    
+Hello World
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦&lt;/p&gt;
+&lt;p&gt;写完啦！&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;啥？这次没有，自己试出来的&amp;hellip;&lt;/p&gt;
+&lt;p&gt;唔啊！准确来说也有，那就是各种搜索引擎啦～&lt;/p&gt;
+- https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
     
     
     
@@ -1018,6 +1311,128 @@ community/xf86-video-qxl 0.1.5-7 (xorg-drivers)
     
     
         <item>
+        <title>加冕日</title>
+        <link>https://weepingdogel.github.io/posts/2020-3-29/</link>
+        <pubDate>Fri, 27 Mar 2020 22:17:58 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/2020-3-29/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/2020-3-29/ -&lt;h2 id=&#34;2020年3月27日&#34;&gt;2020年3月27日&lt;/h2&gt;
+&lt;p&gt;每年的这天定为加冕周年庆。&lt;/p&gt;
+- https://weepingdogel.github.io/posts/2020-3-29/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>[笔记整理]将来进行时</title>
+        <link>https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/</link>
+        <pubDate>Thu, 19 Dec 2019 02:01:58 +0530</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;个人笔记，仅供参考。&lt;/p&gt;
+&lt;h2 id=&#34;基本结构&#34;&gt;基本结构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;陈述句
+&lt;ul&gt;
+&lt;li&gt;肯定:
+&lt;blockquote&gt;
+&lt;p&gt;主语 will be doing sth&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;否定:
+&lt;blockquote&gt;
+&lt;p&gt;主语 won’t / will not be doing sth&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;疑问句
+&lt;blockquote&gt;
+&lt;p&gt;Will 主语 be doing sth?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;例句&#34;&gt;例句&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;表示将来某段时间持续做的动作&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Eg:Toby will be climbing in the Himalayas all next week.&lt;/p&gt;
+&lt;p&gt;Toby下个星期将会爬一整周的喜马拉雅山&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;表示将来的某个时间点前已经开始做的动作，并有可能继续下去&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Eg:Toby will not be in London next Tuesday. He will be climbing the Himalayas.&lt;/p&gt;
+&lt;p&gt;Toby下周二不会在伦敦，他将要攀爬喜马拉雅山&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(预测)表示自然发生的事情，不是人为安排的&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Eg:The weather report says that it will be raining when we arrive in London.&lt;/p&gt;
+&lt;p&gt;天气预报说我们到达伦敦的时候会下雨&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有礼貌地询问关于别人的未来计划&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Eg:Will you be visiting your uncle in London?&lt;/p&gt;
+&lt;p&gt;你要去拜访在伦敦的叔叔嘛?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;表示原因、结果或推测&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;推测&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Eg:If I fail to show up at 7:00, I won’t be coming.&lt;/p&gt;
+&lt;p&gt;如果我7点还没来，那我就不会来了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Eg:The advanced technology will be helping us explore the outer space&lt;/p&gt;
+&lt;p&gt;先进的技术将帮助我们探索太空&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原因&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Please come tomorrow afternoon. Tomorrow morning I’ll be having a meeting.&lt;/p&gt;
+&lt;p&gt;请明天下午来。因为我明天早上在开会。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结果&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Stop the child or he will be falling over&lt;/p&gt;
+&lt;p&gt;让那个孩子停下否则他会摔倒&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考短语&#34;&gt;参考短语&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;fail to do sth&lt;/p&gt;
+&lt;p&gt;未能做到某事&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;from…to..&lt;/p&gt;
+&lt;p&gt;从…到&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;According to&lt;/p&gt;
+&lt;p&gt;根据…&lt;/p&gt;
+&lt;/blockquote&gt;
+- https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
+    
+    
+    
+        <item>
         <title>锏幕 新人四项考核教程</title>
         <link>https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/</link>
         <pubDate>Sun, 20 Oct 2019 23:44:37 +0800</pubDate>
@@ -1789,870 +2204,6 @@ Table: users
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;注意：转载请注明出处，禁止用本博客去干一些作死的事情，否则后果自负，与我无关&lt;/strong&gt;&lt;/p&gt;
 - https://weepingdogel.github.io/posts/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>如何使用 GitHub 搭建网站</title>
-        <link>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/</link>
-        <pubDate>Sun, 13 Oct 2019 02:01:58 +0530</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/ -&lt;h2 id=&#34;不正经的前言&#34;&gt;不正经的前言&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我又回来啦～&lt;/p&gt;
-&lt;p&gt;嘿嘿，我绝对不会告诉你我又回来水啦～&lt;/p&gt;
-&lt;p&gt;啊啊别打我～疼&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;github是啥&#34;&gt;Github是啥&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;某个萌新:大佬大佬，Github是啥？&lt;/p&gt;
-&lt;p&gt;大佬:不知道，滚。&lt;/p&gt;
-&lt;p&gt;萌新:呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜大佬不帮我了呜呜呜呜呜呜呜&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;咳咳，，，，&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/&#34;&gt;Github&lt;/a&gt;是一个基于git的源代码托管平台，由Chris Wanstrath, PJ Hyett 与Tom Preston-Werner三位开发者在2008年4月创办。迄今拥有59名全职员工，主要提供基于git的版本托管服务。&lt;/p&gt;
-&lt;p&gt;也常常被人戏称为&lt;strong&gt;Gayhub&lt;/strong&gt;。2333&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;今天，GitHub已是：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一个拥有143万开发者的社区。其中不乏Linux发明者&lt;a href=&#34;https://github.com/torvalds&#34;&gt;Torvalds&lt;/a&gt;这样的顶级黑客，以及Rails创始人&lt;a href=&#34;https://github.com/dhh&#34;&gt;DHH&lt;/a&gt;这样的年轻极客。&lt;/li&gt;
-&lt;li&gt;这个星球上最流行的开源托管服务。目前已托管431万git项目，不仅越来越多知名开源项目迁入GitHub，比如Ruby on Rails、jQuery、Ruby、Erlang/OTP；近三年流行的开源库往往在GitHub首发，例如：&lt;a href=&#34;https://github.com/twitter/bootstrap&#34;&gt;BootStrap&lt;/a&gt;、&lt;a href=&#34;https://github.com/joyent/node&#34;&gt;Node.js&lt;/a&gt;、&lt;a href=&#34;https://github.com/jashkenas/coffee-script&#34;&gt;CoffeScript&lt;/a&gt;等。&lt;/li&gt;
-&lt;li&gt;alexa全球排名414的网站。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;也就是说，你想把你写好的开源程序发布出去，Github将是最佳选择。&lt;/p&gt;
-&lt;h2 id=&#34;本期的主要内容&#34;&gt;本期的主要内容&lt;/h2&gt;
-&lt;p&gt;本期内容将会写出如何使用Github搭建一个简单的网站&lt;/p&gt;
-&lt;h3 id=&#34;使用github建站的好处&#34;&gt;使用Github建站的好处&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;安全
-&lt;ul&gt;
-&lt;li&gt;由于你的网页源代码是由Github托管，所以Github有多安全，你的网站就有多安全，别人想黑你就得先黑掉Github&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;简单
-&lt;ul&gt;
-&lt;li&gt;大部分操作只需要有前端基础就可以轻松完成&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;无忧
-&lt;ul&gt;
-&lt;li&gt;后端用Github的服务器，无需一天24小时维护，可以做到无人值守&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;使用github建站的缺点&#34;&gt;使用Github建站的缺点&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;限制
-&lt;ul&gt;
-&lt;li&gt;Github仓库只能运行基于HTML这类的静态网页，不能使用数据库等花里胡哨的东西。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;del&gt;禁止爬虫&lt;/del&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;del&gt;Github的仓库是禁止搜索引擎进行爬取内容的，所以你搭建的网站不会在搜索引擎上被找到。&lt;/del&gt; (事实证明其实可以)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;以上就是使用Github建站的优缺点，在搭建之前必须按实际情况以及需求来考虑。&lt;/p&gt;
-&lt;h2 id=&#34;详细教程&#34;&gt;详细教程&lt;/h2&gt;
-&lt;h3 id=&#34;准备&#34;&gt;准备&lt;/h3&gt;
-&lt;h4 id=&#34;注册帐号&#34;&gt;注册帐号&lt;/h4&gt;
-&lt;p&gt;首先你需要去&lt;a href=&#34;https://github.com/&#34;&gt;Github&lt;/a&gt;注册一个帐号，只需要使用邮箱就可以注册，具体方法就不多说了，绝大多数人都会。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;萌新:大佬，我看不懂英文啊。。&lt;/p&gt;
-&lt;p&gt;大佬:emmmm &lt;a href=&#34;https://translate.google.cn/&#34;&gt;谷歌翻译&lt;/a&gt;，请&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;创建仓库&#34;&gt;创建仓库&lt;/h4&gt;
-&lt;p&gt;当你登录帐号以后，你可以看到左上角一个绿绿的&lt;code&gt;new&lt;/code&gt;，点击它&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-13_21-08-00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;然后，就会弹出一个要你填的东西&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-13_21-11-12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;如图所示，&lt;code&gt;Respository name&lt;/code&gt;就是仓库的名称，&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;注意:Github只允许使用与用户名相同的仓库名搭建网页&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;这里有个特殊格式:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;你的GitHub用户名.github.io&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这个仓库名以后就是你的网址了&lt;/p&gt;
-&lt;p&gt;创建完以后就是个空的仓库&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-13_21-18-16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;这个时候你就可以按照它的提示上传你的网页代码了。&lt;/p&gt;
-&lt;h3 id=&#34;上传代码&#34;&gt;上传代码&lt;/h3&gt;
-&lt;p&gt;这里我会贴出一部分 &lt;code&gt;git&lt;/code&gt; 的用法&lt;/p&gt;
-&lt;p&gt;首先创建一个目录:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ mkdir ./你的Github用户名
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个目录的名称其实可以随便写，但是为了方便管理，还是写成你的Github用户名比较好。&lt;/p&gt;
-&lt;p&gt;接下来进入这个目录:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd ./你的Github用户名
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git init
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个命令会使你这个目录被初始化为git目录，如果不理解的话去&lt;a href=&#34;https://www.runoob.com/git/git-tutorial.html&#34;&gt;学一下git&lt;/a&gt;吧。。。。&lt;/p&gt;
-&lt;p&gt;接下来你就可以开始创建、编写你的网页代码了，比如我写个简单的HTML&lt;/p&gt;
-&lt;p&gt;先创建一个&lt;code&gt;index.html&lt;/code&gt;文件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ vim ./index.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里使用了&lt;code&gt;vim&lt;/code&gt;，它会使你的终端自动进入编辑页面。&lt;/p&gt;
-&lt;p&gt;接下来按 &lt;code&gt;i&lt;/code&gt; 键进入编辑模式&lt;/p&gt;
-&lt;p&gt;在里面写入以下代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&amp;lt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;html&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;head&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;title&lt;/span&gt;&amp;gt;HelloWorld&amp;lt;/&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;title&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;head&lt;/span&gt;&amp;gt;
-    &amp;lt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;HelloWorld&amp;lt;/&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;h1&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;HelloWorld,this is my first website.&amp;lt;/&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;p&lt;/span&gt;&amp;gt;
-    &amp;lt;/&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;body&lt;/span&gt;&amp;gt;
-&amp;lt;/&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;html&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;你可以使用HTML语言随意编写你的网站，可以添加多个html页面文件和CSS，甚至JavaScript。&lt;/p&gt;
-&lt;p&gt;编写完你的代码后，按 &lt;code&gt;ESC&lt;/code&gt; 键回到命令模式，接下来按 : 键，你的vim左下角就会出现一个冒号，接下来&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;:wq
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;接下来…执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git add index.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后你的创建的网页代码文件将会被提交&lt;/p&gt;
-&lt;p&gt;如果你的文件比较多的话，可以试试&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git add *
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样你就可以快速的提交你所有的文件了&lt;/p&gt;
-&lt;p&gt;然后依次执行以下命令进行提交&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git commit -m &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;first commit&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git remote add origin https://github.com/你的Github用户名/你的Github用户名.github.io.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ git push -u origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来输入你的Github帐号和密码就可以提交了。&lt;/p&gt;
-&lt;p&gt;然后你就可以在浏览器里访问你的网站了。&lt;/p&gt;
-&lt;p&gt;地址就是上面所述的: &lt;code&gt;你的Github用户名.github.io&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;效果图:
-&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-10-13_22-34-30.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
-&lt;p&gt;以上就是使用github搭建简单网页的全过程了，由于时间关系所以只能写这么多了，下期可能又会拖一段时间。&lt;/p&gt;
-&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.runoob.com/git/git-tutorial.html&#34;&gt;git教程&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Vim_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Archwiki|vim&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Git_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Archwiki|git&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.runoob.com/html/html-tutorial.html&#34;&gt;html教程&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-- https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Python学习笔记 简单爬虫</title>
-        <link>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</link>
-        <pubDate>Tue, 13 Aug 2019 22:20:53 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ -&lt;h2 id=&#34;一如既往不正经的前言&#34;&gt;一如既往不正经的前言&lt;/h2&gt;
-&lt;p&gt;嘿嘿，我又回来了，今天在U盘里弄好了hexo，现在可以继续更新了&lt;/p&gt;
-&lt;p&gt;&lt;del&gt;并且这次博客添加了访问量统计，欢迎扩～&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;那么，本期更新一个简单的Python爬虫&lt;/p&gt;
-&lt;h2 id=&#34;爬虫原理&#34;&gt;爬虫原理&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;小白: 大佬大佬～爬虫是啥啊？&lt;/p&gt;
-&lt;p&gt;大佬: 去搜索引擎查呀&lt;/p&gt;
-&lt;p&gt;小白: 查了，还是看不懂&lt;/p&gt;
-&lt;p&gt;大佬: emmmmm..那你继续往下看吧…&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;概述&#34;&gt;概述&lt;/h3&gt;
-&lt;p&gt;2333,爬虫其实很好理解&lt;/p&gt;
-&lt;p&gt;我们都知道上网是用浏览器的，那么我们具体是怎样访问一个网页的呢？看下面吧(懒得画图了)&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;浏览器 –发送一个请求www.bing.com –&amp;gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;服务器 &amp;lt;–接受到请求-–&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;服务器 –做出响应–&amp;gt; –返回数据–&amp;gt; 浏览器&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;什么？还是不了解？那我们用浏览器来看一下吧，我们随便打开一个网页&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-05-37.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;以Chrome/Chromiun为例，接下来依次点击 &lt;code&gt;鼠标右键——检查——NetWork——将Preserve log打上勾 &lt;/code&gt;，然后刷新 就会发现出现了以下内容&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-12-19.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;我们可以看到浏览器很详细的把请求内容显示出来了，而左边那些列表，你已经获取了这个网站的内容。&lt;/p&gt;
-&lt;p&gt;爬虫的原理就是把这些过程自动化，不需要我们去手动访问，就可以把网页中你想要的信息和内容爬取下来。&lt;/p&gt;
-&lt;h3 id=&#34;爬虫的作用&#34;&gt;爬虫的作用&lt;/h3&gt;
-&lt;p&gt;举个例子，这里有一个 &lt;del&gt;&lt;a href=&#34;http://www.hiphop8.com/&#34;&gt;全国号码段(链接已失效)&lt;/a&gt;&lt;/del&gt; 的网站，我们需要取一个城市中其中一个号码段的所有的号码。比如西安市&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-18-42.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-20-17.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;可以看到，号码段有很多，每个段有一万个号码。这个时候怎么办呢？总不可能用鼠标一条一条的去复制粘贴吧？这个时候爬虫就派上用场了。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;其实也可以用来爬取我的博客，当更新的时候就可以及时收到更新信息&lt;/p&gt;
-&lt;p&gt;啊啊别打我，疼疼疼&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;编程语言的选择&#34;&gt;编程语言的选择&lt;/h2&gt;
-&lt;p&gt;我们如果要进行爬虫工作，那么就必须使用编程语言，用得最多的是&lt;strong&gt;Python&lt;/strong&gt;，因为Python进行爬虫是比较简便的，当然也可以选择其他的比如&lt;strong&gt;C/C++&lt;/strong&gt;、&lt;strong&gt;Java&lt;/strong&gt;等，甚至是&lt;strong&gt;易语言&lt;/strong&gt;都可以做到，只不过难易度和写法不同，目的和功能都是一样的。本期我们选择Python&lt;/p&gt;
-&lt;h2 id=&#34;python的安装&#34;&gt;Python的安装&lt;/h2&gt;
-&lt;p&gt;Python是跨平台的语言，所以平台不同安装方法也有所不同。&lt;/p&gt;
-&lt;h3 id=&#34;windows&#34;&gt;Windows&lt;/h3&gt;
-&lt;p&gt;可以到&lt;a href=&#34;https://www.python.org/&#34;&gt;Python的官网&lt;/a&gt;去下载安装程序并安装，建议下载Python3&lt;/p&gt;
-&lt;h3 id=&#34;mac-osx&#34;&gt;Mac OSX&lt;/h3&gt;
-&lt;p&gt;同样到&lt;a href=&#34;https://www.python.org/&#34;&gt;Python的官网&lt;/a&gt;下载&lt;/p&gt;
-&lt;h3 id=&#34;linux&#34;&gt;Linux&lt;/h3&gt;
-&lt;p&gt;Linux则在包管理器安装即可&lt;/p&gt;
-&lt;h4 id=&#34;deb系&#34;&gt;deb系&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo apt-get install python3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;arch系&#34;&gt;Arch系&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S python
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;rpm系&#34;&gt;rpm系&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo yum install python3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;android&#34;&gt;Android&lt;/h3&gt;
-&lt;p&gt;Android平台则安装QPython即可，&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.coolapk.com/apk/com.hipipal.qpy3&#34;&gt;到酷安安装&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.qpython.com/&#34;&gt;QPython官网&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;安装pip&#34;&gt;安装pip&lt;/h2&gt;
-&lt;p&gt;Windows和Mac OSX的安装程序会自动装上pip，而Linux则不会，需要手动安装。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;什么？你问我Android？我也不知道2333&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;首先打开&lt;a href=&#34;https://pypi.org/project/pip/#files&#34;&gt;这个网页&lt;/a&gt;，然后点击&lt;strong&gt;Download&lt;/strong&gt;，下载第二个tar.gz文件，这是个Linux压缩文件。&lt;/p&gt;
-&lt;p&gt;然后解压它，就会得到一个&lt;code&gt;pip-19.2.2目录&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ tar -xvf pip-19.2.2.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;cd进去&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ cd ./pip-19.2.2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;下面有一个 &lt;strong&gt;&lt;code&gt;setup.py&lt;/code&gt;&lt;/strong&gt; 文件，用python执行它即可&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo python setup.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后就会自动安装好pip了。&lt;/p&gt;
-&lt;h2 id=&#34;需要安装的模块&#34;&gt;需要安装的模块&lt;/h2&gt;
-&lt;p&gt;我的爬虫用到了以下模块：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;requests，网页请求模块&lt;/li&gt;
-&lt;li&gt;BeautifulSoup，分析模块&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;安装命令：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pip install requests BeautifulSoup
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果感觉到速度很慢，则参考&lt;a href=&#34;https://www.cnblogs.com/microman/p/6107879.html&#34;&gt;这里&lt;/a&gt;更换国内镜像源。&lt;/p&gt;
-&lt;h2 id=&#34;代码公开&#34;&gt;代码公开&lt;/h2&gt;
-&lt;p&gt;这里公开一下获取手机号的简单爬虫代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;from&lt;/span&gt; bs4 &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; BeautifulSoup
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;import&lt;/span&gt; requests
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;简易手机号码抓取工具 By WeepingDogel&amp;#34;&lt;/span&gt;)
-url=&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;http://www.hiphop8.com/mobile/xian_1319339.html&amp;#34;&lt;/span&gt;
-page=requests.get(url)
-page_info=page.content
-soup = BeautifulSoup(page_info, &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;html.parser&amp;#34;&lt;/span&gt;)
-numbers = soup.find_all(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;with&lt;/span&gt; open(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;1319339.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;w&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;as&lt;/span&gt; file:
-    &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt; number in numbers:
-        &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;print&lt;/span&gt;(number.string)
-        file.write(str(number.string)+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将代码复制到一个py文件中运行或修改即可。&lt;/p&gt;
-&lt;h2 id=&#34;最后&#34;&gt;最后&lt;/h2&gt;
-&lt;p&gt;写得比较仓促，所以可能不够详细，请谅解。&lt;del&gt;下方有评论区，欢迎评论(Tu Cao)。&lt;/del&gt;&lt;/p&gt;
-- https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Linux 基础命令</title>
-        <link>https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</link>
-        <pubDate>Mon, 05 Aug 2019 15:05:06 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/ -&lt;p&gt;&lt;em&gt;&lt;strong&gt;提示：面向萌新，大佬勿喷&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;刚入门Linux难免会觉得很麻烦，因为不知道如何使用命令去操作，这样的话在Linux系统是寸步难行的，但是学会了一些基础命令以后就能无压力的操作了，想不想学会Linux？那就让我们从简单的文件操作开始吧。&lt;/p&gt;
-&lt;h2 id=&#34;如何使用命令行&#34;&gt;如何使用命令行&lt;/h2&gt;
-&lt;p&gt;如果你的发行版自带图形界面的话，可以从图形界面的菜单中找到一个叫 &lt;strong&gt;“终端”&lt;/strong&gt; 的东西，打开它，就可以使用命令了。如果你的发行版不带图形界面，那么在tty登录用户以后就可以直接使用了。&lt;/p&gt;
-&lt;p&gt;注意，这个终端不等于&lt;strong&gt;DOS&lt;/strong&gt;也不等于&lt;strong&gt;cmd&lt;/strong&gt;，它和windows是没有办毛钱关系的，是另一种东西。&lt;/p&gt;
-&lt;h2 id=&#34;cd命令&#34;&gt;cd命令&lt;/h2&gt;
-&lt;p&gt;如果你之前用过DOS或者经常使用windows的cmd，你就会知道这个命令了，这个命令在大多数操作系统中都有。&lt;/p&gt;
-&lt;p&gt;cd命令是”change directory”的缩写，也就是改变你当前所在的目录，后面可以加相对路径，也可以加上绝对路径。&lt;/p&gt;
-&lt;p&gt;简单的理解，就是进入一个文件夹。&lt;/p&gt;
-&lt;h3 id=&#34;用法&#34;&gt;用法&lt;/h3&gt;
-&lt;p&gt;测试目录:&lt;code&gt;/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id=&#34;进入某个目录&#34;&gt;进入某个目录:&lt;/h4&gt;
-&lt;p&gt;绝对路径：指定一个完整的路径，与自己当前所在的目录无关&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost ~]$ cd /a/b/c &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 进入/a/b/c这个路径中的目录c&lt;/span&gt;
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost b]$ cd ./c &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 进入当前所在/a/b目录下面的目录c&lt;/span&gt;
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;指定上一级&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost b]$ cd ../xxx &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#进入当前所在目录/a/b中的/a目录下的其他目录&lt;/span&gt;
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-[weepingdogel@localhost xxx]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;退出某个目录&#34;&gt;退出某个目录:&lt;/h4&gt;
-&lt;p&gt;有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。&lt;/p&gt;
-&lt;p&gt;返回上一级&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ cd .. &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 从当前所在的目录/a/b/c返回上一级的目录/a/b&lt;/span&gt;
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-[weepingdogel@localhost b]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;返回上两级&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ cd ../.. &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 从当前所在的目录/a/b/c返回上两级的目录/a&lt;/span&gt;
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-[weepingdogel@localhost a]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;pwd命令&#34;&gt;pwd命令&lt;/h2&gt;
-&lt;p&gt;这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。&lt;/p&gt;
-&lt;h3 id=&#34;用法-1&#34;&gt;用法&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost ~]$ pwd
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-/home/weepingdogel
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;假如当前所在目录为/a/b/c&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ pwd
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-/a/b/c
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;虽然只有一个作用，但是却很重要，因为新手每天都会用到，bash或者部分zsh主题是不会显示绝对路就的，如果你不知道你当前在操作哪个目录，你就得用上pwd这个命令了。&lt;/p&gt;
-&lt;h2 id=&#34;ls命令&#34;&gt;ls命令&lt;/h2&gt;
-&lt;p&gt;这个命令相当于windows中的&lt;strong&gt;dir&lt;/strong&gt;，作用是显示当前目录下的所有的文件和目录。&lt;/p&gt;
-&lt;h3 id=&#34;用法-2&#34;&gt;用法&lt;/h3&gt;
-&lt;p&gt;测试目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;直接查看&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ ls &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 查看当前目录下面的文件&lt;/span&gt;
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;  文本.txt  test  wiaori &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 被列出的文件&lt;/span&gt;
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;列表式查看，参数-l&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ ls -l
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#按下回车后&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;4&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;易读列表查看，参数-lh&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ ls -lh
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按时间排序的易读列表查看，参数-lh &amp;ndash;sort=time&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ ls -lh --sort=time
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-总用量 4.0K
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;按文件大小排序的易读列表查看，参数-lh &amp;ndash;sort=size&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ ls -lh --sort=size
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后&lt;/span&gt;
-总用量 4.0K
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:38 文本.txt
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更多用法等你自己去摸索了&lt;/p&gt;
-&lt;h2 id=&#34;文件复制与移动&#34;&gt;文件复制与移动&lt;/h2&gt;
-&lt;h3 id=&#34;mv命令&#34;&gt;mv命令&lt;/h3&gt;
-&lt;p&gt;这个命令是英文单词&lt;strong&gt;move&lt;/strong&gt;的缩写。&lt;/p&gt;
-&lt;p&gt;它的作用主要是移动某些文件到指定的位置，你可以指定绝对路径，但是如果离得比较近的话就可以使用相对路径。&lt;/p&gt;
-&lt;h4 id=&#34;用法-3&#34;&gt;用法&lt;/h4&gt;
-&lt;h5 id=&#34;绝对路径用法&#34;&gt;绝对路径用法：&lt;/h5&gt;
-&lt;p&gt;比如我们把 &lt;strong&gt;“目录c”&lt;/strong&gt; 下面的 &lt;strong&gt;“文本.txt”&lt;/strong&gt; 移动到&lt;code&gt;/tmp/a/&lt;/code&gt;下面&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ mv /tmp/a/b/c/文本.txt /tmp/a/
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后，文件就被移动了&lt;/span&gt;
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们切换到&lt;code&gt;/tmp/a/&lt;/code&gt;下面看看吧&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ cd /tmp/a
-[weepingdogel@localhost a]$ ls
-文本.txt  b
-[weepingdogel@localhost a]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;此时我们就看到了那个 &lt;strong&gt;“文本.txt”&lt;/strong&gt; 被移动到了&lt;code&gt;/tmp/a/&lt;/code&gt;下面了。&lt;/p&gt;
-&lt;h5 id=&#34;相对路径用法&#34;&gt;相对路径用法：&lt;/h5&gt;
-&lt;p&gt;那么我们用另一种方法把这个文件移回去吧，首先我们还在这个&lt;code&gt;/tmp/a/&lt;/code&gt;下面，那么命令如下&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost a]$ mv ./文本.txt ./b/c/
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后，文件就被移动了&lt;/span&gt;
-[weepingdogel@localhost a]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们回到&lt;code&gt;/tmp/a/b/c/&lt;/code&gt;下面看看吧。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost a]$ cd ./b/c
-[weepingdogel@localhost c]$ ls
-&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;  文本.txt  test  wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看到了没有，它又回来了。&lt;/p&gt;
-&lt;h3 id=&#34;cp命令&#34;&gt;cp命令&lt;/h3&gt;
-&lt;p&gt;哈哈，这个命令也不是那个cp的意思，它是  &lt;strong&gt;“copy”&lt;/strong&gt; 的缩写，复制的意思。&lt;/p&gt;
-&lt;p&gt;顾名思义，它的作用就是把一个文件复制到另一个地方。它同样有指定绝对路径和相对路径的两种用法。来尝试一下？&lt;/p&gt;
-&lt;h4 id=&#34;用法-4&#34;&gt;用法&lt;/h4&gt;
-&lt;h5 id=&#34;绝对路径&#34;&gt;绝对路径：&lt;/h5&gt;
-&lt;p&gt;我们来试试把&lt;code&gt;/tmp/a/b/c/文本.txt&lt;/code&gt;这个文件复制到&lt;code&gt;/tmp/a/&lt;/code&gt;下面&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ cp /tmp/a/b/c/文本.txt /tmp/a/
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后，文件就被复制了&lt;/span&gt;
-[weepingdogel@localhost c]$ cd ../.. &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 我们来看看它是否被复制成功&lt;/span&gt;
-[weepingdogel@localhost a]$ ls -lh &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 使用ls命令看一下，可见他是被复制成功的，创建日期与上面不一样。&lt;/span&gt;
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:36 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;60&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:37 b
-[weepingdogel@localhost a]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;注意：此命令如果不使用高级用法是无法复制创建时间和所有者的&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h5 id=&#34;相对路径&#34;&gt;相对路径：&lt;/h5&gt;
-&lt;p&gt;嘿嘿，我们尝试给/tmp/a/的每一级目录都复制一份吧。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost a]$ cp ./文本.txt ./b/ &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 先复制到目录b&lt;/span&gt;
-[weepingdogel@localhost a]$ cp ./文本.txt ./b/c/ &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 复制到目录c&lt;/span&gt;
-[weepingdogel@localhost a]$ cp ./文本.txt ../ &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 复制到/tmp/下面&lt;/span&gt;
-[weepingdogel@localhost a]$ cd .. &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 回到/tmp下面&lt;/span&gt;
-[weepingdogel@localhost tmp]$ ls -lh &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 查看是否复制成功，可见第一个就是该文件&lt;/span&gt;
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:48  文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;80&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:36  a
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 接下来一级一级往下看&lt;/span&gt;
-[weepingdogel@localhost tmp]$ ls -lh ./a
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:36 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;80&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:45 b
-[weepingdogel@localhost tmp]$ ls -lh ./a/b
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:45 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;120&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:25 c
-[weepingdogel@localhost tmp]$ ls -lh ./a/b/c
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:47 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可见，复制是成功的。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意：如果要复制目录，请在指定目录前加上参数-r，否则将无法复制&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;mkdir命令&#34;&gt;mkdir命令&lt;/h2&gt;
-&lt;p&gt;这个命令是 &lt;strong&gt;“make directory”&lt;/strong&gt; 的缩写，意为创建一个目录它一般情况下有两种用法&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;一般创建，直接在已存在的绝对路径或相对路径创建一个目录&lt;/li&gt;
-&lt;li&gt;递归创建，创建一连串目录，在创建之前有一级或以上的目录未被创建&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;同样也是可以指定绝对路径和相对路径的，接下来我就只写出相对路径的示例了，因为方便。&lt;/p&gt;
-&lt;p&gt;来尝试一下？&lt;/p&gt;
-&lt;h3 id=&#34;用法-5&#34;&gt;用法&lt;/h3&gt;
-&lt;h4 id=&#34;一般创建&#34;&gt;一般创建&lt;/h4&gt;
-&lt;p&gt;假设目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;我们要创建一个目录&lt;code&gt;d&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ mkdir ./d &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 在/tmp/a/b/c/下面创建一个目录d&lt;/span&gt;
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车之后，目录就创建了，我们可以用ls来检查一下&lt;/span&gt;
-[weepingdogel@localhost c]$ ls -lh
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:47 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可见，目录被成功创建了。&lt;/p&gt;
-&lt;h4 id=&#34;递归创建&#34;&gt;递归创建&lt;/h4&gt;
-&lt;p&gt;假设目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;我们要在当前目录下创建一串目录，比如&lt;code&gt;./go/for/it&lt;/code&gt;，此时我们就要加个参数&lt;code&gt;-p&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ mkdir -p ./go/fot/it
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车之后，一串目录就被创建了，接下来我们会一级一级的查看&lt;/span&gt;
-[weepingdogel@localhost c]$ ls -lh 
-总用量 4.0K
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;11&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 18:47 文本.txt
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;60&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 19:14 go
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 可见我们看见了目录go&lt;/span&gt;
-[weepingdogel@localhost c]$ cd ./go &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 我们试着进入这个目录，可见我们成功进入了目录&lt;/span&gt;
-[weepingdogel@localhost go]$ ls -lh &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#继续查看下一级&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;3&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;60&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 19:14 &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt;
-[weepingdogel@localhost go]$ cd ./for &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#进入目录for&lt;/span&gt;
-[weepingdogel@localhost &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt;]$ ls -lh &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 继续查看下一级&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 19:14 it
-[weepingdogel@localhost &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;for&lt;/span&gt;]$ cd ./it &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#接下来我们进入这个目录it，由于it里面是空的，所以就不用ls查看了&lt;/span&gt;
-[weepingdogel@localhost it]$ pwd &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#使用pwd查看当前位置&lt;/span&gt;
-/tmp/a/b/c/go/for/it
-[weepingdogel@localhost it]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可见这一串目录也创建成功了。&lt;/p&gt;
-&lt;h2 id=&#34;rm命令&#34;&gt;rm命令&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意:此命令如果使用不当十分危险&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这个命令是 &lt;strong&gt;“remove”&lt;/strong&gt; 的缩写，意为删除，作用上和windows中的del命令差不多，但是用法和参数却有所不同，而且诶这个命令如果使用不当是十分危险的，因为在Linux中，就算是正在被使用的文件也可以被删除，并不会有windows那种保姆级别的”拒绝访问”。&lt;/p&gt;
-&lt;h3 id=&#34;用法-6&#34;&gt;用法&lt;/h3&gt;
-&lt;p&gt;假设目录&lt;code&gt;/tmp/a/b/c&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id=&#34;删除文件&#34;&gt;删除文件&lt;/h4&gt;
-&lt;p&gt;我们来尝试删除一下&lt;code&gt;文本.txt&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ rm ./文本.txt
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车之后这个文件就被删除了&lt;/span&gt;
-[weepingdogel@localhost c]$ ls
-&lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;  d  go  test  wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;删除目录&#34;&gt;删除目录&lt;/h4&gt;
-&lt;p&gt;如果你要删除一个目录，比如go，就需要加一个参数-r&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ rm -r ./go
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车之后，这个目录就被删除了&lt;/span&gt;
-[weepingdogel@localhost c]$ ls -lh &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#查看一下就可以看到，go也不见了&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;223333&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;强制删除危险&#34;&gt;强制删除|危险|&lt;/h4&gt;
-&lt;p&gt;如果你需要强制删除一个文件，则需要调用root权限，并且使用&lt;code&gt;-rf&lt;/code&gt;参数。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意，千万不要用这个命令去删除 &lt;code&gt;/&lt;/code&gt;目录，否则你的系统将会自杀&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;比如我们要删除&lt;code&gt;223333&lt;/code&gt;这个文件&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ sudo rm -rf ./223333
-&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 按下回车后会要你输入一次密码，输入密码后按回车，这个文件就删除了，Linux的安全保护机制使密码不会显示在屏幕上&lt;/span&gt;
-[sudo] weepingdogel 的密码：
-[weepingdogel@localhost c]$ ls -lh &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 查看一下文件的情况，可见这个文件不见了&lt;/span&gt;
-总用量 &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 19:07 d
-drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span&gt; weepingdogel weepingdogel &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;40&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 test
--rw-r--r-- &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; weepingdogel weepingdogel  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;0&lt;/span&gt;  8月  &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; 17:52 wiaori
-[weepingdogel@localhost c]$
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;包管理器&#34;&gt;包管理器&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意：不同发行版之间可能有差异&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;一般情况下，新手使用的&lt;strong&gt;deb系发行版&lt;/strong&gt;的包管理器是&lt;strong&gt;apt&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;那么这些就是&lt;strong&gt;apt&lt;/strong&gt;常用的用法了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost ~]$ sudo apt-get update &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 更新软件源&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ sudo apt-get install &amp;lt;包名&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 安装一个软件、软件包&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ sudo apt-get search &amp;lt;软件名称&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 搜索软件&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ sudo apt-get upgrade &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 升级你已安装的软件，通常消耗时间比较长&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ sudo apt-get remove &amp;lt;包名&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 卸载软件&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ sudo apt-get autoremove &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 自动处理依赖&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;如果要安装本地包，则需要使用本地包管理器dpkg，用法如下
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;[weepingdogel@localhost c]$ sudo dpkg -i &amp;lt;包名&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 安装本地包&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;结语&#34;&gt;结语&lt;/h2&gt;
-&lt;p&gt;本期博客中的内容并不是很详细，我已经尽力写得让大多数人能看懂，也许还有少数人无法理解内容，没关系，你可以在下面的评论区提问。&lt;/p&gt;
-&lt;p&gt;那么，欢迎评论。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>用 Arch Linux 打造完美渗透环境</title>
-        <link>https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/</link>
-        <pubDate>Wed, 31 Jul 2019 21:19:52 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/ -&lt;h2 id=&#34;简介arch-linux&#34;&gt;简介Arch Linux&lt;/h2&gt;
-&lt;p&gt;Arch Linux是一款通用x86_64的GNU/Linux发行版，它采用滚动更新模式，尽全力给用户提供最新的稳定版软件。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;嘿嘿，很久不滚可能会滚挂哦&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;刚装完的Arch只是一个基本系统，什么都没有，随后用户就可以根据自己的想法和喜好，安装自己需要的软件，然后通过高度自定义的配置，打造自己喜欢的、理想的系统。这也是Arch的可爱和有吸引力之处。所以Arch也是我最喜欢的发行版之一。&lt;/p&gt;
-&lt;p&gt;关于Arch Linux的更多详细内容，请参见&lt;a href=&#34;https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;本期内容介绍&#34;&gt;本期内容介绍&lt;/h2&gt;
-&lt;p&gt;本期将会演示如何用Arch Linux打造完美的渗透环境。一切操作均为教程演示，请读者根据实际情况操作。没使用过Arch Linux的用户请&lt;strong&gt;谨慎操作&lt;/strong&gt;，并仔细查阅&lt;a href=&#34;https://wiki.archlinux.org/index.php/Main_page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;那么，开始本期的内容吧。&lt;/p&gt;
-&lt;h3 id=&#34;提示&#34;&gt;提示&lt;/h3&gt;
-&lt;p&gt;本期博客会大量使用Arch Wiki的超链接，以方便理解部分内容。&lt;/p&gt;
-&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
-&lt;h3 id=&#34;安装arch-linux&#34;&gt;安装Arch Linux&lt;/h3&gt;
-&lt;p&gt;本期博客不会详细写出Arch Linux的安装过程，请参考&lt;a href=&#34;https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;安装Arch Linux，并做好基本的配置工作。&lt;/p&gt;
-&lt;h3 id=&#34;选择轻量桌面环境&#34;&gt;选择轻量桌面环境&lt;/h3&gt;
-&lt;p&gt;由于渗透测试中部分操作会占用大量的资源，所以请尽量按需求选择轻量的桌面环境，这里不建议使用 &lt;a href=&#34;https://wiki.archlinux.org/index.php/GNOME_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Gnome&lt;/a&gt; 和 &lt;a href=&#34;https://wiki.archlinux.org/index.php/KDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;KDE&lt;/a&gt;，因为二者占用的资源非常大，对低配用户不友好。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/LXDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;LXDE&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;轻量级GTK桌面环境，默认窗口管理器是 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Openbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;OpenBox&lt;/a&gt; ，最轻量的桌面环境之一。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/LXQt_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;LXQT&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2013年间，洪任諭（“PCMan”）启动了将 LXDE 移植到 Qt 的项目。所以LXQT相当于是使用QT的LXDE，默认窗口管理器还是 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Openbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;OpenBox&lt;/a&gt; ，它比上面的LXDE还要轻量。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Xfce_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;xfce4&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;目前我在用的桌面环境，基于GTK+2，这个是轻量化桌面环境中最好看的一个了。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/I3_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;i3wm&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;i3 是一种动态的&lt;a href=&#34;https://en.wikipedia.org/wiki/Tiling_window_manager&#34;&gt;平铺式窗口管理器&lt;/a&gt;，其灵感来自于面向开发者与资深用户的 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Wmii&#34;&gt;wmii&lt;/a&gt;。 i3 的既定目标包括清晰可读的文档，完善的多显示器支持，基于树形结构的窗口管理，提供 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Vim&#34;&gt;vim&lt;/a&gt; 式的多种操作模式。 ——摘自&lt;a href=&#34;https://wiki.archlinux.org/index.php/I3_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;自己DIY桌面环境&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;你可以使用上面介绍过的 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Openbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;OpenBox&lt;/a&gt; 通过配置来DIY自己的桌面环境，也可以使用 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fluxbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;fluxbox&lt;/a&gt;、&lt;a href=&#34;https://wiki.archlinux.org/index.php/I3_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;i3wm&lt;/a&gt; 等。详细请参见 &lt;del&gt;&lt;a href=&#34;https://latiao233.github.io/2019/07/30/%E5%88%A9%E7%94%A8openbox%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/#more&#34;&gt;利用openbox打造自己的桌面环境-辣条的博客(链接已失效)。&lt;/a&gt;&lt;/del&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;本期博客也将会使用自定义桌面环境进行演示。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;OpenBox+xfce4-panel&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;添加black-arch源&#34;&gt;添加Black Arch源&lt;/h3&gt;
-&lt;p&gt;当Arch Linux基本配置完成之后，就可以开始正常使用了，但是为了安装渗透工具，需要添加一个&lt;strong&gt;Black Arch软件源&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h4 id=&#34;什么是black-arch&#34;&gt;&lt;strong&gt;什么是Black Arch&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;BlackArch Linux，简称BlackArch，是一份基于Arch的Linux发行版。该发行版被设计用于系统渗透测试及安全研究。BlackArch提供一张自启动运行DVD镜像，其中包含有多个轻量级窗口管理器和一千多种用于渗透测试和计算机取证分析的专用工具。该系统即可以直接从镜像启动，也可以安装在硬盘、U盘或虚拟机上。 ——摘自&lt;a href=&#34;https://zh.wikipedia.org/zh-hans/BlackArch_Linux&#34;&gt;维基百科(需要科学上网)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Black Arch官网：&lt;a href=&#34;https://blackarch.org/&#34;&gt;blackarch.org&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如上我们知道，Black Arch是一个基于Arch Linux的独立发行版，但我们不需要去安装它，我们只需要添加它的软件源就好。&lt;/p&gt;
-&lt;p&gt;具体操作如下:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nano /etc/pacman.conf &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 编辑pacman.conf文件&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在&lt;code&gt;pacman.conf&lt;/code&gt;文件的末尾加入以下内容:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34; data-lang=&#34;conf&#34;&gt;[blackarch]
-SigLevel = Optional TrustAll
-Server = https://mirrors.ustc.edu.cn/blackarch/$repo/os/$arch
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后执行:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -Syyu
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没问题，就可以使用Black Arch的软件源了。&lt;/p&gt;
-&lt;h2 id=&#34;开始安装配置常用渗透工具&#34;&gt;开始安装、配置常用渗透工具&lt;/h2&gt;
-&lt;h3 id=&#34;端口扫描和信息收集&#34;&gt;端口扫描和信息收集&lt;/h3&gt;
-&lt;h4 id=&#34;namp&#34;&gt;Namp&lt;/h4&gt;
-&lt;p&gt;首先搬出&lt;a href=&#34;https://baike.baidu.com/item/nmap/1400075?fr=aladdin&#34;&gt;Nmap&lt;/a&gt;，这是一个很常用的扫描工具，可以在渗透的过程中扫描到对方的IP、端口、操作系统等情况。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S nmap
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;基本用法&#34;&gt;基本用法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ nmap &amp;lt;目标IP地址&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 简单的扫描&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nmap -O &amp;lt;目标IP地址&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 扫描目标的操作系统情况&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nmap -sP &amp;lt;目标IP地址&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# ping扫描&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更多用法可参考搜索引擎查询。&lt;/p&gt;
-&lt;h4 id=&#34;xerosploit&#34;&gt;xerosploit&lt;/h4&gt;
-&lt;p&gt;这个扫描工具比&lt;strong&gt;Nmap&lt;/strong&gt;要炫酷一些，色彩也比较好看，用法也很简单，比&lt;strong&gt;Metasploit&lt;/strong&gt;还简单。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-1&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S xerosploit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;用法&#34;&gt;用法&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo xerosploit
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后执行&lt;code&gt;help&lt;/code&gt;就可以看到软件自带的帮助文档了&lt;/p&gt;
-&lt;h4 id=&#34;nslookup&#34;&gt;nslookup&lt;/h4&gt;
-&lt;p&gt;这个命令是查看域名记录的，可以查看Cname、A等各种记录。它包含在&lt;strong&gt;dnsutils&lt;/strong&gt;这个包里&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-2&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S dnsutils
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装这个包dnsutils即可。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我也不太了解这个，所以具体怎么用请自行百度、谷歌一下吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;nbtscan&#34;&gt;nbtscan&lt;/h4&gt;
-&lt;p&gt;内网扫描工具，可以扫描IP段内是否有存活的IP，速度比nmap要快一些。但是只能用于局域网。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-3&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S nbtscan
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法&#34;&gt;使用方法&lt;/h5&gt;
-&lt;ul&gt;
-&lt;li&gt;基本扫描&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nbtscan  -r  192.168.16.0/24
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;官方帮助文档&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&amp;#34;Human-readable service names&amp;#34; (-h) option cannot be used without verbose (-v) option.
-Usage:
-nbtscan [-v] [-d] [-e] [-l] [-t timeout] [-b bandwidth] [-r] [-q] [-s separator] [-m retransmits] (-f filename)|(&amp;lt;scan_range&amp;gt;) 
-	-v		verbose output. Print all names received
-			from each host
-	-d		dump packets. Print whole packet contents.
-	-e		Format output in /etc/hosts format.
-	-l		Format output in lmhosts format.
-			Cannot be used with -v, -s or -h options.
-	-t timeout	wait timeout milliseconds for response.
-			Default 1000.
-	-b bandwidth	Output throttling. Slow down output
-			so that it uses no more that bandwidth bps.
-			Useful on slow links, so that ougoing queries
-			don&amp;#39;t get dropped.
-	-r		use local port 137 for scans. Win95 boxes
-			respond to this only.
-			You need to be root to use this option on Unix.
-	-q		Suppress banners and error messages,
-	-s separator	Script-friendly output. Don&amp;#39;t print
-			column and record headers, separate fields with separator.
-	-h		Print human-readable names for services.
-			Can only be used with -v option.
-	-m retransmits	Number of retransmits. Default 0.
-	-f filename	Take IP addresses to scan from file filename.
-			-f - makes nbtscan take IP addresses from stdin.
-	&amp;lt;scan_range&amp;gt;	what to scan. Can either be single IP
-			like 192.168.1.1 or
-			range of addresses in one of two forms: 
-			xxx.xxx.xxx.xxx/xx or xxx.xxx.xxx.xxx-xxx.
-Examples:
-	nbtscan -r 192.168.1.0/24
-		Scans the whole C-class network.
-	nbtscan 192.168.1.25-137
-		Scans a range from 192.168.1.25 to 192.168.1.137
-	nbtscan -v -s : 192.168.1.0/24
-		Scans C-class network. Prints results in script-friendly
-		format using colon as field separator.
-		Produces output like that:
-		192.168.0.1:NT_SERVER:00U
-		192.168.0.1:MY_DOMAIN:00G
-		192.168.0.1:ADMINISTRATOR:03U
-		192.168.0.2:OTHER_BOX:00U
-		...
-	nbtscan -f iplist
-		Scans IP addresses specified in file iplist.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;这个我也不是很了解，因为平时都用nmap。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;burpsuite&#34;&gt;burpsuite&lt;/h4&gt;
-&lt;p&gt;抓包神器，需要安装java依赖。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-4&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S burpsuite
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-1&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;burpsuite有图形界面，可以通过搜索引擎找到使用方法。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;图形界面的东西不好讲，图片一多博客就加载不出来了，请见谅。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;暴力破解密码生成&#34;&gt;暴力破解、密码生成&lt;/h3&gt;
-&lt;h4 id=&#34;hydra&#34;&gt;hydra&lt;/h4&gt;
-&lt;p&gt;暴力破解工具，中文名九头蛇，功能很强大。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-5&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S hydra
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-2&#34;&gt;使用方法&lt;/h5&gt;
-&lt;ul&gt;
-&lt;li&gt;爆破ssh端口&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hydra -l &amp;lt;用户名&amp;gt; -P &amp;lt;密码字典.txt&amp;gt; -v -e ns -t &amp;lt;次数&amp;gt; &amp;lt;目标IP&amp;gt; ssh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;具体使用方法可以通过搜索引擎查询。&lt;/p&gt;
-&lt;h4 id=&#34;crunch&#34;&gt;crunch&lt;/h4&gt;
-&lt;p&gt;强大的密码字典生成器。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-6&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S crunch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-3&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;&lt;strong&gt;Crunch中的特殊字符有：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; 插入数字
-
-&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;@&amp;#39;&lt;/span&gt; 插入小写字母
-
-&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt; 插入大写字母
-
-&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;^&amp;#39;&lt;/span&gt; 插入符号
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Crunch中用到的命令参数有：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;-b &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#按大小分割字典文件，比如后跟20mib&lt;/span&gt;
-
--c &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#密码个数（行数），比如8000&lt;/span&gt;
-
--d &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#限制出现相同元素的个数（至少出现元素个数），-d 3就不会出现aabbbb之类的情况&lt;/span&gt;
-
--e &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义停止生成密码 ，比如-e abcd：到abcd停止生成密码&lt;/span&gt;
-
--f &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#调用密码库文件，比如-f charset.lst mixalpha-numeric 意为调用密码库 charset.lst中的 mixalpha-numeric项目字符&lt;/span&gt;
-
--i &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#改变输出格式&lt;/span&gt;
-
--l &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#与-t搭配使用&lt;/span&gt;
-
--m &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#与-p搭配使用&lt;/span&gt;
-
--o &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#保存为&lt;/span&gt;
-
--p &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义密码元素&lt;/span&gt;
-
--q &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#读取字典&lt;/span&gt;
-
--r &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义从某一个地方重新开始&lt;/span&gt;
-
--s &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#第一个密码，从xxx开始&lt;/span&gt;
-
--t &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义输出格式&lt;/span&gt;
-
--z &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#打包压缩，格式支持 gzip, bzip2, lzma, 7z&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;生成最小1位，最大8位，由26个小写字母为元素的所有组合:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ crunch &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;8&lt;/span&gt; &amp;gt;&amp;gt; 1.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;生成 最小为1,最大为4.由abcd为元素的所有组合:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ crunch &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;4&lt;/span&gt; abcd &amp;gt;&amp;gt; 2.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;生成以“yale”“test”为元素的所有密码组合:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ crunch &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; -p yale test
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还有更多的方法可以自行通过搜索引擎查找。&lt;/p&gt;
-&lt;h3 id=&#34;漏洞利用&#34;&gt;漏洞利用&lt;/h3&gt;
-&lt;h4 id=&#34;metasploit&#34;&gt;metasploit&lt;/h4&gt;
-&lt;p&gt;这是最重要的一个工具，没有它，内网的渗透也是无法完整进行的。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-7&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S metasploit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装完后执行:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo msfconsole
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;即可。&lt;/p&gt;
-&lt;h5 id=&#34;修复数据库问题&#34;&gt;修复数据库问题&lt;/h5&gt;
-&lt;p&gt;启动msf以后是不是出现了三行报错？这是没有连接数据库导致的。&lt;/p&gt;
-&lt;h6 id=&#34;安装postgresql&#34;&gt;安装postgresql&lt;/h6&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S postgresql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;配置postgresql&#34;&gt;配置postgresql&lt;/h6&gt;
-&lt;p&gt;安装完后会多出来一个用户，叫做&lt;code&gt;postgres&lt;/code&gt;，我们需要给它设置一个密码。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo passwd postgres
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后初始化数据库&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo su - postgres -c &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;initdb --locale en_US.UTF-8 -E UTF8 -D &amp;#39;/var/lib/postgres/data&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;初始化完成后就可以启动数据库了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl start postgresql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来，进入数据库用户postgres&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo su postgres
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行&lt;code&gt;psql&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ psql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后光标就变成了&lt;code&gt;postgres=#&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如上面这个样子。&lt;/p&gt;
-&lt;p&gt;接下来创建一个数据库的新用户，比如&lt;code&gt;msf4&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# CREATE USER msf4 WITH PASSWORD &amp;#39;123456&amp;#39;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后创建对应的数据库&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# CREATE DATABASE msfdb OWNER msf4;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将msfdb数据库的所有权限都赋予msf4&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# GRANT ALL PRIVILEGES ON DATABASE msfdb TO msf4;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;退出psql&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# \q&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;创建Linux普通用户，名称与刚才新建的数据库用户同名，如msf4&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo useradd msf4
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;通过msf连接数据库&#34;&gt;通过msf连接数据库&lt;/h6&gt;
-&lt;p&gt;进入msf，链接数据库，命令为&lt;code&gt;db_connect用户名:密码@ip/数据库名&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5&amp;gt; db_connect msf4:123456@127.0.0.1/msfdb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后检查是否连接成功，如果出现类似以下内容说明成功了。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; db_status
-[*] Connected to msf3. Connection type: postgresql. Connection name: DFz5oEX3.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;成功连接后，别忘了保存以及设置&lt;code&gt;postgresql&lt;/code&gt;自启&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; db_save
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl enable postgresql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-4&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;参考&lt;a href=&#34;https://weepingdogel.github.io/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/&#34;&gt;这篇文章&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;也可通过搜索引擎找更多的教程。&lt;/p&gt;
-&lt;h4 id=&#34;sqlmap&#34;&gt;sqlmap&lt;/h4&gt;
-&lt;p&gt;强大的web注入工具，使用方法可以通过搜索引擎查到。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-8&#34;&gt;安装方法&lt;/h5&gt;
-&lt;p&gt;执行以下命令安装即可。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S sqlmap
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;dns劫持&#34;&gt;DNS劫持&lt;/h3&gt;
-&lt;h4 id=&#34;ettercap&#34;&gt;ettercap&lt;/h4&gt;
-&lt;p&gt;强大的DNS劫持工具，各大搜索引擎也有不少教程。它分为命令行版本和图形化版本，但是只能装其中一个，否则会冲突。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-9&#34;&gt;安装方法&lt;/h5&gt;
-&lt;p&gt;命令行版:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S ettercap
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;图形化版:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S ettercap-gtk
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令行版本在终端执行即可，图形化版本可以在菜单中找到，如果没有执行以下命令&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo ettercap -G
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;apache&#34;&gt;apache&lt;/h4&gt;
-&lt;p&gt;怎么还有这个东西？这个东西不是建网站的吗，哈哈，其实这个是辅助ettercap的，当你劫持目标DNS以后，会将其强行解析到你的IP，而apache就可以在你的机器上运行一个静态网页（html）。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-10&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S apache
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-5&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;执行以下命令启动apache&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl start httpd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;网页根目录为&lt;code&gt;/srv/http/&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;可以在目录下写一个html文件，写完执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl restart httpd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以重启apache即可。&lt;/p&gt;
-&lt;h2 id=&#34;小结&#34;&gt;小结&lt;/h2&gt;
-&lt;p&gt;一个普通的Arch Linuxu导入了Black Arch的软件源之后，可以堪称完美的渗透环境了，以上只是常用的工具，而Black Arch软件源里面有几千个工具，想要什么可以通过&lt;code&gt;pacman&lt;/code&gt;下载安装，应有尽有。&lt;/p&gt;
-&lt;p&gt;最后，谢谢访问。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     

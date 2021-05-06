@@ -7,7 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Fri, 09 Apr 2021 22:50:18 +0800</lastBuildDate><atom:link href="https://weepingdogel.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Apr 2021 14:09:13 +0800</lastBuildDate><atom:link href="https://weepingdogel.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>尝试在 Linux下编译 exe 可执行文件</title>
+      <link>https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Mon, 26 Apr 2021 14:09:13 +0800</pubDate>
+      
+      <guid>https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/</guid>
+      <description>序 最近一直在想有没有什么办法可以在 Linux 环境下编译 Windows 中可以运行的 exe 文件，由于自己没有 Windows 环境， 就算开虚拟机也多多少少有些不方便..
+于是就去谷歌了一下.. 发现办法是有的.
+这种办法叫做交叉编译, 要用到交叉编译器
+我们看看维基百科上怎么说
+ 交叉编译器（英语：Cross compiler）是指一个在某个系统平台下可以产生另一个系统平台的可执行文件的编译器。交叉编译器在目标系统平台（开发出来的应用程序序所运行的平台）难以或不容易编译时非常有用。
+交叉编译器的存在对于从一个开发主机为多个平台编译代码是非常有必要的。直接在平台上编译有时行不通，例如在一个嵌入式系统的单片机 ，因为它们没有操作系统，所以直接编译行不通。
+交叉编译器和源代码至源代码编译器不同，交叉编译器用于二进制代码的跨平台软件开发，而源到源编译器是将某种编程语言的程序源代码作为输入，生成以另一种编程语言构成的等效源代码的编译器，但两者都是编程工具。
+rel: https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8
+ 概念就是这样..
+mingw-w64 这大概是个交叉编译器了
+看看官网怎么说
+ Mingw-w64 is an advancement of the original mingw.org project, created to support the GCC compiler on Windows systems. It has forked it in 2007 in order to provide support for 64 bits and new APIs. It has since then gained widespread use and distribution.</description>
+    </item>
+    
     <item>
       <title>学 GTK 记</title>
       <link>https://weepingdogel.github.io/posts/%E5%AD%A6gtk%E8%AE%B0/</link>
@@ -99,6 +119,24 @@ $ sudo pacman -S polkit-gnome 如果想用其他的，把 polkit-gnome 替换成
  这个很简单，我们需要列几个等级区间。
  优秀  80 ~ 100 分 [80,100]   及格  60~79 分 [60,79]   不及格  60 以下 [0,60)    在代码中，我们可以直接用运算表达式来表达区间，例如：
 score &amp;gt;= 80 &amp;amp;&amp;amp; score &amp;lt;= 100 然后我们用 if() 来判断成绩等级。</description>
+    </item>
+    
+    <item>
+      <title>If Only I...</title>
+      <link>https://weepingdogel.github.io/posts/2020-dec-29/</link>
+      <pubDate>Sun, 29 Nov 2020 23:04:02 +0800</pubDate>
+      
+      <guid>https://weepingdogel.github.io/posts/2020-dec-29/</guid>
+      <description>PAST If only I had been stronger,
+I wouldn&amp;rsquo;t have been damaged by the WIND.
+If only I had been smarter,
+I wouldn&amp;rsquo;t have been cheated by the CROWD.
+If only I had been more brave,
+I wouldn&amp;rsquo;t have been thought to be a SLAVE.
+PRESENT If only I were more fortunate,
+I wouldn&amp;rsquo;t drop into a CAGE.
+If only I were more cautious,
+I wouldn&amp;rsquo;t have to be sure if it&amp;rsquo;s DANGEROUS.</description>
     </item>
     
     <item>
@@ -320,6 +358,32 @@ USTC Mirror
 其实就是基础语法和简单的判断👑
 代码 废话不多说直接上代码👑
 /* 标准体重计算器 By WeepingDogel 世卫计算方法 男性：(身高cm－80)×70﹪=标准体重 女性：(身高cm－70)×60﹪=标准体重 标准体重正负10﹪为正常体重 标准体重正负10﹪~ 20﹪为体重过重或过轻 标准体重正负20﹪以上为肥胖或体重不足 超重计算公式 超重%=[（实际体重－理想体重）/（理想体重）]×100% */ /*导入标准库stdio.h （必须）*/ #include &amp;lt;stdio.h&amp;gt;/*标准体重*/ int weight; /*声明函数*/ float judge(float parameter1,float parameter2); float Count_M(float parameter); float Count_F(float parameter); /*声明主函数main() (这个都不写，那写个屁)*/ int main() { printf(&amp;#34;欢迎使用.&amp;#34;); /*身高*/ int height; /*声明变量sex表示性别*/ char sex; /*声明变量：实际体重*/ int real_weight; /*提示用户输入性别*/ printf(&amp;#34;请输入你的性别\n（M为男性,F为女性,注意大小写）&amp;#34;); printf(&amp;#34;\n\n:&amp;#34;); /*读取用户输入的数据并赋值给sex*/ scanf(&amp;#34;%c&amp;#34;,&amp;amp;sex); /*进入判断，并判断变量sex的值是否为M*/ if(sex == &amp;#39;M&amp;#39;) { /*当变量sex=M时，判断为男性，将执行以下代码*/ printf(&amp;#34;你是男性&amp;#34;); printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); printf(&amp;#34;\n\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); weight = (int) Count_M((float) height); printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); printf(&amp;#34;\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); judge((float) real_weight,(float) weight); } /*进入判断，并判断变量sex的值是否为F*/ else if(sex == &amp;#39;F&amp;#39;) { /*当变量sex=F时，判断为女性，将执行以下代码*/ printf(&amp;#34;你是女性&amp;#34;); printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); printf(&amp;#34;\n\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); weight = (int) Count_F((float) height); printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); printf(&amp;#34;\n:&amp;#34;); scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); judge((float) real_weight,(float) weight); } return 0; } /*计算出男性标准体重*/ float Count_M(float parameter) { /*男性：(身高cm－80)×70﹪=标准体重*/ /*定义变量:结果*/ float result; result = (int)(parameter - 80.</description>
+    </item>
+    
+    <item>
+      <title>加冕日</title>
+      <link>https://weepingdogel.github.io/posts/2020-3-29/</link>
+      <pubDate>Fri, 27 Mar 2020 22:17:58 +0800</pubDate>
+      
+      <guid>https://weepingdogel.github.io/posts/2020-3-29/</guid>
+      <description>2020年3月27日 每年的这天定为加冕周年庆。</description>
+    </item>
+    
+    <item>
+      <title>[笔记整理]将来进行时</title>
+      <link>https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/</link>
+      <pubDate>Thu, 19 Dec 2019 02:01:58 +0530</pubDate>
+      
+      <guid>https://weepingdogel.github.io/posts/%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86_%E5%B0%86%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%97%B6/</guid>
+      <description>简介 个人笔记，仅供参考。
+基本结构  陈述句  肯定:  主语 will be doing sth
+  否定:  主语 won’t / will not be doing sth
+    疑问句  Will 主语 be doing sth?
+   例句   表示将来某段时间持续做的动作
+ Eg:Toby will be climbing in the Himalayas all next week.
+Toby下个星期将会爬一整周的喜马拉雅山
+   表示将来的某个时间点前已经开始做的动作，并有可能继续下去
+ Eg:Toby will not be in London next Tuesday. He will be climbing the Himalayas.</description>
     </item>
     
     <item>
