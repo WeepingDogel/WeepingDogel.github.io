@@ -6,9 +6,85 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Fri, 09 Apr 2021 22:50:18 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 26 Apr 2021 14:09:13 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>scp 命令小结</title>
+        <link>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</link>
+        <pubDate>Sat, 05 Sep 2020 12:10:07 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ -&lt;h2 id=&#34;scp-命令是什么&#34;&gt;scp 命令是什么&lt;/h2&gt;
+&lt;p&gt;是传文件用的..&lt;/p&gt;
+&lt;p&gt;我们用 &lt;code&gt;ssh&lt;/code&gt; 操作服务器，当我们需要给服务器传输文件的时候，&lt;code&gt;scp&lt;/code&gt; 命令会通过 &lt;code&gt;ssh&lt;/code&gt; 的端口进行文件传输。&lt;/p&gt;
+&lt;h2 id=&#34;用法&#34;&gt;用法&lt;/h2&gt;
+&lt;p&gt;当我们在终端输入 &lt;code&gt;scp&lt;/code&gt; 后，我们会得到这些&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp
+usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
+            [-J destination] [-l limit] [-o ssh_option] [-P port]
+            [-S program] source ... target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;很显然我们很快就知道了一些参数&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
+&lt;p&gt;这里举一些例子，来展示清楚具体的使用方法&amp;hellip;&lt;/p&gt;
+&lt;p&gt;先说明一下我的测试环境&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Arch Linux&lt;/p&gt;
+&lt;p&gt;IP: 192.168.0.105&lt;/p&gt;
+&lt;p&gt;CentOS8 虚拟机&lt;/p&gt;
+&lt;p&gt;IP: 192.168.0.108&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;上传一个文件&#34;&gt;上传一个文件&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp [本地文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是一般用法，但是&lt;strong&gt;请确保路径正确！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;即：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
+root@192.168.0.108&amp;#39;s password: 
+7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个很简单的，没什么多说的了..&lt;/p&gt;
+&lt;h3 id=&#34;下载一个文件&#34;&gt;下载一个文件&lt;/h3&gt;
+&lt;p&gt;如果我们要从服务器里取一个文件下来修改，而服务器没有 &lt;code&gt;ftp&lt;/code&gt; 时该怎么办呢？&lt;/p&gt;
+&lt;p&gt;我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp 用户名@地址:[文件名] [本地文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还是要提醒一下，这个&lt;strong&gt;文件名&lt;/strong&gt;， &lt;strong&gt;是一个路径！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;是一个&lt;strong&gt;相对路径&lt;/strong&gt;或&lt;strong&gt;绝对路径&lt;/strong&gt;！具体依情况而定，但&lt;strong&gt;它一定是个路径！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
+root@192.168.0.108&amp;#39;s password: 
+index.html                                                   100%   46KB 728.6KB/s   00:00
+weepingdogel@WeepingDogel ~&amp;gt; ls /tmp/*.html -lh
+-rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了&lt;/p&gt;
+&lt;h3 id=&#34;指定一个-ip&#34;&gt;指定一个 IP&lt;/h3&gt;
+&lt;p&gt;一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。&lt;/p&gt;
+&lt;p&gt;而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。&lt;/p&gt;
+&lt;p&gt;我这里用的是 &lt;a href=&#34;https://www.natfrp.com/&#34;&gt;SakuraFRP&lt;/a&gt; ，非常好用的免费内网穿透服务！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;上传：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口] 用户名@地址:[文件名] [本地文件名]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
+&lt;p&gt;嗯&amp;hellip; 具体就是这样子的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是这里我来个组合命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;amp;&amp;amp; cd /tmp &amp;amp;&amp;amp; python test.py
+The authenticity of host &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&amp;#39; can&amp;#39;t be established.
+ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&amp;#39; (ECDSA) to the list of known hosts.
+root@cn-zj-dx-2.sakurafrp.com&amp;#39;s password: 
+test.py                                                      100%   21     0.2KB/s   00:00    
+Hello World
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦&lt;/p&gt;
+&lt;p&gt;写完啦！&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;p&gt;啥？这次没有，自己试出来的&amp;hellip;&lt;/p&gt;
+&lt;p&gt;唔啊！准确来说也有，那就是各种搜索引擎啦～&lt;/p&gt;
+- https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
     
     
     
@@ -2340,319 +2416,6 @@ drwxr-xr-x &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;2&lt;/span
 &lt;p&gt;本期博客中的内容并不是很详细，我已经尽力写得让大多数人能看懂，也许还有少数人无法理解内容，没关系，你可以在下面的评论区提问。&lt;/p&gt;
 &lt;p&gt;那么，欢迎评论。&lt;/p&gt;
 - https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>用 Arch Linux 打造完美渗透环境</title>
-        <link>https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/</link>
-        <pubDate>Wed, 31 Jul 2019 21:19:52 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/ -&lt;h2 id=&#34;简介arch-linux&#34;&gt;简介Arch Linux&lt;/h2&gt;
-&lt;p&gt;Arch Linux是一款通用x86_64的GNU/Linux发行版，它采用滚动更新模式，尽全力给用户提供最新的稳定版软件。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;嘿嘿，很久不滚可能会滚挂哦&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;刚装完的Arch只是一个基本系统，什么都没有，随后用户就可以根据自己的想法和喜好，安装自己需要的软件，然后通过高度自定义的配置，打造自己喜欢的、理想的系统。这也是Arch的可爱和有吸引力之处。所以Arch也是我最喜欢的发行版之一。&lt;/p&gt;
-&lt;p&gt;关于Arch Linux的更多详细内容，请参见&lt;a href=&#34;https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;本期内容介绍&#34;&gt;本期内容介绍&lt;/h2&gt;
-&lt;p&gt;本期将会演示如何用Arch Linux打造完美的渗透环境。一切操作均为教程演示，请读者根据实际情况操作。没使用过Arch Linux的用户请&lt;strong&gt;谨慎操作&lt;/strong&gt;，并仔细查阅&lt;a href=&#34;https://wiki.archlinux.org/index.php/Main_page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;那么，开始本期的内容吧。&lt;/p&gt;
-&lt;h3 id=&#34;提示&#34;&gt;提示&lt;/h3&gt;
-&lt;p&gt;本期博客会大量使用Arch Wiki的超链接，以方便理解部分内容。&lt;/p&gt;
-&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
-&lt;h3 id=&#34;安装arch-linux&#34;&gt;安装Arch Linux&lt;/h3&gt;
-&lt;p&gt;本期博客不会详细写出Arch Linux的安装过程，请参考&lt;a href=&#34;https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;安装Arch Linux，并做好基本的配置工作。&lt;/p&gt;
-&lt;h3 id=&#34;选择轻量桌面环境&#34;&gt;选择轻量桌面环境&lt;/h3&gt;
-&lt;p&gt;由于渗透测试中部分操作会占用大量的资源，所以请尽量按需求选择轻量的桌面环境，这里不建议使用 &lt;a href=&#34;https://wiki.archlinux.org/index.php/GNOME_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Gnome&lt;/a&gt; 和 &lt;a href=&#34;https://wiki.archlinux.org/index.php/KDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;KDE&lt;/a&gt;，因为二者占用的资源非常大，对低配用户不友好。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/LXDE_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;LXDE&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;轻量级GTK桌面环境，默认窗口管理器是 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Openbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;OpenBox&lt;/a&gt; ，最轻量的桌面环境之一。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/LXQt_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;LXQT&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2013年间，洪任諭（“PCMan”）启动了将 LXDE 移植到 Qt 的项目。所以LXQT相当于是使用QT的LXDE，默认窗口管理器还是 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Openbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;OpenBox&lt;/a&gt; ，它比上面的LXDE还要轻量。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Xfce_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;xfce4&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;目前我在用的桌面环境，基于GTK+2，这个是轻量化桌面环境中最好看的一个了。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/I3_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;i3wm&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;i3 是一种动态的&lt;a href=&#34;https://en.wikipedia.org/wiki/Tiling_window_manager&#34;&gt;平铺式窗口管理器&lt;/a&gt;，其灵感来自于面向开发者与资深用户的 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Wmii&#34;&gt;wmii&lt;/a&gt;。 i3 的既定目标包括清晰可读的文档，完善的多显示器支持，基于树形结构的窗口管理，提供 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Vim&#34;&gt;vim&lt;/a&gt; 式的多种操作模式。 ——摘自&lt;a href=&#34;https://wiki.archlinux.org/index.php/I3_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;Arch Wiki&lt;/a&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;自己DIY桌面环境&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;你可以使用上面介绍过的 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Openbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;OpenBox&lt;/a&gt; 通过配置来DIY自己的桌面环境，也可以使用 &lt;a href=&#34;https://wiki.archlinux.org/index.php/Fluxbox_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;fluxbox&lt;/a&gt;、&lt;a href=&#34;https://wiki.archlinux.org/index.php/I3_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)&#34;&gt;i3wm&lt;/a&gt; 等。详细请参见 &lt;del&gt;&lt;a href=&#34;https://latiao233.github.io/2019/07/30/%E5%88%A9%E7%94%A8openbox%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/#more&#34;&gt;利用openbox打造自己的桌面环境-辣条的博客(链接已失效)。&lt;/a&gt;&lt;/del&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;本期博客也将会使用自定义桌面环境进行演示。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;OpenBox+xfce4-panel&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;添加black-arch源&#34;&gt;添加Black Arch源&lt;/h3&gt;
-&lt;p&gt;当Arch Linux基本配置完成之后，就可以开始正常使用了，但是为了安装渗透工具，需要添加一个&lt;strong&gt;Black Arch软件源&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;h4 id=&#34;什么是black-arch&#34;&gt;&lt;strong&gt;什么是Black Arch&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;BlackArch Linux，简称BlackArch，是一份基于Arch的Linux发行版。该发行版被设计用于系统渗透测试及安全研究。BlackArch提供一张自启动运行DVD镜像，其中包含有多个轻量级窗口管理器和一千多种用于渗透测试和计算机取证分析的专用工具。该系统即可以直接从镜像启动，也可以安装在硬盘、U盘或虚拟机上。 ——摘自&lt;a href=&#34;https://zh.wikipedia.org/zh-hans/BlackArch_Linux&#34;&gt;维基百科(需要科学上网)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Black Arch官网：&lt;a href=&#34;https://blackarch.org/&#34;&gt;blackarch.org&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如上我们知道，Black Arch是一个基于Arch Linux的独立发行版，但我们不需要去安装它，我们只需要添加它的软件源就好。&lt;/p&gt;
-&lt;p&gt;具体操作如下:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nano /etc/pacman.conf &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 编辑pacman.conf文件&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在&lt;code&gt;pacman.conf&lt;/code&gt;文件的末尾加入以下内容:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-conf&#34; data-lang=&#34;conf&#34;&gt;[blackarch]
-SigLevel = Optional TrustAll
-Server = https://mirrors.ustc.edu.cn/blackarch/$repo/os/$arch
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后执行:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -Syyu
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果没问题，就可以使用Black Arch的软件源了。&lt;/p&gt;
-&lt;h2 id=&#34;开始安装配置常用渗透工具&#34;&gt;开始安装、配置常用渗透工具&lt;/h2&gt;
-&lt;h3 id=&#34;端口扫描和信息收集&#34;&gt;端口扫描和信息收集&lt;/h3&gt;
-&lt;h4 id=&#34;namp&#34;&gt;Namp&lt;/h4&gt;
-&lt;p&gt;首先搬出&lt;a href=&#34;https://baike.baidu.com/item/nmap/1400075?fr=aladdin&#34;&gt;Nmap&lt;/a&gt;，这是一个很常用的扫描工具，可以在渗透的过程中扫描到对方的IP、端口、操作系统等情况。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S nmap
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;基本用法&#34;&gt;基本用法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ nmap &amp;lt;目标IP地址&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 简单的扫描&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nmap -O &amp;lt;目标IP地址&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# 扫描目标的操作系统情况&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nmap -sP &amp;lt;目标IP地址&amp;gt; &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# ping扫描&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;更多用法可参考搜索引擎查询。&lt;/p&gt;
-&lt;h4 id=&#34;xerosploit&#34;&gt;xerosploit&lt;/h4&gt;
-&lt;p&gt;这个扫描工具比&lt;strong&gt;Nmap&lt;/strong&gt;要炫酷一些，色彩也比较好看，用法也很简单，比&lt;strong&gt;Metasploit&lt;/strong&gt;还简单。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-1&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S xerosploit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;用法&#34;&gt;用法&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;$ sudo xerosploit
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后执行&lt;code&gt;help&lt;/code&gt;就可以看到软件自带的帮助文档了&lt;/p&gt;
-&lt;h4 id=&#34;nslookup&#34;&gt;nslookup&lt;/h4&gt;
-&lt;p&gt;这个命令是查看域名记录的，可以查看Cname、A等各种记录。它包含在&lt;strong&gt;dnsutils&lt;/strong&gt;这个包里&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-2&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S dnsutils
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装这个包dnsutils即可。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;我也不太了解这个，所以具体怎么用请自行百度、谷歌一下吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;nbtscan&#34;&gt;nbtscan&lt;/h4&gt;
-&lt;p&gt;内网扫描工具，可以扫描IP段内是否有存活的IP，速度比nmap要快一些。但是只能用于局域网。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-3&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S nbtscan
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法&#34;&gt;使用方法&lt;/h5&gt;
-&lt;ul&gt;
-&lt;li&gt;基本扫描&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nbtscan  -r  192.168.16.0/24
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;官方帮助文档&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&amp;#34;Human-readable service names&amp;#34; (-h) option cannot be used without verbose (-v) option.
-Usage:
-nbtscan [-v] [-d] [-e] [-l] [-t timeout] [-b bandwidth] [-r] [-q] [-s separator] [-m retransmits] (-f filename)|(&amp;lt;scan_range&amp;gt;) 
-	-v		verbose output. Print all names received
-			from each host
-	-d		dump packets. Print whole packet contents.
-	-e		Format output in /etc/hosts format.
-	-l		Format output in lmhosts format.
-			Cannot be used with -v, -s or -h options.
-	-t timeout	wait timeout milliseconds for response.
-			Default 1000.
-	-b bandwidth	Output throttling. Slow down output
-			so that it uses no more that bandwidth bps.
-			Useful on slow links, so that ougoing queries
-			don&amp;#39;t get dropped.
-	-r		use local port 137 for scans. Win95 boxes
-			respond to this only.
-			You need to be root to use this option on Unix.
-	-q		Suppress banners and error messages,
-	-s separator	Script-friendly output. Don&amp;#39;t print
-			column and record headers, separate fields with separator.
-	-h		Print human-readable names for services.
-			Can only be used with -v option.
-	-m retransmits	Number of retransmits. Default 0.
-	-f filename	Take IP addresses to scan from file filename.
-			-f - makes nbtscan take IP addresses from stdin.
-	&amp;lt;scan_range&amp;gt;	what to scan. Can either be single IP
-			like 192.168.1.1 or
-			range of addresses in one of two forms: 
-			xxx.xxx.xxx.xxx/xx or xxx.xxx.xxx.xxx-xxx.
-Examples:
-	nbtscan -r 192.168.1.0/24
-		Scans the whole C-class network.
-	nbtscan 192.168.1.25-137
-		Scans a range from 192.168.1.25 to 192.168.1.137
-	nbtscan -v -s : 192.168.1.0/24
-		Scans C-class network. Prints results in script-friendly
-		format using colon as field separator.
-		Produces output like that:
-		192.168.0.1:NT_SERVER:00U
-		192.168.0.1:MY_DOMAIN:00G
-		192.168.0.1:ADMINISTRATOR:03U
-		192.168.0.2:OTHER_BOX:00U
-		...
-	nbtscan -f iplist
-		Scans IP addresses specified in file iplist.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;这个我也不是很了解，因为平时都用nmap。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;burpsuite&#34;&gt;burpsuite&lt;/h4&gt;
-&lt;p&gt;抓包神器，需要安装java依赖。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-4&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S burpsuite
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-1&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;burpsuite有图形界面，可以通过搜索引擎找到使用方法。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;图形界面的东西不好讲，图片一多博客就加载不出来了，请见谅。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;暴力破解密码生成&#34;&gt;暴力破解、密码生成&lt;/h3&gt;
-&lt;h4 id=&#34;hydra&#34;&gt;hydra&lt;/h4&gt;
-&lt;p&gt;暴力破解工具，中文名九头蛇，功能很强大。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-5&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S hydra
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-2&#34;&gt;使用方法&lt;/h5&gt;
-&lt;ul&gt;
-&lt;li&gt;爆破ssh端口&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ hydra -l &amp;lt;用户名&amp;gt; -P &amp;lt;密码字典.txt&amp;gt; -v -e ns -t &amp;lt;次数&amp;gt; &amp;lt;目标IP&amp;gt; ssh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;具体使用方法可以通过搜索引擎查询。&lt;/p&gt;
-&lt;h4 id=&#34;crunch&#34;&gt;crunch&lt;/h4&gt;
-&lt;p&gt;强大的密码字典生成器。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-6&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S crunch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-3&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;&lt;strong&gt;Crunch中的特殊字符有：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; 插入数字
-
-&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;@&amp;#39;&lt;/span&gt; 插入小写字母
-
-&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt; 插入大写字母
-
-&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#39;^&amp;#39;&lt;/span&gt; 插入符号
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Crunch中用到的命令参数有：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;-b &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#按大小分割字典文件，比如后跟20mib&lt;/span&gt;
-
--c &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#密码个数（行数），比如8000&lt;/span&gt;
-
--d &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#限制出现相同元素的个数（至少出现元素个数），-d 3就不会出现aabbbb之类的情况&lt;/span&gt;
-
--e &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义停止生成密码 ，比如-e abcd：到abcd停止生成密码&lt;/span&gt;
-
--f &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#调用密码库文件，比如-f charset.lst mixalpha-numeric 意为调用密码库 charset.lst中的 mixalpha-numeric项目字符&lt;/span&gt;
-
--i &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#改变输出格式&lt;/span&gt;
-
--l &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#与-t搭配使用&lt;/span&gt;
-
--m &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#与-p搭配使用&lt;/span&gt;
-
--o &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#保存为&lt;/span&gt;
-
--p &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义密码元素&lt;/span&gt;
-
--q &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#读取字典&lt;/span&gt;
-
--r &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义从某一个地方重新开始&lt;/span&gt;
-
--s &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#第一个密码，从xxx开始&lt;/span&gt;
-
--t &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#定义输出格式&lt;/span&gt;
-
--z &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#打包压缩，格式支持 gzip, bzip2, lzma, 7z&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;生成最小1位，最大8位，由26个小写字母为元素的所有组合:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ crunch &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;8&lt;/span&gt; &amp;gt;&amp;gt; 1.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;生成 最小为1,最大为4.由abcd为元素的所有组合:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ crunch &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;4&lt;/span&gt; abcd &amp;gt;&amp;gt; 2.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;生成以“yale”“test”为元素的所有密码组合:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ crunch &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#0086f7;font-weight:bold&#34;&gt;5&lt;/span&gt; -p yale test
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还有更多的方法可以自行通过搜索引擎查找。&lt;/p&gt;
-&lt;h3 id=&#34;漏洞利用&#34;&gt;漏洞利用&lt;/h3&gt;
-&lt;h4 id=&#34;metasploit&#34;&gt;metasploit&lt;/h4&gt;
-&lt;p&gt;这是最重要的一个工具，没有它，内网的渗透也是无法完整进行的。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-7&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S metasploit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装完后执行:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo msfconsole
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;即可。&lt;/p&gt;
-&lt;h5 id=&#34;修复数据库问题&#34;&gt;修复数据库问题&lt;/h5&gt;
-&lt;p&gt;启动msf以后是不是出现了三行报错？这是没有连接数据库导致的。&lt;/p&gt;
-&lt;h6 id=&#34;安装postgresql&#34;&gt;安装postgresql&lt;/h6&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S postgresql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;配置postgresql&#34;&gt;配置postgresql&lt;/h6&gt;
-&lt;p&gt;安装完后会多出来一个用户，叫做&lt;code&gt;postgres&lt;/code&gt;，我们需要给它设置一个密码。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo passwd postgres
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后初始化数据库&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo su - postgres -c &lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;initdb --locale en_US.UTF-8 -E UTF8 -D &amp;#39;/var/lib/postgres/data&amp;#39;&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;初始化完成后就可以启动数据库了&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl start postgresql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来，进入数据库用户postgres&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo su postgres
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;执行&lt;code&gt;psql&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ psql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后光标就变成了&lt;code&gt;postgres=#&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;#&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如上面这个样子。&lt;/p&gt;
-&lt;p&gt;接下来创建一个数据库的新用户，比如&lt;code&gt;msf4&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# CREATE USER msf4 WITH PASSWORD &amp;#39;123456&amp;#39;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后创建对应的数据库&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# CREATE DATABASE msfdb OWNER msf4;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将msfdb数据库的所有权限都赋予msf4&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# GRANT ALL PRIVILEGES ON DATABASE msfdb TO msf4;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;退出psql&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#fb660a&#34;&gt;postgres&lt;/span&gt;=&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;# \q&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;创建Linux普通用户，名称与刚才新建的数据库用户同名，如msf4&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo useradd msf4
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h6 id=&#34;通过msf连接数据库&#34;&gt;通过msf连接数据库&lt;/h6&gt;
-&lt;p&gt;进入msf，链接数据库，命令为&lt;code&gt;db_connect用户名:密码@ip/数据库名&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5&amp;gt; db_connect msf4:123456@127.0.0.1/msfdb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后检查是否连接成功，如果出现类似以下内容说明成功了。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; db_status
-[*] Connected to msf3. Connection type: postgresql. Connection name: DFz5oEX3.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;成功连接后，别忘了保存以及设置&lt;code&gt;postgresql&lt;/code&gt;自启&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;msf5 &amp;gt; db_save
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl enable postgresql
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-4&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;参考&lt;a href=&#34;https://weepingdogel.github.io/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/&#34;&gt;这篇文章&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;也可通过搜索引擎找更多的教程。&lt;/p&gt;
-&lt;h4 id=&#34;sqlmap&#34;&gt;sqlmap&lt;/h4&gt;
-&lt;p&gt;强大的web注入工具，使用方法可以通过搜索引擎查到。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-8&#34;&gt;安装方法&lt;/h5&gt;
-&lt;p&gt;执行以下命令安装即可。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S sqlmap
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;dns劫持&#34;&gt;DNS劫持&lt;/h3&gt;
-&lt;h4 id=&#34;ettercap&#34;&gt;ettercap&lt;/h4&gt;
-&lt;p&gt;强大的DNS劫持工具，各大搜索引擎也有不少教程。它分为命令行版本和图形化版本，但是只能装其中一个，否则会冲突。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-9&#34;&gt;安装方法&lt;/h5&gt;
-&lt;p&gt;命令行版:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S ettercap
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;图形化版:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S ettercap-gtk
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;命令行版本在终端执行即可，图形化版本可以在菜单中找到，如果没有执行以下命令&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo ettercap -G
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;apache&#34;&gt;apache&lt;/h4&gt;
-&lt;p&gt;怎么还有这个东西？这个东西不是建网站的吗，哈哈，其实这个是辅助ettercap的，当你劫持目标DNS以后，会将其强行解析到你的IP，而apache就可以在你的机器上运行一个静态网页（html）。&lt;/p&gt;
-&lt;h5 id=&#34;安装方法-10&#34;&gt;安装方法&lt;/h5&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S apache
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;使用方法-5&#34;&gt;使用方法&lt;/h5&gt;
-&lt;p&gt;执行以下命令启动apache&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl start httpd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;网页根目录为&lt;code&gt;/srv/http/&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;可以在目录下写一个html文件，写完执行&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo systemctl restart httpd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以重启apache即可。&lt;/p&gt;
-&lt;h2 id=&#34;小结&#34;&gt;小结&lt;/h2&gt;
-&lt;p&gt;一个普通的Arch Linuxu导入了Black Arch的软件源之后，可以堪称完美的渗透环境了，以上只是常用的工具，而Black Arch软件源里面有几千个工具，想要什么可以通过&lt;code&gt;pacman&lt;/code&gt;下载安装，应有尽有。&lt;/p&gt;
-&lt;p&gt;最后，谢谢访问。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     

