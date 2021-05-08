@@ -42,12 +42,11 @@ gtk.h 要写 gtk 程序， 首先得导入这个库， 不过它得在安装 gtk
 并且编译的时候还要加一些参数..
 安装 gtk 现在已经 gtk 已经更新到 4 了， 不过我这里用的是 3..
 这边 Arch 的话， 直接装上就好。
-1$ sudo pacman -S gtk3 头文件 然后在程序的开头写上这个就可以开始编程了。
-1#include &amp;lt;gtk/gtk.h&amp;gt;构建一个空白窗口 C 可能稍微比较复杂， 在它能够加载出窗口之前， 我们需要在主函数里定义两个参数&amp;hellip;
+1  $ sudo pacman -S gtk3   头文件 然后在程序的开头写上这个就可以开始编程了。
+1  #include &amp;lt;gtk/gtk.h&amp;gt;  构建一个空白窗口 C 可能稍微比较复杂， 在它能够加载出窗口之前， 我们需要在主函数里定义两个参数&amp;hellip;
 我也不太懂， 就当作标准格式了。
 一个是 整型(int) 的， 命名为 argc:
-1int main(int argc, ) 另一个是 char 类型的, 命名为 argv, 但是这个有所不同， 我们得这么写 &amp;ldquo;char *argv&amp;rdquo; :
-1int main(int argc, char *argv[]) 接下来写上大括号，我们就可以开始写了</description>
+1  int main(int argc, )   另一个是 char 类型的, 命名为 argv, 但是这个有所不同， 我们得这么写 &amp;ldquo;char *argv&amp;rdquo; :</description>
     </item>
     
     <item>
@@ -93,14 +92,13 @@ I don&amp;rsquo;t know&amp;hellip; Just looking back on the past&amp;hellip; And
 我们需要装的是 polkit 这个东西&amp;hellip;
 如果不知道它是啥的话，看 Arch Wiki 的这个页面。
  Polkit - ArchWiki  解决过程 首先安装 polkit ，
-1$ sudo pacman -S polkit 装完后，我们还需要安装其对应的图形前端。
+1  $ sudo pacman -S polkit   装完后，我们还需要安装其对应的图形前端。
 如图，我们有很多可以选择。
 我这里选择 Gnome 的，比较习惯..
 用 pacman 就可以装了，
-1$ sudo pacman -S polkit-gnome 如果想用其他的，把 polkit-gnome 替换成其他包名即可。
+1  $ sudo pacman -S polkit-gnome   如果想用其他的，把 polkit-gnome 替换成其他包名即可。
 但是装完还不行，还得设置启动项，原因？ 在这：
- If you are using a graphical environment, make sure that a graphical authentication agent is installed and autostarted on login.
-——Arch Wiki 里写的</description>
+ If you are using a graphical environment, make sure that a graphical authentication agent is installed and autostarted on login.</description>
     </item>
     
     <item>
@@ -118,7 +116,7 @@ I don&amp;rsquo;t know&amp;hellip; Just looking back on the past&amp;hellip; And
  了解 C 程序设计思想 了解 C 程序设计框架 实验内容:  输入一个成绩，输出它的等级评分
  这个很简单，我们需要列几个等级区间。
  优秀  80 ~ 100 分 [80,100]   及格  60~79 分 [60,79]   不及格  60 以下 [0,60)    在代码中，我们可以直接用运算表达式来表达区间，例如：
-1score &amp;gt;= 80 &amp;amp;&amp;amp; score &amp;lt;= 100 然后我们用 if() 来判断成绩等级。</description>
+1  score &amp;gt;= 80 &amp;amp;&amp;amp; score &amp;lt;= 100   然后我们用 if() 来判断成绩等级。</description>
     </item>
     
     <item>
@@ -139,12 +137,12 @@ I don&amp;rsquo;t know&amp;hellip; Just looking back on the past&amp;hellip; And
 就是封面上那个东西..
 我们先要编辑 /etc/apt/sources.list 这个文件。
 Mint 似乎不自带 vim，所以我们这里使用 nano。
-1$ sudo nano /etc/apt/sources.list 注意：sudo 不能丢！ 而且按下回车之后要输入密码才能有权限。
+1  $ sudo nano /etc/apt/sources.list   注意：sudo 不能丢！ 而且按下回车之后要输入密码才能有权限。
 我们打开才发现里面是空的，除了一大堆英文注释什么都没有..
 我们往里面写入
-1deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport 接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 Ubuntu 的帮助文档
+1  deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport   接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 Ubuntu 的帮助文档
 我知道怎么做了，把这些当中的archive.ubuntu.com 等域名全部改成mirrors.tuna.tsinghua.edu.cn 即可
-1#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main 2 3# This system was installed using small removable media 4# (e.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13  #deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main # This system was installed using small removable media # (e.</description>
     </item>
     
     <item>
@@ -164,8 +162,7 @@ qwq
 总之你需要有一个 Github 帐号，然后创建一个名字为这样的库，记得勾选 Public
  你的GitHub用户名.github.io
  安装 Hugo 接下来安装 Hugo
- Arch  1$ sudo pacman -S hugo  deb 系  1$ sudo apt install hugo  Windows  到 Github下载安装程序即可
-生成一个博客 我以 Linux 为例，其他平台可能有些细节不同，请注意</description>
+ Arch  1  $ sudo pacman -S hugo    deb 系  1  $ sudo apt install hugo    Windows  到 Github下载安装程序即可</description>
     </item>
     
     <item>
@@ -190,7 +187,7 @@ IP: 192.168.0.116
 我们将这个虚拟机想象为他们的服务器，然后进行一些攻击测试。
 由于这家公司的管理层是非技术人员，因此服务器的软件不仅版本老旧，且缺乏防御措施。
 外加公司有点不尽人意的工时，程序员们都以“完成任务”的摸鱼态度工作，导致后端 PHP 写成了这样
-1&amp;lt;?php 2if ($_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] &amp;gt; 0) 3{ 4 echo &amp;#34;错误：&amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; 5} 6else 7{ 8 echo &amp;#34;上传文件名: &amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;name&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; 9 echo &amp;#34;文件类型: &amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;type&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; 10 echo &amp;#34;文件大小: &amp;#34; .</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  &amp;lt;?php if ($_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] &amp;gt; 0) { echo &amp;#34;错误：&amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; } else { echo &amp;#34;上传文件名: &amp;#34; .</description>
     </item>
     
     <item>
@@ -200,14 +197,13 @@ IP: 192.168.0.116
       
       <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
       <description>文件操作 open open() 是 Python 进行文件操作的关键函数，它有连个参数需要设置
- 文件名 - 文件的名称，不多解释 模式 - 决定打开的文件是否可读写以及其他属性  1open(&amp;#39;filename&amp;#39;,&amp;#39;mode&amp;#39;) 读 仅以只读方式打开一个文件
-1f = open(&amp;#34;filename.txt&amp;#34;) 这样写也是一样的
-1f = open(&amp;#34;filename&amp;#34;,&amp;#34;rt&amp;#34;) &amp;ldquo;r&amp;rdquo; 表示读
+ 文件名 - 文件的名称，不多解释 模式 - 决定打开的文件是否可读写以及其他属性  1  open(&amp;#39;filename&amp;#39;,&amp;#39;mode&amp;#39;)   读 仅以只读方式打开一个文件
+1  f = open(&amp;#34;filename.txt&amp;#34;)   这样写也是一样的
+1  f = open(&amp;#34;filename&amp;#34;,&amp;#34;rt&amp;#34;)   &amp;ldquo;r&amp;rdquo; 表示读
 &amp;ldquo;t&amp;rdquo; 表示文本，这是函数默认设定好的，所以可以省略。
 这里引入一下 w3school 的一个列表
  There are four different methods (modes) for opening a file:
- &amp;ldquo;r&amp;rdquo; - Read - Default value. Opens a file for reading, error if the file does not exist
-  &amp;ldquo;a&amp;rdquo; - Append - Opens a file for appending, creates the file if it does not exist</description>
+ &amp;ldquo;r&amp;rdquo; - Read - Default value. Opens a file for reading, error if the file does not exist</description>
     </item>
     
     <item>
@@ -219,16 +215,15 @@ IP: 192.168.0.116
       <description>scp 命令是什么 是传文件用的..
 我们用 ssh 操作服务器，当我们需要给服务器传输文件的时候，scp 命令会通过 ssh 的端口进行文件传输。
 用法 当我们在终端输入 scp 后，我们会得到这些
-1weepingdogel@WeepingDogel ~&amp;gt; scp 2usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] 3 [-J destination] [-l limit] [-o ssh_option] [-P port] 4 [-S program] source ... target 很显然我们很快就知道了一些参数&amp;hellip;
+1 2 3 4  weepingdogel@WeepingDogel ~&amp;gt; scp usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] [-J destination] [-l limit] [-o ssh_option] [-P port] [-S program] source ... target   很显然我们很快就知道了一些参数&amp;hellip;
 示例 这里举一些例子，来展示清楚具体的使用方法&amp;hellip;
 先说明一下我的测试环境
  Arch Linux
 IP: 192.168.0.105
 CentOS8 虚拟机
 IP: 192.168.0.108
- 上传一个文件 1$ scp [本地文件名] 用户名@地址:[文件名] 这是一般用法，但是请确保路径正确！
-即：
-1weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/ 2root@192.168.0.108&amp;#39;s password: 37.1.0.zip 100% 95KB 5.</description>
+ 上传一个文件 1  $ scp [本地文件名] 用户名@地址:[文件名]   这是一般用法，但是请确保路径正确！
+即：</description>
     </item>
     
     <item>
@@ -266,9 +261,7 @@ fcitx5 与 fcitx  Fcitx   Fcitx (Flexible Input Method Framework) ──即小�
 这个过程很简单, 按照以下步骤走
   使用 USB 数据线将电脑与手机连接, 并打开 USB 网络共享
  这个都不会的, 可以执行 sudo rm -rf / 这智商, 玩你妈的 Linux 不会的, 请参考这里    打开终端, 执行
-  1$ sudo ip link 然后它会返回这样的东西, 如图
-设置网卡
-1$ sudo ip link set enp3s0f4u2 up 运行 dhcpcd</description>
+  1  $ sudo ip link   然后它会返回这样的东西, 如图</description>
     </item>
     
     <item>
@@ -339,7 +332,7 @@ USTC Mirror
       <description>简介 嘛&amp;hellip;学了一会儿C语言弄了这么个玩意👑
 其实就是基础语法和简单的判断👑
 代码 废话不多说直接上代码👑
-1/* 2标准体重计算器 3By WeepingDogel 45世卫计算方法 6男性：(身高cm－80)×70﹪=标准体重 7女性：(身高cm－70)×60﹪=标准体重 8标准体重正负10﹪为正常体重 9标准体重正负10﹪~ 20﹪为体重过重或过轻 10标准体重正负20﹪以上为肥胖或体重不足 11超重计算公式 12超重%=[（实际体重－理想体重）/（理想体重）]×100% 13*/ 14/*导入标准库stdio.h （必须）*/ 15#include &amp;lt;stdio.h&amp;gt;16/*标准体重*/ 17int weight; 18/*声明函数*/ 19float judge(float parameter1,float parameter2); 20float Count_M(float parameter); 21float Count_F(float parameter); 22/*声明主函数main() (这个都不写，那写个屁)*/ 23int main() 24{ 25 printf(&amp;#34;欢迎使用.&amp;#34;); 26 /*身高*/ 27 int height; 28 /*声明变量sex表示性别*/ 29 char sex; 30 /*声明变量：实际体重*/ 31 int real_weight; 32 /*提示用户输入性别*/ 33 printf(&amp;#34;请输入你的性别\n（M为男性,F为女性,注意大小写）&amp;#34;); 34 printf(&amp;#34;\n\n:&amp;#34;); 35 /*读取用户输入的数据并赋值给sex*/ 36 scanf(&amp;#34;%c&amp;#34;,&amp;amp;sex); 37 /*进入判断，并判断变量sex的值是否为M*/ 38 if(sex == &amp;#39;M&amp;#39;) 39 { 40 /*当变量sex=M时，判断为男性，将执行以下代码*/ 41 printf(&amp;#34;你是男性&amp;#34;); 42 printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); 43 printf(&amp;#34;\n\n:&amp;#34;); 44 scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); 45 weight = (int) Count_M((float) height); 46 printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); 47 printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); 48 printf(&amp;#34;\n:&amp;#34;); 49 scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); 50 judge((float) real_weight,(float) weight); 51 } 52 /*进入判断，并判断变量sex的值是否为F*/ 53 else if(sex == &amp;#39;F&amp;#39;) 54 { 55 /*当变量sex=F时，判断为女性，将执行以下代码*/ 56 printf(&amp;#34;你是女性&amp;#34;); 57 printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); 58 printf(&amp;#34;\n\n:&amp;#34;); 59 scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); 60 weight = (int) Count_F((float) height); 61 printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); 62 printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); 63 printf(&amp;#34;\n:&amp;#34;); 64 scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); 65 judge((float) real_weight,(float) weight); 66 } 67 return 0; 68} 69/*计算出男性标准体重*/ 70float Count_M(float parameter) 71{ 72 /*男性：(身高cm－80)×70﹪=标准体重*/ 73 /*定义变量:结果*/ 74 float result; 75 result = (int)(parameter - 80.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118  /* 标准体重计算器 By WeepingDogel 世卫计算方法 男性：(身高cm－80)×70﹪=标准体重 女性：(身高cm－70)×60﹪=标准体重 标准体重正负10﹪为正常体重 标准体重正负10﹪~ 20﹪为体重过重或过轻 标准体重正负20﹪以上为肥胖或体重不足 超重计算公式 超重%=[（实际体重－理想体重）/（理想体重）]×100% */ /*导入标准库stdio.</description>
     </item>
     
     <item>
@@ -414,7 +407,7 @@ Python的安装 Python是跨平台的语言，所以平台不同安装方法也�
 Windows 可以到Python的官网去下载安装程序并安装，建议下载Python3
 Mac OSX 同样到Python的官网下载
 Linux Linux则在包管理器安装即可
-deb系 1$ sudo apt-get install python3 Arch系 1$ sudo pacman -S python rpm系 1$ sudo yum install python3 Android Android平台则安装QPython即可，</description>
+deb系 1  $ sudo apt-get install python3   Arch系 1  $ sudo pacman -S python   rpm系 1  $ sudo yum install python3   Android Android平台则安装QPython即可，</description>
     </item>
     
     <item>
@@ -432,12 +425,10 @@ cd命令是”change directory”的缩写，也就是改变你当前所在的�
 简单的理解，就是进入一个文件夹。
 用法 测试目录:/a/b/c
 进入某个目录: 绝对路径：指定一个完整的路径，与自己当前所在的目录无关
-1[weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
-1[weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 指定上一级
-1[weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 2# 按下回车后 3[weepingdogel@localhost xxx]$ 退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
-返回上一级
-1[weepingdogel@localhost c]$ cd .. # 从当前所在的目录/a/b/c返回上一级的目录/a/b 2# 按下回车后 3[weepingdogel@localhost b]$ 返回上两级
-1[weepingdogel@localhost c]$ cd ../.. # 从当前所在的目录/a/b/c返回上两级的目录/a 2# 按下回车后 3[weepingdogel@localhost a]$ pwd命令 这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</description>
+1 2 3  [weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c # 按下回车后 [weepingdogel@localhost c]$   相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
+1 2 3  [weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c # 按下回车后 [weepingdogel@localhost c]$   指定上一级
+1 2 3  [weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 # 按下回车后 [weepingdogel@localhost xxx]$   退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
+返回上一级</description>
     </item>
     
     <item>
@@ -508,8 +499,7 @@ https://cvedetails.com/cve/CVE-2017-0147/
 https://cvedetails.com/cve/CVE-2017-0148/
 https://github.com/RiskSense-Ops/MS17-010
  攻击复现 那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个Linux的渗透测试软件包。叫做Metasploit。 它在作为渗透测试的发行版中是自带的，如果你用的不是作为渗透测试的发行版，那么以下是安装方法：
- 基于Arch  1$ sudo pacman -S metasploit  基于Debian更新源里有的  1$ sudo apt-get install metasploit  rpm系或deb系源里没有的  1$ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall 1$ sudo chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall  Windows嘛….   两个选择
- 请到MSF官网下载，并且耐心等待。 出门左转安装Linux   复现过程  重要的事情说三遍：</description>
+ 基于Arch  1  $ sudo pacman -S metasploit    基于Debian更新源里有的  1  $ sudo apt-get install metasploit    rpm系或deb系源里没有的  1  $ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall   1  $ sudo chmod 755 msfinstall &amp;amp;&amp;amp; .</description>
     </item>
     
     <item>

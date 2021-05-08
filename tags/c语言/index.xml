@@ -22,12 +22,11 @@ gtk.h 要写 gtk 程序， 首先得导入这个库， 不过它得在安装 gtk
 并且编译的时候还要加一些参数..
 安装 gtk 现在已经 gtk 已经更新到 4 了， 不过我这里用的是 3..
 这边 Arch 的话， 直接装上就好。
-1$ sudo pacman -S gtk3 头文件 然后在程序的开头写上这个就可以开始编程了。
-1#include &amp;lt;gtk/gtk.h&amp;gt;构建一个空白窗口 C 可能稍微比较复杂， 在它能够加载出窗口之前， 我们需要在主函数里定义两个参数&amp;hellip;
+1  $ sudo pacman -S gtk3   头文件 然后在程序的开头写上这个就可以开始编程了。
+1  #include &amp;lt;gtk/gtk.h&amp;gt;  构建一个空白窗口 C 可能稍微比较复杂， 在它能够加载出窗口之前， 我们需要在主函数里定义两个参数&amp;hellip;
 我也不太懂， 就当作标准格式了。
 一个是 整型(int) 的， 命名为 argc:
-1int main(int argc, ) 另一个是 char 类型的, 命名为 argv, 但是这个有所不同， 我们得这么写 &amp;ldquo;char *argv&amp;rdquo; :
-1int main(int argc, char *argv[]) 接下来写上大括号，我们就可以开始写了</description>
+1  int main(int argc, )   另一个是 char 类型的, 命名为 argv, 但是这个有所不同， 我们得这么写 &amp;ldquo;char *argv&amp;rdquo; :</description>
     </item>
     
     <item>
@@ -39,7 +38,7 @@ gtk.h 要写 gtk 程序， 首先得导入这个库， 不过它得在安装 gtk
       <description>简介 嘛&amp;hellip;学了一会儿C语言弄了这么个玩意👑
 其实就是基础语法和简单的判断👑
 代码 废话不多说直接上代码👑
-1/* 2标准体重计算器 3By WeepingDogel 45世卫计算方法 6男性：(身高cm－80)×70﹪=标准体重 7女性：(身高cm－70)×60﹪=标准体重 8标准体重正负10﹪为正常体重 9标准体重正负10﹪~ 20﹪为体重过重或过轻 10标准体重正负20﹪以上为肥胖或体重不足 11超重计算公式 12超重%=[（实际体重－理想体重）/（理想体重）]×100% 13*/ 14/*导入标准库stdio.h （必须）*/ 15#include &amp;lt;stdio.h&amp;gt;16/*标准体重*/ 17int weight; 18/*声明函数*/ 19float judge(float parameter1,float parameter2); 20float Count_M(float parameter); 21float Count_F(float parameter); 22/*声明主函数main() (这个都不写，那写个屁)*/ 23int main() 24{ 25 printf(&amp;#34;欢迎使用.&amp;#34;); 26 /*身高*/ 27 int height; 28 /*声明变量sex表示性别*/ 29 char sex; 30 /*声明变量：实际体重*/ 31 int real_weight; 32 /*提示用户输入性别*/ 33 printf(&amp;#34;请输入你的性别\n（M为男性,F为女性,注意大小写）&amp;#34;); 34 printf(&amp;#34;\n\n:&amp;#34;); 35 /*读取用户输入的数据并赋值给sex*/ 36 scanf(&amp;#34;%c&amp;#34;,&amp;amp;sex); 37 /*进入判断，并判断变量sex的值是否为M*/ 38 if(sex == &amp;#39;M&amp;#39;) 39 { 40 /*当变量sex=M时，判断为男性，将执行以下代码*/ 41 printf(&amp;#34;你是男性&amp;#34;); 42 printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); 43 printf(&amp;#34;\n\n:&amp;#34;); 44 scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); 45 weight = (int) Count_M((float) height); 46 printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); 47 printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); 48 printf(&amp;#34;\n:&amp;#34;); 49 scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); 50 judge((float) real_weight,(float) weight); 51 } 52 /*进入判断，并判断变量sex的值是否为F*/ 53 else if(sex == &amp;#39;F&amp;#39;) 54 { 55 /*当变量sex=F时，判断为女性，将执行以下代码*/ 56 printf(&amp;#34;你是女性&amp;#34;); 57 printf(&amp;#34;输入你的身高(单位:厘米)&amp;#34;); 58 printf(&amp;#34;\n\n:&amp;#34;); 59 scanf(&amp;#34;%d&amp;#34;,&amp;amp;height); 60 weight = (int) Count_F((float) height); 61 printf(&amp;#34;你的身高对应的标准体重为%dkg\n&amp;#34;,weight); 62 printf(&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;); 63 printf(&amp;#34;\n:&amp;#34;); 64 scanf(&amp;#34;%d&amp;#34;,&amp;amp;real_weight); 65 judge((float) real_weight,(float) weight); 66 } 67 return 0; 68} 69/*计算出男性标准体重*/ 70float Count_M(float parameter) 71{ 72 /*男性：(身高cm－80)×70﹪=标准体重*/ 73 /*定义变量:结果*/ 74 float result; 75 result = (int)(parameter - 80.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118  /* 标准体重计算器 By WeepingDogel 世卫计算方法 男性：(身高cm－80)×70﹪=标准体重 女性：(身高cm－70)×60﹪=标准体重 标准体重正负10﹪为正常体重 标准体重正负10﹪~ 20﹪为体重过重或过轻 标准体重正负20﹪以上为肥胖或体重不足 超重计算公式 超重%=[（实际体重－理想体重）/（理想体重）]×100% */ /*导入标准库stdio.</description>
     </item>
     
   </channel>

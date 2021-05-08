@@ -26,12 +26,12 @@
 就是封面上那个东西..
 我们先要编辑 /etc/apt/sources.list 这个文件。
 Mint 似乎不自带 vim，所以我们这里使用 nano。
-1$ sudo nano /etc/apt/sources.list 注意：sudo 不能丢！ 而且按下回车之后要输入密码才能有权限。
+1  $ sudo nano /etc/apt/sources.list   注意：sudo 不能丢！ 而且按下回车之后要输入密码才能有权限。
 我们打开才发现里面是空的，除了一大堆英文注释什么都没有..
 我们往里面写入
-1deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport 接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 Ubuntu 的帮助文档
+1  deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport   接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 Ubuntu 的帮助文档
 我知道怎么做了，把这些当中的archive.ubuntu.com 等域名全部改成mirrors.tuna.tsinghua.edu.cn 即可
-1#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main 2 3# This system was installed using small removable media 4# (e.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13  #deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main # This system was installed using small removable media # (e.</description>
     </item>
     
     <item>
@@ -49,12 +49,10 @@ cd命令是”change directory”的缩写，也就是改变你当前所在的�
 简单的理解，就是进入一个文件夹。
 用法 测试目录:/a/b/c
 进入某个目录: 绝对路径：指定一个完整的路径，与自己当前所在的目录无关
-1[weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
-1[weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 指定上一级
-1[weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 2# 按下回车后 3[weepingdogel@localhost xxx]$ 退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
-返回上一级
-1[weepingdogel@localhost c]$ cd .. # 从当前所在的目录/a/b/c返回上一级的目录/a/b 2# 按下回车后 3[weepingdogel@localhost b]$ 返回上两级
-1[weepingdogel@localhost c]$ cd ../.. # 从当前所在的目录/a/b/c返回上两级的目录/a 2# 按下回车后 3[weepingdogel@localhost a]$ pwd命令 这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</description>
+1 2 3  [weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c # 按下回车后 [weepingdogel@localhost c]$   相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
+1 2 3  [weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c # 按下回车后 [weepingdogel@localhost c]$   指定上一级
+1 2 3  [weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 # 按下回车后 [weepingdogel@localhost xxx]$   退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
+返回上一级</description>
     </item>
     
     <item>
@@ -75,8 +73,7 @@ https://cvedetails.com/cve/CVE-2017-0147/
 https://cvedetails.com/cve/CVE-2017-0148/
 https://github.com/RiskSense-Ops/MS17-010
  攻击复现 那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个Linux的渗透测试软件包。叫做Metasploit。 它在作为渗透测试的发行版中是自带的，如果你用的不是作为渗透测试的发行版，那么以下是安装方法：
- 基于Arch  1$ sudo pacman -S metasploit  基于Debian更新源里有的  1$ sudo apt-get install metasploit  rpm系或deb系源里没有的  1$ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall 1$ sudo chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall  Windows嘛….   两个选择
- 请到MSF官网下载，并且耐心等待。 出门左转安装Linux   复现过程  重要的事情说三遍：</description>
+ 基于Arch  1  $ sudo pacman -S metasploit    基于Debian更新源里有的  1  $ sudo apt-get install metasploit    rpm系或deb系源里没有的  1  $ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall   1  $ sudo chmod 755 msfinstall &amp;amp;&amp;amp; .</description>
     </item>
     
     <item>

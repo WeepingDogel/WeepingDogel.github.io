@@ -717,11 +717,21 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>我们用 <code>ssh</code> 操作服务器，当我们需要给服务器传输文件的时候，<code>scp</code> 命令会通过 <code>ssh</code> 的端口进行文件传输。</p>
 <h2 id="用法">用法</h2>
 <p>当我们在终端输入 <code>scp</code> 后，我们会得到这些</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>weepingdogel@WeepingDogel ~&gt; scp
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>            [-J destination] [-l limit] [-o ssh_option] [-P port]
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>            [-S program] source ... target
-</code></pre></div><p>很显然我们很快就知道了一些参数&hellip;</p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; scp
+usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
+            [-J destination] [-l limit] [-o ssh_option] [-P port]
+            [-S program] source ... target
+</code></pre></td></tr></table>
+</div>
+</div><p>很显然我们很快就知道了一些参数&hellip;</p>
 <h2 id="示例">示例</h2>
 <p>这里举一些例子，来展示清楚具体的使用方法&hellip;</p>
 <p>先说明一下我的测试环境</p>
@@ -732,47 +742,116 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>IP: 192.168.0.108</p>
 </blockquote>
 <h3 id="上传一个文件">上传一个文件</h3>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ scp [本地文件名] 用户名@地址:[文件名]
-</code></pre></div><p>这是一般用法，但是<strong>请确保路径正确！</strong></p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ scp [本地文件名] 用户名@地址:[文件名]
+</code></pre></td></tr></table>
+</div>
+</div><p>这是一般用法，但是<strong>请确保路径正确！</strong></p>
 <p>即：</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>weepingdogel@WeepingDogel ~ [1]&gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>root@192.168.0.108&#39;s password: 
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
-</code></pre></div><p>这个很简单的，没什么多说的了..</p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~ [1]&gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
+root@192.168.0.108&#39;s password: 
+7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
+</code></pre></td></tr></table>
+</div>
+</div><p>这个很简单的，没什么多说的了..</p>
 <h3 id="下载一个文件">下载一个文件</h3>
 <p>如果我们要从服务器里取一个文件下来修改，而服务器没有 <code>ftp</code> 时该怎么办呢？</p>
 <p>我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ scp 用户名@地址:[文件名] [本地文件名]
-</code></pre></div><p>还是要提醒一下，这个<strong>文件名</strong>， <strong>是一个路径！</strong></p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ scp 用户名@地址:[文件名] [本地文件名]
+</code></pre></td></tr></table>
+</div>
+</div><p>还是要提醒一下，这个<strong>文件名</strong>， <strong>是一个路径！</strong></p>
 <p>是一个<strong>相对路径</strong>或<strong>绝对路径</strong>！具体依情况而定，但<strong>它一定是个路径！</strong></p>
 <p>如：</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>weepingdogel@WeepingDogel ~&gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>root@192.168.0.108&#39;s password: 
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>index.html                                                   100%   46KB 728.6KB/s   00:00
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>weepingdogel@WeepingDogel ~&gt; ls /tmp/*.html -lh
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>-rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
-</code></pre></div><p>只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了</p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
+root@192.168.0.108&#39;s password: 
+index.html                                                   100%   46KB 728.6KB/s   00:00
+weepingdogel@WeepingDogel ~&gt; ls /tmp/*.html -lh
+-rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
+</code></pre></td></tr></table>
+</div>
+</div><p>只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了</p>
 <h3 id="指定一个-ip">指定一个 IP</h3>
 <p>一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。</p>
 <p>而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。</p>
 <p>我这里用的是 <a href="https://www.natfrp.com/">SakuraFRP</a> ，非常好用的免费内网穿透服务！</p>
 <p><strong>上传：</strong></p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
-</code></pre></div><p><strong>下载：</strong></p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>scp -P [端口] 用户名@地址:[文件名] [本地文件名]
-</code></pre></div><p>上面已经提示过很多次<strong>这个<code>[文件名]</code>是个路径了</strong>。这里就不再多废话啦。</p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>下载：</strong></p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">scp -P [端口] 用户名@地址:[文件名] [本地文件名]
+</code></pre></td></tr></table>
+</div>
+</div><p>上面已经提示过很多次<strong>这个<code>[文件名]</code>是个路径了</strong>。这里就不再多废话啦。</p>
 <p>嗯&hellip; 具体就是这样子的：</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>weepingdogel@WeepingDogel ~&gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
-</code></pre></div><p>但是这里我来个组合命令</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>weepingdogel@WeepingDogel ~ [1]&gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;&amp; cd /tmp &amp;&amp; python test.py
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>The authenticity of host &#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&#39; can&#39;t be established.
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>Warning: Permanently added &#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&#39; (ECDSA) to the list of known hosts.
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span>root@cn-zj-dx-2.sakurafrp.com&#39;s password: 
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span>test.py                                                      100%   21     0.2KB/s   00:00    
-<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span>Hello World
-</code></pre></div><p>上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦</p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~&gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
+</code></pre></td></tr></table>
+</div>
+</div><p>但是这里我来个组合命令</p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">weepingdogel@WeepingDogel ~ [1]&gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;&amp; cd /tmp &amp;&amp; python test.py
+The authenticity of host &#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&#39; can&#39;t be established.
+ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added &#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&#39; (ECDSA) to the list of known hosts.
+root@cn-zj-dx-2.sakurafrp.com&#39;s password: 
+test.py                                                      100%   21     0.2KB/s   00:00    
+Hello World
+</code></pre></td></tr></table>
+</div>
+</div><p>上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦</p>
 <p>写完啦！</p>
 <h2 id="参考链接">参考链接</h2>
 <p>啥？这次没有，自己试出来的&hellip;</p>
