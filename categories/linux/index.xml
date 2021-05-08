@@ -26,12 +26,12 @@
 就是封面上那个东西..
 我们先要编辑 /etc/apt/sources.list 这个文件。
 Mint 似乎不自带 vim，所以我们这里使用 nano。
-$ sudo nano /etc/apt/sources.list 注意：sudo 不能丢！ 而且按下回车之后要输入密码才能有权限。
+1$ sudo nano /etc/apt/sources.list 注意：sudo 不能丢！ 而且按下回车之后要输入密码才能有权限。
 我们打开才发现里面是空的，除了一大堆英文注释什么都没有..
 我们往里面写入
-deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport 接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 Ubuntu 的帮助文档
+1deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport 接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 Ubuntu 的帮助文档
 我知道怎么做了，把这些当中的archive.ubuntu.com 等域名全部改成mirrors.tuna.tsinghua.edu.cn 即可
-#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main # This system was installed using small removable media # (e.</description>
+1#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main 2 3# This system was installed using small removable media 4# (e.</description>
     </item>
     
     <item>
@@ -43,16 +43,16 @@ deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import b
       <description>scp 命令是什么 是传文件用的..
 我们用 ssh 操作服务器，当我们需要给服务器传输文件的时候，scp 命令会通过 ssh 的端口进行文件传输。
 用法 当我们在终端输入 scp 后，我们会得到这些
-weepingdogel@WeepingDogel ~&amp;gt; scp usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] [-J destination] [-l limit] [-o ssh_option] [-P port] [-S program] source ... target 很显然我们很快就知道了一些参数&amp;hellip;
+1weepingdogel@WeepingDogel ~&amp;gt; scp 2usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] 3 [-J destination] [-l limit] [-o ssh_option] [-P port] 4 [-S program] source ... target 很显然我们很快就知道了一些参数&amp;hellip;
 示例 这里举一些例子，来展示清楚具体的使用方法&amp;hellip;
 先说明一下我的测试环境
  Arch Linux
 IP: 192.168.0.105
 CentOS8 虚拟机
 IP: 192.168.0.108
- 上传一个文件 $ scp [本地文件名] 用户名@地址:[文件名] 这是一般用法，但是请确保路径正确！
+ 上传一个文件 1$ scp [本地文件名] 用户名@地址:[文件名] 这是一般用法，但是请确保路径正确！
 即：
-weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/ root@192.168.0.108&amp;#39;s password: 7.1.0.zip 100% 95KB 5.</description>
+1weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/ 2root@192.168.0.108&amp;#39;s password: 37.1.0.zip 100% 95KB 5.</description>
     </item>
     
     <item>
@@ -70,12 +70,12 @@ cd命令是”change directory”的缩写，也就是改变你当前所在的�
 简单的理解，就是进入一个文件夹。
 用法 测试目录:/a/b/c
 进入某个目录: 绝对路径：指定一个完整的路径，与自己当前所在的目录无关
-[weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c # 按下回车后 [weepingdogel@localhost c]$ 相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
-[weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c # 按下回车后 [weepingdogel@localhost c]$ 指定上一级
-[weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 # 按下回车后 [weepingdogel@localhost xxx]$ 退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
+1[weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
+1[weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 指定上一级
+1[weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 2# 按下回车后 3[weepingdogel@localhost xxx]$ 退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
 返回上一级
-[weepingdogel@localhost c]$ cd .. # 从当前所在的目录/a/b/c返回上一级的目录/a/b # 按下回车后 [weepingdogel@localhost b]$ 返回上两级
-[weepingdogel@localhost c]$ cd ../.. # 从当前所在的目录/a/b/c返回上两级的目录/a # 按下回车后 [weepingdogel@localhost a]$ pwd命令 这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</description>
+1[weepingdogel@localhost c]$ cd .. # 从当前所在的目录/a/b/c返回上一级的目录/a/b 2# 按下回车后 3[weepingdogel@localhost b]$ 返回上两级
+1[weepingdogel@localhost c]$ cd ../.. # 从当前所在的目录/a/b/c返回上两级的目录/a 2# 按下回车后 3[weepingdogel@localhost a]$ pwd命令 这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</description>
     </item>
     
     <item>

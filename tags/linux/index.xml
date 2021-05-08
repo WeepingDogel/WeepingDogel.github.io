@@ -47,7 +47,7 @@ IP: 192.168.0.116
 我们将这个虚拟机想象为他们的服务器，然后进行一些攻击测试。
 由于这家公司的管理层是非技术人员，因此服务器的软件不仅版本老旧，且缺乏防御措施。
 外加公司有点不尽人意的工时，程序员们都以“完成任务”的摸鱼态度工作，导致后端 PHP 写成了这样
-&amp;lt;?php if ($_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] &amp;gt; 0) { echo &amp;#34;错误：&amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; } else { echo &amp;#34;上传文件名: &amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;name&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; echo &amp;#34;文件类型: &amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;type&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; echo &amp;#34;文件大小: &amp;#34; .</description>
+1&amp;lt;?php 2if ($_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] &amp;gt; 0) 3{ 4 echo &amp;#34;错误：&amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;error&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; 5} 6else 7{ 8 echo &amp;#34;上传文件名: &amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;name&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; 9 echo &amp;#34;文件类型: &amp;#34; . $_FILES[&amp;#34;file&amp;#34;][&amp;#34;type&amp;#34;] . &amp;#34;&amp;lt;br&amp;gt;&amp;#34;; 10 echo &amp;#34;文件大小: &amp;#34; .</description>
     </item>
     
     <item>
@@ -57,9 +57,9 @@ IP: 192.168.0.116
       
       <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
       <description>文件操作 open open() 是 Python 进行文件操作的关键函数，它有连个参数需要设置
- 文件名 - 文件的名称，不多解释 模式 - 决定打开的文件是否可读写以及其他属性  open(&amp;#39;filename&amp;#39;,&amp;#39;mode&amp;#39;) 读 仅以只读方式打开一个文件
-f = open(&amp;#34;filename.txt&amp;#34;) 这样写也是一样的
-f = open(&amp;#34;filename&amp;#34;,&amp;#34;rt&amp;#34;) &amp;ldquo;r&amp;rdquo; 表示读
+ 文件名 - 文件的名称，不多解释 模式 - 决定打开的文件是否可读写以及其他属性  1open(&amp;#39;filename&amp;#39;,&amp;#39;mode&amp;#39;) 读 仅以只读方式打开一个文件
+1f = open(&amp;#34;filename.txt&amp;#34;) 这样写也是一样的
+1f = open(&amp;#34;filename&amp;#34;,&amp;#34;rt&amp;#34;) &amp;ldquo;r&amp;rdquo; 表示读
 &amp;ldquo;t&amp;rdquo; 表示文本，这是函数默认设定好的，所以可以省略。
 这里引入一下 w3school 的一个列表
  There are four different methods (modes) for opening a file:
@@ -76,16 +76,16 @@ f = open(&amp;#34;filename&amp;#34;,&amp;#34;rt&amp;#34;) &amp;ldquo;r&amp;rdquo
       <description>scp 命令是什么 是传文件用的..
 我们用 ssh 操作服务器，当我们需要给服务器传输文件的时候，scp 命令会通过 ssh 的端口进行文件传输。
 用法 当我们在终端输入 scp 后，我们会得到这些
-weepingdogel@WeepingDogel ~&amp;gt; scp usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] [-J destination] [-l limit] [-o ssh_option] [-P port] [-S program] source ... target 很显然我们很快就知道了一些参数&amp;hellip;
+1weepingdogel@WeepingDogel ~&amp;gt; scp 2usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] 3 [-J destination] [-l limit] [-o ssh_option] [-P port] 4 [-S program] source ... target 很显然我们很快就知道了一些参数&amp;hellip;
 示例 这里举一些例子，来展示清楚具体的使用方法&amp;hellip;
 先说明一下我的测试环境
  Arch Linux
 IP: 192.168.0.105
 CentOS8 虚拟机
 IP: 192.168.0.108
- 上传一个文件 $ scp [本地文件名] 用户名@地址:[文件名] 这是一般用法，但是请确保路径正确！
+ 上传一个文件 1$ scp [本地文件名] 用户名@地址:[文件名] 这是一般用法，但是请确保路径正确！
 即：
-weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/ root@192.168.0.108&amp;#39;s password: 7.1.0.zip 100% 95KB 5.</description>
+1weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/ 2root@192.168.0.108&amp;#39;s password: 37.1.0.zip 100% 95KB 5.</description>
     </item>
     
     <item>
@@ -102,9 +102,9 @@ weepingdogel@WeepingDogel ~ [1]&amp;gt; scp ./编译/7.1.0.zip root@192.168.0.10
 这个过程很简单, 按照以下步骤走
   使用 USB 数据线将电脑与手机连接, 并打开 USB 网络共享
  这个都不会的, 可以执行 sudo rm -rf / 这智商, 玩你妈的 Linux 不会的, 请参考这里    打开终端, 执行
-  $ sudo ip link 然后它会返回这样的东西, 如图
+  1$ sudo ip link 然后它会返回这样的东西, 如图
 设置网卡
-$ sudo ip link set enp3s0f4u2 up 运行 dhcpcd</description>
+1$ sudo ip link set enp3s0f4u2 up 运行 dhcpcd</description>
     </item>
     
     <item>
@@ -158,7 +158,7 @@ Python的安装 Python是跨平台的语言，所以平台不同安装方法也�
 Windows 可以到Python的官网去下载安装程序并安装，建议下载Python3
 Mac OSX 同样到Python的官网下载
 Linux Linux则在包管理器安装即可
-deb系 $ sudo apt-get install python3 Arch系 $ sudo pacman -S python rpm系 $ sudo yum install python3 Android Android平台则安装QPython即可，</description>
+deb系 1$ sudo apt-get install python3 Arch系 1$ sudo pacman -S python rpm系 1$ sudo yum install python3 Android Android平台则安装QPython即可，</description>
     </item>
     
     <item>
@@ -176,12 +176,12 @@ cd命令是”change directory”的缩写，也就是改变你当前所在的�
 简单的理解，就是进入一个文件夹。
 用法 测试目录:/a/b/c
 进入某个目录: 绝对路径：指定一个完整的路径，与自己当前所在的目录无关
-[weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c # 按下回车后 [weepingdogel@localhost c]$ 相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
-[weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c # 按下回车后 [weepingdogel@localhost c]$ 指定上一级
-[weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 # 按下回车后 [weepingdogel@localhost xxx]$ 退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
+1[weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
+1[weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c 2# 按下回车后 3[weepingdogel@localhost c]$ 指定上一级
+1[weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 2# 按下回车后 3[weepingdogel@localhost xxx]$ 退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
 返回上一级
-[weepingdogel@localhost c]$ cd .. # 从当前所在的目录/a/b/c返回上一级的目录/a/b # 按下回车后 [weepingdogel@localhost b]$ 返回上两级
-[weepingdogel@localhost c]$ cd ../.. # 从当前所在的目录/a/b/c返回上两级的目录/a # 按下回车后 [weepingdogel@localhost a]$ pwd命令 这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</description>
+1[weepingdogel@localhost c]$ cd .. # 从当前所在的目录/a/b/c返回上一级的目录/a/b 2# 按下回车后 3[weepingdogel@localhost b]$ 返回上两级
+1[weepingdogel@localhost c]$ cd ../.. # 从当前所在的目录/a/b/c返回上两级的目录/a 2# 按下回车后 3[weepingdogel@localhost a]$ pwd命令 这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</description>
     </item>
     
     <item>
@@ -220,7 +220,7 @@ https://cvedetails.com/cve/CVE-2017-0147/
 https://cvedetails.com/cve/CVE-2017-0148/
 https://github.com/RiskSense-Ops/MS17-010
  攻击复现 那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个Linux的渗透测试软件包。叫做Metasploit。 它在作为渗透测试的发行版中是自带的，如果你用的不是作为渗透测试的发行版，那么以下是安装方法：
- 基于Arch  $ sudo pacman -S metasploit  基于Debian更新源里有的  $ sudo apt-get install metasploit  rpm系或deb系源里没有的  $ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall $ sudo chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall  Windows嘛….   两个选择
+ 基于Arch  1$ sudo pacman -S metasploit  基于Debian更新源里有的  1$ sudo apt-get install metasploit  rpm系或deb系源里没有的  1$ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall 1$ sudo chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall  Windows嘛….   两个选择
  请到MSF官网下载，并且耐心等待。 出门左转安装Linux   复现过程  重要的事情说三遍：</description>
     </item>
     

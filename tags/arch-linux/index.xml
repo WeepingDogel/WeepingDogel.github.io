@@ -22,11 +22,11 @@
 我们需要装的是 polkit 这个东西&amp;hellip;
 如果不知道它是啥的话，看 Arch Wiki 的这个页面。
  Polkit - ArchWiki  解决过程 首先安装 polkit ，
-$ sudo pacman -S polkit 装完后，我们还需要安装其对应的图形前端。
+1$ sudo pacman -S polkit 装完后，我们还需要安装其对应的图形前端。
 如图，我们有很多可以选择。
 我这里选择 Gnome 的，比较习惯..
 用 pacman 就可以装了，
-$ sudo pacman -S polkit-gnome 如果想用其他的，把 polkit-gnome 替换成其他包名即可。
+1$ sudo pacman -S polkit-gnome 如果想用其他的，把 polkit-gnome 替换成其他包名即可。
 但是装完还不行，还得设置启动项，原因？ 在这：
  If you are using a graphical environment, make sure that a graphical authentication agent is installed and autostarted on login.
 ——Arch Wiki 里写的</description>
@@ -115,7 +115,7 @@ https://cvedetails.com/cve/CVE-2017-0147/
 https://cvedetails.com/cve/CVE-2017-0148/
 https://github.com/RiskSense-Ops/MS17-010
  攻击复现 那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个Linux的渗透测试软件包。叫做Metasploit。 它在作为渗透测试的发行版中是自带的，如果你用的不是作为渗透测试的发行版，那么以下是安装方法：
- 基于Arch  $ sudo pacman -S metasploit  基于Debian更新源里有的  $ sudo apt-get install metasploit  rpm系或deb系源里没有的  $ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall $ sudo chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall  Windows嘛….   两个选择
+ 基于Arch  1$ sudo pacman -S metasploit  基于Debian更新源里有的  1$ sudo apt-get install metasploit  rpm系或deb系源里没有的  1$ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &amp;gt; msfinstall 1$ sudo chmod 755 msfinstall &amp;amp;&amp;amp; ./msfinstall  Windows嘛….   两个选择
  请到MSF官网下载，并且耐心等待。 出门左转安装Linux   复现过程  重要的事情说三遍：</description>
     </item>
     

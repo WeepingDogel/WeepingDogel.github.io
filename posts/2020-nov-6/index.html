@@ -775,32 +775,32 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p><img src="/img/2020-11-07_14-34.png" alt=""></p>
 <p>我们先要编辑 <code>/etc/apt/sources.list</code> 这个文件。</p>
 <p>Mint 似乎不自带 <code>vim</code>，所以我们这里使用 <code>nano</code>。</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo nano /etc/apt/sources.list
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ sudo nano /etc/apt/sources.list
 </code></pre></div><p><strong>注意：<code>sudo</code> 不能丢！ 而且按下回车之后要输入密码才能有权限。</strong></p>
 <p><img src="/img/2020-11-07_14-39.png" alt=""></p>
 <p>我们打开才发现里面是空的，除了一大堆英文注释什么都没有..</p>
 <p>我们往里面写入</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
 </code></pre></div><p>接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">Ubuntu 的帮助文档</a></p>
 <p><img src="/img/2020-11-07_14-46.png" alt=""></p>
 <p>我知道怎么做了，把这些当中的<code>archive.ubuntu.com</code> 等域名全部改成<code>mirrors.tuna.tsinghua.edu.cn</code> 即可</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main
-
-# This system was installed using small removable media
-# (e.g. netinst, live or single CD). The matching &#34;deb cdrom&#34;
-# entries were disabled at the end of the installation process.
-# For information about how to configure apt package sources,
-# see the sources.list(5) manual.
-
-deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
-deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal main restricted universe multiverse
-deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-updates main restricted universe multiverse
-deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-backports main restricted universe multiverse
-deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span>#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span># This system was installed using small removable media
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span># (e.g. netinst, live or single CD). The matching &#34;deb cdrom&#34;
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span># entries were disabled at the end of the installation process.
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span># For information about how to configure apt package sources,
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span># see the sources.list(5) manual.
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span>deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span>deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal main restricted universe multiverse
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span>deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-updates main restricted universe multiverse
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span>deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-backports main restricted universe multiverse
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span>deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
 </code></pre></div><p>如图：</p>
 <p><img src="/img/2020-11-07_14-49.png" alt=""></p>
 <p>接下来，执行</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt update
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ sudo apt update
 </code></pre></div><p>就会比最开始快很多了</p>
 <h2 id="二使用自带的更新管理器">二、使用自带的更新管理器</h2>
 <p>首先点击开始菜单，找到设置管理器</p>
@@ -825,7 +825,7 @@ deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted u
 <p>还是两种方法</p>
 <p><strong>注意：还是二选一</strong></p>
 <h3 id="一终端法-1">一、终端法</h3>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt upgrade
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ sudo apt upgrade
 </code></pre></div><p><img src="/img/2020-11-07_15-26.png" alt=""></p>
 <p><img src="/img/2020-11-07_15-28.png" alt=""></p>
 <p><img src="/img/2020-11-07_16-44.png" alt=""></p>

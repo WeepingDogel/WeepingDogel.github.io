@@ -575,13 +575,13 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </ul>
 <h2 id="解决过程">解决过程</h2>
 <p>首先安装 <code>polkit</code> ，</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S polkit
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ sudo pacman -S polkit
 </code></pre></div><p>装完后，我们还需要安装其对应的图形前端。</p>
 <p>如图，我们有很多可以选择。</p>
 <p><img src="/img/2021-01-16_23-40.png" alt=""></p>
 <p>我这里选择 Gnome 的，比较习惯..</p>
 <p>用 <code>pacman</code> 就可以装了，</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S polkit-gnome 
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ sudo pacman -S polkit-gnome 
 </code></pre></div><p>如果想用其他的，把 <code>polkit-gnome</code> 替换成其他包名即可。</p>
 <p>但是装完还不行，还得设置启动项，原因？ 在这：</p>
 <blockquote>
@@ -592,7 +592,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>大概是这样吧，想看完整意思就去谷歌翻译吧..</p>
 <p>接下来我要做的是想办法启动&hellip;</p>
 <p>其实我们在终端里直接输入 wiki 上对应的路径就可以用了</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &amp;
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &amp;
 </code></pre></div><p>但这样的话每次都要打一遍，反正我是觉得麻烦～ rua～</p>
 <p>所以要设置开机启动，一般是可以这样的..</p>
 <p><img src="/img/photo_2021-01-16_23-59-36.jpg" alt=""></p>
@@ -601,12 +601,12 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <li><a href="https://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup">i3: i3 User’s Guide</a></li>
 </ul>
 <p>接下来呢，我就直接编辑 <code>~/.config/i3/config</code> 这个文件。</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ vim ~/.config/i3/config
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ vim ~/.config/i3/config
 </code></pre></div><p>然后在里面加入&hellip;</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#080;background-color:#0f140f;font-style:italic"># 登录时，启动 polkit-gnome </span>
-
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#60a0b0;font-style:italic"># 登录时，启动 polkit-gnome </span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span style="color:#007020">exec</span> --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>
 </code></pre></div><p><img src="/img/photo_2021-01-17_00-02-51.jpg" alt=""></p>
 <p>然后我就重启了。</p>
 <p>嗯，可以用了。</p>
@@ -615,7 +615,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 <p><img src="/img/photo_2021-01-16_23-53-31.jpg" alt=""></p>
 <p>看英文就知道.. 这其实是另一个问题了..</p>
 <p>其实它 balabla 一大堆，只不过是 <code>ntfs-3g</code> 这个包我又忘了装而已啦..</p>
-<div class="highlight"><pre style="color:#fff;background-color:#111;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ sudo pacman -S ntfs-3g
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ sudo pacman -S ntfs-3g
 </code></pre></div><p>然后就好了&hellip;</p>
 <p>不过截图是我今晚截的..</p>
 <p><img src="/img/2021-01-17_00-00.png" alt=""></p>
