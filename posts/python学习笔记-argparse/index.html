@@ -740,7 +740,7 @@ optional arguments:
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-a&#39;</span>,<span style="color:#4070a0">&#39;--about&#39;</span>, required<span style="color:#666">=</span>True)
+<pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-a&#39;</span>,<span style="color:#4070a0">&#39;--about&#39;</span>, required<span style="color:#666">=</span><span style="color:#007020;font-weight:bold">True</span>)
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -789,19 +789,19 @@ a.py: error: the following arguments are required: -a/--about
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">argparse</span>
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#39;&#39;&#39;                                                            
+<span style="color:#007020">print</span>(<span style="color:#4070a0">&#39;&#39;&#39;                                                            
 </span><span style="color:#4070a0">By WeepingDogel
 </span><span style="color:#4070a0">&#39;&#39;&#39;</span>)
 <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">GetParser</span>():
     parser <span style="color:#666">=</span> argparse<span style="color:#666">.</span>ArgumentParser(description<span style="color:#666">=</span><span style="color:#4070a0">&#39;Help&#39;</span>, epilog<span style="color:#666">=</span><span style="color:#4070a0">&#39;A new testing program.&#39;</span>)
-    parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-o&#39;</span>,<span style="color:#4070a0">&#39;--output&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Output file&#39;</span>,default<span style="color:#666">=</span><span style="color:#4070a0">&#39;test.txt&#39;</span> , required<span style="color:#666">=</span>True)
-    parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-r&#39;</span>,<span style="color:#4070a0">&#39;--read&#39;</span>,help<span style="color:#666">=</span><span style="color:#4070a0">&#39;read a file&#39;</span>, required<span style="color:#666">=</span>True)
+    parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-o&#39;</span>,<span style="color:#4070a0">&#39;--output&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Output file&#39;</span>,default<span style="color:#666">=</span><span style="color:#4070a0">&#39;test.txt&#39;</span> , required<span style="color:#666">=</span><span style="color:#007020;font-weight:bold">True</span>)
+    parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-r&#39;</span>,<span style="color:#4070a0">&#39;--read&#39;</span>,help<span style="color:#666">=</span><span style="color:#4070a0">&#39;read a file&#39;</span>, required<span style="color:#666">=</span><span style="color:#007020;font-weight:bold">True</span>)
     <span style="color:#007020;font-weight:bold">return</span> parser
 <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">Write</span>(content, filename):
     f <span style="color:#666">=</span> <span style="color:#007020">open</span>(filename,<span style="color:#4070a0">&#34;a&#34;</span>)
     f<span style="color:#666">.</span>write(content)
     f<span style="color:#666">.</span>close()
-    <span style="color:#007020;font-weight:bold">print</span>(filename <span style="color:#666">+</span> <span style="color:#4070a0">&#39; has been written&#39;</span>)
+    <span style="color:#007020">print</span>(filename <span style="color:#666">+</span> <span style="color:#4070a0">&#39; has been written&#39;</span>)
 <span style="color:#007020;font-weight:bold">def</span> <span style="color:#06287e">Read</span>(filename):
     f <span style="color:#666">=</span> <span style="color:#007020">open</span>(filename)
     text <span style="color:#666">=</span> f<span style="color:#666">.</span>read()
@@ -835,10 +835,10 @@ Main()
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">argparse</span>
 parser <span style="color:#666">=</span> argparse<span style="color:#666">.</span>ArgumentParser(description<span style="color:#666">=</span><span style="color:#4070a0">&#39;Help&#39;</span>, epilog<span style="color:#666">=</span><span style="color:#4070a0">&#39;A new testing program.&#39;</span>)
-parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-o&#39;</span>,<span style="color:#4070a0">&#39;--output&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Output file&#39;</span>,default<span style="color:#666">=</span><span style="color:#4070a0">&#39;test.txt&#39;</span> , required<span style="color:#666">=</span>True)
+parser<span style="color:#666">.</span>add_argument(<span style="color:#4070a0">&#39;-o&#39;</span>,<span style="color:#4070a0">&#39;--output&#39;</span>, help<span style="color:#666">=</span><span style="color:#4070a0">&#39;Output file&#39;</span>,default<span style="color:#666">=</span><span style="color:#4070a0">&#39;test.txt&#39;</span> , required<span style="color:#666">=</span><span style="color:#007020;font-weight:bold">True</span>)
 args <span style="color:#666">=</span> parser<span style="color:#666">.</span>parse_args()
 filename <span style="color:#666">=</span> args<span style="color:#666">.</span>output
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;The filename is &#34;</span><span style="color:#666">+</span> filename)
+<span style="color:#007020">print</span>(<span style="color:#4070a0">&#34;The filename is &#34;</span><span style="color:#666">+</span> filename)
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">

@@ -1266,16 +1266,16 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#007020;font-weight:bold">from</span> <span style="color:#0e84b5;font-weight:bold">bs4</span> <span style="color:#007020;font-weight:bold">import</span> BeautifulSoup
 <span style="color:#007020;font-weight:bold">import</span> <span style="color:#0e84b5;font-weight:bold">requests</span>
-<span style="color:#007020;font-weight:bold">print</span>(<span style="color:#4070a0">&#34;简易手机号码抓取工具 By WeepingDogel&#34;</span>)
+<span style="color:#007020">print</span>(<span style="color:#4070a0">&#34;简易手机号码抓取工具 By WeepingDogel&#34;</span>)
 url<span style="color:#666">=</span><span style="color:#4070a0">&#34;http://www.hiphop8.com/mobile/xian_1319339.html&#34;</span>
 page<span style="color:#666">=</span>requests<span style="color:#666">.</span>get(url)
 page_info<span style="color:#666">=</span>page<span style="color:#666">.</span>content
 soup <span style="color:#666">=</span> BeautifulSoup(page_info, <span style="color:#4070a0">&#34;html.parser&#34;</span>)
 numbers <span style="color:#666">=</span> soup<span style="color:#666">.</span>find_all(<span style="color:#4070a0">&#39;a&#39;</span>)
-<span style="color:#007020;font-weight:bold">with</span> <span style="color:#007020">open</span>(<span style="color:#4070a0">&#34;1319339.txt&#34;</span>,<span style="color:#4070a0">&#34;w&#34;</span>) <span style="color:#007020;font-weight:bold">as</span> <span style="color:#007020">file</span>:
+<span style="color:#007020;font-weight:bold">with</span> <span style="color:#007020">open</span>(<span style="color:#4070a0">&#34;1319339.txt&#34;</span>,<span style="color:#4070a0">&#34;w&#34;</span>) <span style="color:#007020;font-weight:bold">as</span> file:
     <span style="color:#007020;font-weight:bold">for</span> number <span style="color:#007020;font-weight:bold">in</span> numbers:
-        <span style="color:#007020;font-weight:bold">print</span>(number<span style="color:#666">.</span>string)
-        <span style="color:#007020">file</span><span style="color:#666">.</span>write(<span style="color:#007020">str</span>(number<span style="color:#666">.</span>string)<span style="color:#666">+</span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">&#34;</span>)
+        <span style="color:#007020">print</span>(number<span style="color:#666">.</span>string)
+        file<span style="color:#666">.</span>write(<span style="color:#007020">str</span>(number<span style="color:#666">.</span>string)<span style="color:#666">+</span><span style="color:#4070a0">&#34;</span><span style="color:#4070a0;font-weight:bold">\n</span><span style="color:#4070a0">&#34;</span>)
 </code></pre></td></tr></table>
 </div>
 </div><p>将代码复制到一个py文件中运行或修改即可。</p>
