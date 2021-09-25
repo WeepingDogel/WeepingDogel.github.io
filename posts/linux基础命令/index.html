@@ -52,7 +52,6 @@ if (!doNotTrack) {
 
 
 <link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
-<script src="/vendor/js/vue.min.js" ></script>
 
 
   
@@ -68,10 +67,10 @@ if (!doNotTrack) {
 
 
 
-<link rel="stylesheet" href="https://weepingdogel.github.io/scss/dark-mode.min.c0082f0b082177f6fb3768ff91439a097de49689bd26f4d49f76d94ebb81e02d.css" integrity="sha256-wAgvCwghd/b7N2j/kUOaCX3klom9JvTUn3bZTruB4C0=" media="screen">
+<link rel="stylesheet" href="https://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
 
 
-<script src="/js/loadCSS.js"></script>
+<script src="/vendor/js/loadCSS.js"></script>
 <script>
   loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
 </script>
@@ -79,9 +78,9 @@ if (!doNotTrack) {
 
 
 
-  
-    <script src="/js/toc.js"></script>
-  
+
+
+  <script src="/js/toc.js"></script>
 
 
 
@@ -114,11 +113,9 @@ if (!doNotTrack) {
 
 
 
-
-
 </head>
 <body>
-    	<div id="app"><div ref="sideContainer" class="side-container">
+    	<div id="app"><div id="sideContainer" class="side-container">
     
     <a class="a-block nav-head false" href="https://weepingdogel.github.io/">
     
@@ -215,7 +212,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 
     </div>
     
-</div><div ref="extraContainer" class="extra-container">
+</div><div id="extraContainer" class="extra-container">
     
     
     <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
@@ -801,19 +798,16 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
             </i>
         </a>
         
-        <a class="pagination-action" v-on:click="toggleDarkMode">
-            <i class="material-icons pagination-action-icon" v-if="isDarkMode">
-                brightness_4
-            </i>
-            <i class="material-icons pagination-action-icon" v-else="isDarkMode">
-                brightness_7
-            </i>
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
         </a>
         
         
     </div>
 </div>
-<div class="single-column-drawer-container" ref="drawer"
+<div class="single-column-drawer-container" id="drawer"
      v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
     <div class="drawer-content">
         <div class="drawer-menu">
@@ -1463,32 +1457,29 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
     </div>
 </div>
 <transition name="fade">
-    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
 </transition>
-<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
-    <div ref="navBackground" class="nav-background"></div>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
     <div class="container container-narrow nav-content">
         <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
             <i class="material-icons">
                 menu
             </i>
         </button>
-        <a ref="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
+        <a id="navTitle" class="navbar-brand" href="https://weepingdogel.github.io/">
             WeepingDogel&#39;s Blog
         </a>
         
-        <button type="button" class="nav-darkmode-toggle" v-on:click="toggleDarkMode">
-            <i class="material-icons" v-if="isDarkMode">
-                brightness_4
-            </i>
-            <i class="material-icons" v-else="isDarkMode">
-                brightness_7
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
             </i>
         </button>
         
     </div>
 </nav>
-<div class="single-column-header-container" ref="pageHead"
+<div class="single-column-header-container" id="pageHead"
      v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
     <a href="https://weepingdogel.github.io/">
         <div class="single-column-header-title">WeepingDogel&#39;s Blog</div>
@@ -1500,7 +1491,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </div>
 
             <div id="content">
-<div ref="streamContainer" class="stream-container">
+                <div id="streamContainer" class="stream-container">
+
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
             
@@ -1569,97 +1561,97 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>测试目录:<code>/a/b/c</code></p>
 <h4 id="进入某个目录">进入某个目录:</h4>
 <p>绝对路径：指定一个完整的路径，与自己当前所在的目录无关</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost ~<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> /a/b/c <span style="color:#60a0b0;font-style:italic"># 进入/a/b/c这个路径中的目录c</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost ~<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> /a/b/c <span style="color:#6272a4"># 进入/a/b/c这个路径中的目录c</span>
+<span style="color:#6272a4"># 按下回车后</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost b<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ./c <span style="color:#60a0b0;font-style:italic"># 进入当前所在/a/b目录下面的目录c</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost b<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ./c <span style="color:#6272a4"># 进入当前所在/a/b目录下面的目录c</span>
+<span style="color:#6272a4"># 按下回车后</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>指定上一级</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost b<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ../xxx <span style="color:#60a0b0;font-style:italic">#进入当前所在目录/a/b中的/a目录下的其他目录</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
-<span style="color:#666">[</span>weepingdogel@localhost xxx<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost b<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ../xxx <span style="color:#6272a4">#进入当前所在目录/a/b中的/a目录下的其他目录</span>
+<span style="color:#6272a4"># 按下回车后</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost xxx<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="退出某个目录">退出某个目录:</h4>
 <p>有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。</p>
 <p>返回上一级</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> .. <span style="color:#60a0b0;font-style:italic"># 从当前所在的目录/a/b/c返回上一级的目录/a/b</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
-<span style="color:#666">[</span>weepingdogel@localhost b<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> .. <span style="color:#6272a4"># 从当前所在的目录/a/b/c返回上一级的目录/a/b</span>
+<span style="color:#6272a4"># 按下回车后</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost b<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>返回上两级</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ../.. <span style="color:#60a0b0;font-style:italic"># 从当前所在的目录/a/b/c返回上两级的目录/a</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ../.. <span style="color:#6272a4"># 从当前所在的目录/a/b/c返回上两级的目录/a</span>
+<span style="color:#6272a4"># 按下回车后</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="pwd命令">pwd命令</h2>
 <p>这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</p>
 <h3 id="用法-1">用法</h3>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost ~<span style="color:#666">]</span>$ <span style="color:#007020">pwd</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost ~<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">pwd</span>
+<span style="color:#6272a4"># 按下回车后</span>
 /home/weepingdogel
 </code></pre></td></tr></table>
 </div>
 </div><p>假如当前所在目录为/a/b/c</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ <span style="color:#007020">pwd</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">pwd</span>
+<span style="color:#6272a4"># 按下回车后</span>
 /a/b/c
 </code></pre></td></tr></table>
 </div>
@@ -1669,24 +1661,24 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <h3 id="用法-2">用法</h3>
 <p>测试目录<code>/tmp/a/b/c</code></p>
 <p>直接查看</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls <span style="color:#60a0b0;font-style:italic"># 查看当前目录下面的文件</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
-<span style="color:#40a070">223333</span>  文本.txt  <span style="color:#007020">test</span>  wiaori <span style="color:#60a0b0;font-style:italic"># 被列出的文件</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls <span style="color:#6272a4"># 查看当前目录下面的文件</span>
+<span style="color:#6272a4"># 按下回车后</span>
+<span style="color:#bd93f9">223333</span>  文本.txt  <span style="color:#8be9fd;font-style:italic">test</span>  wiaori <span style="color:#6272a4"># 被列出的文件</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>列表式查看，参数-l</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -1696,20 +1688,20 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -l
-<span style="color:#60a0b0;font-style:italic">#按下回车后</span>
-总用量 <span style="color:#40a070">4</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 17:38 文本.txt
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -l
+<span style="color:#6272a4">#按下回车后</span>
+总用量 <span style="color:#bd93f9">4</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 17:38 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>易读列表查看，参数-lh</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -1719,20 +1711,20 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -lh
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -lh
+<span style="color:#6272a4"># 按下回车后</span>
 总用量 4.0K
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 17:38 文本.txt
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 17:38 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>按时间排序的易读列表查看，参数-lh &ndash;sort=time</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -1742,20 +1734,20 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -lh --sort<span style="color:#666">=</span><span style="color:#007020">time</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -lh --sort<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">time</span>
+<span style="color:#6272a4"># 按下回车后</span>
 总用量 4.0K
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 17:38 文本.txt
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 17:38 文本.txt
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>按文件大小排序的易读列表查看，参数-lh &ndash;sort=size</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -1765,14 +1757,14 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -lh --sort<span style="color:#666">=</span>size
-<span style="color:#60a0b0;font-style:italic"># 按下回车后</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -lh --sort<span style="color:#ff79c6">=</span>size
+<span style="color:#6272a4"># 按下回车后</span>
 总用量 4.0K
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 17:38 文本.txt
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 17:38 文本.txt
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>更多用法等你自己去摸索了</p>
@@ -1783,61 +1775,61 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 <h4 id="用法-3">用法</h4>
 <h5 id="绝对路径用法">绝对路径用法：</h5>
 <p>比如我们把 <strong>“目录c”</strong> 下面的 <strong>“文本.txt”</strong> 移动到<code>/tmp/a/</code>下面</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ mv /tmp/a/b/c/文本.txt /tmp/a/
-<span style="color:#60a0b0;font-style:italic"># 按下回车后，文件就被移动了</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ mv /tmp/a/b/c/文本.txt /tmp/a/
+<span style="color:#6272a4"># 按下回车后，文件就被移动了</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来我们切换到<code>/tmp/a/</code>下面看看吧</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> /tmp/a
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ ls
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> /tmp/a
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ ls
 文本.txt  b
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>此时我们就看到了那个 <strong>“文本.txt”</strong> 被移动到了<code>/tmp/a/</code>下面了。</p>
 <h5 id="相对路径用法">相对路径用法：</h5>
 <p>那么我们用另一种方法把这个文件移回去吧，首先我们还在这个<code>/tmp/a/</code>下面，那么命令如下</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ mv ./文本.txt ./b/c/
-<span style="color:#60a0b0;font-style:italic"># 按下回车后，文件就被移动了</span>
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ mv ./文本.txt ./b/c/
+<span style="color:#6272a4"># 按下回车后，文件就被移动了</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>接下来我们回到<code>/tmp/a/b/c/</code>下面看看吧。</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ./b/c
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls
-<span style="color:#40a070">223333</span>  文本.txt  <span style="color:#007020">test</span>  wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ./b/c
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls
+<span style="color:#bd93f9">223333</span>  文本.txt  <span style="color:#8be9fd;font-style:italic">test</span>  wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>看到了没有，它又回来了。</p>
@@ -1847,9 +1839,9 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 <h4 id="用法-4">用法</h4>
 <h5 id="绝对路径">绝对路径：</h5>
 <p>我们来试试把<code>/tmp/a/b/c/文本.txt</code>这个文件复制到<code>/tmp/a/</code>下面</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -1859,14 +1851,14 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ cp /tmp/a/b/c/文本.txt /tmp/a/
-<span style="color:#60a0b0;font-style:italic"># 按下回车后，文件就被复制了</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ../.. <span style="color:#60a0b0;font-style:italic"># 我们来看看它是否被复制成功</span>
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ ls -lh <span style="color:#60a0b0;font-style:italic"># 使用ls命令看一下，可见他是被复制成功的，创建日期与上面不一样。</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ cp /tmp/a/b/c/文本.txt /tmp/a/
+<span style="color:#6272a4"># 按下回车后，文件就被复制了</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ../.. <span style="color:#6272a4"># 我们来看看它是否被复制成功</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ ls -lh <span style="color:#6272a4"># 使用ls命令看一下，可见他是被复制成功的，创建日期与上面不一样。</span>
 总用量 4.0K
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 18:36 文本.txt
-drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span style="color:#40a070">60</span>  8月  <span style="color:#40a070">5</span> 17:37 b
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 18:36 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">3</span> weepingdogel weepingdogel <span style="color:#bd93f9">60</span>  8月  <span style="color:#bd93f9">5</span> 17:37 b
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -1874,9 +1866,9 @@ drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span 
 </blockquote>
 <h5 id="相对路径">相对路径：</h5>
 <p>嘿嘿，我们尝试给/tmp/a/的每一级目录都复制一份吧。</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -1900,28 +1892,28 @@ drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ cp ./文本.txt ./b/ <span style="color:#60a0b0;font-style:italic"># 先复制到目录b</span>
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ cp ./文本.txt ./b/c/ <span style="color:#60a0b0;font-style:italic"># 复制到目录c</span>
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ cp ./文本.txt ../ <span style="color:#60a0b0;font-style:italic"># 复制到/tmp/下面</span>
-<span style="color:#666">[</span>weepingdogel@localhost a<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> .. <span style="color:#60a0b0;font-style:italic"># 回到/tmp下面</span>
-<span style="color:#666">[</span>weepingdogel@localhost tmp<span style="color:#666">]</span>$ ls -lh <span style="color:#60a0b0;font-style:italic"># 查看是否复制成功，可见第一个就是该文件</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ cp ./文本.txt ./b/ <span style="color:#6272a4"># 先复制到目录b</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ cp ./文本.txt ./b/c/ <span style="color:#6272a4"># 复制到目录c</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ cp ./文本.txt ../ <span style="color:#6272a4"># 复制到/tmp/下面</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost a<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> .. <span style="color:#6272a4"># 回到/tmp下面</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost tmp<span style="color:#ff79c6">]</span>$ ls -lh <span style="color:#6272a4"># 查看是否复制成功，可见第一个就是该文件</span>
 总用量 4.0K
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 18:48  文本.txt
-drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span style="color:#40a070">80</span>  8月  <span style="color:#40a070">5</span> 18:36  a
-<span style="color:#60a0b0;font-style:italic"># 接下来一级一级往下看</span>
-<span style="color:#666">[</span>weepingdogel@localhost tmp<span style="color:#666">]</span>$ ls -lh ./a
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 18:48  文本.txt
+drwxr-xr-x <span style="color:#bd93f9">3</span> weepingdogel weepingdogel <span style="color:#bd93f9">80</span>  8月  <span style="color:#bd93f9">5</span> 18:36  a
+<span style="color:#6272a4"># 接下来一级一级往下看</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost tmp<span style="color:#ff79c6">]</span>$ ls -lh ./a
 总用量 4.0K
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 18:36 文本.txt
-drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span style="color:#40a070">80</span>  8月  <span style="color:#40a070">5</span> 18:45 b
-<span style="color:#666">[</span>weepingdogel@localhost tmp<span style="color:#666">]</span>$ ls -lh ./a/b
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 18:45 文本.txt
-drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span style="color:#40a070">120</span>  8月  <span style="color:#40a070">5</span> 18:25 c
-<span style="color:#666">[</span>weepingdogel@localhost tmp<span style="color:#666">]</span>$ ls -lh ./a/b/c
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 18:36 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">3</span> weepingdogel weepingdogel <span style="color:#bd93f9">80</span>  8月  <span style="color:#bd93f9">5</span> 18:45 b
+<span style="color:#ff79c6">[</span>weepingdogel@localhost tmp<span style="color:#ff79c6">]</span>$ ls -lh ./a/b
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 18:45 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">3</span> weepingdogel weepingdogel <span style="color:#bd93f9">120</span>  8月  <span style="color:#bd93f9">5</span> 18:25 c
+<span style="color:#ff79c6">[</span>weepingdogel@localhost tmp<span style="color:#ff79c6">]</span>$ ls -lh ./a/b/c
 总用量 4.0K
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 18:47 文本.txt
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 18:47 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
 </code></pre></td></tr></table>
 </div>
 </div><p>可见，复制是成功的。</p>
@@ -1940,9 +1932,9 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 <h4 id="一般创建">一般创建</h4>
 <p>假设目录<code>/tmp/a/b/c</code></p>
 <p>我们要创建一个目录<code>d</code></p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -1954,25 +1946,25 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ mkdir ./d <span style="color:#60a0b0;font-style:italic"># 在/tmp/a/b/c/下面创建一个目录d</span>
-<span style="color:#60a0b0;font-style:italic"># 按下回车之后，目录就创建了，我们可以用ls来检查一下</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -lh
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ mkdir ./d <span style="color:#6272a4"># 在/tmp/a/b/c/下面创建一个目录d</span>
+<span style="color:#6272a4"># 按下回车之后，目录就创建了，我们可以用ls来检查一下</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -lh
 总用量 4.0K
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 18:47 文本.txt
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 19:07 d
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 18:47 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 19:07 d
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>可见，目录被成功创建了。</p>
 <h4 id="递归创建">递归创建</h4>
 <p>假设目录<code>/tmp/a/b/c</code></p>
 <p>我们要在当前目录下创建一串目录，比如<code>./go/for/it</code>，此时我们就要加个参数<code>-p</code></p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -1997,29 +1989,29 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ mkdir -p ./go/fot/it
-<span style="color:#60a0b0;font-style:italic"># 按下回车之后，一串目录就被创建了，接下来我们会一级一级的查看</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -lh 
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ mkdir -p ./go/fot/it
+<span style="color:#6272a4"># 按下回车之后，一串目录就被创建了，接下来我们会一级一级的查看</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -lh 
 总用量 4.0K
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel <span style="color:#40a070">11</span>  8月  <span style="color:#40a070">5</span> 18:47 文本.txt
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 19:07 d
-drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span style="color:#40a070">60</span>  8月  <span style="color:#40a070">5</span> 19:14 go
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
-<span style="color:#60a0b0;font-style:italic"># 可见我们看见了目录go</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ./go <span style="color:#60a0b0;font-style:italic"># 我们试着进入这个目录，可见我们成功进入了目录</span>
-<span style="color:#666">[</span>weepingdogel@localhost go<span style="color:#666">]</span>$ ls -lh <span style="color:#60a0b0;font-style:italic">#继续查看下一级</span>
-总用量 <span style="color:#40a070">0</span>
-drwxr-xr-x <span style="color:#40a070">3</span> weepingdogel weepingdogel <span style="color:#40a070">60</span>  8月  <span style="color:#40a070">5</span> 19:14 <span style="color:#007020;font-weight:bold">for</span>
-<span style="color:#666">[</span>weepingdogel@localhost go<span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ./for <span style="color:#60a0b0;font-style:italic">#进入目录for</span>
-<span style="color:#666">[</span>weepingdogel@localhost <span style="color:#007020;font-weight:bold">for</span><span style="color:#666">]</span>$ ls -lh <span style="color:#60a0b0;font-style:italic"># 继续查看下一级</span>
-总用量 <span style="color:#40a070">0</span>
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 19:14 it
-<span style="color:#666">[</span>weepingdogel@localhost <span style="color:#007020;font-weight:bold">for</span><span style="color:#666">]</span>$ <span style="color:#007020">cd</span> ./it <span style="color:#60a0b0;font-style:italic">#接下来我们进入这个目录it，由于it里面是空的，所以就不用ls查看了</span>
-<span style="color:#666">[</span>weepingdogel@localhost it<span style="color:#666">]</span>$ <span style="color:#007020">pwd</span> <span style="color:#60a0b0;font-style:italic">#使用pwd查看当前位置</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel <span style="color:#bd93f9">11</span>  8月  <span style="color:#bd93f9">5</span> 18:47 文本.txt
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 19:07 d
+drwxr-xr-x <span style="color:#bd93f9">3</span> weepingdogel weepingdogel <span style="color:#bd93f9">60</span>  8月  <span style="color:#bd93f9">5</span> 19:14 go
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+<span style="color:#6272a4"># 可见我们看见了目录go</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ./go <span style="color:#6272a4"># 我们试着进入这个目录，可见我们成功进入了目录</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost go<span style="color:#ff79c6">]</span>$ ls -lh <span style="color:#6272a4">#继续查看下一级</span>
+总用量 <span style="color:#bd93f9">0</span>
+drwxr-xr-x <span style="color:#bd93f9">3</span> weepingdogel weepingdogel <span style="color:#bd93f9">60</span>  8月  <span style="color:#bd93f9">5</span> 19:14 <span style="color:#ff79c6">for</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost go<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ./for <span style="color:#6272a4">#进入目录for</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost <span style="color:#ff79c6">for</span><span style="color:#ff79c6">]</span>$ ls -lh <span style="color:#6272a4"># 继续查看下一级</span>
+总用量 <span style="color:#bd93f9">0</span>
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 19:14 it
+<span style="color:#ff79c6">[</span>weepingdogel@localhost <span style="color:#ff79c6">for</span><span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">cd</span> ./it <span style="color:#6272a4">#接下来我们进入这个目录it，由于it里面是空的，所以就不用ls查看了</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost it<span style="color:#ff79c6">]</span>$ <span style="color:#8be9fd;font-style:italic">pwd</span> <span style="color:#6272a4">#使用pwd查看当前位置</span>
 /tmp/a/b/c/go/for/it
-<span style="color:#666">[</span>weepingdogel@localhost it<span style="color:#666">]</span>$
+<span style="color:#ff79c6">[</span>weepingdogel@localhost it<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><p>可见这一串目录也创建成功了。</p>
@@ -2032,27 +2024,27 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 <p>假设目录<code>/tmp/a/b/c</code></p>
 <h4 id="删除文件">删除文件</h4>
 <p>我们来尝试删除一下<code>文本.txt</code></p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ rm ./文本.txt
-<span style="color:#60a0b0;font-style:italic"># 按下回车之后这个文件就被删除了</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls
-<span style="color:#40a070">223333</span>  d  go  <span style="color:#007020">test</span>  wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ rm ./文本.txt
+<span style="color:#6272a4"># 按下回车之后这个文件就被删除了</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls
+<span style="color:#bd93f9">223333</span>  d  go  <span style="color:#8be9fd;font-style:italic">test</span>  wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="删除目录">删除目录</h4>
 <p>如果你要删除一个目录，比如go，就需要加一个参数-r</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -2063,15 +2055,15 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ rm -r ./go
-<span style="color:#60a0b0;font-style:italic"># 按下回车之后，这个目录就被删除了</span>
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -lh <span style="color:#60a0b0;font-style:italic">#查看一下就可以看到，go也不见了</span>
-总用量 <span style="color:#40a070">0</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#40a070">223333</span>
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 19:07 d
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ rm -r ./go
+<span style="color:#6272a4"># 按下回车之后，这个目录就被删除了</span>
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -lh <span style="color:#6272a4">#查看一下就可以看到，go也不见了</span>
+总用量 <span style="color:#bd93f9">0</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#bd93f9">223333</span>
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 19:07 d
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="强制删除危险">强制删除|危险|</h4>
@@ -2080,9 +2072,9 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 <p>注意，千万不要用这个命令去删除 <code>/</code>目录，否则你的系统将会自杀</p>
 </blockquote>
 <p>比如我们要删除<code>223333</code>这个文件</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -2093,15 +2085,15 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ sudo rm -rf ./223333
-<span style="color:#60a0b0;font-style:italic"># 按下回车后会要你输入一次密码，输入密码后按回车，这个文件就删除了，Linux的安全保护机制使密码不会显示在屏幕上</span>
-<span style="color:#666">[</span>sudo<span style="color:#666">]</span> weepingdogel 的密码：
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ ls -lh <span style="color:#60a0b0;font-style:italic"># 查看一下文件的情况，可见这个文件不见了</span>
-总用量 <span style="color:#40a070">0</span>
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 19:07 d
-drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span style="color:#40a070">40</span>  8月  <span style="color:#40a070">5</span> 17:52 <span style="color:#007020">test</span>
--rw-r--r-- <span style="color:#40a070">1</span> weepingdogel weepingdogel  <span style="color:#40a070">0</span>  8月  <span style="color:#40a070">5</span> 17:52 wiaori
-<span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ sudo rm -rf ./223333
+<span style="color:#6272a4"># 按下回车后会要你输入一次密码，输入密码后按回车，这个文件就删除了，Linux的安全保护机制使密码不会显示在屏幕上</span>
+<span style="color:#ff79c6">[</span>sudo<span style="color:#ff79c6">]</span> weepingdogel 的密码：
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ ls -lh <span style="color:#6272a4"># 查看一下文件的情况，可见这个文件不见了</span>
+总用量 <span style="color:#bd93f9">0</span>
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 19:07 d
+drwxr-xr-x <span style="color:#bd93f9">2</span> weepingdogel weepingdogel <span style="color:#bd93f9">40</span>  8月  <span style="color:#bd93f9">5</span> 17:52 <span style="color:#8be9fd;font-style:italic">test</span>
+-rw-r--r-- <span style="color:#bd93f9">1</span> weepingdogel weepingdogel  <span style="color:#bd93f9">0</span>  8月  <span style="color:#bd93f9">5</span> 17:52 wiaori
+<span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="包管理器">包管理器</h2>
@@ -2110,68 +2102,68 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
 </blockquote>
 <p>一般情况下，新手使用的<strong>deb系发行版</strong>的包管理器是<strong>apt</strong></p>
 <p>那么这些就是<strong>apt</strong>常用的用法了</p>
-<div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost ~<span style="color:#666">]</span>$ sudo apt-get update <span style="color:#60a0b0;font-style:italic"># 更新软件源</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost ~<span style="color:#ff79c6">]</span>$ sudo apt-get update <span style="color:#6272a4"># 更新软件源</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ sudo apt-get install &lt;包名&gt; <span style="color:#60a0b0;font-style:italic"># 安装一个软件、软件包</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ sudo apt-get install &lt;包名&gt; <span style="color:#6272a4"># 安装一个软件、软件包</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ sudo apt-get search &lt;软件名称&gt; <span style="color:#60a0b0;font-style:italic"># 搜索软件</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ sudo apt-get search &lt;软件名称&gt; <span style="color:#6272a4"># 搜索软件</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ sudo apt-get upgrade <span style="color:#60a0b0;font-style:italic"># 升级你已安装的软件，通常消耗时间比较长</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ sudo apt-get upgrade <span style="color:#6272a4"># 升级你已安装的软件，通常消耗时间比较长</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ sudo apt-get remove &lt;包名&gt; <span style="color:#60a0b0;font-style:italic"># 卸载软件</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ sudo apt-get remove &lt;包名&gt; <span style="color:#6272a4"># 卸载软件</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ sudo apt-get autoremove <span style="color:#60a0b0;font-style:italic"># 自动处理依赖</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ sudo apt-get autoremove <span style="color:#6272a4"># 自动处理依赖</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">如果要安装本地包，则需要使用本地包管理器dpkg，用法如下
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">如果要安装本地包，则需要使用本地包管理器dpkg，用法如下
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#666">[</span>weepingdogel@localhost c<span style="color:#666">]</span>$ sudo dpkg -i &lt;包名&gt; <span style="color:#60a0b0;font-style:italic"># 安装本地包</span>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">[</span>weepingdogel@localhost c<span style="color:#ff79c6">]</span>$ sudo dpkg -i &lt;包名&gt; <span style="color:#6272a4"># 安装本地包</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="结语">结语</h2>
@@ -2217,8 +2209,9 @@ drwxr-xr-x <span style="color:#40a070">2</span> weepingdogel weepingdogel <span 
             </div>
         </div>
     </div>
-</div>
 
+
+                    </div>
             </div><div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://amazingrise.net">Rise</a>
 <br>
@@ -2231,275 +2224,7 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 	
 </div>
             </div>
-    <script>
-let app;
-
-app = new Vue({
-    el: '#app',
-    data: {
-        scrollY: 0,
-        navOpacity: 0,
-        isDrawerOpen: false,
-        mounted: false,
-        isDarkMode: false
-    },
-    methods: {
-            sgn(t, x) {
-                let k = 1. / (1. - 2 * t);
-                if (x <= t) return 0;
-                else if (x >= 1 - t) return 1;
-                else {
-                    return k * (x - t);
-                }
-            },
-            handleScroll() {
-                this.scrollY = window.scrollY;
-                this.navOpacity = this.sgn(.0, Math.min(1, Math.max(0, window.scrollY / (this.pageHeadHeight() - this.navBarHeight() * 0.8))));
-                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
-
-                if (this.navOpacity >= 1) {
-                    navBackground.style.opacity = 1;
-                    navTitle.style.opacity = 1;
-                } else {
-                    navBackground.style.opacity = 0;
-                    navTitle.style.opacity = 0;
-                }
-            },
-            handleResize() {
-                const {navBar, navBackground, navTitle, extraContainer, streamContainer} = this.$refs;
-                extraContainer.style.left = (streamContainer.offsetWidth - extraContainer.offsetWidth) + 'px';
-            },
-            navBarHeight() {
-                return this.$refs.navBar.offsetHeight;
-            },
-            pageHeadHeight() {
-                return this.$refs.pageHead.offsetHeight;
-            },
-            toggleDrawer() {
-                this.isDrawerOpen = !this.isDrawerOpen;
-                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
-            },
-            closeDrawer() {
-                this.isDrawerOpen = false;
-                document.getElementsByTagName('html')[0].style.overflow = this.isDrawerOpen ? 'hidden' : 'unset';
-            },
-            toggleDarkMode() {
-                this.isDarkMode = !this.isDarkMode;
-                if (this.isDarkMode==true){
-                    document.cookie = "night=1;path=/";
-                    document.body.classList.add("night");
-                } else {
-                    document.cookie = "night=0;path=/";
-                    document.body.classList.remove("night");
-                }
-            },
-            debounce(func, wait, options) {
-                let lastArgs,
-                    lastThis,
-                    maxWait,
-                    result,
-                    timerId,
-                    lastCallTime
-
-                let lastInvokeTime = 0
-                let leading = false
-                let maxing = false
-                let trailing = true
-
-                
-                const useRAF = (!wait && wait !== 0 && typeof root.requestAnimationFrame === 'function')
-
-                if (typeof func !== 'function') {
-                    throw new TypeError('Expected a function')
-                }
-                function isObject(value) {
-                    const type = typeof value
-                    return value != null && (type === 'object' || type === 'function')
-                }
-
-                wait = +wait || 0
-                if (isObject(options)) {
-                    leading = !!options.leading
-                    maxing = 'maxWait' in options
-                    maxWait = maxing ? Math.max(+options.maxWait || 0, wait) : maxWait
-                    trailing = 'trailing' in options ? !!options.trailing : trailing
-                }
-
-                function invokeFunc(time) {
-                    const args = lastArgs
-                    const thisArg = lastThis
-
-                    lastArgs = lastThis = undefined
-                    lastInvokeTime = time
-                    result = func.apply(thisArg, args)
-                    return result
-                }
-
-                function startTimer(pendingFunc, wait) {
-                    if (useRAF) {
-                    root.cancelAnimationFrame(timerId)
-                    return root.requestAnimationFrame(pendingFunc)
-                    }
-                    return setTimeout(pendingFunc, wait)
-                }
-
-                function cancelTimer(id) {
-                    if (useRAF) {
-                    return root.cancelAnimationFrame(id)
-                    }
-                    clearTimeout(id)
-                }
-
-                function leadingEdge(time) {
-                    
-                    lastInvokeTime = time
-                    
-                    timerId = startTimer(timerExpired, wait)
-                    
-                    return leading ? invokeFunc(time) : result
-                }
-
-                function remainingWait(time) {
-                    const timeSinceLastCall = time - lastCallTime
-                    const timeSinceLastInvoke = time - lastInvokeTime
-                    const timeWaiting = wait - timeSinceLastCall
-
-                    return maxing
-                    ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke)
-                    : timeWaiting
-                }
-
-                function shouldInvoke(time) {
-                    const timeSinceLastCall = time - lastCallTime
-                    const timeSinceLastInvoke = time - lastInvokeTime
-
-                    
-                    
-                    
-                    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
-                    (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait))
-                }
-
-                function timerExpired() {
-                    const time = Date.now()
-                    if (shouldInvoke(time)) {
-                    return trailingEdge(time)
-                    }
-                    
-                    timerId = startTimer(timerExpired, remainingWait(time))
-                }
-
-                function trailingEdge(time) {
-                    timerId = undefined
-
-                    
-                    
-                    if (trailing && lastArgs) {
-                    return invokeFunc(time)
-                    }
-                    lastArgs = lastThis = undefined
-                    return result
-                }
-
-                function cancel() {
-                    if (timerId !== undefined) {
-                    cancelTimer(timerId)
-                    }
-                    lastInvokeTime = 0
-                    lastArgs = lastCallTime = lastThis = timerId = undefined
-                }
-
-                function flush() {
-                    return timerId === undefined ? result : trailingEdge(Date.now())
-                }
-
-                function pending() {
-                    return timerId !== undefined
-                }
-
-                function debounced(...args) {
-                    const time = Date.now()
-                    const isInvoking = shouldInvoke(time)
-
-                    lastArgs = args
-                    lastThis = this
-                    lastCallTime = time
-
-                    if (isInvoking) {
-                    if (timerId === undefined) {
-                        return leadingEdge(lastCallTime)
-                    }
-                    if (maxing) {
-                        
-                        timerId = startTimer(timerExpired, wait)
-                        return invokeFunc(lastCallTime)
-                    }
-                    }
-                    if (timerId === undefined) {
-                    timerId = startTimer(timerExpired, wait)
-                    }
-                    return result
-                }
-                debounced.cancel = cancel
-                debounced.flush = flush
-                debounced.pending = pending
-                return debounced
-                }
-
-    },
-    created() {
-        window.addEventListener('scroll', this.handleScroll);
-        window.addEventListener('resize', this.handleResize);
-        window._nonDesktop = function () {
-            let check = false;
-            (function (a) {
-                if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true;
-            })(navigator.userAgent || navigator.vendor || window.opera);
-            return check;
-        };
-        
-        var night = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        if (night==""){
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                
-            }
-        }else{
-            
-            if (night=="1") {
-                this.toggleDarkMode();
-            }
-        }
-    },
-    mounted() {
-        this.handleScroll();
-        this.handleResize();
-        this.mounted = true;
-
-        
-        
-        
-
-        document.querySelectorAll("table").forEach(function(elem){
-            elem.classList.add("table-striped");
-            elem.classList.add("table");
-            elem.classList.add("table-responsive");
-            elem.classList.add("table-hover");
-        })
-
-        
-        spy();
-        window.addEventListener('scroll', this.debounce(spy, 250, { 'maxWait': 250 }), false);
-        
-        
-    },
-    destroyed() {
-        window.removeEventListener('scroll', this.handleScroll);
-        window.removeEventListener('resize', this.handleResize);
-    }
-});
-
-
-
-</script>
+    
+    <script src="/js/journal.js"></script>
     </body>
 </html>
