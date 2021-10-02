@@ -6,9 +6,445 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>2019-2021 | WeepingDogel via CC-BY-NC 4.0</copyright>
-    <lastBuildDate>Sat, 25 Sep 2021 16:11:55 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 02 Oct 2021 23:19:52 +0800</lastBuildDate>
     
         <atom:link href="https://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>FreeBSD 初♂体验</title>
+        <link>https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
+        <pubDate>Mon, 30 Mar 2020 15:49:34 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/ -&lt;h2 id=&#34;开场白&#34;&gt;开场白&lt;/h2&gt;
+&lt;p&gt;闲着无聊我又来&lt;del&gt;水文章&lt;/del&gt;更新了，这次准备&lt;del&gt;水&lt;/del&gt;写一篇比较长的，然后就想对FreeBSD下手了,嘿嘿。&lt;/p&gt;
+&lt;h2 id=&#34;freebsd介绍&#34;&gt;FreeBSD介绍&lt;/h2&gt;
+&lt;p&gt;FreeBSD是一个类Unix的操作系统，它与Linux还是有区别的&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Unix&amp;hellip;感觉很少人用吧..估计比Linux还少，不过服务器用用应该还不错吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;维基百科是这么说的 :&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FreeBSD是一个类Unix的操作系统，也是FreeBSD项目的发展成果。[2]FreeBSD是第一个开放源代码的系统，他是由基于BSD Unix的源代码派生而来的。BSD Unix是加州大学伯克利分校在1975年至1993年开发的操作系统。FreeBSD被开发为自由软件，这意味着其源代码开放，人人都可以使用FreeBSD。任何人都可以获得并使用它来满足各种需求，也可以修改它，然后再重发布它。此功能专为个人和公司量身定制，可用于创建各种基于FreeBSD的商业和非商业产品。尽管FreeBSD直接从BSD派生，但是从法律的角度来看，FreeBSD为 unix 系统，但它并不是“UNIX”。因为现在“UNIX”商标是属于国际开放标准组织的。[3]FreeBSD的第一个版本于1993年发布。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FreeBSD是一个支持许多硬件和体系架构的企业级系统。和其他BSD家族的操作系统一样， FreeBSD其核心、驱动程序以及所有的用户层（Userland）应用程序（如Unix shell和cat和ps等命令）都存储在源代码库中。[4]FreeBSD也可以运行其他二进制软件，比如Linux的。借助ports和FreeBSD软件包管理器，你可以在其上安装各种应用程序。根据2005年的调查，77％的BSD用户使用FreeBSD，因此FreeBSD拥有BSD系列中最大的用户社区。[5]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在今天，个人和企业都将FreeBSD用于多种用途，包括Yahoo! [6]，苹果[7]，Juniper网络公司，诺基亚，IBM， Yandex的，Apache软件基金会，Hotmail，索尼和许多其他用途&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/FreeBSD&#34;&gt;[Read More]&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;h3 id=&#34;准备工作&#34;&gt;准备工作&lt;/h3&gt;
+&lt;p&gt;我打算在虚拟机里玩玩就好啦～&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;问:是VirtualBox吗？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对，之前介绍过的&lt;strong&gt;VirtualBox&lt;/strong&gt;，也应该没什么好讲的了，创建一个虚拟机应该不是问题，问题是接下来如何进行安装。&lt;/p&gt;
+&lt;p&gt;除了虚拟机我们还要准备的东西就是FreeBSD的安装镜像了，可以去官方的源下载，但是考虑到速度问题，也可以去墙内的一些镜像站下载。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://mirrors.ustc.edu.cn/freebsd/releases/&#34;&gt;USTC Mirror&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：下载的时候要确定你的架构，别下错了&lt;/strong&gt;(应该大部分都是amd64吧)&lt;/p&gt;
+&lt;p&gt;什么？你说配置要求？嘛&amp;hellip;&lt;/p&gt;
+&lt;p&gt;看看官网怎么说&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FreeBSD/i386 和 FreeBSD/pc98 版本， 都需要 486 或更高的处理器，以及至少 24 MB 的 RAM。 您需要至少 150 MB 的空闲硬盘空间， 才能完成最小的安装配置。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;至于amd64架构嘛，一句话，你有处理器有内存有硬盘就能用，而且我们都用虚拟机了&lt;/p&gt;
+&lt;h3 id=&#34;安装过程&#34;&gt;安装过程&lt;/h3&gt;
+&lt;p&gt;首先肯定是先把镜像导入虚拟机啦，这个我就不再写一遍了，百度谷歌能搜到的&amp;hellip;&lt;/p&gt;
+&lt;p&gt;然后我们启动，就会看到这个可爱的画面..&lt;/p&gt;
+&lt;p&gt;你可以直接按回车，也可以等10秒让它自动启动&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/freebsd.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;启动之后就会来到这个界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/FreeBSD_Install.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选择Install按回车啦&lt;/p&gt;
+&lt;p&gt;然后是选择键盘类型，这里选&lt;code&gt;United States Of America&lt;/code&gt;
+&lt;img src=&#34;https://weepingdogel.github.io/img/FreeBSD_keymap.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;选完以后回到第一项回车即可，当然你也可以在第二项那里测试你的键盘是否有效&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-02.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;什么？你看不懂英文？&lt;/p&gt;
+&lt;p&gt;第一项是&lt;code&gt;继续&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;第二项是&lt;code&gt;测试键盘&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;下面的就是地区或者国家名称了&lt;/p&gt;
+&lt;p&gt;接下来输入你的主机名&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-08.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我就随便输入一个&lt;code&gt;localhost&lt;/code&gt;吧&lt;/p&gt;
+&lt;p&gt;然后回车&lt;/p&gt;
+&lt;p&gt;然后我就懵逼了。。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后看了下英文手册，这里是选择要安装的组件&lt;/p&gt;
+&lt;p&gt;根据官方的指引，这里来翻译一下&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;base-dbg&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一些基础的软件包,比如&amp;rsquo;cat&amp;rsquo;这样的（debugging）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;kernel-dbg&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;内核和内核模块（debugging）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;lib32-dbg&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;32位的依赖吧好像是，带（debugging）的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;lib32&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;同上，但是不带（debugging）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;ports&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;嗯..类似于Gentoo的portage，必须装&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;src&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一些源代码，最好选上吧&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;tests&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一些测试代码，没必要选了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;想了一会儿，然后决定这样选了，你问凭什么这样选，我凭经验&lt;/p&gt;
+&lt;p&gt;那你就应该凭借翻译软件把官方的手册翻译完看一遍了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-36.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;接下来是分区&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_17-48.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里有四种方式啊&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Auto(UFS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以&lt;code&gt;UFS&lt;/code&gt;文件系统自动进行分区&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Manual&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;手动对硬盘进行分区&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用命令对硬盘进行分区&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Auto(ZFS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;用&lt;code&gt;ZFS&lt;/code&gt;文件系统自动分区&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;行吧，选第二项，手动&lt;/p&gt;
+&lt;p&gt;然后就进了这里&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后，选&lt;code&gt;create&lt;/code&gt;创建一个分区表，官方手册有说明要创建一个&lt;code&gt;GPT&lt;/code&gt;分区表，但这里由于我没有开启&lt;code&gt;EFI&lt;/code&gt;所以我用&lt;code&gt;MBR&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里的图形操作会有提示的，看不懂英文的可以用翻译器看一下&lt;/p&gt;
+&lt;p&gt;什么？还是不会？这玩意跟cfdisk差不多的&lt;/p&gt;
+&lt;p&gt;总之详细过程我就不截图出来了，只需要把分区分成这样就行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-21.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;接下来选择&lt;code&gt;Finish&lt;/code&gt;,再选择&lt;code&gt;Commit&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-22.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后就会慢慢安装了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;接下来就需要设置一个密码了，毕竟Unix的系统是不能空口令登录的&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-35.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;跟Linux一样，设置一个能记住的就可以了，然后会让你确认网卡&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;后面一路选&lt;code&gt;yes&lt;/code&gt;，不多说&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_18-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里直接全选&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-40.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后回车，这里把&lt;code&gt;6&lt;/code&gt;勾选上，继续按回车&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-47.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;最后一个提示，&lt;code&gt;yes&lt;/code&gt;，然后回车&lt;/p&gt;
+&lt;p&gt;然后重启，自动启动，再登录root，就完成啦&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://weepingdogel.github.io/img/2020-03-30_19-56.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;装完后的感想&#34;&gt;装完后的感想&lt;/h2&gt;
+&lt;p&gt;FreeBSD注定是适合服务器的，或许也适合拿来玩，但日常使用的话就会出现很多问题让人头疼&lt;/p&gt;
+&lt;p&gt;反正我是不会玩啦..连个顺手的文本编辑器都没有&amp;hellip;vi我是真用不来&amp;hellip;要修改很多配置文件的说..&lt;/p&gt;
+&lt;p&gt;如果你有什么主意的话，就在下面留言吧&lt;/p&gt;
+&lt;h2 id=&#34;参考链接&#34;&gt;参考链接&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/using-bsdinstall.html&#34;&gt;FreeBSD 使用手册（英文）&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.freebsd.org/&#34;&gt;FreeBSD 官网&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- https://weepingdogel.github.io/posts/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
+    
+    
+    
+        <item>
+        <title>一个C语言的小程序</title>
+        <link>https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/</link>
+        <pubDate>Sun, 29 Mar 2020 14:15:46 +0800</pubDate>
+        
+        <guid>https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/</guid>
+        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/ -&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;p&gt;嘛&amp;hellip;学了一会儿C语言弄了这么个玩意👑&lt;/p&gt;
+&lt;p&gt;其实就是基础语法和简单的判断👑&lt;/p&gt;
+&lt;h2 id=&#34;代码&#34;&gt;代码&lt;/h2&gt;
+&lt;p&gt;废话不多说直接上代码👑&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  3
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  4
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  5
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  6
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  7
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  8
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;  9
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 10
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 11
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 12
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 13
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 14
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 15
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 16
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 17
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 18
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 19
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 20
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 21
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 22
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 23
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 24
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 25
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 26
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 27
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 28
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 29
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 30
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 31
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 32
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 33
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 34
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 35
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 36
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 37
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 38
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 39
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 40
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 41
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 42
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 43
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 44
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 45
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 46
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 47
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 48
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 49
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 50
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 51
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 52
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 53
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 54
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 55
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 56
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 57
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 58
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 59
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 60
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 61
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 62
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 63
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 64
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 65
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 66
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 67
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 68
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 69
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 70
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 71
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 72
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 73
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 74
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 75
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 76
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 77
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 78
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 79
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 80
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 81
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 82
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 83
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 84
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 85
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 86
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 87
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 88
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 89
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 90
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 91
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 92
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 93
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 94
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 95
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 96
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 97
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 98
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 99
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;100
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;101
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;102
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;103
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;104
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;105
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;106
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;107
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;108
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;109
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;110
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;111
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;112
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;113
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;114
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;115
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;116
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;117
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;118
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;/*
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;标准体重计算器
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;By WeepingDogel
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;世卫计算方法
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;男性：(身高cm－80)×70﹪=标准体重
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;女性：(身高cm－70)×60﹪=标准体重
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;标准体重正负10﹪为正常体重
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;标准体重正负10﹪~ 20﹪为体重过重或过轻
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;标准体重正负20﹪以上为肥胖或体重不足
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;超重计算公式
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;超重%=[（实际体重－理想体重）/（理想体重）]×100%
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;*/&lt;/span&gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*导入标准库stdio.h （必须）*/&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
+&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;/*标准体重*/&lt;/span&gt;
+&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; weight;
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*声明函数*/&lt;/span&gt;
+&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;judge&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter1,&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter2);
+&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Count_M&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter);
+&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Count_F&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter);
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*声明主函数main() (这个都不写，那写个屁)*/&lt;/span&gt;
+&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;main&lt;/span&gt;()
+{
+    printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;欢迎使用.&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*身高*/&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; height;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*声明变量sex表示性别*/&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd&#34;&gt;char&lt;/span&gt; sex;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*声明变量：实际体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; real_weight;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*提示用户输入性别*/&lt;/span&gt;
+    printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;请输入你的性别&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;（M为男性,F为女性,注意大小写）&amp;#34;&lt;/span&gt;);
+    printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;:&amp;#34;&lt;/span&gt;);
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*读取用户输入的数据并赋值给sex*/&lt;/span&gt;
+    scanf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;%c&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;sex);
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*进入判断，并判断变量sex的值是否为M*/&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(sex &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;M&amp;#39;&lt;/span&gt;)
+    {
+        &lt;span style=&#34;color:#6272a4&#34;&gt;/*当变量sex=M时，判断为男性，将执行以下代码*/&lt;/span&gt;
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你是男性&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;输入你的身高(单位:厘米)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;height);
+        weight &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;) Count_M((&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt;) height);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你的身高对应的标准体重为%dkg&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;,weight);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;real_weight);
+        judge((&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt;) real_weight,(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt;) weight);
+    }
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*进入判断，并判断变量sex的值是否为F*/&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(sex &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;F&amp;#39;&lt;/span&gt;)
+    {
+        &lt;span style=&#34;color:#6272a4&#34;&gt;/*当变量sex=F时，判断为女性，将执行以下代码*/&lt;/span&gt;
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你是女性&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;输入你的身高(单位:厘米)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;height);
+        weight &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;) Count_F((&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt;) height);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你的身高对应的标准体重为%dkg&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;,weight);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;请输入你的实际体重(单位:kg)&amp;#34;&lt;/span&gt;);
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;:&amp;#34;&lt;/span&gt;);
+        scanf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&lt;/span&gt;real_weight);
+        judge((&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt;) real_weight,(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt;) weight);
+    }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+}
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*计算出男性标准体重*/&lt;/span&gt;
+&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Count_M&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter)
+{
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*男性：(身高cm－80)×70﹪=标准体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*定义变量:结果*/&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; result;
+    result &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;)(parameter &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;80.0&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.7&lt;/span&gt;;
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; result;
+}
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*计算出女性标准体重*/&lt;/span&gt;
+&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Count_F&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter)
+{
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*女性：(身高cm－70)×60﹪=标准体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*定义变量:结果*/&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; result;
+    result &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;)(parameter &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;70.0&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.6&lt;/span&gt;;
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; result;
+}
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*检测实际体重是否符合标准*/&lt;/span&gt;
+&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;judge&lt;/span&gt;(&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter1,&lt;span style=&#34;color:#8be9fd&#34;&gt;float&lt;/span&gt; parameter2)
+{
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*标准体重正负10﹪为正常体重*/&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.1&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.1&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你的体重符合正常标准&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*标准体重正负10﹪~ 20﹪为体重过重或过轻*/&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.1&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你的体重过重&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*标准体重正负10﹪~ 20﹪为体重过重或过轻*/&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.1&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;=&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你的体重过轻&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*标准体重正负20﹪以上为肥胖或体重不足*/&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;gt;&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;+&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你太胖了。&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#6272a4&#34;&gt;/*标准体重正负20﹪以上为肥胖或体重不足*/&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;(parameter1 &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; parameter2 &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0.2&lt;/span&gt;)
+    {
+        printf(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;你太瘦了。&amp;#34;&lt;/span&gt;);
+    }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;- https://weepingdogel.github.io/posts/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
+        </item>
     
     
     
@@ -4366,38 +4802,6 @@ Priv: Timestomp Commands
 &lt;p&gt;如需转载，请注明出处。&lt;/p&gt;
 - https://weepingdogel.github.io/posts/linux_mint_%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
         </item>
-    
-    
-    
-        <item>
-        <title>关于BlackArch的体验报告</title>
-        <link>https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/</link>
-        <pubDate>Sun, 16 Jun 2019 16:33:47 +0800</pubDate>
-        
-        <guid>https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/</guid>
-        <description>WeepingDogel&#39;s Blog https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/ -&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;今天我尝试装了一下black Arch，花了很长时间，之后发现这个系统并不是很完美。&lt;/em&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;优点&#34;&gt;优点&lt;/h2&gt;
-&lt;p&gt;首先说说它的优点:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;这玩意集成了几千个软件包，并且都是一些很厉害的工具&lt;/li&gt;
-&lt;li&gt;其次这玩意很酷，特别是壁纸，配色什么的，我都觉得特别炫酷&lt;/li&gt;
-&lt;li&gt;以及它安装的便捷性，我一开始以为它比Arch难安装，其实用完才知道这个安装简直比Arch简单十倍，只不过我习惯了Arch那种手动式，这种半自动化却不习惯了&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;缺点&#34;&gt;缺点&lt;/h2&gt;
-&lt;p&gt;现在来说说缺点:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;首先ISO实在是太大了，Black Arch官方的live ISO达到了12GB，我idm都下载了很久，而网络安装包和Arch的大小一样，不过我没试过&lt;/li&gt;
-&lt;li&gt;更可怕的是 blackarch官方镜像的安装最低硬盘需求达到了40GB以上，这使得大部分人缺乏这个安装条件&lt;/li&gt;
-&lt;li&gt;其次就是它的桌面环境实在太简陋了，而且性能上也特别不好，特别是i3和spectrwm这两个，根本无法操作，fluxbox最炫酷但是习惯太不适合大部分人了，openbox啥都没有，更不好操作，而且不支持中文，弄得我很蛋疼；还有就是依赖太乱了，换别的桌面环境很麻烦，比如我想卸载掉其他的换xfce，结果pacman -Rs卸载不了，得用Rsc才能卸载，结果把lxdm给卸掉了，进不去图形了，后来装上lxdm出现了很大的颜色bug。。。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
-&lt;p&gt;首先不能否认BlackArch是装逼的好东西，但是我不推荐使用官方的镜像（无论是在线镜像还是离线live）去安装，否则就会有我的下场了，其次就是用户必须有Arch系基础，否则就是个坑。建议先安装Arch，然后导入BlackArch的软件库安装全套工具即可。最后请不要那blackarch与kali、parrot对比，这没有对比性的，工具都差不多的。&lt;/p&gt;
-- https://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/ - 2019-2021 | WeepingDogel via CC-BY-NC 4.0</description>
-        </item>
-    
-    
     
     
   </channel>
