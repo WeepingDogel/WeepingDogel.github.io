@@ -628,15 +628,8 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 <p>内核更新到了 5.15.3</p>
 <p>一开始我觉得问题不大，更新一下就好了</p>
 <p>于是我就</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ yay -S nvidia-340xx
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>但是没想到，它给我来这一出</p>
+<pre tabindex="0"><code>$ yay -S nvidia-340xx
+</code></pre><p>但是没想到，它给我来这一出</p>
 <p><img src="/img/fucknvidia1.jpg" alt=""></p>
 <p>呜呜呜！！！为什么编译不出来！！！</p>
 <p><strong><del>黄仁勋 NMSL!!!</del></strong></p>
@@ -662,235 +655,101 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 </blockquote>
 <p><img src="/img/2021-11-22-13-58-14%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
 <p>然后我观察了一下这个包的文件目录..</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>.
-</span></span><span style="display:flex;"><span>├── 0001-kernel-5.7.patch
-</span></span><span style="display:flex;"><span>├── 0002-kernel-5.8.patch
-</span></span><span style="display:flex;"><span>├── 0003-kernel-5.9.patch
-</span></span><span style="display:flex;"><span>├── 0004-kernel-5.10.patch
-</span></span><span style="display:flex;"><span>├── 0005-kernel-5.11.patch
-</span></span><span style="display:flex;"><span>├── 0006-kernel-5.14.patch
-</span></span><span style="display:flex;"><span>├── 20-nvidia.conf
-</span></span><span style="display:flex;"><span>├── nvidia-340xx.install
-</span></span><span style="display:flex;"><span>└── PKGBUILD
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>0 directories, 9 files
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>虽然我不太懂，但我发现这个 <code>*.patch</code> 文件的文件名似乎对应着各个内核版本。</p>
+<pre tabindex="0"><code>.
+├── 0001-kernel-5.7.patch
+├── 0002-kernel-5.8.patch
+├── 0003-kernel-5.9.patch
+├── 0004-kernel-5.10.patch
+├── 0005-kernel-5.11.patch
+├── 0006-kernel-5.14.patch
+├── 20-nvidia.conf
+├── nvidia-340xx.install
+└── PKGBUILD
+
+0 directories, 9 files
+</code></pre><p>虽然我不太懂，但我发现这个 <code>*.patch</code> 文件的文件名似乎对应着各个内核版本。</p>
 <p>而这条评论给出了<a href="https://pastebin.com/uYP9J2Cw">新 <code>patch</code> 文件的链接</a>，以及<a href="https://github.com/warpme/minimyth2/issues/15">一个 issue 链接</a>。</p>
 <p>我瞬间知道怎么回事了，打包所需的文件是更新了，但还没有提交到 aur..</p>
 <p>淦，我只能自己试试看了</p>
 <p>于是抱着试试看的态度</p>
 <p>我打开了它的 PKGBUILD</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#008080">pkgbase</span><span style="color:#000;font-weight:bold">=</span>nvidia-340xx
-</span></span><span style="display:flex;"><span><span style="color:#008080">pkgname</span><span style="color:#000;font-weight:bold">=(</span>nvidia-340xx nvidia-340xx-dkms<span style="color:#000;font-weight:bold">)</span>; <span style="color:#000;font-weight:bold">[</span> -n <span style="color:#d14">&#34;</span><span style="color:#008080">$NVIDIA_340XX_DKMS_ONLY</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> <span style="color:#008080">pkgname</span><span style="color:#000;font-weight:bold">=(</span>nvidia-340xx-dkms<span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">pkgver</span><span style="color:#000;font-weight:bold">=</span>340.108
-</span></span><span style="display:flex;"><span><span style="color:#008080">pkgrel</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">25</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">pkgdesc</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;NVIDIA drivers for linux, 340xx legacy branch&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">arch</span><span style="color:#000;font-weight:bold">=(</span><span style="color:#d14">&#39;x86_64&#39;</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">url</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;https://www.nvidia.com/&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">makedepends</span><span style="color:#000;font-weight:bold">=(</span><span style="color:#d14">&#34;nvidia-340xx-utils=</span><span style="color:#d14">${</span><span style="color:#008080">pkgver</span><span style="color:#d14">}</span><span style="color:#d14">&#34;</span> <span style="color:#d14">&#39;linux&gt;=5.5&#39;</span> <span style="color:#d14">&#39;linux-headers&gt;=5.5&#39;</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">conflicts</span><span style="color:#000;font-weight:bold">=(</span><span style="color:#d14">&#39;nvidia&#39;</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">license</span><span style="color:#000;font-weight:bold">=(</span><span style="color:#d14">&#39;custom&#39;</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">options</span><span style="color:#000;font-weight:bold">=(</span>!strip<span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># https://github.com/warpme/minimyth2/tree/master/script/nvidia/nvidia-340.108/files</span>
-</span></span><span style="display:flex;"><span><span style="color:#008080">source</span><span style="color:#000;font-weight:bold">=(</span><span style="color:#d14">&#34;https://us.download.nvidia.com/XFree86/Linux-x86_64/</span><span style="color:#d14">${</span><span style="color:#008080">pkgver</span><span style="color:#d14">}</span><span style="color:#d14">/NVIDIA-Linux-x86_64-</span><span style="color:#d14">${</span><span style="color:#008080">pkgver</span><span style="color:#d14">}</span><span style="color:#d14">-no-compat32.run&#34;</span>
-</span></span><span style="display:flex;"><span>  20-nvidia.conf
-</span></span><span style="display:flex;"><span>  0001-kernel-5.7.patch
-</span></span><span style="display:flex;"><span>  0002-kernel-5.8.patch
-</span></span><span style="display:flex;"><span>  0003-kernel-5.9.patch
-</span></span><span style="display:flex;"><span>  0004-kernel-5.10.patch
-</span></span><span style="display:flex;"><span>  0005-kernel-5.11.patch
-</span></span><span style="display:flex;"><span>  0006-kernel-5.14.patch
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>确实发现了这么一行文件，我在想，是不是把这个新的文件下下来，放到编译目录然后在这个列表加上就能编译了？</p>
+<pre tabindex="0"><code>pkgbase=nvidia-340xx
+pkgname=(nvidia-340xx nvidia-340xx-dkms); [ -n &#34;$NVIDIA_340XX_DKMS_ONLY&#34; ] &amp;&amp; pkgname=(nvidia-340xx-dkms)
+pkgver=340.108
+pkgrel=25
+pkgdesc=&#34;NVIDIA drivers for linux, 340xx legacy branch&#34;
+arch=(&#39;x86_64&#39;)
+url=&#34;https://www.nvidia.com/&#34;
+makedepends=(&#34;nvidia-340xx-utils=${pkgver}&#34; &#39;linux&gt;=5.5&#39; &#39;linux-headers&gt;=5.5&#39;)
+conflicts=(&#39;nvidia&#39;)
+license=(&#39;custom&#39;)
+options=(!strip)
+# https://github.com/warpme/minimyth2/tree/master/script/nvidia/nvidia-340.108/files
+source=(&#34;https://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run&#34;
+  20-nvidia.conf
+  0001-kernel-5.7.patch
+  0002-kernel-5.8.patch
+  0003-kernel-5.9.patch
+  0004-kernel-5.10.patch
+  0005-kernel-5.11.patch
+  0006-kernel-5.14.patch
+)
+</code></pre><p>确实发现了这么一行文件，我在想，是不是把这个新的文件下下来，放到编译目录然后在这个列表加上就能编译了？</p>
 <p>于是我把这个文件下载了下来，放进了编译目录</p>
 <p>（具体过程就略过了，都是 wget cp cd 之类的事情）</p>
 <p>并且把文件名加上了</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#008080">source</span><span style="color:#000;font-weight:bold">=(</span><span style="color:#d14">&#34;https://us.download.nvidia.com/XFree86/Linux-x86_64/</span><span style="color:#d14">${</span><span style="color:#008080">pkgver</span><span style="color:#d14">}</span><span style="color:#d14">/NVIDIA-Linux-x86_64-</span><span style="color:#d14">${</span><span style="color:#008080">pkgver</span><span style="color:#d14">}</span><span style="color:#d14">-no-compat32.run&#34;</span>
-</span></span><span style="display:flex;"><span>  20-nvidia.conf
-</span></span><span style="display:flex;"><span>  0001-kernel-5.7.patch
-</span></span><span style="display:flex;"><span>  0002-kernel-5.8.patch
-</span></span><span style="display:flex;"><span>  0003-kernel-5.9.patch
-</span></span><span style="display:flex;"><span>  0004-kernel-5.10.patch
-</span></span><span style="display:flex;"><span>  0005-kernel-5.11.patch
-</span></span><span style="display:flex;"><span>  0006-kernel-5.14.patch
-</span></span><span style="display:flex;"><span>  0007-kernel-5.15.patch
-</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ makepkg
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>不过很快我就收到了报错</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>==&gt; 正在创建软件包：nvidia-340xx 340.108-25 (Mon 22 Nov 2021 02:08:12 PM CST)
-</span></span><span style="display:flex;"><span>==&gt; 正在检查运行时依赖关系...
-</span></span><span style="display:flex;"><span>==&gt; 正在检查编译时依赖关系
-</span></span><span style="display:flex;"><span>==&gt; 获取源代码...
-</span></span><span style="display:flex;"><span>  -&gt; 找到 NVIDIA-Linux-x86_64-340.108-no-compat32.run
-</span></span><span style="display:flex;"><span>  -&gt; 找到 20-nvidia.conf
-</span></span><span style="display:flex;"><span>  -&gt; 找到 0001-kernel-5.7.patch
-</span></span><span style="display:flex;"><span>  -&gt; 找到 0002-kernel-5.8.patch
-</span></span><span style="display:flex;"><span>  -&gt; 找到 0003-kernel-5.9.patch
-</span></span><span style="display:flex;"><span>  -&gt; 找到 0004-kernel-5.10.patch
-</span></span><span style="display:flex;"><span>  -&gt; 找到 0005-kernel-5.11.patch
-</span></span><span style="display:flex;"><span>  -&gt; 找到 0006-kernel-5.14.patch
-</span></span><span style="display:flex;"><span>  -&gt; 找到 0007-kernel-5.15.patch
-</span></span><span style="display:flex;"><span>==&gt; 错误： 对这些文件的完整性检查缺失: source
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后我试了一下重新生成校验码</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>makepkg -g
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后把返回来的数据复制粘贴进 <code>PKGBUILD</code> (注意，返回内容不唯一)</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>b2sums=(&#39;6538bbec53b10f8d20977f9b462052625742e9709ef06e24cf2e55de5d0c55f1620a4bb21396cfd89ebc54c32f921ea17e3e47eaa95abcbc24ecbd144fb89028&#39;
-</span></span><span style="display:flex;"><span>        &#39;49d99f612e8eee3ab5e34083c25348bfd14ed5fc8a7984dafc0dad7c0ae0df2c0b2a63a1bb993da440eb0a60293d7c753ca3889bd2f51991b8ddc51bce2fe4a8&#39;
-</span></span><span style="display:flex;"><span>        &#39;7150233df867a55f57aa5e798b9c7618329d98459fecc35c4acfad2e9772236cb229703c4fa072381c509279d0588173d65f46297231f4d3bfc65a1ef52e65b1&#39;
-</span></span><span style="display:flex;"><span>        &#39;b436095b89d6e294995651a3680ff18b5af5e91582c3f1ec9b7b63be9282497f54f9bf9be3997a5af30eec9b8548f25ec5235d969ac00a667a9cddece63d8896&#39;
-</span></span><span style="display:flex;"><span>        &#39;947cb1f149b2db9c3c4f973f285d389790f73fc8c8a6865fc5b78d6a782f49513aa565de5c82a81c07515f1164e0e222d26c8212a14cf016e387bcc523e3fcb1&#39;
-</span></span><span style="display:flex;"><span>        &#39;665bf0e1fa22119592e7c75ff40f265e919955f228a3e3e3ebd76e9dffa5226bece5eb032922eb2c009572b31b28e80cd89656f5d0a4ad592277edd98967e68f&#39;
-</span></span><span style="display:flex;"><span>        &#39;344cd3a9888a9a61941906c198d3a480ce230119c96c72c72a74b711d23face2a7b1e53b9b4639465809b84762cdc53f38210e740318866705241bc4216e4f35&#39;
-</span></span><span style="display:flex;"><span>        &#39;31a4047ab84d13e32fd7fdbf9f69c696d3fab6666c541d2acf0a189c1d17c876970985167fd389a4adc0f786021172bdec1aa6d690736e3cf9fcd8ceabe5fd32&#39;
-</span></span><span style="display:flex;"><span>        &#39;a26426488f6e105f546e091ce4d2e9587cc41a0fb05b0dffeb1c523d8d06782bda3004352655c9c019224091f7bc7903939e53ede73f64553f14be8e8a47793a&#39;)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来再次执行 <code>makepkg</code> 就能成功编译了</p>
+<pre tabindex="0"><code>source=(&#34;https://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run&#34;
+  20-nvidia.conf
+  0001-kernel-5.7.patch
+  0002-kernel-5.8.patch
+  0003-kernel-5.9.patch
+  0004-kernel-5.10.patch
+  0005-kernel-5.11.patch
+  0006-kernel-5.14.patch
+  0007-kernel-5.15.patch
+)
+</code></pre><p>接下来</p>
+<pre tabindex="0"><code>$ makepkg
+</code></pre><p>不过很快我就收到了报错</p>
+<pre tabindex="0"><code>==&gt; 正在创建软件包：nvidia-340xx 340.108-25 (Mon 22 Nov 2021 02:08:12 PM CST)
+==&gt; 正在检查运行时依赖关系...
+==&gt; 正在检查编译时依赖关系
+==&gt; 获取源代码...
+  -&gt; 找到 NVIDIA-Linux-x86_64-340.108-no-compat32.run
+  -&gt; 找到 20-nvidia.conf
+  -&gt; 找到 0001-kernel-5.7.patch
+  -&gt; 找到 0002-kernel-5.8.patch
+  -&gt; 找到 0003-kernel-5.9.patch
+  -&gt; 找到 0004-kernel-5.10.patch
+  -&gt; 找到 0005-kernel-5.11.patch
+  -&gt; 找到 0006-kernel-5.14.patch
+  -&gt; 找到 0007-kernel-5.15.patch
+==&gt; 错误： 对这些文件的完整性检查缺失: source
+</code></pre><p>然后我试了一下重新生成校验码</p>
+<pre tabindex="0"><code>makepkg -g
+</code></pre><p>然后把返回来的数据复制粘贴进 <code>PKGBUILD</code> (注意，返回内容不唯一)</p>
+<pre tabindex="0"><code>b2sums=(&#39;6538bbec53b10f8d20977f9b462052625742e9709ef06e24cf2e55de5d0c55f1620a4bb21396cfd89ebc54c32f921ea17e3e47eaa95abcbc24ecbd144fb89028&#39;
+        &#39;49d99f612e8eee3ab5e34083c25348bfd14ed5fc8a7984dafc0dad7c0ae0df2c0b2a63a1bb993da440eb0a60293d7c753ca3889bd2f51991b8ddc51bce2fe4a8&#39;
+        &#39;7150233df867a55f57aa5e798b9c7618329d98459fecc35c4acfad2e9772236cb229703c4fa072381c509279d0588173d65f46297231f4d3bfc65a1ef52e65b1&#39;
+        &#39;b436095b89d6e294995651a3680ff18b5af5e91582c3f1ec9b7b63be9282497f54f9bf9be3997a5af30eec9b8548f25ec5235d969ac00a667a9cddece63d8896&#39;
+        &#39;947cb1f149b2db9c3c4f973f285d389790f73fc8c8a6865fc5b78d6a782f49513aa565de5c82a81c07515f1164e0e222d26c8212a14cf016e387bcc523e3fcb1&#39;
+        &#39;665bf0e1fa22119592e7c75ff40f265e919955f228a3e3e3ebd76e9dffa5226bece5eb032922eb2c009572b31b28e80cd89656f5d0a4ad592277edd98967e68f&#39;
+        &#39;344cd3a9888a9a61941906c198d3a480ce230119c96c72c72a74b711d23face2a7b1e53b9b4639465809b84762cdc53f38210e740318866705241bc4216e4f35&#39;
+        &#39;31a4047ab84d13e32fd7fdbf9f69c696d3fab6666c541d2acf0a189c1d17c876970985167fd389a4adc0f786021172bdec1aa6d690736e3cf9fcd8ceabe5fd32&#39;
+        &#39;a26426488f6e105f546e091ce4d2e9587cc41a0fb05b0dffeb1c523d8d06782bda3004352655c9c019224091f7bc7903939e53ede73f64553f14be8e8a47793a&#39;)
+</code></pre><p>接下来再次执行 <code>makepkg</code> 就能成功编译了</p>
 <p><img src="/img/screenshot-2021-nov-22.png" alt=""></p>
 <p>接下来用 <code>pacman</code> 装上</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo pacman -U nvidia-340xx-dkms-340.108-25-x86_64.pkg.tar.zst
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>最后 pacman 提示我们</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>&gt;&gt;&gt; You must tell Xorg to use the nvidia driver with kernels &gt;=5.11.0.
-</span></span><span style="display:flex;"><span>    You must also set IgnoreABI option with Xorg version &gt;= 21.1.1.
-</span></span><span style="display:flex;"><span>    Minimal config example provided in /usr/share/nvidia-340xx/20-nvidia.conf
-</span></span><span style="display:flex;"><span>    which you should manually place in /etc/X11/xorg.conf.d/
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这个好搞</p>
+<pre tabindex="0"><code>sudo pacman -U nvidia-340xx-dkms-340.108-25-x86_64.pkg.tar.zst
+</code></pre><p>最后 pacman 提示我们</p>
+<pre tabindex="0"><code>&gt;&gt;&gt; You must tell Xorg to use the nvidia driver with kernels &gt;=5.11.0.
+    You must also set IgnoreABI option with Xorg version &gt;= 21.1.1.
+    Minimal config example provided in /usr/share/nvidia-340xx/20-nvidia.conf
+    which you should manually place in /etc/X11/xorg.conf.d/
+</code></pre><p>这个好搞</p>
 <p>复制一下文件就可以了</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cp /usr/share/nvidia-340xx/20-nvidia.conf /etc/X11/xorg.conf.d/
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后重启</p>
+<pre tabindex="0"><code>cp /usr/share/nvidia-340xx/20-nvidia.conf /etc/X11/xorg.conf.d/
+</code></pre><p>然后重启</p>
 <p><img src="/img/image_2021-11-22_14-17-46.png" alt=""></p>
 <p>完美解决～</p>
 <h1 id="总结">总结</h1>
