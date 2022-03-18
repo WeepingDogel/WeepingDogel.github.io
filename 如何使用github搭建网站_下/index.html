@@ -1,652 +1,143 @@
 <!DOCTYPE html>
-<html><head>
-<title>如何使用 GitHub 搭建博客</title>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>如何使用 GitHub 搭建博客 - WeepingDogel</title><meta name="Description" content="利用 Github Pages 和 Hugo 框架搭建博客。"><meta property="og:title" content="如何使用 GitHub 搭建博客" />
+<meta property="og:description" content="利用 Github Pages 和 Hugo 框架搭建博客。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" /><meta property="og:image" content="http://weepingdogel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-10-13T20:37:45+08:00" />
+<meta property="article:modified_time" content="2020-10-13T20:37:45+08:00" />
 
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/logo.png"/>
 
+<meta name="twitter:title" content="如何使用 GitHub 搭建博客"/>
+<meta name="twitter:description" content="利用 Github Pages 和 Hugo 框架搭建博客。"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" /><link rel="prev" href="http://weepingdogel.github.io/2020-09-26/" /><link rel="next" href="http://weepingdogel.github.io/2020-nov-6/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何使用 GitHub 搭建博客",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B\/"
+        },"genre": "posts","keywords": "笔记, Hugo, Github Pages, 博客, 建站, blog, Website","wordcount":  1288 ,
+        "url": "http:\/\/weepingdogel.github.io\/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B\/","datePublished": "2020-10-13T20:37:45+08:00","dateModified": "2020-10-13T20:37:45+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "利用 Github Pages 和 Hugo 框架搭建博客。"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-
-<meta charset="utf-8">
-<meta name="X-UA-Compatible" content="IE=edge">
-<meta name="google-site-verification" content="">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<meta content="telephone=no" name="format-detection">
-<meta name="description" content="利用 Github Pages 和 Hugo 框架搭建博客。">
-<meta name="renderer" content="webkit">
-<meta name="theme-color" content="#ffffff">
-
-
-
-
-
-
-
-
-
-
-
-<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
-
-
-  
-
-
-
-
-
-
-<link rel="stylesheet" href="http://weepingdogel.github.io/scss/journal.min.3f72a5fc8f5b5dd732a4b476aced0eece2156958d9d414316494ddb10593ddf7.css" integrity="sha256-P3Kl/I9bXdcypLR2rO0O7OIVaVjZ1BQxZJTdsQWT3fc=" media="screen">
-
-
-
-<link rel="stylesheet" href="http://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
-
-
-<script src="/vendor/js/loadCSS.js"></script>
-<script>
-  loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
-</script>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8465793241118966"
-     crossorigin="anonymous"></script>
-
-
-
-
-
-  <script src="/js/toc.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</head>
-<body>
-    	<div id="app"><div id="sideContainer" class="side-container">
-    
-    <a class="a-block nav-head false" href="http://weepingdogel.github.io/">
-    
-        <div class="nav-title">
-            WeepingDogel
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="WeepingDogel"></a>
         </div>
-        
-    </a>
-
-    <div class="nav-link-list">
-        
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/posts/">
-                文章
-            </a>
-            
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/tags/">
-                标签
-            </a>
-            
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/categories/">
-                分类
-            </a>
-            
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/about/">
-                关于
-            </a>
-            
-        
-    </div>
-
-    
-
-    <div class="nav-footer">
-        
- <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
-<br>
- <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
-<br>
-
-&copy;
-	
-	2021 WeepingDogel
-	
-
-    </div>
-    
-</div><div id="extraContainer" class="extra-container">
-    
-    
-    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
-
-
-	<div class="toc-content">
-	
-		
-		
-		
-		<center>-  -</center>
-		
-		
-		<ul>
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								
-									<ul>
-								
-							
-						
-						
-							<li>
-								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
-									序
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e6%b3%a8%e5%86%8c-github" onclick="onNavClick(`#注册-github-nav`)" id="注册-github-nav">
-									注册 Github
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%ae%89%e8%a3%85-hugo" onclick="onNavClick(`#安装-hugo-nav`)" id="安装-hugo-nav">
-									安装 Hugo
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e7%94%9f%e6%88%90%e4%b8%80%e4%b8%aa%e5%8d%9a%e5%ae%a2" onclick="onNavClick(`#生成一个博客-nav`)" id="生成一个博客-nav">
-									生成一个博客
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%86%99%e5%8d%9a%e5%ae%a2" onclick="onNavClick(`#写博客-nav`)" id="写博客-nav">
-									写博客
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%8f%91%e5%b8%83%e5%88%b0-github" onclick="onNavClick(`#发布到-github-nav`)" id="发布到-github-nav">
-									发布到 Github
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
-									结语
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
-									参考链接
-								</a>
-							</li>
-						
-						
-					
-				
-			
-		</ul>
-	</div>
-
-</div>
-    
-    <div class="pagination">
-        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
-            <i class="material-icons pagination-action-icon">
-                keyboard_arrow_up
-            </i>
-        </a>
-        
-        <a type="button" class="pagination-action" id="darkModeToggleButton">
-            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
-                dark_mode
-            </span>
-        </a>
-        
-        
-    </div>
-</div>
-<div class="single-column-drawer-container" id="drawer"
-     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
-    <div class="drawer-content">
-        <div class="drawer-menu">
-            
-            
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/posts/">
-                    文章
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
                 </a>
-                
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/tags/">
-                    标签
-                </a>
-                
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/categories/">
-                    分类
-                </a>
-                
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/about/">
-                    关于
-                </a>
-                
-            
-            
-            <div class="toc">
-
-
-	<div class="toc-content">
-	
-		
-		
-		
-		<center>-  -</center>
-		
-		
-		<ul>
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								
-									<ul>
-								
-							
-						
-						
-							<li>
-								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
-									序
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e6%b3%a8%e5%86%8c-github" onclick="onNavClick(`#注册-github-nav`)" id="注册-github-nav">
-									注册 Github
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%ae%89%e8%a3%85-hugo" onclick="onNavClick(`#安装-hugo-nav`)" id="安装-hugo-nav">
-									安装 Hugo
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e7%94%9f%e6%88%90%e4%b8%80%e4%b8%aa%e5%8d%9a%e5%ae%a2" onclick="onNavClick(`#生成一个博客-nav`)" id="生成一个博客-nav">
-									生成一个博客
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%86%99%e5%8d%9a%e5%ae%a2" onclick="onNavClick(`#写博客-nav`)" id="写博客-nav">
-									写博客
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%8f%91%e5%b8%83%e5%88%b0-github" onclick="onNavClick(`#发布到-github-nav`)" id="发布到-github-nav">
-									发布到 Github
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
-									结语
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
-									参考链接
-								</a>
-							</li>
-						
-						
-					
-				
-			
-		</ul>
-	</div>
-
-</div>
-            
-        </div>
-    </div>
-</div>
-<transition name="fade">
-    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
-</transition>
-<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
-    <div id="navBackground" class="nav-background"></div>
-    <div class="container container-narrow nav-content">
-        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
-            <i class="material-icons">
-                menu
-            </i>
-        </button>
-        <a id="navTitle" class="navbar-brand" href="http://weepingdogel.github.io/">
-            WeepingDogel
-        </a>
-        
-        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
-            <i class="material-icons" id="darkModeToggleIcon2">
-                dark_mode
-            </i>
-        </button>
-        
-    </div>
-</nav>
-<div class="single-column-header-container" id="pageHead"
-     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
-    <a href="http://weepingdogel.github.io/">
-        <div class="single-column-header-title">WeepingDogel</div>
-        
-
-    </a>
-</div>
-
-            <div id="content">
-                <div id="streamContainer" class="stream-container">
-
-    <div class="post-list-container post-list-container-shadow">
-        <div class="post">
-            
-            
-            
-
-            <div class="post-head-wrapper-text-only"
-                
-            >
-                <div class="post-title">
-                    如何使用 GitHub 搭建博客
-                    
-                    <div class="post-subtitle">
-                        利用 Github Pages 和 Hugo 框架搭建博客。
-                    </div>
-                    
-                    <div class="post-meta">
-                        
-                        <time itemprop="datePublished">
-                            
-                        </time>
-                        
-
-                        
-                            <i class="material-icons" style="">folder</i>
-                                <a href="/categories/">[Web]</a>
-                                &nbsp;
-                        
-
-                        
-                            <i class="material-icons" style="">label</i>
-                            
-                                <a href="/tags/%E7%AC%94%E8%AE%B0">笔记</a>
-                                &nbsp;
-                            
-                                <a href="/tags/hugo">Hugo</a>
-                                &nbsp;
-                            
-                                <a href="/tags/github-pages">Github Pages</a>
-                                &nbsp;
-                            
-                                <a href="/tags/%E5%8D%9A%E5%AE%A2">博客</a>
-                                &nbsp;
-                            
-                                <a href="/tags/%E5%BB%BA%E7%AB%99">建站</a>
-                                &nbsp;
-                            
-                                <a href="/tags/blog">blog</a>
-                                &nbsp;
-                            
-                                <a href="/tags/website">Website</a>
-                                &nbsp;
-                            
-                        
-                        
-                    </div>
-                </div>
             </div>
-            
-            <div class="post-body-wrapper">
-                
-                <div class="post-body" v-pre>
-                
-                    <h2 id="序">序</h2>
-<p>去年写过一篇<a href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/">如何使用GitHub搭建网站</a>，利用 Github Pages 上传自己写的 HTML 文件来运行一个网页..</p>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="WeepingDogel"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">如何使用 GitHub 搭建博客</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/WeepingDogel" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/web/"><i class="far fa-folder fa-fw"></i>Web</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-10-13">2020-10-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1288 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg"
+        data-srcset="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg, https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg 1.5x, https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg 2x"
+        data-sizes="auto"
+        alt="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg"
+        title="利用 Github Pages 和 Hugo 框架搭建博客。" /></div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#序">序</a></li>
+        <li><a href="#注册-github">注册 Github</a></li>
+        <li><a href="#安装-hugo">安装 Hugo</a></li>
+        <li><a href="#生成一个博客">生成一个博客</a></li>
+        <li><a href="#写博客">写博客</a></li>
+        <li><a href="#发布到-github">发布到 Github</a></li>
+        <li><a href="#结语">结语</a></li>
+        <li><a href="#参考链接">参考链接</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="序">序</h2>
+<p>去年写过一篇<a href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/" target="_blank" rel="noopener noreffer">如何使用GitHub搭建网站</a>，利用 Github Pages 上传自己写的 HTML 文件来运行一个网页..</p>
 <p>嘛.. 搭建博客的话，手写 HTML CSS JS 太麻烦了&hellip;</p>
 <p>怎么办？用框架呀</p>
 <p>qwq</p>
@@ -654,7 +145,7 @@
 <p>正好有个朋友的博客要重建..</p>
 <h2 id="注册-github">注册 Github</h2>
 <p>首先你得有个 Github 帐号和一个能在 Github Pages 显示的库。</p>
-<p>去年<a href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/">那篇</a>已经写清楚了如何注册 Github 帐号以及创建 Github Pages 库，这里就不再重复了。</p>
+<p>去年<a href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/" target="_blank" rel="noopener noreffer">那篇</a>已经写清楚了如何注册 Github 帐号以及创建 Github Pages 库，这里就不再重复了。</p>
 <p>总之你需要有一个 Github 帐号，然后创建一个名字为这样的库，记得勾选 Public</p>
 <blockquote>
 <p>你的GitHub用户名.github.io</p>
@@ -686,7 +177,7 @@
 </div><ul>
 <li>Windows</li>
 </ul>
-<p>到 <a href="https://github.com/gohugoio/hugo/releases">Github</a>下载安装程序即可</p>
+<p>到 <a href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener noreffer">Github</a>下载安装程序即可</p>
 <h2 id="生成一个博客">生成一个博客</h2>
 <p>我以 Linux 为例，其他平台可能有些细节不同，请<strong>注意</strong></p>
 <p>打开你的终端，输入</p>
@@ -760,11 +251,18 @@
 </span></span><span class="line"><span class="cl">请访问https://gohugo.io/以获取快速入门指南和完整文档。
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>好的，接下来我们前往 <a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a> 找一个好看的主题。</p>
-<p><img src="/img/2020-10-22_13-31.png" alt=""></p>
+</div><p>好的，接下来我们前往 <a href="https://themes.gohugo.io/" target="_blank" rel="noopener noreffer">https://themes.gohugo.io/</a> 找一个好看的主题。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2020-10-22_13-31.png"
+        data-srcset="/img/2020-10-22_13-31.png, /img/2020-10-22_13-31.png 1.5x, /img/2020-10-22_13-31.png 2x"
+        data-sizes="auto"
+        alt="/img/2020-10-22_13-31.png"
+        title="/img/2020-10-22_13-31.png" /></p>
 <p>这里有很多主题，qwq。</p>
 <p>嗯&hellip; 因人而异，每个人喜欢的都不同。</p>
-<p>而且各种主题的配置方式也不同，我以 <a href="https://themes.gohugo.io/hugo-coder/">hugo-coder</a> 为例</p>
+<p>而且各种主题的配置方式也不同，我以 <a href="https://themes.gohugo.io/hugo-coder/" target="_blank" rel="noopener noreffer">hugo-coder</a> 为例</p>
 <p>进入 hugo 目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -886,7 +384,14 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后通过浏览器访问 <code>http://127.0.0.1:1313/</code> 即可预览</p>
-<p><img src="/img/2020-10-22_13-53.png" alt=""></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2020-10-22_13-53.png"
+        data-srcset="/img/2020-10-22_13-53.png, /img/2020-10-22_13-53.png 1.5x, /img/2020-10-22_13-53.png 2x"
+        data-sizes="auto"
+        alt="/img/2020-10-22_13-53.png"
+        title="/img/2020-10-22_13-53.png" /></p>
 <p>这样一来，博客在本地就可以访问了，算是成功了一半。</p>
 <p>你可以修改<code>config.toml</code>这个文件来更改你的博客配置</p>
 <div class="highlight"><div class="chroma">
@@ -1260,7 +765,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里将文件里的注释翻译了一下。</p>
-<p>关于这个主题的详细文档可以阅读<a href="https://github.com/luizdepra/hugo-coder/wiki/Configurations">这个链接</a>。</p>
+<p>关于这个主题的详细文档可以阅读<a href="https://github.com/luizdepra/hugo-coder/wiki/Configurations" target="_blank" rel="noopener noreffer">这个链接</a>。</p>
 <p>根据自己的需要和说明修改配置文件就可以啦～</p>
 <h2 id="写博客">写博客</h2>
 <p>首先我们需要创建一个 <code>*.md</code> 文件，我们可以用 <code>hugo new</code> 来生成一个，因为不同主题它的空白格式都不一样</p>
@@ -1331,7 +836,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>就说明文件建立成功了，接下来只需要编辑这个文件就可以写了～</p>
-<p>对了，写博客需要使用 <a href="https://www.runoob.com/markdown/md-tutorial.html">MarkDown 语法</a>，如果不了解的可以点击链接学一下哦～</p>
+<p>对了，写博客需要使用 <a href="https://www.runoob.com/markdown/md-tutorial.html" target="_blank" rel="noopener noreffer">MarkDown 语法</a>，如果不了解的可以点击链接学一下哦～</p>
 <p>我就象征性的随便写一个吧～</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1385,7 +890,14 @@
 </span></span><span class="line"><span class="cl">&gt;```
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img src="/img/2020-10-22_17-31.png" alt="">
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2020-10-22_17-31.png"
+        data-srcset="/img/2020-10-22_17-31.png, /img/2020-10-22_17-31.png 1.5x, /img/2020-10-22_17-31.png 2x"
+        data-sizes="auto"
+        alt="/img/2020-10-22_17-31.png"
+        title="/img/2020-10-22_17-31.png" />
 记得把 <code>draft</code> 后面的内个改成 <code>false</code> 哦，不然它会被默认识别为草稿，不会被发布的。</p>
 <h2 id="发布到-github">发布到 Github</h2>
 <p>写完了以后，我们发现现在只能在<code>127.0.0.1：1313</code>这个本地链接中预览，别人是看不到的。</p>
@@ -1505,75 +1017,60 @@
 <h2 id="参考链接">参考链接</h2>
 <ul>
 <li>
-<p><a href="https://gohugo.io/documentation/">Hugo Documentation | Hugo</a></p>
+<p><a href="https://gohugo.io/documentation/" target="_blank" rel="noopener noreffer">Hugo Documentation | Hugo</a></p>
 </li>
 <li>
-<p><a href="https://themes.gohugo.io/">Complete List | Hugo Themes</a></p>
+<p><a href="https://themes.gohugo.io/" target="_blank" rel="noopener noreffer">Complete List | Hugo Themes</a></p>
 </li>
 <li>
-<p><a href="https://themes.gohugo.io/hugo-coder/">Hugo Coder | Hugo Themes</a></p>
+<p><a href="https://themes.gohugo.io/hugo-coder/" target="_blank" rel="noopener noreffer">Hugo Coder | Hugo Themes</a></p>
 </li>
 <li>
-<p><a href="https://github.com/luizdepra/hugo-coder/wiki/Configurations">Configurations · luizdepra/hugo-coder Wiki · GitHub</a></p>
+<p><a href="https://github.com/luizdepra/hugo-coder/wiki/Configurations" target="_blank" rel="noopener noreffer">Configurations · luizdepra/hugo-coder Wiki · GitHub</a></p>
 </li>
 <li>
-<p><a href="https://www.runoob.com/markdown/md-tutorial.html">Markdown 教程 | 菜鸟教程</a></p>
+<p><a href="https://www.runoob.com/markdown/md-tutorial.html" target="_blank" rel="noopener noreffer">Markdown 教程 | 菜鸟教程</a></p>
 </li>
 </ul>
-
-                    
-                    <HR width="100%" id="EOF">
-		    <p style="color:#777;"></p>
-                    
-                </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-10-13</span>
             </div>
-            
-            
-            <nav class="post-pagination">
-
-                
-                <a class="newer-posts" href="http://weepingdogel.github.io/2020-nov-6/">
-			<br>Linux Mint 如何修改软件源
-                </a>
-                
-                
-                
-                <a class="older-posts" href="http://weepingdogel.github.io/2020-09-26/">
-			<br>攻击 CentOS6 虚拟机
-                </a>
-                
-            </nav>
-            <div class="post-comment-wrapper">
-                
-
-
-
-
-
-
-
-
-
-
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-via="weepingdogel_me" data-hashtags="笔记,Hugo,Github Pages,博客,建站,blog,Website"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-hashtag="笔记"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-description="利用 Github Pages 和 Hugo 框架搭建博客。" data-image="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-caption="利用 Github Pages 和 Hugo 框架搭建博客。" data-tags="笔记,Hugo,Github Pages,博客,建站,blog,Website"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 VK" data-sharer="vk" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-caption="利用 Github Pages 和 Hugo 框架搭建博客。" data-image="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-via="weepingdogel_me" data-picture="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-description="利用 Github Pages 和 Hugo 框架搭建博客。"><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="分享到 StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-image="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-description="利用 Github Pages 和 Hugo 框架搭建博客。"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-description="利用 Github Pages 和 Hugo 框架搭建博客。"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="分享到 OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" data-title="如何使用 GitHub 搭建博客" data-description="利用 Github Pages 和 Hugo 框架搭建博客。"><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2f%25E5%25A6%2582%25E4%25BD%2595%25E4%25BD%25BF%25E7%2594%25A8github%25E6%2590%25AD%25E5%25BB%25BA%25E7%25BD%2591%25E7%25AB%2599_%25E4%25B8%258B%2f&amp;description=%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8%20GitHub%20%e6%90%ad%e5%bb%ba%e5%8d%9a%e5%ae%a2" target="_blank" title="分享到 Mix"><i class="fab fa-mix fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>,&nbsp;<a href="/tags/hugo/">Hugo</a>,&nbsp;<a href="/tags/github-pages/">Github Pages</a>,&nbsp;<a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>,&nbsp;<a href="/tags/%E5%BB%BA%E7%AB%99/">建站</a>,&nbsp;<a href="/tags/blog/">blog</a>,&nbsp;<a href="/tags/website/">Website</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
 
-                    </div>
-            </div><div id="single-column-footer">
- <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
-<br>
- <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
-<br>
-
-&copy;
-	
-	2021 WeepingDogel
-	
+    <div class="post-nav"><a href="/2020-09-26/" class="prev" rel="prev" title="攻击 CentOS6 虚拟机"><i class="fas fa-angle-left fa-fw"></i>攻击 CentOS6 虚拟机</a>
+            <a href="/2020-nov-6/" class="next" rel="next" title="Linux Mint 如何修改软件源">Linux Mint 如何修改软件源<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
-            </div>
-    
-    <script src="/js/journal.js"></script>
-    </body>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.94.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/WeepingDogel" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

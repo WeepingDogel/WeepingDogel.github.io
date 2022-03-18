@@ -1,420 +1,136 @@
 <!DOCTYPE html>
-<html><head>
-<title>一个C语言的小程序</title>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>一个C语言的小程序 - WeepingDogel</title><meta name="Description" content="一个简易的标注体重评测程序，用的是世卫的计算方法。"><meta property="og:title" content="一个C语言的小程序" />
+<meta property="og:description" content="一个简易的标注体重评测程序，用的是世卫的计算方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" /><meta property="og:image" content="http://weepingdogel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-03-29T14:15:46+08:00" />
+<meta property="article:modified_time" content="2020-03-29T14:15:46+08:00" />
 
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/logo.png"/>
 
+<meta name="twitter:title" content="一个C语言的小程序"/>
+<meta name="twitter:description" content="一个简易的标注体重评测程序，用的是世卫的计算方法。"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" /><link rel="prev" href="http://weepingdogel.github.io/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/" /><link rel="next" href="http://weepingdogel.github.io/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "一个C语言的小程序",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F\/"
+        },"genre": "posts","keywords": "C语言, 编程","wordcount":  356 ,
+        "url": "http:\/\/weepingdogel.github.io\/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F\/","datePublished": "2020-03-29T14:15:46+08:00","dateModified": "2020-03-29T14:15:46+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "一个简易的标注体重评测程序，用的是世卫的计算方法。"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-
-<meta charset="utf-8">
-<meta name="X-UA-Compatible" content="IE=edge">
-<meta name="google-site-verification" content="">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<meta content="telephone=no" name="format-detection">
-<meta name="description" content="一个简易的标注体重评测程序，用的是世卫的计算方法。">
-<meta name="renderer" content="webkit">
-<meta name="theme-color" content="#ffffff">
-
-
-
-
-
-
-
-
-
-
-
-<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
-
-
-  
-
-
-
-
-
-
-<link rel="stylesheet" href="http://weepingdogel.github.io/scss/journal.min.3f72a5fc8f5b5dd732a4b476aced0eece2156958d9d414316494ddb10593ddf7.css" integrity="sha256-P3Kl/I9bXdcypLR2rO0O7OIVaVjZ1BQxZJTdsQWT3fc=" media="screen">
-
-
-
-<link rel="stylesheet" href="http://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
-
-
-<script src="/vendor/js/loadCSS.js"></script>
-<script>
-  loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
-</script>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8465793241118966"
-     crossorigin="anonymous"></script>
-
-
-
-
-
-  <script src="/js/toc.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</head>
-<body>
-    	<div id="app"><div id="sideContainer" class="side-container">
-    
-    <a class="a-block nav-head false" href="http://weepingdogel.github.io/">
-    
-        <div class="nav-title">
-            WeepingDogel
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="WeepingDogel"></a>
         </div>
-        
-    </a>
-
-    <div class="nav-link-list">
-        
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/posts/">
-                文章
-            </a>
-            
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/tags/">
-                标签
-            </a>
-            
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/categories/">
-                分类
-            </a>
-            
-        
-            
-            
-            
-            
-            
-            <a class="a-block nav-link-item false" href="/about/">
-                关于
-            </a>
-            
-        
-    </div>
-
-    
-
-    <div class="nav-footer">
-        
- <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
-<br>
- <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
-<br>
-
-&copy;
-	
-	2021 WeepingDogel
-	
-
-    </div>
-    
-</div><div id="extraContainer" class="extra-container">
-    
-    
-    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
-
-
-	<div class="toc-content">
-	
-		
-		
-		
-		<center>-  -</center>
-		
-		
-		<ul>
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								
-									<ul>
-								
-							
-						
-						
-							<li>
-								<a href="#%e7%ae%80%e4%bb%8b" onclick="onNavClick(`#简介-nav`)" id="简介-nav">
-									简介
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e4%bb%a3%e7%a0%81" onclick="onNavClick(`#代码-nav`)" id="代码-nav">
-									代码
-								</a>
-							</li>
-						
-						
-					
-				
-			
-		</ul>
-	</div>
-
-</div>
-    
-    <div class="pagination">
-        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
-            <i class="material-icons pagination-action-icon">
-                keyboard_arrow_up
-            </i>
-        </a>
-        
-        <a type="button" class="pagination-action" id="darkModeToggleButton">
-            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
-                dark_mode
-            </span>
-        </a>
-        
-        
-    </div>
-</div>
-<div class="single-column-drawer-container" id="drawer"
-     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
-    <div class="drawer-content">
-        <div class="drawer-menu">
-            
-            
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/posts/">
-                    文章
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
                 </a>
-                
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/tags/">
-                    标签
-                </a>
-                
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/categories/">
-                    分类
-                </a>
-                
-            
-                
-                
-                
-                
-                
-                <a class="a-block drawer-menu-item false" href="/about/">
-                    关于
-                </a>
-                
-            
-            
-            <div class="toc">
-
-
-	<div class="toc-content">
-	
-		
-		
-		
-		<center>-  -</center>
-		
-		
-		<ul>
-			
-				
-				
-					
-						
-						
-						
-						
-							
-								
-									<ul>
-								
-							
-						
-						
-							<li>
-								<a href="#%e7%ae%80%e4%bb%8b" onclick="onNavClick(`#简介-nav`)" id="简介-nav">
-									简介
-								</a>
-							</li>
-						
-						
-					
-				
-			
-				
-				
-					
-						
-						
-						
-						
-						
-							<li>
-								<a href="#%e4%bb%a3%e7%a0%81" onclick="onNavClick(`#代码-nav`)" id="代码-nav">
-									代码
-								</a>
-							</li>
-						
-						
-					
-				
-			
-		</ul>
-	</div>
-
-</div>
-            
-        </div>
-    </div>
-</div>
-<transition name="fade">
-    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
-</transition>
-<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
-    <div id="navBackground" class="nav-background"></div>
-    <div class="container container-narrow nav-content">
-        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
-            <i class="material-icons">
-                menu
-            </i>
-        </button>
-        <a id="navTitle" class="navbar-brand" href="http://weepingdogel.github.io/">
-            WeepingDogel
-        </a>
-        
-        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
-            <i class="material-icons" id="darkModeToggleIcon2">
-                dark_mode
-            </i>
-        </button>
-        
-    </div>
-</nav>
-<div class="single-column-header-container" id="pageHead"
-     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
-    <a href="http://weepingdogel.github.io/">
-        <div class="single-column-header-title">WeepingDogel</div>
-        
-
-    </a>
-</div>
-
-            <div id="content">
-                <div id="streamContainer" class="stream-container">
-
-    <div class="post-list-container post-list-container-shadow">
-        <div class="post">
-            
-            
-            
-
-            <div class="post-head-wrapper-text-only"
-                
-            >
-                <div class="post-title">
-                    一个C语言的小程序
-                    
-                    <div class="post-subtitle">
-                        一个简易的标注体重评测程序，用的是世卫的计算方法。
-                    </div>
-                    
-                    <div class="post-meta">
-                        
-                        <time itemprop="datePublished">
-                            
-                        </time>
-                        
-
-                        
-                            <i class="material-icons" style="">folder</i>
-                                <a href="/categories/">[编程]</a>
-                                &nbsp;
-                        
-
-                        
-                            <i class="material-icons" style="">label</i>
-                            
-                                <a href="/tags/c%E8%AF%AD%E8%A8%80">C语言</a>
-                                &nbsp;
-                            
-                                <a href="/tags/%E7%BC%96%E7%A8%8B">编程</a>
-                                &nbsp;
-                            
-                        
-                        
-                    </div>
-                </div>
             </div>
-            
-            <div class="post-body-wrapper">
-                
-                <div class="post-body" v-pre>
-                
-                    <h2 id="简介">简介</h2>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="WeepingDogel"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">一个C语言的小程序</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/WeepingDogel" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw"></i>编程</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-29">2020-03-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 356 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/wallhaven-j5qjqy.png"
+        data-srcset="/images/wallhaven-j5qjqy.png, /images/wallhaven-j5qjqy.png 1.5x, /images/wallhaven-j5qjqy.png 2x"
+        data-sizes="auto"
+        alt="/images/wallhaven-j5qjqy.png"
+        title="一个简易的标注体重评测程序，用的是世卫的计算方法。" /></div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#简介">简介</a></li>
+        <li><a href="#代码">代码</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="简介">简介</h2>
 <p>嘛&hellip;学了一会儿C语言弄了这么个玩意👑</p>
 <p>其实就是基础语法和简单的判断👑</p>
 <h2 id="代码">代码</h2>
@@ -661,60 +377,45 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
-                    
-                    <HR width="100%" id="EOF">
-		    <p style="color:#777;"></p>
-                    
-                </div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-03-29</span>
             </div>
-            
-            
-            <nav class="post-pagination">
-
-                
-                <a class="newer-posts" href="http://weepingdogel.github.io/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/">
-			<br>FreeBSD 初♂体验
-                </a>
-                
-                
-                
-                <a class="older-posts" href="http://weepingdogel.github.io/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/">
-			<br>锏幕 新人四项考核教程
-                </a>
-                
-            </nav>
-            <div class="post-comment-wrapper">
-                
-
-
-
-
-
-
-
-
-
-
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-via="weepingdogel_me" data-hashtags="C语言,编程"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-hashtag="C语言"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-description="一个简易的标注体重评测程序，用的是世卫的计算方法。" data-image="/images/wallhaven-j5qjqy.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-caption="一个简易的标注体重评测程序，用的是世卫的计算方法。" data-tags="C语言,编程"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 VK" data-sharer="vk" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-caption="一个简易的标注体重评测程序，用的是世卫的计算方法。" data-image="/images/wallhaven-j5qjqy.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-via="weepingdogel_me" data-picture="/images/wallhaven-j5qjqy.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-description="一个简易的标注体重评测程序，用的是世卫的计算方法。"><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="分享到 StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-image="/images/wallhaven-j5qjqy.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-description="一个简易的标注体重评测程序，用的是世卫的计算方法。"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-description="一个简易的标注体重评测程序，用的是世卫的计算方法。"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="分享到 OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/%E4%B8%80%E4%B8%AAc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F/" data-title="一个C语言的小程序" data-description="一个简易的标注体重评测程序，用的是世卫的计算方法。"><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2f%25E4%25B8%2580%25E4%25B8%25AAc%25E8%25AF%25AD%25E8%25A8%2580%25E7%259A%2584%25E5%25B0%258F%25E7%25A8%258B%25E5%25BA%258F%2f&amp;description=%e4%b8%80%e4%b8%aaC%e8%af%ad%e8%a8%80%e7%9a%84%e5%b0%8f%e7%a8%8b%e5%ba%8f" target="_blank" title="分享到 Mix"><i class="fab fa-mix fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c%E8%AF%AD%E8%A8%80/">C语言</a>,&nbsp;<a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
 
-                    </div>
-            </div><div id="single-column-footer">
- <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
-<br>
- <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
-<br>
-
-&copy;
-	
-	2021 WeepingDogel
-	
+    <div class="post-nav"><a href="/%E9%94%8F%E5%B9%95-%E6%96%B0%E4%BA%BA%E5%9B%9B%E9%A1%B9%E8%80%83%E6%A0%B8%E6%95%99%E7%A8%8B/" class="prev" rel="prev" title="锏幕 新人四项考核教程"><i class="fas fa-angle-left fa-fw"></i>锏幕 新人四项考核教程</a>
+            <a href="/freebsd%E5%88%9D%E4%BD%93%E9%AA%8C/" class="next" rel="next" title="FreeBSD 初♂体验">FreeBSD 初♂体验<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
-            </div>
-    
-    <script src="/js/journal.js"></script>
-    </body>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.94.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/WeepingDogel" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
