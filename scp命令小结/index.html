@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html><head>
+<title>scp 命令小结</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="通过 scp 命令向其他 Linux 设备传输文件，scp 命令...">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/journal.min.3f72a5fc8f5b5dd732a4b476aced0eece2156958d9d414316494ddb10593ddf7.css" integrity="sha256-P3Kl/I9bXdcypLR2rO0O7OIVaVjZ1BQxZJTdsQWT3fc=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
+
+
+<script src="/vendor/js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8465793241118966"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+  <script src="/js/toc.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div id="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            WeepingDogel
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/posts/">
+                文章
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags/">
+                标签
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories/">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about/">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+
+    </div>
+    
+</div><div id="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#scp-%e5%91%bd%e4%bb%a4%e6%98%af%e4%bb%80%e4%b9%88" onclick="onNavClick(`#scp-命令是什么-nav`)" id="scp-命令是什么-nav">
+									scp 命令是什么
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95" onclick="onNavClick(`#用法-nav`)" id="用法-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%a4%ba%e4%be%8b" onclick="onNavClick(`#示例-nav`)" id="示例-nav">
+									示例
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%8a%e4%bc%a0%e4%b8%80%e4%b8%aa%e6%96%87%e4%bb%b6" onclick="onNavClick(`#上传一个文件-nav`)" id="上传一个文件-nav">
+									上传一个文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%8b%e8%bd%bd%e4%b8%80%e4%b8%aa%e6%96%87%e4%bb%b6" onclick="onNavClick(`#下载一个文件-nav`)" id="下载一个文件-nav">
+									下载一个文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%8c%87%e5%ae%9a%e4%b8%80%e4%b8%aa-ip" onclick="onNavClick(`#指定一个-ip-nav`)" id="指定一个-ip-nav">
+									指定一个 IP
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/posts/">
+                    文章
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags/">
+                    标签
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories/">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about/">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#scp-%e5%91%bd%e4%bb%a4%e6%98%af%e4%bb%80%e4%b9%88" onclick="onNavClick(`#scp-命令是什么-nav`)" id="scp-命令是什么-nav">
+									scp 命令是什么
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95" onclick="onNavClick(`#用法-nav`)" id="用法-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%a4%ba%e4%be%8b" onclick="onNavClick(`#示例-nav`)" id="示例-nav">
+									示例
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%8a%e4%bc%a0%e4%b8%80%e4%b8%aa%e6%96%87%e4%bb%b6" onclick="onNavClick(`#上传一个文件-nav`)" id="上传一个文件-nav">
+									上传一个文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%b8%8b%e8%bd%bd%e4%b8%80%e4%b8%aa%e6%96%87%e4%bb%b6" onclick="onNavClick(`#下载一个文件-nav`)" id="下载一个文件-nav">
+									下载一个文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%8c%87%e5%ae%9a%e4%b8%80%e4%b8%aa-ip" onclick="onNavClick(`#指定一个-ip-nav`)" id="指定一个-ip-nav">
+									指定一个 IP
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" onclick="onNavClick(`#参考链接-nav`)" id="参考链接-nav">
+									参考链接
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="http://weepingdogel.github.io/">
+            WeepingDogel
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://weepingdogel.github.io/">
+        <div class="single-column-header-title">WeepingDogel</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    scp 命令小结
+                    
+                    <div class="post-subtitle">
+                        通过 scp 命令向其他 Linux 设备传输文件，scp 命令...
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[Linux]</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/%E8%AE%B0%E5%BD%95">记录</a>
+                                &nbsp;
+                            
+                                <a href="/tags/linux">Linux</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E5%91%BD%E4%BB%A4">命令</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E5%85%A5%E9%97%A8%E5%90%91">入门向</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E6%96%B0%E6%89%8B">新手</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h2 id="scp-命令是什么">scp 命令是什么</h2>
+<p>是传文件用的..</p>
+<p>我们用 <code>ssh</code> 操作服务器，当我们需要给服务器传输文件的时候，<code>scp</code> 命令会通过 <code>ssh</code> 的端口进行文件传输。</p>
+<h2 id="用法">用法</h2>
+<p>当我们在终端输入 <code>scp</code> 后，我们会得到这些</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel ~&gt; scp
+</span></span><span class="line"><span class="cl">usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file]
+</span></span><span class="line"><span class="cl">            [-J destination] [-l limit] [-o ssh_option] [-P port]
+</span></span><span class="line"><span class="cl">            [-S program] source ... target
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>很显然我们很快就知道了一些参数&hellip;</p>
+<h2 id="示例">示例</h2>
+<p>这里举一些例子，来展示清楚具体的使用方法&hellip;</p>
+<p>先说明一下我的测试环境</p>
+<blockquote>
+<p>Arch Linux</p>
+<p>IP: 192.168.0.105</p>
+<p>CentOS8 虚拟机</p>
+<p>IP: 192.168.0.108</p>
+</blockquote>
+<h3 id="上传一个文件">上传一个文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ scp [本地文件名] 用户名@地址:[文件名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是一般用法，但是<strong>请确保路径正确！</strong></p>
+<p>即：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel ~ [1]&gt; scp ./编译/7.1.0.zip root@192.168.0.108:/root/
+</span></span><span class="line"><span class="cl">root@192.168.0.108&#39;s password: 
+</span></span><span class="line"><span class="cl">7.1.0.zip                                                    100%   95KB   5.2MB/s   00:00 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个很简单的，没什么多说的了..</p>
+<h3 id="下载一个文件">下载一个文件</h3>
+<p>如果我们要从服务器里取一个文件下来修改，而服务器没有 <code>ftp</code> 时该怎么办呢？</p>
+<p>我们需要用 SSH 去找到这个文件的位置，不过这个就不详写了，与主题无关。（总之你知道文件的位置就可以了）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ scp 用户名@地址:[文件名] [本地文件名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还是要提醒一下，这个<strong>文件名</strong>， <strong>是一个路径！</strong></p>
+<p>是一个<strong>相对路径</strong>或<strong>绝对路径</strong>！具体依情况而定，但<strong>它一定是个路径！</strong></p>
+<p>如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel ~&gt; scp root@192.168.0.108:/root/index.html /tmp/index.html
+</span></span><span class="line"><span class="cl">root@192.168.0.108&#39;s password: 
+</span></span><span class="line"><span class="cl">index.html                                                   100%   46KB 728.6KB/s   00:00
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel ~&gt; ls /tmp/*.html -lh
+</span></span><span class="line"><span class="cl">-rw-r--r-- 1 weepingdogel weepingdogel 47K  9月  5 20:54 /tmp/index.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只需要知道文件在服务器的具体位置以及想好保存到本地的一个位置就可以了</p>
+<h3 id="指定一个-ip">指定一个 IP</h3>
+<p>一般情况下 SSH 的端口都是 22，那是真的云服务器或者一些有公网 IP 的服务器。</p>
+<p>而上文写的是基于局域网中的文件传输，我们需要内网穿透才能远程文件传输，但内网穿透在一般情况下都是指定一个别的端口来给 SSH 建立一个通道，因此端口就不再是 22 了。</p>
+<p>我这里用的是 <a href="https://www.natfrp.com/">SakuraFRP</a> ，非常好用的免费内网穿透服务！</p>
+<p><strong>上传：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">scp -P [端口]  [本地文件名] 用户名@地址:[文件名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>下载：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">scp -P [端口] 用户名@地址:[文件名] [本地文件名]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面已经提示过很多次<strong>这个<code>[文件名]</code>是个路径了</strong>。这里就不再多废话啦。</p>
+<p>嗯&hellip; 具体就是这样子的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel ~&gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是这里我来个组合命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel ~ [1]&gt; scp -P 45820 root@cn-zj-dx-2.sakurafrp.com:/root/test.py /tmp/test.py &amp;&amp; cd /tmp &amp;&amp; python test.py
+</span></span><span class="line"><span class="cl">The authenticity of host &#39;[cn-zj-dx-2.sakurafrp.com]:45820 ([222.186.174.33]:45820)&#39; can&#39;t be established.
+</span></span><span class="line"><span class="cl">ECDSA key fingerprint is SHA256:8J1Z+I8NtPXAk7EFDwLiwu8pmwSoPLYeJM2iYnV7z5M.
+</span></span><span class="line"><span class="cl">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+</span></span><span class="line"><span class="cl">Warning: Permanently added &#39;[cn-zj-dx-2.sakurafrp.com]:45820,[222.186.174.33]:45820&#39; (ECDSA) to the list of known hosts.
+</span></span><span class="line"><span class="cl">root@cn-zj-dx-2.sakurafrp.com&#39;s password: 
+</span></span><span class="line"><span class="cl">test.py                                                      100%   21     0.2KB/s   00:00    
+</span></span><span class="line"><span class="cl">Hello World
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上传的也是差不多的啦，把位置反过来就可以了，这里就不多演示啦</p>
+<p>写完啦！</p>
+<h2 id="参考链接">参考链接</h2>
+<p>啥？这次没有，自己试出来的&hellip;</p>
+<p>唔啊！准确来说也有，那就是各种搜索引擎啦～</p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;"></p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://weepingdogel.github.io/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
+			<br>Python 学习笔记——文件操作
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://weepingdogel.github.io/%E5%85%B3%E4%BA%8Efcitx5/">
+			<br>关于 fcitx5 ，以及最近的环境变量问题
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="single-column-footer">
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+</div>
+            </div>
+    
+    <script src="/js/journal.js"></script>
+    </body>
+</html>

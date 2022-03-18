@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html><head>
+<title>Linux 基础命令</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="Linux的基本命令用法">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/journal.min.3f72a5fc8f5b5dd732a4b476aced0eece2156958d9d414316494ddb10593ddf7.css" integrity="sha256-P3Kl/I9bXdcypLR2rO0O7OIVaVjZ1BQxZJTdsQWT3fc=" media="screen">
+
+
+
+<link rel="stylesheet" href="http://weepingdogel.github.io/scss/dark-mode.min.f7c2efa7183435a6bd1842f91c541481c7a5137b5991629a870f24e4a516ad4b.css" integrity="sha256-98Lvpxg0Naa9GEL5HFQUgcelE3tZkWKahw8k5KUWrUs=" media="screen">
+
+
+<script src="/vendor/js/loadCSS.js"></script>
+<script>
+  loadCSS("https://fonts.googleapis.com/css?family=Fira+Mono|Material+Icons");
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8465793241118966"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+  <script src="/js/toc.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div id="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="http://weepingdogel.github.io/">
+    
+        <div class="nav-title">
+            WeepingDogel
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/posts/">
+                文章
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags/">
+                标签
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories/">
+                分类
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about/">
+                关于
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+
+    </div>
+    
+</div><div id="extraContainer" class="extra-container">
+    
+    
+    <div class="toc animated-visibility" :class="{ invisible: scrollY <= 140 }">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8%e5%91%bd%e4%bb%a4%e8%a1%8c" onclick="onNavClick(`#如何使用命令行-nav`)" id="如何使用命令行-nav">
+									如何使用命令行
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#cd%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#cd命令-nav`)" id="cd命令-nav">
+									cd命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95" onclick="onNavClick(`#用法-nav`)" id="用法-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e8%bf%9b%e5%85%a5%e6%9f%90%e4%b8%aa%e7%9b%ae%e5%bd%95" onclick="onNavClick(`#进入某个目录-nav`)" id="进入某个目录-nav">
+									进入某个目录:
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%80%80%e5%87%ba%e6%9f%90%e4%b8%aa%e7%9b%ae%e5%bd%95" onclick="onNavClick(`#退出某个目录-nav`)" id="退出某个目录-nav">
+									退出某个目录:
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#pwd%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#pwd命令-nav`)" id="pwd命令-nav">
+									pwd命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-1" onclick="onNavClick(`#用法-1-nav`)" id="用法-1-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#ls%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#ls命令-nav`)" id="ls命令-nav">
+									ls命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-2" onclick="onNavClick(`#用法-2-nav`)" id="用法-2-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%96%87%e4%bb%b6%e5%a4%8d%e5%88%b6%e4%b8%8e%e7%a7%bb%e5%8a%a8" onclick="onNavClick(`#文件复制与移动-nav`)" id="文件复制与移动-nav">
+									文件复制与移动
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#mv%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#mv命令-nav`)" id="mv命令-nav">
+									mv命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-3" onclick="onNavClick(`#用法-3-nav`)" id="用法-3-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#cp%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#cp命令-nav`)" id="cp命令-nav">
+									cp命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-4" onclick="onNavClick(`#用法-4-nav`)" id="用法-4-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#mkdir%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#mkdir命令-nav`)" id="mkdir命令-nav">
+									mkdir命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-5" onclick="onNavClick(`#用法-5-nav`)" id="用法-5-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e8%88%ac%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#一般创建-nav`)" id="一般创建-nav">
+									一般创建
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%80%92%e5%bd%92%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#递归创建-nav`)" id="递归创建-nav">
+									递归创建
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#rm%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#rm命令-nav`)" id="rm命令-nav">
+									rm命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-6" onclick="onNavClick(`#用法-6-nav`)" id="用法-6-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%88%a0%e9%99%a4%e6%96%87%e4%bb%b6" onclick="onNavClick(`#删除文件-nav`)" id="删除文件-nav">
+									删除文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%88%a0%e9%99%a4%e7%9b%ae%e5%bd%95" onclick="onNavClick(`#删除目录-nav`)" id="删除目录-nav">
+									删除目录
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%ba%e5%88%b6%e5%88%a0%e9%99%a4%e5%8d%b1%e9%99%a9" onclick="onNavClick(`#强制删除危险-nav`)" id="强制删除危险-nav">
+									强制删除|危险|
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%8c%85%e7%ae%a1%e7%90%86%e5%99%a8" onclick="onNavClick(`#包管理器-nav`)" id="包管理器-nav">
+									包管理器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
+									结语
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+    
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+    </div>
+</div>
+<div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/posts/">
+                    文章
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags/">
+                    标签
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories/">
+                    分类
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about/">
+                    关于
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>-  -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8%e5%91%bd%e4%bb%a4%e8%a1%8c" onclick="onNavClick(`#如何使用命令行-nav`)" id="如何使用命令行-nav">
+									如何使用命令行
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#cd%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#cd命令-nav`)" id="cd命令-nav">
+									cd命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95" onclick="onNavClick(`#用法-nav`)" id="用法-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e8%bf%9b%e5%85%a5%e6%9f%90%e4%b8%aa%e7%9b%ae%e5%bd%95" onclick="onNavClick(`#进入某个目录-nav`)" id="进入某个目录-nav">
+									进入某个目录:
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%80%80%e5%87%ba%e6%9f%90%e4%b8%aa%e7%9b%ae%e5%bd%95" onclick="onNavClick(`#退出某个目录-nav`)" id="退出某个目录-nav">
+									退出某个目录:
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#pwd%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#pwd命令-nav`)" id="pwd命令-nav">
+									pwd命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-1" onclick="onNavClick(`#用法-1-nav`)" id="用法-1-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#ls%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#ls命令-nav`)" id="ls命令-nav">
+									ls命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-2" onclick="onNavClick(`#用法-2-nav`)" id="用法-2-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e6%96%87%e4%bb%b6%e5%a4%8d%e5%88%b6%e4%b8%8e%e7%a7%bb%e5%8a%a8" onclick="onNavClick(`#文件复制与移动-nav`)" id="文件复制与移动-nav">
+									文件复制与移动
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#mv%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#mv命令-nav`)" id="mv命令-nav">
+									mv命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-3" onclick="onNavClick(`#用法-3-nav`)" id="用法-3-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#cp%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#cp命令-nav`)" id="cp命令-nav">
+									cp命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-4" onclick="onNavClick(`#用法-4-nav`)" id="用法-4-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#mkdir%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#mkdir命令-nav`)" id="mkdir命令-nav">
+									mkdir命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-5" onclick="onNavClick(`#用法-5-nav`)" id="用法-5-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e4%b8%80%e8%88%ac%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#一般创建-nav`)" id="一般创建-nav">
+									一般创建
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%80%92%e5%bd%92%e5%88%9b%e5%bb%ba" onclick="onNavClick(`#递归创建-nav`)" id="递归创建-nav">
+									递归创建
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#rm%e5%91%bd%e4%bb%a4" onclick="onNavClick(`#rm命令-nav`)" id="rm命令-nav">
+									rm命令
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%94%a8%e6%b3%95-6" onclick="onNavClick(`#用法-6-nav`)" id="用法-6-nav">
+									用法
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%88%a0%e9%99%a4%e6%96%87%e4%bb%b6" onclick="onNavClick(`#删除文件-nav`)" id="删除文件-nav">
+									删除文件
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%88%a0%e9%99%a4%e7%9b%ae%e5%bd%95" onclick="onNavClick(`#删除目录-nav`)" id="删除目录-nav">
+									删除目录
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%ba%e5%88%b6%e5%88%a0%e9%99%a4%e5%8d%b1%e9%99%a9" onclick="onNavClick(`#强制删除危险-nav`)" id="强制删除危险-nav">
+									强制删除|危险|
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%8c%85%e7%ae%a1%e7%90%86%e5%99%a8" onclick="onNavClick(`#包管理器-nav`)" id="包管理器-nav">
+									包管理器
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%bb%93%e8%af%ad" onclick="onNavClick(`#结语-nav`)" id="结语-nav">
+									结语
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="http://weepingdogel.github.io/">
+            WeepingDogel
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="http://weepingdogel.github.io/">
+        <div class="single-column-header-title">WeepingDogel</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+
+            <div class="post-head-wrapper-text-only"
+                
+            >
+                <div class="post-title">
+                    Linux 基础命令
+                    
+                    <div class="post-subtitle">
+                        Linux的基本命令用法
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[Linux]</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/linux">Linux</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E6%95%99%E7%A8%8B">教程</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E6%96%B0%E6%89%8B">新手</a>
+                                &nbsp;
+                            
+                                <a href="/tags/%E5%85%A5%E9%97%A8">入门</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <p><em><strong>提示：面向萌新，大佬勿喷</strong></em></p>
+<p>刚入门Linux难免会觉得很麻烦，因为不知道如何使用命令去操作，这样的话在Linux系统是寸步难行的，但是学会了一些基础命令以后就能无压力的操作了，想不想学会Linux？那就让我们从简单的文件操作开始吧。</p>
+<h2 id="如何使用命令行">如何使用命令行</h2>
+<p>如果你的发行版自带图形界面的话，可以从图形界面的菜单中找到一个叫 <strong>“终端”</strong> 的东西，打开它，就可以使用命令了。如果你的发行版不带图形界面，那么在tty登录用户以后就可以直接使用了。</p>
+<p>注意，这个终端不等于<strong>DOS</strong>也不等于<strong>cmd</strong>，它和windows是没有办毛钱关系的，是另一种东西。</p>
+<h2 id="cd命令">cd命令</h2>
+<p>如果你之前用过DOS或者经常使用windows的cmd，你就会知道这个命令了，这个命令在大多数操作系统中都有。</p>
+<p>cd命令是”change directory”的缩写，也就是改变你当前所在的目录，后面可以加相对路径，也可以加上绝对路径。</p>
+<p>简单的理解，就是进入一个文件夹。</p>
+<h3 id="用法">用法</h3>
+<p>测试目录:<code>/a/b/c</code></p>
+<h4 id="进入某个目录">进入某个目录:</h4>
+<p>绝对路径：指定一个完整的路径，与自己当前所在的目录无关</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost ~<span class="o">]</span>$ <span class="nb">cd</span> /a/b/c <span class="c1"># 进入/a/b/c这个路径中的目录c</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost b<span class="o">]</span>$ <span class="nb">cd</span> ./c <span class="c1"># 进入当前所在/a/b目录下面的目录c</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>指定上一级</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost b<span class="o">]</span>$ <span class="nb">cd</span> ../xxx <span class="c1">#进入当前所在目录/a/b中的/a目录下的其他目录</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost xxx<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="退出某个目录">退出某个目录:</h4>
+<p>有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。</p>
+<p>返回上一级</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ <span class="nb">cd</span> .. <span class="c1"># 从当前所在的目录/a/b/c返回上一级的目录/a/b</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost b<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回上两级</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ <span class="nb">cd</span> ../.. <span class="c1"># 从当前所在的目录/a/b/c返回上两级的目录/a</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="pwd命令">pwd命令</h2>
+<p>这个命令是用来辅助上面的cd命令的，它的作用是查看当前所在的绝对路径。</p>
+<h3 id="用法-1">用法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost ~<span class="o">]</span>$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl">/home/weepingdogel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>假如当前所在目录为/a/b/c</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl">/a/b/c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>虽然只有一个作用，但是却很重要，因为新手每天都会用到，bash或者部分zsh主题是不会显示绝对路就的，如果你不知道你当前在操作哪个目录，你就得用上pwd这个命令了。</p>
+<h2 id="ls命令">ls命令</h2>
+<p>这个命令相当于windows中的<strong>dir</strong>，作用是显示当前目录下的所有的文件和目录。</p>
+<h3 id="用法-2">用法</h3>
+<p>测试目录<code>/tmp/a/b/c</code></p>
+<p>直接查看</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls <span class="c1"># 查看当前目录下面的文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl"><span class="m">223333</span>  文本.txt  <span class="nb">test</span>  wiaori <span class="c1"># 被列出的文件</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>列表式查看，参数-l</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -l
+</span></span><span class="line"><span class="cl"><span class="c1">#按下回车后</span>
+</span></span><span class="line"><span class="cl">总用量 <span class="m">4</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 17:38 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>易读列表查看，参数-lh</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -lh
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 17:38 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>按时间排序的易读列表查看，参数-lh &ndash;sort=time</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -lh --sort<span class="o">=</span><span class="nb">time</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 17:38 文本.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>按文件大小排序的易读列表查看，参数-lh &ndash;sort=size</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -lh --sort<span class="o">=</span>size
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后</span>
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 17:38 文本.txt
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>更多用法等你自己去摸索了</p>
+<h2 id="文件复制与移动">文件复制与移动</h2>
+<h3 id="mv命令">mv命令</h3>
+<p>这个命令是英文单词<strong>move</strong>的缩写。</p>
+<p>它的作用主要是移动某些文件到指定的位置，你可以指定绝对路径，但是如果离得比较近的话就可以使用相对路径。</p>
+<h4 id="用法-3">用法</h4>
+<h5 id="绝对路径用法">绝对路径用法：</h5>
+<p>比如我们把 <strong>“目录c”</strong> 下面的 <strong>“文本.txt”</strong> 移动到<code>/tmp/a/</code>下面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ mv /tmp/a/b/c/文本.txt /tmp/a/
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后，文件就被移动了</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来我们切换到<code>/tmp/a/</code>下面看看吧</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ <span class="nb">cd</span> /tmp/a
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ ls
+</span></span><span class="line"><span class="cl">文本.txt  b
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时我们就看到了那个 <strong>“文本.txt”</strong> 被移动到了<code>/tmp/a/</code>下面了。</p>
+<h5 id="相对路径用法">相对路径用法：</h5>
+<p>那么我们用另一种方法把这个文件移回去吧，首先我们还在这个<code>/tmp/a/</code>下面，那么命令如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ mv ./文本.txt ./b/c/
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后，文件就被移动了</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来我们回到<code>/tmp/a/b/c/</code>下面看看吧。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ <span class="nb">cd</span> ./b/c
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls
+</span></span><span class="line"><span class="cl"><span class="m">223333</span>  文本.txt  <span class="nb">test</span>  wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>看到了没有，它又回来了。</p>
+<h3 id="cp命令">cp命令</h3>
+<p>哈哈，这个命令也不是那个cp的意思，它是  <strong>“copy”</strong> 的缩写，复制的意思。</p>
+<p>顾名思义，它的作用就是把一个文件复制到另一个地方。它同样有指定绝对路径和相对路径的两种用法。来尝试一下？</p>
+<h4 id="用法-4">用法</h4>
+<h5 id="绝对路径">绝对路径：</h5>
+<p>我们来试试把<code>/tmp/a/b/c/文本.txt</code>这个文件复制到<code>/tmp/a/</code>下面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ cp /tmp/a/b/c/文本.txt /tmp/a/
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后，文件就被复制了</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ <span class="nb">cd</span> ../.. <span class="c1"># 我们来看看它是否被复制成功</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ ls -lh <span class="c1"># 使用ls命令看一下，可见他是被复制成功的，创建日期与上面不一样。</span>
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 18:36 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> weepingdogel weepingdogel <span class="m">60</span>  8月  <span class="m">5</span> 17:37 b
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：此命令如果不使用高级用法是无法复制创建时间和所有者的</p>
+</blockquote>
+<h5 id="相对路径">相对路径：</h5>
+<p>嘿嘿，我们尝试给/tmp/a/的每一级目录都复制一份吧。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ cp ./文本.txt ./b/ <span class="c1"># 先复制到目录b</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ cp ./文本.txt ./b/c/ <span class="c1"># 复制到目录c</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ cp ./文本.txt ../ <span class="c1"># 复制到/tmp/下面</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost a<span class="o">]</span>$ <span class="nb">cd</span> .. <span class="c1"># 回到/tmp下面</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost tmp<span class="o">]</span>$ ls -lh <span class="c1"># 查看是否复制成功，可见第一个就是该文件</span>
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 18:48  文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> weepingdogel weepingdogel <span class="m">80</span>  8月  <span class="m">5</span> 18:36  a
+</span></span><span class="line"><span class="cl"><span class="c1"># 接下来一级一级往下看</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost tmp<span class="o">]</span>$ ls -lh ./a
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 18:36 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> weepingdogel weepingdogel <span class="m">80</span>  8月  <span class="m">5</span> 18:45 b
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost tmp<span class="o">]</span>$ ls -lh ./a/b
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">11</span>  8月  <span class="m">5</span> 18:45 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> weepingdogel weepingdogel <span class="m">120</span>  8月  <span class="m">5</span> 18:25 c
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost tmp<span class="o">]</span>$ ls -lh ./a/b/c
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 18:47 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可见，复制是成功的。</p>
+<blockquote>
+<p>注意：如果要复制目录，请在指定目录前加上参数-r，否则将无法复制</p>
+</blockquote>
+<h2 id="mkdir命令">mkdir命令</h2>
+<p>这个命令是 <strong>“make directory”</strong> 的缩写，意为创建一个目录它一般情况下有两种用法</p>
+<ol>
+<li>一般创建，直接在已存在的绝对路径或相对路径创建一个目录</li>
+<li>递归创建，创建一连串目录，在创建之前有一级或以上的目录未被创建</li>
+</ol>
+<p>同样也是可以指定绝对路径和相对路径的，接下来我就只写出相对路径的示例了，因为方便。</p>
+<p>来尝试一下？</p>
+<h3 id="用法-5">用法</h3>
+<h4 id="一般创建">一般创建</h4>
+<p>假设目录<code>/tmp/a/b/c</code></p>
+<p>我们要创建一个目录<code>d</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ mkdir ./d <span class="c1"># 在/tmp/a/b/c/下面创建一个目录d</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车之后，目录就创建了，我们可以用ls来检查一下</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -lh
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 18:47 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 19:07 d
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可见，目录被成功创建了。</p>
+<h4 id="递归创建">递归创建</h4>
+<p>假设目录<code>/tmp/a/b/c</code></p>
+<p>我们要在当前目录下创建一串目录，比如<code>./go/for/it</code>，此时我们就要加个参数<code>-p</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ mkdir -p ./go/fot/it
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车之后，一串目录就被创建了，接下来我们会一级一级的查看</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -lh 
+</span></span><span class="line"><span class="cl">总用量 4.0K
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel <span class="m">11</span>  8月  <span class="m">5</span> 18:47 文本.txt
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 19:07 d
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> weepingdogel weepingdogel <span class="m">60</span>  8月  <span class="m">5</span> 19:14 go
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl"><span class="c1"># 可见我们看见了目录go</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ <span class="nb">cd</span> ./go <span class="c1"># 我们试着进入这个目录，可见我们成功进入了目录</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost go<span class="o">]</span>$ ls -lh <span class="c1">#继续查看下一级</span>
+</span></span><span class="line"><span class="cl">总用量 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> weepingdogel weepingdogel <span class="m">60</span>  8月  <span class="m">5</span> 19:14 <span class="k">for</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost go<span class="o">]</span>$ <span class="nb">cd</span> ./for <span class="c1">#进入目录for</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost <span class="k">for</span><span class="o">]</span>$ ls -lh <span class="c1"># 继续查看下一级</span>
+</span></span><span class="line"><span class="cl">总用量 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 19:14 it
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost <span class="k">for</span><span class="o">]</span>$ <span class="nb">cd</span> ./it <span class="c1">#接下来我们进入这个目录it，由于it里面是空的，所以就不用ls查看了</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost it<span class="o">]</span>$ <span class="nb">pwd</span> <span class="c1">#使用pwd查看当前位置</span>
+</span></span><span class="line"><span class="cl">/tmp/a/b/c/go/for/it
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost it<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可见这一串目录也创建成功了。</p>
+<h2 id="rm命令">rm命令</h2>
+<blockquote>
+<p>注意:此命令如果使用不当十分危险</p>
+</blockquote>
+<p>这个命令是 <strong>“remove”</strong> 的缩写，意为删除，作用上和windows中的del命令差不多，但是用法和参数却有所不同，而且诶这个命令如果使用不当是十分危险的，因为在Linux中，就算是正在被使用的文件也可以被删除，并不会有windows那种保姆级别的”拒绝访问”。</p>
+<h3 id="用法-6">用法</h3>
+<p>假设目录<code>/tmp/a/b/c</code></p>
+<h4 id="删除文件">删除文件</h4>
+<p>我们来尝试删除一下<code>文本.txt</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ rm ./文本.txt
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车之后这个文件就被删除了</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls
+</span></span><span class="line"><span class="cl"><span class="m">223333</span>  d  go  <span class="nb">test</span>  wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="删除目录">删除目录</h4>
+<p>如果你要删除一个目录，比如go，就需要加一个参数-r</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ rm -r ./go
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车之后，这个目录就被删除了</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -lh <span class="c1">#查看一下就可以看到，go也不见了</span>
+</span></span><span class="line"><span class="cl">总用量 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 <span class="m">223333</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 19:07 d
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="强制删除危险">强制删除|危险|</h4>
+<p>如果你需要强制删除一个文件，则需要调用root权限，并且使用<code>-rf</code>参数。</p>
+<blockquote>
+<p>注意，千万不要用这个命令去删除 <code>/</code>目录，否则你的系统将会自杀</p>
+</blockquote>
+<p>比如我们要删除<code>223333</code>这个文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ sudo rm -rf ./223333
+</span></span><span class="line"><span class="cl"><span class="c1"># 按下回车后会要你输入一次密码，输入密码后按回车，这个文件就删除了，Linux的安全保护机制使密码不会显示在屏幕上</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sudo<span class="o">]</span> weepingdogel 的密码：
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ ls -lh <span class="c1"># 查看一下文件的情况，可见这个文件不见了</span>
+</span></span><span class="line"><span class="cl">总用量 <span class="m">0</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 19:07 d
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> weepingdogel weepingdogel <span class="m">40</span>  8月  <span class="m">5</span> 17:52 <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> weepingdogel weepingdogel  <span class="m">0</span>  8月  <span class="m">5</span> 17:52 wiaori
+</span></span><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="包管理器">包管理器</h2>
+<blockquote>
+<p>注意：不同发行版之间可能有差异</p>
+</blockquote>
+<p>一般情况下，新手使用的<strong>deb系发行版</strong>的包管理器是<strong>apt</strong></p>
+<p>那么这些就是<strong>apt</strong>常用的用法了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost ~<span class="o">]</span>$ sudo apt-get update <span class="c1"># 更新软件源</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ sudo apt-get install &lt;包名&gt; <span class="c1"># 安装一个软件、软件包</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ sudo apt-get search &lt;软件名称&gt; <span class="c1"># 搜索软件</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ sudo apt-get upgrade <span class="c1"># 升级你已安装的软件，通常消耗时间比较长</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ sudo apt-get remove &lt;包名&gt; <span class="c1"># 卸载软件</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ sudo apt-get autoremove <span class="c1"># 自动处理依赖</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">如果要安装本地包，则需要使用本地包管理器dpkg，用法如下
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>weepingdogel@localhost c<span class="o">]</span>$ sudo dpkg -i &lt;包名&gt; <span class="c1"># 安装本地包</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="结语">结语</h2>
+<p>本期博客中的内容并不是很详细，我已经尽力写得让大多数人能看懂，也许还有少数人无法理解内容，没关系，你可以在下面的评论区提问。</p>
+<p>那么，欢迎评论。</p>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;"></p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="http://weepingdogel.github.io/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/">
+			<br>Python学习笔记 简单爬虫
+                </a>
+                
+                
+                
+                <a class="older-posts" href="http://weepingdogel.github.io/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/">
+			<br>用 Arch Linux 打造完美渗透环境
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="single-column-footer">
+ <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a>  <a href="https://amazingrise.net">Rise</a>
+<br>
+ <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	2021 WeepingDogel
+	
+</div>
+            </div>
+    
+    <script src="/js/journal.js"></script>
+    </body>
+</html>
