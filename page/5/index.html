@@ -96,97 +96,188 @@
                 <div class="container"><div class="page home" posts><div class="home-profile"><div class="home-avatar"><a href="/posts/" title="文章"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/photo_2021-07-21_03-31-50.jpg"
-        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-src="https://www.gravatar.com/avatar/ae0cadcc789f1b3bb8bb3b148c5fa4a1?s=240&amp;d=mp"
+        data-srcset="https://www.gravatar.com/avatar/ae0cadcc789f1b3bb8bb3b148c5fa4a1?s=240&amp;d=mp, https://www.gravatar.com/avatar/ae0cadcc789f1b3bb8bb3b148c5fa4a1?s=240&amp;d=mp 1.5x, https://www.gravatar.com/avatar/ae0cadcc789f1b3bb8bb3b148c5fa4a1?s=240&amp;d=mp 2x"
         data-sizes="auto"
-        alt="/photo_2021-07-21_03-31-50.jpg"
-        title="/photo_2021-07-21_03-31-50.jpg" /></a></div><h1 class="home-title">WeepingDogel</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"><a href="https://github.com/WeepingDogel" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://twitter.com/weepingdogel_me" title="Twitter" target="_blank" rel="noopener noreffer me"><i class="fab fa-twitter fa-fw"></i></a><a href="https://t.me/WeepingDogel_Me" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="mailto:weepingdogel@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/">scp 命令小结</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-09-05">2020-09-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux/"><i class="far fa-folder fa-fw"></i>Linux</a></span></div><div class="content">scp 命令是什么 是传文件用的..
-我们用 ssh 操作服务器，当我们需要给服务器传输文件的时候，scp 命令会通过 ssh 的端口进行文件传输。
-用法 当我们在终端输入 scp 后，我们会得到这些
-1 2 3 4  weepingdogel@WeepingDogel ~&gt; scp usage: scp [-346BCpqrTv] [-c cipher] [-F ssh_config] [-i identity_file] [-J destination] [-l limit] [-o ssh_option] [-P port] [-S program] source ... target   很显然我们很快就知道了一些参数&hellip;
-示例 这里举一些例子，来展示清楚具体的使用方法&hellip;
-先说明一下我的测试环境
- Arch Linux
-IP: 192.168.0.105
-CentOS8 虚拟机
-IP: 192.168.0.108
- 上传一个文件 1  $ scp [本地文件名] 用户名@地址:[文件名]   这是一般用法，但是请确保路径正确！
-即：</div><div class="post-footer">
-        <a href="/scp%E5%91%BD%E4%BB%A4%E5%B0%8F%E7%BB%93/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%B0%E5%BD%95/">记录</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/%E5%91%BD%E4%BB%A4/">命令</a>,&nbsp;<a href="/tags/%E5%85%A5%E9%97%A8%E5%90%91/">入门向</a>,&nbsp;<a href="/tags/%E6%96%B0%E6%89%8B/">新手</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E5%85%B3%E4%BA%8Efcitx5/">关于 fcitx5 ，以及最近的环境变量问题</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-07-25">2020-07-25</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"><i class="far fa-folder fa-fw"></i>问题解决</a></span></div><div class="content">发生了啥 最近我收到了一条这样的消息
- 使用 $HOME/.pam_environment 设置环境变量的用户注意啦！由于 CVE-2010-4708, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。
-ref: Linux 的环境变量怎么设 依云&rsquo;s Blog
- 为什么十年的漏洞现在才修啊喂！！！
-Emmmm, 这么说就是 .pam_environment 这个文件不能用了&hellip;&hellip;
-这里感谢 依云 写出了各种情况的应对方法
-我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西&hellip; 其他具体的可以参考云云写的.. (逃
-fcitx5 与 fcitx  Fcitx   Fcitx (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的输入法平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。
-&mdash; Arch Wiki
-  Fcitx5   Fcitx5 是继 Fcitx 后的新一代输入法框架。
-&mdash; Arch Wiki
- 日常偷懒，直接引用(逃
-好啦，直接开始吧  先贴出我的系统情况</div><div class="post-footer">
-        <a href="/%E5%85%B3%E4%BA%8Efcitx5/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/tags/%E8%BE%93%E5%85%A5%E6%B3%95/">输入法</a>,&nbsp;<a href="/tags/fcitx/">fcitx</a>,&nbsp;<a href="/tags/fcitx5/">fcitx5</a>,&nbsp;<a href="/tags/cve-2010-4708/">CVE-2010-4708</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/"><img
+        alt="https://www.gravatar.com/avatar/ae0cadcc789f1b3bb8bb3b148c5fa4a1?s=240&amp;d=mp"
+        title="https://www.gravatar.com/avatar/ae0cadcc789f1b3bb8bb3b148c5fa4a1?s=240&amp;d=mp" /></a></div><h1 class="home-title">WeepingDogel</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"><a href="https://github.com/WeepingDogel" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://twitter.com/weepingdogel_me" title="Twitter" target="_blank" rel="noopener noreffer me"><i class="fab fa-twitter fa-fw"></i></a><a href="https://t.me/WeepingDogel_Me" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="mailto:weepingdogel@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/img/photo_2020-07-16_23-54-59.jpg"
-        data-srcset="/img/photo_2020-07-16_23-54-59.jpg, /img/photo_2020-07-16_23-54-59.jpg 1.5x, /img/photo_2020-07-16_23-54-59.jpg 2x"
+        data-src="/images/maxresdefault.jpg"
+        data-srcset="/images/maxresdefault.jpg, /images/maxresdefault.jpg 1.5x, /images/maxresdefault.jpg 2x"
         data-sizes="auto"
-        alt="/img/photo_2020-07-16_23-54-59.jpg"
-        title="尝试解决一部分笔记本在安装 Manjaro 后, 无法使用无线网卡连接 WIFI 的问题" /></a>
+        alt="/images/maxresdefault.jpg"
+        title="利用Github Pages创建全静态网页。" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/">如何解决 Manjaro 中 QCA6174 网卡问题</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-07-17">2020-07-17</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"><i class="far fa-folder fa-fw"></i>问题解决</a></span></div><div class="content">开场白 尝试在 Redmibook 14 中安装了 Manjaro, 装完发现 WIFI 不能用
-此时陷入了疑惑, 难道 Manjaro 也不自带 linux-firmware ?
-总之经过了一系列折腾, 最后还是解决了, 写篇东西来记录一下解决的过程
-尝试使用其他方法连接网络 既然 WIFI 不能用, 那也要想别的办法联网, 不然这问题就很棘手了
-我能想到的是插网线, 可这是轻薄本, 没有有限网卡, 那么我们还有一种办法, 使用手机的 USB 网络共享
-这个过程很简单, 按照以下步骤走
-  使用 USB 数据线将电脑与手机连接, 并打开 USB 网络共享
- 这个都不会的, 可以执行 sudo rm -rf / 这智商, 玩你妈的 Linux 不会的, 请参考这里    打开终端, 执行
-  1  $ sudo ip link   然后它会返回这样的东西, 如图</div><div class="post-footer">
-        <a href="/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/manjaro/">Manjaro</a>,&nbsp;<a href="/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/qca6174/">QCA6174</a>,&nbsp;<a href="/tags/%E7%BD%91%E5%8D%A1/">网卡</a>,&nbsp;<a href="/tags/%E9%A9%B1%E5%8A%A8/">驱动</a></div></div>
+        <a href="/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/">如何使用 GitHub 搭建网站</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-10-13">2019-10-13</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/web/"><i class="far fa-folder fa-fw"></i>Web</a></span></div><div class="content">不正经的前言  我又回来啦～
+嘿嘿，我绝对不会告诉你我又回来水啦～
+啊啊别打我～疼
+ Github是啥  某个萌新:大佬大佬，Github是啥？
+大佬:不知道，滚。
+萌新:呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜大佬不帮我了呜呜呜呜呜呜呜
+ 咳咳，，，，
+Github是一个基于git的源代码托管平台，由Chris Wanstrath, PJ Hyett 与Tom Preston-Werner三位开发者在2008年4月创办。迄今拥有59名全职员工，主要提供基于git的版本托管服务。
+也常常被人戏称为Gayhub。2333
+ 今天，GitHub已是：
+ 一个拥有143万开发者的社区。其中不乏Linux发明者Torvalds这样的顶级黑客，以及Rails创始人DHH这样的年轻极客。 这个星球上最流行的开源托管服务。目前已托管431万git项目，不仅越来越多知名开源项目迁入GitHub，比如Ruby on Rails、jQuery、Ruby、Erlang/OTP；近三年流行的开源库往往在GitHub首发，例如：BootStrap、Node.js、CoffeScript等。 alexa全球排名414的网站。   也就是说，你想把你写好的开源程序发布出去，Github将是最佳选择。
+本期的主要内容 本期内容将会写出如何使用Github搭建一个简单的网站
+使用Github建站的好处   安全  由于你的网页源代码是由Github托管，所以Github有多安全，你的网站就有多安全，别人想黑你就得先黑掉Github   简单  大部分操作只需要有前端基础就可以轻松完成   无忧  后端用Github的服务器，无需一天24小时维护，可以做到无人值守     使用Github建站的缺点   限制  Github仓库只能运行基于HTML这类的静态网页，不能使用数据库等花里胡哨的东西。   禁止爬虫  Github的仓库是禁止搜索引擎进行爬取内容的，所以你搭建的网站不会在搜索引擎上被找到。 (事实证明其实可以)      以上就是使用Github建站的优缺点，在搭建之前必须按实际情况以及需求来考虑。</div><div class="post-footer">
+        <a href="/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>,&nbsp;<a href="/tags/html/">HTML</a>,&nbsp;<a href="/tags/github-pages/">Github Pages</a>,&nbsp;<a href="/tags/website/">Website</a>,&nbsp;<a href="/tags/%E5%BB%BA%E7%AB%99/">建站</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
-            <a href="/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/"><img
+            <a href="/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/wallhaven-ey71wo.jpg"
+        data-srcset="/images/wallhaven-ey71wo.jpg, /images/wallhaven-ey71wo.jpg 1.5x, /images/wallhaven-ey71wo.jpg 2x"
+        data-sizes="auto"
+        alt="/images/wallhaven-ey71wo.jpg"
+        title="虽然被爬的那个网站已经GG了..." /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/">Python学习笔记 简单爬虫</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-08-13">2019-08-13</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw"></i>编程</a></span></div><div class="content">一如既往不正经的前言 嘿嘿，我又回来了，今天在U盘里弄好了hexo，现在可以继续更新了
+并且这次博客添加了访问量统计，欢迎扩～
+那么，本期更新一个简单的Python爬虫
+爬虫原理  小白: 大佬大佬～爬虫是啥啊？
+大佬: 去搜索引擎查呀
+小白: 查了，还是看不懂
+大佬: emmmmm..那你继续往下看吧…
+ 概述 2333,爬虫其实很好理解
+我们都知道上网是用浏览器的，那么我们具体是怎样访问一个网页的呢？看下面吧(懒得画图了)
+   浏览器 –发送一个请求www.bing.com –&gt;
+  服务器 &lt;–接受到请求-–
+  服务器 –做出响应–&gt; –返回数据–&gt; 浏览器
+   什么？还是不了解？那我们用浏览器来看一下吧，我们随便打开一个网页
+以Chrome/Chromiun为例，接下来依次点击 鼠标右键——检查——NetWork——将Preserve log打上勾 ，然后刷新 就会发现出现了以下内容
+我们可以看到浏览器很详细的把请求内容显示出来了，而左边那些列表，你已经获取了这个网站的内容。
+爬虫的原理就是把这些过程自动化，不需要我们去手动访问，就可以把网页中你想要的信息和内容爬取下来。
+爬虫的作用 举个例子，这里有一个 全国号码段(链接已失效) 的网站，我们需要取一个城市中其中一个号码段的所有的号码。比如西安市
+可以看到，号码段有很多，每个段有一万个号码。这个时候怎么办呢？总不可能用鼠标一条一条的去复制粘贴吧？这个时候爬虫就派上用场了。
+ 其实也可以用来爬取我的博客，当更新的时候就可以及时收到更新信息
+啊啊别打我，疼疼疼
+ 编程语言的选择 我们如果要进行爬虫工作，那么就必须使用编程语言，用得最多的是Python，因为Python进行爬虫是比较简便的，当然也可以选择其他的比如C/C++、Java等，甚至是易语言都可以做到，只不过难易度和写法不同，目的和功能都是一样的。本期我们选择Python
+Python的安装 Python是跨平台的语言，所以平台不同安装方法也有所不同。
+Windows 可以到Python的官网去下载安装程序并安装，建议下载Python3
+Mac OSX 同样到Python的官网下载
+Linux Linux则在包管理器安装即可
+deb系 1  $ sudo apt-get install python3   Arch系 1  $ sudo pacman -S python   rpm系 1  $ sudo yum install python3   Android Android平台则安装QPython即可，</div><div class="post-footer">
+        <a href="/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>,&nbsp;<a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/linux-arm.png"
+        data-srcset="/images/linux-arm.png, /images/linux-arm.png 1.5x, /images/linux-arm.png 2x"
+        data-sizes="auto"
+        alt="/images/linux-arm.png"
+        title="Linux的基本命令用法" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">Linux 基础命令</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-08-05">2019-08-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux/"><i class="far fa-folder fa-fw"></i>Linux</a></span></div><div class="content">提示：面向萌新，大佬勿喷
+刚入门Linux难免会觉得很麻烦，因为不知道如何使用命令去操作，这样的话在Linux系统是寸步难行的，但是学会了一些基础命令以后就能无压力的操作了，想不想学会Linux？那就让我们从简单的文件操作开始吧。
+如何使用命令行 如果你的发行版自带图形界面的话，可以从图形界面的菜单中找到一个叫 “终端” 的东西，打开它，就可以使用命令了。如果你的发行版不带图形界面，那么在tty登录用户以后就可以直接使用了。
+注意，这个终端不等于DOS也不等于cmd，它和windows是没有办毛钱关系的，是另一种东西。
+cd命令 如果你之前用过DOS或者经常使用windows的cmd，你就会知道这个命令了，这个命令在大多数操作系统中都有。
+cd命令是”change directory”的缩写，也就是改变你当前所在的目录，后面可以加相对路径，也可以加上绝对路径。
+简单的理解，就是进入一个文件夹。
+用法 测试目录:/a/b/c
+进入某个目录: 绝对路径：指定一个完整的路径，与自己当前所在的目录无关
+1 2 3  [weepingdogel@localhost ~]$ cd /a/b/c # 进入/a/b/c这个路径中的目录c # 按下回车后 [weepingdogel@localhost c]$   相对路径：指定当前目录上级目录下的其他目录或下级中的一个目录 指定下一级(常用)
+1 2 3  [weepingdogel@localhost b]$ cd ./c # 进入当前所在/a/b目录下面的目录c # 按下回车后 [weepingdogel@localhost c]$   指定上一级
+1 2 3  [weepingdogel@localhost b]$ cd ../xxx #进入当前所在目录/a/b中的/a目录下的其他目录 # 按下回车后 [weepingdogel@localhost xxx]$   退出某个目录: 有人可能不知道，进入了目录以后怎么退出来，那么这个时候就要用到cd ..命令了。
+返回上一级</div><div class="post-footer">
+        <a href="/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>,&nbsp;<a href="/tags/%E6%96%B0%E6%89%8B/">新手</a>,&nbsp;<a href="/tags/%E5%85%A5%E9%97%A8/">入门</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/wallhaven-nky7y7.png"
         data-srcset="/images/wallhaven-nky7y7.png, /images/wallhaven-nky7y7.png 1.5x, /images/wallhaven-nky7y7.png 2x"
         data-sizes="auto"
         alt="/images/wallhaven-nky7y7.png"
-        title="Arch Linux 入坑手册，安装教程" /></a>
+        title="用 Arch Linux &#43; BlackArch 的软件源来搭建渗透环境。" /></a>
         </div><h1 class="single-title" itemprop="name headline">
-        <a href="/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/">怎样安装 Arch Linux</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-06-13">2020-06-13</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/arch-linux-%E5%85%A5%E5%9D%91%E6%89%8B%E5%86%8C/"><i class="far fa-folder fa-fw"></i>Arch Linux 入坑手册</a></span></div><div class="content">Arch Linux是什么？ Arch Linux 是一个通用 x86_64_ GNU/Linux 发行版，它采用滚动升级模式，尽权力给用户提供最新版本的稳定软件，因其&quot;简洁、现代、实用、以用户为中心&quot;的原则而得名。
-Arch Wiki 上已经写明其原则
- 简洁
-Arch Linux 将简洁定义为：避免任何不必要的添加、修改和复杂增加。它提供的软件都来自原始开发者(上游)，仅进行和发行版(下游)相关的最小修改。
-不包含上游不愿意接受的补丁。绝大部分 Arch 下游补丁都已经被上游接受，下一个正式版本里会包含。
-配置文件也是来自上游，仅包含发行版必须的调整，比如特殊的文件系统路径变动。Arch 不会在安装一个软件包后就自动启动服务。
-软件包通常都和一个上游项目直接对应。仅在极少数情况下才会拆分软件包。
-官方不支持图形化配置界面，建议用户使用命令行或文本编辑器修改设置。
-  现代
-Arch尽全力保持软件处于最新的稳定版本，只要不出现系统软件包破损，都尽量用最新版本。Arch采用滚动升级策略，安装之后可以持续升级。
-Arch向GNU/Linux用户提供了许多新特性，包括systemd初始化系统、现代的文件系统、LVM2/EVMS、软件磁盘阵列（软RAID）、udev支持、initcpio（附带mkinitcpio）以及最新的内核。
-  实用
-Arch 注重实用性，避免意识形态之争。最终的设计决策都是由开发者的共识决定。开发者依赖基于事实的技术分析和讨论，避免政治因素，不会被流行观点左右。
-Arch Linux 的仓库中包含大量的软件包和编译脚本。用户可以按照需要进行自由选择。仓库中既提供了开源、自由的软件，也提供了闭源软件。实用性大于意识形态.
-  以用户为中心
-许多 Linux 发行版都试图变得更“用户友好”，Arch Linux 则一直是，永远会是“以用户为中心”。此发行版是为了满足贡献者的需求，而不是为了吸引尽可能多的用户。Arch 适用于乐于自己动手的用户，他们愿意花时间阅读文档，解决自己的问题。
-Arch 鼓励每一个用户 参与 和贡献，报告和帮助修复 bugs，提供软件包补丁和参加核心 项目：Arch 开发者都是志愿者，通过持续的贡献成为团队的一员。Archers 可以自行贡献软件包到 Arch 用户仓库, 提升 ArchWiki 文档质量, 在 论坛, 邮件列表, IRC 中给其它用户提供技术支持. Arch Linux 是全球很多用户的选择，已经有很多国际社区提供帮助和文档翻译。
- 以上内容引用自 Arch Wiki 词条: https://wiki.</div><div class="post-footer">
-        <a href="/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>,&nbsp;<a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/">系统安装</a>,&nbsp;<a href="/tags/arch-%E5%85%A5%E9%97%A8/">Arch 入门</a>,&nbsp;<a href="/tags/%E6%95%99%E7%A8%8B/">教程</a></div></div>
+        <a href="/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/">用 Arch Linux 打造完美渗透环境</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-07-31">2019-07-31</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="far fa-folder fa-fw"></i>渗透测试</a></span></div><div class="content">简介Arch Linux Arch Linux是一款通用x86_64的GNU/Linux发行版，它采用滚动更新模式，尽全力给用户提供最新的稳定版软件。
+ 嘿嘿，很久不滚可能会滚挂哦
+ 刚装完的Arch只是一个基本系统，什么都没有，随后用户就可以根据自己的想法和喜好，安装自己需要的软件，然后通过高度自定义的配置，打造自己喜欢的、理想的系统。这也是Arch的可爱和有吸引力之处。所以Arch也是我最喜欢的发行版之一。
+关于Arch Linux的更多详细内容，请参见Arch Wiki。
+本期内容介绍 本期将会演示如何用Arch Linux打造完美的渗透环境。一切操作均为教程演示，请读者根据实际情况操作。没使用过Arch Linux的用户请谨慎操作，并仔细查阅Arch Wiki。
+那么，开始本期的内容吧。
+提示 本期博客会大量使用Arch Wiki的超链接，以方便理解部分内容。
+准备工作 安装Arch Linux 本期博客不会详细写出Arch Linux的安装过程，请参考Arch Wiki安装Arch Linux，并做好基本的配置工作。
+选择轻量桌面环境 由于渗透测试中部分操作会占用大量的资源，所以请尽量按需求选择轻量的桌面环境，这里不建议使用 Gnome 和 KDE，因为二者占用的资源非常大，对低配用户不友好。
+ LXDE   轻量级GTK桌面环境，默认窗口管理器是 OpenBox ，最轻量的桌面环境之一。  LXQT   2013年间，洪任諭（“PCMan”）启动了将 LXDE 移植到 Qt 的项目。所以LXQT相当于是使用QT的LXDE，默认窗口管理器还是 OpenBox ，它比上面的LXDE还要轻量。  xfce4   目前我在用的桌面环境，基于GTK+2，这个是轻量化桌面环境中最好看的一个了。  i3wm   i3 是一种动态的平铺式窗口管理器，其灵感来自于面向开发者与资深用户的 wmii。 i3 的既定目标包括清晰可读的文档，完善的多显示器支持，基于树形结构的窗口管理，提供 vim 式的多种操作模式。 ——摘自Arch Wiki。  自己DIY桌面环境   你可以使用上面介绍过的 OpenBox 通过配置来DIY自己的桌面环境，也可以使用 fluxbox、i3wm 等。详细请参见 利用openbox打造自己的桌面环境-辣条的博客(链接已失效)。  本期博客也将会使用自定义桌面环境进行演示。</div><div class="post-footer">
+        <a href="/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>,&nbsp;<a href="/tags/%E9%BB%91%E5%AE%A2/">黑客</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/%E5%A4%8F%E5%B0%94%E5%87%A1%E5%A4%9A%E5%A7%86%E6%B5%B7%E5%A8%81%E8%AF%AD%E5%BD%95/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/wallhaven-0jvojy.jpg"
+        data-srcset="/images/wallhaven-0jvojy.jpg, /images/wallhaven-0jvojy.jpg 1.5x, /images/wallhaven-0jvojy.jpg 2x"
+        data-sizes="auto"
+        alt="/images/wallhaven-0jvojy.jpg"
+        title="收集一些夏尔的语录。" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/%E5%A4%8F%E5%B0%94%E5%87%A1%E5%A4%9A%E5%A7%86%E6%B5%B7%E5%A8%81%E8%AF%AD%E5%BD%95/">夏尔·凡多姆海威语录</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-07-29">2019-07-29</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%94%B6%E9%9B%86/"><i class="far fa-folder fa-fw"></i>收集</a></span></div><div class="content">收集一些夏尔的语录。
+  不要哭，真难看，哭也不会改变什么，这个世界从来不曾对任何人温柔。
+——–夏尔 凡多姆海威
+   随着时间的流逝痛苦会变得淡薄，然而我并不想让时间来治愈我的痛苦，就算从痛苦中逃脱，忘记一切，得到的也只是停滞，无法前进。
+——–夏尔 凡多姆海威
+   用我那牵强的微笑，活出无人能比的骄傲。
+——–夏尔 凡多姆海威
+   除了死亡，所有的离开都是背叛。
+——–夏尔 凡多姆海威
+   就算如此，我也要去。就算全部的棋子被夺走，棋盘上只剩下了王，也绝不会投降。
+——–夏尔 凡多姆海威
+   悲观着，叹息着，这么做有什么用，停滞不前，即使是死人也办得到。可是，我活着，用自己的力量站着，终有一天会死的话，还是不要留下遗憾比较好吧。
+——–夏尔 凡多姆海威
+   认为悲惨的话就反抗，心存懊悔的话就前进，只会为不幸哀叹的你，连猪都不如。
+——–夏尔 凡多姆海威
+   瞬间的犹豫可是会丧命的，所以我决不会犹豫。
+——–夏尔 凡多姆海威
+   一旦失去的东西，就再也拿不回来了。
+——–夏尔 凡多姆海威
+   这个世界里没有什么规则，就算有，那也是由我创造的。
+——–夏尔 凡多姆海威
+   过度的圣洁比邪恶更恶。
+——–夏尔 凡多姆海威
+   我愿我择，故我在。我绝不后悔，也绝不乞怜，无论是向谁。</div><div class="post-footer">
+        <a href="/%E5%A4%8F%E5%B0%94%E5%87%A1%E5%A4%9A%E5%A7%86%E6%B5%B7%E5%A8%81%E8%AF%AD%E5%BD%95/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%94%B6%E9%9B%86/">收集</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><div class="featured-image-preview">
+            <a href="/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/wallhaven-j5j5vm.jpg"
+        data-srcset="/images/wallhaven-j5j5vm.jpg, /images/wallhaven-j5j5vm.jpg 1.5x, /images/wallhaven-j5j5vm.jpg 2x"
+        data-sizes="auto"
+        alt="/images/wallhaven-j5j5vm.jpg"
+        title="好奇的话就点开看看？" /></a>
+        </div><h1 class="single-title" itemprop="name headline">
+        <a href="/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/">震惊！16岁男子竟然在家里做出这种事！</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-07-26">2019-07-26</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="far fa-folder fa-fw"></i>渗透测试</a></span></div><div class="content">简介 该男子居然在家做出这种事情，使多数人震惊！
+这才是真正的简介 哈哈，上面那个是假的，本篇博客将会复现MS17-010漏洞攻击。
+MS17-010是啥啊？ 你是否记得2017年的那个勒索病毒？就是不给钱就把你电脑里所有的AV加密起来的一个病毒。是不是很可怕？这个病毒就是通过这个漏洞让更多的人看不到AV的。
+ 那这个漏洞是怎样的呢？我将给出以下链接用于参考：   Microsoft 安全公告 MS17-010 - 严重
+https://cvedetails.com/cve/CVE-2017-0143/
+https://cvedetails.com/cve/CVE-2017-0144/
+https://cvedetails.com/cve/CVE-2017-0145/
+https://cvedetails.com/cve/CVE-2017-0146/
+https://cvedetails.com/cve/CVE-2017-0147/
+https://cvedetails.com/cve/CVE-2017-0148/
+https://github.com/RiskSense-Ops/MS17-010
+ 攻击复现 那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个Linux的渗透测试软件包。叫做Metasploit。 它在作为渗透测试的发行版中是自带的，如果你用的不是作为渗透测试的发行版，那么以下是安装方法：
+ 基于Arch  1  $ sudo pacman -S metasploit    基于Debian更新源里有的  1  $ sudo apt-get install metasploit    rpm系或deb系源里没有的  1  $ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb &gt; msfinstall   1  $ sudo chmod 755 msfinstall &amp;&amp; .</div><div class="post-footer">
+        <a href="/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>,&nbsp;<a href="/tags/%E8%A3%85%E9%80%BC/">装逼</a>,&nbsp;<a href="/tags/%E9%BB%91%E5%AE%A2/">黑客</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -208,14 +299,6 @@ Arch 鼓励每一个用户 参与 和贡献，报告和帮助修复 bugs，提�
                 </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/6/">6</a>
-                    </span>
-                </li><li class="page-item ">
-                    <span class="page-link">
-                        <a href="/page/7/">7</a>
-                    </span>
-                </li><li class="page-item ">
-                    <span class="page-link">
-                        <a href="/page/8/">8</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
