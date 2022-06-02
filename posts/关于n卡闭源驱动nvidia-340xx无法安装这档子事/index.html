@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>关于N卡闭源驱动 nvidia-340xx 无法安装这档子事 - WeepingDogel</title><meta name="Description" content="Fuck you! Nvidia!!"><meta property="og:title" content="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" />
+<meta property="og:description" content="Fuck you! Nvidia!!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" /><meta property="og:image" content="http://weepingdogel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-22T13:32:29+08:00" />
+<meta property="article:modified_time" content="2021-11-22T13:32:29+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/logo.png"/>
+
+<meta name="twitter:title" content="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"/>
+<meta name="twitter:description" content="Fuck you! Nvidia!!"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" /><link rel="prev" href="http://weepingdogel.github.io/posts/%E5%B7%B2%E5%B0%86%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%8D%A2%E6%88%90utterances/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "关于N卡闭源驱动 nvidia-340xx 无法安装这档子事",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/posts\/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B\/"
+        },"genre": "posts","wordcount":  374 ,
+        "url": "http:\/\/weepingdogel.github.io\/posts\/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B\/","datePublished": "2021-11-22T13:32:29+08:00","dateModified": "2021-11-22T13:32:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "Fuck you! Nvidia!!"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="WeepingDogel"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="WeepingDogel"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">关于N卡闭源驱动 nvidia-340xx 无法安装这档子事</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-22">2021-11-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 374 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/fucknvidia1.jpg"
+        data-srcset="/img/fucknvidia1.jpg, /img/fucknvidia1.jpg 1.5x, /img/fucknvidia1.jpg 2x"
+        data-sizes="auto"
+        alt="/img/fucknvidia1.jpg"
+        title="Fuck you! Nvidia!!" /></div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#序">序</a></li>
+    <li><a href="#解决过程">解决过程</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="序">序</h1>
+<p>首先容我说一句</p>
+<blockquote>
+<p><strong>FUCK YOU NVIDIA!</strong></p>
+</blockquote>
+<p>由于我现在时间比较少，Arch 经常好几天不滚，前两天滚了一下，驱动炸了</p>
+<p>内核更新到了 5.15.3</p>
+<p>一开始我觉得问题不大，更新一下就好了</p>
+<p>于是我就</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ yay -S nvidia-340xx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是没想到，它给我来这一出</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/fucknvidia1.jpg"
+        data-srcset="/img/fucknvidia1.jpg, /img/fucknvidia1.jpg 1.5x, /img/fucknvidia1.jpg 2x"
+        data-sizes="auto"
+        alt="/img/fucknvidia1.jpg"
+        title="/img/fucknvidia1.jpg" /></p>
+<p>呜呜呜！！！为什么编译不出来！！！</p>
+<p><strong><del>黄仁勋 NMSL!!!</del></strong></p>
+<h1 id="解决过程">解决过程</h1>
+<p>咳咳，尽管如此我还是花了一天的时间冷静了下来，然后开始试试看手动 <code>makepkg</code> 行不行。</p>
+<p>按照惯例我应该去 aur 把 PKGBUILD 给 git 下来。</p>
+<p>不过正当我打开 <code>nvidia-340xx</code> 这个包的 aur 界面时，我在评论那里看到了这句话。</p>
+<blockquote>
+<p>Users of this package should block automatic update of their kernel. There is not enough man power to update it as fast as newer kernels are released.</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/fucknvidia2.png"
+        data-srcset="/img/fucknvidia2.png, /img/fucknvidia2.png 1.5x, /img/fucknvidia2.png 2x"
+        data-sizes="auto"
+        alt="/img/fucknvidia2.png"
+        title="/img/fucknvidia2.png" /></p>
+<p>康不懂嘤语？ 给你翻译一下</p>
+<blockquote>
+<p>这个软件包的用户应该阻止其内核的自动更新。没有足够的人力来更新它，因为更新内核的速度太快了。</p>
+</blockquote>
+<p>我当场就想说</p>
+<blockquote>
+<p><strong>FUCK YOU NVIDIA!</strong></p>
+</blockquote>
+<p>然后我就想着要不用回旧版本的内核？一边想一边往下翻，我就又看到了一条对我有用的评论</p>
+<blockquote>
+<p>Patch for kernel 5.15 <a href="https://pastebin.com/uYP9J2Cw" target="_blank" rel="noopener noreffer">https://pastebin.com/uYP9J2Cw</a> Found here <a href="https://github.com/warpme/minimyth2/issues/15" target="_blank" rel="noopener noreffer">https://github.com/warpme/minimyth2/issues/15</a></p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2021-11-22-13-58-14%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2021-11-22-13-58-14%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2021-11-22-13-58-14%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2021-11-22-13-58-14%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2021-11-22-13-58-14屏幕截图.png"
+        title="/img/2021-11-22-13-58-14屏幕截图.png" /></p>
+<p>然后我观察了一下这个包的文件目录..</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── 0001-kernel-5.7.patch
+</span></span><span class="line"><span class="cl">├── 0002-kernel-5.8.patch
+</span></span><span class="line"><span class="cl">├── 0003-kernel-5.9.patch
+</span></span><span class="line"><span class="cl">├── 0004-kernel-5.10.patch
+</span></span><span class="line"><span class="cl">├── 0005-kernel-5.11.patch
+</span></span><span class="line"><span class="cl">├── 0006-kernel-5.14.patch
+</span></span><span class="line"><span class="cl">├── 20-nvidia.conf
+</span></span><span class="line"><span class="cl">├── nvidia-340xx.install
+</span></span><span class="line"><span class="cl">└── PKGBUILD
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0 directories, 9 files
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>虽然我不太懂，但我发现这个 <code>*.patch</code> 文件的文件名似乎对应着各个内核版本。</p>
+<p>而这条评论给出了<a href="https://pastebin.com/uYP9J2Cw" target="_blank" rel="noopener noreffer">新 <code>patch</code> 文件的链接</a>，以及<a href="https://github.com/warpme/minimyth2/issues/15" target="_blank" rel="noopener noreffer">一个 issue 链接</a>。</p>
+<p>我瞬间知道怎么回事了，打包所需的文件是更新了，但还没有提交到 aur..</p>
+<p>淦，我只能自己试试看了</p>
+<p>于是抱着试试看的态度</p>
+<p>我打开了它的 PKGBUILD</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pkgbase=nvidia-340xx
+</span></span><span class="line"><span class="cl">pkgname=(nvidia-340xx nvidia-340xx-dkms); [ -n &#34;$NVIDIA_340XX_DKMS_ONLY&#34; ] &amp;&amp; pkgname=(nvidia-340xx-dkms)
+</span></span><span class="line"><span class="cl">pkgver=340.108
+</span></span><span class="line"><span class="cl">pkgrel=25
+</span></span><span class="line"><span class="cl">pkgdesc=&#34;NVIDIA drivers for linux, 340xx legacy branch&#34;
+</span></span><span class="line"><span class="cl">arch=(&#39;x86_64&#39;)
+</span></span><span class="line"><span class="cl">url=&#34;https://www.nvidia.com/&#34;
+</span></span><span class="line"><span class="cl">makedepends=(&#34;nvidia-340xx-utils=${pkgver}&#34; &#39;linux&gt;=5.5&#39; &#39;linux-headers&gt;=5.5&#39;)
+</span></span><span class="line"><span class="cl">conflicts=(&#39;nvidia&#39;)
+</span></span><span class="line"><span class="cl">license=(&#39;custom&#39;)
+</span></span><span class="line"><span class="cl">options=(!strip)
+</span></span><span class="line"><span class="cl"># https://github.com/warpme/minimyth2/tree/master/script/nvidia/nvidia-340.108/files
+</span></span><span class="line"><span class="cl">source=(&#34;https://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run&#34;
+</span></span><span class="line"><span class="cl">  20-nvidia.conf
+</span></span><span class="line"><span class="cl">  0001-kernel-5.7.patch
+</span></span><span class="line"><span class="cl">  0002-kernel-5.8.patch
+</span></span><span class="line"><span class="cl">  0003-kernel-5.9.patch
+</span></span><span class="line"><span class="cl">  0004-kernel-5.10.patch
+</span></span><span class="line"><span class="cl">  0005-kernel-5.11.patch
+</span></span><span class="line"><span class="cl">  0006-kernel-5.14.patch
+</span></span><span class="line"><span class="cl">)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>确实发现了这么一行文件，我在想，是不是把这个新的文件下下来，放到编译目录然后在这个列表加上就能编译了？</p>
+<p>于是我把这个文件下载了下来，放进了编译目录</p>
+<p>（具体过程就略过了，都是 wget cp cd 之类的事情）</p>
+<p>并且把文件名加上了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">source=(&#34;https://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run&#34;
+</span></span><span class="line"><span class="cl">  20-nvidia.conf
+</span></span><span class="line"><span class="cl">  0001-kernel-5.7.patch
+</span></span><span class="line"><span class="cl">  0002-kernel-5.8.patch
+</span></span><span class="line"><span class="cl">  0003-kernel-5.9.patch
+</span></span><span class="line"><span class="cl">  0004-kernel-5.10.patch
+</span></span><span class="line"><span class="cl">  0005-kernel-5.11.patch
+</span></span><span class="line"><span class="cl">  0006-kernel-5.14.patch
+</span></span><span class="line"><span class="cl">  0007-kernel-5.15.patch
+</span></span><span class="line"><span class="cl">)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ makepkg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过很快我就收到了报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">==&gt; 正在创建软件包：nvidia-340xx 340.108-25 (Mon 22 Nov 2021 02:08:12 PM CST)
+</span></span><span class="line"><span class="cl">==&gt; 正在检查运行时依赖关系...
+</span></span><span class="line"><span class="cl">==&gt; 正在检查编译时依赖关系
+</span></span><span class="line"><span class="cl">==&gt; 获取源代码...
+</span></span><span class="line"><span class="cl">  -&gt; 找到 NVIDIA-Linux-x86_64-340.108-no-compat32.run
+</span></span><span class="line"><span class="cl">  -&gt; 找到 20-nvidia.conf
+</span></span><span class="line"><span class="cl">  -&gt; 找到 0001-kernel-5.7.patch
+</span></span><span class="line"><span class="cl">  -&gt; 找到 0002-kernel-5.8.patch
+</span></span><span class="line"><span class="cl">  -&gt; 找到 0003-kernel-5.9.patch
+</span></span><span class="line"><span class="cl">  -&gt; 找到 0004-kernel-5.10.patch
+</span></span><span class="line"><span class="cl">  -&gt; 找到 0005-kernel-5.11.patch
+</span></span><span class="line"><span class="cl">  -&gt; 找到 0006-kernel-5.14.patch
+</span></span><span class="line"><span class="cl">  -&gt; 找到 0007-kernel-5.15.patch
+</span></span><span class="line"><span class="cl">==&gt; 错误： 对这些文件的完整性检查缺失: source
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我试了一下重新生成校验码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">makepkg -g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后把返回来的数据复制粘贴进 <code>PKGBUILD</code> (注意，返回内容不唯一)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">b2sums=(&#39;6538bbec53b10f8d20977f9b462052625742e9709ef06e24cf2e55de5d0c55f1620a4bb21396cfd89ebc54c32f921ea17e3e47eaa95abcbc24ecbd144fb89028&#39;
+</span></span><span class="line"><span class="cl">        &#39;49d99f612e8eee3ab5e34083c25348bfd14ed5fc8a7984dafc0dad7c0ae0df2c0b2a63a1bb993da440eb0a60293d7c753ca3889bd2f51991b8ddc51bce2fe4a8&#39;
+</span></span><span class="line"><span class="cl">        &#39;7150233df867a55f57aa5e798b9c7618329d98459fecc35c4acfad2e9772236cb229703c4fa072381c509279d0588173d65f46297231f4d3bfc65a1ef52e65b1&#39;
+</span></span><span class="line"><span class="cl">        &#39;b436095b89d6e294995651a3680ff18b5af5e91582c3f1ec9b7b63be9282497f54f9bf9be3997a5af30eec9b8548f25ec5235d969ac00a667a9cddece63d8896&#39;
+</span></span><span class="line"><span class="cl">        &#39;947cb1f149b2db9c3c4f973f285d389790f73fc8c8a6865fc5b78d6a782f49513aa565de5c82a81c07515f1164e0e222d26c8212a14cf016e387bcc523e3fcb1&#39;
+</span></span><span class="line"><span class="cl">        &#39;665bf0e1fa22119592e7c75ff40f265e919955f228a3e3e3ebd76e9dffa5226bece5eb032922eb2c009572b31b28e80cd89656f5d0a4ad592277edd98967e68f&#39;
+</span></span><span class="line"><span class="cl">        &#39;344cd3a9888a9a61941906c198d3a480ce230119c96c72c72a74b711d23face2a7b1e53b9b4639465809b84762cdc53f38210e740318866705241bc4216e4f35&#39;
+</span></span><span class="line"><span class="cl">        &#39;31a4047ab84d13e32fd7fdbf9f69c696d3fab6666c541d2acf0a189c1d17c876970985167fd389a4adc0f786021172bdec1aa6d690736e3cf9fcd8ceabe5fd32&#39;
+</span></span><span class="line"><span class="cl">        &#39;a26426488f6e105f546e091ce4d2e9587cc41a0fb05b0dffeb1c523d8d06782bda3004352655c9c019224091f7bc7903939e53ede73f64553f14be8e8a47793a&#39;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来再次执行 <code>makepkg</code> 就能成功编译了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/screenshot-2021-nov-22.png"
+        data-srcset="/img/screenshot-2021-nov-22.png, /img/screenshot-2021-nov-22.png 1.5x, /img/screenshot-2021-nov-22.png 2x"
+        data-sizes="auto"
+        alt="/img/screenshot-2021-nov-22.png"
+        title="/img/screenshot-2021-nov-22.png" /></p>
+<p>接下来用 <code>pacman</code> 装上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo pacman -U nvidia-340xx-dkms-340.108-25-x86_64.pkg.tar.zst
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后 pacman 提示我们</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&gt;&gt;&gt; You must tell Xorg to use the nvidia driver with kernels &gt;=5.11.0.
+</span></span><span class="line"><span class="cl">    You must also set IgnoreABI option with Xorg version &gt;= 21.1.1.
+</span></span><span class="line"><span class="cl">    Minimal config example provided in /usr/share/nvidia-340xx/20-nvidia.conf
+</span></span><span class="line"><span class="cl">    which you should manually place in /etc/X11/xorg.conf.d/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个好搞</p>
+<p>复制一下文件就可以了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cp /usr/share/nvidia-340xx/20-nvidia.conf /etc/X11/xorg.conf.d/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重启</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_2021-11-22_14-17-46.png"
+        data-srcset="/img/image_2021-11-22_14-17-46.png, /img/image_2021-11-22_14-17-46.png 1.5x, /img/image_2021-11-22_14-17-46.png 2x"
+        data-sizes="auto"
+        alt="/img/image_2021-11-22_14-17-46.png"
+        title="/img/image_2021-11-22_14-17-46.png" /></p>
+<p>完美解决～</p>
+<h1 id="总结">总结</h1>
+<p>最后再说一句</p>
+<blockquote>
+<p><strong>FUCK YOU NVIDIA!</strong></p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-11-22</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-via="weepingdogel_me"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-description="Fuck you! Nvidia!!" data-image="/img/fucknvidia1.jpg"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-caption="Fuck you! Nvidia!!"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-caption="Fuck you! Nvidia!!" data-image="/img/fucknvidia1.jpg"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-via="weepingdogel_me" data-picture="/img/fucknvidia1.jpg"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-description="Fuck you! Nvidia!!"><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="分享到 StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-image="/img/fucknvidia1.jpg"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-description="Fuck you! Nvidia!!"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-description="Fuck you! Nvidia!!"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="分享到 OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/" data-title="关于N卡闭源驱动 nvidia-340xx 无法安装这档子事" data-description="Fuck you! Nvidia!!"><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2f%25E5%2585%25B3%25E4%25BA%258En%25E5%258D%25A1%25E9%2597%25AD%25E6%25BA%2590%25E9%25A9%25B1%25E5%258A%25A8nvidia-340xx%25E6%2597%25A0%25E6%25B3%2595%25E5%25AE%2589%25E8%25A3%2585%25E8%25BF%2599%25E6%25A1%25A3%25E5%25AD%2590%25E4%25BA%258B%2f&amp;description=%e5%85%b3%e4%ba%8eN%e5%8d%a1%e9%97%ad%e6%ba%90%e9%a9%b1%e5%8a%a8%20nvidia-340xx%20%e6%97%a0%e6%b3%95%e5%ae%89%e8%a3%85%e8%bf%99%e6%a1%a3%e5%ad%90%e4%ba%8b" target="_blank" title="分享到 Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E5%B7%B2%E5%B0%86%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%8D%A2%E6%88%90utterances/" class="prev" rel="prev" title="已将评论系统换成 Utterances"><i class="fas fa-angle-left fa-fw"></i>已将评论系统换成 Utterances</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"comment","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

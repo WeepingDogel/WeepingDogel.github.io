@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python 学习笔记——ArgParse - WeepingDogel</title><meta name="Description" content="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."><meta property="og:title" content="Python 学习笔记——ArgParse" />
+<meta property="og:description" content="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" /><meta property="og:image" content="http://weepingdogel.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-16T18:21:05+08:00" />
+<meta property="article:modified_time" content="2021-05-16T18:21:05+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Python 学习笔记——ArgParse"/>
+<meta name="twitter:description" content="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" /><link rel="prev" href="http://weepingdogel.github.io/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" /><link rel="next" href="http://weepingdogel.github.io/posts/%E8%BE%93%E5%85%A5%E4%B8%80%E4%B8%AA%E5%88%86%E6%95%B0%E5%88%A4%E6%96%AD%E8%AF%A5%E5%88%86%E6%95%B0%E7%9A%84%E8%AF%84%E7%BA%A7/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python 学习笔记——ArgParse",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/posts\/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse\/"
+        },"genre": "posts","keywords": "笔记, Linux, Python, 编程","wordcount":  390 ,
+        "url": "http:\/\/weepingdogel.github.io\/posts\/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse\/","datePublished": "2021-05-16T18:21:05+08:00","dateModified": "2021-05-16T18:21:05+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="WeepingDogel"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="WeepingDogel"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python 学习笔记——ArgParse</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/"><i class="far fa-folder fa-fw"></i>编程</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-05-16">2021-05-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 390 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2021-05-16-18-25-46%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2021-05-16-18-25-46%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2021-05-16-18-25-46%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2021-05-16-18-25-46%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2021-05-16-18-25-46屏幕截图.png"
+        title="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..." /></div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#序">序</a></li>
+    <li><a href="#创建-parser--添加选项">创建 Parser &amp;&amp; 添加选项</a></li>
+    <li><a href="#调用获取到的选项参数">调用获取到的选项参数</a></li>
+    <li><a href="#结语">结语</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="序">序</h1>
+<p>为了使 <a href="https://github.com/WeepingDogel/TitleGetter" target="_blank" rel="noopener noreffer">TitleGetter</a> 更加灵活，我打算将 <code>list.txt</code> 和输出文件由用户自定， 因此这需要用到命令行选项&hellip; 就像一些我们常用到的软件一样，比如 <code>pacman</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2021-05-16-18-31-48%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2021-05-16-18-31-48%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2021-05-16-18-31-48%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2021-05-16-18-31-48%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2021-05-16-18-31-48屏幕截图.png"
+        title="/img/2021-05-16-18-31-48屏幕截图.png" /></p>
+<p>因此谷歌了一下，了解到了 <a href="https://docs.python.org/3/library/argparse.html" target="_blank" rel="noopener noreffer">ArgParse</a> 这个东西</p>
+<blockquote>
+<p>The argparse module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv. The argparse module also automatically generates help and usage messages and issues errors when users give the program invalid arguments.</p>
+<p>From: <a href="https://docs.python.org/3/library/argparse.html" target="_blank" rel="noopener noreffer">argparse â Parser for command-line options, arguments and sub-commands — Python 3.9.5 documentation</a></p>
+</blockquote>
+<p>然后我就试着敲了一个文件..</p>
+<p>运行出来的结果是这样的</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2021-05-16-18-43-35%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2021-05-16-18-43-35%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2021-05-16-18-43-35%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2021-05-16-18-43-35%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2021-05-16-18-43-35屏幕截图.png"
+        title="/img/2021-05-16-18-43-35屏幕截图.png" /></p>
+<p>那么接下来稍微整理一下相关的笔记吧&hellip;..</p>
+<h1 id="创建-parser--添加选项">创建 Parser &amp;&amp; 添加选项</h1>
+<p>在一切开始之前，我们需要使用 <code>argparse</code> 库里面的 <code>ArgumentParser</code> 用法来创建一个变量，命名为 &lsquo;parser&rsquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里有个参数 <code>description=''</code>， 这里是写一些说明用的&hellip;</p>
+<p>比如我们写上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Welcome&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>顺便我们需要写上一些需要的选项～</p>
+<p><code>parser.add_argument()</code> 使用这个就可以了</p>
+<p>里面需要加上一些东西, 比如 <code>-a</code>、 <code>--about</code> 这些选项的使用形式</p>
+<p>最后加上 <code>args = parser.parse_args()</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Welcome&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span><span class="s1">&#39;--about&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Show the about&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这时我们已经可以加上 <code>-h</code> 来看看效果了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ python a.py -h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">usage: a.py [-h] [-a ABOUT]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Welcome
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">optional arguments:
+</span></span><span class="line"><span class="cl">  -h, --help            show this help message and exit
+</span></span><span class="line"><span class="cl">  -a ABOUT, --about ABOUT
+</span></span><span class="line"><span class="cl">                        Show the about
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>那么这里整理一下常用的这么几个参数</p>
+<ol>
+<li><code>default</code>
+<ul>
+<li>没有设置任何参数情况下的默认参数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span><span class="s1">&#39;--about&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Show the about&#39;</span><span class="p">,</span> <span class="n">defualt</span><span class="o">=</span><span class="s1">&#39;text.txt&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果用户没有设置这个参数则会自动提供一个默认的</li>
+</ul>
+</li>
+<li><code>help</code>
+<ul>
+<li>给对应的选项添加说明文字</li>
+</ul>
+</li>
+<li>required
+<ul>
+<li>用于决定这个参数是否一定需要设置</li>
+<li>如果设置了 <code>required=True</code>, 在运行时如果不设置这个参数就会报错</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span><span class="s1">&#39;--about&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ python a.py   
+</span></span><span class="line"><span class="cl">usage: a.py [-h] -a ABOUT
+</span></span><span class="line"><span class="cl">a.py: error: the following arguments are required: -a/--about
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h1 id="调用获取到的选项参数">调用获取到的选项参数</h1>
+<p>接下来我们要做的是，将获取到的参数运用起来。</p>
+<p>我们知道，当在命令行中给选项后面写上了一些东西，那么程序会默认地作为字符串而获取它，这时我们就要拿这获得的东西做我们想要做的事</p>
+<p>我简单地写了个能够将一个文件的内容写到另一个文件的脚本</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;                                                            
+</span></span></span><span class="line"><span class="cl"><span class="s1">By WeepingDogel
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">GetParser</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Help&#39;</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="s1">&#39;A new testing program.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output file&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;test.txt&#39;</span> <span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-r&#39;</span><span class="p">,</span><span class="s1">&#39;--read&#39;</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s1">&#39;read a file&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">parser</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">Write</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s2">&#34;a&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s1">&#39; has been written&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">Read</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">text</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">Main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span> <span class="o">=</span> <span class="n">GetParser</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Write</span><span class="p">(</span><span class="n">Read</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">read</span><span class="p">),</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>好的不难看出，我们得到的东西会到这个 <code>args</code> 变量里面去，<strong>因为它是由 <code>parser.parse_args()</code> 这个函数所返回的内容所赋值而来的，而取出对应选项参数得到的内容则是 <code>args.选项名</code></strong></p>
+<p>比如我们要获取写出的文件名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ vim b.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Help&#39;</span><span class="p">,</span> <span class="n">epilog</span><span class="o">=</span><span class="s1">&#39;A new testing program.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output file&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;test.txt&#39;</span> <span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">filename</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;The filename is &#34;</span><span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ python b.py -o WeepingDogel
+</span></span><span class="line"><span class="cl">The filename is WeepingDogel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可见我们已经获取到这个字符串 &ldquo;WeepingDogel&rdquo; 了。</p>
+<p>同理，需要读取的文件名也是一样的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">args</span><span class="o">.</span><span class="n">read</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这么写就可以了～</p>
+<p>接下来用截图来看看上面那一堆代码的效果：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2021-05-16-20-05-47%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2021-05-16-20-05-47%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2021-05-16-20-05-47%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2021-05-16-20-05-47%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2021-05-16-20-05-47屏幕截图.png"
+        title="/img/2021-05-16-20-05-47屏幕截图.png" /></p>
+<p>简单的创建与使用就是如此&hellip;</p>
+<p>当然还有更多的用法需要探索..</p>
+<h1 id="结语">结语</h1>
+<p>那么我接下来要做的就是将这些更新进 <a href="https://github.com/WeepingDogel/TitleGetter" target="_blank" rel="noopener noreffer">TitleGetter</a> 啦！</p>
+<p>以后就不需要在配置文件里设置 <code>list.txt</code> 的位置了！ 输出的文件位置也不需要固定了！！</p>
+<hr>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://vra.github.io/2017/12/02/argparse-usage/" target="_blank" rel="noopener noreffer">argparse简要用法总结 | Yunfeng&rsquo;s Simple Blog</a></li>
+<li><a href="https://docs.python.org/3/library/argparse.html" target="_blank" rel="noopener noreffer">argparse â Parser for command-line options, arguments and sub-commands — Python 3.9.5 documentation</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-05-16</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-via="weepingdogel_me" data-hashtags="笔记,Linux,Python,编程"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-hashtag="笔记"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-description="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..." data-image="/img/2021-05-16-18-25-46屏幕截图.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-caption="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..." data-tags="笔记,Linux,Python,编程"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-caption="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..." data-image="/img/2021-05-16-18-25-46屏幕截图.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-via="weepingdogel_me" data-picture="/img/2021-05-16-18-25-46屏幕截图.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-description="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="分享到 StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-image="/img/2021-05-16-18-25-46屏幕截图.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-description="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-description="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="分享到 OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" data-title="Python 学习笔记——ArgParse" data-description="Python 学习笔记之 ArgParse 的使用，可以使 Python 程序在命令行中加选项..."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2fpython%25E5%25AD%25A6%25E4%25B9%25A0%25E7%25AC%2594%25E8%25AE%25B0-argparse%2f&amp;description=Python%20%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0%e2%80%94%e2%80%94ArgParse" target="_blank" title="分享到 Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E5%B0%9D%E8%AF%95%E5%9C%A8linux%E4%B8%8B%E7%BC%96%E8%AF%91exe%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6/" class="prev" rel="prev" title="尝试在 Linux 下编译 exe 可执行文件"><i class="fas fa-angle-left fa-fw"></i>尝试在 Linux 下编译 exe 可执行文件</a>
+            <a href="/posts/%E8%BE%93%E5%85%A5%E4%B8%80%E4%B8%AA%E5%88%86%E6%95%B0%E5%88%A4%E6%96%AD%E8%AF%A5%E5%88%86%E6%95%B0%E7%9A%84%E8%AF%84%E7%BA%A7/" class="next" rel="next" title="输入一个分数判断该分数的评级">输入一个分数判断该分数的评级<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"comment","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
