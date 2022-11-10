@@ -433,7 +433,7 @@ LANG=en_US.UTF-8
 
 #### 网络
 
-首先需要安装的是 `dhcpcd` 这个包，不然安装完成重启后就需要手动配置网络了。
+首先需要安装的是 `networkmanager` 这个包，不然安装完成重启后就需要手动配置网络了。
 
 ```txt
 # pacman -S networkmanager
