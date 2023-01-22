@@ -4,7 +4,74 @@
         <link>http://weepingdogel.github.io/tags/%E5%AE%B9%E5%99%A8/</link>
         <description>容器 - 标签 - WeepingDogel</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
-            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Sat, 15 Oct 2022 20:21:13 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/%E5%AE%B9%E5%99%A8/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Mon, 23 Jan 2023 00:53:24 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/%E5%AE%B9%E5%99%A8/" rel="self" type="application/rss+xml" /><item>
+    <title>修正普通用户使用 docker 时没权限的问题</title>
+    <link>http://weepingdogel.github.io/posts/fix-the-problem-of-docker-permisson-denied/</link>
+    <pubDate>Mon, 23 Jan 2023 00:53:24 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/posts/fix-the-problem-of-docker-permisson-denied/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2023-01-23-01-02-04%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png" referrerpolicy="no-referrer">
+            </div><h1 id="序">序</h1>
+<p></p>
+<p>平时用 docker 的时候都是用 sudo 来调用 root 权限才能运行，这样其实很不安全，尤其是在共用环境中这样滥用 root 权限会有很大风险。</p>
+<p>为了规避这个风险，可以用一种简单的方法修复这个问题。</p>
+<h1 id="解决方法">解决方法</h1>
+<p>首先创建一个新组名为 <code>docker</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo groupadd docker 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后把用户添加进去。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo usermod -aG docker $USER
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里将 <code>$USER</code> 改为当前登录的用户名， 比如我是 <code>weepingdogel</code> 。</p>
+<p>然后再重新登录到该组就行啦。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ newgrp docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>run 一个 <code>hello-world</code>， 来检查一下是否修复成功。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ docker run hello-world
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>很明显它成功了！</p>
+<p>但是如果还是报错的情况下，这个时候就要重启了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>自此，这个问题就解决了。</p>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/48957195/how-to-fix-docker-got-permission-denied-issue</a></li>
+</ul>
+]]></description>
+</item><item>
     <title>浅尝 Docker</title>
     <link>http://weepingdogel.github.io/posts/%E6%B5%85%E5%B0%9Ddocker/</link>
     <pubDate>Sat, 15 Oct 2022 20:21:13 &#43;0800</pubDate>
