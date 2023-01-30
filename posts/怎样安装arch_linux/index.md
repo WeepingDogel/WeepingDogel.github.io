@@ -292,7 +292,7 @@ rtt min/avg/max/mdev = 110.224/112.036/114.157/1.355 ms
 
 |挂载点|分区|分区类型|建议大小|
 |:--|----|:--|:--|:--|
-|`/mnt/efi`|`/dev/sdX1`|EFI 系统分区|260-512 MB|
+|`/mnt/boot/EFI`|`/dev/sdX1`|EFI 系统分区|260-512 MB|
 |`/mnt`|`/dev/sdX2`|Linux|剩余空间|
 |[SWAP]|`/dev/sdX3`|Linux swap (交换空间) |大于 512 MB|
 
