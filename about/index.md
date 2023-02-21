@@ -84,3 +84,6 @@
 
 [KiraPGR's Blog](https://kira-pgr.github.io/)
 
+[Lynnrin's Blog](https://blog.lynnrin.moe/)
+
+[poly000客栈](https://poly000.github.io/)
