@@ -1,7 +1,7 @@
 # About
 
 
-![](/img/photo_2021-02-15_20-22-35.png)
+<!-- ![](/img/photo_2021-02-15_20-22-35.png) -->
 
 # 简介 
 是一只超级坏狗勾
@@ -68,3 +68,6 @@
 [Lynnrin's Blog](https://blog.lynnrin.moe/)
 
 [poly000客栈](https://poly000.github.io/)
+
+
+

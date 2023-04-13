@@ -346,27 +346,27 @@ drwxr-xr-x 2 weepingdogel weepingdogel 40  8月  5 17:52 test
 
 那么这些就是**apt**常用的用法了
 ```bash
-[weepingdogel@localhost ~]$ sudo apt-get update # 更新软件源
+[weepingdogel@localhost ~]$ sudo apt update # 更新软件源
 ```
 
 ```bash
-[weepingdogel@localhost c]$ sudo apt-get install <包名> # 安装一个软件、软件包
+[weepingdogel@localhost c]$ sudo apt install <包名> # 安装一个软件、软件包
 ```
 
 ```bash
-[weepingdogel@localhost c]$ sudo apt-get search <软件名称> # 搜索软件
+[weepingdogel@localhost c]$ sudo apt search <软件名称> # 搜索软件
 ```
 
 ```bash
-[weepingdogel@localhost c]$ sudo apt-get upgrade # 升级你已安装的软件，通常消耗时间比较长
+[weepingdogel@localhost c]$ sudo apt upgrade # 升级你已安装的软件，通常消耗时间比较长
 ```
 
 ```bash
-[weepingdogel@localhost c]$ sudo apt-get remove <包名> # 卸载软件
+[weepingdogel@localhost c]$ sudo apt remove <包名> # 卸载软件
 ```
 
 ```bash
-[weepingdogel@localhost c]$ sudo apt-get autoremove # 自动处理依赖
+[weepingdogel@localhost c]$ sudo apt autoremove # 自动处理依赖
 ```
 
 ```bash
