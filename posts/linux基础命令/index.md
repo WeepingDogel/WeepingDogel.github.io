@@ -369,9 +369,7 @@ drwxr-xr-x 2 weepingdogel weepingdogel 40  8月  5 17:52 test
 [weepingdogel@localhost c]$ sudo apt autoremove # 自动处理依赖
 ```
 
-```bash
 如果要安装本地包，则需要使用本地包管理器dpkg，用法如下
-```
 
 ```bash
 [weepingdogel@localhost c]$ sudo dpkg -i <包名> # 安装本地包
