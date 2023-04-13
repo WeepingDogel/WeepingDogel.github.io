@@ -1,0 +1,232 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>随记 - 标签 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/tags/%E9%9A%8F%E8%AE%B0/</link>
+        <description>随记 - 标签 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Fri, 09 Apr 2021 22:50:18 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/tags/%E9%9A%8F%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+    <title>学 GTK 记</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%AD%A6gtk%E8%AE%B0/</link>
+    <pubDate>Fri, 09 Apr 2021 22:50:18 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%AD%A6gtk%E8%AE%B0/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2021-04-09_23-41.png" referrerpolicy="no-referrer">
+            </div><h2 id="序">序</h2>
+<p>心血来潮想玩玩 GTK, 于是..</p>
+<p>我就尝试了一下， 用 <code>C</code> 试着捏了一个。</p>
+<p>总的来说其实不是很难， 也是套用函数就好&hellip;</p>
+<p>但是，很长.. 真的很长..</p>
+<h2 id="gtkh">gtk.h</h2>
+<p>要写 gtk 程序， 首先得导入这个库， 不过它得在安装 gtk 之后才行。</p>
+<p>并且编译的时候还要加一些参数..</p>
+<h3 id="安装-gtk">安装 gtk</h3>
+<p>现在已经 gtk 已经更新到 4 了， 不过我这里用的是 3..</p>
+<p>这边 Arch 的话， 直接装上就好。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S gtk3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="头文件">头文件</h3>
+<p>然后在程序的开头写上这个就可以开始编程了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="构建一个空白窗口">构建一个空白窗口</h2>
+<p>C 可能稍微比较复杂， 在它能够加载出窗口之前， 我们需要在主函数里定义两个参数&hellip;</p>
+<p>我也不太懂， 就当作标准格式了。</p>
+<p>一个是 <strong>整型(<code>int</code>)</strong> 的， 命名为 <code>argc</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>另一个是 <strong><code>char</code> 类型的</strong>, 命名为 <code>argv</code>, 但是这个有所不同， 我们得这么写 &ldquo;<code>char *argv</code>&rdquo; :</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来写上大括号，我们就可以开始写了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>首先我们要进行的是让 gtk 初始化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">gtk_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>写入这两个参数， 记得前面变量要加 <code>&amp;</code>, 这个似乎是指针吧.. 还是什么..</p>
+<p>呜呜呜， C 学得不怎么好&hellip;</p>
+<p>好啦我们继续.. 就这样写在**主函数(main)**里面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gtk_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>&quot;<code>;</code>&quot;</strong> 这个一定不能丢！！ 别问为什么！</p>
+<p><del>如果你不写 <strong>&quot;<code>;</code>&quot;</strong> 能把 C 语言程序跑起来, 我就一口气喝1L的肥宅快乐水</del></p>
+<p>然后我们需要创建一个窗口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">GtkWidget</span> <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="nf">gtk_window_new</span><span class="p">(</span><span class="n">GTK_WINDOW_TOPLEVEL</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>*window</code> 为控件名称， 后面是 <code>gtk.h</code> 里面的函数， 没错， 就是像这样的调用，但是很长。</p>
+<p>你也可以把 <code>*window</code> 写成别的， 只要你接下来输对了就可以..</p>
+<p>那么接下来我们的代码变成了这样</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gtk_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="nf">gtk_window_new</span><span class="p">(</span><span class="n">GTK_WINDOW_TOPLEVEL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我们要让窗口显示出来， 需要写入这行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">gtk_widget_show_all</span><span class="p">(</span><span class="n">window</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以及这行， 让 gtk 完全启动</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">gtk_main</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后我们加上 <code>return 0;</code></p>
+<p>完整代码变成了这样:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;gtk/gtk.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gtk_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GtkWidget</span> <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="nf">gtk_window_new</span><span class="p">(</span><span class="n">GTK_WINDOW_TOPLEVEL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gtk_widget_show_all</span><span class="p">(</span><span class="n">window</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gtk_main</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我们得编译了， 上面提到过编译要写一长串</p>
+<p>首先要 <code>cd</code> 到代码文件所在的位置， 然后敲这些</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ gcc -o test $(pkg-config --cflags --libs gtk+-3.0) 文件名.c
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>文件名.c</code> 改为你的代码文件名， test 也可以改为你需要命名的名称</p>
+<p>如果没有任何报错，那么大概是编译成功了</p>
+<p>接下来在终端敲</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ ./test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一个 gtk 窗口程序就此诞生了! 不过它需要使用 <code>CTRL + C</code> 来结束， 因为此时只是一个外观的渲染， 窗口按钮是无效的。</p>
+<p></p>
+<p>接下来你可以添加更多的细节，一切可以参考 gtk 官方文档..</p>
+<p>以及我这里也写了个实例可以参考。</p>
+<p><del>也是瞎捏的</del></p>
+<ul>
+<li><a href="https://github.com/Aozaki-Club/about-doggy" target="_blank" rel="noopener noreffer">GitHub - Aozaki-Club/about-doggy</a></li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>总体上来讲它似乎并不是特别的难..</p>
+<p>就是太长了..</p>
+<p>上文写的可能看不出来它有多长， 但是真正控件多了的时候就&hellip;</p>
+<p>不过我还是会试着继续学的。</p>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://www.gtk.org/" target="_blank" rel="noopener noreffer">The GTK Project - A free and open-source cross-platform widget toolkit</a></li>
+<li><a href="https://blog.csdn.net/tennysonsky/article/details/42740865" target="_blank" rel="noopener noreffer">C语言也能做界面：踏上GTK+学习之旅_秋叶原 &amp;&amp; Mike || 麦克-CSDN博客_c语言gtk</a></li>
+<li><a href="https://developer.gnome.org/gtk3/stable/" target="_blank" rel="noopener noreffer">GTK+ 3 Reference Manual: GTK+ 3 Reference Manual</a></li>
+<li><a href="https://developer.gnome.org/gtk3/stable/GtkWindow.html" target="_blank" rel="noopener noreffer">GtkWindow: GTK+ 3 Reference Manual</a></li>
+</ul>
+]]></description>
+</item></channel>
+</rss>

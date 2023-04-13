@@ -1,0 +1,154 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>问题解决 - 标签 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</link>
+        <description>问题解决 - 标签 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Fri, 17 Jul 2020 10:30:59 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="self" type="application/rss+xml" /><item>
+    <title>如何解决 Manjaro 中 QCA6174 网卡问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Fri, 17 Jul 2020 10:30:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/photo_2020-07-16_23-54-59.jpg" referrerpolicy="no-referrer">
+            </div><h2 id="开场白">开场白</h2>
+<p>尝试在 Redmibook 14 中安装了 Manjaro, 装完发现 WIFI 不能用</p>
+<p>此时陷入了疑惑, 难道 Manjaro 也不自带 linux-firmware ?</p>
+<p>总之经过了一系列折腾, 最后还是解决了, 写篇东西来记录一下解决的过程</p>
+<h2 id="尝试使用其他方法连接网络">尝试使用其他方法连接网络</h2>
+<p>既然 WIFI 不能用, 那也要想别的办法联网, 不然这问题就很棘手了</p>
+<p>我能想到的是插网线, 可这是轻薄本, 没有有限网卡, 那么我们还有一种办法, 使用手机的 USB 网络共享</p>
+<p>这个过程很简单, 按照以下步骤走</p>
+<ol>
+<li>
+<p><strong>使用 USB 数据线将电脑与手机连接, 并打开 USB 网络共享</strong></p>
+<ul>
+<li><del>这个都不会的, 可以执行 <code>sudo rm -rf /</code></del></li>
+<li><del>这智商, 玩你妈的 Linux</del></li>
+<li>不会的, 请<a href="https://jingyan.baidu.com/article/09ea3ede1cfbf1c0aede391d.html" target="_blank" rel="noopener noreffer">参考这里</a></li>
+</ul>
+</li>
+<li>
+<p><strong>打开终端, 执行</strong></p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo ip link
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后它会返回这样的东西, 如图</p>
+<p></p>
+<p>设置网卡</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo ip link set enp3s0f4u2 up
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行 <code>dhcpcd</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo dhcpcd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来, 我试着运行 <code>ifconfig</code>, 可是不能用, 但是看了一眼 <code>network manager</code></p>
+<p>嗯 能上网了</p>
+<p></p>
+<h2 id="解决过程">解决过程</h2>
+<h3 id="软件源">软件源</h3>
+<p>我们会进行软件包的装卸, 所以我们首先需要做的是选择合适的软件源&hellip;.</p>
+<p>ok, 现在我们需要修改的文件是这个</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">/etc/pacman.d/mirrorlist
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们用 <code>nano</code> 改, 记得加 <code>sudo</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo nano /etc/pacman.d/mirrorlist
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将 <code># China</code> 下面的内容 放到第一行</p>
+<p>至于 <code>nano</code> 的用法, 请自行查找资料, 会用记事本就会用这个</p>
+<p>修改完后, 如图</p>
+<p></p>
+<p>然后执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -Sy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装-linux-firmware">安装 <code>linux-firmware</code></h3>
+<p>执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S linux-firmware
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重启之后, 发现还是无效, 此时我去谷歌查了一下.</p>
+<p>发现, 我们需要手动从 <a href="https://github.com/FireWalkerX/ath10k-firmware/tree/master/QCA6174/hw3.0" target="_blank" rel="noopener noreffer">Github</a> 下载它的驱动文件</p>
+<h3 id="手动替换驱动文件">手动替换驱动文件</h3>
+<p>到上面那个链接指向的 Github 仓库, 下载 <code>board-2.bin</code> 和 <code>firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1</code>, 分别将它们重命名为: <code>board.bin</code> 和 <code>firmware-4.bin</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/board-2.bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后把这两个文件复制到 <code>/lib/firmware/ath10k/QCA6174/hw3.0/</code> 目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo cp firmware-4.bin /lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重启系统, WIFI 就能用了.</p>
+<p></p>
+<h2 id="总结">总结</h2>
+<p>以上内容均为 Redmibook 14 的解决过程, 并不一定适用于其他设备, 因此仅供参考.</p>
+]]></description>
+</item></channel>
+</rss>

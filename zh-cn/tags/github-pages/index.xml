@@ -1,0 +1,1134 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Github Pages - 标签 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/tags/github-pages/</link>
+        <description>Github Pages - 标签 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Tue, 13 Oct 2020 20:37:45 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/tags/github-pages/" rel="self" type="application/rss+xml" /><item>
+    <title>如何使用 GitHub 搭建博客</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/</link>
+    <pubDate>Tue, 13 Oct 2020 20:37:45 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://w.wallhaven.cc/full/39/wallhaven-39xklv.jpg" referrerpolicy="no-referrer">
+            </div><h2 id="序">序</h2>
+<p>去年写过一篇<a href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/" target="_blank" rel="noopener noreffer">如何使用GitHub搭建网站</a>，利用 Github Pages 上传自己写的 HTML 文件来运行一个网页..</p>
+<p>嘛.. 搭建博客的话，手写 HTML CSS JS 太麻烦了&hellip;</p>
+<p>怎么办？用框架呀</p>
+<p>qwq</p>
+<p>我建议用 Hugo&hellip; 个人觉得最简单</p>
+<p>正好有个朋友的博客要重建..</p>
+<h2 id="注册-github">注册 Github</h2>
+<p>首先你得有个 Github 帐号和一个能在 Github Pages 显示的库。</p>
+<p>去年<a href="https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/" target="_blank" rel="noopener noreffer">那篇</a>已经写清楚了如何注册 Github 帐号以及创建 Github Pages 库，这里就不再重复了。</p>
+<p>总之你需要有一个 Github 帐号，然后创建一个名字为这样的库，记得勾选 Public</p>
+<blockquote>
+<p>你的GitHub用户名.github.io</p>
+</blockquote>
+<h2 id="安装-hugo">安装 Hugo</h2>
+<p>接下来安装 Hugo</p>
+<ul>
+<li>Arch</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo pacman -S hugo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>deb 系</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install hugo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Windows</li>
+</ul>
+<p>到 <a href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener noreffer">Github</a>下载安装程序即可</p>
+<h2 id="生成一个博客">生成一个博客</h2>
+<p>我以 Linux 为例，其他平台可能有些细节不同，请<strong>注意</strong></p>
+<p>打开你的终端，输入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo new site <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来你的终端会返回一些这样的文字</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Congratulations! Your new Hugo site is created in /home/weepingdogel/test.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Just a few more steps and you&#39;re ready to go:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1. Download a theme into the same-named folder.
+</span></span><span class="line"><span class="cl">   Choose a theme from https://themes.gohugo.io/ or
+</span></span><span class="line"><span class="cl">   create your own with the &#34;hugo new theme &lt;THEMENAME&gt;&#34; command.
+</span></span><span class="line"><span class="cl">2. Perhaps you want to add some content. You can add single files
+</span></span><span class="line"><span class="cl">   with &#34;hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;.
+</span></span><span class="line"><span class="cl">3. Start the built-in live server via &#34;hugo server&#34;.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Visit https://gohugo.io/ for quickstart guide and full documentation.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个时候你也许知道怎么做了，如果看不太懂英文呢，用 Google Translate 翻译一下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">恭喜你！ 您的新Hugo网站是在/ home / weepingdogel / test中创建的。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">仅需执行几个步骤，您就可以开始：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1.将主题下载到同名文件夹中。
+</span></span><span class="line"><span class="cl">    从https://themes.gohugo.io/中选择一个主题
+</span></span><span class="line"><span class="cl">    使用“ hugo新主题&lt;THEMENAME&gt;”命令创建自己的命令。
+</span></span><span class="line"><span class="cl">2.也许您想添加一些内容。 您可以添加单个文件
+</span></span><span class="line"><span class="cl">    和“ hugo new &lt;SECTIONNAME&gt; / &lt;FILENAME&gt;。&lt;FORMAT&gt;”。
+</span></span><span class="line"><span class="cl">3.通过“ hugo服务器”启动内置实时服务器。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">请访问https://gohugo.io/以获取快速入门指南和完整文档。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>好的，接下来我们前往 <a href="https://themes.gohugo.io/" target="_blank" rel="noopener noreffer">https://themes.gohugo.io/</a> 找一个好看的主题。</p>
+<p></p>
+<p>这里有很多主题，qwq。</p>
+<p>嗯&hellip; 因人而异，每个人喜欢的都不同。</p>
+<p>而且各种主题的配置方式也不同，我以 <a href="https://themes.gohugo.io/hugo-coder/" target="_blank" rel="noopener noreffer">hugo-coder</a> 为例</p>
+<p>进入 hugo 目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看里面的文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -lh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">总用量 28K
+</span></span><span class="line"><span class="cl">drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 archetypes/
+</span></span><span class="line"><span class="cl">-rw-r--r-- 1 weepingdogel weepingdogel   82 10月 22 13:23 config.toml
+</span></span><span class="line"><span class="cl">drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 content/
+</span></span><span class="line"><span class="cl">drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 data/
+</span></span><span class="line"><span class="cl">drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 layouts/
+</span></span><span class="line"><span class="cl">drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 static/
+</span></span><span class="line"><span class="cl">drwxr-xr-x 2 weepingdogel weepingdogel 4.0K 10月 22 13:23 themes/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们只需要记住这几个目录</p>
+<ul>
+<li>config.toml
+<ul>
+<li>博客的配置文件，全局配置</li>
+</ul>
+</li>
+<li>static
+<ul>
+<li>静态资源文件，你的图片什么的就可以直接放在这里</li>
+</ul>
+</li>
+<li>content
+<ul>
+<li>你写的文章会存储在这个目录下的 <code>posts\</code> 目录下，其他页面也是在这个目录下</li>
+</ul>
+</li>
+<li>themes
+<ul>
+<li>这个是你放主题的目录</li>
+</ul>
+</li>
+<li>public
+<ul>
+<li>生成出来的静态文件</li>
+</ul>
+</li>
+</ul>
+<p>然后我们.. 执行这些</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> theme
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone https://github.com/luizdepra/hugo-coder.git 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> ..
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来将主题里面的 <code>examplesite/config.toml</code> 复制到 hugo 目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cp ./themes/hugo-coder/exampleSite/config.toml ./ -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还要将 <code>examplesite/content</code> 目录下的东西也复制到外面这个 <code>content</code> 目录里面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cp -rv ./themes/hugo-coder/exampleSite/content/* content/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动本地预览服务器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo server 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后通过浏览器访问 <code>http://127.0.0.1:1313/</code> 即可预览</p>
+<p></p>
+<p>这样一来，博客在本地就可以访问了，算是成功了一半。</p>
+<p>你可以修改<code>config.toml</code>这个文件来更改你的博客配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ vim config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">baseurl</span> <span class="p">=</span> <span class="s2">&#34;http://www.example.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;johndoe&#34;</span> <span class="c"># 博客标题</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;hugo-coder&#34;</span> <span class="c"># 主题名称，不需要动</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">languagecode</span> <span class="p">=</span> <span class="s2">&#34;en&#34;</span> <span class="c"># 语言，默认英文..</span>
+</span></span><span class="line"><span class="cl"><span class="nx">defaultcontentlanguage</span> <span class="p">=</span> <span class="s2">&#34;en&#34;</span> <span class="c"># 同上</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">paginate</span> <span class="p">=</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">pygmentsstyle</span> <span class="p">=</span> <span class="s2">&#34;b2&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pygmentscodefences</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pygmentscodefencesguesssyntax</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">disqusShortname</span> <span class="p">=</span> <span class="s2">&#34;yourdiscussshortname&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">## 基本信息，自己谷歌翻译吧... qwq</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">author</span> <span class="p">=</span> <span class="s2">&#34;John Doe&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">description</span> <span class="p">=</span> <span class="s2">&#34;John Doe&#39;s personal website&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">keywords</span> <span class="p">=</span> <span class="s2">&#34;blog,developer,personal&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">info</span> <span class="p">=</span> <span class="s2">&#34;Full Stack DevOps and Magician&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">avatarurl</span> <span class="p">=</span> <span class="s2">&#34;images/avatar.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">#gravatar = &#34;john.doe@example.com&#34; </span>
+</span></span><span class="line"><span class="cl">    <span class="nx">footercontent</span> <span class="p">=</span> <span class="s2">&#34;Enter a text here.&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">dateformat</span> <span class="p">=</span> <span class="s2">&#34;January 2, 2006&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">hideFooter</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hideCredits</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hideCopyright</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">since</span> <span class="p">=</span> <span class="mi">2019</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Git Commit in Footer，取消注释下面的行以启用它。</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">commit</span> <span class="p">=</span> <span class="s2">&#34;https://github.com/luizdepra/hugo-coder/tree/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">rtl</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># Specify light/dark colorscheme</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># Supported values:</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># &#34;auto&#34; (use preference set by browser)</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># &#34;dark&#34; (dark background, light foreground)</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># &#34;light&#34; (light background, dark foreground) (default)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">colorscheme</span> <span class="p">=</span> <span class="s2">&#34;auto&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># 隐藏切换按钮以及相关的垂直分隔线</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hidecolorschemetoggle</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># 系列，另见帖子数</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">maxSeeAlsoItems</span> <span class="p">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># 启用Twemoji</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">enableTwemoji</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># 自定义CSS</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">customCSS</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># 自定义SCSS</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">customSCSS</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># 自定义JS</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">customJS</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 如果要使用 fathom（https://usefathom.com）进行分析，请添加此部分</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">fathomAnalytics</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">siteID</span> <span class="p">=</span> <span class="s2">&#34;ABCDE&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 默认值为cdn.usefathom.com，如果您是自托管主机，则将其覆盖</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">serverURL</span> <span class="p">=</span> <span class="s2">&#34;analytics.example.com&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 如果要使用 plausible（https://plausible.io）进行分析，请添加此部分</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">plausibleAnalytics</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">domain</span> <span class="p">=</span> <span class="s2">&#34;example.com&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 默认值为plausible.io，如果您是自托管或使用自定义域，请覆盖此默认值</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">serverURL</span> <span class="p">=</span> <span class="s2">&#34;analytics.example.com&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 如果要使用山羊计数（https://goatcounter.com）进行分析，请添加此部分</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">goatCounter</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">code</span> <span class="p">=</span> <span class="s2">&#34;code&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">taxonomies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">category</span> <span class="p">=</span> <span class="s2">&#34;categories&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">series</span> <span class="p">=</span> <span class="s2">&#34;series&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tag</span> <span class="p">=</span> <span class="s2">&#34;tags&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">author</span> <span class="p">=</span> <span class="s2">&#34;authors&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Github&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">icon</span> <span class="p">=</span> <span class="s2">&#34;fa fa-github&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;https://github.com/johndoe/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Gitlab&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">icon</span> <span class="p">=</span> <span class="s2">&#34;fa fa-gitlab&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;https://gitlab.com/johndoe/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Twitter&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">icon</span> <span class="p">=</span> <span class="s2">&#34;fa fa-twitter&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;https://twitter.com/johndoe/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;LinkedIn&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">icon</span> <span class="p">=</span> <span class="s2">&#34;fa fa-linkedin&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;https://www.linkedin.com/in/johndoe/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Medium&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">icon</span> <span class="p">=</span> <span class="s2">&#34;fa fa-medium&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;https://medium.com/@johndoe&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;RSS&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">icon</span> <span class="p">=</span> <span class="s2">&#34;fa fa-rss&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;https://myhugosite.com/index.xml&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rel</span> <span class="p">=</span> <span class="s2">&#34;alternate&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">type</span> <span class="p">=</span> <span class="s2">&#34;application/rss+xml&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">languages</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">en</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">languagename</span> <span class="p">=</span> <span class="s2">&#34;English&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">en</span><span class="p">.</span><span class="nx">menu</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">en</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;About&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;about/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">en</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Blog&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;posts/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">en</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Projects&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;projects/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">en</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Contact me&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;contact/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">pt-br</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">languagename</span> <span class="p">=</span> <span class="s2">&#34;Português&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;João Ninguém&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">pt-br</span><span class="p">.</span><span class="nx">params</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">author</span> <span class="p">=</span> <span class="s2">&#34;João Ninguém&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">info</span> <span class="p">=</span> <span class="s2">&#34;Full Stack DevOps e Mágico&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">description</span> <span class="p">=</span> <span class="s2">&#34;Sítio pessoal de João Ninguém&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">keywords</span> <span class="p">=</span> <span class="s2">&#34;blog,desenvolvedor,pessoal&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">footercontent</span> <span class="p">=</span> <span class="s2">&#34;Coloque algum texto aqui.&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">pt-br</span><span class="p">.</span><span class="nx">menu</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">pt-br</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Sobre&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;about/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">pt-br</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Blog&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;posts/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">pt-br</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Projetos&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;projects/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="p">[[</span><span class="nx">languages</span><span class="p">.</span><span class="nx">pt-br</span><span class="p">.</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Contato&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">weight</span> <span class="p">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;contact/&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里将文件里的注释翻译了一下。</p>
+<p>关于这个主题的详细文档可以阅读<a href="https://github.com/luizdepra/hugo-coder/wiki/Configurations" target="_blank" rel="noopener noreffer">这个链接</a>。</p>
+<p>根据自己的需要和说明修改配置文件就可以啦～</p>
+<h2 id="写博客">写博客</h2>
+<p>首先我们需要创建一个 <code>*.md</code> 文件，我们可以用 <code>hugo new</code> 来生成一个，因为不同主题它的空白格式都不一样</p>
+<p>这个是本站的空白格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#34;Test&#34;
+</span></span><span class="line"><span class="cl">date: 2020-10-22T17:08:31+08:00
+</span></span><span class="line"><span class="cl">draft: true
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个是 coder 主题的空白格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">+++ 
+</span></span><span class="line"><span class="cl">draft = true
+</span></span><span class="line"><span class="cl">date = 2020-10-22T17:09:47+08:00
+</span></span><span class="line"><span class="cl">title = &#34;&#34;
+</span></span><span class="line"><span class="cl">description = &#34;&#34;
+</span></span><span class="line"><span class="cl">slug = &#34;&#34;
+</span></span><span class="line"><span class="cl">authors = []
+</span></span><span class="line"><span class="cl">tags = []
+</span></span><span class="line"><span class="cl">categories = []
+</span></span><span class="line"><span class="cl">externalLink = &#34;&#34;
+</span></span><span class="line"><span class="cl">series = []
+</span></span><span class="line"><span class="cl">+++
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还是有区别的对吧，因此我们需要这样子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hugo new posts/helloworld.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果终端返回一条这样的信息:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">/home/weepingdogel/test/content/posts/helloworld.md created
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就说明文件建立成功了，接下来只需要编辑这个文件就可以写了～</p>
+<p>对了，写博客需要使用 <a href="https://www.runoob.com/markdown/md-tutorial.html" target="_blank" rel="noopener noreffer">MarkDown 语法</a>，如果不了解的可以点击链接学一下哦～</p>
+<p>我就象征性的随便写一个吧～</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">+++ 
+</span></span><span class="line"><span class="cl">draft = false
+</span></span><span class="line"><span class="cl">date = 2020-10-22T17:09:47+08:00
+</span></span><span class="line"><span class="cl">title = &#34;HELLO WORLD&#34;
+</span></span><span class="line"><span class="cl">description = &#34;&#34;
+</span></span><span class="line"><span class="cl">slug = &#34;&#34;
+</span></span><span class="line"><span class="cl">authors = []
+</span></span><span class="line"><span class="cl">tags = []
+</span></span><span class="line"><span class="cl">categories = []
+</span></span><span class="line"><span class="cl">externalLink = &#34;&#34;
+</span></span><span class="line"><span class="cl">series = []
+</span></span><span class="line"><span class="cl">+++
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## Hello World
+</span></span></span><span class="line"><span class="cl"><span class="gu"></span>
+</span></span><span class="line"><span class="cl"><span class="gs">**It&#39;s my first blog!**</span>
+</span></span><span class="line"><span class="cl">&gt;```c
+</span></span><span class="line"><span class="cl"><span class="k">&gt; </span><span class="ge">#include&lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="ge"></span><span class="k">&gt; </span><span class="ge">int main(){
+</span></span></span><span class="line"><span class="cl"><span class="ge"></span><span class="k">&gt; </span><span class="ge">  printf(&#34;Hello World&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="ge"></span><span class="k">&gt; </span><span class="ge">  return 0;
+</span></span></span><span class="line"><span class="cl"><span class="ge"></span>&gt;}
+</span></span><span class="line"><span class="cl">&gt;```
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+记得把 <code>draft</code> 后面的内个改成 <code>false</code> 哦，不然它会被默认识别为草稿，不会被发布的。</p>
+<h2 id="发布到-github">发布到 Github</h2>
+<p>写完了以后，我们发现现在只能在<code>127.0.0.1：1313</code>这个本地链接中预览，别人是看不到的。</p>
+<p>接下來我们还得把它放到 Github 上去才行。</p>
+<p>先生成静态文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ hugo --theme=hugo-coder
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回出以下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Start building sites … 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                   | EN | PT-BR  
+</span></span><span class="line"><span class="cl">-------------------+----+--------
+</span></span><span class="line"><span class="cl">  Pages            | 57 |    25  
+</span></span><span class="line"><span class="cl">  Paginator pages  |  0 |     0  
+</span></span><span class="line"><span class="cl">  Non-page files   |  0 |     0  
+</span></span><span class="line"><span class="cl">  Static files     |  0 |     0  
+</span></span><span class="line"><span class="cl">  Processed images |  0 |     0  
+</span></span><span class="line"><span class="cl">  Aliases          | 21 |     9  
+</span></span><span class="line"><span class="cl">  Sitemaps         |  2 |     1  
+</span></span><span class="line"><span class="cl">  Cleaned          |  0 |     0  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Total in 237 ms
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进入 <code>public</code> 目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> public/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下來我们需要做的就是把这个目录里所有文件 pull 到 <code>你的GitHub用户名.github.io</code> 这个库里面去，其实很简单..</p>
+<p>初始化仓库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add -A
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>作出提交请求</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;随便写点啥&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加你的 Github 仓库地址</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git remote add origin https://github.com/你的Github用户名/你的Github用户名.github.io.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 http 的方式提交</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git push -u origin master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下來输入你的帐号密码，就会自动提交到仓库了，接下來等一会儿，你的博客就能通过这个链接被访问了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">https://你的Github用户名.github.io/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="结语">结语</h2>
+<p>这个坑终于填完了。</p>
+<p>对，这次也是很水的，而且还偷懒了，写得不太详细，看完还是不会的，在下面留言就好..</p>
+<p>qwq</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li>
+<p><a href="https://gohugo.io/documentation/" target="_blank" rel="noopener noreffer">Hugo Documentation | Hugo</a></p>
+</li>
+<li>
+<p><a href="https://themes.gohugo.io/" target="_blank" rel="noopener noreffer">Complete List | Hugo Themes</a></p>
+</li>
+<li>
+<p><a href="https://themes.gohugo.io/hugo-coder/" target="_blank" rel="noopener noreffer">Hugo Coder | Hugo Themes</a></p>
+</li>
+<li>
+<p><a href="https://github.com/luizdepra/hugo-coder/wiki/Configurations" target="_blank" rel="noopener noreffer">Configurations · luizdepra/hugo-coder Wiki · GitHub</a></p>
+</li>
+<li>
+<p><a href="https://www.runoob.com/markdown/md-tutorial.html" target="_blank" rel="noopener noreffer">Markdown 教程 | 菜鸟教程</a></p>
+</li>
+</ul>
+]]></description>
+</item><item>
+    <title>如何使用 GitHub 搭建网站</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/</link>
+    <pubDate>Sun, 13 Oct 2019 02:01:58 &#43;0530</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/maxresdefault.jpg" referrerpolicy="no-referrer">
+            </div><h2 id="不正经的前言">不正经的前言</h2>
+<blockquote>
+<p>我又回来啦～</p>
+<p>嘿嘿，我绝对不会告诉你我又回来水啦～</p>
+<p>啊啊别打我～疼</p>
+</blockquote>
+<h2 id="github是啥">Github是啥</h2>
+<blockquote>
+<p>某个萌新:大佬大佬，Github是啥？</p>
+<p>大佬:不知道，滚。</p>
+<p>萌新:呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜大佬不帮我了呜呜呜呜呜呜呜</p>
+</blockquote>
+<p>咳咳，，，，</p>
+<p><a href="https://github.com/" target="_blank" rel="noopener noreffer">Github</a>是一个基于git的源代码托管平台，由Chris Wanstrath, PJ Hyett 与Tom Preston-Werner三位开发者在2008年4月创办。迄今拥有59名全职员工，主要提供基于git的版本托管服务。</p>
+<p>也常常被人戏称为<strong>Gayhub</strong>。2333</p>
+<blockquote>
+<p>今天，GitHub已是：</p>
+<ul>
+<li>一个拥有143万开发者的社区。其中不乏Linux发明者<a href="https://github.com/torvalds" target="_blank" rel="noopener noreffer">Torvalds</a>这样的顶级黑客，以及Rails创始人<a href="https://github.com/dhh" target="_blank" rel="noopener noreffer">DHH</a>这样的年轻极客。</li>
+<li>这个星球上最流行的开源托管服务。目前已托管431万git项目，不仅越来越多知名开源项目迁入GitHub，比如Ruby on Rails、jQuery、Ruby、Erlang/OTP；近三年流行的开源库往往在GitHub首发，例如：<a href="https://github.com/twitter/bootstrap" target="_blank" rel="noopener noreffer">BootStrap</a>、<a href="https://github.com/joyent/node" target="_blank" rel="noopener noreffer">Node.js</a>、<a href="https://github.com/jashkenas/coffee-script" target="_blank" rel="noopener noreffer">CoffeScript</a>等。</li>
+<li>alexa全球排名414的网站。</li>
+</ul>
+</blockquote>
+<p>也就是说，你想把你写好的开源程序发布出去，Github将是最佳选择。</p>
+<h2 id="本期的主要内容">本期的主要内容</h2>
+<p>本期内容将会写出如何使用Github搭建一个简单的网站</p>
+<h3 id="使用github建站的好处">使用Github建站的好处</h3>
+<blockquote>
+<ul>
+<li>安全
+<ul>
+<li>由于你的网页源代码是由Github托管，所以Github有多安全，你的网站就有多安全，别人想黑你就得先黑掉Github</li>
+</ul>
+</li>
+<li>简单
+<ul>
+<li>大部分操作只需要有前端基础就可以轻松完成</li>
+</ul>
+</li>
+<li>无忧
+<ul>
+<li>后端用Github的服务器，无需一天24小时维护，可以做到无人值守</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="使用github建站的缺点">使用Github建站的缺点</h3>
+<blockquote>
+<ul>
+<li>限制
+<ul>
+<li>Github仓库只能运行基于HTML这类的静态网页，不能使用数据库等花里胡哨的东西。</li>
+</ul>
+</li>
+<li><del>禁止爬虫</del>
+<ul>
+<li><del>Github的仓库是禁止搜索引擎进行爬取内容的，所以你搭建的网站不会在搜索引擎上被找到。</del> (事实证明其实可以)</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<p>以上就是使用Github建站的优缺点，在搭建之前必须按实际情况以及需求来考虑。</p>
+<h2 id="详细教程">详细教程</h2>
+<h3 id="准备">准备</h3>
+<h4 id="注册帐号">注册帐号</h4>
+<p>首先你需要去<a href="https://github.com/" target="_blank" rel="noopener noreffer">Github</a>注册一个帐号，只需要使用邮箱就可以注册，具体方法就不多说了，绝大多数人都会。</p>
+<blockquote>
+<p>萌新:大佬，我看不懂英文啊。。</p>
+<p>大佬:emmmm <a href="https://translate.google.cn/" target="_blank" rel="noopener noreffer">谷歌翻译</a>，请</p>
+</blockquote>
+<h4 id="创建仓库">创建仓库</h4>
+<p>当你登录帐号以后，你可以看到左上角一个绿绿的<code>new</code>，点击它</p>
+<p></p>
+<p>然后，就会弹出一个要你填的东西</p>
+<p></p>
+<p>如图所示，<code>Respository name</code>就是仓库的名称，</p>
+<p><strong>注意:Github只允许使用与用户名相同的仓库名搭建网页</strong></p>
+<p>这里有个特殊格式:</p>
+<blockquote>
+<p>你的GitHub用户名.github.io</p>
+</blockquote>
+<p>这个仓库名以后就是你的网址了</p>
+<p>创建完以后就是个空的仓库</p>
+<p></p>
+<p>这个时候你就可以按照它的提示上传你的网页代码了。</p>
+<h3 id="上传代码">上传代码</h3>
+<p>这里我会贴出一部分 <code>git</code> 的用法</p>
+<p>首先创建一个目录:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ mkdir ./你的Github用户名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个目录的名称其实可以随便写，但是为了方便管理，还是写成你的Github用户名比较好。</p>
+<p>接下来进入这个目录:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> ./你的Github用户名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个命令会使你这个目录被初始化为git目录，如果不理解的话去<a href="https://www.runoob.com/git/git-tutorial.html" target="_blank" rel="noopener noreffer">学一下git</a>吧。。。。</p>
+<p>接下来你就可以开始创建、编写你的网页代码了，比如我写个简单的HTML</p>
+<p>先创建一个<code>index.html</code>文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ vim ./index.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里使用了<code>vim</code>，它会使你的终端自动进入编辑页面。</p>
+<p>接下来按 <code>i</code> 键进入编辑模式</p>
+<p>在里面写入以下代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>HelloWorld<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>HelloWorld<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>HelloWorld,this is my first website.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你可以使用HTML语言随意编写你的网站，可以添加多个html页面文件和CSS，甚至JavaScript。</p>
+<p>编写完你的代码后，按 <code>ESC</code> 键回到命令模式，接下来按 : 键，你的vim左下角就会出现一个冒号，接下来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">:wq
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来…执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add index.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后你的创建的网页代码文件将会被提交</p>
+<p>如果你的文件比较多的话，可以试试</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add *
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样你就可以快速的提交你所有的文件了</p>
+<p>然后依次执行以下命令进行提交</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;first commit&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git remote add origin https://github.com/你的Github用户名/你的Github用户名.github.io.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git push -u origin master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来输入你的Github帐号和密码就可以提交了。</p>
+<p>然后你就可以在浏览器里访问你的网站了。</p>
+<p>地址就是上面所述的: <code>你的Github用户名.github.io</code></p>
+<p>效果图:
+</p>
+<h2 id="结语">结语</h2>
+<p>以上就是使用github搭建简单网页的全过程了，由于时间关系所以只能写这么多了，下期可能又会拖一段时间。</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li>
+<p><a href="https://www.runoob.com/git/git-tutorial.html" target="_blank" rel="noopener noreffer">git教程</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/Vim_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Archwiki|vim</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/Git_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Archwiki|git</a></p>
+</li>
+<li>
+<p><a href="https://www.runoob.com/html/html-tutorial.html" target="_blank" rel="noopener noreffer">html教程</a></p>
+</li>
+</ul>
+]]></description>
+</item></channel>
+</rss>

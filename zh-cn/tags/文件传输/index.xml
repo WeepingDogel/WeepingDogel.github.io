@@ -1,0 +1,191 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>文件传输 - 标签 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/</link>
+        <description>文件传输 - 标签 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Fri, 12 Aug 2022 09:48:53 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" rel="self" type="application/rss+xml" /><item>
+    <title>试玩 IPFS 协议——Web3.0时代的先驱者。</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E8%AF%95%E7%8E%A9ipfs/</link>
+    <pubDate>Fri, 12 Aug 2022 09:48:53 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E8%AF%95%E7%8E%A9ipfs/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Ipfs-logo-1024-ice-text.png" referrerpolicy="no-referrer">
+            </div><p><del>这个 LOGO 真好看。</del></p>
+<h1 id="ipfs-是什么啊">IPFS 是什么啊？</h1>
+<p><strong>IPFS(InterPlanetary File System)</strong>, 听名字一看好像是个文件系统？ 翻译过来是星际文件系统，听起来是不是很高级？</p>
+<p>实际上它能实现的功能远比文件系统强大。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>官方描述<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">IPFS is a collection of protocols, packages, and specifications that allow computers to send and receive data. Because of this, users can pick and choose which packages to install when using IPFS. And like shoe sizes, there is no one-size-fits-all solution. A developer building network applications will install a different set of tools than someone who wants to store files on IPFS. Pick the one that best suits what you&rsquo;re here to do.</div>
+        </div>
+    </div>
+<p>如果你康得懂英文就很容易明白它是啥了，如果你康不懂那就来翻译一下。</p>
+<blockquote>
+<p>IPFS 是允许计算机发送和接收数据的协议、包和规范的集合。 因此，用户可以在使用 IPFS 时选择要安装的软件包。 和鞋码一样，没有一种万能的解决方案。 构建网络应用程序的开发人员将安装一组不同的工具，而不是想要在 IPFS 上存储文件的人。 选择最适合您在这里做的事情。
+（Google Translate）</p>
+</blockquote>
+<p>其实它的原理和BT差不多，具有去中心化的性质，这可能会加速从 Web2.0 时代到 Web3.0 时代的过程。</p>
+<p>它可能会带头颠覆之前 Web2.0 时代所有的开发逻辑。因为这是比 http 还底层的协议，它可不仅仅是让你能够通过 BT 下载好康的那么简单，而且它可以让一切信息都用去中心化的方式传输。</p>
+<p>因此我对它挺有兴趣的，今天就来玩一下。</p>
+<h1 id="我能怎么玩">我能怎么玩？</h1>
+<p>对于目前这么菜的我来说，可以先试试官方文档写好了的玩法， 233。</p>
+<h2 id="安装">安装</h2>
+<p>在一切开始之前我得先把 IPFS 安装上去。</p>
+<p>我们可以选择多种安装方案。</p>
+<p>阅读 <a href="ipns://docs.ipfs.tech/install/" target="_blank" rel="noopener noreffer">IPFS 官方文档的 Install 部分</a></p>
+<p></p>
+<p>桌面用户（如 Windows、Mac、Linux）可以使用 IPFS Desktop，可以通过阅读官方文档中的教程进行安装和配置。 同样 Linux 也可以使用</p>
+<p>然而 Arch 需要通过 aur 才能安装 <code>ipfs-desktop</code> 这个包，因此我决定安装命令行版本的 ipfs。</p>
+<p>根据<a href="ipns://docs.ipfs.tech/install/command-line/#system-requirements" target="_blank" rel="noopener noreffer">官方文档</a>的教程</p>
+<p>我们需要用 <code>wget</code> 下载一个叫 <code>kubo</code> 的包：</p>
+<blockquote>
+<ol>
+<li>Download the Linux binary from dist.ipfs.tech (opens new window).</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wget https://dist.ipfs.tech/kubo/v0.14.0/kubo_v0.14.0_linux-amd64.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>然后要进行解压、复制文件等一系列繁琐的操作，然而咱用 Arch 的就别吃这一套了。因为咱官方的仓库就有这个包</p>
+<p>打开你的终端，用 <code>pacman</code> 找一下这个包:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo pacman -Ss kubo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来你的终端就会返回类似于这样的信息:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">community/kubo 0.14.0-1
+</span></span><span class="line"><span class="cl">    A peer-to-peer hypermedia distribution protocol
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>装它就完事了！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo pacman -S kubo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来我们就可以愉快的使用 ipfs 了，哈哈！ <del>这就是咱 Arch 用户的优越性！！！</del></p>
+<p>然后我们开始部署 ipfs，将自己的机器作为 ipfs 的节点～！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ipfs init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ipfs daemon
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>接下来我们用 Brave 浏览器打开 WebUI : http://127.0.0.1:5001/webui</p>
+<p>然后你就能看到这个界面了:
+</p>
+<p>是不是超简单！</p>
+<p>另外，推荐使用 <a href="https://brave.com/" target="_blank" rel="noopener noreffer">brave 浏览器</a>来访问 IPFS 服务，毕竟它原生支持 IPFS 网关！</p>
+<h2 id="文件传输">文件传输</h2>
+<p>在当前 Web 2.0 的模式下，我们传输文件必须经过一些大公司的商业网盘，传输速度和存储空间都会得到一定程度的限制。</p>
+<p>而使用 IPFS 传输文件则不会受这些限制，除此之外还能规避很大一部分的审查。</p>
+<p>使用 IPFS 传输文件也非常简单，只需要使用 WebUI 进行操作即可。</p>
+<p>首先点击 &ldquo;文件&rdquo;：</p>
+<p></p>
+<p>再点击右上角的导入：</p>
+<p></p>
+<p>发送文件者可以点击 <code>文件</code> 或 <code>文件夹</code> 来导入要分享出去的文件，这时浏览器会自动弹出系统或DE自带的目录选择器，找到需要分享的文件即可。</p>
+<p>然后点击对应文件右边的三个点：</p>
+<p></p>
+<p>选择<code>复制 CID</code>，然后将 CID 发给接受者。</p>
+<p>而接受者则点击<code>来自 IPFS 路径</code>。</p>
+<p></p>
+<p>将 CID 复制粘贴进去就能将它导入到 WebUI 的文件列表了。</p>
+<p>图形化操作，非常简单。</p>
+<p>我随便找来几个文件测试了一下，在节点距离较近的情况下传输速度非常惊人。</p>
+<p></p>
+<p>而在远距离的情况下，速度略有逊色，但很稳定。至少比某些商业网盘的速度要快多了，而且这是免费的。</p>
+<p></p>
+<h2 id="网页">网页</h2>
+<p>IPFS 也是可以用来展示网页的，而且非常简单！</p>
+<p>这里是个简单的玩法。</p>
+<p>首先编写一个 HTML 文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Hello! IPFS!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;font-size: 100px;&#34;</span><span class="p">&gt;</span>Hello! IPFS!!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>保存，用和文件传输相同的方法把 <code>index.html</code> 导入自己的 IPFS 节点。</p>
+<p>接下来同样点击文件最右边的三个点，与之前不同的是，这次我们要点击的是第一个按钮，<code>分享链接</code>。</p>
+<p></p>
+<p></p>
+<p>然后用 Brave 浏览器直接访问链接。</p>
+<p></p>
+<p>页面成功打开，这时候我们发现地址栏开头写的协议既不是 HTTP 也不是 HTTPS，而是 <code>ipfs://</code></p>
+<p>由此可见，这个网页是通过 IPFS 协议打开的：</p>
+<p></p>
+<p>像这样点对点协议建立的网站是可以有效规避审查的，内容也会更加丰富。</p>
+<h1 id="对未来有什么影响">对未来有什么影响？</h1>
+<p>就目前来看， IPFS 节点和用户都比较少，还处于一个冷门阶段。</p>
+<p>但是通过我这么菜的试玩，可以看出在文件传输和网页搭建这两个方面 IPFS 是非常优秀的。</p>
+<p>唯一想说的是，</p>
+<p>在目前全世界节点不足一千的情况下，下载速度最慢最慢都能稳定在1MB/s左右，而某商业网盘运营十几年下载速度却只有9kb/s。</p>
+<p>实在是想不到别的理由来拒绝 IPFS 的怀抱了。</p>
+<p>也许有一天 IPFS 能火起来，节点数量能增加到 70 亿，那个时候，资源的获取和分享将会更加自由和高效吧。</p>
+<p>除此之外，如果用 IPFS 来干一些更能满足需求的事情，一切去中心化，将会对 Web 2.0 时代的巨头们造成一次沉重的打击。</p>
+<p>还在想什么呢，赶紧在本地搭一个 IPFS 节点试试看？也许你会想用 IPFS 整一些有意思的活？在评论区留言吧。</p>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://zh.wikipedia.org/zh-cn/%E6%98%9F%E9%99%85%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener noreffer">星际文件系统 - 维基百科，自由的百科全书</a></li>
+<li><a href="https://docs.ipfs.io" target="_blank" rel="noopener noreffer">IPFS Documentation | IPFS Docs</a></li>
+<li><a href="https://wiki.archlinux.org/title/InterPlanetary_File_System" target="_blank" rel="noopener noreffer">InterPlanetary File System - ArchWiki</a></li>
+</ul>
+]]></description>
+</item></channel>
+</rss>

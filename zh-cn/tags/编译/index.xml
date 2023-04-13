@@ -1,0 +1,525 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>编译 - 标签 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/tags/%E7%BC%96%E8%AF%91/</link>
+        <description>编译 - 标签 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Sat, 11 Jun 2022 08:00:00 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/tags/%E7%BC%96%E8%AF%91/" rel="self" type="application/rss+xml" /><item>
+    <title>利用 rsync 给笔记本安装 Gentoo</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%88%A9%E7%94%A8rsync%E7%BB%99%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%AE%89%E8%A3%85gentoo/</link>
+    <pubDate>Sat, 11 Jun 2022 08:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%88%A9%E7%94%A8rsync%E7%BB%99%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%AE%89%E8%A3%85gentoo/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://w.wallhaven.cc/full/95/wallhaven-955vx1.jpg" referrerpolicy="no-referrer">
+            </div><h1 id="序">序</h1>
+<p>半年不见，甚是想念～</p>
+<p>我有一台性能羸弱不堪的 ChromeBook，</p>
+<p>2GB 的 RAM 和一颗 只有 2.6 GHz 的双核老低压 U 对于现在的流行发行版来说已经完全不够用了，目前跑个 Mint 也是 CPU 经常性的 100% 占用。</p>
+<p></p>
+<p>于是我想着能不能给他装个 Gentoo？</p>
+<p>然而就这乌龟U，估计得连续开机一周才能编译完吧&hellip;</p>
+<p>嗯，不过我想试试能不能通过台式机编译完 Gentoo 再通过 rsync 给它传输到 ChromeBook。</p>
+<p></p>
+<p>论编译，我感觉哪怕是在 2022 年 E3 神教也不会让我失望吧。</p>
+<p>起码比这颗小赛扬快多了。</p>
+<h1 id="准备工作">准备工作</h1>
+<p>废话不多说，直接开搞。</p>
+<p>但我们要准备好这些东西</p>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Main_Page" target="_blank" rel="noopener noreffer">Gentoo Wiki</a>
+<ul>
+<li>安装过程中需要用到官方的指引和文档，必备</li>
+</ul>
+</li>
+<li>翻译工具
+<ul>
+<li>由于 Gentoo 的用户群体较小，文档汉化可能不是很全面，因此可以借助翻译工具，这里推荐 <a href="https://www.deepl.com/zh/translator" target="_blank" rel="noopener noreffer">deepl</a></li>
+</ul>
+</li>
+<li>一个 U 盘
+<ul>
+<li>用来装一个临时的 Linux 作为笔记本的 rsync 接收端。</li>
+<li>这个没什么好说的，最好支持 USB 3.0～</li>
+</ul>
+</li>
+<li>下载好 Gentoo 官方提供的 stage 包
+<ul>
+<li>这个会在下文中写出过程</li>
+</ul>
+</li>
+<li>一个能够操作的 Linux 终端</li>
+</ul>
+<h1 id="下载-stage-压缩包">下载 stage 压缩包</h1>
+<p>由于我们的安装手段比较特殊，因此可以直接跳到官方 wiki 的这一步</p>
+<p>按照官方 wiki 给出的文档，我们进行以下操作:</p>
+<p>首先开启 root</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">weepingdogel $ sudo -i
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来，你可以挂载一个分区到 <code>mnt</code> ，也可以直接创建文件夹，我这边空间很充足就直接空载操作了。</p>
+<p>至于如何挂载？可以去参考 Arch Wiki。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # cd /mnt/gentoo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我们需要用 wget 下载 stage 包，打开<a href="https://www.gentoo.org/downloads/#other-arches" target="_blank" rel="noopener noreffer">这个页面</a>，这里我们选择 stage3</p>
+<p>因为我懒，喜欢用 systemd ， 可以根据需要选择。</p>
+<p><strong>注意：右键 stage3 systemd ，复制链接</strong></p>
+<p></p>
+<p>将链接粘贴到终端上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20220605T170549Z/stage3-amd64-systemd-20220605T170549Z.tar.xz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等待下载。</p>
+<p></p>
+<p>下载完成之后可以进行一下文件校验，可以参考一下官方的<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn" target="_blank" rel="noopener noreffer">这个条目</a></p>
+<p></p>
+<p>一般情况下我这边不会损坏，所以我这里就不写出来了，接下来我们直接进入解压 stage 文件这一步。</p>
+<h1 id="解压-stage-压缩包">解压 stage 压缩包</h1>
+<p>我们使用 tar 来进行解压，这是官方 wiki 给出的命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root #tar xpvf stage3-*.tar.bz2 --xattrs-include=&#39;*.*&#39; --numeric-owner
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有些读者可能看不懂中间那一串，那一串其实是个通配符，不过这个通配符可能跟你下载到的文件不一样，因此我们将中间那段改成准确的文件名。</p>
+<p>这一步操作很简单，只需要按一下 Tab 键即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # tar xpvf stage3-amd64-systemd-20220102T170545Z.tar.xz --xattrs-include=&#39;*.*&#39; --numeric-owner
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等待解压，一会儿就好，<del>除非你用 IDE 硬盘</del>。</p>
+<p></p>
+<h1 id="配置编译选项">配置编译选项</h1>
+<p>这一步官方是这么解释的：</p>
+<blockquote>
+<p>为了优化Gentoo，可以设置一些影响Portage的变量，Gentoo官方支持包管理器。 所有这些变量可以设置为环境变量（使用export），但这不是永久的。 为了保留设置，Portage读入/etc/portage/make.conf文件 ，一个用于Portage的配置文件。</p>
+<blockquote>
+<p>附注</p>
+<p>所有可能的变量的注释列表可以在 /mnt/gentoo/usr/share/portage/config/make.conf.example中找到。要成功安装Gentoo，只需要设置下面提到的变量。</p>
+</blockquote>
+<p>启动编辑器（在本指南中，我们使用 nano）来更改我们将在下面讨论的优化变量。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">root #nano -w /mnt/gentoo/etc/portage/make.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从make.conf.example文件中可以明显看出文件的结构：注释行以 &ldquo;#&ldquo;开头，其他行使用 VARIABLE=&ldquo;content 语法定义变量。 接下来选取其中的几个进行讨论。</p>
+</blockquote>
+<p>这里我们用 vim 写一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # vim /mnt/gentoo/etc/portage/make.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将里面的 <code>COMMON_FLAGS=</code> 加入 <code>-march=silvermont</code> 的选项，这样就能让编译器给 <code>silvermont</code> 架构的垃圾 CPU 进行优化了。</p>
+<p>完整文件如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># These settings were set by the catalyst build script that automatically
+</span></span><span class="line"><span class="cl"># built this stage.
+</span></span><span class="line"><span class="cl"># Please consult /usr/share/portage/config/make.conf.example for a more
+</span></span><span class="line"><span class="cl"># detailed example.
+</span></span><span class="line"><span class="cl">COMMON_FLAGS=&#34;-march=silvermont -O2 -pipe&#34;
+</span></span><span class="line"><span class="cl">CFLAGS=&#34;${COMMON_FLAGS}&#34;
+</span></span><span class="line"><span class="cl">CXXFLAGS=&#34;${COMMON_FLAGS}&#34;
+</span></span><span class="line"><span class="cl">FCFLAGS=&#34;${COMMON_FLAGS}&#34;
+</span></span><span class="line"><span class="cl">FFLAGS=&#34;${COMMON_FLAGS}&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># NOTE: This stage was built with the bindist Use flag enabled
+</span></span><span class="line"><span class="cl">PORTDIR=&#34;/var/db/repos/gentoo&#34;
+</span></span><span class="line"><span class="cl">DISTDIR=&#34;/var/cache/distfiles&#34;
+</span></span><span class="line"><span class="cl">PKGDIR=&#34;/var/cache/binpkgs&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># This sets the language of build output to English.
+</span></span><span class="line"><span class="cl"># Please keep this setting intact when reporting bugs.
+</span></span><span class="line"><span class="cl">LC_MESSAGES=C
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="安装-gentoo-基础系统">安装 Gentoo 基础系统</h1>
+<p>上面已经完成了第一阶段的操作，可以开始安装基本系统了，诶嘿嘿。</p>
+<p>接下来要做的是选择镜像源，我们可以参考 ustc mirror 给出的帮助文档：</p>
+<ul>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo.html" target="_blank" rel="noopener noreffer">Gentoo 源使用帮助 — USTC Mirror Help  文档</a></li>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo-portage.html" target="_blank" rel="noopener noreffer">Gentoo Portage 源使用帮助 — USTC Mirror Help  文档</a></li>
+</ul>
+<p>直接按照 ustc 给出的帮助设置这两个源地址就好啦～</p>
+<p></p>
+<p></p>
+<p>然后复制 DNS 信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="挂载必要的文件系统">挂载必要的文件系统</h2>
+<p>这里要注意一下了，我这边要打好几条命令</p>
+<p>Why？</p>
+<p>官方的解释：</p>
+<blockquote>
+<p>稍等片刻，Linux 的根目录将变更到新的位置。为了确保新环境正常工作，需要确保一些文件系统可以正常使用。</p>
+<p>需要提供的文件系统是：</p>
+<ul>
+<li>/proc/ 一个pseudo文件系统（看起来像是常规文件，事实上却是实时生成的），由Linux内核暴露的一些环境信息</li>
+<li>/sys/ 一个pseudo文件系统，像要被取代的/proc/一样，比/proc/更加有结构</li>
+<li>/dev/ 是一个包含全部设备文件的常规文件系统，一部分由Linux设备管理器（通常是udev）管理</li>
+</ul>
+<p>/proc/位置将要挂载到/mnt/gentoo/proc/，而其它的两个都是绑定挂载。字面上的意思是，例如/mnt/gentoo/sys/事实上就是/sys/（它只是同一个文件系统的第二个条目点），而/mnt/gentoo/proc/是（可以说是）文件系统的一个新的挂载。</p>
+</blockquote>
+<p>因此按顺序执行以下命令进行挂载：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # mount --types proc /proc /mnt/gentoo/proc
+</span></span><span class="line"><span class="cl">root # mount --rbind /sys /mnt/gentoo/sys
+</span></span><span class="line"><span class="cl">root # mount --make-rslave /mnt/gentoo/sys
+</span></span><span class="line"><span class="cl">root # mount --rbind /dev /mnt/gentoo/dev
+</span></span><span class="line"><span class="cl">root # mount --make-rslave /mnt/gentoo/dev 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然而，这还没完</p>
+<p></p>
+<p>因此，接下来要加上这三条</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # test -L /dev/shm &amp;&amp; rm /dev/shm &amp;&amp; mkdir /dev/shm
+</span></span><span class="line"><span class="cl">root # mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm 
+</span></span><span class="line"><span class="cl">root # chmod 1777 /dev/shm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="chroot--进入新环境">Chroot : 进入新环境</h2>
+<p>当挂载好一切后，就可以 chroot 进去了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # chroot /mnt/gentoo /bin/bash 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # source /etc/profile 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # export PS1=&#34;(chroot) ${PS1}&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来终端会变成这样</p>
+<p></p>
+<h2 id="挂载-boot-分区">挂载 boot 分区</h2>
+<p>这一步我们直接略过，因为最终安装的设备不是本机，而是另一台笔记本。</p>
+<p>之后我们再进行手动安装引导介质。</p>
+<h2 id="从网站安装-gentoo-ebuild-数据库快照">从网站安装 Gentoo ebuild 数据库快照</h2>
+<p>官方其实这个就相当于 Arch 里面的 <code>sudo pacman -Syyu</code></p>
+<p>不多说，复制粘贴吧。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">root # emerge-webrsync
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<h2 id="选择配置文件">选择配置文件</h2>
+<p><del>我怎么感觉像是在复制 wiki 的内容呢&hellip;</del></p>
+<blockquote>
+<p>配置文件是任何一个Gentoo系统的积木。它不仅指定USE、CFLAGS和其它重要变量的默认值，还会锁定系统的包版本范围。这些设定全是由Gentoo的Portage开发者们来维护。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># eselect profile list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Available profile symlink targets:
+</span></span><span class="line"><span class="cl">  [1]   default/linux/amd64/17.1 *
+</span></span><span class="line"><span class="cl">  [2]   default/linux/amd64/17.1/desktop
+</span></span><span class="line"><span class="cl">  [3]   default/linux/amd64/17.1/desktop/gnome
+</span></span><span class="line"><span class="cl">  [4]   default/linux/amd64/17.1/desktop/kde
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后输入以下命令即可：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># eselect profile set [对应的数字]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实它会列出很多选项，我们需要选择含有 <code>desktop/system</code> 的版本</p>
+<h2 id="设置时区">设置时区</h2>
+<p>这里直接用 Arch 的方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># ln -sf /usr/share/zoneinfo/Region（地区名）/City（城市名） /etc/localtime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据我的情况，我应该这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后运行 hwclock 以生成 /etc/adjtime：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># hwclock --systohc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="设置-use">设置 USE</h2>
+<p>对于 Gentoo 这个系统来说， USE 标记是必备的，因此在编译之前，我们需要设置好全局 USE 标记</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># vim /etc/portage/make.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">USE=&#34;alsa udev dbus icu systemd gles2 sound video intel -kde tiff x265&#34;
+</span></span><span class="line"><span class="cl">VIDEO_CARDS=&#34;intel&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="更新-world-集合">更新 @world 集合</h2>
+<p>其实就是跟 Arch 的“滚”差不多，但是它会是一个比较漫长的过程。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># emerge --ask --verbose --update --deep --newuse @world
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>除此之外，在更改USE标记之后，这条命令也用来动态调整系统功能。</p>
+<h2 id="配置-locale">配置 locale</h2>
+<p>麻了，参考这个 <a href="https://wiki.archlinux.org/title/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9C%AC%E5%9C%B0%E5%8C%96" target="_blank" rel="noopener noreffer">Installation guide (简体中文) - ArchWiki</a></p>
+<h1 id="配置内核">配置内核</h1>
+<p>嗯哼，你以为我那么傻又编译八个小时？不！这次我选择用 bin 内核！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># emerge --ask sys-kernel/installkernel-systemd-boot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>节省不少时间呢。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># emerge --ask sys-kernel/gentoo-kernel-bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>哎呀不想写了&hellip; 写了都是复制粘贴</p>
+<p>自己看吧</p>
+<p></p>
+<h1 id="安装固件">安装固件</h1>
+<blockquote>
+<p>一些驱动需要先在系统上安装附加的固件才能工作。经常网络接口上会使用，特别是无线网络接口。此外，来自 AMD 、 NVidia 和 Intel 等供应商的现代视频芯片在使用开源驱动程序时，通常也需要外部固件文件。大多数固件都打包在 sys-kernel/linux-firmware 里</p>
+</blockquote>
+<p>大多数设备的驱动都依赖于 <code>linux-firmware</code> 这个包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># emerge --ask sys-kernel/linux-firmware
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="配置-fstab">配置 fstab</h1>
+<p>这一步操作是在系统启动的时候，让内核认识分区</p>
+<p>但是 Gentoo 好像不能用 <code>genfstab</code></p>
+<p>只能手写了</p>
+<p>先在笔记本获取 UUID</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ls /dev/disk/by-uuid/ -l
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来将 <code>/</code> 分区对应分区的 <code>UUID</code> 按如下格式写在 <code>/etc/fstab</code> 这个文件里面</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># /dev/mmcblk1p2
+</span></span><span class="line"><span class="cl">UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx	/         	xfs       	default,rw,relatime	0 1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="通过-rsync-将系统灌到笔记本上">通过 rsync 将系统灌到笔记本上</h1>
+<p>这个时候需要给笔记本插入一个 ArchISO 的 U 盘，启动到 ISO，<strong>并连接 WIFI 和 开启 ssh 服务。</strong></p>
+<p>接下来将其原有的分区格式化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># mkfs.btrfs /dev/mmcblk1p2 -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后挂载它，并将刚刚做好的文件用 rsync 灌进去</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># mount /dev/mmcblk1p2 /mnt 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来笔记本这一端开启 ssh 服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># systemctl start sshd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后使用 rsync 将编译好的文件传输至笔记本的系统分区。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># rsync -aAXHv -P -vi --exclude={&#34;/dev/*&#34;,&#34;/proc/*&#34;,&#34;/sys/*&#34;,&#34;/tmp/*&#34;,&#34;/run/*&#34;,&#34;/mnt/*&#34;,&#34;/media/*&#34;,&#34;/lost+found&#34;} ./mnt/gentoo/. root@192.168.0.109:/mnt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="在笔记本安装启动引导器">在笔记本安装启动引导器</h1>
+<p>这个也是很熟悉的操作了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># grub-install --target=x86_64-efi --efi-directory=/dev/mmcblk1p1 --bootloader-id=GRUB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="结语">结语</h1>
+<p>通过一系列的折腾，这台老本子终于能发挥其最大的性能了。</p>
+<p>由此看来通过 rsync 复制 Linux 发行版系统文件到其他的设备看起来是可行的。</p>
+<p>不过也折腾了挺久的</p>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://wiki.gentoo.org/wiki/Main_Page" target="_blank" rel="noopener noreffer">Gentoo Wiki</a></li>
+<li><a href="https://www.gentoo.org/downloads/#other-arches" target="_blank" rel="noopener noreffer">Downloads â Gentoo Linux</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn" target="_blank" rel="noopener noreffer">安装Gentoo安装文件 - Gentoo Wiki</a></li>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo.html" target="_blank" rel="noopener noreffer">Gentoo 源使用帮助 — USTC Mirror Help  文档</a></li>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo-portage.html" target="_blank" rel="noopener noreffer">Gentoo Portage 源使用帮助 — USTC Mirror Help  文档</a></li>
+<li><a href="https://wiki.archlinux.org/title/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9C%AC%E5%9C%B0%E5%8C%96" target="_blank" rel="noopener noreffer">Installation guide (简体中文) - ArchWiki</a></li>
+</ul>
+]]></description>
+</item></channel>
+</rss>

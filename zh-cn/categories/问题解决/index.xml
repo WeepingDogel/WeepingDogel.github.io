@@ -1,0 +1,976 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>问题解决 - 分类 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</link>
+        <description>问题解决 - 分类 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Mon, 06 Mar 2023 22:27:08 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="self" type="application/rss+xml" /><item>
+    <title>尝试解决最近 VirtualBox 启动虚拟机时卡在 Starting 的问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/</link>
+    <pubDate>Mon, 06 Mar 2023 22:27:08 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/photo_2023-03-06_20-52-14.jpg" referrerpolicy="no-referrer">
+            </div><h1 id="序遇到了啥问题啊">序：遇到了啥问题啊？</h1>
+<p>今天心血来潮想要玩一下 VirtualBox 虚拟机， 结果发现打开之后每个虚拟机都卡在 <code>Starting virutal machine.</code>。</p>
+<p>首先遇到问题的第一步就是去谷歌。</p>
+<p>嗯&hellip; 查到了两篇 Arch 官方论坛的帖子。</p>
+<ul>
+<li>
+<p><a href="https://bbs.archlinux.org/viewtopic.php?id=277409" target="_blank" rel="noopener noreffer">Virtualbox hangs on Starting virtual machine window / Newbie Corner / Arch Linux Forums</a></p>
+</li>
+<li>
+<p><a href="https://bbs.archlinux.org/viewtopic.php?id=276699" target="_blank" rel="noopener noreffer">KVM busted in linux 5.18 due to Intel CET / Kernel &amp; Hardware / Arch Linux Forums</a></p>
+</li>
+</ul>
+<p>读完两篇帖子之后，我发现是因为 KVM 在新版本的内核中产生了一个 bug 导致的。</p>
+<p>已经有大佬提交了 Bug 报告了。</p>
+<ul>
+<li>
+<p><a href="https://bugs.archlinux.org/task/75481" target="_blank" rel="noopener noreffer">FS#75481 : [linux] VBox virtual machines stop functioning</a></p>
+</li>
+<li>
+<p><a href="https://github.com/torvalds/linux/commit/991625f3dd2cbc4b787deb0213e2bcf8fa264b21" target="_blank" rel="noopener noreffer">x86/ibt: Add IBT feature, MSR and #CP handling · torvalds/linux@991625f · GitHub</a></p>
+</li>
+</ul>
+<p><del>至于这个 Bug 是怎么产生&hellip; 咱笨笨，不知道</del></p>
+<h1 id="想想怎么解决">想想怎么解决</h1>
+<p>根据阅读帖子里的内容，得到的解决方法都是设置内核参数 <code>ibt=off</code>。</p>
+<blockquote>
+<p>Thank you</p>
+<p>appending</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ibt=off
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>to kernel boot params fixed my problem.</p>
+</blockquote>
+<h2 id="怎么设置内核启动参数呢">怎么设置内核启动参数呢？</h2>
+<p>我并不知道这个，所以我还是去谷歌查了，得到了方法。</p>
+<ul>
+<li><a href="https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux" target="_blank" rel="noopener noreffer">How to set kernel boot parameters on Linux - Linux Tutorials - Learn Linux Configuration</a></li>
+</ul>
+<p>此时能看懂英文的读者可以参考上面这条链接去解决问题了，但是如果英文阅读比较困难的话，也可以跟着本文的步骤走。</p>
+<h2 id="设想的解决方法">设想的解决方法</h2>
+<p>其实就是编辑 <code>/etc/defualt/grub</code> 这个文件的 <code>GRUB_CMDLINE_LINUX=&quot;&quot;</code> 的值。</p>
+<p>然后往这里面写 <code>&quot;ibt=off&quot;</code></p>
+<h1 id="解决步骤">解决步骤</h1>
+<h2 id="1-编辑-etcdefaultgrub-文件">1. 编辑 <code>/etc/default/grub</code> 文件</h2>
+<p>编辑这个文件的目的是设置内核启动参数，在不同的启动引导器引导的系统中，设置这个玩意的方法也有所不同，由于我的 Arch 用的是 Grub， 所以我需要编辑这个文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>找到 <code>GRUB_CMDLINE_LINUX=&quot;&quot;</code> 关键字，并设置参数 <code>ibt=off</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># GRUB boot loader configuration
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">GRUB_DEFAULT=0
+</span></span><span class="line"><span class="cl">GRUB_TIMEOUT=5
+</span></span><span class="line"><span class="cl">GRUB_DISTRIBUTOR=&#34;Arch&#34;
+</span></span><span class="line"><span class="cl">GRUB_CMDLINE_LINUX_DEFAULT=&#34;loglevel=7&#34;
+</span></span><span class="line"><span class="cl">GRUB_CMDLINE_LINUX=&#34;ibt=off&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">......
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>按 <code>:</code> 输入 <code>wq</code> 回车（基础操作了，不多解释）。</p>
+<h2 id="2-重新生成-grub-配置文件">2. 重新生成 Grub 配置文件</h2>
+<p>然后重新生成 Grub 配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等待操作，在没有报错的情况下，可以重启操作系统了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="测试和验证">测试和验证</h1>
+<p>重启之后再次打开 VirutalBox， 然后启动一个虚拟机，此时发现虚拟机已经进入了系统。</p>
+<p></p>
+<p>这意味着问题得到了解决。</p>
+]]></description>
+</item><item>
+    <title>如何解决 gvfs 在 i3wm 下无法挂载的问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Sat, 16 Jan 2021 23:59:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/image_2021-01-09_16-24-45.png" referrerpolicy="no-referrer">
+            </div><h2 id="序">序</h2>
+<p>呃&hellip; 前面其实没什么可以说的废话，就是出问题了嘛&hellip;</p>
+<p>然后就去群里问了，弄好了，然后写一下怎么弄好的&hellip;</p>
+<p>换 i3wm 了，然后使用文件管理器挂载别的分区的时候，突然弹出这个报错&hellip;</p>
+<p></p>
+<p>这个问题一般是缺包，</p>
+<p>好吧其实就是少装了东西。</p>
+<p>我们需要装的是 <code>polkit</code> 这个东西&hellip;</p>
+<p>如果不知道它是啥的话，看 Arch Wiki 的这个页面。</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Polkit" target="_blank" rel="noopener noreffer">Polkit - ArchWiki</a></li>
+</ul>
+<h2 id="解决过程">解决过程</h2>
+<p>首先安装 <code>polkit</code> ，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S polkit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>装完后，我们还需要安装其对应的图形前端。</p>
+<p>如图，我们有很多可以选择。</p>
+<p></p>
+<p>我这里选择 Gnome 的，比较习惯..</p>
+<p>用 <code>pacman</code> 就可以装了，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S polkit-gnome 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果想用其他的，把 <code>polkit-gnome</code> 替换成其他包名即可。</p>
+<p>但是装完还不行，还得设置启动项，原因？ 在这：</p>
+<blockquote>
+<p>If you are using a graphical environment, make sure that a graphical authentication agent is installed and <a href="https://wiki.archlinux.org/index.php/Autostarting" target="_blank" rel="noopener noreffer">autostarted</a> on login.</p>
+<p>——<a href="https://wiki.archlinux.org/index.php/Polkit#Authentication_agents" target="_blank" rel="noopener noreffer">Arch Wiki 里写的</a></p>
+</blockquote>
+<p>大意就是，如果你要用的话，得保持这个程序运行&hellip;</p>
+<p>大概是这样吧，想看完整意思就去谷歌翻译吧..</p>
+<p>接下来我要做的是想办法启动&hellip;</p>
+<p>其实我们在终端里直接输入 wiki 上对应的路径就可以用了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &amp;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但这样的话每次都要打一遍，反正我是觉得麻烦～ rua～</p>
+<p>所以要设置开机启动，一般是可以这样的..</p>
+<p></p>
+<p>嘛&hellip; i3wm 的话，要参考这个文档了。</p>
+<ul>
+<li><a href="https://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup" target="_blank" rel="noopener noreffer">i3: i3 User’s Guide</a></li>
+</ul>
+<p>接下来呢，我就直接编辑 <code>~/.config/i3/config</code> 这个文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ vim ~/.config/i3/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在里面加入&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 登录时，启动 polkit-gnome </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">exec</span> --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>然后我就重启了。</p>
+<p>嗯，可以用了。</p>
+<p></p>
+<p>然后我试着输入密码，敲下去之后&hellip; 嗯，又报错了..</p>
+<p></p>
+<p>看英文就知道.. 这其实是另一个问题了..</p>
+<p>其实它 balabla 一大堆，只不过是 <code>ntfs-3g</code> 这个包我又忘了装而已啦..</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S ntfs-3g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后就好了&hellip;</p>
+<p>不过截图是我今晚截的..</p>
+<p></p>
+<h2 id="结尾">结尾</h2>
+<p>然后我就又可以快乐地使用 <code>i3wm</code> 啦～</p>
+]]></description>
+</item><item>
+    <title>帮做大学计算机作业</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/</link>
+    <pubDate>Wed, 02 Dec 2020 23:20:22 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2020-12-03%2000-58-57%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png" referrerpolicy="no-referrer">
+            </div><h2 id="序">序</h2>
+<p>帮做作业 qwq&hellip;</p>
+<p>我也好久没玩 C 语言了，试试看我会不会做</p>
+<blockquote>
+<p>PS: 我这里是 Linux，运行方式可能不同，如果你是 Windows ，你得用编辑器来运行。</p>
+<p>例如 Dev C++ 、 VS 2019 等。</p>
+</blockquote>
+<h2 id="实验十一">实验十一</h2>
+<blockquote>
+<p>实验十一</p>
+<p>实验目的:</p>
+<ul>
+<li>了解 C 程序设计思想</li>
+<li>了解 C 程序设计框架
+实验内容:</li>
+</ul>
+<p>输入一个成绩，输出它的等级评分</p>
+</blockquote>
+<p>这个很简单，我们需要列几个等级区间。</p>
+<ul>
+<li>优秀
+<ul>
+<li>80 ~ 100 分 [80,100]</li>
+</ul>
+</li>
+<li>及格
+<ul>
+<li>60~79 分 [60,79]</li>
+</ul>
+</li>
+<li>不及格
+<ul>
+<li>60 以下 [0,60)</li>
+</ul>
+</li>
+</ul>
+<p>在代码中，我们可以直接用运算表达式来表达区间，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">100</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我们用 <code>if()</code> 来判断成绩等级。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">85</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">     <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;成绩为优秀&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">79</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;成绩为及格&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;成绩不及格&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来执行程序</p>
+<p>输出如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; make test
+</span></span><span class="line"><span class="cl">cc     test.c   -o test
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">成绩为优秀⏎     
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我们需要获取用户输入的成绩，像这样，使用 <code>scanf()</code> 函数获取用户输入的数据然后赋值给整型变量 <code>score</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;输入你的成绩:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">score</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">score</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来就是将这两段代码组合到一起。</p>
+<p>完整代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;输入你的成绩:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">score</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;成绩为优秀&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">79</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;成绩为及格&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;成绩不及格&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>思路：
+先用 <code>scanf()</code> 函数获取用户输入的成绩，再用 <code>if()</code> 进行比对，最后输出结果。</p>
+<p>这是输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; make test
+</span></span><span class="line"><span class="cl">cc     test.c   -o test
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">输入你的成绩:99
+</span></span><span class="line"><span class="cl">成绩为优秀⏎                                                        
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">输入你的成绩:85
+</span></span><span class="line"><span class="cl">成绩为优秀⏎                                                        
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">输入你的成绩:60
+</span></span><span class="line"><span class="cl">成绩为及格⏎                                                        
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">输入你的成绩:59
+</span></span><span class="line"><span class="cl">成绩不及格⏎                                
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="实验十二">实验十二</h2>
+<blockquote>
+<p>实验十二</p>
+<p>实验目的:</p>
+<ul>
+<li>了解 C 程序设计思想</li>
+<li>了解 C 程序设计框架</li>
+</ul>
+<ol>
+<li>任务内容</li>
+</ol>
+<ul>
+<li>要求编写一个先注册然后再登录的程序，输出格式如下图所示：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               注册界面
+</span></span><span class="line"><span class="cl">请输入您的注册用户名: Ly
+</span></span><span class="line"><span class="cl">请输入您的注册密码: 123
+</span></span><span class="line"><span class="cl">恭喜您！注册成功！
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               登录界面
+</span></span><span class="line"><span class="cl">请输入您的登录用户名: Ly
+</span></span><span class="line"><span class="cl">请输入您的登录密码: 123
+</span></span><span class="line"><span class="cl">登录成功！
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               登录界面
+</span></span><span class="line"><span class="cl">请输入您的登录用户名: Ly
+</span></span><span class="line"><span class="cl">请输入您的登录密码: 1234
+</span></span><span class="line"><span class="cl">登录失败！
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>定义 <strong>4</strong> 个变量，分别保存注册时的用户名、密码以及登录时的用户名、密码</li>
+<li>使用 <strong><code>if ... else</code></strong> 语句完成用户名、密码的判断</li>
+</ul>
+</blockquote>
+<p>&hellip;</p>
+<p>怎么说呢.. 我连说都懒得说了&hellip;</p>
+<p>跟上面一样，先用 <code>scanf()</code> 获取内容，然后赋值给变量再来判断&hellip;</p>
+<p>噗！算了，上代码，不想解释..</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*定义4个变量，分别保存注册时的用户名、密码以及登录时的用户名、密码*/</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">username_sign</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">password_sign</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">username_login</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">password_login</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*定义4个变量，分别保存注册时的用户名、密码以及登录时的用户名、密码*/</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;--------------------------------------</span><span class="se">\n</span><span class="s">               注册界面</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;请输入您的注册用户名:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">username_sign</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;请输入您的注册密码:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">password_sign</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;恭喜您！注册成功！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">--------------------------------------&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*先用 scanf() 获取内容*/</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n\n</span><span class="s">--------------------------------------</span><span class="se">\n</span><span class="s">               登录界面</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;请输入您的登录用户名:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="n">username_login</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;请输入您的登录密码:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="n">password_login</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*使用 if ... else 语句完成用户名、密码的判断*/</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*这里用 strcmp() 函数*/</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">strcmp</span><span class="p">(</span><span class="n">username_login</span><span class="p">,</span><span class="n">username_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">password_login</span><span class="p">,</span><span class="n">password_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;登录成功！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;登录失败！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">--------------------------------------&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过值得一提的是，这个字符串的判断方法有所不同，它需要使用<code>strcmp()</code> 函数，大概是这样&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nf">strcmp</span><span class="p">(</span><span class="n">username_login</span><span class="p">,</span><span class="n">username_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">password_login</span><span class="p">,</span><span class="n">password_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;登录成功！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;登录失败！&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它似乎会计算出一个数值，如果等于 0 就表示这两段字符串是一样的。大概就是这样。</p>
+<p>看看输出吧&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; make test2
+</span></span><span class="line"><span class="cl">cc     test2.c   -o test2
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test2
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               注册界面
+</span></span><span class="line"><span class="cl">请输入您的注册用户名:Ly
+</span></span><span class="line"><span class="cl">请输入您的注册密码:123
+</span></span><span class="line"><span class="cl">恭喜您！注册成功！
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               登录界面
+</span></span><span class="line"><span class="cl">请输入您的登录用户名:Ly
+</span></span><span class="line"><span class="cl">请输入您的登录密码:123
+</span></span><span class="line"><span class="cl">登录成功！
+</span></span><span class="line"><span class="cl">--------------------------------------⏎                              
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test2
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               注册界面
+</span></span><span class="line"><span class="cl">请输入您的注册用户名:Ly
+</span></span><span class="line"><span class="cl">请输入您的注册密码:123
+</span></span><span class="line"><span class="cl">恭喜您！注册成功！
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               登录界面
+</span></span><span class="line"><span class="cl">请输入您的登录用户名:Ly
+</span></span><span class="line"><span class="cl">请输入您的登录密码:1234
+</span></span><span class="line"><span class="cl">登录失败！
+</span></span><span class="line"><span class="cl">--------------------------------------⏎                                 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>做完了～</p>
+<h2 id="结语">结语</h2>
+<p>其实细节上还是涉及到一些我可能会粗心大意忘掉的东西，所以我不敢说 &ldquo;就这？就这？&rdquo;</p>
+<p>不过，相对来说还是比较简单的&hellip; 嗯&hellip;</p>
+]]></description>
+</item><item>
+    <title>关于 fcitx5 ，以及最近的环境变量问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Efcitx5/</link>
+    <pubDate>Sat, 25 Jul 2020 13:25:46 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Efcitx5/</guid>
+    <description><![CDATA[<h2 id="发生了啥">发生了啥</h2>
+<p>最近我收到了一条这样的消息</p>
+<blockquote>
+<p>使用 <code>$HOME/.pam_environment</code> 设置环境变量的用户注意啦！由于 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708" target="_blank" rel="noopener noreffer">CVE-2010-4708</a>, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。</p>
+<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">Linux 的环境变量怎么设 依云&rsquo;s Blog</a></p>
+</blockquote>
+<p><del>为什么十年的漏洞现在才修啊喂！！！</del></p>
+<p>Emmmm, 这么说就是 <code>.pam_environment</code> 这个文件不能用了&hellip;&hellip;</p>
+<p>这里感谢 <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">依云</a> 写出了各种情况的应对方法</p>
+<p>我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西&hellip; 其他具体的可以参考云云写的.. (逃</p>
+<h2 id="fcitx5-与-fcitx">fcitx5 与 fcitx</h2>
+<ul>
+<li>Fcitx</li>
+</ul>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a> (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的<a href="https://en.wikipedia.org/wiki/Input_method" target="_blank" rel="noopener noreffer">输入法</a>平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+</blockquote>
+<ul>
+<li>Fcitx5</li>
+</ul>
+<blockquote>
+<p>Fcitx5 是继 <a href="https://wiki.archlinux.org/index.php/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a> 后的新一代输入法框架。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+</blockquote>
+<p>日常偷懒，直接引用(逃</p>
+<h2 id="好啦直接开始吧">好啦，直接开始吧</h2>
+<blockquote>
+<p>先贴出我的系统情况</p>
+<p>操作系统：Arch Linux</p>
+<p>桌面环境：xfce</p>
+<p>显示管理器：lightdm</p>
+</blockquote>
+<p>实际上，只要把原来写 <code>.pam_environment</code> 中的输入法环境变量写到 <code>.xprofile</code> 里面就可以解决这个问题，但是我想试试 fcitx5。</p>
+<h3 id="卸载掉-fcitx">卸载掉 fcitx</h3>
+<p>首先我们要先卸载掉原来的 fcitx ，我之前用的是 <code>fcitx-googlepinyin</code> 这个输入法，所以这个包也要卸掉，因为会有依赖</p>
+<p>除此之外，与 fcitx 有一定关系的都要卸掉，不然 <code>pacman</code> 会报错，所以你要执行这个</p>
+<blockquote>
+<p>（PS：你可能用的不是谷歌输入法，所以请把 <code>fcitx-googlepinyin</code> 改成你装的输入法的包名）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来，将这个文件删除，反正也没用了 (逃</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo rm -rf ./.pam_environment
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装-fcitx5">安装 fcitx5</h3>
+<p>现在来安装 fcitx5，这样子弄</p>
+<ul>
+<li>
+<p>fcitx5</p>
+<ul>
+<li>主包，不用多解释啦～</li>
+</ul>
+</li>
+<li>
+<p>fcitx5-chinese-addons</p>
+<ul>
+<li>中文输入法包&hellip;. Arch Wiki 里面是这样解释的:
+<blockquote>
+<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons" target="_blank" rel="noopener noreffer">fcitx5-chinese-addons</a> 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>fcitx5-im</p>
+<ul>
+<li>环境依赖包，要装的，不然在一些软件上打不出字</li>
+</ul>
+</li>
+<li>
+<p>fcitx5-configtool</p>
+<ul>
+<li>fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。在上面三个装完之后装。</li>
+</ul>
+</li>
+</ul>
+<p>那么，执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="环境变量">环境变量</h3>
+<p>嗯哼，最后就是设置环境变量了，既然 <code>.pam_environment</code> 不能用了，那要写在哪里呢？</p>
+<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">云云</a>说：</p>
+<blockquote>
+<p>使用 X11 的桌面环境，通常通过 display manager 来登录，比如 lightdm 和 sddm。这俩都支持 <code>~/.xprofile</code>。这个文件会在启动过程中被 source，使用的 shell 是由 dm 自己确定的。lightdm 和 sddm 都是用的 <code>/bin/sh</code>（分别位于 <code>/etc/lightdm/Xsession</code> 和 <code>/usr/share/sddm/scripts/Xsession</code> 文件里）。可以看到，除了读取 <code>.xprofile</code> 外，lightdm 也会读取 <code>.profile</code>。sddm 甚至连 bash、zsh、tcsh、fish 的启动配置脚本都给读了。</p>
+</blockquote>
+<p>也就是说，我们需要把 fcitx5 的环境变量写在 <code>.xprofile</code> 这个文件里面</p>
+<p>然后&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ vim ./.xprofile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在里面写入这些东西</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INPUT_METHOD</span><span class="o">=</span>fcitx5
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">GTK_IM_MODULE</span><span class="o">=</span>fcitx5
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">QT_IM_MODULE</span><span class="o">=</span>fcitx5
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">XMODIFIERS</span><span class="o">=</span>@im<span class="o">=</span>fcitx5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来你可以选择重启 <code>lightdm</code> ，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo systemctl restart lightdm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者重启系统</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时，xfce 的状态栏出现了一个键盘，但是按 <kbd><code>CTRL</code></kbd> + <kbd><code>SPACE</code></kbd> 无法弹出中文输入法，这下怎么办呢？</p>
+<p>直接右键那个键盘图标，点击配置，然后进入内个 QT 写的配置工具里添加中文输入法就可以啦～～！</p>
+<p></p>
+<p>只需要双击就可以添加到左边哦～</p>
+<p>然后点击 OK，开始享受 fcitx5 吧</p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">Linux 的环境变量怎么设 - 依云&rsquo;s Blog</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx5 (简体中文) - ArchWiki</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx - Wikipedia</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx (简体中文) - ArchWiki</a></li>
+</ul>
+]]></description>
+</item><item>
+    <title>如何解决 Manjaro 中 QCA6174 网卡问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Fri, 17 Jul 2020 10:30:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3manjaro%E4%B8%ADqca6174%E7%BD%91%E5%8D%A1%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/photo_2020-07-16_23-54-59.jpg" referrerpolicy="no-referrer">
+            </div><h2 id="开场白">开场白</h2>
+<p>尝试在 Redmibook 14 中安装了 Manjaro, 装完发现 WIFI 不能用</p>
+<p>此时陷入了疑惑, 难道 Manjaro 也不自带 linux-firmware ?</p>
+<p>总之经过了一系列折腾, 最后还是解决了, 写篇东西来记录一下解决的过程</p>
+<h2 id="尝试使用其他方法连接网络">尝试使用其他方法连接网络</h2>
+<p>既然 WIFI 不能用, 那也要想别的办法联网, 不然这问题就很棘手了</p>
+<p>我能想到的是插网线, 可这是轻薄本, 没有有限网卡, 那么我们还有一种办法, 使用手机的 USB 网络共享</p>
+<p>这个过程很简单, 按照以下步骤走</p>
+<ol>
+<li>
+<p><strong>使用 USB 数据线将电脑与手机连接, 并打开 USB 网络共享</strong></p>
+<ul>
+<li><del>这个都不会的, 可以执行 <code>sudo rm -rf /</code></del></li>
+<li><del>这智商, 玩你妈的 Linux</del></li>
+<li>不会的, 请<a href="https://jingyan.baidu.com/article/09ea3ede1cfbf1c0aede391d.html" target="_blank" rel="noopener noreffer">参考这里</a></li>
+</ul>
+</li>
+<li>
+<p><strong>打开终端, 执行</strong></p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo ip link
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后它会返回这样的东西, 如图</p>
+<p></p>
+<p>设置网卡</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo ip link set enp3s0f4u2 up
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行 <code>dhcpcd</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo dhcpcd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来, 我试着运行 <code>ifconfig</code>, 可是不能用, 但是看了一眼 <code>network manager</code></p>
+<p>嗯 能上网了</p>
+<p></p>
+<h2 id="解决过程">解决过程</h2>
+<h3 id="软件源">软件源</h3>
+<p>我们会进行软件包的装卸, 所以我们首先需要做的是选择合适的软件源&hellip;.</p>
+<p>ok, 现在我们需要修改的文件是这个</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">/etc/pacman.d/mirrorlist
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们用 <code>nano</code> 改, 记得加 <code>sudo</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo nano /etc/pacman.d/mirrorlist
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将 <code># China</code> 下面的内容 放到第一行</p>
+<p>至于 <code>nano</code> 的用法, 请自行查找资料, 会用记事本就会用这个</p>
+<p>修改完后, 如图</p>
+<p></p>
+<p>然后执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -Sy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装-linux-firmware">安装 <code>linux-firmware</code></h3>
+<p>执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S linux-firmware
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重启之后, 发现还是无效, 此时我去谷歌查了一下.</p>
+<p>发现, 我们需要手动从 <a href="https://github.com/FireWalkerX/ath10k-firmware/tree/master/QCA6174/hw3.0" target="_blank" rel="noopener noreffer">Github</a> 下载它的驱动文件</p>
+<h3 id="手动替换驱动文件">手动替换驱动文件</h3>
+<p>到上面那个链接指向的 Github 仓库, 下载 <code>board-2.bin</code> 和 <code>firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1</code>, 分别将它们重命名为: <code>board.bin</code> 和 <code>firmware-4.bin</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/board-2.bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ wget https://github.com/FireWalkerX/ath10k-firmware/raw/7e56cbb94182a2fdab110cf5bfeded8fd1d44d30/QCA6174/hw3.0/firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后把这两个文件复制到 <code>/lib/firmware/ath10k/QCA6174/hw3.0/</code> 目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo cp firmware-4.bin /lib/firmware/ath10k/QCA6174/hw3.0/firmware-4.bin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重启系统, WIFI 就能用了.</p>
+<p></p>
+<h2 id="总结">总结</h2>
+<p>以上内容均为 Redmibook 14 的解决过程, 并不一定适用于其他设备, 因此仅供参考.</p>
+]]></description>
+</item></channel>
+</rss>

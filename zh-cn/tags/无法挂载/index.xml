@@ -1,0 +1,120 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>无法挂载 - 标签 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/tags/%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD/</link>
+        <description>无法挂载 - 标签 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Sat, 16 Jan 2021 23:59:59 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/tags/%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD/" rel="self" type="application/rss+xml" /><item>
+    <title>如何解决 gvfs 在 i3wm 下无法挂载的问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+    <pubDate>Sat, 16 Jan 2021 23:59:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/image_2021-01-09_16-24-45.png" referrerpolicy="no-referrer">
+            </div><h2 id="序">序</h2>
+<p>呃&hellip; 前面其实没什么可以说的废话，就是出问题了嘛&hellip;</p>
+<p>然后就去群里问了，弄好了，然后写一下怎么弄好的&hellip;</p>
+<p>换 i3wm 了，然后使用文件管理器挂载别的分区的时候，突然弹出这个报错&hellip;</p>
+<p></p>
+<p>这个问题一般是缺包，</p>
+<p>好吧其实就是少装了东西。</p>
+<p>我们需要装的是 <code>polkit</code> 这个东西&hellip;</p>
+<p>如果不知道它是啥的话，看 Arch Wiki 的这个页面。</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Polkit" target="_blank" rel="noopener noreffer">Polkit - ArchWiki</a></li>
+</ul>
+<h2 id="解决过程">解决过程</h2>
+<p>首先安装 <code>polkit</code> ，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S polkit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>装完后，我们还需要安装其对应的图形前端。</p>
+<p>如图，我们有很多可以选择。</p>
+<p></p>
+<p>我这里选择 Gnome 的，比较习惯..</p>
+<p>用 <code>pacman</code> 就可以装了，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S polkit-gnome 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果想用其他的，把 <code>polkit-gnome</code> 替换成其他包名即可。</p>
+<p>但是装完还不行，还得设置启动项，原因？ 在这：</p>
+<blockquote>
+<p>If you are using a graphical environment, make sure that a graphical authentication agent is installed and <a href="https://wiki.archlinux.org/index.php/Autostarting" target="_blank" rel="noopener noreffer">autostarted</a> on login.</p>
+<p>——<a href="https://wiki.archlinux.org/index.php/Polkit#Authentication_agents" target="_blank" rel="noopener noreffer">Arch Wiki 里写的</a></p>
+</blockquote>
+<p>大意就是，如果你要用的话，得保持这个程序运行&hellip;</p>
+<p>大概是这样吧，想看完整意思就去谷歌翻译吧..</p>
+<p>接下来我要做的是想办法启动&hellip;</p>
+<p>其实我们在终端里直接输入 wiki 上对应的路径就可以用了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &amp;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但这样的话每次都要打一遍，反正我是觉得麻烦～ rua～</p>
+<p>所以要设置开机启动，一般是可以这样的..</p>
+<p></p>
+<p>嘛&hellip; i3wm 的话，要参考这个文档了。</p>
+<ul>
+<li><a href="https://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup" target="_blank" rel="noopener noreffer">i3: i3 User’s Guide</a></li>
+</ul>
+<p>接下来呢，我就直接编辑 <code>~/.config/i3/config</code> 这个文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ vim ~/.config/i3/config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在里面加入&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 登录时，启动 polkit-gnome </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">exec</span> --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>然后我就重启了。</p>
+<p>嗯，可以用了。</p>
+<p></p>
+<p>然后我试着输入密码，敲下去之后&hellip; 嗯，又报错了..</p>
+<p></p>
+<p>看英文就知道.. 这其实是另一个问题了..</p>
+<p>其实它 balabla 一大堆，只不过是 <code>ntfs-3g</code> 这个包我又忘了装而已啦..</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ sudo pacman -S ntfs-3g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后就好了&hellip;</p>
+<p>不过截图是我今晚截的..</p>
+<p></p>
+<h2 id="结尾">结尾</h2>
+<p>然后我就又可以快乐地使用 <code>i3wm</code> 啦～</p>
+]]></description>
+</item></channel>
+</rss>

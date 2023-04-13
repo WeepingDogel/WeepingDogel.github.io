@@ -1,33 +1,35 @@
-# Python 学习笔记——文件操作
+# Python Study Notes - File Operations
 
 
-## 文件操作
-
-
+## File Operations
 ### open
 
-`open()` 是 Python 进行文件操作的关键函数，它有连个参数需要设置
+`open()` is the key function in Python for file operations, with two parameters that need to be set:
 
-* 文件名 - 文件的名称，不多解释
-* 模式 - 决定打开的文件是否可读写以及其他属性
+* Filename - the name of the file, self-explanatory
+* Mode - determines if the file being opened can be read/written to or has other attributes.
 
 ```python
 open('filename','mode')
 ```
-### 读
-仅以只读方式打开一个文件
+
+### Reading
+Open a file in read-only mode:
+
 ```python
 f = open("filename.txt")
 ```
-这样写也是一样的
+
+This is equivalent to:
+
 ```python
 f = open("filename","rt")
 ```
-**"r"** 表示读
+**"r"** indicates to read
 
-**"t"** 表示文本，这是函数默认设定好的，所以可以省略。
+**"t"** indicates that the file is text, this is the default setting for the function, so it can be omitted.
 
-这里引入一下 [w3school](https://www.w3schools.com/python/python_file_handling.asp) 的一个列表
+Here's a list from [w3schools](https://www.w3schools.com/python/python_file_handling.asp):
 
 >There are four different methods (modes) for opening a file:
 >
@@ -45,83 +47,99 @@ f = open("filename","rt")
 >
 >>"b" - Binary - Binary mode (e.g. images)
 
-以一个文件举例
-```txt
+For example, let's say we have a file:
+
+```
 /home/weepingdogel/test.txt
 ---
 Hello!I love Python.
 ```
-我们不写 mode 参数：
+
+We can read the file without specifying the mode parameter:
+
 ```python
 f = open('test.txt')
 print(f.read())
 ```
-执行后：
-```txt
+
+Output:
+
+```
 weepingdogel@WeepingDogel ~> python test.py
 Hello!I love Python.
 ```
-我们将它加上：
+
+Or we can specify it:
+
 ```python
 f = open('test.txt', 'rt')
 print(f.read())
 ```
-执行后：
-```txt
+
+Output:
+
+```
 weepingdogel@WeepingDogel ~> python test.py
 Hello!I love Python.
 ```
 
-结果是一模一样的。
+### Reading lines
 
-#### 读行
-文件:
-```txt
+File:
+
+```
 /home/weepingdogel/test.txt
 ---
 Hello!I love Python.
 Have a nice day!
 Good luck!
 ```
-当我们遇到一个多行文件的时候，我们可以选择只读取它其中一行
-`f.readline()`
 
-例如:
-```py
+When we encounter a multiline file, we can choose to read only one line at a time using `f.readline()`
+
+For example:
+
+```python
 f = open('test.txt')
 print(f.readline())
 ```
-执行后：
-```txt
+
+Output:
+
+```
 weepingdogel@WeepingDogel ~> python test.py
 Hello!I love Python.
-
 ```
 
-我们需要两行的时候：
-```py
+If we need two lines:
+
+```python
 f = open('test.txt')
 print(f.readline())
 print(f.readline())
 ```
-执行后：
-```txt
+
+Output:
+
+```
 weepingdogel@WeepingDogel ~> python test.py
 Hello!I love Python.
 
 Have a nice day!
-
 ```
-如果我们需要三行：
 
-```py
+If we need three lines:
+
+```python
 f = open('test.txt')
 print(f.readline())
 print(f.readline())
 print(f.readline())
 ```
-执行后：
-```txt
+
+Output:
+
+```
 weepingdogel@WeepingDogel ~> python test.py
 Hello!I love Python.
 
@@ -129,109 +147,113 @@ Have a nice day!
 
 Good luck!
 
+
 ```
 
-这个用法它会逐行读取，并且打印输出的时候是会换行的
+This usage reads line by line and prints with line breaks.
 
-在读配置文件的时候也许会用到吧...
+You may need it when reading configuration files...
 
-当然我们也可以用 `for` 循环读一次性读全部：
-```py
+Of course, we can also use a `for()` loop to read all lines at once:
+
+```python
 f = open('test.txt')
 for x in f:
     print(x)
 ```
-执行后：
-```txt
+
+Output:
+
+```
 weepingdogel@WeepingDogel ~> python test.py
 Hello!I love Python.
 
 Have a nice day!
 
 Good luck!
-
 ```
 
-我觉得用 `for` 应该更有效率点...
+I think using `for` is more efficient...
 
-
-### 关闭文件
-这个没什么好讲的...
-
-```py
+### Closing files
+Nothing much to say here...
+```python
 f = open('test.txt')
 print(f.read())
 f.close()
 ```
+The effect is similar to the previous example.
+> I won't provide debugging results below, it's too late.
 
-执行了也是跟上面差不多的效果
+### Creating
 
-> 下面不给出调试结果了，太晚了。
-### 创建
-**"x"** 表示创建一个新文件，如果文件名指的那个文件已经存在就会报错
-```py
+**"x"** indicates creating a new file. If the specified filename already exists, an error will be returned.
+
+```python
 f = open("test.txt","x")
 ```
 
-自己去试试啦，这个没什么好说的。
+Try it out yourself, nothing much else.
 
-### 写
-**"a"** 表示在已有文件上添加内容，它不会使文件原有的内容被删除或者被覆盖
+### Writing to a file
 
-例如：
-```py
+The character `'a'` represents adding content to an existing file without deleting or overwriting its original contents.
+
+For example:
+
+```python
 f = open("test.txt","a")
-f.write("加入内容 / content added.") # 这段字符串将会被添加到这个文件里
+f.write("加入内容 / content added.")
 ```
-**"w"** 表示将会覆盖那个文件，它将会覆盖原有的内容
 
-例如：
-```py
+The above string will be added to the file.
+
+The character `'w'` represents overwriting the file, which will replace any existing content.
+
+For example:
+
+```python
 f = open("test.txt", "w")
-f.write("加入内容 / content added.") # 文件将只会存在这段字符串
+f.write("加入内容 / content added.")
 ```
 
-### 删
+In this case, only the string specified will exist in the file.
 
-这里需要用到 `os` 这个模块，并用到里面的 `os.remove()` 函数，直接 `import os` 即可
+### Deleting a file
 
-```py
+You need to use the `os` module and its `os.remove()` function. Simply type `import os` to import it.
+
+```python
 import os
 os.remove("test.txt")
 ```
 
-#### 典型例子
-检测一个文件是否存在，如果存在就删除，不存在就提示
-```py
-import os
-if os.path.exists("test.txt"):
-    os.remove("test.txt")
-else:
-    print("文件不存在")
-```
-#### 删除目录
+#### Classic example
+Check if a file exists, delete it if it does, or display a message if it doesn't.
 
-用 `os.rmdir()` 即可
+#### Deleting a directory
 
-```py
+Use `os.rmdir()`.
+
+```python
 import os
 os.rmdir("foldername")
 ```
 
-## 总结
+## Conclusion
 
-这些就是基础的文件读写操作需要知道的东西啦...
+These are the basics of file read/write operations that you should know.
 
-如果看完没什么概念的话，可以试试下面这一大串代码
+If you're having trouble understanding, you can try running the following code with different `open()` mode parameters.
 
-可以改改里面 `open()` 的 mode 参数试试
+Summary code:
 
-总结代码：
 ```python
 import os
 import datetime
+
 def sign():
-    # 程序标识
+    # Program identification
     print(
 '''
 ╭╮╭╮╭╮╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━━━╮╱╱╱╱╱╱╱╱╭╮
@@ -244,38 +266,44 @@ def sign():
 ╱╱╱╱╱╱╱╱╱╱╱╰╯╱╱╱╱╱╰━━╯╱╱╱╱╱╱╰━━╯
 '''
     )
+
 def filecrt(filename):
-    # 文件创建
-    if os.path.exists(filename): #检查文件是否存在
-        print(str(datetime.datetime.now())+ ": 文件已存在")
+    # File creation
+    if os.path.exists(filename): # Check if the file exists
+        print(str(datetime.datetime.now()) + ": The file already exists")
         return 0
     else:
         f = open(filename,'x')
         f.close()
-        print(str(datetime.datetime.now()) + ": 已创建文件: " + filename)
+        print(str(datetime.datetime.now()) + ": Created file: " + filename)
         return 1
+
 def filewrt(filename):
-    fruits = ['apple', 'banana', 'strawbarry','orange'] # 给出要写的内容
-    # 文件写入操作
+    fruits = ['apple', 'banana', 'strawberry','orange'] # Specify the contents to be written
+    # File write operation
     f = open(filename, 'w')
     for fruit in fruits:
         f.write(fruit + '\n')
-        print(str(datetime.datetime.now()) + ": 已写入" + fruit)
+        print(str(datetime.datetime.now()) + ": Writing: " + fruit)
     f.close()
+
 def filedel(filename):
-    # 删除文件操作
+    # Delete file operation
     if os.path.exists(filename):
         os.remove(filename)
-        print(str(datetime.datetime.now()) + ": 已删除" + filename)
+        print(str(datetime.datetime.now()) + ": Deleted file: " + filename)
     else:
-        print(str(datetime.datetime.now()) + filename + "不存在")
+        print(str(datetime.datetime.now()) + ": " + filename + " does not exist")
+
 def fileread(filename):
-    print(str(datetime.datetime.now()) + ": 读取中.." )
+    print(str(datetime.datetime.now()) + ": Reading..." )
     f = open(filename,'r')
-    print("-" * 5 + "文件内容" + "-" * 5 + "\n")
+    print("-" * 5 + " File contents " + "-" * 5 + "\n")
     print(f.read())
-    print("-" * 5 + "文件内容" + "-" * 5 + "\n")
+    print("-" * 5 + " File contents " + "-" * 5 + "\n")
+
 sign()
+
 if filecrt("test.txt") == 0:
     fileread("test.txt")
     filedel("test.txt")

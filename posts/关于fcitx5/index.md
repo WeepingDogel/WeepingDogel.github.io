@@ -1,113 +1,113 @@
-# 关于 fcitx5 ，以及最近的环境变量问题
+# About fcitx5, and recent environment variable issues
 
 
-## 发生了啥
+## What happened
 
-最近我收到了一条这样的消息
->使用 `$HOME/.pam_environment` 设置环境变量的用户注意啦！由于 [CVE-2010-4708](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708), pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。
+I recently received a message like this
+>For those who use `$HOME/.pam_environment` to set environment variables, take note! Due to [CVE-2010-4708](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708), pam upstream is set to not read user's environment variable settings by default in version 1.4.0, and users are required to change their environment variable settings or restore the original default read behavior.
 >
->ref: [Linux 的环境变量怎么设 依云's Blog](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html)
+>ref: [Linux environment variables how to set Evian's Blog](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html)
 
-~~为什么十年的漏洞现在才修啊喂！！！~~
+~~Why is the 10-year vulnerability only now fixed?~~ Emmmm, so that's what the vulnerability is.
 
-Emmmm, 这么说就是 `.pam_environment` 这个文件不能用了......
+Emmmm, so that is `.pam_environment` this file can not be used ......
 
-这里感谢 [依云](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html) 写出了各种情况的应对方法
+Here thanks to [lilydjwg](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html) for writing out the way to deal with various situations
 
-我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西... 其他具体的可以参考云云写的.. (逃
+I'll write a note about replacing fcitx5 in xfce + lightdm environment... Other specifics can be found in what **lilydjwg** wrote... (Escape
 
-## fcitx5 与 fcitx
+## fcitx5 vs fcitx
 
 * Fcitx
-> [Fcitx](https://en.wikipedia.org/wiki/Fcitx) (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的[输入法](https://en.wikipedia.org/wiki/Input_method)平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。
+> [Fcitx](https://en.wikipedia.org/wiki/Fcitx) (Flexible Input Method Framework) ── i.e. Little Penguin Input Method, which is an [input method](https://en.wikipedia.org/) distributed under GPL wiki/Input_method) platform, which can support multiple input methods by installing the engine, and supports simple input and output, it is a common Chinese input method in Linux OS. It has the advantage of being short and compact, and has good compatibility with programs.
 >
 > --- [Arch Wiki](https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
 * Fcitx5
->Fcitx5 是继 [Fcitx](https://wiki.archlinux.org/index.php/Fcitx) 后的新一代输入法框架。 
+>Fcitx5 is the next generation input method framework after [Fcitx](https://wiki.archlinux.org/index.php/Fcitx). 
 >
 > --- [Arch Wiki](https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
-日常偷懒，直接引用(逃
+Daily lazy, direct quotes (flee
 
-## 好啦，直接开始吧
+## Okay, let's get right to it
 
-> 先贴出我的系统情况
+> first post my system situation
 >
-> 操作系统：Arch Linux
+> Operating system: Arch Linux
 >
-> 桌面环境：xfce
+> Desktop environment: xfce
 >
-> 显示管理器：lightdm
+> Display Manager: lightdm
 
-实际上，只要把原来写 `.pam_environment` 中的输入法环境变量写到 `.xprofile` 里面就可以解决这个问题，但是我想试试 fcitx5。
+Actually, just writing the input method environment variables from `.pam_environment` to `.xprofile` will solve the problem, but I'd like to try fcitx5.
 
-### 卸载掉 fcitx
+### Uninstall the old version fcitx
 
-首先我们要先卸载掉原来的 fcitx ，我之前用的是 `fcitx-googlepinyin` 这个输入法，所以这个包也要卸掉，因为会有依赖
+First of all, we need to uninstall the original fcitx, I was using `fcitx-googlepinyin` input method before, so I need to uninstall this package too, because there will be dependency.
 
-除此之外，与 fcitx 有一定关系的都要卸掉，不然 `pacman` 会报错，所以你要执行这个
+Besides, all the packages that have some relationship with fcitx should be uninstalled, otherwise `pacman` will report error, so you have to execute this
 
->（PS：你可能用的不是谷歌输入法，所以请把 `fcitx-googlepinyin` 改成你装的输入法的包名）
+>(PS: you may not use Google input method, so please change `fcitx-googlepinyin` to the package name of the input method you installed)
 
 ```txt
 sudo pacman -Rs fcitx-configtool fcitx-googlepinyin fcitx-qt5 fcitx
 ```
 
-接下来，将这个文件删除，反正也没用了 (逃
+Next, delete this file, it's useless anyway (escape
 
 ```txt
-$ sudo rm -rf ./.pam_environment
+$ sudo rm -rf . /.pam_environment
 ```
 
 
-### 安装 fcitx5
+### Installing fcitx5
 
-现在来安装 fcitx5，这样子弄
+Now to install fcitx5, this is how to do it
 
 
 * fcitx5
 
-   * 主包，不用多解释啦～
+   * The main package, no need to explain
 
 * fcitx5-chinese-addons
 
-   * 中文输入法包.... Arch Wiki 里面是这样解释的:
-       > [fcitx5-chinese-addons](https://www.archlinux.org/packages/?name=fcitx5-chinese-addons) 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等
+   * Chinese input method package .... Arch Wiki explains it like this.
+       > [fcitx5-chinese-addons](https://www.archlinux.org/packages/?name=fcitx5-chinese-addons) contains a lot of Chinese input methods: Pinyin, ShuangPin, WubiPinyin, Natural Code, CangJie, BingToad Holographic, ErBi, etc.
 
 * fcitx5-im
-   * 环境依赖包，要装的，不然在一些软件上打不出字
+   * Environment dependency package, you have to install it, otherwise you can't type on some software
 
 * fcitx5-configtool
-   * fcitx5 的 GUI 配置工具，因为我不懂怎么修改配置文件，所以就装了这个。在上面三个装完之后装。
+   * fcitx5's GUI configuration tool, because I don't know how to modify the configuration file, so I installed this. Install it after the three above.
 
-那么，执行
+Then, execute
 ```txt
 $ sudo pacman -S fcitx5 fcitx5-chinese-addons fcitx5-im fcitx5-configtool
 ```
 
-软件包安装完成后，理论上它是会开机启动的，但是嘛，也有可能出点玄学问题，先手动做一下这个
+After the package is installed, it will theoretically boot up, but well, there can be some metaphysical problems, so do this manually first
 
 ```txt
 $ sudo cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/ -v
 ```
 
-### 环境变量
+### Environment variables
 
-嗯哼，最后就是设置环境变量了，既然 `.pam_environment` 不能用了，那要写在哪里呢？ 
+Well, finally it's set environment variable, since `.pam_environment` can't be used, where to write it? 
 
-[云云](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html)说：
->使用 X11 的桌面环境，通常通过 display manager 来登录，比如 lightdm 和 sddm。这俩都支持 `~/.xprofile`。这个文件会在启动过程中被 source，使用的 shell 是由 dm 自己确定的。lightdm 和 sddm 都是用的 `/bin/sh`（分别位于 `/etc/lightdm/Xsession` 和 `/usr/share/sddm/scripts/Xsession` 文件里）。可以看到，除了读取 `.xprofile` 外，lightdm 也会读取 `.profile`。sddm 甚至连 bash、zsh、tcsh、fish 的启动配置脚本都给读了。
+[lilydjwg](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html) said:
+> Using X11 desktop environment, usually login through display manager, such as lightdm and sddm. Both of them support `~/.xprofile`. This file will be sourced during boot, using a shell determined by `dm` itself. Both lightdm and sddm use `/bin/sh` (in the files `/etc/lightdm/Xsession` and `/usr/share/sddm/scripts/Xsession` respectively). As you can see, in addition to reading `.xprofile`, lightdm also reads `.profile`. sddm even reads the startup configuration scripts for bash, zsh, tcsh, and fish.
 
-也就是说，我们需要把 fcitx5 的环境变量写在 `.xprofile` 这个文件里面
+That is, we need to write the fcitx5 environment variables in the `.xprofile` file
 
-然后...
+Then...
 
 ```txt
-$ vim ./.xprofile
+$ vim . /.xprofile
 ```
 
-在里面写入这些东西
+Write these things in it
 
 ```sh
 export INPUT_METHOD=fcitx5
@@ -116,31 +116,34 @@ export QT_IM_MODULE=fcitx5
 export XMODIFIERS=@im=fcitx5
 ```
 
-接下来你可以选择重启 `lightdm` ，
+Next you can choose to restart `lightdm`,
 
 ```txt
 $ sudo systemctl restart lightdm
 ```
 
-或者重启系统
+Or reboot the system.
 
 ```txt
 $ sudo reboot
 ```
 
-此时，xfce 的状态栏出现了一个键盘，但是按 <kbd>`CTRL`</kbd> + <kbd>`SPACE`</kbd> 无法弹出中文输入法，这下怎么办呢？
+At this time, a keyboard appears in the status bar of xfce, but pressing <kbd>`CTRL`</kbd> + <kbd>`SPACE`</kbd> but it does not bring up the Chinese input method, so what should we do?
 
-直接右键那个键盘图标，点击配置，然后进入内个 QT 写的配置工具里添加中文输入法就可以啦～～！
+
+Right-click the keyboard icon, click Configure, and then go to the QT configuration tool to add Chinese input methods on it!
 
 ![](/img/2020-07-25_15-52.png)
 
-只需要双击就可以添加到左边哦～
+Just double click to add to the left ~
 
-然后点击 OK，开始享受 fcitx5 吧
+Then click OK and start enjoying fcitx5!
 
 
-## 参考链接
-* [Linux 的环境变量怎么设 - 依云's Blog](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html)
-* [Fcitx5 (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+## Reference links
+* [How to set environment variables for Linux - Evian's Blog](https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html)
+* [Fcitx5 (Simplified Chinese) - ArchWiki](https://wiki.archlinux.org/index.php/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 * [Fcitx - Wikipedia](https://en.wikipedia.org/wiki/Fcitx)
-* [Fcitx (简体中文) - ArchWiki](https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+* [Fcitx (Simplified Chinese) - ArchWiki](https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+
+Translated with www.DeepL.com/Translator (free version)
