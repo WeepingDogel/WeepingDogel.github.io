@@ -1,62 +1,60 @@
-# Linux Mint 如何修改软件源
+# How to Modify Software Sources in Linux Mint
 
 
-## 序
+## Introduction
 
-由于 Linux Mint 在安装完之后.. 
-
-~~唔啊！ 不许笑！！ 我我我当然早就会！写给萌新看的！喂！不许笑！！~~
+After installing Linux Mint, one of the first things you may want to do is modify your software sources.
 
 ![](/img/2020-11-07_14-12.png)
 
-默认的软件源是官方的，在安装软件包和更新的时候得 ~~跨过山河大海，也要穿过人山人海~~ ，因此我们得把它修改为离我们最近的镜像源
+The default software sources in Linux Mint are official ones, which may take a long time to download and update packages. Therefore, it's recommended to modify the software sources and use a mirror source that is closer to you.
 
-对于 Mint 来说，无非就两种办法
+For Linux Mint, there are basically two ways to modify the software sources.
 
-**注意：二选一**
+**Note: Choose only one of the following options.**
 
-## 一、终端法
+## Method 1: Using the Terminal
 
-我们先去 TUNA 镜像站看看[帮助文档](https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/)
+We'll first go to the TUNA mirror site and take a look at the help documentation (https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/).
 
-内容是这样的
+The content is as follows:
 
 ![](/img/2020-11-07_15-07.png)
 
-嗯... 也许你看不太懂，具体怎么操作...
+"Oh, I see. Maybe you're having trouble understanding how to do it. Here's a detailed guide on how to perform the operation:
 
-首先把鼠标移到左下角，打开终端
+First, move your mouse cursor to the bottom left corner of the screen and open the Terminal."
+
 
 ![](/img/截图_2020-11-07_14-28-48.png)
 
-就是封面上那个东西..
-
 ![](/img/2020-11-07_14-34.png)
 
-我们先要编辑 `/etc/apt/sources.list` 这个文件。
+To modify the software sources, we first need to edit the `/etc/apt/sources.list` file.
 
-Mint 似乎不自带 `vim`，所以我们这里使用 `nano`。
+It seems that Mint does not come with `vim` pre-installed, so we will use `nano` here.
+
 
 ```bash
 $ sudo nano /etc/apt/sources.list
 ```
 
-**注意：`sudo` 不能丢！ 而且按下回车之后要输入密码才能有权限。**
+**Note: `sudo` is required and do not forget to enter your password after pressing Enter in the terminal.**
 
 ![](/img/2020-11-07_14-39.png)
 
-我们打开才发现里面是空的，除了一大堆英文注释什么都没有..
+When you open the file, you may notice that it appears empty except for some English comments.
 
-我们往里面写入
+You can start writing into the file by following the instructions provided by the TUNA mirror site or other tutorial
 ```txt
 deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
 ```
 
-接下来还不够，因为 Mint 还有一些包要使用 Ubuntu 的仓库，所以我们再看看 [Ubuntu 的帮助文档](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/) 
+I understand. To complete the process, we also need to add Ubuntu repositories as some packages in Mint require them. Let's take a look at the [Ubuntu help documentation](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/) for further instructions.
 
 ![](/img/2020-11-07_14-46.png)
 
-我知道怎么做了，把这些当中的`archive.ubuntu.com` 等域名全部改成`mirrors.tuna.tsinghua.edu.cn` 即可
+Great, it sounds like you have a good understanding of the process! Yes, you can modify the URLs in the `/etc/apt/sources.list` file and replace `archive.ubuntu.com` with `mirrors.tuna.tsinghua.edu.cn`. This will help speed up the process of downloading and updating packages in Linux Mint.
 
 ```txt
 #deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main
@@ -73,117 +71,113 @@ deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-updates main restricted uni
 deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-backports main restricted universe multiverse
 deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
 ```
-如图：
+Like this：
 
 ![](/img/2020-11-07_14-49.png)
 
-接下来，执行
-```bash
-$ sudo apt update
-```
-就会比最开始快很多了
+Exactly! After modifying the software sources, you can run the command `sudo apt update` in the terminal to update the package lists. This will allow you to download and install packages much faster than before.
 
-## 二、使用自带的更新管理器
+## Method 2: Using the Update Manager
 
-首先点击开始菜单，找到设置管理器
+irst, click on the "Menu" button in the bottom left corner of the screen to access the applications menu. Then, search for "Settings Manager" and click on it to open the manager.
 
 ![](/img/截图_2020-11-07_15-06-34.png)
 
-滚轮滑下去，找到`软件源`
+Next, scroll down the Settings Manager window until you find the "Software Sources" option. Click on it to open the software sources settings.
 
 ![](/img/2020-11-07_15-08.png)
 
-输入你的用户密码
+Hmm, didn't you see it at the beginning?
 
 ![](/img/2020-11-07_15-09.png)
 
-嗯哼，是不是在开头看到过？
+Yes, you are correct! The TUNA mirror site was mentioned earlier in this guide as an example of a mirror that can be used to modify the software sources.
+
 ![](/img/2020-11-07_15-10.png)
 
-然后用这个软件把这些都改成国内的就好了，具体怎么操作... 我也不好讲啊...
+Then use this software to modify the sources to use mirrors hosted in China. However, I am not sure of the exact steps on how to do this.
 
 ![](/img/2020-11-07_15-12.png)
 
-唔啊！总之这个就是... 拿鼠标点点点就好了...
-
-总之这样就好啦～
+Oh yeah! Anyway, this is it... Just use your mouse to click around, and you're good to go!
 
 ![](/img/2020-11-07_15-14.png)
 
-接下來它会提示你是否更新 apt 缓存，点击确定就可以啦～
+Next, you will be prompted to update the apt cache. Click "OK" to continue.
 
 ![](/img/2020-11-07_15-15.png)
 
-等它跑完就好啦～
+Wait for the process to finish, and you're done!
 
 ![](/img/2020-11-07_15-16.png)
 
-## 更新软件包
+## Updating Software Packages
 
-当我们设置好 apt 软件源后，我们要做的就是进行必要的软件包更新..
+Once you have set up the apt software sources, the next step is to perform necessary software package updates.
 
-还是两种方法
+Here are two methods to update your software packages:
 
-**注意：还是二选一**
+**Note: Still, you can choose either Method 1 or Method 2 to update your software packages.**
 
-### 一、终端法
+### Method 1: Using the Terminal
+
+1. Open the Terminal by clicking on the "Menu" button in the bottom left corner of the screen and searching for "Terminal".
+2. In the Terminal, type the following command and press Enter:
 
 ```bash
 $ sudo apt upgrade
 ```
+3. Enter your password when prompted and press Enter again.
+4. Wait for the update process to finish.
+
 ![](/img/2020-11-07_15-26.png)
 
 ![](/img/2020-11-07_15-28.png)
 
 ![](/img/2020-11-07_16-44.png)
 
-搞定
+Then, you can reboot your system.
 
-接下来重启虚拟机就可以了
-
-### 二、使用这个更新管理器
+### Using the Update Manager
 
 ![](/img/2020-11-07_15-19.png)
 
-点击就好～
+Click it!
 
 ![](/img/2020-11-07_15-20.png)
 
-然后输入密码就可以了
+Then you just need to enter the password.
 
 ![](/img/2020-11-07_15-21.png)
 
-点击安装更新就好了
+Just click to install the update.
 ![](/img/2020-11-07_15-24.png)
 
-确定
+确定Click OK
 
 ![](/img/2020-11-07_15-25.png)
 
-截图累死了...
-
-然后等它跑完就好了
+Screenshots are exhausting...then just wait for it to finish running.
 
 ![](/img/2020-11-07_15-25_1.png)
 
-接下来重启虚拟机就可以了
+Next, restart the virtual machine and it will be ready to use.
+## Conclusion
 
-## 结语
+First of all, I used Linux Mint 20 for demonstration, which may be updated in the future and some details in this article may differ from the actual situation, but the operations are similar. Please adjust accordingly based on your actual situation.
 
-首先要说的是，我是使用 Linux Mint 20 来演示的，在未来它会更新，也许本文章的有些细节与实情不相同，但操作是大同小异的。请根据实际情况随机应变。
+Secondly, ~~please don't laugh!~~ This article is aimed at beginners who are just starting to learn about Linux. 
 
-其次，~~不许笑~~ ，本文章是面向刚接触 Linux 的初学者，不喜勿喷。
+If there are any shortcomings or small mistakes caused by carelessness, please leave a message in the Gitalk section below.
 
-如果有什么不足之处，或一些粗心造成的小错误，请在下面的 gitalk 中留言
-
-最后，本站遵循 [CC-BY-NC 4.0 协议](https://creativecommons.org/licenses/by-nc/4.0/)，转载请注明出处
+Finally, this site follows the [CC-BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/)，please indicate the source when reprinting.
 
 ----
 
-## 参考链接
+## Reference links
 
-* [linuxmint | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/)
+* [Linux Mint | Mirror Usage Guide | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/)
 
-* [ubuntu | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
+* [Ubuntu | Mirror Usage Guide | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)
 
 
