@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation) - WeepingDogel</title><meta name="Description" content="A note of my attempting."><meta property="og:title" content="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" />
+<meta property="og:description" content="A note of my attempting." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" /><meta property="og:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-04T16:37:32+08:00" />
+<meta property="article:modified_time" content="2023-05-05T21:32:32+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/>
+
+<meta name="twitter:title" content="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"/>
+<meta name="twitter:description" content="A note of my attempting."/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" /><link rel="prev" href="http://weepingdogel.github.io/posts/problem_of_virtualbox_appeding_starting_vm/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)",
+        "inLanguage": "",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/posts\/attempted_solution_to_the_openstack_provincial_competition_problem_part1\/"
+        },"genre": "posts","keywords": "OpenStack, Linux, CentOS, Competition, Installation, Notes, Attempt","wordcount":  3460 ,
+        "url": "http:\/\/weepingdogel.github.io\/posts\/attempted_solution_to_the_openstack_provincial_competition_problem_part1\/","datePublished": "2023-05-04T16:37:32+08:00","dateModified": "2023-05-05T21:32:32+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "A note of my attempting."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="WeepingDogel"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" selected></option></select>
+                    </a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="WeepingDogel"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" selected></option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">included in <a href="/categories/operations-and-maintenance/"><i class="far fa-folder fa-fw"></i>operations and maintenance</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-04">2023-05-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3460 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;17 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-05-04-17-14-22%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-05-04-17-14-22%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-05-04-17-14-22%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-05-04-17-14-22%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-05-04-17-14-22屏幕截图.png"
+        title="A note of my attempting." /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#preparation">Preparation</a>
+          <ul>
+            <li><a href="#nodes">Nodes</a></li>
+            <li><a href="#network">Network</a>
+              <ul>
+                <li><a href="#network-interfaces">Network Interfaces</a></li>
+                <li><a href="#nodes-ip-address">Nodes IP Address</a></li>
+              </ul>
+            </li>
+            <li><a href="#operating-system">Operating System</a>
+              <ul>
+                <li><a href="#set-up-the-network">Set up the network</a></li>
+                <li><a href="#start-ssh-service">Start ssh service</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#quiz">Quiz</a>
+          <ul>
+            <li><a href="#task-1-building-private-cloud-services-105-points">[Task 1] Building Private Cloud Services [10.5 points]</a>
+              <ul>
+                <li><a href="#question-1-basic-environment-configuration-05-points"><strong>[Question 1] Basic environment configuration [0.5 points]</strong></a></li>
+                <li><a href="#question-2-yum-repository-configuration-05-points"><strong>[Question 2] Yum Repository Configuration [0.5 points]</strong></a></li>
+                <li><a href="#question-3-configure-ssh-without-keys-05-points"><strong>[Question 3] Configure SSH without keys [0.5 points]</strong></a></li>
+                <li><a href="#question-4-basic-installation-05-points"><strong>[Question 4] Basic Installation [0.5 points]</strong></a></li>
+                <li><a href="#question-5-database-installation-and-tuning-10-point"><strong>[Question 5] Database Installation and Tuning [1.0 point]</strong></a></li>
+                <li><a href="#question-6-keystone-service-installation-and-usage-05-points"><strong>[Question 6] Keystone Service Installation and Usage [0.5 points]</strong></a></li>
+                <li><a href="#question-7-glance-installation-and-usage-05-points"><strong>[Question 7] Glance Installation and Usage [0.5 points]</strong></a></li>
+                <li><a href="#to-be-continued"><strong>To be continued&hellip;.</strong></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
+<p>As you know, I have been fortunate enough to be selected by my instructors to participate in the provincial cloud computing competition. As a result, I have joined the project group in campus.</p>
+<p>As a member of the group, I need to study hard and continuously expand my knowledge. To achieve good results at the upcoming provincial competition, we need to learn about the structure of private clouds and the different types of container clouds.</p>
+<p>One suggested option for a private cloud solution is <strong>OpenStack</strong>, which can be complex and require significant effort to master.</p>
+<p>However, I am still motivated to pursue this technology as I have a strong interest in IT and Linux-related topics, and I believe that the challenge of learning OpenStack will ultimately improve my knowledge and skills.</p>
+<p>Therefore, I made a decision to write some articles on my blog site to document my study process.</p>
+<h2 id="preparation">Preparation</h2>
+<h3 id="nodes">Nodes</h3>
+<p>At first of the first, I need to understand a basic example structrue of the OpenStack.</p>
+<p>Without doubt, this picture below is a reasonable and official one.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://docs.openstack.org/install-guide/_images/hwreqs.png"
+        data-srcset="https://docs.openstack.org/install-guide/_images/hwreqs.png, https://docs.openstack.org/install-guide/_images/hwreqs.png 1.5x, https://docs.openstack.org/install-guide/_images/hwreqs.png 2x"
+        data-sizes="auto"
+        alt="https://docs.openstack.org/install-guide/_images/hwreqs.png"
+        title="https://docs.openstack.org/install-guide/_images/hwreqs.png" /></p>
+<p>However, limited by the performance and small disk storage, I can only create mainly <strong>2</strong> nodes and <strong>an extra resource node to provide the images and repos</strong>.</p>
+<p>I won&rsquo;t create independent <strong>Object Storage Node</strong> and <strong>Block Storage Node</strong> while it&rsquo;s a better choice to add 2 extra virtual disks to the Compute Node.</p>
+<p>And for the <strong>Cinder Service</strong>, I will only provide <strong>1</strong> disk with <strong>2</strong> partitions to run the service.</p>
+<p>The details of my VirutalBox properties is blow:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-05-04-17-29-02%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-05-04-17-29-02%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-05-04-17-29-02%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-05-04-17-29-02%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-05-04-17-29-02屏幕截图.png"
+        title="/img/2023-05-04-17-29-02屏幕截图.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-05-04-17-29-43%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-05-04-17-29-43%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-05-04-17-29-43%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-05-04-17-29-43%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-05-04-17-29-43屏幕截图.png"
+        title="/img/2023-05-04-17-29-43屏幕截图.png" /></p>
+<p>By the way, I have to explain the Arch VM, it&rsquo;s only a resource node to provide the HTTP downloading and <code>yum</code> repo service.</p>
+<p>So I just use <strong>256MB RAM and 1 core</strong>, but <strong>2</strong> disks to storage the multiple and large repo files.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-05-04-17-30-18%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-05-04-17-30-18%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-05-04-17-30-18%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-05-04-17-30-18%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-05-04-17-30-18屏幕截图.png"
+        title="/img/2023-05-04-17-30-18屏幕截图.png" /></p>
+<h3 id="network">Network</h3>
+<h4 id="network-interfaces">Network Interfaces</h4>
+<p>In order to set up the OpenStack Services, each node (compute and controller) need to use 2 network interfaces.</p>
+<p>The first one is used to connect to the <strong>Management NetWork</strong> while the second one is used to connect the <strong>Operation Network</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Network Interface</th>
+<th style="text-align:center">Network</th>
+<th style="text-align:center">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">enp0s3</td>
+<td style="text-align:center">192.168.56.0/24</td>
+<td style="text-align:center">Management NetWork</td>
+</tr>
+<tr>
+<td style="text-align:center">enp0s8</td>
+<td style="text-align:center">172.129.1.0/24</td>
+<td style="text-align:center">Operation Network</td>
+</tr>
+</tbody>
+</table>
+<h4 id="nodes-ip-address">Nodes IP Address</h4>
+<p>So the detail netowrk properties is below:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Node</th>
+<th style="text-align:center">Management Address</th>
+<th style="text-align:center">Operation Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">controller</td>
+<td style="text-align:center">192.168.56.2</td>
+<td style="text-align:center">172.129.1.1</td>
+</tr>
+<tr>
+<td style="text-align:center">compute</td>
+<td style="text-align:center">192.168.56.3</td>
+<td style="text-align:center">172.129.1.2</td>
+</tr>
+<tr>
+<td style="text-align:center">Resource</td>
+<td style="text-align:center">192.168.56.100</td>
+<td style="text-align:center">None</td>
+</tr>
+</tbody>
+</table>
+<h3 id="operating-system">Operating System</h3>
+<p>CentOS will be installed in the controller and compute and the Arch Linux will be installed in Resouce.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Node</th>
+<th style="text-align:center">OS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">controller</td>
+<td style="text-align:center">CentOS 7</td>
+</tr>
+<tr>
+<td style="text-align:center">compute</td>
+<td style="text-align:center">CentOS 7</td>
+</tr>
+<tr>
+<td style="text-align:center">Resource</td>
+<td style="text-align:center">Arch Linux</td>
+</tr>
+</tbody>
+</table>
+<h4 id="set-up-the-network">Set up the network</h4>
+<p>Edit the file <code>/etc/sysconfig/network-scripts/ifcfg-enp0s3</code> and <code>/etc/sysconfig/network-scripts/ifcfg-enp0s8</code> on each nodes.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
+</span></span><span class="line"><span class="cl"># vim /etc/sysconfig/network-scripts/ifcfg-enp0s8
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And Edit the file according to the sheet.</p>
+<p>For example, the controller node is below:</p>
+<p><code>/etc/sysconfig/network-scripts/ifcfg-enp0s3</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">TYPE=Ethernet
+</span></span><span class="line"><span class="cl">PROXY_METHOD=none
+</span></span><span class="line"><span class="cl">BROWSER_ONLY=no
+</span></span><span class="line"><span class="cl">BOOTPROTO=static
+</span></span><span class="line"><span class="cl">DEFROUTE=yes
+</span></span><span class="line"><span class="cl">IPADDR=192.168.56.2
+</span></span><span class="line"><span class="cl">GATEWAY=192.168.56.1
+</span></span><span class="line"><span class="cl">PREFIX=24
+</span></span><span class="line"><span class="cl">IPV4_FAILURE_FATAL=no
+</span></span><span class="line"><span class="cl">IPV6INIT=yes
+</span></span><span class="line"><span class="cl">IPV6_AUTOCONF=yes
+</span></span><span class="line"><span class="cl">IPV6_DEFROUTE=yes
+</span></span><span class="line"><span class="cl">IPV6_FAILURE_FATAL=no
+</span></span><span class="line"><span class="cl">IPV6_ADDR_GEN_MODE=stable-privacy
+</span></span><span class="line"><span class="cl">NAME=enp0s3
+</span></span><span class="line"><span class="cl">UUID=d59932b3-b22e-4d55-893d-cdeb847bd619
+</span></span><span class="line"><span class="cl">DEVICE=enp0s3
+</span></span><span class="line"><span class="cl">ONBOOT=yes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>/etc/sysconfig/network-scripts/ifcfg-enp0s8</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">TYPE=Ethernet
+</span></span><span class="line"><span class="cl">PROXY_METHOD=none
+</span></span><span class="line"><span class="cl">BROWSER_ONLY=no
+</span></span><span class="line"><span class="cl">BOOTPROTO=static
+</span></span><span class="line"><span class="cl">DEFROUTE=yes
+</span></span><span class="line"><span class="cl">IPADDR=172.129.1.1
+</span></span><span class="line"><span class="cl">PREFIX=24
+</span></span><span class="line"><span class="cl">IPV4_FAILURE_FATAL=no
+</span></span><span class="line"><span class="cl">IPV6INIT=yes
+</span></span><span class="line"><span class="cl">IPV6_AUTOCONF=yes
+</span></span><span class="line"><span class="cl">IPV6_DEFROUTE=yes
+</span></span><span class="line"><span class="cl">IPV6_FAILURE_FATAL=no
+</span></span><span class="line"><span class="cl">IPV6_ADDR_GEN_MODE=stable-privacy
+</span></span><span class="line"><span class="cl">NAME=enp0s8
+</span></span><span class="line"><span class="cl">UUID=b02be511-361b-447f-b670-282850bce1f5
+</span></span><span class="line"><span class="cl">DEVICE=enp0s8
+</span></span><span class="line"><span class="cl">ONBOOT=yes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="start-ssh-service">Start ssh service</h4>
+<p>Start sshd on each nodes.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># systemctl start sshd &amp;&amp; systemctl enable sshd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="quiz">Quiz</h2>
+<h3 id="task-1-building-private-cloud-services-105-points">[Task 1] Building Private Cloud Services [10.5 points]</h3>
+<blockquote>
+<h4 id="question-1-basic-environment-configuration-05-points"><strong>[Question 1] Basic environment configuration [0.5 points]</strong></h4>
+<p>Using the provided username and password, log in to the provided OpenStack private cloud platform. Under the current tenancy, create two virtual machines using the CentOS7.9 image and 4vCPU/12G/100G_50G type. The second network card should be created and connected to both the controller and compute nodes (the second network card&rsquo;s subnet is <code>10.10.X.0/24</code>, where X represents the workstation number, and no routing is needed). Verify the security group policies to ensure normal network communication and ssh connection, and configure the servers as follows:</p>
+<ol>
+<li>Set the hostname of the control node to &lsquo;controller&rsquo; and that of the compute node to &lsquo;compute&rsquo;;</li>
+<li>Modify the hosts file to map IP addresses to hostnames.</li>
+</ol>
+<p>After completing the configuration, submit the username, password, and IP address of the control node in the answer box.</p>
+</blockquote>
+<p>The first quiz is eazy, just some steps can be done.</p>
+<p>At the controller Node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# hostnamectl set-hostname controller
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>At the compute Node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute ~]# hostnamectl set-hostname compute
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Edit the file <code>/etc/hosts</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# vim /etc/hosts
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Write these:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+</span></span><span class="line"><span class="cl">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+</span></span><span class="line"><span class="cl">192.168.56.100 Resource
+</span></span><span class="line"><span class="cl">192.168.56.2 controller
+</span></span><span class="line"><span class="cl">192.168.56.3 compute
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Save it by <code>:wq</code>.</p>
+<p>Then send it to compute Node by <code>scp</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# scp /etc/hosts root@compute:/etc/hosts
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally, all the operation is complete.</p>
+<blockquote>
+<h4 id="question-2-yum-repository-configuration-05-points"><strong>[Question 2] Yum Repository Configuration [0.5 points]</strong></h4>
+<p>Using the provided <em><strong>HTTP service address</strong></em>, there are <code>CentOS 7.9</code> and <code>IaaS network YUM repositories</code> available under the HTTP service. Use this HTTP source as the network source for installing the IaaS platform. Set up the yum source file http.repo for both the controller node and compute node. After completion, submit the username, password, and IP address of the control node to the answer box.</p>
+</blockquote>
+<p>Well, it&rsquo;s still a easy question.</p>
+<p>First, delete the old repo files in two nodes:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# rm -rfv /etc/yum.repos.d/*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute ~]# rm -rfv /etc/yum.repos.d/*
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Second, according to the question, we should create and edit a file named after <code>http.repo</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# vim /etc/yum.repos.d/http.repo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>write the information below into the file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[centos]
+</span></span><span class="line"><span class="cl">name=centos
+</span></span><span class="line"><span class="cl">baseurl=http://Resource/centos
+</span></span><span class="line"><span class="cl">gpgcheck=0
+</span></span><span class="line"><span class="cl">enabled=1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[iaas-repo]
+</span></span><span class="line"><span class="cl">name=centos
+</span></span><span class="line"><span class="cl">baseurl=http://Resource/iaas
+</span></span><span class="line"><span class="cl">gpgcheck=0
+</span></span><span class="line"><span class="cl">enabled=1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then save it, and do the same operation in the <strong>compute</strong> node.</p>
+<p>But there&rsquo;s a quick way to use <code>scp</code> to copy the file to it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# scp /etc/yum.repos.d/http.repo root@compute:/etc/yum.repos.d/http.repo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then type the password of the root in compute node, the file will be sent.</p>
+<p>And of course, I will use the quick way to do the same executions.</p>
+<blockquote>
+<h4 id="question-3-configure-ssh-without-keys-05-points"><strong>[Question 3] Configure SSH without keys [0.5 points]</strong></h4>
+<p>Configure the <strong>controller node to access the compute node without a key</strong>, and then attempt an SSH connection to the hostname of the compute node for testing. After completion, submit the username, password, and IP address of the controller node in the answer box.</p>
+</blockquote>
+<p>It&rsquo;s also an easy and necessary operation we have to do, because we can make the <strong>controller node</strong> easier to transfer files and execute commands in <strong>compute node</strong>.</p>
+<p>So the first thing we have to do is generate a <code>ssh-key</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# ssh-keygen
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then press the <kbd>Enter</kbd> to confirm your requirements of generation according to the information in terminal.</p>
+<p>Normally you will see these:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Generating public/private rsa key pair.
+</span></span><span class="line"><span class="cl">Enter file in which to save the key (/root/.ssh/id_rsa): 
+</span></span><span class="line"><span class="cl">Enter passphrase (empty for no passphrase): 
+</span></span><span class="line"><span class="cl">Enter same passphrase again: 
+</span></span><span class="line"><span class="cl">Your identification has been saved in /root/.ssh/id_rsa
+</span></span><span class="line"><span class="cl">Your public key has been saved in /root/.ssh/id_rsa.pub
+</span></span><span class="line"><span class="cl">The key fingerprint is:
+</span></span><span class="line"><span class="cl">SHA256:FYN98pz53tfocj5Q4DO90jqqN+lJdzXi9WKMFNjm4Wc root@Resource
+</span></span><span class="line"><span class="cl">The key&#39;s randomart image is:
+</span></span><span class="line"><span class="cl">+---[RSA 3072]----+
+</span></span><span class="line"><span class="cl">|         oo      |
+</span></span><span class="line"><span class="cl">|        . o=o    |
+</span></span><span class="line"><span class="cl">|          o*==   |
+</span></span><span class="line"><span class="cl">|         . +Ooo  |
+</span></span><span class="line"><span class="cl">|        S   +BE+.|
+</span></span><span class="line"><span class="cl">|           .+=*.o|
+</span></span><span class="line"><span class="cl">|          ..o*=oo|
+</span></span><span class="line"><span class="cl">|         .+o+o=.+|
+</span></span><span class="line"><span class="cl">|        .++o *o..|
+</span></span><span class="line"><span class="cl">+----[SHA256]-----+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And now it&rsquo;s time to put the key into the <strong>compute node</strong>!</p>
+<p>Just simply execute the <code>ssh-copy-id</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# ssh-copy-id root@compute
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And type the password at the last time! You needn&rsquo;t enter the ssh password of the <strong>compute node</strong> anymore!</p>
+<p>Then this quiz is solved!</p>
+<blockquote>
+<h4 id="question-4-basic-installation-05-points"><strong>[Question 4] Basic Installation [0.5 points]</strong></h4>
+<p>Install the <code>openstack-iaas</code> package on <em><strong>both</strong></em> the <strong>control node and compute node</strong>, and configure the basic variables in the script files of the two nodes according to Table 2 (the configuration script file is <code>/etc/openstack/openrc.sh</code>).</p>
+</blockquote>
+<ul>
+<li>Table 2 Cloud Platform Configuration Information</li>
+</ul>
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="ProgId" content="Excel.Sheet">
+<meta name="Generator" content="Aspose.Cell 22.7.0">
+<link rel="File-List" href="工作簿1_files/filelist.xml">
+<link rel="Edit-Time-Data" href="工作簿1_files/editdata.mso">
+<link rel="OLE-Object-Data" href="工作簿1_files/oledata.mso">
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Revision>1</o:Revision>
+  <o:LastSaved>2023-05-05T13:11:27Z</o:LastSaved>
+</o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--table
+ {mso-displayed-decimal-separator:"\.";
+ mso-displayed-thousand-separator:"\,";}
+@page
+ {
+ mso-header-data:"";
+ mso-footer-data:"";
+ margin:0.7519685039370079in 0.7007874015748032in 0.7519685039370079in 0.7007874015748032in;
+ mso-header-margin:0.3in;
+ mso-footer-margin:0.3in;
+ mso-page-orientation:Portrait;
+ }
+tr
+ {mso-height-source:auto;
+ mso-ruby-visibility:none;}
+col
+ {mso-width-source:auto;
+ mso-ruby-visibility:none;}
+br
+ {mso-data-placement:same-cell;}
+ruby
+ {ruby-align:left;}
+.style0
+ {
+ mso-number-format:General;
+ text-align:general;
+ vertical-align:bottom;
+ white-space:nowrap;
+ background:auto;
+ mso-pattern:auto;
+ color:#000000;
+ font-size:11pt;
+ font-weight:400;
+ font-style:normal;
+ font-family:"Calibri","sans-serif";
+ mso-protection:locked visible;
+ mso-style-name:Normal;
+ mso-style-id:0;}
+td
+ {mso-style-parent:style0;
+ mso-number-format:General;
+ text-align:general;
+ vertical-align:bottom;
+ white-space:nowrap;
+ background:auto;
+ mso-pattern:auto;
+ color:#000000;
+ font-size:11pt;
+ font-weight:400;
+ font-style:normal;
+ font-family:"Calibri","sans-serif";
+ mso-protection:locked visible;
+ mso-ignore:padding;}
+.x15
+ {
+ mso-number-format:General;
+ text-align:general;
+ vertical-align:bottom;
+ white-space:nowrap;
+ background:auto;
+ mso-pattern:auto;
+ color:#000000;
+ font-size:11pt;
+ font-weight:400;
+ font-style:normal;
+ font-family:"Calibri","sans-serif";
+ mso-protection:locked visible;
+ }
+.x21
+ {
+ mso-number-format:General;
+ text-align:center;
+ vertical-align:middle;
+ white-space:normal;word-wrap:break-word;
+ background:auto;
+ mso-pattern:auto;
+ font-size:11pt;
+ font-weight:400;
+ font-style:normal;
+ font-family:"微软雅黑","sans-serif";
+ border-top:1px solid #000000;
+ border-right:1px solid #000000;
+ border-bottom:1px solid #000000;
+ border-left:1px solid #000000;
+ mso-diagonal-down:none;
+ mso-diagonal-up:none;
+ mso-protection:locked visible;
+ }
+.x22
+ {
+ mso-number-format:General;
+ text-align:left;
+ vertical-align:middle;
+ white-space:normal;word-wrap:break-word;
+ background:auto;
+ mso-pattern:auto;
+ font-size:11pt;
+ font-weight:400;
+ font-style:normal;
+ font-family:"微软雅黑","sans-serif";
+ border-top:1px solid #000000;
+ border-right:1px solid #000000;
+ border-bottom:1px solid #000000;
+ border-left:1px solid #000000;
+ mso-diagonal-down:none;
+ mso-diagonal-up:none;
+ mso-protection:locked visible;
+ }
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <x:ExcelWorkbook>
+  <x:ExcelWorksheets>
+   <x:ExcelWorksheet>
+    <x:Name>Sheet1</x:Name>
+<x:WorksheetOptions>
+ <x:StandardWidth>2048</x:StandardWidth>
+ <x:Print>
+  <x:ValidPrinterInfo/>
+  <x:PaperSizeIndex>9</x:PaperSizeIndex>
+  <x:HorizontalResolution>600</x:HorizontalResolution>
+  <x:VerticalResolution>600</x:VerticalResolution>
+ </x:Print>
+</x:WorksheetOptions>
+   </x:ExcelWorksheet>
+  </x:ExcelWorksheets>
+  <x:WindowHeight>9720</x:WindowHeight>
+  <x:WindowWidth>20955</x:WindowWidth>
+  <x:WindowTopX>360</x:WindowTopX>
+  <x:WindowTopY>15</x:WindowTopY>
+  <x:RefModeR1C1/>
+  <x:TabRatio>600</x:TabRatio>
+  <x:ActiveSheet>0</x:ActiveSheet>
+ </x:ExcelWorkbook>
+</xml><![endif]-->
+</head>
+<body link='blue' vlink='purple' >
+<table border='0' cellpadding='0' cellspacing='0' width='697' style='border-collapse: 
+ collapse;table-layout:fixed;width:522pt'>
+ <col width='210' style='mso-width-source:userset;width:157.5pt'>
+ <col width='232' style='mso-width-source:userset;width:174pt'>
+ <col width='255' style='mso-width-source:userset;width:191.25pt'>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td height='17' class='x21' width='210' style='height:12.75pt;width:157.5pt;'>Service Name</td>
+<td class='x21' width='232' style='width:174pt;'>Variable</td>
+<td class='x21' width='255' style='width:191.25pt;'>Parameter/Password</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td rowspan='7' height='131' class='x21' style='border-bottom:1px solid #000000;height:98.25pt;'>Mysql</td>
+<td class='x21'>root</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Keystone</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Glance</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Nova</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Neutron</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Heat</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Zun</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td rowspan='8' height='150' class='x21' style='border-bottom:1px solid #000000;height:112.5pt;'>Keystone</td>
+<td class='x21'>DOMAIN_NAME</td>
+<td class='x21'>demo</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Admin</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Rabbit</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Glance</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Nova</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Neutron</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Heat</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>Zun</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td rowspan='2' height='36' class='x21' style='border-bottom:1px solid #000000;height:27pt;'>Neutron</td>
+<td class='x21'>Metadata</td>
+<td class='x21'>000000</td>
+ </tr>
+ <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+<td class='x21'>External Network</td>
+<td class='x21'>eth1 (depending on actual situation)</td>
+ </tr>
+<![if supportMisalignedColumns]>
+ <tr height='0' style='display:none'>
+  <td width='210' style='width:157.5pt;'></td>
+  <td width='232' style='width:174pt;'></td>
+  <td width='255' style='width:191.25pt;'></td>
+ </tr>
+ <![endif]>
+</table>
+</body>
+</html>
+<p>So according to the Quiz, we have to install the package <code>openstack-iaas</code> at first:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# yum install -y openstack-iaas 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute ~]# yum install -y openstack-iaas
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then edit the file <code>/etc/openstack/openrc.sh</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# vim /etc/openstack/openrc.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>With the information provided by the tables, we can simply write them into it by using <code>vim</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">##--------------------system Config--------------------##
+</span></span><span class="line"><span class="cl">##Controller Server Manager IP. example:x.x.x.x
+</span></span><span class="line"><span class="cl">#HOST_IP=192.168.56.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">##Controller HOST Password. example:000000 
+</span></span><span class="line"><span class="cl">#HOST_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">##Controller Server hostname. example:controller
+</span></span><span class="line"><span class="cl">#HOST_NAME=controller
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">##Compute Node Manager IP. example:x.x.x.x
+</span></span><span class="line"><span class="cl">#HOST_IP_NODE=192.168.56.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">##Compute HOST Password. example:000000 
+</span></span><span class="line"><span class="cl">#HOST_PASS_NODE=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">##Compute Node hostname. example:compute
+</span></span><span class="line"><span class="cl">#HOST_NAME_NODE=compute
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">##--------------------Chrony Config-------------------##
+</span></span><span class="line"><span class="cl">##Controller network segment IP.  example:x.x.0.0/16(x.x.x.0/24)
+</span></span><span class="line"><span class="cl">#network_segment_IP=192.168.56.0/24
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">......
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>But for all the <code>PASS=000000</code> we can operate quickly by using the command.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="p">:</span>%<span class="nx">s</span><span class="sr">/PASS=/</span><span class="nx">PASS</span><span class="p">=</span><span class="m">000000</span>/<span class="nx">g</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then you will spot that there is a <code>#</code> in each of the front of the variables, we need to execute this <code>vim</code> command to delete the first character:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="p">:</span>%<span class="nx">s</span><span class="sr">/^.\{1\}/</span>/<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally, we will get a file like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#--------------------system Config--------------------##
+</span></span><span class="line"><span class="cl">#Controller Server Manager IP. example:x.x.x.x
+</span></span><span class="line"><span class="cl">HOST_IP=192.168.56.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Controller HOST Password. example:000000 
+</span></span><span class="line"><span class="cl">HOST_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Controller Server hostname. example:controller
+</span></span><span class="line"><span class="cl">HOST_NAME=controller
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Compute Node Manager IP. example:x.x.x.x
+</span></span><span class="line"><span class="cl">HOST_IP_NODE=192.168.56.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Compute HOST Password. example:000000 
+</span></span><span class="line"><span class="cl">HOST_PASS_NODE=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Compute Node hostname. example:compute
+</span></span><span class="line"><span class="cl">HOST_NAME_NODE=compute
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Chrony Config-------------------##
+</span></span><span class="line"><span class="cl">#Controller network segment IP.  example:x.x.0.0/16(x.x.x.0/24)
+</span></span><span class="line"><span class="cl">network_segment_IP=192.168.56.0/24
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Rabbit Config ------------------##
+</span></span><span class="line"><span class="cl">#user for rabbit. example:openstack
+</span></span><span class="line"><span class="cl">RABBIT_USER=openstack
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for rabbit user .example:000000
+</span></span><span class="line"><span class="cl">RABBIT_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------MySQL Config---------------------##
+</span></span><span class="line"><span class="cl">#Password for MySQL root user . exmaple:000000
+</span></span><span class="line"><span class="cl">DB_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Keystone Config------------------##
+</span></span><span class="line"><span class="cl">#Password for Keystore admin user. exmaple:000000
+</span></span><span class="line"><span class="cl">DOMAIN_NAME=demo
+</span></span><span class="line"><span class="cl">ADMIN_PASS=000000
+</span></span><span class="line"><span class="cl">DEMO_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Mysql keystore user. exmaple:000000
+</span></span><span class="line"><span class="cl">KEYSTONE_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Glance Config--------------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql glance user. exmaple:000000
+</span></span><span class="line"><span class="cl">GLANCE_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore glance user. exmaple:000000
+</span></span><span class="line"><span class="cl">GLANCE_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Placement Config----------------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql placement user. exmaple:000000
+</span></span><span class="line"><span class="cl">PLACEMENT_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore placement user. exmaple:000000
+</span></span><span class="line"><span class="cl">PLACEMENT_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Nova Config----------------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql nova user. exmaple:000000
+</span></span><span class="line"><span class="cl">NOVA_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore nova user. exmaple:000000
+</span></span><span class="line"><span class="cl">NOVA_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Neutron Config-------------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql neutron user. exmaple:000000
+</span></span><span class="line"><span class="cl">NEUTRON_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore neutron user. exmaple:000000
+</span></span><span class="line"><span class="cl">NEUTRON_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#metadata secret for neutron. exmaple:000000
+</span></span><span class="line"><span class="cl">METADATA_SECRET=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#External Network Interface. example:eth1
+</span></span><span class="line"><span class="cl">INTERFACE_NAME=enp0s3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#External Network The Physical Adapter. example:provider
+</span></span><span class="line"><span class="cl">Physical_NAME=provider1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#First Vlan ID in VLAN RANGE for VLAN Network. exmaple:101
+</span></span><span class="line"><span class="cl">minvlan=101
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Last Vlan ID in VLAN RANGE for VLAN Network. example:200
+</span></span><span class="line"><span class="cl">maxvlan=200
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Cinder Config--------------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql cinder user. exmaple:000000
+</span></span><span class="line"><span class="cl">CINDER_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore cinder user. exmaple:000000
+</span></span><span class="line"><span class="cl">CINDER_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Cinder Block Disk. example:md126p3
+</span></span><span class="line"><span class="cl">BLOCK_DISK=sdb1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Swift Config---------------------##
+</span></span><span class="line"><span class="cl">#Password for Keystore swift user. exmaple:000000
+</span></span><span class="line"><span class="cl">SWIFT_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#The NODE Object Disk for Swift. example:md126p4.
+</span></span><span class="line"><span class="cl">OBJECT_DISK=sdb2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#The NODE IP for Swift Storage Network. example:x.x.x.x.
+</span></span><span class="line"><span class="cl">STORAGE_LOCAL_NET_IP=172.129.1.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Trove Config----------------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql trove user. exmaple:000000
+</span></span><span class="line"><span class="cl">TROVE_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore trove user. exmaple:000000
+</span></span><span class="line"><span class="cl">TROVE_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Heat Config----------------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql heat user. exmaple:000000
+</span></span><span class="line"><span class="cl">HEAT_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore heat user. exmaple:000000
+</span></span><span class="line"><span class="cl">HEAT_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Ceilometer Config----------------##
+</span></span><span class="line"><span class="cl">#Password for Gnocchi ceilometer user. exmaple:000000
+</span></span><span class="line"><span class="cl">CEILOMETER_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore ceilometer user. exmaple:000000
+</span></span><span class="line"><span class="cl">CEILOMETER_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------AODH Config----------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql AODH user. exmaple:000000
+</span></span><span class="line"><span class="cl">AODH_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore AODH user. exmaple:000000
+</span></span><span class="line"><span class="cl">AODH_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------ZUN Config----------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql ZUN user. exmaple:000000
+</span></span><span class="line"><span class="cl">ZUN_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore ZUN user. exmaple:000000
+</span></span><span class="line"><span class="cl">ZUN_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore KURYR user. exmaple:000000
+</span></span><span class="line"><span class="cl">KURYR_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------OCTAVIA Config----------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql OCTAVIA user. exmaple:000000
+</span></span><span class="line"><span class="cl">OCTAVIA_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore OCTAVIA user. exmaple:000000
+</span></span><span class="line"><span class="cl">OCTAVIA_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Manila Config----------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql Manila user. exmaple:000000
+</span></span><span class="line"><span class="cl">MANILA_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore Manila user. exmaple:000000
+</span></span><span class="line"><span class="cl">MANILA_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#The NODE Object Disk for Manila. example:md126p5.
+</span></span><span class="line"><span class="cl">SHARE_DISK=sdc1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Cloudkitty Config----------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql Cloudkitty user. exmaple:000000
+</span></span><span class="line"><span class="cl">CLOUDKITTY_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore Cloudkitty user. exmaple:000000
+</span></span><span class="line"><span class="cl">CLOUDKITTY_PASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#--------------------Barbican Config----------------##
+</span></span><span class="line"><span class="cl">#Password for Mysql Barbican user. exmaple:000000
+</span></span><span class="line"><span class="cl">BARBICAN_DBPASS=000000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#Password for Keystore Barbican user. exmaple:000000
+</span></span><span class="line"><span class="cl">BARBICAN_PASS=000000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And then execute the <code>scp</code> command to copy it to the <strong>compute node</strong>, this Quiz gonna be solved!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# scp /etc/openstack/openrc.sh root@compute:/etc/openstack/openrc.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h4 id="question-5-database-installation-and-tuning-10-point"><strong>[Question 5] Database Installation and Tuning [1.0 point]</strong></h4>
+<p>Use the <code>iaas-install-mysql.sh</code> script on the controller node to install services such as Mariadb, Memcached, and RabbitMQ. After installing the services, modify the <code>/etc/my.cnf</code> file to meet the following requirements:</p>
+<ol>
+<li>Set the database to support case sensitivity;</li>
+<li>Set the cache for innodb table indexes, data, and insert data buffer to 4GB;</li>
+<li>Set the database&rsquo;s log buffer to 64MB;</li>
+<li>Set the size of the database&rsquo;s redo log to 256MB;</li>
+<li>Set the number of redo log file groups for the database to 2. After completing the configuration, submit the username, password, and IP address of the controller node in the answer box.</li>
+</ol>
+</blockquote>
+<p>Before we execute the <code>iaas-install-mysql.sh</code> to install services, we need to run the <code>iaas-pre-host.sh</code> script on each nodes, in order to install some packages the services need.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">[root@controller bin]# ./iaas-pre-host.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute ~]# cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">[root@compute bin]# ./iaas-pre-host.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After the script finished, we need to reconnect the <code>ssh</code> shell or reboot the system of each nodes.</p>
+<p>Then we can do the first step, run <code>iaas-install-mysql.sh</code> in <strong>controller node</strong>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-mysql.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And we edit the file <code>/etc/my.cnf</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# vim /etc/my.cnf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Add these properties into it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">lower_case_table_names = 1
+</span></span><span class="line"><span class="cl">innodb_buffer_pool_size = 4G
+</span></span><span class="line"><span class="cl">innodb_log_buffer_size = 64M
+</span></span><span class="line"><span class="cl">innodb_log_file_size = 256M
+</span></span><span class="line"><span class="cl">innodb_log_files_in_group = 2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Make sure your file look like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl"># This group is read both both by the client and the server
+</span></span><span class="line"><span class="cl"># use it for options that affect everything
+</span></span><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl">[client-server]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl"># This group is read by the server
+</span></span><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl">[mysqld]
+</span></span><span class="line"><span class="cl"># Disabling symbolic-links is recommended to prevent assorted security risks
+</span></span><span class="line"><span class="cl">lower_case_table_names = 1
+</span></span><span class="line"><span class="cl">innodb_buffer_pool_size = 4G
+</span></span><span class="line"><span class="cl">innodb_log_buffer_size = 64M
+</span></span><span class="line"><span class="cl">innodb_log_file_size = 256M
+</span></span><span class="line"><span class="cl">innodb_log_files_in_group = 2
+</span></span><span class="line"><span class="cl">symbolic-links=0
+</span></span><span class="line"><span class="cl">default-storage-engine = innodb
+</span></span><span class="line"><span class="cl">innodb_file_per_table
+</span></span><span class="line"><span class="cl">collation-server = utf8_general_ci
+</span></span><span class="line"><span class="cl">init-connect = &#39;SET NAMES utf8&#39;
+</span></span><span class="line"><span class="cl">character-set-server = utf8
+</span></span><span class="line"><span class="cl">max_connections=10000
+</span></span><span class="line"><span class="cl">default-storage-engine = innodb
+</span></span><span class="line"><span class="cl">innodb_file_per_table
+</span></span><span class="line"><span class="cl">collation-server = utf8_general_ci
+</span></span><span class="line"><span class="cl">init-connect = &#39;SET NAMES utf8&#39;
+</span></span><span class="line"><span class="cl">character-set-server = utf8
+</span></span><span class="line"><span class="cl">max_connections=10000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl"># include all files from the config directory
+</span></span><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl">!includedir /etc/my.cnf.d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally we Save it.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="p">:</span><span class="nx">wq</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>The quiz was sovled!</p>
+<blockquote>
+<h4 id="question-6-keystone-service-installation-and-usage-05-points"><strong>[Question 6] Keystone Service Installation and Usage [0.5 points]</strong></h4>
+<p>Use the <code>iaas-install-keystone.sh</code> script on the controller node to install the Keystone service. After installation, use the relevant commands to create a user named chinaskill with the password <code>000000</code>. Upon completion, submit the username, password, and IP address of the controller node in the answer box.</p>
+</blockquote>
+<p>To install the Keystone service, we need to run the <code>iaas-install-keystone.sh</code> script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-keystone.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If the installation is successful, the information backed should be like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">......
+</span></span><span class="line"><span class="cl">Complete!
+</span></span><span class="line"><span class="cl">Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field       | Value                            |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| description | Default Domain                   |
+</span></span><span class="line"><span class="cl">| enabled     | True                             |
+</span></span><span class="line"><span class="cl">| id          | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| name        | demo                             |
+</span></span><span class="line"><span class="cl">| options     | {}                               |
+</span></span><span class="line"><span class="cl">| tags        | []                               |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field       | Value                            |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| description | Admin project                    |
+</span></span><span class="line"><span class="cl">| domain_id   | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| enabled     | True                             |
+</span></span><span class="line"><span class="cl">| id          | b0787807ee924b179cc02799bc595d38 |
+</span></span><span class="line"><span class="cl">| is_domain   | False                            |
+</span></span><span class="line"><span class="cl">| name        | myadmin                          |
+</span></span><span class="line"><span class="cl">| options     | {}                               |
+</span></span><span class="line"><span class="cl">| parent_id   | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| tags        | []                               |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field               | Value                            |
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| domain_id           | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| enabled             | True                             |
+</span></span><span class="line"><span class="cl">| id                  | 7b4df65fc3ac4d4e8a764c74f0178153 |
+</span></span><span class="line"><span class="cl">| name                | myadmin                          |
+</span></span><span class="line"><span class="cl">| options             | {}                               |
+</span></span><span class="line"><span class="cl">| password_expires_at | None                             |
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field       | Value                            |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| description | Service Project                  |
+</span></span><span class="line"><span class="cl">| domain_id   | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| enabled     | True                             |
+</span></span><span class="line"><span class="cl">| id          | 4eca281ad75c45669f8b178f0d26944d |
+</span></span><span class="line"><span class="cl">| is_domain   | False                            |
+</span></span><span class="line"><span class="cl">| name        | service                          |
+</span></span><span class="line"><span class="cl">| options     | {}                               |
+</span></span><span class="line"><span class="cl">| parent_id   | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| tags        | []                               |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field       | Value                            |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| description | Demo Project                     |
+</span></span><span class="line"><span class="cl">| domain_id   | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| enabled     | True                             |
+</span></span><span class="line"><span class="cl">| id          | 1256dce1e4c843b99cf50e0739308313 |
+</span></span><span class="line"><span class="cl">| is_domain   | False                            |
+</span></span><span class="line"><span class="cl">| name        | demo                             |
+</span></span><span class="line"><span class="cl">| options     | {}                               |
+</span></span><span class="line"><span class="cl">| parent_id   | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| tags        | []                               |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field               | Value                            |
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| domain_id           | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| enabled             | True                             |
+</span></span><span class="line"><span class="cl">| id                  | c9f1413519a84c8ba0f9efd4d3f8d728 |
+</span></span><span class="line"><span class="cl">| name                | demo                             |
+</span></span><span class="line"><span class="cl">| options             | {}                               |
+</span></span><span class="line"><span class="cl">| password_expires_at | None                             |
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field       | Value                            |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| description | None                             |
+</span></span><span class="line"><span class="cl">| domain_id   | None                             |
+</span></span><span class="line"><span class="cl">| id          | 7ad524a1308d4089a01347dbf09d2044 |
+</span></span><span class="line"><span class="cl">| name        | user                             |
+</span></span><span class="line"><span class="cl">| options     | {}                               |
+</span></span><span class="line"><span class="cl">+-------------+----------------------------------+
+</span></span><span class="line"><span class="cl">+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+</span></span><span class="line"><span class="cl">| Field      | Value                                                                                                                                                                                   |
+</span></span><span class="line"><span class="cl">+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+</span></span><span class="line"><span class="cl">| expires    | 2023-05-05T14:51:32+0000                                                                                                                                                                |
+</span></span><span class="line"><span class="cl">| id         | gAAAAABkVQnk9i7FQoKaw9VKNqZuEbVOmoaE-bCPPYlEy-kBqZyxOmk9o3PKLt6IxyCnfU9jO_dvd7yMpGl9LuhaXqiFHycPiIUSCoP-har-EhxmH1IUWK303DcD6jGi4GvBufnTtx7tYIIJgrA-NdMCRJu2lkSnKxCwmvI8pjz7drBwnxDl9Ps |
+</span></span><span class="line"><span class="cl">| project_id | b0787807ee924b179cc02799bc595d38                                                                                                                                                        |
+</span></span><span class="line"><span class="cl">| user_id    | 7b4df65fc3ac4d4e8a764c74f0178153                                                                                                                                                        |
+</span></span><span class="line"><span class="cl">+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After the installation, we need to create a user named &lsquo;chinaskill&rsquo; according to the question.</p>
+<p>So, first we use the <code>source</code> command to read the variables of <code>Keystone</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# source /etc/keystone/admin-openrc.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then create the user by using <code>openstack</code> command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# openstack user create --domain demo --password-prompt chinaskill
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then type the password <code>000000</code>, you will get these information:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">User Password:
+</span></span><span class="line"><span class="cl">Repeat User Password:
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| Field               | Value                            |
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span><span class="line"><span class="cl">| domain_id           | ff38535aa995441d8641b24d86881583 |
+</span></span><span class="line"><span class="cl">| enabled             | True                             |
+</span></span><span class="line"><span class="cl">| id                  | 206814a5dfba4a9194701d124a815ca3 |
+</span></span><span class="line"><span class="cl">| name                | chinaskill                       |
+</span></span><span class="line"><span class="cl">| options             | {}                               |
+</span></span><span class="line"><span class="cl">| password_expires_at | None                             |
+</span></span><span class="line"><span class="cl">+---------------------+----------------------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>It means that you create the user successfully! And this quiz was also solved!</p>
+<blockquote>
+<h4 id="question-7-glance-installation-and-usage-05-points"><strong>[Question 7] Glance Installation and Usage [0.5 points]</strong></h4>
+<p>Use the <code>iaas-install-glance.sh</code> script on the <strong>controller node</strong> to install the <strong>glance service</strong>. Use the command to upload the provided <code>cirros-0.3.4-x86_64-disk.img</code> image (<strong>which is available on an HTTP service and can be downloaded independently</strong>) to the platform, name it cirros, and set the minimum required disk size for startup to <strong>10G</strong> and the minimum required memory for startup to <strong>1G</strong>. After completion, submit the username, password, and IP address of the controller node to the answer box.</p>
+</blockquote>
+<p>Well, it&rsquo;s a little chanllenging, isn&rsquo;t it?</p>
+<p>But don&rsquo;t worry, we do the installation at first:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-glance.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we download the <code>cirros-0.3.4-x86_64-disk.img</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# cd ~
+</span></span><span class="line"><span class="cl">[root@controller ~]# wget http://192.168.56.100/img/cirros-0.3.4-x86_64-disk.img
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Confirm the filename:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# ls -lh
+</span></span><span class="line"><span class="cl">total 13M
+</span></span><span class="line"><span class="cl">-rw-------. 1 root root 1.3K May  4 16:09 anaconda-ks.cfg
+</span></span><span class="line"><span class="cl">-rw-r--r--  1 root root  13M Apr 27  2022 cirros-0.3.4-x86_64-disk.img
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we execute the command to upload the image:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# openstack image create --disk-format qcow2 --container-format bare --min-disk 10 --min-ram 1024 --file ./cirros-0.3.4-x86_64-disk.img cirros
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then you will see the result returned by terminal:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+</span></span><span class="line"><span class="cl">| Field            | Value                                                                                                                                                                                      |
+</span></span><span class="line"><span class="cl">+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+</span></span><span class="line"><span class="cl">| checksum         | ee1eca47dc88f4879d8a229cc70a07c6                                                                                                                                                           |
+</span></span><span class="line"><span class="cl">| container_format | bare                                                                                                                                                                                       |
+</span></span><span class="line"><span class="cl">| created_at       | 2023-05-05T15:01:42Z                                                                                                                                                                       |
+</span></span><span class="line"><span class="cl">| disk_format      | qcow2                                                                                                                                                                                      |
+</span></span><span class="line"><span class="cl">| file             | /v2/images/62102ae0-27c3-4bc1-ad87-44be814237f4/file                                                                                                                                       |
+</span></span><span class="line"><span class="cl">| id               | 62102ae0-27c3-4bc1-ad87-44be814237f4                                                                                                                                                       |
+</span></span><span class="line"><span class="cl">| min_disk         | 10                                                                                                                                                                                         |
+</span></span><span class="line"><span class="cl">| min_ram          | 1024                                                                                                                                                                                       |
+</span></span><span class="line"><span class="cl">| name             | cirros                                                                                                                                                                                     |
+</span></span><span class="line"><span class="cl">| owner            | b0787807ee924b179cc02799bc595d38                                                                                                                                                           |
+</span></span><span class="line"><span class="cl">| properties       | os_hash_algo=&#39;sha512&#39;, os_hash_value=&#39;1b03ca1bc3fafe448b90583c12f367949f8b0e665685979d95b004e48574b953316799e23240f4f739d1b5eb4c4ca24d38fdc6f4f9d8247a2bc64db25d6bbdb2&#39;, os_hidden=&#39;False&#39; |
+</span></span><span class="line"><span class="cl">| protected        | False                                                                                                                                                                                      |
+</span></span><span class="line"><span class="cl">| schema           | /v2/schemas/image                                                                                                                                                                          |
+</span></span><span class="line"><span class="cl">| size             | 13287936                                                                                                                                                                                   |
+</span></span><span class="line"><span class="cl">| status           | active                                                                                                                                                                                     |
+</span></span><span class="line"><span class="cl">| tags             |                                                                                                                                                                                            |
+</span></span><span class="line"><span class="cl">| updated_at       | 2023-05-05T15:01:42Z                                                                                                                                                                       |
+</span></span><span class="line"><span class="cl">| virtual_size     | None                                                                                                                                                                                       |
+</span></span><span class="line"><span class="cl">| visibility       | shared                                                                                                                                                                                     |
+</span></span><span class="line"><span class="cl">+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>It means the operation is finished and successful!</p>
+<p>Now this quiz was solved!</p>
+<h4 id="to-be-continued"><strong>To be continued&hellip;.</strong></h4>
+<h2 id="conclusion">Conclusion</h2>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-05-05</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-via="weepingdogel_me" data-hashtags="OpenStack,Linux,CentOS,Competition,Installation,Notes,Attempt"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-hashtag="OpenStack"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-description="A note of my attempting." data-image="/img/2023-05-04-17-14-22屏幕截图.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="Share on Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-caption="A note of my attempting." data-tags="OpenStack,Linux,CentOS,Competition,Installation,Notes,Attempt"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="Share on VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-caption="A note of my attempting." data-image="/img/2023-05-04-17-14-22屏幕截图.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="Share on Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-via="weepingdogel_me" data-picture="/img/2023-05-04-17-14-22屏幕截图.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="Share on Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-description="A note of my attempting."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="Share on Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="Share on Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="Share on StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="Share on Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-image="/img/2023-05-04-17-14-22屏幕截图.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-description="A note of my attempting."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-description="A note of my attempting."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="Share on OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="Share on Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="Share on Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" data-title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)" data-description="A note of my attempting."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2fattempted_solution_to_the_openstack_provincial_competition_problem_part1%2f&amp;description=Attempted%20solution%20to%20the%20OpenStack%20Provincial%20Competition%20problem%20%28Part%20One%3a%20Installation%29" target="_blank" title="Share on Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/openstack/">OpenStack</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/centos/">CentOS</a>,&nbsp;<a href="/tags/competition/">Competition</a>,&nbsp;<a href="/tags/installation/">Installation</a>,&nbsp;<a href="/tags/notes/">Notes</a>,&nbsp;<a href="/tags/attempt/">Attempt</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/problem_of_virtualbox_appeding_starting_vm/" class="prev" rel="prev" title="Attempt to Solve the Problem of VirtualBox Stuck on &#39;Starting&#39; When Starting a Virtual Machine"><i class="fas fa-angle-left fa-fw"></i>Attempt to Solve the Problem of VirtualBox Stuck on &#39;Starting&#39; When Starting a Virtual Machine</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
