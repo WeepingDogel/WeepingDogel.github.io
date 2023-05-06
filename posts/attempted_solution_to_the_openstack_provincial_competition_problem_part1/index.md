@@ -1773,6 +1773,111 @@ Done!
 >
 > After setting up the OpenStack platform, disable memory sharing in the system and enable transparent huge pages. After completing this, submit the username, password, and IP address of the control node to the answer box.
 
-#### **To be continued**
+```
+[root@controller ~]# find / -name defrag
+```
+
+Disable memory sharing in the system and enable transparent huge pages.
+
+```
+[root@controller ~]# echo never > /sys/kernel/mm/transparent_hugepage/defrag 
+```
+
+Check the fianl result:
+
+```
+[root@controller ~]# cat /sys/kernel/mm/transparent_hugepage/defrag 
+always madvise [never]
+```
+
+Done!
+
+
+> #### **Question 17] Modify file handle count [0.5 points]**
+>
+> In a Linux server with high concurrency, it is often necessary to tune the Linux parameters in advance. By default, Linux only allows a maximum of 1024 file handles. When your server reaches its limit during high concurrency, you will encounter the error message "too many open files". To address this, create a cloud instance and modify the relevant configuration to permanently increase the maximum file handle count to 65535 for the control node. After completing the configuration, submit the username, password, and IP address of the controller node to the answer box.
+
+Get the information of the maximum file handles:
+```
+[root@controller ~]# ulimit -n
+1024
+```
+
+Change the settings:
+
+```
+[root@controller ~]# echo "* soft nofile 65535" >> /etc/security/limits.conf
+[root@controller ~]# echo "* hard nofile 65535" >> /etc/security/limits.conf
+```
+
+Finally just reconnect to the ssh shell, and get the maximum file handles again.
+
+```
+[root@controller ~]# ulimit -n
+65535
+```
+
+
+> #### **[Question 18] Linux System Tuning - Dirty Data Writing Back [1.0 point]**
+>
+> There may be dirty data in the memory of a Linux system, and the system generally defaults to writing back to the disk after 30 seconds of dirty data. Modify the system configuration file to temporarily adjust the time for writing back to the disk to 60 seconds. After completion, submit the username, password, and IP address of the controller node to the answer box.
+
+Just edit the file `/etc/sysctl.conf`:
+
+```
+[root@controller ~]# vim /etc/sysctl.conf 
+```
+
+Add this property into it:
+```
+vm.dirty_writeback_centisecs = 6000
+```
+
+Then execute:
+
+```
+[root@controller ~]# sysctl -p
+```
+
+Verify:
+```
+[root@controller ~]# cat /proc/sys/vm/dirty_writeback_centisecs
+6000
+```
+
+Done!
+
+> #### **[Question 19] Linux System Tuning - Preventing SYN Attacks [0.5 points]**
+>
+> Modify the relevant configuration files on the controller node to enable SYN cookies and prevent SYN flood attacks. After completion, submit the username, password, and IP address of the controller node to the answer box.
+
+Edit the file `/etc/sysctl.conf`
+
+```
+[root@controller ~]# vim /etc/sysctl.conf
+```
+
+Add these properties into it:
+```
+net.ipv4.tcp_max_syn_backlog=2048
+
+net.ipv4.tcp_syncookies=1
+
+net.ipv4.tcp_syn_retries = 0
+```
+
+Then execute:
+
+```
+[root@controller ~]# sysctl -p
+```
+
+Done!
 
 ## Conclusion
+
+Well, finally, I finished all the steps of establishing the OpenStack!
+
+These are the notes of the process.
+
+

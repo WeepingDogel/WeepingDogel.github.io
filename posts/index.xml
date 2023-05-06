@@ -2830,8 +2830,158 @@ td
 <h4 id="question-16-openstack-platform-memory-optimization-05-points"><strong>[Question 16] OpenStack Platform Memory Optimization [0.5 points]</strong></h4>
 <p>After setting up the OpenStack platform, disable memory sharing in the system and enable transparent huge pages. After completing this, submit the username, password, and IP address of the control node to the answer box.</p>
 </blockquote>
-<h4 id="to-be-continued"><strong>To be continued</strong></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# find / -name defrag
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Disable memory sharing in the system and enable transparent huge pages.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check the fianl result:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# cat /sys/kernel/mm/transparent_hugepage/defrag 
+</span></span><span class="line"><span class="cl">always madvise [never]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Done!</p>
+<blockquote>
+<h4 id="question-17-modify-file-handle-count-05-points"><strong>Question 17] Modify file handle count [0.5 points]</strong></h4>
+<p>In a Linux server with high concurrency, it is often necessary to tune the Linux parameters in advance. By default, Linux only allows a maximum of 1024 file handles. When your server reaches its limit during high concurrency, you will encounter the error message &ldquo;too many open files&rdquo;. To address this, create a cloud instance and modify the relevant configuration to permanently increase the maximum file handle count to 65535 for the control node. After completing the configuration, submit the username, password, and IP address of the controller node to the answer box.</p>
+</blockquote>
+<p>Get the information of the maximum file handles:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# ulimit -n
+</span></span><span class="line"><span class="cl">1024
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Change the settings:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# echo &#34;* soft nofile 65535&#34; &gt;&gt; /etc/security/limits.conf
+</span></span><span class="line"><span class="cl">[root@controller ~]# echo &#34;* hard nofile 65535&#34; &gt;&gt; /etc/security/limits.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally just reconnect to the ssh shell, and get the maximum file handles again.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# ulimit -n
+</span></span><span class="line"><span class="cl">65535
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h4 id="question-18-linux-system-tuning---dirty-data-writing-back-10-point"><strong>[Question 18] Linux System Tuning - Dirty Data Writing Back [1.0 point]</strong></h4>
+<p>There may be dirty data in the memory of a Linux system, and the system generally defaults to writing back to the disk after 30 seconds of dirty data. Modify the system configuration file to temporarily adjust the time for writing back to the disk to 60 seconds. After completion, submit the username, password, and IP address of the controller node to the answer box.</p>
+</blockquote>
+<p>Just edit the file <code>/etc/sysctl.conf</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# vim /etc/sysctl.conf 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Add this property into it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vm.dirty_writeback_centisecs = 6000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then execute:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# sysctl -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Verify:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# cat /proc/sys/vm/dirty_writeback_centisecs
+</span></span><span class="line"><span class="cl">6000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Done!</p>
+<blockquote>
+<h4 id="question-19-linux-system-tuning---preventing-syn-attacks-05-points"><strong>[Question 19] Linux System Tuning - Preventing SYN Attacks [0.5 points]</strong></h4>
+<p>Modify the relevant configuration files on the controller node to enable SYN cookies and prevent SYN flood attacks. After completion, submit the username, password, and IP address of the controller node to the answer box.</p>
+</blockquote>
+<p>Edit the file <code>/etc/sysctl.conf</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# vim /etc/sysctl.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Add these properties into it:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">net.ipv4.tcp_max_syn_backlog=2048
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_syncookies=1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_syn_retries = 0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then execute:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# sysctl -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Done!</p>
 <h2 id="conclusion">Conclusion</h2>
+<p>Well, finally, I finished all the steps of establishing the OpenStack!</p>
+<p>These are the notes of the process.</p>
 ]]></description>
 </item><item>
     <title>Attempt to Solve the Problem of VirtualBox Stuck on &#39;Starting&#39; When Starting a Virtual Machine</title>
