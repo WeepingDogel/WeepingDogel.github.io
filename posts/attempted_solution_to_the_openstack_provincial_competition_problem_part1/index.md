@@ -460,7 +460,7 @@ td
  <col width='210' style='mso-width-source:userset;width:157.5pt'>
  <col width='232' style='mso-width-source:userset;width:174pt'>
  <col width='255' style='mso-width-source:userset;width:191.25pt'>
- <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+ <tr height='19' style='mso-height-source:use21rset;height:14.25pt'>
 <td height='17' class='x21' width='210' style='height:12.75pt;width:157.5pt;'>Service Name</td>
 <td class='x21' width='232' style='width:174pt;'>Variable</td>
 <td class='x21' width='255' style='width:191.25pt;'>Parameter/Password</td>
@@ -608,7 +608,7 @@ Finally, we will get a file like this:
 
 ```conf
 #--------------------system Config--------------------##
-#Controller Server Manager IP. example:x.x.x.x
+#Controller Server Manager IP. example:x.x.x.21x
 HOST_IP=192.168.56.2
 
 #Controller HOST Password. example:000000 
@@ -1082,6 +1082,697 @@ It means the operation is finished and successful!
 
 Now this quiz was solved!
 
-#### **To be continued....**
+
+> #### **[Question 8] Nova Installation and Optimization [0.5 points]**
+>
+> Use the `iaas-install-placement.sh`, `iaas-install-nova-controller.sh`, and `iaas-install-nova-compute.sh` scripts to install the **Nova** service on the **controller node** and **compute node** respectively. After installation, please modify the relevant Nova configuration files to solve the problem of virtual machine startup timeout due to long waiting time, which leads to failure to obtain IP address and error reporting. After configuring, submit the username, password, and IP address of the controller node to the answer box.
+
+We should run `iaas-install-placement.sh` script in controller node to install the placment service at first:
+```
+[root@controller ~]# cd /usr/local/bin/
+[root@controller bin]# ./iaas-install-placement.sh 
+```
+
+After installation of placement, we should run `iaas-install-nova-controller.sh` script to install nova service in controller node:
+
+```
+[root@controller bin]# ./iaas-install-nova-controller.sh
+```
+
+Then we should install nova service in compute node, but before that we should copy the public key of controller node to it.
+
+So we run:
+
+```
+[root@compute ~]# ssh-copy-id root@controller
+```
+
+Then run `iaas-install-nova-compute.sh`:
+
+```
+[root@compute ~]# cd /usr/local/bin/
+[root@compute bin]# ./iaas-install-nova-compute.sh 
+```
+
+Installed!
+```
++----+--------------+---------+------+---------+-------+------------+
+| ID | Binary       | Host    | Zone | Status  | State | Updated At |
++----+--------------+---------+------+---------+-------+------------+
+|  6 | nova-compute | compute | nova | enabled | up    | None       |
++----+--------------+---------+------+---------+-------+------------+
+Found 2 cell mappings.
+Skipping cell0 since it does not contain hosts.
+Getting computes from cell 'cell1': d955f2a9-ec41-4ea0-b72a-8f3c38977c2e
+Checking host mapping for compute host 'compute': c17f7c5c-5821-4891-b6ca-a6684b028db1
+Creating host mapping for compute host 'compute': c17f7c5c-5821-4891-b6ca-a6684b028db1
+Found 1 unmapped computes in cell: d955f2a9-ec41-4ea0-b72a-8f3c38977c2e
+```
+
+Then run the check command in controller to verify if the nova service installed successfully!
+
+```
+[root@controller bin]# source /etc/keystone/admin-openrc.sh 
+[root@controller bin]# openstack compute service list
+```
+
+And you will see the hostname of compute node:
+```
++----+----------------+------------+----------+---------+-------+----------------------------+
+| ID | Binary         | Host       | Zone     | Status  | State | Updated At                 |
++----+----------------+------------+----------+---------+-------+----------------------------+
+|  4 | nova-conductor | controller | internal | enabled | up    | 2023-05-06T03:14:27.000000 |
+|  5 | nova-scheduler | controller | internal | enabled | up    | 2023-05-06T03:14:28.000000 |
+|  6 | nova-compute   | compute    | nova     | enabled | up    | 2023-05-06T03:14:25.000000 |
++----+----------------+------------+----------+---------+-------+----------------------------+
+```
+
+Ok, now we should do the final operation, edit the file `/etc/nova/nova.conf`
+
+```
+[root@controller bin]# vim /etc/nova/nova.conf
+```
+Just simply change `#vif_plugging_is_fatal=true` to `vif_plugging_is_fatal=false`, but we can use vim command quickly:
+```vim
+:%s/#vif_plugging_is_fatal=true/vif_plugging_is_fatal=false/g
+```
+
+And save it!
+
+```vim
+:wq
+```
+
+So we solved a quiz again! Congratulations!
+
+
+> #### **[Question 9] Neutron Installation [0.5 points]**
+>
+>Using the provided scripts `iaas-install-neutron-controller.sh` and `iaas-install-neutron-compute.sh`, install the neutron service on the controller and compute nodes. After completion, submit the username, password, and IP address of the control node to the answer box.
+
+This quiz is easy, just run the scripts in each nodes:
+
+```
+[root@controller bin]# ./iaas-install-neutron-controller.sh 
+```
+
+```
+[root@compute bin]# ./iaas-install-neutron-compute.sh 
+```
+
+But after installation, we should reset the [Network properties](#network).
+
+And reboot system:
+
+```
+reboot
+```
+
+And check:
+
+```
+[root@controller ~]# source /etc/keystone/admin-openrc.sh && openstack-service status
+```
+```
+MainPID=1050 Id=neutron-dhcp-agent.service ActiveState=active
+MainPID=1020 Id=neutron-l3-agent.service ActiveState=active
+MainPID=1052 Id=neutron-linuxbridge-agent.service ActiveState=active
+MainPID=1033 Id=neutron-metadata-agent.service ActiveState=active
+MainPID=2295 Id=neutron-server.service ActiveState=activating
+MainPID=1015 Id=openstack-glance-api.service ActiveState=active
+MainPID=1027 Id=openstack-glance-registry.service ActiveState=active
+MainPID=1019 Id=openstack-nova-api.service ActiveState=active
+MainPID=1035 Id=openstack-nova-conductor.service ActiveState=active
+MainPID=1032 Id=openstack-nova-novncproxy.service ActiveState=active
+MainPID=1014 Id=openstack-nova-scheduler.service ActiveState=active
+```
+
+But there's a problem when dump the list of network agents:
+
+```
+Unable to establish connection to http://controller:9696/v2.0/agents: HTTPConnectionPool(host='controller', port=9696): Max retries exceeded with url: /v2.0/agents (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f36ecec5890>: Failed to establish a new connection: [Errno 111] Connection refused',))
+```
+
+And the I checked the systemd service:
+```
+[root@controller ~]# systemctl status neutron-server
+```
+
+Found a problem:
+```
+...
+start request repeated too quickly for neutron-server.service
+...
+```
+
+So I tried checking the log:
+```
+[root@controller ~]# cat /var/log/neutron/server.log 
+```
+
+Found an error:
+```
+2023-05-06 11:47:28.283 2290 ERROR neutron ProgrammingError: (pymysql.err.ProgrammingError) (1146, u"Table 'neutron.ml2_vlan_allocations' doesn't exist") [SQL: u'SELECT ml2_vlan_allocations.physical_network AS ml2_vlan_allocations_physical_network \nFROM ml2_vlan_allocations GROUP BY ml2_vlan_allocations.physical_network'] (Background on this error at: http://sqlalche.me/e/f405)
+2023-05-06 11:47:28.283 2290 ERROR neutron 
+```
+
+The error message you provided indicates that the Neutron server is unable to execute a SQL query due to a missing table in the database. Specifically, it appears that the table `ml2_vlan_allocations` is missing from the database.
+
+I tried running the command `neutron-db-manage` upgrade head to manually migrate the Neutron database schema to the latest version.
+
+```
+[root@controller ~]# neutron-db-manage
+```
+
+And restart the `neutron-server`
+
+```
+[root@controller ~]# systemctl restart neutron-server
+```
+
+Finally, reboot the compute node.
+```
+[root@compute bin]# reboot
+```
+And check the list network agent list
+
+```
+[root@controller ~]# source /etc/keystone/admin-openrc.sh && openstack network agent list
+```
+
+```
++--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
+| ID                                   | Agent Type         | Host       | Availability Zone | Alive | State | Binary                    |
++--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
+| 4dd5511c-91dc-4d1b-9da5-2bc57f908378 | Linux bridge agent | compute    | None              | :-)   | UP    | neutron-linuxbridge-agent |
+| 72f00e1b-3a14-4f8d-bfbd-4017520936ff | DHCP agent         | controller | nova              | :-)   | UP    | neutron-dhcp-agent        |
+| 88b4ecb7-41d9-40b6-a688-2aa6b19782bf | L3 agent           | controller | nova              | :-)   | UP    | neutron-l3-agent          |
+| b6554942-e045-40d6-9842-07176b7c577a | Linux bridge agent | controller | None              | :-)   | UP    | neutron-linuxbridge-agent |
+| f56ed93a-a109-42e2-8cb3-ba1e4a2ce732 | Metadata agent     | controller | None              | :-)   | UP    | neutron-metadata-agent    |
++--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
+```
+
+Then the Neutron Service was installed successfully! Quiz Solved!
+
+
+> #### **[Question 10] Installation of Doshboard [0.5 points]**
+>
+> Use the `iaas-install-dashboad.sh` script to install the dashboard service on the controller node. After installation, modify the Djingo data in the Dashboard to be stored in a file (this modification solves the problem of ALL-in-one snapshots not being accessible in other cloud platform dashboards). After completion, submit the username, password and IP address of the controller node to the answer box.
+
+
+Run `iaas-install-dashboad.sh` script:
+
+```
+[root@controller bin]# ./iaas-install-dashboard.sh 
+```
+Edit the file `/etc/openstack-dashboard/local_settings`
+```
+[root@controller bin]# vim /etc/openstack-dashboard/local_settings
+```
+
+Replace `SESSION_ENGINE = 'django.contrib.sessions.backends.cache'` to `SESSION_ENGINE = 'django.contrib.sessions.backends.file'`
+
+```vim
+:%s/SESSION_ENGINE = 'django.contrib.sessions.backends.cache'/SESSION_ENGINE = 'django.contrib.sessions.backends.file'/g
+```
+
+Save the file:
+```vim
+:wq
+```
+
+And visit the Dashboard by browser
+
+```
+http://192.168.56.2/dashboard
+```
+
+You will see the login page.
+
+![](/img/Dashboard_login.png)
+
+Login with username `admin` and password `000000`.
+
+![](/img/Dashboard_Overview.png)
+
+Then Dashboard was installed successfully.
+
+> #### **[Question 11] Swift Installation [0.5 points]**
+>
+>Use the `iaas-install-swift-controller.sh` and `iaas-install-swift-compute.sh` scripts to install the Swift service on the control and compute nodes respectively. After installation, use a command to create a container named "examcontainer", upload the `cirros-0.3.4-x86_64-disk.img` image to the "examcontainer" container, and set segment storage with a size of `10M` for each segment. Once completed, submit the username, password, and IP address of the control node to the answer box.
+
+At first we need to create partitions in compute node
+
+We need to check the disks:
+
+```
+[root@compute bin]# fdisk -l
+```
+
+
+```
+Disk /dev/sda: 53.7 GB, 53687091200 bytes, 104857600 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x000d6c03
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048     2099199     1048576   83  Linux
+/dev/sda2         2099200   104857599    51379200   8e  Linux LVM
+
+Disk /dev/sdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sdc: 3221 MB, 3221225472 bytes, 6291456 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/centos-root: 48.4 GB, 48444211200 bytes, 94617600 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/centos-swap: 4160 MB, 4160749568 bytes, 8126464 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+```
+
+We'll get information below:
+
+
+
+* `/dev/sdb` is a disk with a size of 21.5 GB and no partitions.
+
+* `/dev/sdc` is a disk with a size of 3221 MB (3.2 GB) and no partitions.
+
+We need create 2 partitions in `sdb`: `sdb1` and `sdb2`
+
+`sdb1` for cinder and `sdb2` for swift.
+
+```
+[root@compute bin]# fdisk /dev/sdb
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0xe8f17fde.
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1): 
+First sector (2048-41943039, default 2048): +10G
+Last sector, +sectors or +size{K,M,G} (20971520-41943039, default 41943039): 
+Using default value 41943039
+Partition 1 of type Linux and of size 10 GiB is set
+
+Command (m for help): n
+Partition type:
+   p   primary (1 primary, 0 extended, 3 free)
+   e   extended
+Select (default p): p
+Partition number (2-4, default 2): 
+First sector (2048-41943039, default 2048): 
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519): 
+Using default value 20971519
+Partition 2 of type Linux and of size 10 GiB is set
+
+Command (m for help): p
+
+Disk /dev/sdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0xe8f17fde
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1        20971520    41943039    10485760   83  Linux
+/dev/sdb2            2048    20971519    10484736   83  Linux
+
+Partition table entries are not in disk order
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+```
+
+Format the partitions:
+```
+[root@compute bin]# mkfs.ext4 /dev/sdb1
+mke2fs 1.42.9 (28-Dec-2013)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+655360 inodes, 2621440 blocks
+131072 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=2151677952
+80 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: done 
+```
+
+```
+[root@compute bin]# mkfs.ext4 /dev/sdb2
+mke2fs 1.42.9 (28-Dec-2013)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+655360 inodes, 2621184 blocks
+131059 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=2151677952
+80 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (32768 blocks): done
+Writing superblocks and filesystem accounting information: done 
+```
+
+Then run `iaas-install-swift-controller.sh` and `iaas-install-swift-compute.sh` scripts:
+
+```
+[root@controller bin]# ./iaas-install-swift-controller.sh 
+```
+
+```
+[root@compute bin]# ./iaas-install-swift-compute.sh 
+```
+
+Back to `/root` directory(Or other location of `cirros-0.3.4-x86_64-disk.img`):
+```
+[root@controller bin]# cd ~
+```
+
+Create a container named ``:
+
+```
+[root@controller ~]# swift post examcontainer
+```
+Upload the cirros-0.3.4-x86_64-disk.img image to the “examcontainer” container, and set segment storage with a size of 10M for each segment. 
+```
+[root@controller ~]# swift upload examcontainer -S 10000000 cirros-0.3.4-x86_64-disk.img 
+```
+```
+cirros-0.3.4-x86_64-disk.img segment 1
+cirros-0.3.4-x86_64-disk.img segment 0
+cirros-0.3.4-x86_64-disk.img
+```
+
+Then it's finished.
+
+
+> #### **[Question 12] Creating a Cinder volume [0.5 points]**
+>
+> Using the `iaas-install-cinder-controller.sh` and `iaas-install-cinder-compute.sh` scripts, install the Cinder service on both the control node and compute node. On the compute node, expand the block storage by creating an additional 5GB partition and adding it to the back-end storage for Cinder block storage. After completion, submit the username, password, and IP address of the compute node to the answer box.
+
+Install the Cinder Service in controller node:
+```
+[root@controller bin]# ./iaas-install-cinder-controller.sh
+```
+
+Install the Cinder Service in compute node:
+```
+[root@compute bin]# ./iaas-install-cinder-compute.sh 
+```
+
+Check if succeed:
+
+```
+[root@compute bin]# lsblk
+NAME                                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                                               8:0    0   50G  0 disk 
+├─sda1                                            8:1    0    1G  0 part /boot
+└─sda2                                            8:2    0   49G  0 part 
+  ├─centos-root                                 253:0    0 45.1G  0 lvm  /
+  └─centos-swap                                 253:1    0  3.9G  0 lvm  [SWAP]
+sdb                                               8:16   0   20G  0 disk 
+├─sdb1                                            8:17   0   10G  0 part 
+│ ├─cinder--volumes-cinder--volumes--pool_tmeta 253:2    0   12M  0 lvm  
+│ │ └─cinder--volumes-cinder--volumes--pool     253:4    0  9.5G  0 lvm  
+│ └─cinder--volumes-cinder--volumes--pool_tdata 253:3    0  9.5G  0 lvm  
+│   └─cinder--volumes-cinder--volumes--pool     253:4    0  9.5G  0 lvm  
+└─sdb2                                            8:18   0   10G  0 part /swift/node/sdb2
+sdc                                               8:32   0    3G  0 disk 
+sr0                                              11:0    1 1024M  0 rom  
+```
+
+```
+[root@compute bin]# vgdisplay
+  --- Volume group ---
+  VG Name               cinder-volumes
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  4
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                1
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <10.00 GiB
+  PE Size               4.00 MiB
+  Total PE              2559
+  Alloc PE / Size       2438 / 9.52 GiB
+  Free  PE / Size       121 / 484.00 MiB
+  VG UUID               QHk53K-Kj2O-ilc2-pxk6-Upqe-meRE-vfJu6P
+   
+  --- Volume group ---
+  VG Name               centos
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  3
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                2
+  Open LV               2
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               <49.00 GiB
+  PE Size               4.00 MiB
+  Total PE              12543
+  Alloc PE / Size       12542 / 48.99 GiB
+  Free  PE / Size       1 / 4.00 MiB
+  VG UUID               2tEud0-Ydx6-cFfX-dZMM-F9IC-l3nc-sLS38v
+   
+```
+
+Well, it's finished.
+
+> #### **[Question 13] Installation and Usage of Manila Service [0.5 point]**
+>
+>Install the Manila service on the control and compute nodes using the `iaas-install-manila-controller.sh` and `iaas-install-manila-compute.sh` scripts, respectively. After installing the service, create a default_share_type share type (without driver support), and then create a shared storage called share01 with a size of 2G and grant permission for OpenStack management network segment to access the share01 directory. Finally, submit the username, password, and IP address of the control node to the answer box.
+
+Create a partion for Manila:
+
+```
+[root@compute bin]# fdisk /dev/sdc
+Welcome to fdisk (util-linux 2.23.2).
+
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+Device does not contain a recognized partition table
+Building a new DOS disklabel with disk identifier 0x6e07efc2.
+
+Command (m for help): n
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p
+Partition number (1-4, default 1): 
+First sector (2048-6291455, default 2048): 
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-6291455, default 6291455): 
+Using default value 6291455
+Partition 1 of type Linux and of size 3 GiB is set
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+```
+
+
+Installl the Manila Service in controller node:
+
+```
+[root@controller bin]# ./iaas-install-manila-controller.sh 
+```
+
+Install the Manila Service in compute node:
+
+```
+[root@compute bin]# ./iaas-install-manila-compute.sh
+```
+
+Create a default_share_type share type (without driver support):
+
+```
+[root@controller bin]# manila type-create default_share_type False
+```
+
+Check the manila type list:
+```
+[root@controller bin]# manila type-list
+```
+Create a shared storage called share01 with a size of 2G
+```
+[root@controller bin]# manila create NFS 2 --name share01
+```
+Check if the operation succeed:
+```
+[root@controller bin]# manila list
+```
+```
++--------------------------------------+---------+------+-------------+-----------+-----------+--------------------+-----------------------------+-------------------+
+| ID                                   | Name    | Size | Share Proto | Status    | Is Public | Share Type Name    | Host                        | Availability Zone |
++--------------------------------------+---------+------+-------------+-----------+-----------+--------------------+-----------------------------+-------------------+
+| 0cdd5acb-5e54-4cdd-9187-467e2800d212 | share01 | 2    | NFS         | available | False     | default_share_type | compute@lvm#lvm-single-pool | nova              |
++--------------------------------------+---------+------+-------------+-----------+-----------+--------------------+-----------------------------+-------------------+
+```
+
+Grant permission for OpenStack management network segment to access the share01 directory.
+
+```
+[root@controller bin]# manila access-allow share01 ip 192.168.56.0/24 --access-level rw
+```
+
+Check if the operation succeed!
+
+```
+[root@controller bin]# manila access-list share01
+```
+```
++--------------------------------------+-------------+-----------------+--------------+--------+------------+----------------------------+------------+
+| id                                   | access_type | access_to       | access_level | state  | access_key | created_at                 | updated_at |
++--------------------------------------+-------------+-----------------+--------------+--------+------------+----------------------------+------------+
+| cad9f433-6ad3-4db9-afe1-90dc52374a08 | ip          | 192.168.56.0/24 | rw           | active | None       | 2023-05-06T06:55:13.000000 | None       |
++--------------------------------------+-------------+-----------------+--------------+--------+------------+----------------------------+------------+
+```
+Done!
+
+
+> #### **[Question 14] Barbican Service Installation and Usage [0.5 points]**
+>
+> Install the Barbican service using the `iaas-install-barbican.sh` script. After the installation is complete, use the openstack command to create a key named "secret01". Once created, submit the username, password, and IP address of the control node in the answer box.
+
+Well, it's easy, run `iaas-install-barbican.sh` in controller node.
+
+```
+[root@controller bin]# ./iaas-install-barbican.sh 
+```
+Create a key named "secret01"
+```
+[root@controller bin]# openstack secret store --name secret01 --payload secretkey
+```
+
+Done!
+
+> #### **[Question 15] Cloudkitty Service Installation and Usage [0.5 points]**
+>
+>Install the cloudkitty service using the `iaas-install-cloudkitty.sh` script. After installation, enable the hashmap rating module and then create the volume_thresholds group. Create a service matching rule for volume.size and set the price per GB to 0.01. Next, apply discounts to corresponding large amounts of data. Create a threshold in the volume_thresholds group and set a discount of 2% (0.98) if the threshold is exceeded for volumes over 50GB. After completing the setup, submit the username, password, and IP address of the control node in the answer box.
+
+
+Run the script to install the service:
+
+```
+[root@controller bin]# ./iaas-install-cloudkitty.sh 
+```
+
+Enable hashmap:
+
+```txt
+[root@controller bin]# openstack rating module enable hashmap 
+```
+Create hashmap service
+```
+[root@controller bin]# openstack rating  hashmap service create volume.size 
++-------------+--------------------------------------+
+| Name        | Service ID                           |
++-------------+--------------------------------------+
+| volume.size | 12b61017-6842-4d54-aa44-599d121e5f46 |
++-------------+--------------------------------------+
+```
+
+Create hashmap service group
+
+```
+[root@controller bin]# openstack rating hashmap group create  volume_thresholds 
++-------------------+--------------------------------------+
+| Name              | Group ID                             |
++-------------------+--------------------------------------+
+| volume_thresholds | c46c8a1e-1878-4c44-bf36-57c06ce0672b |
++-------------------+--------------------------------------+
+```
+
+Create volume price
+```
+[root@controller bin]# openstack rating hashmap mapping create -s 12b61017-6842-4d54-aa44-599d121e5f46 -g c46c8a1e-1878-4c44-bf36-57c06ce0672b  -t flat  0.01  
++--------------------------------------+-------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+| Mapping ID                           | Value | Cost       | Type | Field ID | Service ID                           | Group ID                             | Project ID |
++--------------------------------------+-------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+| e5f99784-e49c-47ac-98e0-6f818c3ff6fb | None  | 0.01000000 | flat | None     | 12b61017-6842-4d54-aa44-599d121e5f46 | c46c8a1e-1878-4c44-bf36-57c06ce0672b | None       |
++--------------------------------------+-------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+```
+
+Create service rule
+```
+[root@controller bin]# openstack rating hashmap threshold create -s 12b61017-6842-4d54-aa44-599d121e5f46  -g c46c8a1e-1878-4c44-bf36-57c06ce0672b  -t rate 50 0.98
++--------------------------------------+-------------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+| Threshold ID                         | Level       | Cost       | Type | Field ID | Service ID                           | Group ID                             | Project ID |
++--------------------------------------+-------------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+| a88e4768-defd-4c72-91f2-521b28e3c1a2 | 50.00000000 | 0.98000000 | rate | None     | 12b61017-6842-4d54-aa44-599d121e5f46 | c46c8a1e-1878-4c44-bf36-57c06ce0672b | None       |
++--------------------------------------+-------------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+```
+
+Done!
+
+> #### **[Question 16] OpenStack Platform Memory Optimization [0.5 points]**
+>
+> After setting up the OpenStack platform, disable memory sharing in the system and enable transparent huge pages. After completing this, submit the username, password, and IP address of the control node to the answer box.
+
+#### **To be continued**
 
 ## Conclusion

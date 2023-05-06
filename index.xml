@@ -599,7 +599,7 @@ td
  <col width='210' style='mso-width-source:userset;width:157.5pt'>
  <col width='232' style='mso-width-source:userset;width:174pt'>
  <col width='255' style='mso-width-source:userset;width:191.25pt'>
- <tr height='19' style='mso-height-source:userset;height:14.25pt'>
+ <tr height='19' style='mso-height-source:use21rset;height:14.25pt'>
 <td height='17' class='x21' width='210' style='height:12.75pt;width:157.5pt;'>Service Name</td>
 <td class='x21' width='232' style='width:174pt;'>Variable</td>
 <td class='x21' width='255' style='width:191.25pt;'>Parameter/Password</td>
@@ -964,7 +964,7 @@ td
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#--------------------system Config--------------------##
-</span></span><span class="line"><span class="cl">#Controller Server Manager IP. example:x.x.x.x
+</span></span><span class="line"><span class="cl">#Controller Server Manager IP. example:x.x.x.21x
 </span></span><span class="line"><span class="cl">HOST_IP=192.168.56.2
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">#Controller HOST Password. example:000000 
@@ -1654,7 +1654,1185 @@ td
 </div>
 </div><p>It means the operation is finished and successful!</p>
 <p>Now this quiz was solved!</p>
-<h4 id="to-be-continued"><strong>To be continued&hellip;.</strong></h4>
+<blockquote>
+<h4 id="question-8-nova-installation-and-optimization-05-points"><strong>[Question 8] Nova Installation and Optimization [0.5 points]</strong></h4>
+<p>Use the <code>iaas-install-placement.sh</code>, <code>iaas-install-nova-controller.sh</code>, and <code>iaas-install-nova-compute.sh</code> scripts to install the <strong>Nova</strong> service on the <strong>controller node</strong> and <strong>compute node</strong> respectively. After installation, please modify the relevant Nova configuration files to solve the problem of virtual machine startup timeout due to long waiting time, which leads to failure to obtain IP address and error reporting. After configuring, submit the username, password, and IP address of the controller node to the answer box.</p>
+</blockquote>
+<p>We should run <code>iaas-install-placement.sh</code> script in controller node to install the placment service at first:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-placement.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After installation of placement, we should run <code>iaas-install-nova-controller.sh</code> script to install nova service in controller node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-nova-controller.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we should install nova service in compute node, but before that we should copy the public key of controller node to it.</p>
+<p>So we run:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute ~]# ssh-copy-id root@controller
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then run <code>iaas-install-nova-compute.sh</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute ~]# cd /usr/local/bin/
+</span></span><span class="line"><span class="cl">[root@compute bin]# ./iaas-install-nova-compute.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Installed!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+----+--------------+---------+------+---------+-------+------------+
+</span></span><span class="line"><span class="cl">| ID | Binary       | Host    | Zone | Status  | State | Updated At |
+</span></span><span class="line"><span class="cl">+----+--------------+---------+------+---------+-------+------------+
+</span></span><span class="line"><span class="cl">|  6 | nova-compute | compute | nova | enabled | up    | None       |
+</span></span><span class="line"><span class="cl">+----+--------------+---------+------+---------+-------+------------+
+</span></span><span class="line"><span class="cl">Found 2 cell mappings.
+</span></span><span class="line"><span class="cl">Skipping cell0 since it does not contain hosts.
+</span></span><span class="line"><span class="cl">Getting computes from cell &#39;cell1&#39;: d955f2a9-ec41-4ea0-b72a-8f3c38977c2e
+</span></span><span class="line"><span class="cl">Checking host mapping for compute host &#39;compute&#39;: c17f7c5c-5821-4891-b6ca-a6684b028db1
+</span></span><span class="line"><span class="cl">Creating host mapping for compute host &#39;compute&#39;: c17f7c5c-5821-4891-b6ca-a6684b028db1
+</span></span><span class="line"><span class="cl">Found 1 unmapped computes in cell: d955f2a9-ec41-4ea0-b72a-8f3c38977c2e
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then run the check command in controller to verify if the nova service installed successfully!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# source /etc/keystone/admin-openrc.sh 
+</span></span><span class="line"><span class="cl">[root@controller bin]# openstack compute service list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And you will see the hostname of compute node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+----+----------------+------------+----------+---------+-------+----------------------------+
+</span></span><span class="line"><span class="cl">| ID | Binary         | Host       | Zone     | Status  | State | Updated At                 |
+</span></span><span class="line"><span class="cl">+----+----------------+------------+----------+---------+-------+----------------------------+
+</span></span><span class="line"><span class="cl">|  4 | nova-conductor | controller | internal | enabled | up    | 2023-05-06T03:14:27.000000 |
+</span></span><span class="line"><span class="cl">|  5 | nova-scheduler | controller | internal | enabled | up    | 2023-05-06T03:14:28.000000 |
+</span></span><span class="line"><span class="cl">|  6 | nova-compute   | compute    | nova     | enabled | up    | 2023-05-06T03:14:25.000000 |
+</span></span><span class="line"><span class="cl">+----+----------------+------------+----------+---------+-------+----------------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ok, now we should do the final operation, edit the file <code>/etc/nova/nova.conf</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# vim /etc/nova/nova.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Just simply change <code>#vif_plugging_is_fatal=true</code> to <code>vif_plugging_is_fatal=false</code>, but we can use vim command quickly:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="p">:</span>%<span class="nx">s</span><span class="sr">/#vif_plugging_is_fatal=true/</span><span class="nx">vif_plugging_is_fatal</span><span class="p">=</span><span class="nx">false</span>/<span class="nx">g</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>And save it!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="p">:</span><span class="nx">wq</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>So we solved a quiz again! Congratulations!</p>
+<blockquote>
+<h4 id="question-9-neutron-installation-05-points"><strong>[Question 9] Neutron Installation [0.5 points]</strong></h4>
+<p>Using the provided scripts <code>iaas-install-neutron-controller.sh</code> and <code>iaas-install-neutron-compute.sh</code>, install the neutron service on the controller and compute nodes. After completion, submit the username, password, and IP address of the control node to the answer box.</p>
+</blockquote>
+<p>This quiz is easy, just run the scripts in each nodes:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-neutron-controller.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# ./iaas-install-neutron-compute.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>But after installation, we should reset the <a href="#network" rel="">Network properties</a>.</p>
+<p>And reboot system:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And check:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# source /etc/keystone/admin-openrc.sh &amp;&amp; openstack-service status
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MainPID=1050 Id=neutron-dhcp-agent.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1020 Id=neutron-l3-agent.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1052 Id=neutron-linuxbridge-agent.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1033 Id=neutron-metadata-agent.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=2295 Id=neutron-server.service ActiveState=activating
+</span></span><span class="line"><span class="cl">MainPID=1015 Id=openstack-glance-api.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1027 Id=openstack-glance-registry.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1019 Id=openstack-nova-api.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1035 Id=openstack-nova-conductor.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1032 Id=openstack-nova-novncproxy.service ActiveState=active
+</span></span><span class="line"><span class="cl">MainPID=1014 Id=openstack-nova-scheduler.service ActiveState=active
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>But there&rsquo;s a problem when dump the list of network agents:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Unable to establish connection to http://controller:9696/v2.0/agents: HTTPConnectionPool(host=&#39;controller&#39;, port=9696): Max retries exceeded with url: /v2.0/agents (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPConnection object at 0x7f36ecec5890&gt;: Failed to establish a new connection: [Errno 111] Connection refused&#39;,))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And the I checked the systemd service:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# systemctl status neutron-server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Found a problem:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">start request repeated too quickly for neutron-server.service
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>So I tried checking the log:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# cat /var/log/neutron/server.log 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Found an error:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">2023-05-06 11:47:28.283 2290 ERROR neutron ProgrammingError: (pymysql.err.ProgrammingError) (1146, u&#34;Table &#39;neutron.ml2_vlan_allocations&#39; doesn&#39;t exist&#34;) [SQL: u&#39;SELECT ml2_vlan_allocations.physical_network AS ml2_vlan_allocations_physical_network \nFROM ml2_vlan_allocations GROUP BY ml2_vlan_allocations.physical_network&#39;] (Background on this error at: http://sqlalche.me/e/f405)
+</span></span><span class="line"><span class="cl">2023-05-06 11:47:28.283 2290 ERROR neutron 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The error message you provided indicates that the Neutron server is unable to execute a SQL query due to a missing table in the database. Specifically, it appears that the table <code>ml2_vlan_allocations</code> is missing from the database.</p>
+<p>I tried running the command <code>neutron-db-manage</code> upgrade head to manually migrate the Neutron database schema to the latest version.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# neutron-db-manage
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And restart the <code>neutron-server</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# systemctl restart neutron-server
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally, reboot the compute node.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# reboot
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And check the list network agent list</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# source /etc/keystone/admin-openrc.sh &amp;&amp; openstack network agent list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
+</span></span><span class="line"><span class="cl">| ID                                   | Agent Type         | Host       | Availability Zone | Alive | State | Binary                    |
+</span></span><span class="line"><span class="cl">+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
+</span></span><span class="line"><span class="cl">| 4dd5511c-91dc-4d1b-9da5-2bc57f908378 | Linux bridge agent | compute    | None              | :-)   | UP    | neutron-linuxbridge-agent |
+</span></span><span class="line"><span class="cl">| 72f00e1b-3a14-4f8d-bfbd-4017520936ff | DHCP agent         | controller | nova              | :-)   | UP    | neutron-dhcp-agent        |
+</span></span><span class="line"><span class="cl">| 88b4ecb7-41d9-40b6-a688-2aa6b19782bf | L3 agent           | controller | nova              | :-)   | UP    | neutron-l3-agent          |
+</span></span><span class="line"><span class="cl">| b6554942-e045-40d6-9842-07176b7c577a | Linux bridge agent | controller | None              | :-)   | UP    | neutron-linuxbridge-agent |
+</span></span><span class="line"><span class="cl">| f56ed93a-a109-42e2-8cb3-ba1e4a2ce732 | Metadata agent     | controller | None              | :-)   | UP    | neutron-metadata-agent    |
+</span></span><span class="line"><span class="cl">+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then the Neutron Service was installed successfully! Quiz Solved!</p>
+<blockquote>
+<h4 id="question-10-installation-of-doshboard-05-points"><strong>[Question 10] Installation of Doshboard [0.5 points]</strong></h4>
+<p>Use the <code>iaas-install-dashboad.sh</code> script to install the dashboard service on the controller node. After installation, modify the Djingo data in the Dashboard to be stored in a file (this modification solves the problem of ALL-in-one snapshots not being accessible in other cloud platform dashboards). After completion, submit the username, password and IP address of the controller node to the answer box.</p>
+</blockquote>
+<p>Run <code>iaas-install-dashboad.sh</code> script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-dashboard.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Edit the file <code>/etc/openstack-dashboard/local_settings</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# vim /etc/openstack-dashboard/local_settings
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Replace <code>SESSION_ENGINE = 'django.contrib.sessions.backends.cache'</code> to <code>SESSION_ENGINE = 'django.contrib.sessions.backends.file'</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="p">:</span>%<span class="nx">s</span><span class="sr">/SESSION_ENGINE = &#39;django.contrib.sessions.backends.cache&#39;/</span><span class="nx">SESSION_ENGINE</span> <span class="p">=</span> <span class="s1">&#39;django.contrib.sessions.backends.file&#39;</span>/<span class="nx">g</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Save the file:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vim" data-lang="vim"><span class="line"><span class="cl"><span class="p">:</span><span class="nx">wq</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>And visit the Dashboard by browser</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://192.168.56.2/dashboard
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You will see the login page.</p>
+<p></p>
+<p>Login with username <code>admin</code> and password <code>000000</code>.</p>
+<p></p>
+<p>Then Dashboard was installed successfully.</p>
+<blockquote>
+<h4 id="question-11-swift-installation-05-points"><strong>[Question 11] Swift Installation [0.5 points]</strong></h4>
+<p>Use the <code>iaas-install-swift-controller.sh</code> and <code>iaas-install-swift-compute.sh</code> scripts to install the Swift service on the control and compute nodes respectively. After installation, use a command to create a container named &ldquo;examcontainer&rdquo;, upload the <code>cirros-0.3.4-x86_64-disk.img</code> image to the &ldquo;examcontainer&rdquo; container, and set segment storage with a size of <code>10M</code> for each segment. Once completed, submit the username, password, and IP address of the control node to the answer box.</p>
+</blockquote>
+<p>At first we need to create partitions in compute node</p>
+<p>We need to check the disks:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# fdisk -l
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Disk /dev/sda: 53.7 GB, 53687091200 bytes, 104857600 sectors
+</span></span><span class="line"><span class="cl">Units = sectors of 1 * 512 = 512 bytes
+</span></span><span class="line"><span class="cl">Sector size (logical/physical): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">Disk label type: dos
+</span></span><span class="line"><span class="cl">Disk identifier: 0x000d6c03
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Device Boot      Start         End      Blocks   Id  System
+</span></span><span class="line"><span class="cl">/dev/sda1   *        2048     2099199     1048576   83  Linux
+</span></span><span class="line"><span class="cl">/dev/sda2         2099200   104857599    51379200   8e  Linux LVM
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Disk /dev/sdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
+</span></span><span class="line"><span class="cl">Units = sectors of 1 * 512 = 512 bytes
+</span></span><span class="line"><span class="cl">Sector size (logical/physical): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Disk /dev/sdc: 3221 MB, 3221225472 bytes, 6291456 sectors
+</span></span><span class="line"><span class="cl">Units = sectors of 1 * 512 = 512 bytes
+</span></span><span class="line"><span class="cl">Sector size (logical/physical): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Disk /dev/mapper/centos-root: 48.4 GB, 48444211200 bytes, 94617600 sectors
+</span></span><span class="line"><span class="cl">Units = sectors of 1 * 512 = 512 bytes
+</span></span><span class="line"><span class="cl">Sector size (logical/physical): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Disk /dev/mapper/centos-swap: 4160 MB, 4160749568 bytes, 8126464 sectors
+</span></span><span class="line"><span class="cl">Units = sectors of 1 * 512 = 512 bytes
+</span></span><span class="line"><span class="cl">Sector size (logical/physical): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We&rsquo;ll get information below:</p>
+<ul>
+<li>
+<p><code>/dev/sdb</code> is a disk with a size of 21.5 GB and no partitions.</p>
+</li>
+<li>
+<p><code>/dev/sdc</code> is a disk with a size of 3221 MB (3.2 GB) and no partitions.</p>
+</li>
+</ul>
+<p>We need create 2 partitions in <code>sdb</code>: <code>sdb1</code> and <code>sdb2</code></p>
+<p><code>sdb1</code> for cinder and <code>sdb2</code> for swift.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# fdisk /dev/sdb
+</span></span><span class="line"><span class="cl">Welcome to fdisk (util-linux 2.23.2).
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Changes will remain in memory only, until you decide to write them.
+</span></span><span class="line"><span class="cl">Be careful before using the write command.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Device does not contain a recognized partition table
+</span></span><span class="line"><span class="cl">Building a new DOS disklabel with disk identifier 0xe8f17fde.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Command (m for help): n
+</span></span><span class="line"><span class="cl">Partition type:
+</span></span><span class="line"><span class="cl">   p   primary (0 primary, 0 extended, 4 free)
+</span></span><span class="line"><span class="cl">   e   extended
+</span></span><span class="line"><span class="cl">Select (default p): p
+</span></span><span class="line"><span class="cl">Partition number (1-4, default 1): 
+</span></span><span class="line"><span class="cl">First sector (2048-41943039, default 2048): +10G
+</span></span><span class="line"><span class="cl">Last sector, +sectors or +size{K,M,G} (20971520-41943039, default 41943039): 
+</span></span><span class="line"><span class="cl">Using default value 41943039
+</span></span><span class="line"><span class="cl">Partition 1 of type Linux and of size 10 GiB is set
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Command (m for help): n
+</span></span><span class="line"><span class="cl">Partition type:
+</span></span><span class="line"><span class="cl">   p   primary (1 primary, 0 extended, 3 free)
+</span></span><span class="line"><span class="cl">   e   extended
+</span></span><span class="line"><span class="cl">Select (default p): p
+</span></span><span class="line"><span class="cl">Partition number (2-4, default 2): 
+</span></span><span class="line"><span class="cl">First sector (2048-41943039, default 2048): 
+</span></span><span class="line"><span class="cl">Using default value 2048
+</span></span><span class="line"><span class="cl">Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519): 
+</span></span><span class="line"><span class="cl">Using default value 20971519
+</span></span><span class="line"><span class="cl">Partition 2 of type Linux and of size 10 GiB is set
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Command (m for help): p
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Disk /dev/sdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
+</span></span><span class="line"><span class="cl">Units = sectors of 1 * 512 = 512 bytes
+</span></span><span class="line"><span class="cl">Sector size (logical/physical): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span></span><span class="line"><span class="cl">Disk label type: dos
+</span></span><span class="line"><span class="cl">Disk identifier: 0xe8f17fde
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Device Boot      Start         End      Blocks   Id  System
+</span></span><span class="line"><span class="cl">/dev/sdb1        20971520    41943039    10485760   83  Linux
+</span></span><span class="line"><span class="cl">/dev/sdb2            2048    20971519    10484736   83  Linux
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Partition table entries are not in disk order
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Command (m for help): w
+</span></span><span class="line"><span class="cl">The partition table has been altered!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Calling ioctl() to re-read partition table.
+</span></span><span class="line"><span class="cl">Syncing disks.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Format the partitions:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# mkfs.ext4 /dev/sdb1
+</span></span><span class="line"><span class="cl">mke2fs 1.42.9 (28-Dec-2013)
+</span></span><span class="line"><span class="cl">Filesystem label=
+</span></span><span class="line"><span class="cl">OS type: Linux
+</span></span><span class="line"><span class="cl">Block size=4096 (log=2)
+</span></span><span class="line"><span class="cl">Fragment size=4096 (log=2)
+</span></span><span class="line"><span class="cl">Stride=0 blocks, Stripe width=0 blocks
+</span></span><span class="line"><span class="cl">655360 inodes, 2621440 blocks
+</span></span><span class="line"><span class="cl">131072 blocks (5.00%) reserved for the super user
+</span></span><span class="line"><span class="cl">First data block=0
+</span></span><span class="line"><span class="cl">Maximum filesystem blocks=2151677952
+</span></span><span class="line"><span class="cl">80 block groups
+</span></span><span class="line"><span class="cl">32768 blocks per group, 32768 fragments per group
+</span></span><span class="line"><span class="cl">8192 inodes per group
+</span></span><span class="line"><span class="cl">Superblock backups stored on blocks: 
+</span></span><span class="line"><span class="cl">	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Allocating group tables: done                            
+</span></span><span class="line"><span class="cl">Writing inode tables: done                            
+</span></span><span class="line"><span class="cl">Creating journal (32768 blocks): done
+</span></span><span class="line"><span class="cl">Writing superblocks and filesystem accounting information: done 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# mkfs.ext4 /dev/sdb2
+</span></span><span class="line"><span class="cl">mke2fs 1.42.9 (28-Dec-2013)
+</span></span><span class="line"><span class="cl">Filesystem label=
+</span></span><span class="line"><span class="cl">OS type: Linux
+</span></span><span class="line"><span class="cl">Block size=4096 (log=2)
+</span></span><span class="line"><span class="cl">Fragment size=4096 (log=2)
+</span></span><span class="line"><span class="cl">Stride=0 blocks, Stripe width=0 blocks
+</span></span><span class="line"><span class="cl">655360 inodes, 2621184 blocks
+</span></span><span class="line"><span class="cl">131059 blocks (5.00%) reserved for the super user
+</span></span><span class="line"><span class="cl">First data block=0
+</span></span><span class="line"><span class="cl">Maximum filesystem blocks=2151677952
+</span></span><span class="line"><span class="cl">80 block groups
+</span></span><span class="line"><span class="cl">32768 blocks per group, 32768 fragments per group
+</span></span><span class="line"><span class="cl">8192 inodes per group
+</span></span><span class="line"><span class="cl">Superblock backups stored on blocks: 
+</span></span><span class="line"><span class="cl">	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Allocating group tables: done                            
+</span></span><span class="line"><span class="cl">Writing inode tables: done                            
+</span></span><span class="line"><span class="cl">Creating journal (32768 blocks): done
+</span></span><span class="line"><span class="cl">Writing superblocks and filesystem accounting information: done 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then run <code>iaas-install-swift-controller.sh</code> and <code>iaas-install-swift-compute.sh</code> scripts:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-swift-controller.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# ./iaas-install-swift-compute.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Back to <code>/root</code> directory(Or other location of <code>cirros-0.3.4-x86_64-disk.img</code>):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# cd ~
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create a container named ``:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# swift post examcontainer
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Upload the cirros-0.3.4-x86_64-disk.img image to the “examcontainer” container, and set segment storage with a size of 10M for each segment.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# swift upload examcontainer -S 10000000 cirros-0.3.4-x86_64-disk.img 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cirros-0.3.4-x86_64-disk.img segment 1
+</span></span><span class="line"><span class="cl">cirros-0.3.4-x86_64-disk.img segment 0
+</span></span><span class="line"><span class="cl">cirros-0.3.4-x86_64-disk.img
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then it&rsquo;s finished.</p>
+<blockquote>
+<h4 id="question-12-creating-a-cinder-volume-05-points"><strong>[Question 12] Creating a Cinder volume [0.5 points]</strong></h4>
+<p>Using the <code>iaas-install-cinder-controller.sh</code> and <code>iaas-install-cinder-compute.sh</code> scripts, install the Cinder service on both the control node and compute node. On the compute node, expand the block storage by creating an additional 5GB partition and adding it to the back-end storage for Cinder block storage. After completion, submit the username, password, and IP address of the compute node to the answer box.</p>
+</blockquote>
+<p>Install the Cinder Service in controller node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-cinder-controller.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Install the Cinder Service in compute node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# ./iaas-install-cinder-compute.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check if succeed:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# lsblk
+</span></span><span class="line"><span class="cl">NAME                                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+</span></span><span class="line"><span class="cl">sda                                               8:0    0   50G  0 disk 
+</span></span><span class="line"><span class="cl">├─sda1                                            8:1    0    1G  0 part /boot
+</span></span><span class="line"><span class="cl">└─sda2                                            8:2    0   49G  0 part 
+</span></span><span class="line"><span class="cl">  ├─centos-root                                 253:0    0 45.1G  0 lvm  /
+</span></span><span class="line"><span class="cl">  └─centos-swap                                 253:1    0  3.9G  0 lvm  [SWAP]
+</span></span><span class="line"><span class="cl">sdb                                               8:16   0   20G  0 disk 
+</span></span><span class="line"><span class="cl">├─sdb1                                            8:17   0   10G  0 part 
+</span></span><span class="line"><span class="cl">│ ├─cinder--volumes-cinder--volumes--pool_tmeta 253:2    0   12M  0 lvm  
+</span></span><span class="line"><span class="cl">│ │ └─cinder--volumes-cinder--volumes--pool     253:4    0  9.5G  0 lvm  
+</span></span><span class="line"><span class="cl">│ └─cinder--volumes-cinder--volumes--pool_tdata 253:3    0  9.5G  0 lvm  
+</span></span><span class="line"><span class="cl">│   └─cinder--volumes-cinder--volumes--pool     253:4    0  9.5G  0 lvm  
+</span></span><span class="line"><span class="cl">└─sdb2                                            8:18   0   10G  0 part /swift/node/sdb2
+</span></span><span class="line"><span class="cl">sdc                                               8:32   0    3G  0 disk 
+</span></span><span class="line"><span class="cl">sr0                                              11:0    1 1024M  0 rom  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# vgdisplay
+</span></span><span class="line"><span class="cl">  --- Volume group ---
+</span></span><span class="line"><span class="cl">  VG Name               cinder-volumes
+</span></span><span class="line"><span class="cl">  System ID             
+</span></span><span class="line"><span class="cl">  Format                lvm2
+</span></span><span class="line"><span class="cl">  Metadata Areas        1
+</span></span><span class="line"><span class="cl">  Metadata Sequence No  4
+</span></span><span class="line"><span class="cl">  VG Access             read/write
+</span></span><span class="line"><span class="cl">  VG Status             resizable
+</span></span><span class="line"><span class="cl">  MAX LV                0
+</span></span><span class="line"><span class="cl">  Cur LV                1
+</span></span><span class="line"><span class="cl">  Open LV               0
+</span></span><span class="line"><span class="cl">  Max PV                0
+</span></span><span class="line"><span class="cl">  Cur PV                1
+</span></span><span class="line"><span class="cl">  Act PV                1
+</span></span><span class="line"><span class="cl">  VG Size               &lt;10.00 GiB
+</span></span><span class="line"><span class="cl">  PE Size               4.00 MiB
+</span></span><span class="line"><span class="cl">  Total PE              2559
+</span></span><span class="line"><span class="cl">  Alloc PE / Size       2438 / 9.52 GiB
+</span></span><span class="line"><span class="cl">  Free  PE / Size       121 / 484.00 MiB
+</span></span><span class="line"><span class="cl">  VG UUID               QHk53K-Kj2O-ilc2-pxk6-Upqe-meRE-vfJu6P
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">  --- Volume group ---
+</span></span><span class="line"><span class="cl">  VG Name               centos
+</span></span><span class="line"><span class="cl">  System ID             
+</span></span><span class="line"><span class="cl">  Format                lvm2
+</span></span><span class="line"><span class="cl">  Metadata Areas        1
+</span></span><span class="line"><span class="cl">  Metadata Sequence No  3
+</span></span><span class="line"><span class="cl">  VG Access             read/write
+</span></span><span class="line"><span class="cl">  VG Status             resizable
+</span></span><span class="line"><span class="cl">  MAX LV                0
+</span></span><span class="line"><span class="cl">  Cur LV                2
+</span></span><span class="line"><span class="cl">  Open LV               2
+</span></span><span class="line"><span class="cl">  Max PV                0
+</span></span><span class="line"><span class="cl">  Cur PV                1
+</span></span><span class="line"><span class="cl">  Act PV                1
+</span></span><span class="line"><span class="cl">  VG Size               &lt;49.00 GiB
+</span></span><span class="line"><span class="cl">  PE Size               4.00 MiB
+</span></span><span class="line"><span class="cl">  Total PE              12543
+</span></span><span class="line"><span class="cl">  Alloc PE / Size       12542 / 48.99 GiB
+</span></span><span class="line"><span class="cl">  Free  PE / Size       1 / 4.00 MiB
+</span></span><span class="line"><span class="cl">  VG UUID               2tEud0-Ydx6-cFfX-dZMM-F9IC-l3nc-sLS38v
+</span></span><span class="line"><span class="cl">   
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Well, it&rsquo;s finished.</p>
+<blockquote>
+<h4 id="question-13-installation-and-usage-of-manila-service-05-point"><strong>[Question 13] Installation and Usage of Manila Service [0.5 point]</strong></h4>
+<p>Install the Manila service on the control and compute nodes using the <code>iaas-install-manila-controller.sh</code> and <code>iaas-install-manila-compute.sh</code> scripts, respectively. After installing the service, create a default_share_type share type (without driver support), and then create a shared storage called share01 with a size of 2G and grant permission for OpenStack management network segment to access the share01 directory. Finally, submit the username, password, and IP address of the control node to the answer box.</p>
+</blockquote>
+<p>Create a partion for Manila:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# fdisk /dev/sdc
+</span></span><span class="line"><span class="cl">Welcome to fdisk (util-linux 2.23.2).
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Changes will remain in memory only, until you decide to write them.
+</span></span><span class="line"><span class="cl">Be careful before using the write command.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Device does not contain a recognized partition table
+</span></span><span class="line"><span class="cl">Building a new DOS disklabel with disk identifier 0x6e07efc2.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Command (m for help): n
+</span></span><span class="line"><span class="cl">Partition type:
+</span></span><span class="line"><span class="cl">   p   primary (0 primary, 0 extended, 4 free)
+</span></span><span class="line"><span class="cl">   e   extended
+</span></span><span class="line"><span class="cl">Select (default p): p
+</span></span><span class="line"><span class="cl">Partition number (1-4, default 1): 
+</span></span><span class="line"><span class="cl">First sector (2048-6291455, default 2048): 
+</span></span><span class="line"><span class="cl">Using default value 2048
+</span></span><span class="line"><span class="cl">Last sector, +sectors or +size{K,M,G} (2048-6291455, default 6291455): 
+</span></span><span class="line"><span class="cl">Using default value 6291455
+</span></span><span class="line"><span class="cl">Partition 1 of type Linux and of size 3 GiB is set
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Command (m for help): w
+</span></span><span class="line"><span class="cl">The partition table has been altered!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Calling ioctl() to re-read partition table.
+</span></span><span class="line"><span class="cl">Syncing disks.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Installl the Manila Service in controller node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-manila-controller.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Install the Manila Service in compute node:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# ./iaas-install-manila-compute.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create a default_share_type share type (without driver support):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# manila type-create default_share_type False
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check the manila type list:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# manila type-list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create a shared storage called share01 with a size of 2G</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# manila create NFS 2 --name share01
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check if the operation succeed:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# manila list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+--------------------------------------+---------+------+-------------+-----------+-----------+--------------------+-----------------------------+-------------------+
+</span></span><span class="line"><span class="cl">| ID                                   | Name    | Size | Share Proto | Status    | Is Public | Share Type Name    | Host                        | Availability Zone |
+</span></span><span class="line"><span class="cl">+--------------------------------------+---------+------+-------------+-----------+-----------+--------------------+-----------------------------+-------------------+
+</span></span><span class="line"><span class="cl">| 0cdd5acb-5e54-4cdd-9187-467e2800d212 | share01 | 2    | NFS         | available | False     | default_share_type | compute@lvm#lvm-single-pool | nova              |
+</span></span><span class="line"><span class="cl">+--------------------------------------+---------+------+-------------+-----------+-----------+--------------------+-----------------------------+-------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Grant permission for OpenStack management network segment to access the share01 directory.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# manila access-allow share01 ip 192.168.56.0/24 --access-level rw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Check if the operation succeed!</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# manila access-list share01
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+--------------------------------------+-------------+-----------------+--------------+--------+------------+----------------------------+------------+
+</span></span><span class="line"><span class="cl">| id                                   | access_type | access_to       | access_level | state  | access_key | created_at                 | updated_at |
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------------+-----------------+--------------+--------+------------+----------------------------+------------+
+</span></span><span class="line"><span class="cl">| cad9f433-6ad3-4db9-afe1-90dc52374a08 | ip          | 192.168.56.0/24 | rw           | active | None       | 2023-05-06T06:55:13.000000 | None       |
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------------+-----------------+--------------+--------+------------+----------------------------+------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Done!</p>
+<blockquote>
+<h4 id="question-14-barbican-service-installation-and-usage-05-points"><strong>[Question 14] Barbican Service Installation and Usage [0.5 points]</strong></h4>
+<p>Install the Barbican service using the <code>iaas-install-barbican.sh</code> script. After the installation is complete, use the openstack command to create a key named &ldquo;secret01&rdquo;. Once created, submit the username, password, and IP address of the control node in the answer box.</p>
+</blockquote>
+<p>Well, it&rsquo;s easy, run <code>iaas-install-barbican.sh</code> in controller node.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-barbican.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create a key named &ldquo;secret01&rdquo;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# openstack secret store --name secret01 --payload secretkey
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Done!</p>
+<blockquote>
+<h4 id="question-15-cloudkitty-service-installation-and-usage-05-points"><strong>[Question 15] Cloudkitty Service Installation and Usage [0.5 points]</strong></h4>
+<p>Install the cloudkitty service using the <code>iaas-install-cloudkitty.sh</code> script. After installation, enable the hashmap rating module and then create the volume_thresholds group. Create a service matching rule for volume.size and set the price per GB to 0.01. Next, apply discounts to corresponding large amounts of data. Create a threshold in the volume_thresholds group and set a discount of 2% (0.98) if the threshold is exceeded for volumes over 50GB. After completing the setup, submit the username, password, and IP address of the control node in the answer box.</p>
+</blockquote>
+<p>Run the script to install the service:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# ./iaas-install-cloudkitty.sh 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Enable hashmap:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[root@controller bin]# openstack rating module enable hashmap 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create hashmap service</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# openstack rating  hashmap service create volume.size 
+</span></span><span class="line"><span class="cl">+-------------+--------------------------------------+
+</span></span><span class="line"><span class="cl">| Name        | Service ID                           |
+</span></span><span class="line"><span class="cl">+-------------+--------------------------------------+
+</span></span><span class="line"><span class="cl">| volume.size | 12b61017-6842-4d54-aa44-599d121e5f46 |
+</span></span><span class="line"><span class="cl">+-------------+--------------------------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create hashmap service group</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# openstack rating hashmap group create  volume_thresholds 
+</span></span><span class="line"><span class="cl">+-------------------+--------------------------------------+
+</span></span><span class="line"><span class="cl">| Name              | Group ID                             |
+</span></span><span class="line"><span class="cl">+-------------------+--------------------------------------+
+</span></span><span class="line"><span class="cl">| volume_thresholds | c46c8a1e-1878-4c44-bf36-57c06ce0672b |
+</span></span><span class="line"><span class="cl">+-------------------+--------------------------------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create volume price</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# openstack rating hashmap mapping create -s 12b61017-6842-4d54-aa44-599d121e5f46 -g c46c8a1e-1878-4c44-bf36-57c06ce0672b  -t flat  0.01  
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+</span></span><span class="line"><span class="cl">| Mapping ID                           | Value | Cost       | Type | Field ID | Service ID                           | Group ID                             | Project ID |
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+</span></span><span class="line"><span class="cl">| e5f99784-e49c-47ac-98e0-6f818c3ff6fb | None  | 0.01000000 | flat | None     | 12b61017-6842-4d54-aa44-599d121e5f46 | c46c8a1e-1878-4c44-bf36-57c06ce0672b | None       |
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create service rule</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# openstack rating hashmap threshold create -s 12b61017-6842-4d54-aa44-599d121e5f46  -g c46c8a1e-1878-4c44-bf36-57c06ce0672b  -t rate 50 0.98
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+</span></span><span class="line"><span class="cl">| Threshold ID                         | Level       | Cost       | Type | Field ID | Service ID                           | Group ID                             | Project ID |
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+</span></span><span class="line"><span class="cl">| a88e4768-defd-4c72-91f2-521b28e3c1a2 | 50.00000000 | 0.98000000 | rate | None     | 12b61017-6842-4d54-aa44-599d121e5f46 | c46c8a1e-1878-4c44-bf36-57c06ce0672b | None       |
+</span></span><span class="line"><span class="cl">+--------------------------------------+-------------+------------+------+----------+--------------------------------------+--------------------------------------+------------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Done!</p>
+<blockquote>
+<h4 id="question-16-openstack-platform-memory-optimization-05-points"><strong>[Question 16] OpenStack Platform Memory Optimization [0.5 points]</strong></h4>
+<p>After setting up the OpenStack platform, disable memory sharing in the system and enable transparent huge pages. After completing this, submit the username, password, and IP address of the control node to the answer box.</p>
+</blockquote>
+<h4 id="to-be-continued"><strong>To be continued</strong></h4>
 <h2 id="conclusion">Conclusion</h2>
 ]]></description>
 </item><item>
