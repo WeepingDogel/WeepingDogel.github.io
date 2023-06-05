@@ -1,0 +1,185 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Web Crawler - Tag - WeepingDogel</title>
+        <link>http://weepingdogel.github.io/tags/web-crawler/</link>
+        <description>Web Crawler - Tag - WeepingDogel</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Tue, 13 Aug 2019 22:20:53 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/web-crawler/" rel="self" type="application/rss+xml" /><item>
+    <title>Python Learning Notes: Simple Web Crawler</title>
+    <link>http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</link>
+    <pubDate>Tue, 13 Aug 2019 22:20:53 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/wallhaven-ey71wo.jpg" referrerpolicy="no-referrer">
+            </div><h2 id="a-casual-preface">A Casual Preface</h2>
+<p>Hey, I&rsquo;m back. Today, I set up hexo in my U-disk, so I can continue to update my blog.</p>
+<p><del>And this time I added a visitor counter to my blog. Feel free to help increase the count!～</del></p>
+<p>So, in this post, I will introduce a simple web crawler implemented in Python.</p>
+<h2 id="principles-of-web-crawlers">Principles of Web Crawlers</h2>
+<blockquote>
+<p>Beginner: Hey there, what is a web crawler?</p>
+<p>Expert: Go search it on a search engine.</p>
+<p>Beginner: I did, but I still don&rsquo;t understand it.</p>
+<p>Expert: Uh&hellip;then keep reading&hellip;</p>
+</blockquote>
+<h3 id="overview">Overview</h3>
+<p>To put it simply, a web crawler automates the process of browsing web pages to extract desired information and content from them.</p>
+<p>We all know that we use web browsers to access the Internet. So how do we visit a webpage? Here&rsquo;s a brief overview (I&rsquo;m too lazy to draw):</p>
+<blockquote>
+<ol>
+<li>
+<p>Browser –Sends a request for <a href="https://www.bing.com" target="_blank" rel="noopener noreffer">www.bing.com</a>–&gt;</p>
+</li>
+<li>
+<p>Server &lt;–Receives the request–</p>
+</li>
+<li>
+<p>Server –Responds with data–&gt; –Returns the data–&gt; Browser</p>
+</li>
+</ol>
+</blockquote>
+<p>What? Still confused? Let&rsquo;s take a look using a browser. Open any webpage.</p>
+<p></p>
+<p>Using Chrome/Chromium as an example, right-click and select &ldquo;Inspect&rdquo;, then go to the &ldquo;Network&rdquo; tab, and check the &ldquo;Preserve log&rdquo; checkbox. Refresh the page and you&rsquo;ll see the following content:</p>
+<p></p>
+<p>As you can see, the browser displays the request content in great detail. And the left lists are the contents you retrieve from the website.</p>
+<p>A web crawler automates these processes so that we don&rsquo;t need to visit websites manually to get the information we want.</p>
+<h3 id="the-purpose-of-web-crawlers">The Purpose of Web Crawlers</h3>
+<p>For example, let&rsquo;s say there is a website <del><a href="http://www.hiphop8.com/" target="_blank" rel="noopener noreffer">全国号码段(链接已失效)</a></del> where we need to obtain all the phone numbers of one of the phone number segments in a city, such as Xi&rsquo;an.</p>
+<p></p>
+<p></p>
+<p>As you can see, there are many phone number segments, each with ten thousand phone numbers. What should we do? Can&rsquo;t we copy and paste them one by one using the mouse, right? This is where web crawlers come into play.</p>
+<blockquote>
+<p>Actually, it can also be used to crawl my blog so that you can receive update information in a timely manner.</p>
+<p>Ah, please don&rsquo;t hit me, it hurts!</p>
+</blockquote>
+<h2 id="choosing-a-programming-language">Choosing a Programming Language</h2>
+<p>To perform web crawling, we need to use a programming language. The most commonly used one is <strong>Python</strong> because it is easy to use for web crawling. However, you can also choose other languages such as <strong>C/C++</strong>, <strong>Java</strong>, or even <strong>Visual Basic</strong>. The level of difficulty and coding methods may be different, but the purpose and functionality are the same. In this post, we will choose <strong>Python</strong>.</p>
+<h2 id="installing-python">Installing Python</h2>
+<p>Python is a cross-platform language, so installation methods differ depending on the platform.</p>
+<h3 id="windows">Windows</h3>
+<p>You can download the installation program from <a href="https://www.python.org/" target="_blank" rel="noopener noreffer">Python&rsquo;s official website</a> and install it. It is recommended to download Python 3.</p>
+<h3 id="mac-osx">Mac OSX</h3>
+<p>Download it from <a href="https://www.python.org/" target="_blank" rel="noopener noreffer">Python&rsquo;s official website</a></p>
+<h3 id="linux">Linux</h3>
+<p>Install it via package manager.</p>
+<h4 id="deb-based">deb-based</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt-get install python3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="arch-based">Arch-based</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo pacman -S python
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="rpm-based">rpm-based</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo yum install python3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="android">Android</h3>
+<p>Install QPython on the Android platform:</p>
+<p><a href="https://www.coolapk.com/apk/com.hipipal.qpy3" target="_blank" rel="noopener noreffer">Download it from Coolapk</a></p>
+<p><a href="https://www.qpython.com/" target="_blank" rel="noopener noreffer">QPython Official Website</a></p>
+<h2 id="installing-pip">Installing pip</h2>
+<p>The installation programs for Windows and Mac OS X will automatically install pip, but Linux does not. We need to install it manually.</p>
+<blockquote>
+<p>What? You&rsquo;re asking about Android? I don&rsquo;t know either, hahaha.</p>
+</blockquote>
+<p>First, go to <a href="https://pypi.org/project/pip/#files" target="_blank" rel="noopener noreffer">this website</a>，and click <strong>Download</strong>，Download the second tar.gz file, which is a Linux compressed file.</p>
+<p>Then, extract it to get a <code>pip-19.2.2</code> directory:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ tar -xvf pip-19.2.2.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Enter the directory:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> ./pip-19.2.2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>There is a file called <strong>setup.py</strong> in there. Execute it using Python:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo python setup.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then pip will be installed automatically.</p>
+<h2 id="required-modules">Required Modules</h2>
+<p>The web crawler in this post uses the following modules:</p>
+<ul>
+<li>requests, for sending HTTP/1.1 requests</li>
+<li>BeautifulSoup, for parsing HTML and XML documents</li>
+</ul>
+<p>We can install them using the following command:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo pip install requests BeautifulSoup
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If you find that the installation speed is slow, you can refer to <a href="https://www.cnblogs.com/microman/p/6107879.html" target="_blank" rel="noopener noreffer">this link</a> to change the mirror source to a domestic one.</p>
+<h2 id="public-code">Public Code</h2>
+<p>Here&rsquo;s the code for a simple phone number crawler:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;简易手机号码抓取工具 By WeepingDogel&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">url</span><span class="o">=</span><span class="s2">&#34;http://www.hiphop8.com/mobile/xian_1319339.html&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">page</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">page_info</span><span class="o">=</span><span class="n">page</span><span class="o">.</span><span class="n">content</span>
+</span></span><span class="line"><span class="cl"><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page_info</span><span class="p">,</span> <span class="s2">&#34;html.parser&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">numbers</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;1319339.txt&#34;</span><span class="p">,</span><span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="o">.</span><span class="n">string</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You can copy the above code into a Python file and run or modify it as needed.</p>
+<h2 id="in-conclusion">In Conclusion</h2>
+<p>I wrote this post in a hurry, so it may not be detailed enough. Please forgive me. <del>There&rsquo;s a comment section below, feel free to leave comments (or criticize me).</del></p>
+]]></description>
+</item></channel>
+</rss>

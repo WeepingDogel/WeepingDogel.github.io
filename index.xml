@@ -3,7 +3,7 @@
         <title>WeepingDogel</title>
         <link>http://weepingdogel.github.io/</link>
         <description>Write to share</description>
-        <generator>Hugo -- gohugo.io</generator><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
             <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Thu, 04 May 2023 16:37:32 &#43;0800</lastBuildDate>
             <atom:link href="http://weepingdogel.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
@@ -1809,165 +1809,6 @@ td
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# ./iaas-install-neutron-compute.sh 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>But after installation, we should reset the <a href="#network" rel="">Network properties</a>.</p>
-<p>And reboot system:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">reboot
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And check:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# source /etc/keystone/admin-openrc.sh &amp;&amp; openstack-service status
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MainPID=1050 Id=neutron-dhcp-agent.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1020 Id=neutron-l3-agent.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1052 Id=neutron-linuxbridge-agent.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1033 Id=neutron-metadata-agent.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=2295 Id=neutron-server.service ActiveState=activating
-</span></span><span class="line"><span class="cl">MainPID=1015 Id=openstack-glance-api.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1027 Id=openstack-glance-registry.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1019 Id=openstack-nova-api.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1035 Id=openstack-nova-conductor.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1032 Id=openstack-nova-novncproxy.service ActiveState=active
-</span></span><span class="line"><span class="cl">MainPID=1014 Id=openstack-nova-scheduler.service ActiveState=active
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>But there&rsquo;s a problem when dump the list of network agents:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Unable to establish connection to http://controller:9696/v2.0/agents: HTTPConnectionPool(host=&#39;controller&#39;, port=9696): Max retries exceeded with url: /v2.0/agents (Caused by NewConnectionError(&#39;&lt;urllib3.connection.HTTPConnection object at 0x7f36ecec5890&gt;: Failed to establish a new connection: [Errno 111] Connection refused&#39;,))
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And the I checked the systemd service:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# systemctl status neutron-server
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Found a problem:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">start request repeated too quickly for neutron-server.service
-</span></span><span class="line"><span class="cl">...
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>So I tried checking the log:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# cat /var/log/neutron/server.log 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Found an error:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">2023-05-06 11:47:28.283 2290 ERROR neutron ProgrammingError: (pymysql.err.ProgrammingError) (1146, u&#34;Table &#39;neutron.ml2_vlan_allocations&#39; doesn&#39;t exist&#34;) [SQL: u&#39;SELECT ml2_vlan_allocations.physical_network AS ml2_vlan_allocations_physical_network \nFROM ml2_vlan_allocations GROUP BY ml2_vlan_allocations.physical_network&#39;] (Background on this error at: http://sqlalche.me/e/f405)
-</span></span><span class="line"><span class="cl">2023-05-06 11:47:28.283 2290 ERROR neutron 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The error message you provided indicates that the Neutron server is unable to execute a SQL query due to a missing table in the database. Specifically, it appears that the table <code>ml2_vlan_allocations</code> is missing from the database.</p>
-<p>I tried running the command <code>neutron-db-manage</code> upgrade head to manually migrate the Neutron database schema to the latest version.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# neutron-db-manage
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And restart the <code>neutron-server</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# systemctl restart neutron-server
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Finally, reboot the compute node.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@compute bin]# reboot
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And check the list network agent list</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller ~]# source /etc/keystone/admin-openrc.sh &amp;&amp; openstack network agent list
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
-</span></span><span class="line"><span class="cl">| ID                                   | Agent Type         | Host       | Availability Zone | Alive | State | Binary                    |
-</span></span><span class="line"><span class="cl">+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
-</span></span><span class="line"><span class="cl">| 4dd5511c-91dc-4d1b-9da5-2bc57f908378 | Linux bridge agent | compute    | None              | :-)   | UP    | neutron-linuxbridge-agent |
-</span></span><span class="line"><span class="cl">| 72f00e1b-3a14-4f8d-bfbd-4017520936ff | DHCP agent         | controller | nova              | :-)   | UP    | neutron-dhcp-agent        |
-</span></span><span class="line"><span class="cl">| 88b4ecb7-41d9-40b6-a688-2aa6b19782bf | L3 agent           | controller | nova              | :-)   | UP    | neutron-l3-agent          |
-</span></span><span class="line"><span class="cl">| b6554942-e045-40d6-9842-07176b7c577a | Linux bridge agent | controller | None              | :-)   | UP    | neutron-linuxbridge-agent |
-</span></span><span class="line"><span class="cl">| f56ed93a-a109-42e2-8cb3-ba1e4a2ce732 | Metadata agent     | controller | None              | :-)   | UP    | neutron-metadata-agent    |
-</span></span><span class="line"><span class="cl">+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
-</span></span></code></pre></td></tr></table>
-</div>
 </div><p>Then the Neutron Service was installed successfully! Quiz Solved!</p>
 <blockquote>
 <h4 id="question-10-installation-of-doshboard-05-points"><strong>[Question 10] Installation of Doshboard [0.5 points]</strong></h4>
@@ -2353,7 +2194,7 @@ td
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[root@controller bin]# cd ~
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>Create a container named ``:</p>
+</div><p>Create a container named <code>examcontainer</code>:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1

@@ -1,0 +1,425 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>homework - Tag - WeepingDogel</title>
+        <link>http://weepingdogel.github.io/tags/homework/</link>
+        <description>homework - Tag - WeepingDogel</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Wed, 02 Dec 2020 23:20:22 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/homework/" rel="self" type="application/rss+xml" /><item>
+    <title>Help with College Computer Homework</title>
+    <link>http://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/</link>
+    <pubDate>Wed, 02 Dec 2020 23:20:22 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2020-12-03%2000-58-57%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png" referrerpolicy="no-referrer">
+            </div><h2 id="introduction">Introduction</h2>
+<p>Help with homework qwq&hellip;</p>
+<p>I haven&rsquo;t played with C language for a long time, let me try to see if I can do it.</p>
+<blockquote>
+<p>PS: I&rsquo;m on Linux, the execution method may be different. If you are on Windows, you need an editor to run it.</p>
+<p>For example, Dev C++, VS 2019, etc.</p>
+</blockquote>
+<h2 id="experiment-eleven">Experiment Eleven</h2>
+<blockquote>
+<p>Experiment Eleven</p>
+<p>Objective:</p>
+<ul>
+<li>Understand C programming concepts</li>
+<li>Understand C program design framework</li>
+</ul>
+<p>Contents:</p>
+<p>Input a grade and output its level rating.</p>
+</blockquote>
+<p>This is straightforward. We need to list several grade levels:</p>
+<ul>
+<li>Excellent
+<ul>
+<li>80 ~ 100 points [80,100]</li>
+</ul>
+</li>
+<li>Pass
+<ul>
+<li>60~79 points [60,79]</li>
+</ul>
+</li>
+<li>Fail
+<ul>
+<li>Below 60 points [0,60)</li>
+</ul>
+</li>
+</ul>
+<p>In the code, we can use expressions to represent the intervals, for example:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">100</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we use if() to determine the grade level.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">85</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">     <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;The grade is excellent&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">79</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;The grade is pass&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;The grade is fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next, we run the program.</p>
+<p>Output:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; make test
+</span></span><span class="line"><span class="cl">cc     test.c   -o test
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">The grade is excellent⏎     
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we need to get the user&rsquo;s input for the grade, like this, using the <code>scanf()</code> function to get the user&rsquo;s input and assign it to an integer variable <code>score</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Enter your grade:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">score</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="n">score</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Next, we combine these two pieces of code together.</p>
+<p>The complete code is as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Enter your grade:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">score</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;The grade is excellent&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">79</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;The grade is pass&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;The grade is fail&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The idea is to first use <code>scanf()</code> function to get the user&rsquo;s input for the grade, then use <code>if()</code> statements to compare and output the result.</p>
+<p>This is the output:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; make test
+</span></span><span class="line"><span class="cl">cc     test.c   -o test
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">Enter your grade:99
+</span></span><span class="line"><span class="cl">The grade is excellent⏎                                                        
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">Enter your grade:85
+</span></span><span class="line"><span class="cl">The grade is excellent⏎                                                        
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">Enter your grade:60
+</span></span><span class="line"><span class="cl">The grade is pass⏎                                                        
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test
+</span></span><span class="line"><span class="cl">Enter your grade:59
+</span></span><span class="line"><span class="cl">The grade is fail⏎                       
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="experiment-12">Experiment 12</h2>
+<blockquote>
+<p>Experiment Purpose:</p>
+<ul>
+<li>Understand C program design ideas</li>
+<li>Understand C program design frameworks</li>
+</ul>
+<p>Task content</p>
+<ul>
+<li>Requires writing a program that registers and then logs in, outputting the format shown in the following figure:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">              Registration Interface
+</span></span><span class="line"><span class="cl">Please enter your registration username: Ly
+</span></span><span class="line"><span class="cl">Please enter your registration password: 123
+</span></span><span class="line"><span class="cl">Congratulations! Registration successful!
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">              Login Interface
+</span></span><span class="line"><span class="cl">Please enter your login username: Ly
+</span></span><span class="line"><span class="cl">Please enter your login password: 123
+</span></span><span class="line"><span class="cl">Login successful!
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">              Login Interface
+</span></span><span class="line"><span class="cl">Please enter your login username: Ly
+</span></span><span class="line"><span class="cl">Please enter your login password: 1234
+</span></span><span class="line"><span class="cl">Login failed!
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Define 4 variables to save the registered username, password and login username, password respectively.</li>
+<li>Use if&hellip;else statement to complete the judgment of the username and password.</li>
+</ul>
+</blockquote>
+<p>To put it simply&hellip; it uses <code>scanf()</code> to get input, assigns the values to variables, and then performs the judgment&hellip;</p>
+<p>Pft! Alright, here&rsquo;s the code, no explanation needed&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Define 4 variables to save the registered username,
+</span></span></span><span class="line"><span class="cl"><span class="cm">    password and login username, password respectively */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">username_sign</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">password_sign</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">username_login</span><span class="p">[</span><span class="mi">40</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">password_login</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Define 4 variables to save the registered username,
+</span></span></span><span class="line"><span class="cl"><span class="cm">    password and login username, password respectively */</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;--------------------------------------</span><span class="se">\n</span><span class="s">               Registration Interface</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Please enter your registration username:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">username_sign</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Please enter your registration password:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">password_sign</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulations! Registration successful!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">--------------------------------------&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Use scanf() to get input */</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n\n</span><span class="s">--------------------------------------</span><span class="se">\n</span><span class="s">               Login Interface</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Please enter your login username:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="n">username_login</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Please enter your login password:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span><span class="n">password_login</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Use if...else statement to complete the judgment of the username and password */</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Uses the strcmp() function here */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">strcmp</span><span class="p">(</span><span class="n">username_login</span><span class="p">,</span><span class="n">username_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">password_login</span><span class="p">,</span><span class="n">password_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Login successful!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Login failed!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">--------------------------------------&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>However, it&rsquo;s worth noting that this string comparison method is slightly different. It requires using the <code>strcmp()</code> function, something like this.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nf">strcmp</span><span class="p">(</span><span class="n">username_login</span><span class="p">,</span><span class="n">username_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">password_login</span><span class="p">,</span><span class="n">password_sign</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Login successful!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Login failed!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>It seems to calculate a numerical value, which equals 0 if the two strings are the same. That&rsquo;s roughly how it works.</p>
+<p>Let&rsquo;s take a look at the output&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; make test2
+</span></span><span class="line"><span class="cl">cc     test2.c   -o test2
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test2
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               Registration Interface
+</span></span><span class="line"><span class="cl">Please enter your registration username:Ly
+</span></span><span class="line"><span class="cl">Please enter your registration password:123
+</span></span><span class="line"><span class="cl">Congratulations! Registration successful!
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               Login Interface
+</span></span><span class="line"><span class="cl">Please enter your login username:Ly
+</span></span><span class="line"><span class="cl">Please enter your login password:123
+</span></span><span class="line"><span class="cl">Login successful!
+</span></span><span class="line"><span class="cl">--------------------------------------⏎                              
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">weepingdogel@WeepingDogel /tmp&gt; ./test2
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               Registration Interface
+</span></span><span class="line"><span class="cl">Please enter your registration username:Ly
+</span></span><span class="line"><span class="cl">Please enter your registration password:123
+</span></span><span class="line"><span class="cl">Congratulations! Registration successful!
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--------------------------------------
+</span></span><span class="line"><span class="cl">               Login Interface
+</span></span><span class="line"><span class="cl">Please enter your login username:Ly
+</span></span><span class="line"><span class="cl">Please enter your login password:1234
+</span></span><span class="line"><span class="cl">Login failed!
+</span></span><span class="line"><span class="cl">--------------------------------------⏎     
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And that&rsquo;s it!</p>
+<h2 id="closing-remarks">Closing Remarks</h2>
+<p>Actually, there are still some details that I might overlook due to carelessness, so I can&rsquo;t say &ldquo;Is that it? Is that all?&rdquo;</p>
+<p>But relatively speaking, it&rsquo;s still quite simple&hellip; yeah&hellip;</p>
+]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,161 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>modifying software sources - Tag - WeepingDogel</title>
+        <link>http://weepingdogel.github.io/tags/modifying-software-sources/</link>
+        <description>modifying software sources - Tag - WeepingDogel</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Fri, 06 Nov 2020 22:54:23 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/modifying-software-sources/" rel="self" type="application/rss+xml" /><item>
+    <title>How to Modify Software Sources in Linux Mint</title>
+    <link>http://weepingdogel.github.io/posts/2020-nov-6/</link>
+    <pubDate>Fri, 06 Nov 2020 22:54:23 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://weepingdogel.github.io/posts/2020-nov-6/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2020-11-07_14-33.png" referrerpolicy="no-referrer">
+            </div><h2 id="introduction">Introduction</h2>
+<p>After installing Linux Mint, one of the first things you may want to do is modify your software sources.</p>
+<p></p>
+<p>The default software sources in Linux Mint are official ones, which may take a long time to download and update packages. Therefore, it&rsquo;s recommended to modify the software sources and use a mirror source that is closer to you.</p>
+<p>For Linux Mint, there are basically two ways to modify the software sources.</p>
+<p><strong>Note: Choose only one of the following options.</strong></p>
+<h2 id="method-1-using-the-terminal">Method 1: Using the Terminal</h2>
+<p>We&rsquo;ll first go to the TUNA mirror site and take a look at the help documentation (<a href="https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/%29" target="_blank" rel="noopener noreffer">https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/)</a>.</p>
+<p>The content is as follows:</p>
+<p></p>
+<p>&ldquo;Oh, I see. Maybe you&rsquo;re having trouble understanding how to do it. Here&rsquo;s a detailed guide on how to perform the operation:</p>
+<p>First, move your mouse cursor to the bottom left corner of the screen and open the Terminal.&rdquo;</p>
+<p></p>
+<p></p>
+<p>To modify the software sources, we first need to edit the <code>/etc/apt/sources.list</code> file.</p>
+<p>It seems that Mint does not come with <code>vim</code> pre-installed, so we will use <code>nano</code> here.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo nano /etc/apt/sources.list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Note: <code>sudo</code> is required and do not forget to enter your password after pressing Enter in the terminal.</strong></p>
+<p></p>
+<p>When you open the file, you may notice that it appears empty except for some English comments.</p>
+<p>You can start writing into the file by following the instructions provided by the TUNA mirror site or other tutorial</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I understand. To complete the process, we also need to add Ubuntu repositories as some packages in Mint require them. Let&rsquo;s take a look at the <a href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener noreffer">Ubuntu help documentation</a> for further instructions.</p>
+<p></p>
+<p>Great, it sounds like you have a good understanding of the process! Yes, you can modify the URLs in the <code>/etc/apt/sources.list</code> file and replace <code>archive.ubuntu.com</code> with <code>mirrors.tuna.tsinghua.edu.cn</code>. This will help speed up the process of downloading and updating packages in Linux Mint.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">#deb cdrom:[Linux Mint 20 _Ulyana_ - Release amd64 20200624]/ focal contrib main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># This system was installed using small removable media
+</span></span><span class="line"><span class="cl"># (e.g. netinst, live or single CD). The matching &#34;deb cdrom&#34;
+</span></span><span class="line"><span class="cl"># entries were disabled at the end of the installation process.
+</span></span><span class="line"><span class="cl"># For information about how to configure apt package sources,
+</span></span><span class="line"><span class="cl"># see the sources.list(5) manual.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb http://mirrors.tuna.tsinghua.edu.cn/linuxmint/ ulyana main upstream import backport
+</span></span><span class="line"><span class="cl">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-updates main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu focal-backports main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Like this：</p>
+<p></p>
+<p>Exactly! After modifying the software sources, you can run the command <code>sudo apt update</code> in the terminal to update the package lists. This will allow you to download and install packages much faster than before.</p>
+<h2 id="method-2-using-the-update-manager">Method 2: Using the Update Manager</h2>
+<p>irst, click on the &ldquo;Menu&rdquo; button in the bottom left corner of the screen to access the applications menu. Then, search for &ldquo;Settings Manager&rdquo; and click on it to open the manager.</p>
+<p></p>
+<p>Next, scroll down the Settings Manager window until you find the &ldquo;Software Sources&rdquo; option. Click on it to open the software sources settings.</p>
+<p></p>
+<p>Hmm, didn&rsquo;t you see it at the beginning?</p>
+<p></p>
+<p>Yes, you are correct! The TUNA mirror site was mentioned earlier in this guide as an example of a mirror that can be used to modify the software sources.</p>
+<p></p>
+<p>Then use this software to modify the sources to use mirrors hosted in China. However, I am not sure of the exact steps on how to do this.</p>
+<p></p>
+<p>Oh yeah! Anyway, this is it&hellip; Just use your mouse to click around, and you&rsquo;re good to go!</p>
+<p></p>
+<p>Next, you will be prompted to update the apt cache. Click &ldquo;OK&rdquo; to continue.</p>
+<p></p>
+<p>Wait for the process to finish, and you&rsquo;re done!</p>
+<p></p>
+<h2 id="updating-software-packages">Updating Software Packages</h2>
+<p>Once you have set up the apt software sources, the next step is to perform necessary software package updates.</p>
+<p>Here are two methods to update your software packages:</p>
+<p><strong>Note: Still, you can choose either Method 1 or Method 2 to update your software packages.</strong></p>
+<h3 id="method-1-using-the-terminal-1">Method 1: Using the Terminal</h3>
+<ol>
+<li>Open the Terminal by clicking on the &ldquo;Menu&rdquo; button in the bottom left corner of the screen and searching for &ldquo;Terminal&rdquo;.</li>
+<li>In the Terminal, type the following command and press Enter:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt upgrade
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Enter your password when prompted and press Enter again.</li>
+<li>Wait for the update process to finish.</li>
+</ol>
+<p></p>
+<p></p>
+<p></p>
+<p>Then, you can reboot your system.</p>
+<h3 id="using-the-update-manager">Using the Update Manager</h3>
+<p></p>
+<p>Click it!</p>
+<p></p>
+<p>Then you just need to enter the password.</p>
+<p></p>
+<p>Just click to install the update.
+</p>
+<p>确定Click OK</p>
+<p></p>
+<p>Screenshots are exhausting&hellip;then just wait for it to finish running.</p>
+<p></p>
+<p>Next, restart the virtual machine and it will be ready to use.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>First of all, I used Linux Mint 20 for demonstration, which may be updated in the future and some details in this article may differ from the actual situation, but the operations are similar. Please adjust accordingly based on your actual situation.</p>
+<p>Secondly, <del>please don&rsquo;t laugh!</del> This article is aimed at beginners who are just starting to learn about Linux.</p>
+<p>If there are any shortcomings or small mistakes caused by carelessness, please leave a message in the Gitalk section below.</p>
+<p>Finally, this site follows the <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreffer">CC-BY-NC 4.0 license</a>，please indicate the source when reprinting.</p>
+<hr>
+<h2 id="reference-links">Reference links</h2>
+<ul>
+<li>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/linuxmint/" target="_blank" rel="noopener noreffer">Linux Mint | Mirror Usage Guide | Tsinghua Open Source Mirror</a></p>
+</li>
+<li>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener noreffer">Ubuntu | Mirror Usage Guide | Tsinghua Open Source Mirror</a></p>
+</li>
+</ul>
+]]></description>
+</item></channel>
+</rss>

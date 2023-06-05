@@ -1180,98 +1180,6 @@ This quiz is easy, just run the scripts in each nodes:
 [root@compute bin]# ./iaas-install-neutron-compute.sh 
 ```
 
-But after installation, we should reset the [Network properties](#network).
-
-And reboot system:
-
-```
-reboot
-```
-
-And check:
-
-```
-[root@controller ~]# source /etc/keystone/admin-openrc.sh && openstack-service status
-```
-```
-MainPID=1050 Id=neutron-dhcp-agent.service ActiveState=active
-MainPID=1020 Id=neutron-l3-agent.service ActiveState=active
-MainPID=1052 Id=neutron-linuxbridge-agent.service ActiveState=active
-MainPID=1033 Id=neutron-metadata-agent.service ActiveState=active
-MainPID=2295 Id=neutron-server.service ActiveState=activating
-MainPID=1015 Id=openstack-glance-api.service ActiveState=active
-MainPID=1027 Id=openstack-glance-registry.service ActiveState=active
-MainPID=1019 Id=openstack-nova-api.service ActiveState=active
-MainPID=1035 Id=openstack-nova-conductor.service ActiveState=active
-MainPID=1032 Id=openstack-nova-novncproxy.service ActiveState=active
-MainPID=1014 Id=openstack-nova-scheduler.service ActiveState=active
-```
-
-But there's a problem when dump the list of network agents:
-
-```
-Unable to establish connection to http://controller:9696/v2.0/agents: HTTPConnectionPool(host='controller', port=9696): Max retries exceeded with url: /v2.0/agents (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f36ecec5890>: Failed to establish a new connection: [Errno 111] Connection refused',))
-```
-
-And the I checked the systemd service:
-```
-[root@controller ~]# systemctl status neutron-server
-```
-
-Found a problem:
-```
-...
-start request repeated too quickly for neutron-server.service
-...
-```
-
-So I tried checking the log:
-```
-[root@controller ~]# cat /var/log/neutron/server.log 
-```
-
-Found an error:
-```
-2023-05-06 11:47:28.283 2290 ERROR neutron ProgrammingError: (pymysql.err.ProgrammingError) (1146, u"Table 'neutron.ml2_vlan_allocations' doesn't exist") [SQL: u'SELECT ml2_vlan_allocations.physical_network AS ml2_vlan_allocations_physical_network \nFROM ml2_vlan_allocations GROUP BY ml2_vlan_allocations.physical_network'] (Background on this error at: http://sqlalche.me/e/f405)
-2023-05-06 11:47:28.283 2290 ERROR neutron 
-```
-
-The error message you provided indicates that the Neutron server is unable to execute a SQL query due to a missing table in the database. Specifically, it appears that the table `ml2_vlan_allocations` is missing from the database.
-
-I tried running the command `neutron-db-manage` upgrade head to manually migrate the Neutron database schema to the latest version.
-
-```
-[root@controller ~]# neutron-db-manage
-```
-
-And restart the `neutron-server`
-
-```
-[root@controller ~]# systemctl restart neutron-server
-```
-
-Finally, reboot the compute node.
-```
-[root@compute bin]# reboot
-```
-And check the list network agent list
-
-```
-[root@controller ~]# source /etc/keystone/admin-openrc.sh && openstack network agent list
-```
-
-```
-+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
-| ID                                   | Agent Type         | Host       | Availability Zone | Alive | State | Binary                    |
-+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
-| 4dd5511c-91dc-4d1b-9da5-2bc57f908378 | Linux bridge agent | compute    | None              | :-)   | UP    | neutron-linuxbridge-agent |
-| 72f00e1b-3a14-4f8d-bfbd-4017520936ff | DHCP agent         | controller | nova              | :-)   | UP    | neutron-dhcp-agent        |
-| 88b4ecb7-41d9-40b6-a688-2aa6b19782bf | L3 agent           | controller | nova              | :-)   | UP    | neutron-l3-agent          |
-| b6554942-e045-40d6-9842-07176b7c577a | Linux bridge agent | controller | None              | :-)   | UP    | neutron-linuxbridge-agent |
-| f56ed93a-a109-42e2-8cb3-ba1e4a2ce732 | Metadata agent     | controller | None              | :-)   | UP    | neutron-metadata-agent    |
-+--------------------------------------+--------------------+------------+-------------------+-------+-------+---------------------------+
-```
-
 Then the Neutron Service was installed successfully! Quiz Solved!
 
 
@@ -1498,7 +1406,7 @@ Back to `/root` directory(Or other location of `cirros-0.3.4-x86_64-disk.img`):
 [root@controller bin]# cd ~
 ```
 
-Create a container named ``:
+Create a container named `examcontainer`:
 
 ```
 [root@controller ~]# swift post examcontainer

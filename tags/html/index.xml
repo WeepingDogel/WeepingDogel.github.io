@@ -1,26 +1,26 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>HTML - 标签 - WeepingDogel</title>
+        <title>HTML - Tag - WeepingDogel</title>
         <link>http://weepingdogel.github.io/tags/html/</link>
-        <description>HTML - 标签 - WeepingDogel</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+        <description>HTML - Tag - WeepingDogel</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
             <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Thu, 17 Nov 2022 22:41:43 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/html/" rel="self" type="application/rss+xml" /><item>
-    <title>关于写 HTML CSS 的时候一些想说的话</title>
+    <title>Some Thoughts on Writing HTML and CSS</title>
     <link>http://weepingdogel.github.io/posts/something-about-html-css/</link>
     <pubDate>Thu, 17 Nov 2022 22:41:43 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>Author</author>
     <guid>http://weepingdogel.github.io/posts/something-about-html-css/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://w.wallhaven.cc/full/zy/wallhaven-zygeko.jpg" referrerpolicy="no-referrer">
-            </div><h1 id="序">序</h1>
-<p>很多初学者在学 HTML 和 CSS 的时候总是遇到一些低级的问题就望而却步&hellip;</p>
-<p>我本来是实在不想写基础类的内容的，但是感觉有些人可能就需要看这种内容&hellip; 就写一些吧</p>
-<p>要说的也不多，就是语法和用法上的问题。</p>
-<h1 id="我已经发现的常见问题">我已经发现的常见问题</h1>
-<h2 id="html-语法问题">HTML 语法问题</h2>
-<h3 id="标签顺序问题">标签顺序问题</h3>
-<p>我经常被人问：“为什么我的标签写上去之后内容显示不出来？为什么我这个显示不了&hellip; ” 之类的问题。</p>
-<p>我第一个被问到的是为什么标题（<code>&lt;h1&gt;</code> 标签）的内容显示不出来，我看一眼他的代码:</p>
+            </div><h1 id="introduction">Introduction</h1>
+<p>Many beginners often encounter some basic problems when learning HTML and CSS, which can be frustrating.</p>
+<p>I originally didn&rsquo;t want to write about basic topics, but I feel that some people may need to see this kind of content&hellip;so here are some tips.</p>
+<p>There is not much to say, just some issues related to syntax and usage.</p>
+<h1 id="common-issues-i-have-noticed">Common Issues I Have Noticed</h1>
+<h2 id="html-syntax-problems">HTML Syntax Problems</h2>
+<h3 id="tag-order-problems">Tag Order Problems</h3>
+<p>I often get asked questions like &ldquo;Why isn&rsquo;t my content showing up when I put the tags in?&rdquo;, or &ldquo;Why isn&rsquo;t this working&hellip;&rdquo; and so on.</p>
+<p>The first question I was asked was why the content of the title (<code>&lt;h1&gt;</code> tag) wasn&rsquo;t showing up. I took a look at their code:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -55,10 +55,10 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>麻了，我血压一下子就上来了，居然把 h1 标签套进 p 里面去&hellip;</p>
-<p>这里很明显是对这两个标签都不太熟， <code>&lt;h1&gt;</code> 和 <code>&lt;p&gt;</code> 都是块级元素的标签，且默认情况下 <code>&lt;h1&gt;</code> 的字体是比 <code>&lt;p&gt;</code> 要大的，因此放进去之后可能会显示错误，正常情况下，这两个标签是平级存在的，两者都会独占一整行来显示。如果大的<code>&lt;h1&gt;</code>套进小的里面去的话，当然就看不到啦~</p>
-<p>总的来说段落里面不能有标题，二者不能互相嵌套。</p>
-<p>所以正确的写法应该是这样的：</p>
+</div><p>I couldn&rsquo;t believe it &ndash; they put the <code>&lt;h1&gt;</code> tag inside the <code>&lt;p&gt;</code> tag&hellip;</p>
+<p>It&rsquo;s clear that they aren&rsquo;t familiar with either of these tags. Both <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> are block-level elements, and by default the font size of <code>&lt;h1&gt;</code> is larger than that of <code>&lt;p&gt;</code>. Therefore, putting them together may result in display errors. Normally, these two tags exist on the same level, and both will occupy a line to display. If the larger <code>&lt;h1&gt;</code> tag is nested inside the smaller one, of course you won&rsquo;t be able to see it~</p>
+<p>In summary, there cannot be headings within paragraphs, and they cannot be nested within each other.</p>
+<p>Therefore, the correct way to write it should be as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -87,10 +87,10 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="丢符号的问题">丢符号的问题，</h3>
-<p>有时候也因为这个问题被问到，我感觉这都是低级错误。</p>
-<p>打开代码一看， <del>妈也， 这是什么玩意</del></p>
-<p>很明显这就是不规范的 HTML。</p>
+</div><h3 id="missing-symbols">Missing Symbols</h3>
+<p>Sometimes I get asked about this issue as well, and I feel like these are all basic errors.</p>
+<p>Looking at the code, I&rsquo;m like, <del>&ldquo;What is this mess?&quot;</del></p>
+<p>It&rsquo;s clearly not standard HTML.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -123,13 +123,13 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这种代码&hellip;.</p>
-<p>要么是打的时候不认真，要么也是没有熟悉这些标签的用法。</p>
-<p>或者是说，不知道标签怎么表示</p>
-<p>那这里就再解释一下， 标签有两种，单标签和双标签</p>
-<p>以插入图片的标签为例，单标签是这样的: <code>&lt;img /&gt;</code>， 前面的 <code>&lt;</code> 和后面的 <code>&gt;</code> 都不能丢， 而且最好在末尾的 <code>&gt;</code> 前面加个 <code>/</code>。</p>
-<p>双标签就以段落为例吧： <code>&lt;p&gt;这是一个段落&lt;/p&gt;</code> ，这种双标签有头必有尾。 前面的部分和后面的部分一个都不能丢。</p>
-<p>写双标签出现嵌套的时候最好养成一个好习惯，换行缩进</p>
+</div><p>This type of code&hellip;</p>
+<p>Either they weren&rsquo;t paying attention when writing it or they&rsquo;re not familiar with how to use these tags.</p>
+<p>Or perhaps they don&rsquo;t know how to represent tags.</p>
+<p>Let me explain again: there are two types of tags, single tags and double tags.</p>
+<p>Taking the tag for inserting an image as an example, the single tag looks like this: <code>&lt;img /&gt;</code>. The <code>&lt;</code> at the beginning and <code>&gt;</code> at the end can&rsquo;t be left out, and it&rsquo;s best to add a <code>/</code> before the closing <code>&gt;</code>.</p>
+<p>As for double tags, let&rsquo;s take the paragraph tag as an example: <code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code>. This type of double tag must have an opening and closing tag. Neither the beginning nor the end can be left out.</p>
+<p>When writing double tags and there&rsquo;s nesting involved, it&rsquo;s a good habit to indent each level on a new line.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -180,28 +180,28 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这样的话，代码不仅美观，而且后期维护起来也会轻松很多，出了问题也好找。</p>
-<h3 id="分不清-head-和-body">分不清 <code>&lt;head&gt;</code> 和 <code>&lt;body&gt;</code></h3>
-<p>除了上面的问题以外，甚至还有在 <code>&lt;head&gt;</code> 里面写 <code>&lt;div&gt;</code> 的，这就说明还没有分清楚 HTML 的头部信息区和内容显示区。</p>
-<p>我只能这样解释了：</p>
+</div><p>This way, the code is not only beautiful, but it&rsquo;s also easier to maintain and troubleshoot in the future.</p>
+<h3 id="not-differentiating-between-head-and-body">Not Differentiating Between <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code></h3>
+<p>In addition to the aforementioned issues, there are even cases where people write <code>&lt;div&gt;</code> tags inside the <code>&lt;head&gt;</code>, which indicates that they haven&rsquo;t yet distinguished between the HTML header and content display areas.</p>
+<p>I can only explain it this way:</p>
 <ul>
 <li>
-<p><code>&lt;head&gt;</code> 里面是头部信息区，这个是服务器给浏览器看的，里面的代码并不会渲染在浏览器的页面上。</p>
+<p>The <code>&lt;head&gt;</code> section is the header information area, which is what the server sends to the browser. The code inside it is not rendered on the page in the browser.</p>
 </li>
 <li>
-<p><code>&lt;body&gt;</code> 则是内容显示区，用来写那些能够被显示出来的标签的，也可以写 <code>&lt;script&gt;</code> 标签然后套 js 代码，但是 CSS 样式不能写在这里。</p>
+<p>The <code>&lt;body&gt;</code> section is the content display area, used to write tags that can be displayed. You can also write <code>&lt;script&gt;</code> tags with JavaScript code nested inside, but CSS styles cannot be written here.</p>
 </li>
 </ul>
-<h2 id="css-的问题">CSS 的问题</h2>
-<p>除了 HTML 的语法问题和区域分不清的问题以外，在写 CSS 的时候也有不少人问我一些奇葩问题。</p>
-<h3 id="引用样式的方法">引用样式的方法</h3>
-<p>引用 CSS 样式表的方法，按教科书来说有三种，但是常用的也就两种。</p>
-<p>我个人最喜欢的是用 <code>&lt;link&gt;</code> 来链入，这样可以分为两个文件然后分屏写，很方便。</p>
-<p>不需要像行内式一样把屏幕翻来翻去。</p>
-<p>至于行内式？用得少，我几乎在实践当中没用过。</p>
-<p>不过到现在为止居然还有人不会链入式？</p>
-<p>最主要的是不清楚路径这个概念。</p>
-<p>其实很简单，只需要把相对路径记住，然后再把相对路径填入 <code>&lt;link&gt;</code> 标签的 <code>href</code> 属性值里面就行了。</p>
+<h2 id="css-problems">CSS Problems</h2>
+<p>In addition to syntax issues and not differentiating between sections in HTML, there are also some strange questions people ask me when writing CSS.</p>
+<h3 id="referencing-stylesheets">Referencing Stylesheets</h3>
+<p>There are three ways to reference CSS stylesheets, according to textbooks, but the most commonly used are two.</p>
+<p>My personal favorite is to use <code>&lt;link&gt;</code> to link the stylesheet. This way, you can split it into two files and write them side by side, making it very convenient.</p>
+<p>You don&rsquo;t need to flip back and forth like with inline styles.</p>
+<p>As for inline styles? They&rsquo;re not used much, I almost never use them in practice.</p>
+<p>But there are still people who don&rsquo;t know how to link stylesheets?</p>
+<p>The main issue is not understanding the concept of paths.</p>
+<p>It&rsquo;s actually very simple &ndash; just remember the relative path and then fill it into the <code>href</code> attribute value of the <code>&lt;link&gt;</code> tag.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -210,8 +210,8 @@
 <pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">link</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/css&#34;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;css/style.css&#34;</span> <span class="p">/&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>当然，内嵌式也还是有人不会的，这没什么好说的，一定记得 <code>&lt;style&gt;</code> 标签要写在 <code>&lt;head&gt;</code> 里面，然后按照正确的 CSS 格式在 <code>&lt;style&gt;</code> 标签里面写样式就行。</p>
-<p>例如：</p>
+</div><p>Of course, there are still people who don&rsquo;t know how to use inline styles, but there&rsquo;s not much to say about it. Just remember that the <code>&lt;style&gt;</code> tag must be placed inside the <code>&lt;head&gt;</code> section and then write the styles using the correct CSS format inside the <code>&lt;style&gt;</code> tag.</p>
+<p>For example：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -270,9 +270,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="写-css-的时候丢---和--和拼错单词">写 CSS 的时候丢 <code>;</code> 、<code>{</code> 和 <code>}</code> ，和拼错单词</h3>
-<p>这种呢都是低级错误，多练练多注意就好&hellip;.</p>
-<p>正确模板是这样的：</p>
+</div><h3 id="when-writing-css-losing---and--and-misspelling-words">When writing CSS, losing <code>;</code>, <code>{</code>, and <code>}</code> and misspelling words.</h3>
+<p>These are all minor mistakes that can be improved with more practice and attention. The correct template should look like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -280,8 +279,8 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">选择器</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="err">属性:</span> <span class="err">属性值</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">Selector</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Property</span><span class="p">:</span> <span class="n">value</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -303,9 +302,9 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="消除默认内外边距">消除默认内外边距</h3>
-<p>很多初学者在写 CSS 的时候没有养成先消除默认内外边距的习惯，这导致写到后期会发现样式越来越难调。</p>
-<p>其实很简单:</p>
+</div><h3 id="remove-default-padding-and-margin">Remove default padding and margin</h3>
+<p>Many beginners do not develop the habit of resetting default padding and margin in CSS when they start coding, which leads to difficulty in styling as they progress.</p>
+<p>In fact, it&rsquo;s quite simple:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -320,11 +319,11 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>*</code> 是个正则通配符，在 CSS 里面它的优先级是最低的，而在一切开始之前将它的 <code>margin</code> 属性和 <code>padding</code> 属性设置为0可以消除所有的元素在没被选择器选择的时候的内外边距清除，便于后期对它进行更准确的设定。</p>
-<p>还是不知道写不写有什么区别？你试试就知道了。</p>
-<h3 id="使用类选择器id-选择器的时候命名不规范">使用类选择器、ID 选择器的时候命名不规范</h3>
-<p>这个问题也很大，非常影响代码的可读性和后期管理性。</p>
-<p>我是经常看到这样的:</p>
+</div><p><code>*</code> is a regular wildcard character in CSS, and it has the lowest priority among all selectors. Setting its <code>margin</code> and <code>padding</code> properties to <code>0</code> before everything else can eliminate the default padding and margin for all elements before they are selected by a specific selector. This makes it much easier to make more accurate adjustments to element spacing later on.</p>
+<p>If you&rsquo;re still not sure whether or not to include it, try it out and see the difference for yourself.</p>
+<h3 id="inappropriate-naming-when-using-class-selectors-and-id-selectors">Inappropriate naming when using class selectors and ID selectors</h3>
+<p>This is also a big problem that greatly affects the readability and maintainability of the code.</p>
+<p>I often see something like this:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -355,9 +354,9 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这就很难去找它到底选择的是个什么元素，增加了工作量&hellip;.</p>
-<p>因为第一眼看上去完全就不知道它指的是什么。</p>
-<p>还有用中文的，虽然我在初中的时候写这玩意也喜欢用中文，但是这个习惯也很不好，如果有一些服务器的编码炸了，样式文件也很容易加载不出来。</p>
+</div><p>It&rsquo;s hard to know what element it actually selects, which increases workload&hellip;</p>
+<p>Because at first glance, it&rsquo;s unclear what it refers to.</p>
+<p>Also, using Chinese characters for naming, although I used to like to do this when I was in middle school, this habit is not good because if there are some server encoding issues, the style files may not be loaded properly.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -418,8 +417,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>但是甚至还有用数字的！</p>
-<p>然后问我为什么不显示！</p>
+</div><p>But some people even use numbers!</p>
+<p>And then they ask me why the style is not displaying properly!</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -432,13 +431,13 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>数字和数字开头的名字是不能作为类选择器名称和ID的，其次在很多编程语言中也不能使用数字或者数字开头的名字来给变量命名。</p>
-<p>而比较好的命名方法有驼峰法和<code>_</code>拼接法。</p>
+</div><p>Numbers or names that start with numbers cannot be used as class selector names and IDs in CSS. Similarly, in many programming languages, it is not allowed to name variables using numbers or names that begin with numbers.</p>
+<p>To avoid this problem, naming conventions such as camelCase and <code>_</code> concatenation can be used.</p>
 <ul>
-<li>大驼峰是指两个单词拼在一起，两个首字母都大写，比如 <code>TopHead</code>。</li>
-<li>小驼峰是指两个单词拼在一起，只有后面那个词的首字母大写，比如 <code>contentPlace</code>。</li>
+<li>Upper camel case refers to two words combined, with the first letter of each word capitalized, such as <code>TopHead</code>.</li>
+<li>Lower camel case refers to two words combined, with only the first letter of the second word capitalized, such as <code>contentPlace</code>.</li>
 </ul>
-<p>而两个以上单词的命名就需要 <code>_</code> 来拼接了，比如 <code>the_menu_bar</code>。</p>
+<p>For naming conventions with more than two words, the <code>_</code> character is needed to combine them, such as <code>the_menu_bar</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -471,253 +470,11 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这样可读性就高多了，一般来说都知道哪个对应哪个，不需要费那么多眼神去一个一个找了。</p>
-<h1 id="结尾">结尾</h1>
-<p>以上只是我个人对目前已经发现的初学者学习 HTML 和 CSS 会出现的小问题的一些看法和方法。</p>
-<p>也许还有更多问题我没发现的&hellip;</p>
-<p>其实你可以到下面的评论插件吐槽&hellip;.</p>
-]]></description>
-</item><item>
-    <title>如何使用 GitHub 搭建网站</title>
-    <link>http://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/</link>
-    <pubDate>Sun, 13 Oct 2019 02:01:58 &#43;0530</pubDate>
-    <author>作者</author>
-    <guid>http://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/maxresdefault.jpg" referrerpolicy="no-referrer">
-            </div><h2 id="不正经的前言">不正经的前言</h2>
-<blockquote>
-<p>我又回来啦～</p>
-<p>嘿嘿，我绝对不会告诉你我又回来水啦～</p>
-<p>啊啊别打我～疼</p>
-</blockquote>
-<h2 id="github是啥">Github是啥</h2>
-<blockquote>
-<p>某个萌新:大佬大佬，Github是啥？</p>
-<p>大佬:不知道，滚。</p>
-<p>萌新:呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜呜大佬不帮我了呜呜呜呜呜呜呜</p>
-</blockquote>
-<p>咳咳，，，，</p>
-<p><a href="https://github.com/" target="_blank" rel="noopener noreffer">Github</a>是一个基于git的源代码托管平台，由Chris Wanstrath, PJ Hyett 与Tom Preston-Werner三位开发者在2008年4月创办。迄今拥有59名全职员工，主要提供基于git的版本托管服务。</p>
-<p>也常常被人戏称为<strong>Gayhub</strong>。2333</p>
-<blockquote>
-<p>今天，GitHub已是：</p>
-<ul>
-<li>一个拥有143万开发者的社区。其中不乏Linux发明者<a href="https://github.com/torvalds" target="_blank" rel="noopener noreffer">Torvalds</a>这样的顶级黑客，以及Rails创始人<a href="https://github.com/dhh" target="_blank" rel="noopener noreffer">DHH</a>这样的年轻极客。</li>
-<li>这个星球上最流行的开源托管服务。目前已托管431万git项目，不仅越来越多知名开源项目迁入GitHub，比如Ruby on Rails、jQuery、Ruby、Erlang/OTP；近三年流行的开源库往往在GitHub首发，例如：<a href="https://github.com/twitter/bootstrap" target="_blank" rel="noopener noreffer">BootStrap</a>、<a href="https://github.com/joyent/node" target="_blank" rel="noopener noreffer">Node.js</a>、<a href="https://github.com/jashkenas/coffee-script" target="_blank" rel="noopener noreffer">CoffeScript</a>等。</li>
-<li>alexa全球排名414的网站。</li>
-</ul>
-</blockquote>
-<p>也就是说，你想把你写好的开源程序发布出去，Github将是最佳选择。</p>
-<h2 id="本期的主要内容">本期的主要内容</h2>
-<p>本期内容将会写出如何使用Github搭建一个简单的网站</p>
-<h3 id="使用github建站的好处">使用Github建站的好处</h3>
-<blockquote>
-<ul>
-<li>安全
-<ul>
-<li>由于你的网页源代码是由Github托管，所以Github有多安全，你的网站就有多安全，别人想黑你就得先黑掉Github</li>
-</ul>
-</li>
-<li>简单
-<ul>
-<li>大部分操作只需要有前端基础就可以轻松完成</li>
-</ul>
-</li>
-<li>无忧
-<ul>
-<li>后端用Github的服务器，无需一天24小时维护，可以做到无人值守</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="使用github建站的缺点">使用Github建站的缺点</h3>
-<blockquote>
-<ul>
-<li>限制
-<ul>
-<li>Github仓库只能运行基于HTML这类的静态网页，不能使用数据库等花里胡哨的东西。</li>
-</ul>
-</li>
-<li><del>禁止爬虫</del>
-<ul>
-<li><del>Github的仓库是禁止搜索引擎进行爬取内容的，所以你搭建的网站不会在搜索引擎上被找到。</del> (事实证明其实可以)</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<hr>
-<p>以上就是使用Github建站的优缺点，在搭建之前必须按实际情况以及需求来考虑。</p>
-<h2 id="详细教程">详细教程</h2>
-<h3 id="准备">准备</h3>
-<h4 id="注册帐号">注册帐号</h4>
-<p>首先你需要去<a href="https://github.com/" target="_blank" rel="noopener noreffer">Github</a>注册一个帐号，只需要使用邮箱就可以注册，具体方法就不多说了，绝大多数人都会。</p>
-<blockquote>
-<p>萌新:大佬，我看不懂英文啊。。</p>
-<p>大佬:emmmm <a href="https://translate.google.cn/" target="_blank" rel="noopener noreffer">谷歌翻译</a>，请</p>
-</blockquote>
-<h4 id="创建仓库">创建仓库</h4>
-<p>当你登录帐号以后，你可以看到左上角一个绿绿的<code>new</code>，点击它</p>
-<p></p>
-<p>然后，就会弹出一个要你填的东西</p>
-<p></p>
-<p>如图所示，<code>Respository name</code>就是仓库的名称，</p>
-<p><strong>注意:Github只允许使用与用户名相同的仓库名搭建网页</strong></p>
-<p>这里有个特殊格式:</p>
-<blockquote>
-<p>你的GitHub用户名.github.io</p>
-</blockquote>
-<p>这个仓库名以后就是你的网址了</p>
-<p>创建完以后就是个空的仓库</p>
-<p></p>
-<p>这个时候你就可以按照它的提示上传你的网页代码了。</p>
-<h3 id="上传代码">上传代码</h3>
-<p>这里我会贴出一部分 <code>git</code> 的用法</p>
-<p>首先创建一个目录:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ mkdir ./你的Github用户名
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这个目录的名称其实可以随便写，但是为了方便管理，还是写成你的Github用户名比较好。</p>
-<p>接下来进入这个目录:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> ./你的Github用户名
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git init
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这个命令会使你这个目录被初始化为git目录，如果不理解的话去<a href="https://www.runoob.com/git/git-tutorial.html" target="_blank" rel="noopener noreffer">学一下git</a>吧。。。。</p>
-<p>接下来你就可以开始创建、编写你的网页代码了，比如我写个简单的HTML</p>
-<p>先创建一个<code>index.html</code>文件</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ vim ./index.html
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这里使用了<code>vim</code>，它会使你的终端自动进入编辑页面。</p>
-<p>接下来按 <code>i</code> 键进入编辑模式</p>
-<p>在里面写入以下代码</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>HelloWorld<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>HelloWorld<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>HelloWorld,this is my first website.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>你可以使用HTML语言随意编写你的网站，可以添加多个html页面文件和CSS，甚至JavaScript。</p>
-<p>编写完你的代码后，按 <code>ESC</code> 键回到命令模式，接下来按 : 键，你的vim左下角就会出现一个冒号，接下来</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">:wq
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来…执行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add index.html
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后你的创建的网页代码文件将会被提交</p>
-<p>如果你的文件比较多的话，可以试试</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git add *
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这样你就可以快速的提交你所有的文件了</p>
-<p>然后依次执行以下命令进行提交</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;first commit&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git remote add origin https://github.com/你的Github用户名/你的Github用户名.github.io.git
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git push -u origin master
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来输入你的Github帐号和密码就可以提交了。</p>
-<p>然后你就可以在浏览器里访问你的网站了。</p>
-<p>地址就是上面所述的: <code>你的Github用户名.github.io</code></p>
-<p>效果图:
-</p>
-<h2 id="结语">结语</h2>
-<p>以上就是使用github搭建简单网页的全过程了，由于时间关系所以只能写这么多了，下期可能又会拖一段时间。</p>
-<h2 id="参考链接">参考链接</h2>
-<ul>
-<li>
-<p><a href="https://www.runoob.com/git/git-tutorial.html" target="_blank" rel="noopener noreffer">git教程</a></p>
-</li>
-<li>
-<p><a href="https://wiki.archlinux.org/index.php/Vim_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Archwiki|vim</a></p>
-</li>
-<li>
-<p><a href="https://wiki.archlinux.org/index.php/Git_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Archwiki|git</a></p>
-</li>
-<li>
-<p><a href="https://www.runoob.com/html/html-tutorial.html" target="_blank" rel="noopener noreffer">html教程</a></p>
-</li>
-</ul>
+</div><p>This significantly improves readability so that one can generally tell at a glance which element corresponds to which, without having to spend time searching through the code.</p>
+<h1 id="end">End</h1>
+<p>The above are just my personal opinions and methods for addressing some of the small issues that beginner learners may encounter when studying HTML and CSS.</p>
+<p>There may be other problems that I haven&rsquo;t discovered yet&hellip;</p>
+<p>Feel free to leave a comment below to share your thoughts and feedback.</p>
 ]]></description>
 </item></channel>
 </rss>
