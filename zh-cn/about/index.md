@@ -147,10 +147,7 @@
 </html>
 
 # 简介 
-是一只超级坏狗勾
-* 刚成年不久
-* 公的 
-* DK 
+是一只大专笨狗
 * Arch User 
 * Python 初学者 
 * Telegram 频道 [@WeepingDogel](https://t.me/WeepingDogel)
