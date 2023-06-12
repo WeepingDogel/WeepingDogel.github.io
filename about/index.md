@@ -208,10 +208,6 @@ Please indicate the link when reprinting.
 
 Some articles use screenshots as covers, most article cover images are from [wallhaven.cc](https://wallhaven.cc/).
 
-# Comment
-
-You can leave a comment using the comment plugin below.
-
 ----
 
 # Links
