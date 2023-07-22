@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2 - WeepingDogel</title><meta name="Description" content="A passage to record some methods of programming in FrontEnd Development."><meta property="og:title" content="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" />
+<meta property="og:description" content="A passage to record some methods of programming in FrontEnd Development." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" /><meta property="og:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-22T15:46:49+08:00" />
+<meta property="article:modified_time" content="2023-07-22T15:46:49+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/>
+
+<meta name="twitter:title" content="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"/>
+<meta name="twitter:description" content="A passage to record some methods of programming in FrontEnd Development."/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" /><link rel="prev" href="http://weepingdogel.github.io/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/posts\/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2\/"
+        },"genre": "posts","keywords": "Vue, FrontEnd, Javascript, Web, Devlopment, Programming","wordcount":  1038 ,
+        "url": "http:\/\/weepingdogel.github.io\/posts\/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2\/","datePublished": "2023-07-22T15:46:49+08:00","dateModified": "2023-07-22T15:46:49+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "A passage to record some methods of programming in FrontEnd Development."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="WeepingDogel"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/">简体中文</option><option value="/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" selected></option></select>
+                    </a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="WeepingDogel"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/">简体中文</option><option value="/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" selected></option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2</h1><h2 class="single-subtitle">A passage to record some methods of programming in FrontEnd Development.</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io/" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">included in <a href="/categories/programming/"><i class="far fa-folder fa-fw"></i>Programming</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-07-22">2023-07-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1038 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/background_preview_2023_07_22.png"
+        data-srcset="/img/background_preview_2023_07_22.png, /img/background_preview_2023_07_22.png 1.5x, /img/background_preview_2023_07_22.png 2x"
+        data-sizes="auto"
+        alt="/img/background_preview_2023_07_22.png"
+        title="A passage to record some methods of programming in FrontEnd Development." /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#ways-to-transfer-a-value-from-the-parent-to-the-child">Ways to transfer a value from the parent to the child</a>
+          <ul>
+            <li><a href="#step-1-create-the-parent-component">Step 1: Create the Parent Component</a></li>
+            <li><a href="#step-2-define-the-data-in-the-parent-component">Step 2: Define the Data in the Parent Component</a></li>
+            <li><a href="#step-3-pass-the-data-as-a-prop-to-the-child-component">Step 3: Pass the Data as a Prop to the Child Component</a></li>
+            <li><a href="#step-4-create-the-child-component">Step 4: Create the Child Component</a></li>
+            <li><a href="#step-5-define-the-prop-in-the-child-component">Step 5: Define the Prop in the Child Component</a></li>
+            <li><a href="#step-6-emit-an-event-from-the-child-component">Step 6: Emit an Event from the Child Component</a></li>
+            <li><a href="#step-7-handle-the-event-in-the-parent-component">Step 7: Handle the Event in the Parent Component</a></li>
+            <li><a href="#compeleted-code">Compeleted Code</a></li>
+          </ul>
+        </li>
+        <li><a href="#test">Test</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
+<p>Vue is a popular JavaScript framework for building interactive web interfaces. It&rsquo;s easy to learn, versatile, and has a supportive community.</p>
+<p>Developing single-page applications with Vue is incredibly convenient.</p>
+<p>However, there are instances where we encounter challenges when it comes to transferring values between parent and child components.</p>
+<p>Still unclear? Imagine this scenario: You&rsquo;ve created a button and you want it to control the content of a <code>&lt;p&gt;&lt;/p&gt;</code> element, thereby fulfilling a specific development requirement.</p>
+<p>Then it&rsquo;s time to transfer different values to <code>ChildComponet</code> to change the properties or trigger an event.</p>
+<h2 id="ways-to-transfer-a-value-from-the-parent-to-the-child">Ways to transfer a value from the parent to the child</h2>
+<h3 id="step-1-create-the-parent-component">Step 1: Create the Parent Component</h3>
+<ol>
+<li>Create a new Vue component file for the parent component (e.g., <code>ParentComponent.vue</code>).</li>
+<li>In the component&rsquo;s template, define the parent component&rsquo;s content and include the child component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;FatherBox&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Import the child component by adding the necessary import statement.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">ChildComponent</span> <span class="nx">from</span> <span class="s1">&#39;./ChildComponent.vue&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Register the child component in the parent component&rsquo;s components property.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ChildComponent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step-2-define-the-data-in-the-parent-component">Step 2: Define the Data in the Parent Component</h3>
+<ol>
+<li>In the parent component&rsquo;s script section, define a data property to store the value that will be passed to the child component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Assign the initial value to the data property. This will be the value passed initially to the child component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hello from the parent component!&#39;</span><span class="p">,</span> <span class="c1">// Value to pass to child component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step-3-pass-the-data-as-a-prop-to-the-child-component">Step 3: Pass the Data as a Prop to the Child Component</h3>
+<p>1.In the parent component&rsquo;s template, add the child component and use the colon (:) binding to pass the data property as a prop to the child component.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;FatherBox&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="nt">:message</span><span class="s">=&#34;message&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>The prop name in the child component should match the name you choose when passing the prop in the parent component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">ChildComponent</span> <span class="nx">from</span> <span class="s1">&#39;./ChildComponent.vue&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ChildComponent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hello from the parent component!&#39;</span><span class="p">,</span> <span class="c1">// Value to pass to child component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">&#39;New message from parent!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step-4-create-the-child-component">Step 4: Create the Child Component</h3>
+<ol>
+<li>
+<p>Create a new Vue component file for the child component (e.g., <code>ChildComponent.vue</code>).</p>
+</li>
+<li>
+<p>In the child component&rsquo;s template, define the child component&rsquo;s content. This will include rendering the prop value passed from the parent component.</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{{</span> <span class="nx">message</span> <span class="p">}}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step-5-define-the-prop-in-the-child-component">Step 5: Define the Prop in the Child Component</h3>
+<ol>
+<li>In the child component&rsquo;s script section, define the prop for receiving the data sent by the parent component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">message</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Specify the type of the prop (e.g., <code>String</code>, <code>Number</code>, etc.) to ensure data integrity. You can also set <code>required: true</code> if the prop must be passed.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">message</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step-6-emit-an-event-from-the-child-component">Step 6: Emit an Event from the Child Component</h3>
+<ol>
+<li>In the child component&rsquo;s script, define a method that will emit an event to communicate with the parent component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">newMessage</span> <span class="o">=</span> <span class="s1">&#39;New message from child!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Inside the method, use this.$emit(&rsquo;event-name&rsquo;, data) to emit the event. Choose a suitable event name and pass any relevant data to the parent component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">newMessage</span> <span class="o">=</span> <span class="s1">&#39;New message from child!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s1">&#39;update-message&#39;</span><span class="p">,</span> <span class="nx">newMessage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="step-7-handle-the-event-in-the-parent-component">Step 7: Handle the Event in the Parent Component</h3>
+<ol>
+<li>In the parent component&rsquo;s script, define a method that will handle the event emitted by the child component.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">updateMessage</span><span class="p">(</span><span class="nx">newMessage</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Add an event listener to the child component instance in the parent component&rsquo;s template, using <code>@event-name=&quot;methodName&quot;</code>.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="nt">:message</span><span class="s">=&#34;message&#34;</span> <span class="nt">@update-message</span><span class="s">=&#34;updateMessage&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>In the method, receive the emitted data as an argument and update the parent component&rsquo;s data accordingly.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">updateMessage</span><span class="p">(</span><span class="nx">newMessage</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">newMessage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="compeleted-code">Compeleted Code</h3>
+<p>ParentComponent:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;FatherBox&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="nt">:message</span><span class="s">=&#34;message&#34;</span> <span class="nt">@update-message</span><span class="s">=&#34;updateMessage&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="nt">@click</span><span class="s">=&#34;changeMessage&#34;</span><span class="p">&gt;</span><span class="na">Change</span> <span class="na">Message</span> <span class="na">By</span> <span class="na">ParentComponent</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">ChildComponent</span> <span class="nx">from</span> <span class="s1">&#39;./ChildComponent.vue&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ChildComponent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hello from the parent component!&#39;</span><span class="p">,</span> <span class="c1">// Value to pass to child component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">updateMessage</span><span class="p">(</span><span class="nx">newMessage</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">newMessage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">&#39;New message from parent!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span> <span class="na">scoped</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">FatherBox</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">background</span><span class="o">-</span><span class="nx">color</span><span class="o">:</span> <span class="err">#</span><span class="nx">f1f1f1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">border</span><span class="o">-</span><span class="nx">radius</span><span class="o">:</span> <span class="mi">20</span><span class="nx">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">box</span><span class="o">-</span><span class="nx">shadow</span><span class="o">:</span> <span class="mi">0</span> <span class="mi">5</span><span class="nx">px</span> <span class="mi">5</span><span class="nx">px</span> <span class="nx">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">padding</span><span class="o">:</span> <span class="mi">20</span><span class="nx">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ChildComponent:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{{</span> <span class="nx">message</span> <span class="p">}}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="nt">@click</span><span class="s">=&#34;changeMessage&#34;</span><span class="p">&gt;</span><span class="na">Change</span> <span class="na">Message</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">message</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">newMessage</span> <span class="o">=</span> <span class="s1">&#39;New message from child!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s1">&#39;update-message&#39;</span><span class="p">,</span> <span class="nx">newMessage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="test">Test</h2>
+<p>Then we can execute <code>yarn dev</code> to start a development server and we can see a page like this:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/Screenshot_2023-07-22_at_18-07-34_Vite_App.png"
+        data-srcset="/img/Screenshot_2023-07-22_at_18-07-34_Vite_App.png, /img/Screenshot_2023-07-22_at_18-07-34_Vite_App.png 1.5x, /img/Screenshot_2023-07-22_at_18-07-34_Vite_App.png 2x"
+        data-sizes="auto"
+        alt="/img/Screenshot_2023-07-22_at_18-07-34_Vite_App.png"
+        title="/img/Screenshot_2023-07-22_at_18-07-34_Vite_App.png" /></p>
+<p>Now Let&rsquo;s try clicking the first button!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-07-22-18-09-41%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-07-22-18-09-41%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-07-22-18-09-41%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-07-22-18-09-41%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-07-22-18-09-41屏幕截图.png"
+        title="/img/2023-07-22-18-09-41屏幕截图.png" /></p>
+<p>Obviously! The content of the text changed!</p>
+<p>Then let&rsquo;s click the second button!</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-07-22-18-11-13%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-07-22-18-11-13%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-07-22-18-11-13%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-07-22-18-11-13%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-07-22-18-11-13屏幕截图.png"
+        title="/img/2023-07-22-18-11-13屏幕截图.png" /></p>
+<p>It became &ldquo;New message from parent!&rdquo;!</p>
+<p>That&rsquo;s amazing right?</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>That&rsquo;s it! By following these steps, you can successfully pass a value from a parent component to a child component using props and events in Vue.js. Don&rsquo;t forget to save your files, import components where necessary, and register components appropriately.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-22</span>
+            </div>
+            <div class="post-info-license"><span>CC BY-NC 4.0</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-via="weepingdogel_me" data-hashtags="Vue,FrontEnd,Javascript,Web,Devlopment,Programming"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-hashtag="Vue"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-description="A passage to record some methods of programming in FrontEnd Development." data-image="/img/background_preview_2023_07_22.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="Share on Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-caption="A passage to record some methods of programming in FrontEnd Development." data-tags="Vue,FrontEnd,Javascript,Web,Devlopment,Programming"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="Share on VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-caption="A passage to record some methods of programming in FrontEnd Development." data-image="/img/background_preview_2023_07_22.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="Share on Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-via="weepingdogel_me" data-picture="/img/background_preview_2023_07_22.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="Share on Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-description="A passage to record some methods of programming in FrontEnd Development."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="Share on Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="Share on Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="Share on StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="Share on Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-image="/img/background_preview_2023_07_22.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-description="A passage to record some methods of programming in FrontEnd Development."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-description="A passage to record some methods of programming in FrontEnd Development."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="Share on OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="Share on Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="Share on Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" data-title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2" data-description="A passage to record some methods of programming in FrontEnd Development."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2fhow_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2%2f&amp;description=How%20To%20Transfer%20A%20Value%20From%20The%20Parent%20Component%20To%20The%20Child%20Component%20in%20Vue%203.2" target="_blank" title="Share on Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vue/">Vue</a>,&nbsp;<a href="/tags/frontend/">FrontEnd</a>,&nbsp;<a href="/tags/javascript/">Javascript</a>,&nbsp;<a href="/tags/web/">Web</a>,&nbsp;<a href="/tags/devlopment/">Devlopment</a>,&nbsp;<a href="/tags/programming/">Programming</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/attempted_solution_to_the_openstack_provincial_competition_problem_part1/" class="prev" rel="prev" title="Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)"><i class="fas fa-angle-left fa-fw"></i>Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.112.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -4,7 +4,513 @@
         <link>http://weepingdogel.github.io/zh-cn/posts/</link>
         <description>所有文章 | WeepingDogel 的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
-            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Mon, 06 Mar 2023 22:27:08 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Sat, 22 Jul 2023 15:46:49 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>如何在Vue 3.2中从父组件传递一个值给子组件？</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/</link>
+    <pubDate>Sat, 22 Jul 2023 15:46:49 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/background_preview_2023_07_22.png" referrerpolicy="no-referrer">
+            </div><h2 id="介绍">介绍</h2>
+<p>Vue 是一种流行的 JavaScript 框架，用于构建交互式的网页界面。它易于学习、多功能，并拥有一个支持性强的社区。</p>
+<p>使用 Vue 开发单页面应用非常方便。</p>
+<p>然而，在父组件和子组件之间传递值的场景中，有时候可能会遇到一些挑战。</p>
+<p>还不清楚？想象一下这种情景：你创建了一个按钮，希望它可以控制一个 <code>&lt;p&gt;&lt;/p&gt;</code> 元素的内容，以满足特定的开发需求。</p>
+<p>这时，就该将不同的值传递给 <code>ChildComponent</code>，来改变属性或触发事件了。</p>
+<h2 id="从父组件传递值给子组件的方法">从父组件传递值给子组件的方法</h2>
+<h3 id="步骤-1创建父组件">步骤 1：创建父组件</h3>
+<ol>
+<li>为父组件创建一个新的 Vue 组件文件（例如 <code>ParentComponent.vue</code>）。</li>
+<li>在组件的模板中，定义父组件的内容并包含子组件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;FatherBox&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>通过添加必要的导入语句导入子组件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">ChildComponent</span> <span class="nx">from</span> <span class="s1">&#39;./ChildComponent.vue&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>在父组件的 components 属性中注册子组件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ChildComponent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="步骤-2在父组件中定义数据">步骤 2：在父组件中定义数据。</h3>
+<ol>
+<li>在父组件的脚本部分中，定义一个数据属性来存储将传递给子组件的值。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>给数据属性赋初始值。这将是最初传递给子组件的值。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hello from the parent component!&#39;</span><span class="p">,</span> <span class="c1">// Value to pass to child component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="步骤3将数据作为属性传递给子组件">步骤3：将数据作为属性传递给子组件</h3>
+<ol>
+<li>在父组件的模板中，添加子组件并使用冒号（:）绑定将数据属性作为 prop 传递给子组件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;FatherBox&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="nt">:message</span><span class="s">=&#34;message&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>在子组件中，prop 的名称应与在父组件中传递 prop 时选择的名称相匹配。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">ChildComponent</span> <span class="nx">from</span> <span class="s1">&#39;./ChildComponent.vue&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ChildComponent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hello from the parent component!&#39;</span><span class="p">,</span> <span class="c1">// Value to pass to child component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">&#39;New message from parent!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="步骤4创建子组件">步骤4：创建子组件</h3>
+<ol>
+<li>
+<p>为子组件创建一个新的 Vue 组件文件（例如，<code>ChildComponent.vue</code>）。</p>
+</li>
+<li>
+<p>在子组件的模板中，定义子组件的内容。这将包括呈现从组件传递的 prop 值。</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{{</span> <span class="nx">message</span> <span class="p">}}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="步骤5在子组件中定义-prop">步骤5：在子组件中定义 prop。</h3>
+<ol>
+<li>在子组件的脚本部分中，定义用于接收父组件发送的数据的 prop。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">message</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>为了确保数据的完整性，可以指定 prop 的类型（例如 <code>String</code>、<code>Number</code> 等）。如果必须传递该 prop，则还可以设置 <code>required: true</code>。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">message</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">type</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第六步从子组件发出事件">第六步：从子组件发出事件</h3>
+<ol>
+<li>在子组件的脚本中，定义一个方法来发出事件，与父组件进行通信。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">newMessage</span> <span class="o">=</span> <span class="s1">&#39;New message from child!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>在该方法内部，使用 <code>this.emit('事件名称',数据)</code>来发出事件。选择一个合适的事件名称，并将任何相关数据递给父组件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">newMessage</span> <span class="o">=</span> <span class="s1">&#39;New message from child!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s1">&#39;update-message&#39;</span><span class="p">,</span> <span class="nx">newMessage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第七步在父组件中处理事件">第七步：在父组件中处理事件</h3>
+<ol>
+<li>在父组件的脚本中，定义一个方法来处理子组件发出的事件。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">updateMessage</span><span class="p">(</span><span class="nx">newMessage</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>在父组件的模板中，通过使用 <code>@event-name=&quot;methodName&quot;</code> 为子组件实例添加事件监听器。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="nt">:message</span><span class="s">=&#34;message&#34;</span> <span class="nt">@update-message</span><span class="s">=&#34;updateMessage&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>在该方法中，将发出的数据作为参数接收，并相应地更新父件的数据。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="nx">updateMessage</span><span class="p">(</span><span class="nx">newMessage</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">newMessage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="完整代码">完整代码</h3>
+<p>父组件:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;FatherBox&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">ChildComponent</span> <span class="nt">:message</span><span class="s">=&#34;message&#34;</span> <span class="nt">@update-message</span><span class="s">=&#34;updateMessage&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="nt">@click</span><span class="s">=&#34;changeMessage&#34;</span><span class="p">&gt;</span><span class="na">Change</span> <span class="na">Message</span> <span class="na">By</span> <span class="na">ParentComponent</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">ChildComponent</span> <span class="nx">from</span> <span class="s1">&#39;./ChildComponent.vue&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">components</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ChildComponent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hello from the parent component!&#39;</span><span class="p">,</span> <span class="c1">// Value to pass to child component
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">updateMessage</span><span class="p">(</span><span class="nx">newMessage</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">newMessage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">&#39;New message from parent!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span> <span class="na">scoped</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nx">FatherBox</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">background</span><span class="o">-</span><span class="nx">color</span><span class="o">:</span> <span class="err">#</span><span class="nx">f1f1f1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">border</span><span class="o">-</span><span class="nx">radius</span><span class="o">:</span> <span class="mi">20</span><span class="nx">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">box</span><span class="o">-</span><span class="nx">shadow</span><span class="o">:</span> <span class="mi">0</span> <span class="mi">5</span><span class="nx">px</span> <span class="mi">5</span><span class="nx">px</span> <span class="nx">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">padding</span><span class="o">:</span> <span class="mi">20</span><span class="nx">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>子组件:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-vue" data-lang="vue"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;{{</span> <span class="nx">message</span> <span class="p">}}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">button</span> <span class="nt">@click</span><span class="s">=&#34;changeMessage&#34;</span><span class="p">&gt;</span><span class="na">Change</span> <span class="na">Message</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">lang</span><span class="o">=</span><span class="s">&#34;ts&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">message</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">methods</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">changeMessage</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="nx">newMessage</span> <span class="o">=</span> <span class="s1">&#39;New message from child!&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s1">&#39;update-message&#39;</span><span class="p">,</span> <span class="nx">newMessage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="测试">测试</h2>
+<p>然后我们可以执行 <code>yarn dev</code> 来启动开发服务器，然后我们就可以看到一个类似这样的页面：</p>
+<p></p>
+<p>现在让我们尝试点击第一个按钮！</p>
+<p></p>
+<p>显然！文本的内容发生了变化！</p>
+<p>那么让我们点击第二个按钮吧！</p>
+<p></p>
+<p>它变成了&quot;New message from parent!&quot;</p>
+<p>是不是很神奇呢？</p>
+<h2 id="结语">结语</h2>
+<p>没错！通过按照这些步骤，在Vue.js中可以成功地通过props和事件将值从父组件传给子组件。不要忘记保存文件，根据需要导组件，并适当注册组件。</p>
+]]></description>
+</item><item>
     <title>尝试解决最近 VirtualBox 启动虚拟机时卡在 Starting 的问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/</link>
     <pubDate>Mon, 06 Mar 2023 22:27:08 &#43;0800</pubDate>
@@ -3119,854 +3625,6 @@
 </blockquote>
 <p>但是其他方面足够满足我的需求，柔和的背光和优秀的按键触感让我觉得这两百多花得也值了。</p>
 <p><del>嗯&hellip; 如果有空的话把键冒换成粉色（逃</del></p>
-]]></description>
-</item><item>
-    <title>冒泡排序的尝试</title>
-    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E7%9A%84%E5%B0%9D%E8%AF%95/</link>
-    <pubDate>Tue, 15 Jun 2021 15:35:52 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E7%9A%84%E5%B0%9D%E8%AF%95/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/img/%e6%88%aa%e5%9b%be_2021-06-15_15-30-27.png" referrerpolicy="no-referrer">
-            </div><h1 id="序">序</h1>
-<p>嗯.. 又遇到了一个题</p>
-<blockquote>
-<p>输入4个整数，从小到大排序</p>
-</blockquote>
-<p>哇这个.. 看似简单其实写起来可不轻松呢。</p>
-<p>我照着谷歌查到的教程写了两种办法..</p>
-<p>一个是指针交换法</p>
-<ul>
-<li><a href="https://github.com/WeepingDogel/drafts/blob/main/C/swap_sort.c" target="_blank" rel="noopener noreffer">drafts/swap_sort.c at main · WeepingDogel/drafts · GitHub</a></li>
-</ul>
-<p>另一个是冒泡排序</p>
-<ul>
-<li><a href="https://github.com/WeepingDogel/drafts/blob/main/C/bbsort.c" target="_blank" rel="noopener noreffer">drafts/bbsort.c at main · WeepingDogel/drafts · GitHub</a></li>
-</ul>
-<p>本文将会描述用冒泡排序法解这个题</p>
-<h1 id="冒泡排序">冒泡排序</h1>
-<p>什么是冒泡排序？</p>
-<blockquote>
-<p>冒泡排序（英语：Bubble Sort）又称为泡式排序，是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
-<p>——<a href="https://zh.wikipedia.org/zh-cn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener noreffer">冒泡排序 - 维基百科，自由的百科全书</a></p>
-</blockquote>
-<p>嗯&hellip; 冒泡排序的过程是啥？</p>
-<blockquote>
-<ol>
-<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
-<li>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</li>
-<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
-<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
-</ol>
-<p>——<a href="https://zh.wikipedia.org/zh-cn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener noreffer">冒泡排序 - 维基百科，自由的百科全书</a></p>
-</blockquote>
-<p>再来看看维基百科上的伪代码和助记码</p>
-<blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="n">function</span> <span class="n">bubble_sort</span> <span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">   <span class="kt">var</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">   <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">from</span> <span class="m">0</span> <span class="n">to</span> <span class="n">length</span><span class="p">-</span><span class="m">1</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">       <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="k">from</span> <span class="m">0</span> <span class="n">to</span> <span class="n">length</span><span class="p">-</span><span class="m">1</span><span class="p">-</span><span class="n">i</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">           <span class="k">if</span> <span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">&gt;</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">+</span><span class="m">1</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">               <span class="n">swap</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">+</span><span class="m">1</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">       <span class="p">}</span>
-</span></span><span class="line"><span class="cl">   <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-basic" data-lang="basic"><span class="line"><span class="cl"><span class="err">函数</span><span class="w"> </span><span class="err">冒泡排序</span><span class="w"> </span><span class="err">输入</span><span class="w"> </span><span class="err">一个数组名称为</span><span class="vg">array</span><span class="w"> </span><span class="err">其长度为</span><span class="vg">length</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="vg">i</span><span class="w"> </span><span class="err">从</span><span class="w"> </span><span class="il">0</span><span class="w"> </span><span class="err">到</span><span class="w"> </span><span class="p">(</span><span class="vg">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="il">1</span><span class="p">)</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="vg">j</span><span class="w"> </span><span class="err">从</span><span class="w"> </span><span class="il">0</span><span class="w"> </span><span class="err">到</span><span class="w"> </span><span class="p">(</span><span class="vg">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="il">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vg">i</span><span class="p">)</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="err">如果</span><span class="w"> </span><span class="vg">array</span><span class="p">[</span><span class="vg">j</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="vg">array</span><span class="p">[</span><span class="vg">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="il">1</span><span class="p">]</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">               </span><span class="err">交换</span><span class="w"> </span><span class="vg">array</span><span class="p">[</span><span class="vg">j</span><span class="p">]</span><span class="w"> </span><span class="err">和</span><span class="w"> </span><span class="vg">array</span><span class="p">[</span><span class="vg">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="il">1</span><span class="p">]</span><span class="w"> </span><span class="err">的值</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="err">如果结束</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">       </span><span class="vg">j</span><span class="err">循环结束</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="vg">i</span><span class="err">循环结束</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">函数结束</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>助记码</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-r" data-lang="r"><span class="line"><span class="cl"><span class="n">i</span>∈<span class="n">[0</span><span class="p">,</span><span class="n">N</span><span class="m">-1</span><span class="p">)</span>               <span class="o">//</span>循环<span class="n">N</span><span class="m">-1</span>遍
-</span></span><span class="line"><span class="cl">  <span class="n">j</span>∈<span class="n">[0</span><span class="p">,</span><span class="n">N</span><span class="m">-1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>           <span class="o">//</span>每遍循环要处理的无序部分
-</span></span><span class="line"><span class="cl">    <span class="nf">swap</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="m">+1</span><span class="p">)</span>          <span class="o">//</span>两两排序（升序<span class="o">/</span>降序）
-</span></span></code></pre></td></tr></table>
-</div>
-</div></blockquote>
-<p>看完之后其实不难理解，变量<code>i</code>和<code>j</code>其实是用来定位元素在数组中的位置，然后通过循环增减来进行比较，如果其中一个比另一个大就更换位置。</p>
-<p><code>j</code> 的 <code>for</code> 循环每循环一次比对交换一次，<code>i</code> 的 <code>for</code> 循环每循环一次执行一次 <code>j</code> 的 <code>for</code> 循环，周而复始，直到循环结束就已经没有任何一对数字需要比较。</p>
-<p>接下来我将分别使用 Python 和 C 语言来实现冒泡了算法以及题目的需求。</p>
-<h1 id="过程">过程</h1>
-<h2 id="python">Python</h2>
-<p>首先用 Python 试试看。</p>
-<p>先声明变量 <code>sort()</code>，规定参数 <code>arr</code> 来表示数组:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>设置变量 <code>i</code> 和 <code>j</code>, 并用 <code>for</code> 从 <code>i</code> 开始循环<code>arr的长度-1</code>遍:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来在上一个循环里面再创建一个循环, 用 <code>for</code> 从 <code>j</code> 开始循环 <code>arr 的长度 - 1 - i</code> 遍, 所以这里 <code>range()</code> 要从 0 开始了:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后我们在<code>j</code>这个循环里面开始比对元素, 如果<code>arr[j]</code>大于<code>arr[j+1]</code>则将二者的值相互交换一下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>最后我们返回转换好的数组:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">arr</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">arr</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这样以来排列函数就写好了，接下来我们按照题目的要求输入四个整数再输出看看:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">73837372882</span><span class="p">,</span> <span class="mi">2772828191919</span><span class="p">,</span> <span class="mi">82828282828</span><span class="p">,</span><span class="mi">828282728181</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>输出:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[73837372882, 82828282828, 828282728181, 2772828191919]
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>很明显是按从小到大的数据排列的。:)</p>
-<p>这样一来 Python 就成功实现冒泡排序了。</p>
-<h2 id="c">C</h2>
-<p>接下来我们使用 C 语言来实现一下，不过在此之前我们看看 C 语言的 <code>for(){}</code> 语句是怎样的。</p>
-<blockquote>
-<p></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span> <span class="n">init</span><span class="p">;</span> <span class="n">condition</span><span class="p">;</span> <span class="n">increment</span> <span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">statement</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>for 循环的控制流：</p>
-<ol>
-<li>init 会首先被执行，且只会执行一次。这一步允许您声明并初始化任何循环控制变量。您也可以不在这里写任何语句，只要有一个分号出现即可。</li>
-<li>接下来，会判断 condition。如果为真，则执行循环主体。如果为假，则不执行循环主体，且控制流会跳转到紧接着 for 循环的下一条语句。</li>
-<li>在执行完 for 循环主体后，控制流会跳回上面的 increment 语句。该语句允许您更新循环控制变量。该语句可以留空，只要在条件后有一个分号出现即可。</li>
-<li>条件再次被判断。如果为真，则执行循环，这个过程会不断重复（循环主体，然后增加步值，再然后重新判断条件）。在条件变为假时，for 循环终止。</li>
-</ol>
-<p>——<a href="https://www.runoob.com/cprogramming/c-for-loop.html" target="_blank" rel="noopener noreffer">C for 循环 | 菜鸟教程</a></p>
-</blockquote>
-<p>这跟 Python 又不一样了，不过流程大致上是相同的。 :)</p>
-<p>由于 C 语言没有 Python 当中的 <code>len()</code> 函数来取长度，因此我们得在循环函数提供长度参数<code>int len()</code>了。
-而这个参数的值我们需要利用<code>sizeof()</code>函数计算地址来算。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>不过这是循环函数之外的事情，回写在主函数里面。</p>
-<p>接下来我们先写循环函数,声明函数 <code>void sort(){}</code>, 规定两个参数 <code>int arr[]</code> 和 <code>int len</code>：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来定义三个整型变量，分别为 <code>i</code>,<code>j</code>,<code>temp</code>， 由于语法不同，在 C 语言中变量 <code>temp</code> 将作为交换两个数组元素值而设置的中间值：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">temp</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">sort</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来创建 <code>for</code> 循环, 规定 <code>i</code> 从 0 开始一增加，直到不满足 <code>i &lt; len - 1;</code> 为止并跳出循环：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">sort</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后在上一个 <code>for</code> 循环里面再创建一个 <code>for</code> 循环，规定 <code>j</code> 从 0 开始一直增加，直到不满足 <code>j &lt; len - 1 - i</code> 为止并跳出循环：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">sort</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后就开始在循环圈里比对大小和交换了,如果 <code>arr[j]</code> 大于 <code>arr[j + 1]</code>，则将他们的值交换，先把 <code>arr[j]</code> 的值赋给 <code>temp</code>, 再把 <code>arr[j+1]</code> 的值赋给 <code>arr[j]</code>, 最后将 <code>temp</code> 的值赋给 <code>arr[j+1]</code>:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">sort</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这样以来排序函数就写好了，接下来我们来写主函数里面的东西, 先定义主函数：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>题目要我们输入四个整数，我们定义四个整形变量，并通过<code>scanf()</code> 获取输入值并分别赋给他们:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;please type four numbers:&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d%d%d%d&#34;</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;please type four numbers:&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d%d%d%d&#34;</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>接下来定义整形数组<code>int arr[]={};</code>，将得到的这四个整数加入这个数组:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;please type four numbers:&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d%d%d%d&#34;</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后定义整形变量 len, 计算数组长度并赋值给它:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;please type four numbers:&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d%d%d%d&#34;</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后我们调用刚刚写好的排序函数<code>sort();</code>：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;please type four numbers:&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d%d%d%d&#34;</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>此时 <code>arr[]</code> 各项元素的位置都按照以小到大的顺序排列好了。最后我们需要定义一个用来确定位置的整形变量 <code>i</code> 再将这个数组用 <code>for</code> 循环输出就好了。</p>
-<p>创建 <code>for</code> 循环, 规定 <code>i</code> 从 0 开始一直增加直到不满足 <code>i &lt; len</code> 为止并跳出，每循环一次，输出一个以<code>i</code>为位置的元素：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;please type four numbers:&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d%d%d%d&#34;</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>(还有不要忘了 <code>return 0;</code>)</p>
-<p>接下来进行编译和运行</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ gcc 文件名.c -o /tmp/文件名
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">$ /tmp/文件名
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>输出:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">type four numbers:
-</span></span><span class="line"><span class="cl">54 87 25 65
-</span></span><span class="line"><span class="cl">25 54 65 87 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>很明显，每个数字都是按照从小到大的顺序排列的，C 语言下的冒泡排序就成功实现了。:)</p>
-<h1 id="完整代码">完整代码</h1>
-<h2 id="python-1">Python</h2>
-<p>Github: <a href="https://github.com/WeepingDogel/drafts/blob/main/Python/bbsort.py" target="_blank" rel="noopener noreffer">drafts/bbsort.py at main · WeepingDogel/drafts · GitHub</a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
-</span></span></span><span class="line"><span class="cl"><span class="s1">冒泡排序
-</span></span></span><span class="line"><span class="cl"><span class="s1">Python 实例
-</span></span></span><span class="line"><span class="cl"><span class="s1">By WeepingDogel
-</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">arr</span>
-</span></span><span class="line"><span class="cl"><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">73837372882</span><span class="p">,</span> <span class="mi">2772828191919</span><span class="p">,</span> <span class="mi">82828282828</span><span class="p">,</span><span class="mi">828282728181</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="c-1">C</h2>
-<p>Github: <a href="https://github.com/WeepingDogel/drafts/blob/main/C/bbsort.c" target="_blank" rel="noopener noreffer">drafts/bbsort.c at main · WeepingDogel/drafts · GitHub</a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*
-</span></span></span><span class="line"><span class="cl"><span class="cm">冒泡排序 
-</span></span></span><span class="line"><span class="cl"><span class="cm">C 语言实例
-</span></span></span><span class="line"><span class="cl"><span class="cm">By WeepingDogel
-</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">arr</span><span class="p">[],</span><span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;type four numbers:</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d%d%d%d&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n1</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n2</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n3</span><span class="p">,</span><span class="o">&amp;</span><span class="n">n4</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">n3</span><span class="p">,</span><span class="n">n4</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">sizeof</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">len</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="参考链接">参考链接</h1>
-<ul>
-<li><a href="https://www.runoob.com/cprogramming/c-arrays.html" target="_blank" rel="noopener noreffer">C 数组 | 菜鸟教程</a></li>
-<li><a href="https://www.runoob.com/cprogramming/c-for-loop.html" target="_blank" rel="noopener noreffer">C for 循环 | 菜鸟教程</a></li>
-<li><a href="https://www.runoob.com/cprogramming/c-basic-syntax.html" target="_blank" rel="noopener noreffer">C 基本语法 | 菜鸟教程</a></li>
-<li><a href="https://www.runoob.com/cprogramming/c-data-types.html" target="_blank" rel="noopener noreffer">C 数据类型 | 菜鸟教程</a></li>
-<li><a href="https://www.runoob.com/python/python-for-loop.html" target="_blank" rel="noopener noreffer">Python for 循环语句 | 菜鸟教程</a></li>
-<li><a href="https://zh.wikipedia.org/zh-cn/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener noreffer">冒泡排序 - 维基百科，自由的百科全书</a></li>
-<li><a href="https://cloud.tencent.com/developer/article/1736013" target="_blank" rel="noopener noreffer">c语言获取数组长度的三种方法 - 云+社区 - 腾讯云</a></li>
-</ul>
 ]]></description>
 </item></channel>
 </rss>
