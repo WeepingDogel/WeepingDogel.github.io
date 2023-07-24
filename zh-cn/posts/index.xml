@@ -590,15 +590,15 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># GRUB boot loader configuration
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="c"># GRUB boot loader configuration
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="nv">0</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="nv">5</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;loglevel=7&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;ibt=off&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">GRUB_DEFAULT=0
-</span></span><span class="line"><span class="cl">GRUB_TIMEOUT=5
-</span></span><span class="line"><span class="cl">GRUB_DISTRIBUTOR=&#34;Arch&#34;
-</span></span><span class="line"><span class="cl">GRUB_CMDLINE_LINUX_DEFAULT=&#34;loglevel=7&#34;
-</span></span><span class="line"><span class="cl">GRUB_CMDLINE_LINUX=&#34;ibt=off&#34;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">......
+</span></span><span class="line"><span class="cl"><span class="nv">......</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>按 <code>:</code> 输入 <code>wq</code> 回车（基础操作了，不多解释）。</p>
@@ -2440,8 +2440,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">anonymous_enable=YES
-</span></span><span class="line"><span class="cl">no_anon_password=YES
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">anonymous_enable</span><span class="o">=</span><span class="nv">YES</span>
+</span></span><span class="line"><span class="cl"><span class="nv">no_anon_password</span><span class="o">=</span><span class="nv">YES</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后通过 systemd 启动</p>
@@ -2494,8 +2494,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># No DHCP service in DMZ network (192.168.2.0/24)
-</span></span><span class="line"><span class="cl">subnet 192.168.2.0 netmask 255.255.255.0 
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="c"># No DHCP service in DMZ network (192.168.2.0/24)
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="kt">subnet</span> <span class="mf">192.168.2.0</span> <span class="kt">netmask</span> <span class="mf">255.255.255.0</span> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后通过 systemd 来启动服务</p>
@@ -2897,24 +2897,24 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># These settings were set by the catalyst build script that automatically
-</span></span><span class="line"><span class="cl"># built this stage.
-</span></span><span class="line"><span class="cl"># Please consult /usr/share/portage/config/make.conf.example for a more
-</span></span><span class="line"><span class="cl"># detailed example.
-</span></span><span class="line"><span class="cl">COMMON_FLAGS=&#34;-march=silvermont -O2 -pipe&#34;
-</span></span><span class="line"><span class="cl">CFLAGS=&#34;${COMMON_FLAGS}&#34;
-</span></span><span class="line"><span class="cl">CXXFLAGS=&#34;${COMMON_FLAGS}&#34;
-</span></span><span class="line"><span class="cl">FCFLAGS=&#34;${COMMON_FLAGS}&#34;
-</span></span><span class="line"><span class="cl">FFLAGS=&#34;${COMMON_FLAGS}&#34;
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="c"># These settings were set by the catalyst build script that automatically
+</span></span></span><span class="line"><span class="cl"><span class="c"># built this stage.
+</span></span></span><span class="line"><span class="cl"><span class="c"># Please consult /usr/share/portage/config/make.conf.example for a more
+</span></span></span><span class="line"><span class="cl"><span class="c"># detailed example.
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">COMMON_FLAGS</span><span class="o">=</span><span class="s">&#34;-march=silvermont -O2 -pipe&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">CFLAGS</span><span class="o">=</span><span class="s">&#34;</span><span class="si">${COMMON_FLAGS}</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s">&#34;</span><span class="si">${COMMON_FLAGS}</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">FCFLAGS</span><span class="o">=</span><span class="s">&#34;</span><span class="si">${COMMON_FLAGS}</span><span class="s">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">FFLAGS</span><span class="o">=</span><span class="s">&#34;</span><span class="si">${COMMON_FLAGS}</span><span class="s">&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># NOTE: This stage was built with the bindist Use flag enabled
-</span></span><span class="line"><span class="cl">PORTDIR=&#34;/var/db/repos/gentoo&#34;
-</span></span><span class="line"><span class="cl">DISTDIR=&#34;/var/cache/distfiles&#34;
-</span></span><span class="line"><span class="cl">PKGDIR=&#34;/var/cache/binpkgs&#34;
+</span></span><span class="line"><span class="cl"><span class="c"># NOTE: This stage was built with the bindist Use flag enabled
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">PORTDIR</span><span class="o">=</span><span class="s">&#34;/var/db/repos/gentoo&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">DISTDIR</span><span class="o">=</span><span class="s">&#34;/var/cache/distfiles&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PKGDIR</span><span class="o">=</span><span class="s">&#34;/var/cache/binpkgs&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"># This sets the language of build output to English.
-</span></span><span class="line"><span class="cl"># Please keep this setting intact when reporting bugs.
-</span></span><span class="line"><span class="cl">LC_MESSAGES=C
+</span></span><span class="line"><span class="cl"><span class="c"># This sets the language of build output to English.
+</span></span></span><span class="line"><span class="cl"><span class="c"># Please keep this setting intact when reporting bugs.
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">LC_MESSAGES</span><span class="o">=</span><span class="nv">C</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="安装-gentoo-基础系统">安装 Gentoo 基础系统</h1>
@@ -3108,8 +3108,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">USE=&#34;alsa udev dbus icu systemd gles2 sound video intel -kde tiff x265&#34;
-</span></span><span class="line"><span class="cl">VIDEO_CARDS=&#34;intel&#34;
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">USE</span><span class="o">=</span><span class="s">&#34;alsa udev dbus icu systemd gles2 sound video intel -kde tiff x265&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">VIDEO_CARDS</span><span class="o">=</span><span class="s">&#34;intel&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="更新-world-集合">更新 @world 集合</h2>
