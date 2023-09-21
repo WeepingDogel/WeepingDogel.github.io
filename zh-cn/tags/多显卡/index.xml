@@ -1,0 +1,284 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>多显卡 - 标签 - WeepingDogel 的博客</title>
+        <link>http://weepingdogel.github.io/zh-cn/tags/%E5%A4%9A%E6%98%BE%E5%8D%A1/</link>
+        <description>多显卡 - 标签 - WeepingDogel 的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/tags/%E5%A4%9A%E6%98%BE%E5%8D%A1/" rel="self" type="application/rss+xml" /><item>
+    <title>解决 NVIDIA 和 Intel GPU 双屏问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</link>
+    <pubDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png" referrerpolicy="no-referrer">
+            </div><h2 id="序">序</h2>
+<p>最近买了个优派的新显示器，但是我遇到了多显卡问题。</p>
+<p>过去一年我都是用笔记本自带的显示器跑 Gnome, 没有装 N 卡闭源驱动。</p>
+<p>然而，因为买了新显示器，用核显来带两个屏幕，显然性能不够。</p>
+<p>因此，我打算在我的 Arch 给这张 3050 装闭源驱动，用来带新的显示器。</p>
+<p>但是过程并不是很顺利&hellip;&hellip;</p>
+<p>我踩坑的原因是我之前习惯用 wayland 模式来跑 Gnome 的。</p>
+<p>但据说 N 卡的闭源驱动在 wayland 表现不太好？</p>
+<p>所以这意味着我必须放弃用 wayland 来带两个屏幕。</p>
+<p>这太糟糕了，我不得不回到 X11 的怀抱了。</p>
+<h2 id="起步">起步</h2>
+<p>最开始呢，我直接把显示器插在了笔记本上的 mini-DP 口，另一头插在显示器的 DP 口上。</p>
+<p>但失望的是，它根本没有亮起来。 QAQ</p>
+<p>也许是这个 miniDP 口在缺少N卡驱动的情况下不能输出。</p>
+<p>所以我打算把它装上。</p>
+<h2 id="安装-n-卡驱动">安装 N 卡驱动</h2>
+<p>第一步是安装驱动，但需要注意的是，这是第一步，而不是万事大吉。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-prime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然而，这显示器仍然没有亮&hellip;</p>
+<p>于是我到 ArchCN 群问大佬。</p>
+<p>经过讨论之后，我得到了解决问题的方法。</p>
+<h2 id="打开-ibt">打开 <code>ibt</code></h2>
+<p>大概在三月份的时候，<a href="/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/" rel="">我遇到了一些 VirtualBox 的问题</a>。</p>
+<p>但是现在不需要关掉了，所以我需要把它从内核参数当中移除。</p>
+<p>编辑文件：<code>/etc/default/grub</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;ibt=off&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后将 <code>ibt=off</code> 从 <code>GRUB_CMD_LINE_LINUX</code> 当中删除：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重新生成 <code>grub.cfg</code> 配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /etc/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="设置-nvidia-modeset">设置 NVIDIA modeset</h2>
+<p>然后我需要查看 <code>nvidia-drm.modeset</code> 的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat /sys/module/nvidia_drm/parameters/modeset
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它返回的结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">N
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我需要向内核参数添加 <code>nvidia-drm.modeset=1</code> 。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>nvidia-drm.modeset=1</code>内核参数启用了<strong>NVIDIA Direct Rendering Manager KMS（内核模式设置）</strong>。KMS是一种在内核空间而非用户空间设置显示分辨率和深度的方法。</div>
+        </div>
+    </div>
+<p>编辑文件：<code>/etc/default/grub</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>向 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 添加 <code>nvidia-drm.modeset=1</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0 nvidia-drm.modeset=1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重新生成 grub 配置文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重启。</p>
+<h2 id="使用-mutter-performance">使用 mutter-performance</h2>
+<p>然而，在重启之后效果还是不太好。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>mutter-performance</code> &ldquo;是 Mutter 窗口管理器的优化版本，特别针对性能进行了调整。Mutter 是 GNOME 3 的默认窗口管理器，负责窗口的排列、交互和动画<a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer">linkedin.com</a>。</div>
+        </div>
+    </div>
+<p>这个包需要从 <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer">AUR</a> 安装.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ paru -S mutter-performance
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>装完之后，桌面确实比之前要快一点了，但仍然不够。</p>
+<p>并且，值得一提的是，现在是时候卸载 <code>xf86-video-intel</code> 了。 在新设备当中并不需要这个包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo pacman -Rs xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>xf86-video-intel 软件包是 Intel 集成显卡芯片的驱动程序，由 X.Org 项目维护。 然而，对于现代 Intel 图形硬件（大约 2007 年及更新版本），出于以下几个原因，通常建议删除此软件包：</p>
+<p>更好地支持模式设置驱动程序：模式设置驱动程序是 X 服务器的一部分，不需要单独安装，可以更好地支持现代图形功能和硬件。 它由 X.Org 项目维护，并倾向于跟上图形技术 github.com 的新发展。</p>
+<p>xf86-video-intel 驱动程序的问题：已知 xf86-video-intel 驱动程序会在某些系统上引起问题，包括图形故障以及与模式设置驱动程序相比性能较差。 在某些情况下，它甚至会导致 bbs.archlinux.org 系统不稳定。</p>
+<p>缺乏积极的开发：xf86-video-intel 驱动程序已经好几年没有积极开发了，这意味着它可能缺乏对较新硬件和软件中的功能的支持。 另一方面，模式设置驱动程序作为 X 服务器 reddit.com 的一部分正在积极开发。</p>
+<p>要删除 xf86-video-intel 软件包，您可以使用特定 Linux 发行版的软件包管理器。 以下是使用 pacman（Arch Linux 的包管理器）的示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo pacman -R xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除软件包后，重新启动系统以确保更改生效。</p>
+<p>请记住检查特定发行版的文档，了解删除软件包和处理驱动程序的正确方法。</p>
+</div>
+        </div>
+    </div>
+<h2 id="设置-x11-配置文件">设置 X11 配置文件</h2>
+<p>根据 <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">Arch Wiki</a>，我需要设置一些 X11 配置文件，用来单独使用 N 卡。</p>
+<p>写入文件 <code>/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf/</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;intel&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;i915&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;modesetting&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;nvidia-drm&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;AllowEmptyInitialConfiguration&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;PrimaryGPU&#34;</span> <span class="s">&#34;yes&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/nvidia/xorg&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/xorg/modules&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我就需要创建两个 <code>*.desktop</code> 文件来配置 GDM。</p>
+<p>写入文件 <code>/usr/share/gdm/greeter/autostart/optimus.desktop</code> 和 <code>/etc/xdg/autostart/optimus.desktop</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="err">[</span><span class="nv">Desktop</span> <span class="nv">Entry</span><span class="err">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span><span class="nv">Application</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Name</span><span class="o">=</span><span class="nv">Optimus</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Exec</span><span class="o">=</span><span class="nv">sh</span> <span class="nv">-c</span> <span class="s">&#34;xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NoDisplay</span><span class="o">=</span><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">X-GNOME-Autostart-Phase</span><span class="o">=</span><span class="nv">DisplayServer</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后，经过重启，终于解决了这些问题。</p>
+<p>好耶！</p>
+<h2 id="参考连接">参考连接</h2>
+<ul>
+<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer">Phind.com</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #GDM</a></li>
+</ul>
+]]></description>
+</item></channel>
+</rss>

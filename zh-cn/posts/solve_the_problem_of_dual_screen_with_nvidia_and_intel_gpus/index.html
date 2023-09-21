@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>解决 NVIDIA 和 Intel GPU 双屏问题 - WeepingDogel 的博客</title><meta name="Description" content="几个礼拜前，我买了个优派的新显示器"><meta property="og:title" content="解决 NVIDIA 和 Intel GPU 双屏问题" />
+<meta property="og:description" content="几个礼拜前，我买了个优派的新显示器" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" /><meta property="og:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-21T23:06:09+08:00" />
+<meta property="article:modified_time" content="2023-09-21T23:06:09+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/>
+
+<meta name="twitter:title" content="解决 NVIDIA 和 Intel GPU 双屏问题"/>
+<meta name="twitter:description" content="几个礼拜前，我买了个优派的新显示器"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" /><link rel="prev" href="http://weepingdogel.github.io/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "解决 NVIDIA 和 Intel GPU 双屏问题",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/zh-cn\/posts\/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus\/"
+        },"genre": "posts","keywords": "多显卡, NVIDIA, Intel, Arch Linux, Linux, NVIDIA 驱动, X11, 问题解决","wordcount":  1565 ,
+        "url": "http:\/\/weepingdogel.github.io\/zh-cn\/posts\/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus\/","datePublished": "2023-09-21T23:06:09+08:00","dateModified": "2023-09-21T23:06:09+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "几个礼拜前，我买了个优派的新显示器"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/zh-cn/" title="WeepingDogel 的博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/zh-cn/posts/"> 文章 </a><a class="menu-item" href="/zh-cn/tags/"> 标签 </a><a class="menu-item" href="/zh-cn/categories/"> 分类 </a><a class="menu-item" href="/zh-cn/about/"> 关于我 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" selected>简体中文</option><option value="/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"></option></select>
+                    </a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/zh-cn/" title="WeepingDogel 的博客"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/zh-cn/posts/" title="">文章</a><a class="menu-item" href="/zh-cn/tags/" title="">标签</a><a class="menu-item" href="/zh-cn/categories/" title="">分类</a><a class="menu-item" href="/zh-cn/about/" title="">关于我</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" selected>简体中文</option><option value="/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"></option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">解决 NVIDIA 和 Intel GPU 双屏问题</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">收录于 <a href="/zh-cn/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"><i class="far fa-folder fa-fw"></i>问题解决</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-21">2023-09-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1565 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-09-21-21-49-12屏幕截图.png"
+        title="几个礼拜前，我买了个优派的新显示器" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#序">序</a></li>
+        <li><a href="#起步">起步</a></li>
+        <li><a href="#安装-n-卡驱动">安装 N 卡驱动</a></li>
+        <li><a href="#打开-ibt">打开 <code>ibt</code></a></li>
+        <li><a href="#设置-nvidia-modeset">设置 NVIDIA modeset</a></li>
+        <li><a href="#使用-mutter-performance">使用 mutter-performance</a></li>
+        <li><a href="#设置-x11-配置文件">设置 X11 配置文件</a></li>
+        <li><a href="#参考连接">参考连接</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="序">序</h2>
+<p>最近买了个优派的新显示器，但是我遇到了多显卡问题。</p>
+<p>过去一年我都是用笔记本自带的显示器跑 Gnome, 没有装 N 卡闭源驱动。</p>
+<p>然而，因为买了新显示器，用核显来带两个屏幕，显然性能不够。</p>
+<p>因此，我打算在我的 Arch 给这张 3050 装闭源驱动，用来带新的显示器。</p>
+<p>但是过程并不是很顺利&hellip;&hellip;</p>
+<p>我踩坑的原因是我之前习惯用 wayland 模式来跑 Gnome 的。</p>
+<p>但据说 N 卡的闭源驱动在 wayland 表现不太好？</p>
+<p>所以这意味着我必须放弃用 wayland 来带两个屏幕。</p>
+<p>这太糟糕了，我不得不回到 X11 的怀抱了。</p>
+<h2 id="起步">起步</h2>
+<p>最开始呢，我直接把显示器插在了笔记本上的 mini-DP 口，另一头插在显示器的 DP 口上。</p>
+<p>但失望的是，它根本没有亮起来。 QAQ</p>
+<p>也许是这个 miniDP 口在缺少N卡驱动的情况下不能输出。</p>
+<p>所以我打算把它装上。</p>
+<h2 id="安装-n-卡驱动">安装 N 卡驱动</h2>
+<p>第一步是安装驱动，但需要注意的是，这是第一步，而不是万事大吉。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-prime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然而，这显示器仍然没有亮&hellip;</p>
+<p>于是我到 ArchCN 群问大佬。</p>
+<p>经过讨论之后，我得到了解决问题的方法。</p>
+<h2 id="打开-ibt">打开 <code>ibt</code></h2>
+<p>大概在三月份的时候，<a href="/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/" rel="">我遇到了一些 VirtualBox 的问题</a>。</p>
+<p>但是现在不需要关掉了，所以我需要把它从内核参数当中移除。</p>
+<p>编辑文件：<code>/etc/default/grub</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;ibt=off&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后将 <code>ibt=off</code> 从 <code>GRUB_CMD_LINE_LINUX</code> 当中删除：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重新生成 <code>grub.cfg</code> 配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /etc/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="设置-nvidia-modeset">设置 NVIDIA modeset</h2>
+<p>然后我需要查看 <code>nvidia-drm.modeset</code> 的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat /sys/module/nvidia_drm/parameters/modeset
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它返回的结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">N
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我需要向内核参数添加 <code>nvidia-drm.modeset=1</code> 。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>nvidia-drm.modeset=1</code>内核参数启用了<strong>NVIDIA Direct Rendering Manager KMS（内核模式设置）</strong>。KMS是一种在内核空间而非用户空间设置显示分辨率和深度的方法。</div>
+        </div>
+    </div>
+<p>编辑文件：<code>/etc/default/grub</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>向 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 添加 <code>nvidia-drm.modeset=1</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0 nvidia-drm.modeset=1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重新生成 grub 配置文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重启。</p>
+<h2 id="使用-mutter-performance">使用 mutter-performance</h2>
+<p>然而，在重启之后效果还是不太好。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>mutter-performance</code> &ldquo;是 Mutter 窗口管理器的优化版本，特别针对性能进行了调整。Mutter 是 GNOME 3 的默认窗口管理器，负责窗口的排列、交互和动画<a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer">linkedin.com</a>。</div>
+        </div>
+    </div>
+<p>这个包需要从 <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer">AUR</a> 安装.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ paru -S mutter-performance
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>装完之后，桌面确实比之前要快一点了，但仍然不够。</p>
+<p>并且，值得一提的是，现在是时候卸载 <code>xf86-video-intel</code> 了。 在新设备当中并不需要这个包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo pacman -Rs xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>xf86-video-intel 软件包是 Intel 集成显卡芯片的驱动程序，由 X.Org 项目维护。 然而，对于现代 Intel 图形硬件（大约 2007 年及更新版本），出于以下几个原因，通常建议删除此软件包：</p>
+<p>更好地支持模式设置驱动程序：模式设置驱动程序是 X 服务器的一部分，不需要单独安装，可以更好地支持现代图形功能和硬件。 它由 X.Org 项目维护，并倾向于跟上图形技术 github.com 的新发展。</p>
+<p>xf86-video-intel 驱动程序的问题：已知 xf86-video-intel 驱动程序会在某些系统上引起问题，包括图形故障以及与模式设置驱动程序相比性能较差。 在某些情况下，它甚至会导致 bbs.archlinux.org 系统不稳定。</p>
+<p>缺乏积极的开发：xf86-video-intel 驱动程序已经好几年没有积极开发了，这意味着它可能缺乏对较新硬件和软件中的功能的支持。 另一方面，模式设置驱动程序作为 X 服务器 reddit.com 的一部分正在积极开发。</p>
+<p>要删除 xf86-video-intel 软件包，您可以使用特定 Linux 发行版的软件包管理器。 以下是使用 pacman（Arch Linux 的包管理器）的示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo pacman -R xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除软件包后，重新启动系统以确保更改生效。</p>
+<p>请记住检查特定发行版的文档，了解删除软件包和处理驱动程序的正确方法。</p>
+</div>
+        </div>
+    </div>
+<h2 id="设置-x11-配置文件">设置 X11 配置文件</h2>
+<p>根据 <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">Arch Wiki</a>，我需要设置一些 X11 配置文件，用来单独使用 N 卡。</p>
+<p>写入文件 <code>/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf/</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;intel&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;i915&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;modesetting&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;nvidia-drm&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;AllowEmptyInitialConfiguration&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;PrimaryGPU&#34;</span> <span class="s">&#34;yes&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/nvidia/xorg&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/xorg/modules&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我就需要创建两个 <code>*.desktop</code> 文件来配置 GDM。</p>
+<p>写入文件 <code>/usr/share/gdm/greeter/autostart/optimus.desktop</code> 和 <code>/etc/xdg/autostart/optimus.desktop</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="err">[</span><span class="nv">Desktop</span> <span class="nv">Entry</span><span class="err">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span><span class="nv">Application</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Name</span><span class="o">=</span><span class="nv">Optimus</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Exec</span><span class="o">=</span><span class="nv">sh</span> <span class="nv">-c</span> <span class="s">&#34;xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NoDisplay</span><span class="o">=</span><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">X-GNOME-Autostart-Phase</span><span class="o">=</span><span class="nv">DisplayServer</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后，经过重启，终于解决了这些问题。</p>
+<p>好耶！</p>
+<h2 id="参考连接">参考连接</h2>
+<ul>
+<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer">Phind.com</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #GDM</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-09-21</span>
+            </div>
+            <div class="post-info-license"><span>CC BY-NC 4.0</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-via="weepingdogel_me" data-hashtags="多显卡,NVIDIA,Intel,Arch Linux,Linux,NVIDIA 驱动,X11,问题解决"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-hashtag="多显卡"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-description="几个礼拜前，我买了个优派的新显示器" data-image="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-caption="几个礼拜前，我买了个优派的新显示器" data-tags="多显卡,NVIDIA,Intel,Arch Linux,Linux,NVIDIA 驱动,X11,问题解决"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="分享到 VK" data-sharer="vk" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-caption="几个礼拜前，我买了个优派的新显示器" data-image="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-via="weepingdogel_me" data-picture="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-description="几个礼拜前，我买了个优派的新显示器"><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="分享到 StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-image="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-description="几个礼拜前，我买了个优派的新显示器"><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-description="几个礼拜前，我买了个优派的新显示器"><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="分享到 OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="解决 NVIDIA 和 Intel GPU 双屏问题" data-description="几个礼拜前，我买了个优派的新显示器"><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fzh-cn%2fposts%2fsolve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus%2f&amp;description=%e8%a7%a3%e5%86%b3%20NVIDIA%20%e5%92%8c%20Intel%20GPU%20%e5%8f%8c%e5%b1%8f%e9%97%ae%e9%a2%98" target="_blank" title="分享到 Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/zh-cn/tags/%E5%A4%9A%E6%98%BE%E5%8D%A1/">多显卡</a>,&nbsp;<a href="/zh-cn/tags/nvidia/">NVIDIA</a>,&nbsp;<a href="/zh-cn/tags/intel/">Intel</a>,&nbsp;<a href="/zh-cn/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/zh-cn/tags/linux/">Linux</a>,&nbsp;<a href="/zh-cn/tags/nvidia-%E9%A9%B1%E5%8A%A8/">NVIDIA 驱动</a>,&nbsp;<a href="/zh-cn/tags/x11/">X11</a>,&nbsp;<a href="/zh-cn/tags/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">问题解决</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/zh-cn/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" class="prev" rel="prev" title="如何在Vue 3.2中从父组件传递一个值给子组件？"><i class="fas fa-angle-left fa-fw"></i>如何在Vue 3.2中从父组件传递一个值给子组件？</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

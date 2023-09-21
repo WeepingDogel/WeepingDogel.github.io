@@ -4,9 +4,285 @@
         <link>http://weepingdogel.github.io/zh-cn/</link>
         <description>Write to share</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
-            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Sat, 22 Jul 2023 15:46:49 &#43;0800</lastBuildDate>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</lastBuildDate>
             <atom:link href="http://weepingdogel.github.io/zh-cn/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>解决 NVIDIA 和 Intel GPU 双屏问题</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</link>
+    <pubDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png" referrerpolicy="no-referrer">
+            </div><h2 id="序">序</h2>
+<p>最近买了个优派的新显示器，但是我遇到了多显卡问题。</p>
+<p>过去一年我都是用笔记本自带的显示器跑 Gnome, 没有装 N 卡闭源驱动。</p>
+<p>然而，因为买了新显示器，用核显来带两个屏幕，显然性能不够。</p>
+<p>因此，我打算在我的 Arch 给这张 3050 装闭源驱动，用来带新的显示器。</p>
+<p>但是过程并不是很顺利&hellip;&hellip;</p>
+<p>我踩坑的原因是我之前习惯用 wayland 模式来跑 Gnome 的。</p>
+<p>但据说 N 卡的闭源驱动在 wayland 表现不太好？</p>
+<p>所以这意味着我必须放弃用 wayland 来带两个屏幕。</p>
+<p>这太糟糕了，我不得不回到 X11 的怀抱了。</p>
+<h2 id="起步">起步</h2>
+<p>最开始呢，我直接把显示器插在了笔记本上的 mini-DP 口，另一头插在显示器的 DP 口上。</p>
+<p>但失望的是，它根本没有亮起来。 QAQ</p>
+<p>也许是这个 miniDP 口在缺少N卡驱动的情况下不能输出。</p>
+<p>所以我打算把它装上。</p>
+<h2 id="安装-n-卡驱动">安装 N 卡驱动</h2>
+<p>第一步是安装驱动，但需要注意的是，这是第一步，而不是万事大吉。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-prime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然而，这显示器仍然没有亮&hellip;</p>
+<p>于是我到 ArchCN 群问大佬。</p>
+<p>经过讨论之后，我得到了解决问题的方法。</p>
+<h2 id="打开-ibt">打开 <code>ibt</code></h2>
+<p>大概在三月份的时候，<a href="/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/" rel="">我遇到了一些 VirtualBox 的问题</a>。</p>
+<p>但是现在不需要关掉了，所以我需要把它从内核参数当中移除。</p>
+<p>编辑文件：<code>/etc/default/grub</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;ibt=off&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后将 <code>ibt=off</code> 从 <code>GRUB_CMD_LINE_LINUX</code> 当中删除：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重新生成 <code>grub.cfg</code> 配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /etc/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="设置-nvidia-modeset">设置 NVIDIA modeset</h2>
+<p>然后我需要查看 <code>nvidia-drm.modeset</code> 的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat /sys/module/nvidia_drm/parameters/modeset
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它返回的结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">N
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我需要向内核参数添加 <code>nvidia-drm.modeset=1</code> 。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>nvidia-drm.modeset=1</code>内核参数启用了<strong>NVIDIA Direct Rendering Manager KMS（内核模式设置）</strong>。KMS是一种在内核空间而非用户空间设置显示分辨率和深度的方法。</div>
+        </div>
+    </div>
+<p>编辑文件：<code>/etc/default/grub</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>向 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 添加 <code>nvidia-drm.modeset=1</code> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0 nvidia-drm.modeset=1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重新生成 grub 配置文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重启。</p>
+<h2 id="使用-mutter-performance">使用 mutter-performance</h2>
+<p>然而，在重启之后效果还是不太好。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>mutter-performance</code> &ldquo;是 Mutter 窗口管理器的优化版本，特别针对性能进行了调整。Mutter 是 GNOME 3 的默认窗口管理器，负责窗口的排列、交互和动画<a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer">linkedin.com</a>。</div>
+        </div>
+    </div>
+<p>这个包需要从 <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer">AUR</a> 安装.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ paru -S mutter-performance
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>装完之后，桌面确实比之前要快一点了，但仍然不够。</p>
+<p>并且，值得一提的是，现在是时候卸载 <code>xf86-video-intel</code> 了。 在新设备当中并不需要这个包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo pacman -Rs xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>xf86-video-intel 软件包是 Intel 集成显卡芯片的驱动程序，由 X.Org 项目维护。 然而，对于现代 Intel 图形硬件（大约 2007 年及更新版本），出于以下几个原因，通常建议删除此软件包：</p>
+<p>更好地支持模式设置驱动程序：模式设置驱动程序是 X 服务器的一部分，不需要单独安装，可以更好地支持现代图形功能和硬件。 它由 X.Org 项目维护，并倾向于跟上图形技术 github.com 的新发展。</p>
+<p>xf86-video-intel 驱动程序的问题：已知 xf86-video-intel 驱动程序会在某些系统上引起问题，包括图形故障以及与模式设置驱动程序相比性能较差。 在某些情况下，它甚至会导致 bbs.archlinux.org 系统不稳定。</p>
+<p>缺乏积极的开发：xf86-video-intel 驱动程序已经好几年没有积极开发了，这意味着它可能缺乏对较新硬件和软件中的功能的支持。 另一方面，模式设置驱动程序作为 X 服务器 reddit.com 的一部分正在积极开发。</p>
+<p>要删除 xf86-video-intel 软件包，您可以使用特定 Linux 发行版的软件包管理器。 以下是使用 pacman（Arch Linux 的包管理器）的示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo pacman -R xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除软件包后，重新启动系统以确保更改生效。</p>
+<p>请记住检查特定发行版的文档，了解删除软件包和处理驱动程序的正确方法。</p>
+</div>
+        </div>
+    </div>
+<h2 id="设置-x11-配置文件">设置 X11 配置文件</h2>
+<p>根据 <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">Arch Wiki</a>，我需要设置一些 X11 配置文件，用来单独使用 N 卡。</p>
+<p>写入文件 <code>/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf/</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;intel&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;i915&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;modesetting&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;nvidia-drm&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;AllowEmptyInitialConfiguration&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;PrimaryGPU&#34;</span> <span class="s">&#34;yes&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/nvidia/xorg&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/xorg/modules&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后我就需要创建两个 <code>*.desktop</code> 文件来配置 GDM。</p>
+<p>写入文件 <code>/usr/share/gdm/greeter/autostart/optimus.desktop</code> 和 <code>/etc/xdg/autostart/optimus.desktop</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="err">[</span><span class="nv">Desktop</span> <span class="nv">Entry</span><span class="err">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span><span class="nv">Application</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Name</span><span class="o">=</span><span class="nv">Optimus</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Exec</span><span class="o">=</span><span class="nv">sh</span> <span class="nv">-c</span> <span class="s">&#34;xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NoDisplay</span><span class="o">=</span><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">X-GNOME-Autostart-Phase</span><span class="o">=</span><span class="nv">DisplayServer</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后，经过重启，终于解决了这些问题。</p>
+<p>好耶！</p>
+<h2 id="参考连接">参考连接</h2>
+<ul>
+<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer">Phind.com</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #GDM</a></li>
+</ul>
+]]></description>
+</item><item>
     <title>如何在Vue 3.2中从父组件传递一个值给子组件？</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/</link>
     <pubDate>Sat, 22 Jul 2023 15:46:49 &#43;0800</pubDate>
@@ -904,7 +1180,7 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="err">选择器</span><span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">选择器</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="err">属性:</span> <span class="err">属性值</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1013,28 +1289,28 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">h1</span><span class="o">.</span><span class="err">中央标题</span>
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">h1</span><span class="p">.</span><span class="nc">中央标题</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">text-align</span><span class="p">:</span><span class="kc">center</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span><span class="mi">22</span><span class="kt">px</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h1</span><span class="o">.</span><span class="err">一级标题</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h1</span><span class="p">.</span><span class="nc">一级标题</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span><span class="mi">22</span><span class="kt">px</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h2</span><span class="o">.</span><span class="err">二级标题</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h2</span><span class="p">.</span><span class="nc">二级标题</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h2</span><span class="o">.</span><span class="err">三级标题</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h2</span><span class="p">.</span><span class="nc">三级标题</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">h2</span><span class="o">.</span><span class="err">四级标题</span>
+</span></span><span class="line"><span class="cl"><span class="nt">h2</span><span class="p">.</span><span class="nc">四级标题</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nt">p</span><span class="o">.</span><span class="err">普通文字</span>
+</span></span><span class="line"><span class="cl"><span class="nt">p</span><span class="p">.</span><span class="nc">普通文字</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">text-indent</span><span class="p">:</span><span class="mi">25</span><span class="kt">px</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span><span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
@@ -3554,79 +3830,6 @@
                 <img src="https://w.wallhaven.cc/full/y8/wallhaven-y8622k.jpg" referrerpolicy="no-referrer">
             </div><p>之前都是使用 Gitalk 做评论系统的，但是 Diary 主题在夜间模式下对 Gitalk 的显示有 bug。</p>
 <p><a href="https://github.com/AmazingRise/hugo-theme-diary/issues/96" target="_blank" rel="noopener noreffer">目前开发者也在修复中</a></p>
-]]></description>
-</item><item>
-    <title>罗技 K845 开箱</title>
-    <link>http://weepingdogel.github.io/zh-cn/posts/%E7%BD%97%E6%8A%80k845%E5%BC%80%E7%AE%B1/</link>
-    <pubDate>Mon, 30 Aug 2021 21:49:09 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://weepingdogel.github.io/zh-cn/posts/%E7%BD%97%E6%8A%80k845%E5%BC%80%E7%AE%B1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/img/logi/IMG_20210830_212407_648.jpg" referrerpolicy="no-referrer">
-            </div><h1 id="序">序</h1>
-<blockquote>
-<p>注意，这不是专业详细的评测，只是个人的开箱体验感受</p>
-</blockquote>
-<p>关注我 <a href="https://t.me/WeepingDogel" target="_blank" rel="noopener noreffer">tg 频道</a>的读者可能知道，之前我一直在考虑入手一把机械键盘。最终我选择了<a href="https://www.logitech.com.cn/zh-cn/products/keyboards/k845-mechanical-illuminated.html?crid=27" target="_blank" rel="noopener noreffer">罗技的 k845</a>。</p>
-<p>昨天下午收到了快递代收点发来的到货短信，它终于来了，内心同时存在两种感觉：一个是键盘来了的欢喜，一个是暂时无法去取快递的尴尬。</p>
-<p>今天返城到家，一下车我就迫不及待的跑去拿快递。 包了一层塑料纸和一层瓦楞纸，但是没有泡泡纸，不能戳戳戳了。 QAQ</p>
-<p>多重？据说这个键盘不太重，连包装一起&hellip; 大概和一瓶 2L 的可乐差不多吧..</p>
-<h1 id="包装与外观">包装与外观</h1>
-<p>一跑回家就开始拆快递了，带着一点点急切和一点点期待&hellip;.. Emmmm&hellip;.. 就打开了&hellip;</p>
-<p>
-
-<del>啊这，罗技作为一个大品牌怎么可以这么抠啊</del></p>
-<p>嗯&hellip; 简约低调朴实无华的牛皮纸外包装，完美地体现了罗技的环保品牌形象！</p>
-<p>
-密封方式照样也很简约环保，沾了一层透明的胶，只需要简简单单的用指甲划开，就能打开盒子了。</p>
-<p>打开盒子之后，里面直接就是一把键盘，啥都没有&hellip;</p>
-<p></p>
-<p>这环保，简直做到了极致啊。<strong>堪比某果不送充电器～</strong></p>
-<p>不过包装并不能代表什么，罗技这样的大厂肯定是把预算都花在了品质上。</p>
-<p>没有泡沫绵缓冲这个事实就表明了罗技对键盘的可靠性充满了自信，这是一项加分项。</p>
-<p>键盘采用悬浮式设计，银色磨砂外观的铝制底板，一股商务风扑面而来</p>
-<p></p>
-<p>图片是我直接上机点亮后拍的，不得不说这个灯光确实跟我想象的一样，在房间开灯的时候键盘上的灯光跟几乎没有一样.. 很微弱。</p>
-<p>于是我就关上了灯，想看看它在关灯的时候是什么效果。</p>
-<p></p>
-<p>嗯.. 亮度刚刚好，不刺眼，<del>正好适合晚上偷偷的写代码嘿嘿～</del></p>
-<blockquote>
-<p>（照片看上去可能很亮，但实际上并没有图上那么刺眼。）</p>
-</blockquote>
-<p>键冒的话.. 是 ABS 黑色键冒，配上这个白色的背光.. 感觉有点性冷淡的感觉，233</p>
-<p>如果把键冒换成粉色的就完美了，嘿嘿</p>
-<p>然后右上角有三个指示灯，分别是数字键、大小写、滚动锁定，这样传统的设计还是比较适合我的。qwq</p>
-<p>背后有两个脚架，打开之后大概是这样</p>
-<p></p>
-<p>我个人是很喜欢打开脚架的，不过打开这个脚架需要稍微用一点力，打开之后的高度差也不是很大，正好<del>适合狗爪子（bushi）</del>。</p>
-<h1 id="手感">手感</h1>
-<p>日常打字的话，概括一下：</p>
-<ol>
-<li>
-<p>清脆的声音很带感，嘿嘿。 qwq</p>
-</li>
-<li>
-<p>但是造成的噪音也很大，毕竟青轴号称室友快乐轴嘛～ <del>但是我喜欢</del> （逃</p>
-</li>
-<li>
-<p>青轴的触感很强，段落感很到位～</p>
-</li>
-<li>
-<p>长期输入的情况下都不会疲劳。</p>
-</li>
-</ol>
-<p>游戏方面，我玩了会 Minecraft ，对比薄膜差异还是很大的 QAQ，但平时也很少玩其他游戏了。</p>
-<p>总的来说比薄膜强太多了，我可能回不去了。 QAQ</p>
-<p>希望它能够耐用吧，毕竟它是我的第一把机械键盘。</p>
-<h1 id="总结">总结</h1>
-<p>这个键盘，244，值！</p>
-<p>耐用程度上我是看好它的，打算用个四年五年的应该没问题（？）</p>
-<p>虽然这个价位的它没有炫酷的 RGB，没有键线分离，音乐律动这些花里胡哨的东西&hellip;</p>
-<blockquote>
-<p>（然而作为 Arch 用户的我连驱动都不想装，嗯，它也没驱动）</p>
-</blockquote>
-<p>但是其他方面足够满足我的需求，柔和的背光和优秀的按键触感让我觉得这两百多花得也值了。</p>
-<p><del>嗯&hellip; 如果有空的话把键冒换成粉色（逃</del></p>
 ]]></description>
 </item></channel>
 </rss>

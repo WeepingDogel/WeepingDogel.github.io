@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Solve the problem of dual screen with NVIDIA and Intel GPUs - WeepingDogel</title><meta name="Description" content="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs."><meta property="og:title" content="Solve the problem of dual screen with NVIDIA and Intel GPUs" />
+<meta property="og:description" content="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" /><meta property="og:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-21T16:25:47+08:00" />
+<meta property="article:modified_time" content="2023-09-21T16:25:47+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://weepingdogel.github.io/photo_2021-07-21_03-31-50.jpg"/>
+
+<meta name="twitter:title" content="Solve the problem of dual screen with NVIDIA and Intel GPUs"/>
+<meta name="twitter:description" content="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs."/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" /><link rel="prev" href="http://weepingdogel.github.io/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><meta name="google-site-verification" content="twaX9bmrayAeCFiSLFsfosnmEjKpOlWNLIYKt5ZIno4" /><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Solve the problem of dual screen with NVIDIA and Intel GPUs",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/weepingdogel.github.io\/posts\/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus\/"
+        },"genre": "posts","keywords": "Dual GPUs, NVIDIA, Intel, Arch Linux, Linux, NVIDIA Driver, X11, Problem Solving","wordcount":  947 ,
+        "url": "http:\/\/weepingdogel.github.io\/posts\/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus\/","datePublished": "2023-09-21T16:25:47+08:00","dateModified": "2023-09-21T16:25:47+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "WeepingDogel"
+            },"description": "Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs."
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="WeepingDogel"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> About Me </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/">简体中文</option><option value="/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" selected></option></select>
+                    </a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="WeepingDogel"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/photo_2021-07-21_03-31-50.jpg"
+        data-srcset="/photo_2021-07-21_03-31-50.jpg, /photo_2021-07-21_03-31-50.jpg 1.5x, /photo_2021-07-21_03-31-50.jpg 2x"
+        data-sizes="auto"
+        alt="/photo_2021-07-21_03-31-50.jpg"
+        title="/photo_2021-07-21_03-31-50.jpg" />WeepingDogel</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">About Me</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="Select Language"><i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/">简体中文</option><option value="/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" selected></option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Solve the problem of dual screen with NVIDIA and Intel GPUs</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://weepingdogel.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>WeepingDogel</a></span>&nbsp;<span class="post-category">included in <a href="/categories/problem-solving/"><i class="far fa-folder fa-fw"></i>Problem Solving</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-09-21">2023-09-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;947 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png"
+        data-srcset="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png, /img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 1.5x, /img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/img/2023-09-21-21-49-12屏幕截图.png"
+        title="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs." /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#beginning">Beginning</a></li>
+        <li><a href="#installation-of-the-nvidia-drivers">Installation of the NVIDIA drivers</a></li>
+        <li><a href="#open-the-ibt">Open the <code>ibt</code></a></li>
+        <li><a href="#set-nvidia-modeset">Set NVIDIA modeset</a></li>
+        <li><a href="#use-mutter-performance">Use mutter-performance</a></li>
+        <li><a href="#set-x-11-configuration">Set X-11 Configuration</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="introduction">Introduction</h2>
+<p>Recently I bought a new monitor made by ViewSonic, but I meet some problems of the dual GPUs.</p>
+<p>In the past years, I have used only one screen which is installed in my laptop without NVIDIA graphcial drivers. (Only use the Intel core GPU).</p>
+<p>However, because of the new monitor added, the ntegrated graphics is not powerful enough to output two screens.</p>
+<p>Therefore, I decide to install the NVIDIA grapcial driver of the RTX3050 on my Arch Linux in order to make use of the Discrete Graphics Card to output the new screen.</p>
+<p>But things are not running well&hellip;</p>
+<p>The reason why I crashed the wall is that I used to running Gnome on wayland mode before.</p>
+<p>But it is said that NVIDIA drivers are not performing well on wayland?</p>
+<p>So it truly means that I have to abandon the idea to output two screen on wayland.</p>
+<p>Oh it&rsquo;s bad! I have to come back to the hugging of the X11!</p>
+<h2 id="beginning">Beginning</h2>
+<p>At the beginning of that, I plugged the miniDP into the laptop and the another port into the monitor.</p>
+<p>But disappointingly, it can&rsquo;t be lighted up at all. QAQ.</p>
+<p>Maybe the miniDP port can not output anything because of missing the NVIDIA driver.</p>
+<p>So I have to install it.</p>
+<h2 id="installation-of-the-nvidia-drivers">Installation of the NVIDIA drivers</h2>
+<p>The first step is to install the drivers. Yeah notefuly, it&rsquo;s the first step, not the last.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-prime
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>However, the screen was still not displaying anything&hellip;</p>
+<p>Then I went to the Arch Linux CN group to ask the guys in community.</p>
+<p>After discussion, I finally got the solution.</p>
+<h2 id="open-the-ibt">Open the <code>ibt</code></h2>
+<p>About on the March, <a href="/en/posts/problem_of_virtualbox_appeding_starting_vm/" rel="">I faced a problem of VirutalBox and set the <code>ibt=off</code></a>.</p>
+<p>But now it is not required to be <code>off</code>, I need to remove the param of the kernel.</p>
+<p>Edit the file: <code>/etc/default/grub</code>,</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;ibt=off&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>then remove the <code>ibt=off</code> in <code>GRUB_CMD_LINE_LINUX</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_TIMEOUT</span><span class="o">=</span><span class="s">&#34;100&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_DISTRIBUTOR</span><span class="o">=</span><span class="s">&#34;Arch&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX</span><span class="o">=</span><span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">.........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then regenerate the <code>grub.cfg</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /etc/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="set-nvidia-modeset">Set NVIDIA modeset</h2>
+<p>Then I need to check the value of the <code>nvidia-drm.modeset</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ cat /sys/module/nvidia_drm/parameters/modeset
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>It shows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">N
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Now I need to add <code>nvidia-drm.modeset=1</code> into Kernel Paramaters.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Explanation from ChatGPT<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">The <code>nvidia-drm.modeset=1</code> kernel parameter enables the <strong>NVIDIA Direct Rendering Manager KMS (Kernel Mode Setting)</strong>. KMS is a method for setting display resolution and depth in the kernel space rather than user space.</div>
+        </div>
+    </div>
+<p>Edit the file: <code>/etc/default/grub</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo vim /etc/default/grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Add the <code>nvidia-drm.modeset=1</code> into <code>GRUB_CMDLINE_LINUX_DEFAULT</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s">&#34;quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0 nvidia-drm.modeset=1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">........</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then regenerate the grub configuration file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And reboot.</p>
+<h2 id="use-mutter-performance">Use mutter-performance</h2>
+<p>Still, it&rsquo;s not performing well after restarting the system.</p>
+<p>For this reason, it should be a bit better to use the <code>mutter-performance</code>.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Explanation from ChatGPT<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>mutter-performance</code> is an optimized version of the Mutter window manager, particularly tweaked for performance. Mutter is the default window manager for GNOME 3, which is responsible for arranging, interacting with, and animating windows <a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer">linkedin.com</a>.</div>
+        </div>
+    </div>
+<p>This package should be installed from <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer">AUR</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ paru -S mutter-performance
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After installation, the desktop truly ran a little faster, but it&rsquo;s still not enough.</p>
+<p>And by the way, it&rsquo;s time to remove the <code>xf86-video-intel</code>. It is not required in new devices.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ sudo pacman -Rs xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Explanation from ChatGPT<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>The xf86-video-intel package is a driver for Intel integrated graphics chips that is maintained by the X.Org project. However, for modern Intel graphics hardware (roughly 2007 and newer), it is often recommended to remove this package for several reasons:</p>
+<p>Better support with modesetting driver: The modesetting driver, which is part of the X server and does not need to be installed separately, has better support for modern graphics features and hardware. It is maintained by the X.Org project and tends to keep up with new developments in graphics technology github.com.</p>
+<p>Issues with xf86-video-intel driver: The xf86-video-intel driver has been known to cause issues on some systems, including graphical glitches and poorer performance compared to the modesetting driver. In some cases, it can even lead to system instability bbs.archlinux.org.</p>
+<p>Lack of active development: The xf86-video-intel driver has not seen active development for several years, which means it may lack support for features found in newer hardware and software. On the other hand, the modesetting driver is actively developed as part of the X server reddit.com.</p>
+<p>To remove the xf86-video-intel package, you can use the package manager of your specific Linux distribution. Here&rsquo;s an example using pacman, the package manager for Arch Linux:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo pacman -R xf86-video-intel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After removing the package, restart your system to ensure the changes take effect.</p>
+<p>Remember to check the documentation of your specific distribution for the correct way to remove packages and handle drivers.</p>
+</div>
+        </div>
+    </div>
+<h2 id="set-x-11-configuration">Set X-11 Configuration</h2>
+<p>According to the <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">Arch Wiki</a>, I need to set some X-11 Configuration, intending to use the NVIDIA graphics only.</p>
+<p>Write in the file <code>/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf/</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;intel&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;i915&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;modesetting&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">Section</span> <span class="s">&#34;OutputClass&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Identifier</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">MatchDriver</span> <span class="s">&#34;nvidia-drm&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Driver</span> <span class="s">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;AllowEmptyInitialConfiguration&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">Option</span> <span class="s">&#34;PrimaryGPU&#34;</span> <span class="s">&#34;yes&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/nvidia/xorg&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">ModulePath</span> <span class="s">&#34;/usr/lib/xorg/modules&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EndSection</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then I need to create two <code>*.desktop</code> files to configure the GDM.</p>
+<p>Write in <code>/usr/share/gdm/greeter/autostart/optimus.desktop</code> and <code>/etc/xdg/autostart/optimus.desktop</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-conf" data-lang="conf"><span class="line"><span class="cl"><span class="err">[</span><span class="nv">Desktop</span> <span class="nv">Entry</span><span class="err">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span><span class="nv">Application</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Name</span><span class="o">=</span><span class="nv">Optimus</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Exec</span><span class="o">=</span><span class="nv">sh</span> <span class="nv">-c</span> <span class="s">&#34;xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NoDisplay</span><span class="o">=</span><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nv">X-GNOME-Autostart-Phase</span><span class="o">=</span><span class="nv">DisplayServer</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Finally, I rebooted and fixed the problem.</p>
+<p>Yay!</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer">Phind.com</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #GDM</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-21</span>
+            </div>
+            <div class="post-info-license"><span>CC BY-NC 4.0</span></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-via="weepingdogel_me" data-hashtags="Dual GPUs,NVIDIA,Intel,Arch Linux,Linux,NVIDIA Driver,X11,Problem Solving"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-hashtag="Dual GPUs"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Pinterest" data-sharer="pinterest" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-description="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs." data-image="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-pinterest fa-fw"></i></a><a href="javascript:void(0);" title="Share on Tumblr" data-sharer="tumblr" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-caption="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs." data-tags="Dual GPUs,NVIDIA,Intel,Arch Linux,Linux,NVIDIA Driver,X11,Problem Solving"><i class="fab fa-tumblr fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-reddit fa-fw"></i></a><a href="javascript:void(0);" title="Share on VK" data-sharer="vk" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-caption="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs." data-image="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-vk fa-fw"></i></a><a href="javascript:void(0);" title="Share on Buffer" data-sharer="buffer" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-via="weepingdogel_me" data-picture="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-buffer fa-fw"></i></a><a href="javascript:void(0);" title="Share on Xing" data-sharer="xing" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i class="fab fa-xing fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-description="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs."><i data-svg-src="/lib/simple-icons/icons/instapaper.min.svg"></i></a><a href="javascript:void(0);" title="Share on Pocket" data-sharer="pocket" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-get-pocket fa-fw"></i></a><a href="javascript:void(0);" title="Share on Digg" data-sharer="digg" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-digg fa-fw"></i></a><a href="javascript:void(0);" title="Share on StumbleUpon" data-sharer="stumbleupon" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i class="fab fa-stumbleupon fa-fw"></i></a><a href="javascript:void(0);" title="Share on Flipboard" data-sharer="flipboard" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i class="fab fa-flipboard fa-fw"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-image="/img/2023-09-21-21-49-12屏幕截图.png"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on 人人" data-sharer="renren" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-description="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs."><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-description="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs."><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on 百度" data-sharer="baidu" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a><a href="javascript:void(0);" title="Share on OK.RU" data-sharer="okru" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i class="fab fa-odnoklassniki fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i class="fab fa-evernote fa-fw"></i></a><a href="javascript:void(0);" title="Share on Skype" data-sharer="skype" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs"><i class="fab fa-skype fa-fw"></i></a><a href="javascript:void(0);" title="Share on Trello" data-sharer="trello" data-url="http://weepingdogel.github.io/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/" data-title="Solve the problem of dual screen with NVIDIA and Intel GPUs" data-description="Weeks ago, I bought a screen made by ViewSonic, then I have to screens. But I meet a problem about the dual GPUs."><i class="fab fa-trello fa-fw"></i></a><a href="//mix.com/add?url=http%3a%2f%2fweepingdogel.github.io%2fposts%2fsolve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus%2f&amp;description=Solve%20the%20problem%20of%20dual%20screen%20with%20NVIDIA%20and%20Intel%20GPUs" target="_blank" title="Share on Mix"><i class="fab fa-mix fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dual-gpus/">Dual GPUs</a>,&nbsp;<a href="/tags/nvidia/">NVIDIA</a>,&nbsp;<a href="/tags/intel/">Intel</a>,&nbsp;<a href="/tags/arch-linux/">Arch Linux</a>,&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/nvidia-driver/">NVIDIA Driver</a>,&nbsp;<a href="/tags/x11/">X11</a>,&nbsp;<a href="/tags/problem-solving/">Problem Solving</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/" class="prev" rel="prev" title="How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2"><i class="fas fa-angle-left fa-fw"></i>How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.118.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://weepingdogel.github.io" target="_blank">WeepingDogel</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":30},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"title","label":"gitalk","lightTheme":"github-light","repo":"WeepingDogel/WeepingDogel.github.io"}},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
