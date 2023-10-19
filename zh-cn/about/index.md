@@ -242,3 +242,5 @@
 
 [rcd的博客](https://www.rcdfrd.com/)
 
+[PangLAN 's Blog](https://pll.moe)
+

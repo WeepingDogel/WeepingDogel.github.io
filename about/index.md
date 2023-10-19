@@ -247,3 +247,5 @@ Some articles use screenshots as covers, most article cover images are from [wal
 
 [rcd的博客](https://www.rcdfrd.com/)
 
+[PangLAN 's Blog](https://pll.moe)
+
