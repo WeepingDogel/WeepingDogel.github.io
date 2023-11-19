@@ -244,3 +244,4 @@
 
 [PangLAN 's Blog](https://pll.moe)
 
+[Toka's Blog](https://nonamev.com/)
