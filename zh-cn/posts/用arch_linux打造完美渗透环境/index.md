@@ -1,6 +1,7 @@
 # 用 Arch Linux 打造完美渗透环境
 
 
+<!--more-->
 ## 简介Arch Linux
 
 Arch Linux是一款通用x86_64的GNU/Linux发行版，它采用滚动更新模式，尽全力给用户提供最新的稳定版软件。

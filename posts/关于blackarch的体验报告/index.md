@@ -3,6 +3,7 @@
 
 > *Today, I attempted to install BlackArch and spent quite a long time doing so. However, I later discovered that this system was not very perfect.*
 
+<!--more-->
 ## Advantages
 
 Firstly, let's talk about its advantages:

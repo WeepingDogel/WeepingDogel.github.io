@@ -4,6 +4,7 @@
 
 ~~这个 LOGO 真好看。~~
 
+<!--more-->
 # IPFS 是什么啊？
 
 **IPFS(InterPlanetary File System)**, 听名字一看好像是个文件系统？ 翻译过来是星际文件系统，听起来是不是很高级？

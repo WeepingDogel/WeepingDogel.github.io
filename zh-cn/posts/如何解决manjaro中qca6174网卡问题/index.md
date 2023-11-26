@@ -1,6 +1,7 @@
 # 如何解决 Manjaro 中 QCA6174 网卡问题
 
 
+<!--more-->
 ## 开场白
 
 尝试在 Redmibook 14 中安装了 Manjaro, 装完发现 WIFI 不能用

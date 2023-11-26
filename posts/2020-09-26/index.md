@@ -1,6 +1,7 @@
 # Attacking CentOS6 Virtual Machines
 
 
+<!--more-->
 > Although the penetration process is involved, this article's main topic is not about penetration testing. Please read it with a rational mindset.
 
 ## The reason for writing this blog post

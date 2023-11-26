@@ -1,6 +1,7 @@
 # LAN Penetration Testing with Beef, Bettercap, and Other Tools
 
 
+<!--more-->
 ## Introduction
 
 Well... Let's start with some rambling as usual...

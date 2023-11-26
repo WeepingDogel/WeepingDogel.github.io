@@ -1,6 +1,7 @@
 # How to Modify Software Sources in Linux Mint
 
 
+<!--more-->
 ## Introduction
 
 After installing Linux Mint, one of the first things you may want to do is modify your software sources.

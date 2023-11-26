@@ -1,7 +1,7 @@
 # Help with College Computer Homework
 
 
-
+<!--more-->
 ## Introduction
 
 Help with homework qwq... 

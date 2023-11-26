@@ -1,6 +1,7 @@
 # Python Study Notes - File Operations
 
 
+<!--more-->
 ## File Operations
 ### open
 

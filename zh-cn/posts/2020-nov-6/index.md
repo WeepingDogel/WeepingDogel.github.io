@@ -1,6 +1,7 @@
 # Linux Mint 如何修改软件源
 
 
+<!--more-->
 ## 序
 
 由于 Linux Mint 在安装完之后.. 

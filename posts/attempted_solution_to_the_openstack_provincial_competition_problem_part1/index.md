@@ -1,6 +1,7 @@
 # Attempted solution to the OpenStack Provincial Competition problem (Part One: Installation)
 
 
+<!--more-->
 ## Introduction
 
 As you know, I have been fortunate enough to be selected by my instructors to participate in the provincial cloud computing competition. As a result, I have joined the project group in campus.

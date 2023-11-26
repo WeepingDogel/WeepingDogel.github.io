@@ -2,6 +2,7 @@
 
 
 
+<!--more-->
 # Prologue: What was the problem?
 
 Today, I felt like playing around with VirtualBox and discovered that every virtual machine was stuck at `Starting virtual machine.`.

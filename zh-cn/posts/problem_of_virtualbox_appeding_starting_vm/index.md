@@ -2,6 +2,7 @@
 
 
 
+<!--more-->
 # 序：遇到了啥问题啊？
 
 今天心血来潮想要玩一下 VirtualBox 虚拟机， 结果发现打开之后每个虚拟机都卡在 `Starting virutal machine.`。

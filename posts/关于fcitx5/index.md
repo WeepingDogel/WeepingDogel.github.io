@@ -1,6 +1,7 @@
 # About fcitx5, and recent environment variable issues
 
 
+<!--more-->
 ## What happened
 
 I recently received a message like this

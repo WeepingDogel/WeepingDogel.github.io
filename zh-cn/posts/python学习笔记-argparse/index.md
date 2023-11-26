@@ -1,6 +1,7 @@
 # Python 学习笔记——ArgParse
 
 
+<!--more-->
 # 序
 
 为了使 [TitleGetter](https://github.com/WeepingDogel/TitleGetter) 更加灵活，我打算将 `list.txt` 和输出文件由用户自定， 因此这需要用到命令行选项... 就像一些我们常用到的软件一样，比如 `pacman`

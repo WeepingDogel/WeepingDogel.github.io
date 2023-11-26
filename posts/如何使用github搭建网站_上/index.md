@@ -1,6 +1,7 @@
 # How to Build a Website Using GitHub
 
 
+<!--more-->
 ## Informal Introduction
 
 > I'm back again~

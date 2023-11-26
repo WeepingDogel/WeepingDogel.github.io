@@ -1,6 +1,7 @@
 # Python Learning Notes: Simple Web Crawler
 
 
+<!--more-->
 ## A Casual Preface
 
 Hey, I'm back. Today, I set up hexo in my U-disk, so I can continue to update my blog.

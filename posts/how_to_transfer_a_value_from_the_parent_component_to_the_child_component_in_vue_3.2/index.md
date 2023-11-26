@@ -1,6 +1,7 @@
 # How To Transfer A Value From The Parent Component To The Child Component in Vue 3.2
 
 
+<!--more-->
 ## Introduction
 
 Vue is a popular JavaScript framework for building interactive web interfaces. It's easy to learn, versatile, and has a supportive community.

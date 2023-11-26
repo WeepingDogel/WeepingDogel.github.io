@@ -1,8 +1,7 @@
 # 怎样安装 Arch Linux
 
 
-
-
+<!--more-->
 ## Arch Linux是什么？
 
 **[Arch Linux](https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))** 是一个通用 x86_64_ GNU/Linux 发行版，它采用滚动升级模式，尽权力给用户提供最新版本的稳定软件，因其"简洁、现代、实用、以用户为中心"的原则而得名。

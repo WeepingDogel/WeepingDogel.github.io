@@ -1,6 +1,7 @@
 # Solve the problem of dual screen with NVIDIA and Intel GPUs
 
 
+<!--more-->
 ## Introduction
 
 Recently I bought a new monitor made by ViewSonic, but I meet some problems of the dual GPUs.

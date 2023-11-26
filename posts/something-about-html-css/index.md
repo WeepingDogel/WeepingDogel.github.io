@@ -1,6 +1,7 @@
 # Some Thoughts on Writing HTML and CSS
 
 
+<!--more-->
 # Introduction
 
 Many beginners often encounter some basic problems when learning HTML and CSS, which can be frustrating.

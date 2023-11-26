@@ -1,6 +1,7 @@
 # Linux Mint 安装教程
 
 
+<!--more-->
 ## 简介
 
 Linux Mint是一款由Linux Mint Team团队从2006年开始发行，是基于Debian和Ubuntu的发行版。

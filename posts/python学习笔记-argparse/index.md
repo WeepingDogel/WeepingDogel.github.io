@@ -1,6 +1,7 @@
 # Python Learning Notes - ArgParse
 
 
+<!--more-->
 # Introduction
 
 In order to make [TitleGetter](https://github.com/WeepingDogel/TitleGetter)  more flexible, I plan to let users customize `list.txt` and the output file. Therefore, this requires the use of command line options... just like some software we commonly use, such as `pacman`.

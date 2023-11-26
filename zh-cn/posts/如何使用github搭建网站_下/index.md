@@ -1,6 +1,7 @@
 # 如何使用 GitHub 搭建博客
 
 
+<!--more-->
 ## 序
 
 去年写过一篇[如何使用GitHub搭建网站](https://weepingdogel.github.io/posts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8github%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99_%E4%B8%8A/)，利用 Github Pages 上传自己写的 HTML 文件来运行一个网页..
