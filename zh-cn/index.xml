@@ -10,7 +10,7 @@
     <title>解决 NVIDIA 和 Intel GPU 双屏问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</link>
     <pubDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png" referrerpolicy="no-referrer">
@@ -120,7 +120,7 @@
 </div><p>现在我需要向内核参数添加 <code>nvidia-drm.modeset=1</code> 。</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><code>nvidia-drm.modeset=1</code>内核参数启用了<strong>NVIDIA Direct Rendering Manager KMS（内核模式设置）</strong>。KMS是一种在内核空间而非用户空间设置显示分辨率和深度的方法。</div>
@@ -162,13 +162,13 @@
 <p>然而，在重启之后效果还是不太好。</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><code>mutter-performance</code> &ldquo;是 Mutter 窗口管理器的优化版本，特别针对性能进行了调整。Mutter 是 GNOME 3 的默认窗口管理器，负责窗口的排列、交互和动画<a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer">linkedin.com</a>。</div>
+            <div class="admonition-content"><code>mutter-performance</code> &ldquo;是 Mutter 窗口管理器的优化版本，特别针对性能进行了调整。Mutter 是 GNOME 3 的默认窗口管理器，负责窗口的排列、交互和动画<a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer ">linkedin.com</a>。</div>
         </div>
     </div>
-<p>这个包需要从 <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer">AUR</a> 安装.</p>
+<p>这个包需要从 <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer ">AUR</a> 安装.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -189,7 +189,7 @@
 </div>
 </div><div class="details admonition tip">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>xf86-video-intel 软件包是 Intel 集成显卡芯片的驱动程序，由 X.Org 项目维护。 然而，对于现代 Intel 图形硬件（大约 2007 年及更新版本），出于以下几个原因，通常建议删除此软件包：</p>
@@ -211,7 +211,7 @@
         </div>
     </div>
 <h2 id="设置-x11-配置文件">设置 X11 配置文件</h2>
-<p>根据 <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">Arch Wiki</a>，我需要设置一些 X11 配置文件，用来单独使用 N 卡。</p>
+<p>根据 <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer ">Arch Wiki</a>，我需要设置一些 X11 配置文件，用来单独使用 N 卡。</p>
 <p>写入文件 <code>/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf/</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -273,15 +273,16 @@
 <p>好耶！</p>
 <h2 id="参考连接">参考连接</h2>
 <ul>
-<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer">Phind.com</a></li>
-<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
-<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #GDM</a></li>
+<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer ">Phind.com</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer ">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer ">NVIDIA Optimus - ArchWiki #GDM</a></li>
 </ul>]]></description>
-</item><item>
+</item>
+<item>
     <title>如何在Vue 3.2中从父组件传递一个值给子组件？</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/</link>
     <pubDate>Sat, 22 Jul 2023 15:46:49 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/how_to_transfer_a_value_from_the_parent_component_to_the_child_component_in_vue_3.2/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/background_preview_2023_07_22.png" referrerpolicy="no-referrer">
@@ -782,11 +783,12 @@
 <p>是不是很神奇呢？</p>
 <h2 id="结语">结语</h2>
 <p>没错！通过按照这些步骤，在Vue.js中可以成功地通过props和事件将值从父组件传给子组件。不要忘记保存文件，根据需要导组件，并适当注册组件。</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>尝试解决最近 VirtualBox 启动虚拟机时卡在 Starting 的问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/</link>
     <pubDate>Mon, 06 Mar 2023 22:27:08 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/problem_of_virtualbox_appeding_starting_vm/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/photo_2023-03-06_20-52-14.jpg" referrerpolicy="no-referrer">
@@ -796,20 +798,20 @@
 <p>嗯&hellip; 查到了两篇 Arch 官方论坛的帖子。</p>
 <ul>
 <li>
-<p><a href="https://bbs.archlinux.org/viewtopic.php?id=277409" target="_blank" rel="noopener noreffer">Virtualbox hangs on Starting virtual machine window / Newbie Corner / Arch Linux Forums</a></p>
+<p><a href="https://bbs.archlinux.org/viewtopic.php?id=277409" target="_blank" rel="noopener noreffer ">Virtualbox hangs on Starting virtual machine window / Newbie Corner / Arch Linux Forums</a></p>
 </li>
 <li>
-<p><a href="https://bbs.archlinux.org/viewtopic.php?id=276699" target="_blank" rel="noopener noreffer">KVM busted in linux 5.18 due to Intel CET / Kernel &amp; Hardware / Arch Linux Forums</a></p>
+<p><a href="https://bbs.archlinux.org/viewtopic.php?id=276699" target="_blank" rel="noopener noreffer ">KVM busted in linux 5.18 due to Intel CET / Kernel &amp; Hardware / Arch Linux Forums</a></p>
 </li>
 </ul>
 <p>读完两篇帖子之后，我发现是因为 KVM 在新版本的内核中产生了一个 bug 导致的。</p>
 <p>已经有大佬提交了 Bug 报告了。</p>
 <ul>
 <li>
-<p><a href="https://bugs.archlinux.org/task/75481" target="_blank" rel="noopener noreffer">FS#75481 : [linux] VBox virtual machines stop functioning</a></p>
+<p><a href="https://bugs.archlinux.org/task/75481" target="_blank" rel="noopener noreffer ">FS#75481 : [linux] VBox virtual machines stop functioning</a></p>
 </li>
 <li>
-<p><a href="https://github.com/torvalds/linux/commit/991625f3dd2cbc4b787deb0213e2bcf8fa264b21" target="_blank" rel="noopener noreffer">x86/ibt: Add IBT feature, MSR and #CP handling · torvalds/linux@991625f · GitHub</a></p>
+<p><a href="https://github.com/torvalds/linux/commit/991625f3dd2cbc4b787deb0213e2bcf8fa264b21" target="_blank" rel="noopener noreffer ">x86/ibt: Add IBT feature, MSR and #CP handling · torvalds/linux@991625f · GitHub</a></p>
 </li>
 </ul>
 <p><del>至于这个 Bug 是怎么产生&hellip; 咱笨笨，不知道</del></p>
@@ -831,7 +833,7 @@
 <h2 id="怎么设置内核启动参数呢">怎么设置内核启动参数呢？</h2>
 <p>我并不知道这个，所以我还是去谷歌查了，得到了方法。</p>
 <ul>
-<li><a href="https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux" target="_blank" rel="noopener noreffer">How to set kernel boot parameters on Linux - Linux Tutorials - Learn Linux Configuration</a></li>
+<li><a href="https://linuxconfig.org/how-to-set-kernel-boot-parameters-on-linux" target="_blank" rel="noopener noreffer ">How to set kernel boot parameters on Linux - Linux Tutorials - Learn Linux Configuration</a></li>
 </ul>
 <p>此时能看懂英文的读者可以参考上面这条链接去解决问题了，但是如果英文阅读比较困难的话，也可以跟着本文的步骤走。</p>
 <h2 id="设想的解决方法">设想的解决方法</h2>
@@ -897,11 +899,12 @@
 <p>重启之后再次打开 VirutalBox， 然后启动一个虚拟机，此时发现虚拟机已经进入了系统。</p>
 <p></p>
 <p>这意味着问题得到了解决。</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>关于写 HTML CSS 的时候一些想说的话</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/something-about-html-css/</link>
     <pubDate>Thu, 17 Nov 2022 22:41:43 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/something-about-html-css/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://w.wallhaven.cc/full/zy/wallhaven-zygeko.jpg" referrerpolicy="no-referrer">
@@ -1369,11 +1372,12 @@
 <p>以上只是我个人对目前已经发现的初学者学习 HTML 和 CSS 会出现的小问题的一些看法和方法。</p>
 <p>也许还有更多问题我没发现的&hellip;</p>
 <p>其实你可以到下面的评论插件吐槽&hellip;.</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>浅尝 Docker</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E6%B5%85%E5%B0%9Ddocker/</link>
     <pubDate>Sat, 15 Oct 2022 20:21:13 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E6%B5%85%E5%B0%9Ddocker/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://w.wallhaven.cc/full/d5/wallhaven-d5we7o.png" referrerpolicy="no-referrer">
@@ -1383,7 +1387,7 @@
 <h1 id="docker-是什么">docker 是什么？</h1>
 <p><div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>官方英文简介<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>官方英文简介<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content">Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.</div>
@@ -1411,7 +1415,7 @@
 </div>
 </div><div class="details admonition note open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>如果运行时出现以下报错</p>
@@ -1447,7 +1451,7 @@
         </div>
     </div>
 <h2 id="debian">Debian</h2>
-<p>如果是用 deb 系的发行版，可以参考<a href="https://docs.docker.com/engine/install/debian/#install-docker-engine" target="_blank" rel="noopener noreffer">官方文档</a>用 apt 来安装。</p>
+<p>如果是用 deb 系的发行版，可以参考<a href="https://docs.docker.com/engine/install/debian/#install-docker-engine" target="_blank" rel="noopener noreffer ">官方文档</a>用 apt 来安装。</p>
 <h3 id="设置仓库">设置仓库</h3>
 <ol>
 <li>更新 apt 仓库，并安装一些依赖来允许 apt 通过 https 使用第三方仓库。</li>
@@ -1514,13 +1518,13 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt update
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>如果更新的时候发生了 GPG 错误，可以参考官网的<a href="https://docs.docker.com/engine/install/debian/#install-docker-engine" target="_blank" rel="noopener noreffer">这个提示</a>：</p>
+</div><p>如果更新的时候发生了 GPG 错误，可以参考官网的<a href="https://docs.docker.com/engine/install/debian/#install-docker-engine" target="_blank" rel="noopener noreffer ">这个提示</a>：</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>Receiving a GPG error when running apt-get update?<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Receiving a GPG error when running apt-get update?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><p>Your default <a href="https://en.wikipedia.org/wiki/Umask" target="_blank" rel="noopener noreffer">umask</a> may be incorrectly configured, preventing detection of the repository public key file. Try granting read permission for the Docker public key file before updating the package index:</p>
+            <div class="admonition-content"><p>Your default <a href="https://en.wikipedia.org/wiki/Umask" target="_blank" rel="noopener noreffer ">umask</a> may be incorrectly configured, preventing detection of the repository public key file. Try granting read permission for the Docker public key file before updating the package index:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1595,9 +1599,9 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="对于-linux-平台再提一嘴">对于 Linux 平台再提一嘴</h2>
-<p>上述的方法都是在 Linux 平台安装 docker 的最新版本，如果需要安装特定的版本，可以<a href="https://docs.docker.com/engine/" target="_blank" rel="noopener noreffer">参考 docker 的官方文档</a>进行操作。</p>
+<p>上述的方法都是在 Linux 平台安装 docker 的最新版本，如果需要安装特定的版本，可以<a href="https://docs.docker.com/engine/" target="_blank" rel="noopener noreffer ">参考 docker 的官方文档</a>进行操作。</p>
 <h2 id="windows">Windows</h2>
-<p>在 Windows 平台可以直接安装 docker-desktop，这也非常简单，直接通过 <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank" rel="noopener noreffer">docker 官方文档</a><a href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" target="_blank" rel="noopener noreffer">下载</a>安装包就行了。</p>
+<p>在 Windows 平台可以直接安装 docker-desktop，这也非常简单，直接通过 <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank" rel="noopener noreffer ">docker 官方文档</a><a href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" target="_blank" rel="noopener noreffer ">下载</a>安装包就行了。</p>
 <h1 id="我能怎么玩-docker">我能怎么玩 docker？</h1>
 <p>docker 能干的事多着呢。</p>
 <p>最常用的就是在 docker 容器里运行应用程序了。</p>
@@ -1622,7 +1626,7 @@
 </ul>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>如果出现了以下信息，可能是因为在启动容器的时候没有下载好相关的镜像</p>
@@ -1662,14 +1666,14 @@
 </div>
 </div><div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>参数含义<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>参数含义<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><ul>
 <li><code>-i</code>: 交互式操作。</li>
 <li><code>-t</code>: 终端。</li>
 </ul>
-<p><a href="https://www.runoob.com/docker/docker-image-usage.html" target="_blank" rel="noopener noreffer">引自菜鸟教程</a></div>
+<p><a href="https://www.runoob.com/docker/docker-image-usage.html" target="_blank" rel="noopener noreffer ">引自菜鸟教程</a></div>
         </div>
     </div>
 <p>这样我们创建容器之后,我们的 shell 也变成了容器里的 shell</p>
@@ -1821,7 +1825,7 @@
 </div><p>此时我们用 <code>docker ps</code> 就又能看到它在运行了</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>使用 <code>docker ps -a</code>命令可以查看所有的容器,无论是否正在运行</p>
@@ -1909,7 +1913,7 @@
 </div>
 </div><div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>各个选项说明:<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>各个选项说明:<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><ul>
@@ -1930,7 +1934,7 @@
 </li>
 </ul>
 <p>同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如 ubuntu 仓库源里，有 <code>15.10</code>、<code>14.04</code> 等多个不同的版本，我们使用 <code>REPOSITORY:TAG</code> 来定义不同的镜像。</p>
-<p><a href="https://www.runoob.com/docker/docker-image-usage.html" target="_blank" rel="noopener noreffer">引自菜鸟教程</a></p>
+<p><a href="https://www.runoob.com/docker/docker-image-usage.html" target="_blank" rel="noopener noreffer ">引自菜鸟教程</a></p>
 </div>
         </div>
     </div>
@@ -1961,7 +1965,7 @@
 </div>
 </div><div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>来自菜鸟教程的提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>来自菜鸟教程的提示<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><ul>
@@ -1998,7 +2002,7 @@
 <p>熟悉 Linux 操作的话, 上手这玩意也就很简单了, 但是值得注意的是菜鸟教程当中说的这一段:</p>
 <div class="details admonition note open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>Dockerfile 的指令每执行一次都会在 docker 上新建一层。所以过多无意义的层，会造成镜像膨胀过大。例如：</p>
@@ -2107,7 +2111,7 @@
 </div>
 </div><div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>指令详解<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>指令详解<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><ul>
@@ -2157,7 +2161,7 @@
 </div><p>注意了, 我在最后面还加了一个 <code>.</code> , 这个叫做上写文路径, 也是指相对路径</p>
 <div class="details admonition note open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw"></i>什么叫上下文路径?<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>什么叫上下文路径?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content">上下文路径，是指 docker 在构建镜像，有时候想要使用到本机的文件（比如复制），docker build 命令得知这个路径后，会将路径下的所有内容打包。</div>
@@ -2194,11 +2198,12 @@
 <p>诶? 你问我难不难? QwQ ~</p>
 <p>对 Linux 熟悉的人来玩这个没几天应该就能玩会了, 不过要做到深入的了解还是需要时间的.</p>
 <p>那 就这样吧</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>一天刷完《Linux网络操作系统应用基础教程》这本书</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E4%B8%80%E5%A4%A9%E5%88%B7%E5%AE%8Clinux%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E8%BF%99%E6%9C%AC%E4%B9%A6/</link>
     <pubDate>Fri, 30 Sep 2022 19:25:48 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E4%B8%80%E5%A4%A9%E5%88%B7%E5%AE%8Clinux%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E8%BF%99%E6%9C%AC%E4%B9%A6/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/photo_2022-09-30_20-14-56.jpg" referrerpolicy="no-referrer">
@@ -2218,7 +2223,7 @@
 <h1 id="概念内容">概念内容</h1>
 <p>大概是项目一到项目二的 2.1 的内容，讲了 Linux 的案例、历史、以及流行的发行版。</p>
 <p>书中居然没有 Arch, 差评。</p>
-<p>但是也描述了 Linux 可以用来运行各种服务，比如 DNS（<a href="https://zh.wikipedia.org/zh-cn/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener noreffer">Domain Name System</a>）服务、Web 服务器（Apache Nginx 这些提供基于HTTP协议的网页服务的）、基于 SMTP 协议的邮件服务器、以及 FTP 协议的文件传输服务器、基于 Samba 协议的文件共享服务器、<a href="https://zh.wikipedia.org/zh-ctiaoguo%B8%BB%E6%9C%BA%E8%AE%BE%E7%BD%AE%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener noreffer">DHCP</a> 服务器 还有 VPN 服务器。</p>
+<p>但是也描述了 Linux 可以用来运行各种服务，比如 DNS（<a href="https://zh.wikipedia.org/zh-cn/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener noreffer ">Domain Name System</a>）服务、Web 服务器（Apache Nginx 这些提供基于HTTP协议的网页服务的）、基于 SMTP 协议的邮件服务器、以及 FTP 协议的文件传输服务器、基于 Samba 协议的文件共享服务器、<a href="https://zh.wikipedia.org/zh-ctiaoguo%B8%BB%E6%9C%BA%E8%AE%BE%E7%BD%AE%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener noreffer ">DHCP</a> 服务器 还有 VPN 服务器。</p>
 <p>总之就是讲了 Linux 能干啥、Linux 的优点等， 这些可以通过搜索引擎查到，不多赘述。</p>
 <h1 id="实操性内容">实操性内容</h1>
 <p>往后都是一些操作性的内容，比如 Linux 的安装和搭建各种服务等</p>
@@ -2226,7 +2231,7 @@
 <p>书中讲用 VMware 装一个 CentOS 虚拟机。</p>
 <p>高中的时候就会了，跳过。</p>
 <h2 id="linux-基础操作">Linux 基础操作</h2>
-<p>关于基础操作方面，我在初中的时候就写过一丢丢<a href="https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" target="_blank" rel="noopener noreffer">基础命令的笔记</a></p>
+<p>关于基础操作方面，我在初中的时候就写过一丢丢<a href="https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" target="_blank" rel="noopener noreffer ">基础命令的笔记</a></p>
 <p>书里也介绍了两种打开终端的方式，一个是在图形界面打开终端，另一种是按 <code>Ctrl</code> + <code>Alt</code> + <code>(F1 ~F6)</code> 来切换 tty。</p>
 <p>然后是命令，大部分是加了 <code>-h</code> 参数以后的中文翻译，对于英语不太好的人来说，需要的时候翻阅一下也是一件美事。</p>
 <p>另外我需要补充一些初中发的那篇文章当中没有写到的一些命令。</p>
@@ -2411,7 +2416,7 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">vim [文件名]
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>引用一个<a href="https://www.runoob.com/linux/linux-vim.html" target="_blank" rel="noopener noreffer">菜鸟教程的链接吧</a></p>
+</div><p>引用一个<a href="https://www.runoob.com/linux/linux-vim.html" target="_blank" rel="noopener noreffer ">菜鸟教程的链接吧</a></p>
 <p>我平常就用个 <code>i</code> 来编辑文档， <code>ESC</code> 来退出编辑模式， <code>:w</code> 保存， <code>:q</code> 来退出。</p>
 <p>有时候要加个 <code>!</code> 强制执行。</p>
 <p>保存退出是 <code>:wq</code></p>
@@ -2430,11 +2435,11 @@
 <p>有些多人协作部署的服务器也会利用 Linux 多用户的特性。</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>GNU/Linux 系统中的每一个文件都从属一个用户（属主）和一个用户组（属组）。另外，还有三种类型的访问权限：读（read）、写（write）、运行（execute）。我们可以针对文件的属主、属组、而设置相应的访问权限。</p>
-<p>—— 摘自&amp;&amp;详见 <a href="https://wiki.archlinux.org/title/Users_and_groups_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9D%83%E9%99%90%E4%B8%8E%E5%B1%9E%E4%B8%BB" target="_blank" rel="noopener noreffer">ArchWiki</a></p>
+<p>—— 摘自&amp;&amp;详见 <a href="https://wiki.archlinux.org/title/Users_and_groups_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9D%83%E9%99%90%E4%B8%8E%E5%B1%9E%E4%B8%BB" target="_blank" rel="noopener noreffer ">ArchWiki</a></p>
 </div>
         </div>
     </div>
@@ -2456,11 +2461,11 @@
 </ul>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>使用 <code>useradd --defaults</code> 可以查看 shell 的默认值。默认是 Bash。使用 <code>-s</code> / <code>--shell</code> 选项可以设置其他值。<code>/etc/shells</code> 记录了可以使用的登录 shell。</p>
-<p>—— 摘自 <a href="https://wiki.archlinux.org/title/Users_and_groups_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">ArchWiki</a></p>
+<p>—— 摘自 <a href="https://wiki.archlinux.org/title/Users_and_groups_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">ArchWiki</a></p>
 </div>
         </div>
     </div>
@@ -2486,7 +2491,7 @@
 </div><p>就像这样咯～</p>
 <div class="details admonition warning open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-exclamation-triangle fa-fw"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><ol>
@@ -2519,13 +2524,13 @@
 </div>
 </div><div class="details admonition warning open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-exclamation-triangle fa-fw"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><strong><del>别瞎j8乱删用户</del></strong></div>
         </div>
     </div>
-<p>没什么好说的，详见 <a href="https://linux.die.net/man/8/userdel" target="_blank" rel="noopener noreffer">man userdel</a> 。</p>
+<p>没什么好说的，详见 <a href="https://linux.die.net/man/8/userdel" target="_blank" rel="noopener noreffer ">man userdel</a> 。</p>
 <h3 id="groups">groups</h3>
 <p>这个命令用来查看用户属于哪些组。</p>
 <div class="highlight"><div class="chroma">
@@ -2577,7 +2582,7 @@
 </div>
 </div><div class="details admonition warning open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-exclamation-triangle fa-fw"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><strong><del>别瞎j8乱删组</del></strong></div>
@@ -2613,10 +2618,10 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gpasswd -d [用户名] [组名]
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>其他的用法也可以参考 <a href="https://linux.die.net/man/1/gpasswd" target="_blank" rel="noopener noreffer">man gpasswd</a></p>
+</div><p>其他的用法也可以参考 <a href="https://linux.die.net/man/1/gpasswd" target="_blank" rel="noopener noreffer ">man gpasswd</a></p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content">如果用户已经处于登录状态，必须重新登录才能更改生效。</div>
@@ -2646,7 +2651,7 @@
 </div>
 </div><div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>提示<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content">不同的设备当中，磁盘的块设备表示也不同，比如使用 SATA 接口的硬盘会被显示为 <code>/dev/sd*X</code>， 而使用 NVME 硬盘则会显示为 <code>/dev/nvme*n*</code></div>
@@ -2658,7 +2663,7 @@
 <p>甚至可以用一些发行版自带的图形化分区工具。</p>
 <h3 id="格式化">格式化</h3>
 <p>分区创建好以后，就要选择合适的文件系统来进行格式化。</p>
-<p>文件系统有哪些？具体可以参考<a href="https://wiki.archlinux.org/title/File_systems_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">这个页面</a></p>
+<p>文件系统有哪些？具体可以参考<a href="https://wiki.archlinux.org/title/File_systems_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">这个页面</a></p>
 <p>Linux 往往用 EXT4</p>
 <p>使用 mkfs</p>
 <div class="highlight"><div class="chroma">
@@ -2678,7 +2683,7 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mount [被挂载的分区] [要挂载到的地方]
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>当然也可以写 <code>/etc/fstab</code> 来进行自动挂载，详情可以看<a href="https://wiki.archlinux.org/title/Fstab_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD" target="_blank" rel="noopener noreffer">这里</a></p>
+</div><p>当然也可以写 <code>/etc/fstab</code> 来进行自动挂载，详情可以看<a href="https://wiki.archlinux.org/title/Fstab_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD" target="_blank" rel="noopener noreffer ">这里</a></p>
 <h2 id="资源共享服务">资源共享服务</h2>
 <h3 id="ftp">FTP</h3>
 <p>搭建 FTP 服务器</p>
@@ -2724,7 +2729,7 @@
 </div>
 </div><p>通过客户端连接</p>
 <p></p>
-<p>参考<a href="https://wiki.archlinux.org/title/Very_Secure_FTP_Daemon_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener noreffer">Arch Wiki</a>， 可根据实际情况调整配置。</p>
+<p>参考<a href="https://wiki.archlinux.org/title/Very_Secure_FTP_Daemon_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener noreffer ">Arch Wiki</a>， 可根据实际情况调整配置。</p>
 <h3 id="samba">Samba</h3>
 <p>不搞这玩意，太危险了。</p>
 <h2 id="dhcp-服务器">DHCP 服务器</h2>
@@ -2778,7 +2783,7 @@
 </div>
 </div><h2 id="dns-服务器">DNS 服务器</h2>
 <p>懒得搞了，不难</p>
-<p>参考 <a href="https://wiki.archlinux.org/title/BIND_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">https://wiki.archlinux.org/title/BIND_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></p>
+<p>参考 <a href="https://wiki.archlinux.org/title/BIND_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">https://wiki.archlinux.org/title/BIND_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></p>
 <h2 id="apache-服务器">Apache 服务器</h2>
 <p>这个简单</p>
 <p>deb</p>
@@ -2822,11 +2827,12 @@
 <p><del>什么垃圾书！</del></p>
 <p>很简单，但是太老了，跟不上时代了。</p>
 <p>还是自己去网上找资料来得快。</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>试玩 IPFS 协议——Web3.0时代的先驱者。</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E8%AF%95%E7%8E%A9ipfs/</link>
     <pubDate>Fri, 12 Aug 2022 09:48:53 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E8%AF%95%E7%8E%A9ipfs/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Ipfs-logo-1024-ice-text.png" referrerpolicy="no-referrer">
@@ -2836,7 +2842,7 @@
 <p>实际上它能实现的功能远比文件系统强大。</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>官方描述<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>官方描述<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content">IPFS is a collection of protocols, packages, and specifications that allow computers to send and receive data. Because of this, users can pick and choose which packages to install when using IPFS. And like shoe sizes, there is no one-size-fits-all solution. A developer building network applications will install a different set of tools than someone who wants to store files on IPFS. Pick the one that best suits what you&rsquo;re here to do.</div>
@@ -2855,11 +2861,11 @@
 <h2 id="安装">安装</h2>
 <p>在一切开始之前我得先把 IPFS 安装上去。</p>
 <p>我们可以选择多种安装方案。</p>
-<p>阅读 <a href="ipns://docs.ipfs.tech/install/" target="_blank" rel="noopener noreffer">IPFS 官方文档的 Install 部分</a></p>
+<p>阅读 <a href="ipns://docs.ipfs.tech/install/" target="_blank" rel="noopener noreffer ">IPFS 官方文档的 Install 部分</a></p>
 <p></p>
 <p>桌面用户（如 Windows、Mac、Linux）可以使用 IPFS Desktop，可以通过阅读官方文档中的教程进行安装和配置。 同样 Linux 也可以使用</p>
 <p>然而 Arch 需要通过 aur 才能安装 <code>ipfs-desktop</code> 这个包，因此我决定安装命令行版本的 ipfs。</p>
-<p>根据<a href="ipns://docs.ipfs.tech/install/command-line/#system-requirements" target="_blank" rel="noopener noreffer">官方文档</a>的教程</p>
+<p>根据<a href="ipns://docs.ipfs.tech/install/command-line/#system-requirements" target="_blank" rel="noopener noreffer ">官方文档</a>的教程</p>
 <p>我们需要用 <code>wget</code> 下载一个叫 <code>kubo</code> 的包：</p>
 <blockquote>
 <ol>
@@ -2928,7 +2934,7 @@
 <p>然后你就能看到这个界面了:
 </p>
 <p>是不是超简单！</p>
-<p>另外，推荐使用 <a href="https://brave.com/" target="_blank" rel="noopener noreffer">brave 浏览器</a>来访问 IPFS 服务，毕竟它原生支持 IPFS 网关！</p>
+<p>另外，推荐使用 <a href="https://brave.com/" target="_blank" rel="noopener noreffer ">brave 浏览器</a>来访问 IPFS 服务，毕竟它原生支持 IPFS 网关！</p>
 <h2 id="文件传输">文件传输</h2>
 <p>在当前 Web 2.0 的模式下，我们传输文件必须经过一些大公司的商业网盘，传输速度和存储空间都会得到一定程度的限制。</p>
 <p>而使用 IPFS 传输文件则不会受这些限制，除此之外还能规避很大一部分的审查。</p>
@@ -3000,15 +3006,16 @@
 <p>还在想什么呢，赶紧在本地搭一个 IPFS 节点试试看？也许你会想用 IPFS 整一些有意思的活？在评论区留言吧。</p>
 <h1 id="参考链接">参考链接</h1>
 <ul>
-<li><a href="https://zh.wikipedia.org/zh-cn/%E6%98%9F%E9%99%85%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener noreffer">星际文件系统 - 维基百科，自由的百科全书</a></li>
-<li><a href="https://docs.ipfs.io" target="_blank" rel="noopener noreffer">IPFS Documentation | IPFS Docs</a></li>
-<li><a href="https://wiki.archlinux.org/title/InterPlanetary_File_System" target="_blank" rel="noopener noreffer">InterPlanetary File System - ArchWiki</a></li>
+<li><a href="https://zh.wikipedia.org/zh-cn/%E6%98%9F%E9%99%85%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F" target="_blank" rel="noopener noreffer ">星际文件系统 - 维基百科，自由的百科全书</a></li>
+<li><a href="https://docs.ipfs.io" target="_blank" rel="noopener noreffer ">IPFS Documentation | IPFS Docs</a></li>
+<li><a href="https://wiki.archlinux.org/title/InterPlanetary_File_System" target="_blank" rel="noopener noreffer ">InterPlanetary File System - ArchWiki</a></li>
 </ul>]]></description>
-</item><item>
+</item>
+<item>
     <title>利用 rsync 给笔记本安装 Gentoo</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E5%88%A9%E7%94%A8rsync%E7%BB%99%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%AE%89%E8%A3%85gentoo/</link>
     <pubDate>Sat, 11 Jun 2022 08:00:00 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%88%A9%E7%94%A8rsync%E7%BB%99%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%AE%89%E8%A3%85gentoo/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://w.wallhaven.cc/full/95/wallhaven-955vx1.jpg" referrerpolicy="no-referrer">
@@ -3027,14 +3034,14 @@
 <p>废话不多说，直接开搞。</p>
 <p>但我们要准备好这些东西</p>
 <ul>
-<li><a href="https://wiki.gentoo.org/wiki/Main_Page" target="_blank" rel="noopener noreffer">Gentoo Wiki</a>
+<li><a href="https://wiki.gentoo.org/wiki/Main_Page" target="_blank" rel="noopener noreffer ">Gentoo Wiki</a>
 <ul>
 <li>安装过程中需要用到官方的指引和文档，必备</li>
 </ul>
 </li>
 <li>翻译工具
 <ul>
-<li>由于 Gentoo 的用户群体较小，文档汉化可能不是很全面，因此可以借助翻译工具，这里推荐 <a href="https://www.deepl.com/zh/translator" target="_blank" rel="noopener noreffer">deepl</a></li>
+<li>由于 Gentoo 的用户群体较小，文档汉化可能不是很全面，因此可以借助翻译工具，这里推荐 <a href="https://www.deepl.com/zh/translator" target="_blank" rel="noopener noreffer ">deepl</a></li>
 </ul>
 </li>
 <li>一个 U 盘
@@ -3072,7 +3079,7 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root # cd /mnt/gentoo
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后我们需要用 wget 下载 stage 包，打开<a href="https://www.gentoo.org/downloads/#other-arches" target="_blank" rel="noopener noreffer">这个页面</a>，这里我们选择 stage3</p>
+</div><p>然后我们需要用 wget 下载 stage 包，打开<a href="https://www.gentoo.org/downloads/#other-arches" target="_blank" rel="noopener noreffer ">这个页面</a>，这里我们选择 stage3</p>
 <p>因为我懒，喜欢用 systemd ， 可以根据需要选择。</p>
 <p><strong>注意：右键 stage3 systemd ，复制链接</strong></p>
 <p></p>
@@ -3087,7 +3094,7 @@
 </div>
 </div><p>等待下载。</p>
 <p></p>
-<p>下载完成之后可以进行一下文件校验，可以参考一下官方的<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn" target="_blank" rel="noopener noreffer">这个条目</a></p>
+<p>下载完成之后可以进行一下文件校验，可以参考一下官方的<a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn" target="_blank" rel="noopener noreffer ">这个条目</a></p>
 <p></p>
 <p>一般情况下我这边不会损坏，所以我这里就不写出来了，接下来我们直接进入解压 stage 文件这一步。</p>
 <h1 id="解压-stage-压缩包">解压 stage 压缩包</h1>
@@ -3188,8 +3195,8 @@
 <p>上面已经完成了第一阶段的操作，可以开始安装基本系统了，诶嘿嘿。</p>
 <p>接下来要做的是选择镜像源，我们可以参考 ustc mirror 给出的帮助文档：</p>
 <ul>
-<li><a href="https://mirrors.ustc.edu.cn/help/gentoo.html" target="_blank" rel="noopener noreffer">Gentoo 源使用帮助 — USTC Mirror Help  文档</a></li>
-<li><a href="https://mirrors.ustc.edu.cn/help/gentoo-portage.html" target="_blank" rel="noopener noreffer">Gentoo Portage 源使用帮助 — USTC Mirror Help  文档</a></li>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo.html" target="_blank" rel="noopener noreffer ">Gentoo 源使用帮助 — USTC Mirror Help  文档</a></li>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo-portage.html" target="_blank" rel="noopener noreffer ">Gentoo Portage 源使用帮助 — USTC Mirror Help  文档</a></li>
 </ul>
 <p>直接按照 ustc 给出的帮助设置这两个源地址就好啦～</p>
 <p></p>
@@ -3391,7 +3398,7 @@
 </div>
 </div><p>除此之外，在更改USE标记之后，这条命令也用来动态调整系统功能。</p>
 <h2 id="配置-locale">配置 locale</h2>
-<p>麻了，参考这个 <a href="https://wiki.archlinux.org/title/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9C%AC%E5%9C%B0%E5%8C%96" target="_blank" rel="noopener noreffer">Installation guide (简体中文) - ArchWiki</a></p>
+<p>麻了，参考这个 <a href="https://wiki.archlinux.org/title/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9C%AC%E5%9C%B0%E5%8C%96" target="_blank" rel="noopener noreffer ">Installation guide (简体中文) - ArchWiki</a></p>
 <h1 id="配置内核">配置内核</h1>
 <p>嗯哼，你以为我那么傻又编译八个小时？不！这次我选择用 bin 内核！</p>
 <div class="highlight"><div class="chroma">
@@ -3513,18 +3520,19 @@
 <p>不过也折腾了挺久的</p>
 <h1 id="参考链接">参考链接</h1>
 <ul>
-<li><a href="https://wiki.gentoo.org/wiki/Main_Page" target="_blank" rel="noopener noreffer">Gentoo Wiki</a></li>
-<li><a href="https://www.gentoo.org/downloads/#other-arches" target="_blank" rel="noopener noreffer">Downloads â Gentoo Linux</a></li>
-<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn" target="_blank" rel="noopener noreffer">安装Gentoo安装文件 - Gentoo Wiki</a></li>
-<li><a href="https://mirrors.ustc.edu.cn/help/gentoo.html" target="_blank" rel="noopener noreffer">Gentoo 源使用帮助 — USTC Mirror Help  文档</a></li>
-<li><a href="https://mirrors.ustc.edu.cn/help/gentoo-portage.html" target="_blank" rel="noopener noreffer">Gentoo Portage 源使用帮助 — USTC Mirror Help  文档</a></li>
-<li><a href="https://wiki.archlinux.org/title/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9C%AC%E5%9C%B0%E5%8C%96" target="_blank" rel="noopener noreffer">Installation guide (简体中文) - ArchWiki</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Main_Page" target="_blank" rel="noopener noreffer ">Gentoo Wiki</a></li>
+<li><a href="https://www.gentoo.org/downloads/#other-arches" target="_blank" rel="noopener noreffer ">Downloads â Gentoo Linux</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn" target="_blank" rel="noopener noreffer ">安装Gentoo安装文件 - Gentoo Wiki</a></li>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo.html" target="_blank" rel="noopener noreffer ">Gentoo 源使用帮助 — USTC Mirror Help  文档</a></li>
+<li><a href="https://mirrors.ustc.edu.cn/help/gentoo-portage.html" target="_blank" rel="noopener noreffer ">Gentoo Portage 源使用帮助 — USTC Mirror Help  文档</a></li>
+<li><a href="https://wiki.archlinux.org/title/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9C%AC%E5%9C%B0%E5%8C%96" target="_blank" rel="noopener noreffer ">Installation guide (简体中文) - ArchWiki</a></li>
 </ul>]]></description>
-</item><item>
+</item>
+<item>
     <title>关于N卡闭源驱动 nvidia-340xx 无法安装这档子事</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/</link>
     <pubDate>Mon, 22 Nov 2021 13:32:29 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8En%E5%8D%A1%E9%97%AD%E6%BA%90%E9%A9%B1%E5%8A%A8nvidia-340xx%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E8%BF%99%E6%A1%A3%E5%AD%90%E4%BA%8B/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/fucknvidia1.jpg" referrerpolicy="no-referrer">
@@ -3567,7 +3575,7 @@
 </blockquote>
 <p>然后我就想着要不用回旧版本的内核？一边想一边往下翻，我就又看到了一条对我有用的评论</p>
 <blockquote>
-<p>Patch for kernel 5.15 <a href="https://pastebin.com/uYP9J2Cw" target="_blank" rel="noopener noreffer">https://pastebin.com/uYP9J2Cw</a> Found here <a href="https://github.com/warpme/minimyth2/issues/15" target="_blank" rel="noopener noreffer">https://github.com/warpme/minimyth2/issues/15</a></p>
+<p>Patch for kernel 5.15 <a href="https://pastebin.com/uYP9J2Cw" target="_blank" rel="noopener noreffer ">https://pastebin.com/uYP9J2Cw</a> Found here <a href="https://github.com/warpme/minimyth2/issues/15" target="_blank" rel="noopener noreffer ">https://github.com/warpme/minimyth2/issues/15</a></p>
 </blockquote>
 <p></p>
 <p>然后我观察了一下这个包的文件目录..</p>
@@ -3602,7 +3610,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>虽然我不太懂，但我发现这个 <code>*.patch</code> 文件的文件名似乎对应着各个内核版本。</p>
-<p>而这条评论给出了<a href="https://pastebin.com/uYP9J2Cw" target="_blank" rel="noopener noreffer">新 <code>patch</code> 文件的链接</a>，以及<a href="https://github.com/warpme/minimyth2/issues/15" target="_blank" rel="noopener noreffer">一个 issue 链接</a>。</p>
+<p>而这条评论给出了<a href="https://pastebin.com/uYP9J2Cw" target="_blank" rel="noopener noreffer ">新 <code>patch</code> 文件的链接</a>，以及<a href="https://github.com/warpme/minimyth2/issues/15" target="_blank" rel="noopener noreffer ">一个 issue 链接</a>。</p>
 <p>我瞬间知道怎么回事了，打包所需的文件是更新了，但还没有提交到 aur..</p>
 <p>淦，我只能自己试试看了</p>
 <p>于是抱着试试看的态度</p>
@@ -3807,15 +3815,17 @@
 <blockquote>
 <p><strong>FUCK YOU NVIDIA!</strong></p>
 </blockquote>]]></description>
-</item><item>
+</item>
+<item>
     <title>已将评论系统换成 Utterances</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E5%B7%B2%E5%B0%86%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%8D%A2%E6%88%90utterances/</link>
     <pubDate>Sat, 25 Sep 2021 16:11:55 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%B7%B2%E5%B0%86%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%8D%A2%E6%88%90utterances/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="https://w.wallhaven.cc/full/y8/wallhaven-y8622k.jpg" referrerpolicy="no-referrer">
             </div><p>之前都是使用 Gitalk 做评论系统的，但是 Diary 主题在夜间模式下对 Gitalk 的显示有 bug。</p>
-<p><a href="https://github.com/AmazingRise/hugo-theme-diary/issues/96" target="_blank" rel="noopener noreffer">目前开发者也在修复中</a></p>]]></description>
-</item></channel>
+<p><a href="https://github.com/AmazingRise/hugo-theme-diary/issues/96" target="_blank" rel="noopener noreffer ">目前开发者也在修复中</a></p>]]></description>
+</item>
+</channel>
 </rss>

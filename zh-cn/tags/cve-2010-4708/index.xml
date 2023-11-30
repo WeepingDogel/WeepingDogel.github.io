@@ -8,32 +8,32 @@
     <title>关于 fcitx5 ，以及最近的环境变量问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Efcitx5/</link>
     <pubDate>Sat, 25 Jul 2020 13:25:46 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Efcitx5/</guid>
     <description><![CDATA[<h2 id="发生了啥">发生了啥</h2>
 <p>最近我收到了一条这样的消息</p>
 <blockquote>
-<p>使用 <code>$HOME/.pam_environment</code> 设置环境变量的用户注意啦！由于 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708" target="_blank" rel="noopener noreffer">CVE-2010-4708</a>, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。</p>
-<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">Linux 的环境变量怎么设 依云&rsquo;s Blog</a></p>
+<p>使用 <code>$HOME/.pam_environment</code> 设置环境变量的用户注意啦！由于 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708" target="_blank" rel="noopener noreffer ">CVE-2010-4708</a>, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。</p>
+<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">Linux 的环境变量怎么设 依云&rsquo;s Blog</a></p>
 </blockquote>
 <p><del>为什么十年的漏洞现在才修啊喂！！！</del></p>
 <p>Emmmm, 这么说就是 <code>.pam_environment</code> 这个文件不能用了&hellip;&hellip;</p>
-<p>这里感谢 <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">依云</a> 写出了各种情况的应对方法</p>
+<p>这里感谢 <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">依云</a> 写出了各种情况的应对方法</p>
 <p>我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西&hellip; 其他具体的可以参考云云写的.. (逃</p>
 <h2 id="fcitx5-与-fcitx">fcitx5 与 fcitx</h2>
 <ul>
 <li>Fcitx</li>
 </ul>
 <blockquote>
-<p><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a> (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的<a href="https://en.wikipedia.org/wiki/Input_method" target="_blank" rel="noopener noreffer">输入法</a>平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。</p>
-<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx</a> (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的<a href="https://en.wikipedia.org/wiki/Input_method" target="_blank" rel="noopener noreffer ">输入法</a>平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a></p>
 </blockquote>
 <ul>
 <li>Fcitx5</li>
 </ul>
 <blockquote>
-<p>Fcitx5 是继 <a href="https://wiki.archlinux.org/index.php/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a> 后的新一代输入法框架。</p>
-<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+<p>Fcitx5 是继 <a href="https://wiki.archlinux.org/index.php/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx</a> 后的新一代输入法框架。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a></p>
 </blockquote>
 <p>日常偷懒，直接引用(逃</p>
 <h2 id="好啦直接开始吧">好啦，直接开始吧</h2>
@@ -81,7 +81,7 @@
 <ul>
 <li>中文输入法包&hellip;. Arch Wiki 里面是这样解释的:
 <blockquote>
-<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons" target="_blank" rel="noopener noreffer">fcitx5-chinese-addons</a> 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等</p>
+<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons" target="_blank" rel="noopener noreffer ">fcitx5-chinese-addons</a> 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等</p>
 </blockquote>
 </li>
 </ul>
@@ -119,7 +119,7 @@
 </div>
 </div><h3 id="环境变量">环境变量</h3>
 <p>嗯哼，最后就是设置环境变量了，既然 <code>.pam_environment</code> 不能用了，那要写在哪里呢？</p>
-<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">云云</a>说：</p>
+<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">云云</a>说：</p>
 <blockquote>
 <p>使用 X11 的桌面环境，通常通过 display manager 来登录，比如 lightdm 和 sddm。这俩都支持 <code>~/.xprofile</code>。这个文件会在启动过程中被 source，使用的 shell 是由 dm 自己确定的。lightdm 和 sddm 都是用的 <code>/bin/sh</code>（分别位于 <code>/etc/lightdm/Xsession</code> 和 <code>/usr/share/sddm/scripts/Xsession</code> 文件里）。可以看到，除了读取 <code>.xprofile</code> 外，lightdm 也会读取 <code>.profile</code>。sddm 甚至连 bash、zsh、tcsh、fish 的启动配置脚本都给读了。</p>
 </blockquote>
@@ -173,10 +173,11 @@
 <p>然后点击 OK，开始享受 fcitx5 吧</p>
 <h2 id="参考链接">参考链接</h2>
 <ul>
-<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">Linux 的环境变量怎么设 - 依云&rsquo;s Blog</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx5 (简体中文) - ArchWiki</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx - Wikipedia</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx (简体中文) - ArchWiki</a></li>
+<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">Linux 的环境变量怎么设 - 依云&rsquo;s Blog</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Fcitx5 (简体中文) - ArchWiki</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx - Wikipedia</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Fcitx (简体中文) - ArchWiki</a></li>
 </ul>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

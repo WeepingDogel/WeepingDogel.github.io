@@ -8,7 +8,7 @@
     <title>解决 NVIDIA 和 Intel GPU 双屏问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</link>
     <pubDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/2023-09-21-21-49-12%e5%b1%8f%e5%b9%95%e6%88%aa%e5%9b%be.png" referrerpolicy="no-referrer">
@@ -118,7 +118,7 @@
 </div><p>现在我需要向内核参数添加 <code>nvidia-drm.modeset=1</code> 。</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><code>nvidia-drm.modeset=1</code>内核参数启用了<strong>NVIDIA Direct Rendering Manager KMS（内核模式设置）</strong>。KMS是一种在内核空间而非用户空间设置显示分辨率和深度的方法。</div>
@@ -160,13 +160,13 @@
 <p>然而，在重启之后效果还是不太好。</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><code>mutter-performance</code> &ldquo;是 Mutter 窗口管理器的优化版本，特别针对性能进行了调整。Mutter 是 GNOME 3 的默认窗口管理器，负责窗口的排列、交互和动画<a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer">linkedin.com</a>。</div>
+            <div class="admonition-content"><code>mutter-performance</code> &ldquo;是 Mutter 窗口管理器的优化版本，特别针对性能进行了调整。Mutter 是 GNOME 3 的默认窗口管理器，负责窗口的排列、交互和动画<a href="https://www.linkedin.com/company/mutter-performance/" target="_blank" rel="noopener noreffer ">linkedin.com</a>。</div>
         </div>
     </div>
-<p>这个包需要从 <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer">AUR</a> 安装.</p>
+<p>这个包需要从 <a href="https://aur.archlinux.org" target="_blank" rel="noopener noreffer ">AUR</a> 安装.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -187,7 +187,7 @@
 </div>
 </div><div class="details admonition tip">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>ChatGPT 的解释<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>xf86-video-intel 软件包是 Intel 集成显卡芯片的驱动程序，由 X.Org 项目维护。 然而，对于现代 Intel 图形硬件（大约 2007 年及更新版本），出于以下几个原因，通常建议删除此软件包：</p>
@@ -209,7 +209,7 @@
         </div>
     </div>
 <h2 id="设置-x11-配置文件">设置 X11 配置文件</h2>
-<p>根据 <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">Arch Wiki</a>，我需要设置一些 X11 配置文件，用来单独使用 N 卡。</p>
+<p>根据 <a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer ">Arch Wiki</a>，我需要设置一些 X11 配置文件，用来单独使用 N 卡。</p>
 <p>写入文件 <code>/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf/</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -271,15 +271,16 @@
 <p>好耶！</p>
 <h2 id="参考连接">参考连接</h2>
 <ul>
-<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer">Phind.com</a></li>
-<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
-<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer">NVIDIA Optimus - ArchWiki #GDM</a></li>
+<li><a href="https://www.phind.com" target="_blank" rel="noopener noreffer ">Phind.com</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#Use_NVIDIA_graphics_only" target="_blank" rel="noopener noreffer ">NVIDIA Optimus - ArchWiki #Use_NVIDIA_graphics_only</a></li>
+<li><a href="https://wiki.archlinux.org/title/NVIDIA_Optimus#GDM" target="_blank" rel="noopener noreffer ">NVIDIA Optimus - ArchWiki #GDM</a></li>
 </ul>]]></description>
-</item><item>
+</item>
+<item>
     <title>如何解决 gvfs 在 i3wm 下无法挂载的问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</link>
     <pubDate>Sat, 16 Jan 2021 23:59:59 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3_gvfs_%E5%9C%A8_i3wm_%E4%B8%8B%E6%97%A0%E6%B3%95%E6%8C%82%E8%BD%BD%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/img/image_2021-01-09_16-24-45.png" referrerpolicy="no-referrer">
@@ -293,7 +294,7 @@
 <p>我们需要装的是 <code>polkit</code> 这个东西&hellip;</p>
 <p>如果不知道它是啥的话，看 Arch Wiki 的这个页面。</p>
 <ul>
-<li><a href="https://wiki.archlinux.org/index.php/Polkit" target="_blank" rel="noopener noreffer">Polkit - ArchWiki</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Polkit" target="_blank" rel="noopener noreffer ">Polkit - ArchWiki</a></li>
 </ul>
 <h2 id="解决过程">解决过程</h2>
 <p>首先安装 <code>polkit</code> ，</p>
@@ -321,8 +322,8 @@
 </div><p>如果想用其他的，把 <code>polkit-gnome</code> 替换成其他包名即可。</p>
 <p>但是装完还不行，还得设置启动项，原因？ 在这：</p>
 <blockquote>
-<p>If you are using a graphical environment, make sure that a graphical authentication agent is installed and <a href="https://wiki.archlinux.org/index.php/Autostarting" target="_blank" rel="noopener noreffer">autostarted</a> on login.</p>
-<p>——<a href="https://wiki.archlinux.org/index.php/Polkit#Authentication_agents" target="_blank" rel="noopener noreffer">Arch Wiki 里写的</a></p>
+<p>If you are using a graphical environment, make sure that a graphical authentication agent is installed and <a href="https://wiki.archlinux.org/index.php/Autostarting" target="_blank" rel="noopener noreffer ">autostarted</a> on login.</p>
+<p>——<a href="https://wiki.archlinux.org/index.php/Polkit#Authentication_agents" target="_blank" rel="noopener noreffer ">Arch Wiki 里写的</a></p>
 </blockquote>
 <p>大意就是，如果你要用的话，得保持这个程序运行&hellip;</p>
 <p>大概是这样吧，想看完整意思就去谷歌翻译吧..</p>
@@ -341,7 +342,7 @@
 <p></p>
 <p>嘛&hellip; i3wm 的话，要参考这个文档了。</p>
 <ul>
-<li><a href="https://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup" target="_blank" rel="noopener noreffer">i3: i3 User’s Guide</a></li>
+<li><a href="https://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup" target="_blank" rel="noopener noreffer ">i3: i3 User’s Guide</a></li>
 </ul>
 <p>接下来呢，我就直接编辑 <code>~/.config/i3/config</code> 这个文件。</p>
 <div class="highlight"><div class="chroma">
@@ -386,36 +387,37 @@
 <p></p>
 <h2 id="结尾">结尾</h2>
 <p>然后我就又可以快乐地使用 <code>i3wm</code> 啦～</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>关于 fcitx5 ，以及最近的环境变量问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Efcitx5/</link>
     <pubDate>Sat, 25 Jul 2020 13:25:46 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Efcitx5/</guid>
     <description><![CDATA[<h2 id="发生了啥">发生了啥</h2>
 <p>最近我收到了一条这样的消息</p>
 <blockquote>
-<p>使用 <code>$HOME/.pam_environment</code> 设置环境变量的用户注意啦！由于 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708" target="_blank" rel="noopener noreffer">CVE-2010-4708</a>, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。</p>
-<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">Linux 的环境变量怎么设 依云&rsquo;s Blog</a></p>
+<p>使用 <code>$HOME/.pam_environment</code> 设置环境变量的用户注意啦！由于 <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708" target="_blank" rel="noopener noreffer ">CVE-2010-4708</a>, pam 上游在 1.4.0 版本中设置了默认不读取用户的环境变量设置，需要用户自行更换环境变量设置位置或恢复原默认读取行为。</p>
+<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">Linux 的环境变量怎么设 依云&rsquo;s Blog</a></p>
 </blockquote>
 <p><del>为什么十年的漏洞现在才修啊喂！！！</del></p>
 <p>Emmmm, 这么说就是 <code>.pam_environment</code> 这个文件不能用了&hellip;&hellip;</p>
-<p>这里感谢 <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">依云</a> 写出了各种情况的应对方法</p>
+<p>这里感谢 <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">依云</a> 写出了各种情况的应对方法</p>
 <p>我这里记一篇在 xfce + lightdm 环境下更换 fcitx5 的东西&hellip; 其他具体的可以参考云云写的.. (逃</p>
 <h2 id="fcitx5-与-fcitx">fcitx5 与 fcitx</h2>
 <ul>
 <li>Fcitx</li>
 </ul>
 <blockquote>
-<p><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a> (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的<a href="https://en.wikipedia.org/wiki/Input_method" target="_blank" rel="noopener noreffer">输入法</a>平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。</p>
-<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx</a> (Flexible Input Method Framework) ──即小企鹅输入法，它是一个以 GPL 方式发布的<a href="https://en.wikipedia.org/wiki/Input_method" target="_blank" rel="noopener noreffer ">输入法</a>平台,可以通过安装引擎支持多种输入法，支持简入繁出，是在 Linux 操作系统中常用的中文输入法。它的优点是，短小精悍、跟程序的兼容性比较好。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a></p>
 </blockquote>
 <ul>
 <li>Fcitx5</li>
 </ul>
 <blockquote>
-<p>Fcitx5 是继 <a href="https://wiki.archlinux.org/index.php/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a> 后的新一代输入法框架。</p>
-<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+<p>Fcitx5 是继 <a href="https://wiki.archlinux.org/index.php/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx</a> 后的新一代输入法框架。</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a></p>
 </blockquote>
 <p>日常偷懒，直接引用(逃</p>
 <h2 id="好啦直接开始吧">好啦，直接开始吧</h2>
@@ -463,7 +465,7 @@
 <ul>
 <li>中文输入法包&hellip;. Arch Wiki 里面是这样解释的:
 <blockquote>
-<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons" target="_blank" rel="noopener noreffer">fcitx5-chinese-addons</a> 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等</p>
+<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons" target="_blank" rel="noopener noreffer ">fcitx5-chinese-addons</a> 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等</p>
 </blockquote>
 </li>
 </ul>
@@ -501,7 +503,7 @@
 </div>
 </div><h3 id="环境变量">环境变量</h3>
 <p>嗯哼，最后就是设置环境变量了，既然 <code>.pam_environment</code> 不能用了，那要写在哪里呢？</p>
-<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">云云</a>说：</p>
+<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">云云</a>说：</p>
 <blockquote>
 <p>使用 X11 的桌面环境，通常通过 display manager 来登录，比如 lightdm 和 sddm。这俩都支持 <code>~/.xprofile</code>。这个文件会在启动过程中被 source，使用的 shell 是由 dm 自己确定的。lightdm 和 sddm 都是用的 <code>/bin/sh</code>（分别位于 <code>/etc/lightdm/Xsession</code> 和 <code>/usr/share/sddm/scripts/Xsession</code> 文件里）。可以看到，除了读取 <code>.xprofile</code> 外，lightdm 也会读取 <code>.profile</code>。sddm 甚至连 bash、zsh、tcsh、fish 的启动配置脚本都给读了。</p>
 </blockquote>
@@ -555,21 +557,22 @@
 <p>然后点击 OK，开始享受 fcitx5 吧</p>
 <h2 id="参考链接">参考链接</h2>
 <ul>
-<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">Linux 的环境变量怎么设 - 依云&rsquo;s Blog</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx5 (简体中文) - ArchWiki</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx - Wikipedia</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx (简体中文) - ArchWiki</a></li>
+<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">Linux 的环境变量怎么设 - 依云&rsquo;s Blog</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Fcitx5 (简体中文) - ArchWiki</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx - Wikipedia</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Fcitx (简体中文) - ArchWiki</a></li>
 </ul>]]></description>
-</item><item>
+</item>
+<item>
     <title>怎样安装 Arch Linux</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/</link>
     <pubDate>Sat, 13 Jun 2020 12:53:25 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85arch_linux/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/wallhaven-nky7y7.png" referrerpolicy="no-referrer">
             </div><h2 id="arch-linux是什么">Arch Linux是什么？</h2>
-<p><strong><a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Linux</a></strong> 是一个通用 x86_64_ GNU/Linux 发行版，它采用滚动升级模式，尽权力给用户提供最新版本的稳定软件，因其&quot;简洁、现代、实用、以用户为中心&quot;的原则而得名。</p>
+<p><strong><a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Linux</a></strong> 是一个通用 x86_64_ GNU/Linux 发行版，它采用滚动升级模式，尽权力给用户提供最新版本的稳定软件，因其&quot;简洁、现代、实用、以用户为中心&quot;的原则而得名。</p>
 <p>Arch Wiki 上已经写明其原则</p>
 <blockquote>
 <p>简洁</p>
@@ -594,8 +597,8 @@
 <p>许多 Linux 发行版都试图变得更“用户友好”，Arch Linux 则一直是，永远会是“以用户为中心”。此发行版是为了满足贡献者的需求，而不是为了吸引尽可能多的用户。Arch 适用于乐于自己动手的用户，他们愿意花时间阅读文档，解决自己的问题。</p>
 <p>Arch 鼓励每一个用户 参与 和贡献，报告和帮助修复 bugs，提供软件包补丁和参加核心 项目：Arch 开发者都是志愿者，通过持续的贡献成为团队的一员。Archers 可以自行贡献软件包到 Arch 用户仓库, 提升 ArchWiki 文档质量, 在 论坛, 邮件列表, IRC 中给其它用户提供技术支持. Arch Linux 是全球很多用户的选择，已经有很多国际社区提供帮助和文档翻译。</p>
 </blockquote>
-<p>以上内容引用自 Arch Wiki 词条: <a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E5%8E%9F%E5%88%99" target="_blank" rel="noopener noreffer">https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%8E%9F%E5%88%99</a></p>
-<p>更多关于 Arch Linux 的介绍可以<a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">参考这里</a></p>
+<p>以上内容引用自 Arch Wiki 词条: <a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E5%8E%9F%E5%88%99" target="_blank" rel="noopener noreffer ">https://wiki.archlinux.org/index.php/Arch_Linux_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%8E%9F%E5%88%99</a></p>
+<p>更多关于 Arch Linux 的介绍可以<a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">参考这里</a></p>
 <h2 id="如何安装">如何安装</h2>
 <p>现在我们要知道的是如何安装它。</p>
 <p>其实在Arch Wiki上已经有了安装指南，但是对于 Linux 新手或从未使用过 Linux 的入坑者来说似乎不太容易读懂。因此，这里将会简单的写出安装方法以及过程。</p>
@@ -653,10 +656,10 @@
 <li>
 <p>第一步、下载Arch Linux的ISO镜像文件</p>
 <ul>
-<li>你可以去 <a href="https://www.archlinux.org/download/" target="_blank" rel="noopener noreffer">Arch 官网</a>下载，也可以去你所在位置的开源镜像站下载，这里贴出
+<li>你可以去 <a href="https://www.archlinux.org/download/" target="_blank" rel="noopener noreffer ">Arch 官网</a>下载，也可以去你所在位置的开源镜像站下载，这里贴出
 <ul>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest//" target="_blank" rel="noopener noreffer">清华源传送门</a></li>
-<li><a href="http://mirrors.ustc.edu.cn/archlinux/iso/" target="_blank" rel="noopener noreffer">中科大源传送门</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/latest//" target="_blank" rel="noopener noreffer ">清华源传送门</a></li>
+<li><a href="http://mirrors.ustc.edu.cn/archlinux/iso/" target="_blank" rel="noopener noreffer ">中科大源传送门</a></li>
 </ul>
 </li>
 </ul>
@@ -670,7 +673,7 @@
 <li>
 <p>第三步、使用刻录软件将 ArchISO 刻录进U盘</p>
 <ul>
-<li>Windows 环境: 这里推荐 <a href="https://rufus.ie/zh_CN.html" target="_blank" rel="noopener noreffer">rufus</a></li>
+<li>Windows 环境: 这里推荐 <a href="https://rufus.ie/zh_CN.html" target="_blank" rel="noopener noreffer ">rufus</a></li>
 <li>Linux 环境: 可以使用 DD 命令 （如果电脑不支持EFI启动，不推荐。）</li>
 </ul>
 </li>
@@ -679,7 +682,7 @@
 <h4 id="不爆炸的心态">不爆炸的心态</h4>
 <p>如果你从未接触过 Arch Linux 或者是 Linux 新手，在安装过程中难免会遇到问题，这个时候不要慌张也不要着急，平静下来通过各种途径找出解决方法，不过这都需要有个不爆炸的心态。</p>
 <h4 id="阅读-arch-wiki">阅读 Arch Wiki</h4>
-<p>Arch 官方搭建了一个 Wiki 供用户查阅资料，当遇到安装过程中遇到麻烦的时候，也许 <a href="https://wiki.archlinux.org/index.php/Main_page_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a> 能够帮到你。</p>
+<p>Arch 官方搭建了一个 Wiki 供用户查阅资料，当遇到安装过程中遇到麻烦的时候，也许 <a href="https://wiki.archlinux.org/index.php/Main_page_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a> 能够帮到你。</p>
 <h2 id="一切准备就绪出发">一切准备就绪，出发</h2>
 <p>当你准备好一切的时候，就可以开始安装了。</p>
 <h3 id="启动-arch-iso">启动 Arch ISO</h3>
@@ -1229,7 +1232,7 @@
 </div>
 </div><p>这样基本系统就差不多完成了，但是现在还不能重启，因为它目前无法被引导。</p>
 <h3 id="安装启动引导器">安装启动引导器</h3>
-<p>如上面所说，你需要一个启动引导程序才能启动系统，Linux 有很多类似于这样的软件，可以在<a href="https://wiki.archlinux.org/index.php/Boot_loaders_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">这个页面</a>参考.</p>
+<p>如上面所说，你需要一个启动引导程序才能启动系统，Linux 有很多类似于这样的软件，可以在<a href="https://wiki.archlinux.org/index.php/Boot_loaders_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">这个页面</a>参考.</p>
 <p>我推荐使用 <code>GRUB</code></p>
 <h4 id="安装grub">安装Grub</h4>
 <p>先安装 <code>grub</code> 这个软件包</p>
@@ -1490,11 +1493,12 @@
 </div>
 </div><p>好啦 装完啦~</p>
 <p>接下来系统就可以使用啦~</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>用 Arch Linux 打造完美渗透环境</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/</link>
     <pubDate>Wed, 31 Jul 2019 21:19:52 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E7%94%A8arch_linux%E6%89%93%E9%80%A0%E5%AE%8C%E7%BE%8E%E6%B8%97%E9%80%8F%E7%8E%AF%E5%A2%83/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/wallhaven-nky7y7.png" referrerpolicy="no-referrer">
@@ -1504,46 +1508,46 @@
 <p>嘿嘿，很久不滚可能会滚挂哦</p>
 </blockquote>
 <p>刚装完的Arch只是一个基本系统，什么都没有，随后用户就可以根据自己的想法和喜好，安装自己需要的软件，然后通过高度自定义的配置，打造自己喜欢的、理想的系统。这也是Arch的可爱和有吸引力之处。所以Arch也是我最喜欢的发行版之一。</p>
-<p>关于Arch Linux的更多详细内容，请参见<a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a>。</p>
+<p>关于Arch Linux的更多详细内容，请参见<a href="https://wiki.archlinux.org/index.php/Arch_Linux_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a>。</p>
 <h2 id="本期内容介绍">本期内容介绍</h2>
-<p>本期将会演示如何用Arch Linux打造完美的渗透环境。一切操作均为教程演示，请读者根据实际情况操作。没使用过Arch Linux的用户请<strong>谨慎操作</strong>，并仔细查阅<a href="https://wiki.archlinux.org/index.php/Main_page_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a>。</p>
+<p>本期将会演示如何用Arch Linux打造完美的渗透环境。一切操作均为教程演示，请读者根据实际情况操作。没使用过Arch Linux的用户请<strong>谨慎操作</strong>，并仔细查阅<a href="https://wiki.archlinux.org/index.php/Main_page_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a>。</p>
 <p>那么，开始本期的内容吧。</p>
 <h3 id="提示">提示</h3>
 <p>本期博客会大量使用Arch Wiki的超链接，以方便理解部分内容。</p>
 <h2 id="准备工作">准备工作</h2>
 <h3 id="安装arch-linux">安装Arch Linux</h3>
-<p>本期博客不会详细写出Arch Linux的安装过程，请参考<a href="https://wiki.archlinux.org/index.php/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a>安装Arch Linux，并做好基本的配置工作。</p>
+<p>本期博客不会详细写出Arch Linux的安装过程，请参考<a href="https://wiki.archlinux.org/index.php/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a>安装Arch Linux，并做好基本的配置工作。</p>
 <h3 id="选择轻量桌面环境">选择轻量桌面环境</h3>
-<p>由于渗透测试中部分操作会占用大量的资源，所以请尽量按需求选择轻量的桌面环境，这里不建议使用 <a href="https://wiki.archlinux.org/index.php/GNOME_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Gnome</a> 和 <a href="https://wiki.archlinux.org/index.php/KDE_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">KDE</a>，因为二者占用的资源非常大，对低配用户不友好。</p>
+<p>由于渗透测试中部分操作会占用大量的资源，所以请尽量按需求选择轻量的桌面环境，这里不建议使用 <a href="https://wiki.archlinux.org/index.php/GNOME_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Gnome</a> 和 <a href="https://wiki.archlinux.org/index.php/KDE_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">KDE</a>，因为二者占用的资源非常大，对低配用户不友好。</p>
 <ol>
-<li><a href="https://wiki.archlinux.org/index.php/LXDE_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">LXDE</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/LXDE_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">LXDE</a></li>
 </ol>
 <ul>
-<li>轻量级GTK桌面环境，默认窗口管理器是 <a href="https://wiki.archlinux.org/index.php/Openbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">OpenBox</a> ，最轻量的桌面环境之一。</li>
+<li>轻量级GTK桌面环境，默认窗口管理器是 <a href="https://wiki.archlinux.org/index.php/Openbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">OpenBox</a> ，最轻量的桌面环境之一。</li>
 </ul>
 <ol start="2">
-<li><a href="https://wiki.archlinux.org/index.php/LXQt_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">LXQT</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/LXQt_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">LXQT</a></li>
 </ol>
 <ul>
-<li>2013年间，洪任諭（“PCMan”）启动了将 LXDE 移植到 Qt 的项目。所以LXQT相当于是使用QT的LXDE，默认窗口管理器还是 <a href="https://wiki.archlinux.org/index.php/Openbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">OpenBox</a> ，它比上面的LXDE还要轻量。</li>
+<li>2013年间，洪任諭（“PCMan”）启动了将 LXDE 移植到 Qt 的项目。所以LXQT相当于是使用QT的LXDE，默认窗口管理器还是 <a href="https://wiki.archlinux.org/index.php/Openbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">OpenBox</a> ，它比上面的LXDE还要轻量。</li>
 </ul>
 <ol start="3">
-<li><a href="https://wiki.archlinux.org/index.php/Xfce_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">xfce4</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Xfce_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">xfce4</a></li>
 </ol>
 <ul>
 <li>目前我在用的桌面环境，基于GTK+2，这个是轻量化桌面环境中最好看的一个了。</li>
 </ul>
 <ol start="4">
-<li><a href="https://wiki.archlinux.org/index.php/I3_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">i3wm</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/I3_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">i3wm</a></li>
 </ol>
 <ul>
-<li>i3 是一种动态的<a href="https://en.wikipedia.org/wiki/Tiling_window_manager" target="_blank" rel="noopener noreffer">平铺式窗口管理器</a>，其灵感来自于面向开发者与资深用户的 <a href="https://wiki.archlinux.org/index.php/Wmii" target="_blank" rel="noopener noreffer">wmii</a>。 i3 的既定目标包括清晰可读的文档，完善的多显示器支持，基于树形结构的窗口管理，提供 <a href="https://wiki.archlinux.org/index.php/Vim" target="_blank" rel="noopener noreffer">vim</a> 式的多种操作模式。 ——摘自<a href="https://wiki.archlinux.org/index.php/I3_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a>。</li>
+<li>i3 是一种动态的<a href="https://en.wikipedia.org/wiki/Tiling_window_manager" target="_blank" rel="noopener noreffer ">平铺式窗口管理器</a>，其灵感来自于面向开发者与资深用户的 <a href="https://wiki.archlinux.org/index.php/Wmii" target="_blank" rel="noopener noreffer ">wmii</a>。 i3 的既定目标包括清晰可读的文档，完善的多显示器支持，基于树形结构的窗口管理，提供 <a href="https://wiki.archlinux.org/index.php/Vim" target="_blank" rel="noopener noreffer ">vim</a> 式的多种操作模式。 ——摘自<a href="https://wiki.archlinux.org/index.php/I3_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a>。</li>
 </ul>
 <ol start="5">
 <li>自己DIY桌面环境</li>
 </ol>
 <ul>
-<li>你可以使用上面介绍过的 <a href="https://wiki.archlinux.org/index.php/Openbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">OpenBox</a> 通过配置来DIY自己的桌面环境，也可以使用 <a href="https://wiki.archlinux.org/index.php/Fluxbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">fluxbox</a>、<a href="https://wiki.archlinux.org/index.php/I3_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">i3wm</a> 等。详细请参见 <del><a href="https://latiao233.github.io/2019/07/30/%E5%88%A9%E7%94%A8openbox%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/#more" target="_blank" rel="noopener noreffer">利用openbox打造自己的桌面环境-辣条的博客(链接已失效)。</a></del></li>
+<li>你可以使用上面介绍过的 <a href="https://wiki.archlinux.org/index.php/Openbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">OpenBox</a> 通过配置来DIY自己的桌面环境，也可以使用 <a href="https://wiki.archlinux.org/index.php/Fluxbox_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">fluxbox</a>、<a href="https://wiki.archlinux.org/index.php/I3_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">i3wm</a> 等。详细请参见 <del><a href="https://latiao233.github.io/2019/07/30/%E5%88%A9%E7%94%A8openbox%E6%89%93%E9%80%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83/#more" target="_blank" rel="noopener noreffer ">利用openbox打造自己的桌面环境-辣条的博客(链接已失效)。</a></del></li>
 </ul>
 <p>本期博客也将会使用自定义桌面环境进行演示。</p>
 <blockquote>
@@ -1553,8 +1557,8 @@
 <p>当Arch Linux基本配置完成之后，就可以开始正常使用了，但是为了安装渗透工具，需要添加一个<strong>Black Arch软件源</strong></p>
 <blockquote>
 <h4 id="什么是black-arch"><strong>什么是Black Arch</strong></h4>
-<p>BlackArch Linux，简称BlackArch，是一份基于Arch的Linux发行版。该发行版被设计用于系统渗透测试及安全研究。BlackArch提供一张自启动运行DVD镜像，其中包含有多个轻量级窗口管理器和一千多种用于渗透测试和计算机取证分析的专用工具。该系统即可以直接从镜像启动，也可以安装在硬盘、U盘或虚拟机上。 ——摘自<a href="https://zh.wikipedia.org/zh-hans/BlackArch_Linux" target="_blank" rel="noopener noreffer">维基百科(需要科学上网)</a></p>
-<p>Black Arch官网：<a href="https://blackarch.org/" target="_blank" rel="noopener noreffer">blackarch.org</a></p>
+<p>BlackArch Linux，简称BlackArch，是一份基于Arch的Linux发行版。该发行版被设计用于系统渗透测试及安全研究。BlackArch提供一张自启动运行DVD镜像，其中包含有多个轻量级窗口管理器和一千多种用于渗透测试和计算机取证分析的专用工具。该系统即可以直接从镜像启动，也可以安装在硬盘、U盘或虚拟机上。 ——摘自<a href="https://zh.wikipedia.org/zh-hans/BlackArch_Linux" target="_blank" rel="noopener noreffer ">维基百科(需要科学上网)</a></p>
+<p>Black Arch官网：<a href="https://blackarch.org/" target="_blank" rel="noopener noreffer ">blackarch.org</a></p>
 </blockquote>
 <p>如上我们知道，Black Arch是一个基于Arch Linux的独立发行版，但我们不需要去安装它，我们只需要添加它的软件源就好。</p>
 <p>具体操作如下:</p>
@@ -1592,7 +1596,7 @@
 <h2 id="开始安装配置常用渗透工具">开始安装、配置常用渗透工具</h2>
 <h3 id="端口扫描和信息收集">端口扫描和信息收集</h3>
 <h4 id="namp">Namp</h4>
-<p>首先搬出<a href="https://baike.baidu.com/item/nmap/1400075?fr=aladdin" target="_blank" rel="noopener noreffer">Nmap</a>，这是一个很常用的扫描工具，可以在渗透的过程中扫描到对方的IP、端口、操作系统等情况。</p>
+<p>首先搬出<a href="https://baike.baidu.com/item/nmap/1400075?fr=aladdin" target="_blank" rel="noopener noreffer ">Nmap</a>，这是一个很常用的扫描工具，可以在渗透的过程中扫描到对方的IP、端口、操作系统等情况。</p>
 <h5 id="安装方法">安装方法</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2211,11 +2215,12 @@
 <h2 id="小结">小结</h2>
 <p>一个普通的Arch Linuxu导入了Black Arch的软件源之后，可以堪称完美的渗透环境了，以上只是常用的工具，而Black Arch软件源里面有几千个工具，想要什么可以通过<code>pacman</code>下载安装，应有尽有。</p>
 <p>最后，谢谢访问。</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>震惊！16岁男子竟然在家里做出这种事！</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/</link>
     <pubDate>Fri, 26 Jul 2019 22:52:54 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E9%9C%87%E6%83%8A16%E5%B2%81%E7%94%B7%E5%AD%90%E7%AB%9F%E7%84%B6%E5%9C%A8%E5%AE%B6%E9%87%8C%E5%81%9A%E5%87%BA%E8%BF%99%E7%A7%8D%E4%BA%8B/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/wallhaven-j5j5vm.jpg" referrerpolicy="no-referrer">
@@ -2229,17 +2234,17 @@
 <li>那这个漏洞是怎样的呢？我将给出以下链接用于参考：</li>
 </ul>
 <blockquote>
-<p><a href="https://docs.microsoft.com/zh-cn/security-updates/Securitybulletins/2017/ms17-010" target="_blank" rel="noopener noreffer">Microsoft 安全公告 MS17-010 - 严重</a></p>
-<p><a href="https://cvedetails.com/cve/CVE-2017-0143/" target="_blank" rel="noopener noreffer">https://cvedetails.com/cve/CVE-2017-0143/</a></p>
-<p><a href="https://cvedetails.com/cve/CVE-2017-0144/" target="_blank" rel="noopener noreffer">https://cvedetails.com/cve/CVE-2017-0144/</a></p>
-<p><a href="https://cvedetails.com/cve/CVE-2017-0145/" target="_blank" rel="noopener noreffer">https://cvedetails.com/cve/CVE-2017-0145/</a></p>
-<p><a href="https://cvedetails.com/cve/CVE-2017-0146/" target="_blank" rel="noopener noreffer">https://cvedetails.com/cve/CVE-2017-0146/</a></p>
-<p><a href="https://cvedetails.com/cve/CVE-2017-0147/" target="_blank" rel="noopener noreffer">https://cvedetails.com/cve/CVE-2017-0147/</a></p>
-<p><a href="https://cvedetails.com/cve/CVE-2017-0148/" target="_blank" rel="noopener noreffer">https://cvedetails.com/cve/CVE-2017-0148/</a></p>
-<p><a href="https://github.com/RiskSense-Ops/MS17-010" target="_blank" rel="noopener noreffer">https://github.com/RiskSense-Ops/MS17-010</a></p>
+<p><a href="https://docs.microsoft.com/zh-cn/security-updates/Securitybulletins/2017/ms17-010" target="_blank" rel="noopener noreffer ">Microsoft 安全公告 MS17-010 - 严重</a></p>
+<p><a href="https://cvedetails.com/cve/CVE-2017-0143/" target="_blank" rel="noopener noreffer ">https://cvedetails.com/cve/CVE-2017-0143/</a></p>
+<p><a href="https://cvedetails.com/cve/CVE-2017-0144/" target="_blank" rel="noopener noreffer ">https://cvedetails.com/cve/CVE-2017-0144/</a></p>
+<p><a href="https://cvedetails.com/cve/CVE-2017-0145/" target="_blank" rel="noopener noreffer ">https://cvedetails.com/cve/CVE-2017-0145/</a></p>
+<p><a href="https://cvedetails.com/cve/CVE-2017-0146/" target="_blank" rel="noopener noreffer ">https://cvedetails.com/cve/CVE-2017-0146/</a></p>
+<p><a href="https://cvedetails.com/cve/CVE-2017-0147/" target="_blank" rel="noopener noreffer ">https://cvedetails.com/cve/CVE-2017-0147/</a></p>
+<p><a href="https://cvedetails.com/cve/CVE-2017-0148/" target="_blank" rel="noopener noreffer ">https://cvedetails.com/cve/CVE-2017-0148/</a></p>
+<p><a href="https://github.com/RiskSense-Ops/MS17-010" target="_blank" rel="noopener noreffer ">https://github.com/RiskSense-Ops/MS17-010</a></p>
 </blockquote>
 <h2 id="攻击复现">攻击复现</h2>
-<p>那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个<a href="https://baike.baidu.com/item/linux/27050?fr=aladdin" target="_blank" rel="noopener noreffer">Linux</a>的渗透测试软件包。叫做<strong>Metasploit</strong>。 它在作为<strong>渗透测试的发行版</strong>中是自带的，如果你用的不是<strong>作为渗透测试的发行版</strong>，那么以下是安装方法：</p>
+<p>那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个<a href="https://baike.baidu.com/item/linux/27050?fr=aladdin" target="_blank" rel="noopener noreffer ">Linux</a>的渗透测试软件包。叫做<strong>Metasploit</strong>。 它在作为<strong>渗透测试的发行版</strong>中是自带的，如果你用的不是<strong>作为渗透测试的发行版</strong>，那么以下是安装方法：</p>
 <ul>
 <li>基于Arch</li>
 </ul>
@@ -2287,7 +2292,7 @@
 <blockquote>
 <p>两个选择</p>
 <ul>
-<li>请到<a href="https://www.metasploit.com/" target="_blank" rel="noopener noreffer">MSF官网</a>下载，并且耐心等待。</li>
+<li>请到<a href="https://www.metasploit.com/" target="_blank" rel="noopener noreffer ">MSF官网</a>下载，并且耐心等待。</li>
 <li><a href="/posts/linux_mint_%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b/" rel="">出门左转</a>安装Linux</li>
 </ul>
 </blockquote>
@@ -3198,11 +3203,12 @@
 <p>首先本篇博客仅作为测试用途，请勿将其用于违法用途。</p>
 <p>其次，ms17-010这类的漏洞都是十分危险的，Windows用户一定要注意及时更新，打好补丁，不要给坏人可乘之机，最好是干脆直接日用Linux，windows仅用于娱乐即可。</p>
 <p>然后这篇博客也带有很多水的成分，谢谢浏览。</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>关于BlackArch的体验报告</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/</link>
     <pubDate>Sun, 16 Jun 2019 16:33:47 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%85%B3%E4%BA%8Eblackarch%E7%9A%84%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/ba-slider.png" referrerpolicy="no-referrer">
@@ -3225,5 +3231,6 @@
 </ul>
 <h2 id="总结">总结</h2>
 <p>首先不能否认BlackArch是装逼的好东西，但是我不推荐使用官方的镜像（无论是在线镜像还是离线live）去安装，否则就会有我的下场了，其次就是用户必须有Arch系基础，否则就是个坑。建议先安装Arch，然后导入BlackArch的软件库安装全套工具即可。最后请不要那blackarch与kali、parrot对比，这没有对比性的，工具都差不多的。</p>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

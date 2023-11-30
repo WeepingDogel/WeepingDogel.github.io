@@ -8,32 +8,32 @@
     <title>About fcitx5, and recent environment variable issues</title>
     <link>http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/</link>
     <pubDate>Sat, 25 Jul 2020 13:25:46 &#43;0800</pubDate>
-    <author>Author</author>
+    <author>WeepingDogel</author>
     <guid>http://weepingdogel.github.io/posts/%E5%85%B3%E4%BA%8Efcitx5/</guid>
     <description><![CDATA[<h2 id="what-happened">What happened</h2>
 <p>I recently received a message like this</p>
 <blockquote>
-<p>For those who use <code>$HOME/.pam_environment</code> to set environment variables, take note! Due to <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708" target="_blank" rel="noopener noreffer">CVE-2010-4708</a>, pam upstream is set to not read user&rsquo;s environment variable settings by default in version 1.4.0, and users are required to change their environment variable settings or restore the original default read behavior.</p>
-<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">Linux environment variables how to set Evian&rsquo;s Blog</a></p>
+<p>For those who use <code>$HOME/.pam_environment</code> to set environment variables, take note! Due to <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4708" target="_blank" rel="noopener noreffer ">CVE-2010-4708</a>, pam upstream is set to not read user&rsquo;s environment variable settings by default in version 1.4.0, and users are required to change their environment variable settings or restore the original default read behavior.</p>
+<p>ref: <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">Linux environment variables how to set Evian&rsquo;s Blog</a></p>
 </blockquote>
 <p><del>Why is the 10-year vulnerability only now fixed?</del> Emmmm, so that&rsquo;s what the vulnerability is.</p>
 <p>Emmmm, so that is <code>.pam_environment</code> this file can not be used &hellip;&hellip;</p>
-<p>Here thanks to <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">lilydjwg</a> for writing out the way to deal with various situations</p>
+<p>Here thanks to <a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">lilydjwg</a> for writing out the way to deal with various situations</p>
 <p>I&rsquo;ll write a note about replacing fcitx5 in xfce + lightdm environment&hellip; Other specifics can be found in what <strong>lilydjwg</strong> wrote&hellip; (Escape</p>
 <h2 id="fcitx5-vs-fcitx">fcitx5 vs fcitx</h2>
 <ul>
 <li>Fcitx</li>
 </ul>
 <blockquote>
-<p><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a> (Flexible Input Method Framework) ── i.e. Little Penguin Input Method, which is an <a href="https://en.wikipedia.org/" target="_blank" rel="noopener noreffer">input method</a> distributed under GPL wiki/Input_method) platform, which can support multiple input methods by installing the engine, and supports simple input and output, it is a common Chinese input method in Linux OS. It has the advantage of being short and compact, and has good compatibility with programs.</p>
-<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx</a> (Flexible Input Method Framework) ── i.e. Little Penguin Input Method, which is an <a href="https://en.wikipedia.org/" target="_blank" rel="noopener noreffer ">input method</a> distributed under GPL wiki/Input_method) platform, which can support multiple input methods by installing the engine, and supports simple input and output, it is a common Chinese input method in Linux OS. It has the advantage of being short and compact, and has good compatibility with programs.</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a></p>
 </blockquote>
 <ul>
 <li>Fcitx5</li>
 </ul>
 <blockquote>
-<p>Fcitx5 is the next generation input method framework after <a href="https://wiki.archlinux.org/index.php/Fcitx" target="_blank" rel="noopener noreffer">Fcitx</a>.</p>
-<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Arch Wiki</a></p>
+<p>Fcitx5 is the next generation input method framework after <a href="https://wiki.archlinux.org/index.php/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx</a>.</p>
+<p>&mdash; <a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Arch Wiki</a></p>
 </blockquote>
 <p>Daily lazy, direct quotes (flee</p>
 <h2 id="okay-lets-get-right-to-it">Okay, let&rsquo;s get right to it</h2>
@@ -81,7 +81,7 @@
 <ul>
 <li>Chinese input method package &hellip;. Arch Wiki explains it like this.
 <blockquote>
-<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons" target="_blank" rel="noopener noreffer">fcitx5-chinese-addons</a> contains a lot of Chinese input methods: Pinyin, ShuangPin, WubiPinyin, Natural Code, CangJie, BingToad Holographic, ErBi, etc.</p>
+<p><a href="https://www.archlinux.org/packages/?name=fcitx5-chinese-addons" target="_blank" rel="noopener noreffer ">fcitx5-chinese-addons</a> contains a lot of Chinese input methods: Pinyin, ShuangPin, WubiPinyin, Natural Code, CangJie, BingToad Holographic, ErBi, etc.</p>
 </blockquote>
 </li>
 </ul>
@@ -119,7 +119,7 @@
 </div>
 </div><h3 id="environment-variables">Environment variables</h3>
 <p>Well, finally it&rsquo;s set environment variable, since <code>.pam_environment</code> can&rsquo;t be used, where to write it?</p>
-<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">lilydjwg</a> said:</p>
+<p><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">lilydjwg</a> said:</p>
 <blockquote>
 <p>Using X11 desktop environment, usually login through display manager, such as lightdm and sddm. Both of them support <code>~/.xprofile</code>. This file will be sourced during boot, using a shell determined by <code>dm</code> itself. Both lightdm and sddm use <code>/bin/sh</code> (in the files <code>/etc/lightdm/Xsession</code> and <code>/usr/share/sddm/scripts/Xsession</code> respectively). As you can see, in addition to reading <code>.xprofile</code>, lightdm also reads <code>.profile</code>. sddm even reads the startup configuration scripts for bash, zsh, tcsh, and fish.</p>
 </blockquote>
@@ -173,11 +173,12 @@
 <p>Then click OK and start enjoying fcitx5!</p>
 <h2 id="reference-links">Reference links</h2>
 <ul>
-<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer">How to set environment variables for Linux - Evian&rsquo;s Blog</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx5 (Simplified Chinese) - ArchWiki</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer">Fcitx - Wikipedia</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer">Fcitx (Simplified Chinese) - ArchWiki</a></li>
+<li><a href="https://blog.lilydjwg.me/2020/7/22/linux-environment-variables.215496.html" target="_blank" rel="noopener noreffer ">How to set environment variables for Linux - Evian&rsquo;s Blog</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx5_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Fcitx5 (Simplified Chinese) - ArchWiki</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Fcitx" target="_blank" rel="noopener noreffer ">Fcitx - Wikipedia</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fcitx_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29" target="_blank" rel="noopener noreffer ">Fcitx (Simplified Chinese) - ArchWiki</a></li>
 </ul>
-<p>Translated with <a href="https://www.DeepL.com/Translator" target="_blank" rel="noopener noreffer">www.DeepL.com/Translator</a> (free version)</p>]]></description>
-</item></channel>
+<p>Translated with <a href="https://www.DeepL.com/Translator" target="_blank" rel="noopener noreffer ">www.DeepL.com/Translator</a> (free version)</p>]]></description>
+</item>
+</channel>
 </rss>
