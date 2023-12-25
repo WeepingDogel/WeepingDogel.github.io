@@ -30,7 +30,6 @@
 第一步是安装驱动，但需要注意的是，这是第一步，而不是万事大吉。
 
 ```commandline
-
 $ sudo pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-prime
 ```
 

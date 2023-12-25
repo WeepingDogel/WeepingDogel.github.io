@@ -37,7 +37,6 @@ So I have to install it.
 The first step is to install the drivers. Yeah notefuly, it's the first step, not the last.
 
 ```commandline
-
 $ sudo pacman -S nvidia nvidia-utils lib32-nvidia-utils nvidia-prime
 ```
 
