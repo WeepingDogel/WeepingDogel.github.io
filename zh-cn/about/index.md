@@ -248,5 +248,5 @@
 
 [Mare_Infinitus - 无限深海](https://lab.imgb.space/)
 
-[Episode 33 的 Blog](https://blog.w1111am.xyz/)
+[Episode 33's Blog](http://blog.episode33.pro/)
 
