@@ -566,7 +566,7 @@ Although I had trained and prepared, learning much...
 
 ## Skills, works and gaming.
 
-In addition..  some details of skills and some basic knowledges hadn't been accquired.
+In addition..  some details of skills and some basic knowledges hadn't been acquired.
 
 Saddly, I also hadn't enjoyed a good gaming time...
 
@@ -577,11 +577,11 @@ Everything bad comes from the terrible reason, I might be ill in emotion, like d
 I know it is necessary to see a doctor, but chances are few. 
 I wanna get rid of it, but it's hard.
 
-It has been a stone which probably and definitly prevents my steps to go forward...
+It has been a stone which probably and definitely prevents my steps to go forward...
 
 # New accquaintance
 
-Here are my new accquaintance or firends I met this year with something they say.
+Here are my new accquaintance or friends I met this year with something they say.
 
 ## GrassBlock
 > "In the new year I hope WeepingDogel can live happily and not stress himself out by thinking too lowly of himself!"
