@@ -53,7 +53,7 @@ def index():
 
 ```
 
-```jinja2
+```html
 {% extends "base.html" %}
 {% block Title %} {{PageTitle}} | TinyGallery {% endblock %}
 {% block body %}
