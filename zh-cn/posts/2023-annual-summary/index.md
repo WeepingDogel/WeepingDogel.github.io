@@ -592,7 +592,7 @@ VirtualBox 的包容性和用户友好性凸显了提供易于使用的虚拟化
 > 还是考虑下怎么好好活着吧,至少在我看来你是挺有前景的。"
 
 # 2024 年的计划
-* 完成***《Computer Systems A Programmer’s Perspective》***一书的阅读。
+* 完成 ***《Computer Systems A Programmer’s Perspective》*** 一书的阅读。
 * 学习使用 Vuetify 或 PrimeVue。
 * 学习更多有关虚拟化、编程和网络的知识。
 * 准备专升本。
