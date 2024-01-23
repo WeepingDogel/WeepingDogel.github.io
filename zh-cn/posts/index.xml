@@ -4,7 +4,934 @@
         <link>http://weepingdogel.github.io/zh-cn/posts/</link>
         <description>所有文章 | WeepingDogel 的博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
-            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Mon, 25 Dec 2023 21:43:21 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/zh-cn/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>2023 年度总结</title>
+    <link>http://weepingdogel.github.io/zh-cn/posts/2023-annual-summary/</link>
+    <pubDate>Mon, 25 Dec 2023 21:43:21 &#43;0800</pubDate>
+    <author>WeepingDogel</author>
+    <guid>http://weepingdogel.github.io/zh-cn/posts/2023-annual-summary/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/github-worth.png" referrerpolicy="no-referrer">
+            </div><p>尽管时间是人类定义的单位，但并不影响它像一条河流般从山坡像平原流逝。感觉只是喘口气，眨一下眼睛，2023年就这么过去了。</p>
+<p>回想这些记忆，就像飘在半空中的樱花花瓣，我想踮起脚尖去捕捉，今年也发生了许多。</p>
+<p>现在就拾起花瓣看看，也许会让我把时光捡回来呢。</p>
+<h1 id="收获">收获</h1>
+<p>过去的一年也学到了点东西。</p>
+<h2 id="知识--技能">知识 &amp; 技能</h2>
+<p>2023 年，我学会了一些技能，并开了几个能看的开源项目，拓宽了一些视野。</p>
+<h3 id="flask">Flask</h3>
+<p>让我们从 Flask 之旅开始。</p>
+<p>很早以前，我就发现自己陷入了 Flask 这个迷人的网络中，这是一个令人愉悦的 Python 网络应用程序框架。
+使用 Flask 简单而高效的 MVC 结构设置并完成 <a href="https://github.com/WeepingDogel/tinygallery" target="_blank" rel="noopener noreffer ">TinyGallery</a> 的快感在我的学习道路上留下了不可磨灭的印记。</p>
+<p>深入研究 Flask 官方文档后，我发现了借助 jinja2 驱动的模板渲染页面的艺术。这种探索虽然需要耐心，但最终取得了成果，因为我逐渐在项目中加入了一些功能&ndash;除了上传文件的要求。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">database</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_db</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ImageTable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM IMAGES ORDER BY Date DESC&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="s1">&#39;username&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LikeTable</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;SELECT LikedPostUUID FROM ImagesLikedByUser WHERE User = ? AND LikeStatus = ?&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="p">))</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LikedList</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">LikeTable</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">LikedList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Avatar</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT Avatar FROM AVATARS WHERE UserName = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],))</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">userAvaterImage</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;PUBLIC_USERFILES&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">Avatar</span><span class="p">[</span><span class="s1">&#39;Avatar&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;index.html&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PageTitle</span><span class="o">=</span><span class="s2">&#34;HomePage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Images</span><span class="o">=</span><span class="n">ImageTable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">userAvaterImage</span><span class="o">=</span><span class="n">userAvaterImage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">userName</span><span class="o">=</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="n">LikedList</span><span class="o">=</span><span class="n">LikedList</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&#34;index.html&#34;</span><span class="p">,</span> <span class="n">PageTitle</span><span class="o">=</span><span class="s2">&#34;HomePage&#34;</span><span class="p">,</span> <span class="n">Images</span><span class="o">=</span><span class="n">ImageTable</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{% extends &#34;base.html&#34; %}
+</span></span><span class="line"><span class="cl">{% block Title %} {{PageTitle}} | TinyGallery {% endblock %}
+</span></span><span class="line"><span class="cl">{% block body %}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;Content&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {% for x in Images %}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;work&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">img</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;displayedImages&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;OpenFullImage({{ loop[&#34;</span> <span class="na">index</span><span class="err">&#34;]</span> <span class="err">}})&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">src</span><span class="o">=</span><span class="s">&#34;/static/img/users/{{ x[&#39;User&#39;] }}/Images/{{ x[&#39;UUID&#39;] }}.jpg&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;{{ x[&#39;UUID&#39;] }}&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;userName&#34;</span><span class="p">&gt;</span>{{ x[&#39;ImageTitle&#39;] }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;textFont&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>By {{ x[&#39;User&#39;] }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;LikesNum&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                Likes: {{ x[&#39;Dots&#39;] }}
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Description: {{ x[&#39;Description&#39;] }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Date: {{x[&#39;Date&#39;]}}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            {% if g.user %}
+</span></span><span class="line"><span class="cl">            {% if x[&#39;UUID&#39;] in LikedList %}
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;SendLikedData({{ loop[&#34;</span> <span class="na">index</span><span class="err">&#34;]</span> <span class="err">}},</span> <span class="err">&#39;</span><span class="na">Like</span><span class="err">&#39;</span> <span class="err">)&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;likeStatus0&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;display: none;&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">xmlns</span><span class="o">=</span><span class="s">&#34;http://www.w3.org/2000/svg&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">height</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bi bi-star&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">viewBox</span><span class="o">=</span><span class="s">&#34;0 0 16 16&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">path</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">d</span><span class="o">=</span><span class="s">&#34;M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;SendLikedData({{ loop[&#34;</span> <span class="na">index</span><span class="err">&#34;]</span> <span class="err">}},</span> <span class="err">&#39;</span><span class="na">Unlike</span><span class="err">&#39;</span> <span class="err">)&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;likeStatus1&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">xmlns</span><span class="o">=</span><span class="s">&#34;http://www.w3.org/2000/svg&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">height</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bi bi-star-fill&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">viewBox</span><span class="o">=</span><span class="s">&#34;0 0 16 16&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">path</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">d</span><span class="o">=</span><span class="s">&#34;M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            {% else %}
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;SendLikedData({{ loop[&#34;</span> <span class="na">index</span><span class="err">&#34;]</span> <span class="err">}},</span> <span class="err">&#39;</span><span class="na">Like</span><span class="err">&#39;</span> <span class="err">)&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;likeStatus0&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">xmlns</span><span class="o">=</span><span class="s">&#34;http://www.w3.org/2000/svg&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">height</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bi bi-star&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">viewBox</span><span class="o">=</span><span class="s">&#34;0 0 16 16&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">path</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">d</span><span class="o">=</span><span class="s">&#34;M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;SendLikedData({{ loop[&#34;</span> <span class="na">index</span><span class="err">&#34;]</span> <span class="err">}},</span> <span class="err">&#39;</span><span class="na">Unlike</span><span class="err">&#39;</span> <span class="err">)&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;likeStatus1&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;display: none;&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">xmlns</span><span class="o">=</span><span class="s">&#34;http://www.w3.org/2000/svg&#34;</span> <span class="na">width</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">height</span><span class="o">=</span><span class="s">&#34;16&#34;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&#34;currentColor&#34;</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;bi bi-star-fill&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">viewBox</span><span class="o">=</span><span class="s">&#34;0 0 16 16&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">path</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">d</span><span class="o">=</span><span class="s">&#34;M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            {% endif %}
+</span></span><span class="line"><span class="cl">            {% endif %}
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {% endfor %}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{% endblock %}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>尽管 Flask 简单易用，但在 TinyGallery 的早期版本中，Flask 确实表现出了一些缺陷，并产生了一些具有挑战性的错误，这促使我决定过渡到一个新的技术栈。</p>
+<h3 id="fastapivuejs">FastAPI、VueJS</h3>
+<p>进入<strong>FastAPI</strong>和<strong>VueJS</strong>。为了提升 TinyGallery 的体验，我们决定将后端和前端分开，重点利用 Ajax-all-in 和 Restful API 功能。这种强烈的追求让我沉浸在 VueJS 的世界中，并最终创建了 <a href="https://github.com/WeepingDogel/tinygallery-vue" target="_blank" rel="noopener noreffer ">tinygallery-vue</a> 和 <a href="https://github.com/WeepingDogel/tinygallery-backend" target="_blank" rel="noopener noreffer ">tinygallery-backend</a> 。经过几个月的潜心学习，最终成功完成了这项工作。</p>
+<p>在此期间，我学习的深度和广度都很可观，包括使用 FastAPI 创建一个 Restful API 提供程序，使用 axios 制作一个能够与服务器进行无缝数据通信的网页，以及使用 VueJS 精心设计简单而优雅的组件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">async</span> <span class="nx">fetchData() {</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Fetch more image data from the server
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">pages</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">pages</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Increment the current page number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s2">&#34;/resources/posts/&#34;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">pages</span><span class="p">);</span> <span class="c1">// Make a GET request to the server API
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">newData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span> <span class="c1">// Parse the response text to JSON format
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">newData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// If there is no new data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">pages</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">pages</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Decrement the current page number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Otherwise
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">newData</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// Loop over the new data and add it to the display data array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">displayData</span> <span class="kr">as</span> <span class="kt">any</span><span class="p">).</span><span class="nx">push</span><span class="p">(</span><span class="nx">newData</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;Card&#34;</span> <span class="na">v-for</span><span class="o">=</span><span class="s">&#34;items of displayData&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">      <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;OpenRemarkBySingleUUID((items as any).post_uuid)&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">&#34;displayImage_NSFW&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">:src</span><span class="o">=</span><span class="s">&#34;(items as any).cover_url&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">:alt</span><span class="o">=</span><span class="s">&#34;(items as any).post_uuid&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">v-if</span><span class="o">=</span><span class="s">&#34;(items as any).nsfw&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">      <span class="err">@</span><span class="na">click</span><span class="o">=</span><span class="s">&#34;OpenRemarkBySingleUUID((items as any).post_uuid)&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">class</span><span class="o">=</span><span class="s">&#34;displayImage&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">:src</span><span class="o">=</span><span class="s">&#34;(items as any).cover_url&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">:alt</span><span class="o">=</span><span class="s">&#34;(items as any).post_uuid&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="na">v-else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ImageTitle&#34;</span><span class="p">&gt;</span>{{ (items as any).post_title }}<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ImageDescription&#34;</span><span class="p">&gt;</span>{{ (items as any).description }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;UserInfoBar&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">img</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;UserAvatar&#34;</span> <span class="na">:src</span><span class="o">=</span><span class="s">&#34;(items as any).avatar&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ImageUserName&#34;</span><span class="p">&gt;</span>{{ (items as any).user_name }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;LikesDisplay&#34;</span><span class="p">&gt;</span>{{ (items as any).dots }} likes<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;ImageDate&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{ TimeZoneCaculator.CaculateTheCorrectDate((items as any).date) }}
+</span></span><span class="line"><span class="cl">      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@image_resources_api.get</span><span class="p">(</span><span class="s2">&#34;/posts/</span><span class="si">{page}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">get_posts_as_json</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">page</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;You must append a page number to the end of the url.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">posts_from_db</span> <span class="o">=</span> <span class="n">crud</span><span class="o">.</span><span class="n">get_posts_by_page</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list_for_return</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">posts_from_db</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">user_uuid</span> <span class="o">=</span> <span class="n">get_user_uuid_by_name</span><span class="p">(</span><span class="n">user_name</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">user_name</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">admin_uuid</span> <span class="o">=</span> <span class="n">get_admin_uuid_by_name</span><span class="p">(</span><span class="n">user_name</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">user_name</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">temp_dict</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;id&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;share_num&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">share_num</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;post_uuid&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">post_uuid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;nsfw&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">nsfw</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;user_name&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">user_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;post_title&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">post_title</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;dots&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">dots</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;date&#34;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;cover_url&#34;</span><span class="p">:</span> <span class="n">dir_tool</span><span class="o">.</span><span class="n">get_cover_file_url</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">post_uuid</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;avatar&#34;</span><span class="p">:</span> <span class="n">dir_tool</span><span class="o">.</span><span class="n">get_avatar_file_url</span><span class="p">(</span><span class="n">dir_user_uuid</span><span class="o">=</span><span class="n">admin_uuid</span> <span class="k">if</span> <span class="n">admin_uuid</span> <span class="k">else</span> <span class="n">user_uuid</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">list_for_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_dict</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">list_for_return</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我沉浸在新技能带来的满足感中，得意洋洋地浏览了 VueJS 的选项 API，熟悉了生命周期管理、组件和道具的复杂性。在后端方面，我掌握了用于身份验证、文件处理和数据操作的 JWT 令牌创建技术，进一步增强了我的能力。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">LoginAccount() {</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">logUserName</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">logPassWord</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Check if username and password are empty
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="nx">Result</span> <span class="o">=</span> <span class="s2">&#34;Username or password can&#39;t be empty!&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Username or password can&#39;t be empty!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">bodyFormData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;username&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">logUserName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;password&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">logPassWord</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">axios</span><span class="p">({</span><span class="nx">method</span><span class="o">:</span> <span class="s2">&#34;post&#34;</span><span class="p">,</span> <span class="nx">url</span><span class="o">:</span> <span class="s2">&#34;/user/token&#34;</span><span class="p">,</span> <span class="nx">data</span>: <span class="kt">bodyFormData</span><span class="p">,</span> <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&#34;Content-Type&#34;</span><span class="o">:</span> <span class="s2">&#34;application/x-www-form-urlencoded&#34;</span> <span class="p">},})</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Create an object to store the username and token.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">access_token</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&#34;Token&#34;</span><span class="p">,</span> <span class="nx">token</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Set logging status.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">Authentication</span><span class="p">().</span><span class="nx">setLogStatus</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Return the errors.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">this</span><span class="p">.</span><span class="nx">Result</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">detail</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@userAuthRouter.post</span><span class="p">(</span><span class="s2">&#34;/token&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">user_login</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span> <span class="n">form_data</span><span class="p">:</span> <span class="n">OAuth2PasswordRequestForm</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">()):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_authentication</span> <span class="o">=</span> <span class="n">authenticate_user</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">form_data</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">form_data</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">admin_authentication</span> <span class="o">=</span> <span class="n">authenticate_admin</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">form_data</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">form_data</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Raise error if authentication fails</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">user_authentication</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">admin_authentication</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Incorrect username or password.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;WWW-Authenticate&#34;</span><span class="p">:</span> <span class="s2">&#34;Bearer&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Create access token</span>
+</span></span><span class="line"><span class="cl">        <span class="n">access_token_expires</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">ACCESS_TOKEN_EXPIRE_MINUTES</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">access_token</span> <span class="o">=</span> <span class="n">create_access_token</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;sub&#34;</span><span class="p">:</span> <span class="n">form_data</span><span class="o">.</span><span class="n">username</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="n">expires_delta</span><span class="o">=</span><span class="n">access_token_expires</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">JWTError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Cannot create token.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;WWW-Authenticate&#34;</span><span class="p">:</span> <span class="s2">&#34;Bearer&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Return access token</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span><span class="s2">&#34;access_token&#34;</span><span class="p">:</span> <span class="n">access_token</span><span class="p">,</span> <span class="s2">&#34;token_type&#34;</span><span class="p">:</span> <span class="s2">&#34;bearer&#34;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data() {</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">pages</span>: <span class="kt">1</span><span class="p">,</span> <span class="c1">// The current page number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">displayData</span><span class="o">:</span> <span class="p">[],</span> <span class="c1">// An array to store the displayed images.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">mounted() {</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Called after the component is mounted and ready to use
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">displayIamges</span><span class="p">();</span> <span class="c1">// Display the initial set of images
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外，我还可以处理上传文件、更新和删除数据的任务。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="nx">uploadPost() {</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Define a method called &#39;uploadPost&#39; that sends a POST request to the server with the form data entered by the user.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">post_title</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">description</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// If the &#39;post_title&#39; or &#39;description&#39; data properties are empty, log an error message to the console.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Title and Dercription can&#39;t be empty!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&#34;Token&#34;</span><span class="p">);</span> <span class="c1">// Get the JWT token from local storage and store it in a variable called &#39;token&#39;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// Define an object called &#39;config&#39; with headers that include the JWT token and set the content type to &#39;multipart/form-data&#39;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">Authorization</span><span class="o">:</span> <span class="s2">&#34;Bearer &#34;</span> <span class="o">+</span> <span class="nx">token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Content-type&#34;</span><span class="o">:</span> <span class="s2">&#34;multipart/form-data&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">is_nsfw</span><span class="p">;</span> <span class="c1">// Declare a variable called &#39;is_nsfw&#39;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">let</span> <span class="nx">bodyFormData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span> <span class="c1">// Create a new instance of the FormData class and store it in a variable called &#39;bodyFormData&#39;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">is_nsfw</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// Check whether the &#39;is_nsfw&#39; data property is true. If so, set &#39;is_nsfw&#39; to &#34;true&#34;; otherwise, set it to &#34;false&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">is_nsfw</span> <span class="o">=</span> <span class="s2">&#34;true&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">is_nsfw</span> <span class="o">=</span> <span class="s2">&#34;false&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;is_nsfw&#34;</span><span class="p">,</span> <span class="nx">is_nsfw</span><span class="p">);</span> <span class="c1">// Append the &#39;is_nsfw&#39; value to the form data object.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;post_title&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">post_title</span><span class="p">);</span> <span class="c1">// Append the &#39;post_title&#39; value to the form data object.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;description&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">description</span><span class="p">);</span> <span class="c1">// Append the &#39;description&#39; value to the form data object.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">CustomCover</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// If the &#39;CustomCover&#39; data property is true, append the cover file selected by the user to the form data object; otherwise, append an empty string.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;cover&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">coverFile</span> <span class="kr">as</span> <span class="kt">any</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;cover&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">uploadImagesFile</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// Loop through the array of uploaded images and append each one to the form data object.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">uploadImagesFile</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">bodyFormData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;uploaded_file&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">uploadImagesFile</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bodyFormData</span><span class="p">);</span> <span class="c1">// Log the final form data object to the console.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">axios</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/posts/create&#34;</span><span class="p">,</span> <span class="nx">bodyFormData</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="c1">// Send a POST request to the &#39;/posts/create&#39; endpoint with the form data as the payload.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// If the request is successful...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span> <span class="c1">// Log the response to the console for debugging purposes.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">((</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="s2">&#34;success&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="c1">// Check if the server responded with a success status.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s2">&#34;update:modelValue&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="c1">// Emit the &#39;update:modelValue&#39; event with a value of false to close the uploader panel.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="nx">UpdateImages</span><span class="p">().</span><span class="nx">Update</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Call the &#39;UpdateImages&#39; function to update the images displayed on the website.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">);</span> <span class="c1">// Redirect the user to the homepage.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// If there was an error...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> <span class="c1">// Log the error to the console for debugging purposes.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">alert</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">detail</span><span class="p">);</span> <span class="c1">// Display an alert with details about the error.  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">post_title</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span> <span class="c1">// Reset the &#39;post_title&#39; data property to an empty string.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span> <span class="c1">// Reset the &#39;description&#39; data property to an empty string.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">is_nsfw</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span> <span class="c1">// Reset the &#39;is_nsfw&#39; data property to an empty string.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">this</span><span class="p">.</span><span class="nx">CustomCover</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Reset the &#39;CustomCover&#39; data property to false.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@Post_router.post</span><span class="p">(</span><span class="s2">&#34;/create&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">upload_image</span><span class="p">(</span><span class="n">is_nsfw</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">uploaded_file</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">UploadFile</span><span class="p">]</span> <span class="o">=</span> <span class="n">File</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">cover</span><span class="p">:</span> <span class="n">UploadFile</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">post_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Form</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">oauth2Scheme</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># This block for declare variables.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- declare block</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Get the name of user from token</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">token_tool</span><span class="o">.</span><span class="n">get_user_name_by_token</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">post_uuid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># If User uploaded a cover then this variable will be True.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cover_exist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># -- end declare block</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># This block for verification</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># ---verification block</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">crud</span><span class="o">.</span><span class="n">get_user_by_name</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">user_name</span><span class="o">=</span><span class="n">user_name</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">crud</span><span class="o">.</span><span class="n">get_admin_by_name</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">user_name</span><span class="o">=</span><span class="n">user_name</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;The user does not exist!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">cover</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cover_exist</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Return Error, if list have same file name.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">uploaded_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">filename</span> <span class="ow">in</span> <span class="n">uploaded_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;File name not be same!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create the post direction witch named its uuid in IMAGE_DIR from config.py.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">current_post_path_obj</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">POST_DIR</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">post_uuid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># If the direction already existed then return error.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">current_post_path_obj</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Cannot to create post.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">current_post_path_obj</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">current_post_path_obj</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&#34;cover&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Check image files suffix.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">uploaded_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">ALLOW_SUFFIX</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Not allowed file type.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">cover</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">cover</span><span class="o">.</span><span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;.&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">ALLOW_SUFFIX</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Not allowed file type.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">save_post_status</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">dir_tool</span><span class="o">.</span><span class="n">save_post_images</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">post_uuid</span><span class="o">=</span><span class="n">post_uuid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">uploaded_file</span><span class="o">=</span><span class="n">uploaded_file</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">supplementary_mode</span><span class="o">=</span><span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">save_post_status</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Cannot save the post on server!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">save_cover_status</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">dir_tool</span><span class="o">.</span><span class="n">save_post_cover</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cover_name</span><span class="o">=</span><span class="n">uploaded_file</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">post_uuid</span><span class="o">=</span><span class="n">post_uuid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cover</span><span class="o">=</span><span class="n">cover</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cover_exist</span><span class="o">=</span><span class="n">cover_exist</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">update_mode</span><span class="o">=</span><span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">save_cover_status</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Cannot save the cover of post on server!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">compress_cover_status</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">dir_tool</span><span class="o">.</span><span class="n">compress_cover</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">post_uuid</span><span class="o">=</span><span class="n">post_uuid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">update_mode</span><span class="o">=</span><span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">compress_cover_status</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&#34;Cannot compress the cover of post on server!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">is_nsfw</span> <span class="o">==</span> <span class="s2">&#34;true&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nsfw_db</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nsfw_db</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">crud</span><span class="o">.</span><span class="n">db_create_post</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">db</span><span class="o">=</span><span class="n">db</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">user_name</span><span class="o">=</span><span class="n">user_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">post_title</span><span class="o">=</span><span class="n">post_title</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">post_uuid</span><span class="o">=</span><span class="n">post_uuid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">is_nsfw</span><span class="o">=</span><span class="n">nsfw_db</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;status&#34;</span><span class="p">:</span> <span class="s2">&#34;success&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些框架不仅加快了我开发简单网络应用程序的速度，还拓宽了我的编程经验，让我重新找回了自信。</p>
+<h3 id="pandas">pandas</h3>
+<p>学习 <a href="https://pandas.pydata.org/" target="_blank" rel="noopener noreffer "><strong>pandas</strong></a> 改变了我的生活。这个建立在 Python 基础上的开源数据分析和处理工具用途广泛，速度快如闪电，已被证明是我执行数据相关任务时不可或缺的资产。</p>
+<p>无论是清理数据集，还是深入研究综合数据分析，pandas 始终是我的得力助手。
+一个有趣的方面是，它能够毫不费力地处理通过蜘蛛脚本获取的数据，使数据易于访问和读取，以便进一步处理。</p>
+<p>此外，在清理操作之后，我还能迅速将新数据生成 Excel 或 CSV 文件，这一点简直太神奇了。</p>
+<p>不过，我必须承认，要掌握这个强大的工具，需要学习和实践的地方还很多。经验才是真正的老师，不是吗？</p>
+<h3 id="pyecharts">pyecharts</h3>
+<p>现在，让我们来谈谈 <a href="https://pyecharts.org/#/" target="_blank" rel="noopener noreffer "><strong>pyecharts</strong></a>。当我需要从我的数据中绘制出令人惊叹的图片或图表并将其显示在网页上时，pyecharts 就成了我的首选解决方案。</p>
+<p>当然，我也知道 Apache ECharts 是一个开源的 JavaScript 可视化库，但设置其属性和渲染复杂的图表可能是一项相当繁重的工作。这时，pyecharts 的出现拯救了我，帮我避开了复杂的问题，简化了流程。</p>
+<p>官方文档提供了大量创建简单数据图表和图形的示例，绝对是我的救星。当我只需要一个快速、简单的图表时，依靠 pyecharts 绝对是轻而易举的事。</p>
+<h3 id="数据库">数据库</h3>
+<p>在掌握了 SQL 并熟悉了 MySQL、MariaDB 和 SQLite 之后，我发现它们在满足各种开发需求方面各有千秋。</p>
+<h4 id="sqlitehttpswwwsqliteorg"><a href="https://www.sqlite.org" target="_blank" rel="noopener noreffer ">SQLite</a></h4>
+<p>说到轻量级、基于文件的管理和丰富内容的轻松传输，SQLite 一直是我在简单应用中的首选。SQLite 数据库文件通常用于内容传输和长期数据存档，这表明它具有多功能性，可广泛应用于各种场景。事实上，你知道目前有超过 1 万亿（1e12）个活跃的 SQLite 数据库在使用吗？这真是令人难以置信！SQLite 的灵活性和易用性使其成为 <a href="https://github.com/WeepingDogel/tinygallery-backend" target="_blank" rel="noopener noreffer ">TinyGallery</a> 等项目的理想解决方案，在这些项目中，它是可靠的数据库引擎。</p>
+<h4 id="mysqlhttpswwwmysqlcom--mariadbhttpsmariadborg"><a href="https://www.mysql.com" target="_blank" rel="noopener noreffer ">MySQL</a> &amp; <a href="https://mariadb.org" target="_blank" rel="noopener noreffer ">MariaDB</a></h4>
+<p>当然，在性能是重中之重的情况下，尤其是在大型应用中，MySQL 或其分叉产品 MariaDB 的稳健性往往变得至关重要。它们在业界的良好声誉以及处理更大数据集和更高负载的能力使它们成为开发社区的热门选择。</p>
+<h3 id="虚拟化">虚拟化</h3>
+<p>进入云计算这个令人着迷的领域，不仅拓宽了我对现代技术的理解，还激发了我对虚拟化&ndash;云基础设施的基石&ndash;的浓厚兴趣。</p>
+<p>在这一领域，我有幸熟悉了各种虚拟化软件，提高了我对资源管理和系统协调的理解。让我们深入了解每种著名工具的具体内容：</p>
+<h4 id="vmware-workstation">VMware Workstation</h4>
+<p>在我的虚拟化探索中，<a href="https://www.vmware.com/products/workstation-pro.html" target="_blank" rel="noopener noreffer "><strong>VMware Workstation</strong></a>处于最前沿。它在单个物理设备上运行多个虚拟机的强大环境，对完善我的系统管理和资源分配方法起到了重要作用。</p>
+<p>VMware Workstation 丰富的功能集和友好的用户界面使我能够以无与伦比的轻松和高效创建和管理虚拟环境，在我的数字基础架构管理之旅中留下了不可磨灭的印记。</p>
+<h4 id="virtualbox">VirtualBox</h4>
+<p>随着我的深入研究，<a href="https://www.virtualbox.org" target="_blank" rel="noopener noreffer "><strong>VirtualBox</strong></a>凭借其开源精神，成为一个引人注目的替代方案，重塑了我对虚拟化的可访问性和简易性的看法。它无缝创建和管理虚拟机的能力不仅拓宽了我的技术能力，还使虚拟化体验民主化，让不同的爱好者和专业人士都能使用虚拟化。</p>
+<p>VirtualBox 的包容性和用户友好性凸显了提供易于使用的虚拟化工具对于帮助更多有抱负的开发人员和云计算爱好者的重要意义。</p>
+<h4 id="qemukvm">Qemu/KVM</h4>
+<p>在我的虚拟化之旅中，<a href="https://wiki.qemu.org/Features/KVM" target="_blank" rel="noopener noreffer "><strong>QEMU/KVM</strong></a> 的强强联手一直是一股强大的力量，它囊括了管理程序功能和 Linux 系统硬件辅助虚拟化的原始力量。</p>
+<p>这对充满活力的组合所提供的无缝兼容性和强大性能，为管理虚拟化环境的敏捷性和效率开辟了新的空间，并激发了我对底层虚拟化技术复杂性的新认识。</p>
+<p>使用 QEMU/KVM 不仅增强了我的技术实力，还丰富了我对系统级虚拟化的理解，改变了我管理数字基础设施的方法。</p>
+<h4 id="libvirt">Libvirt</h4>
+<p>最后但并非最不重要的是，<a href="https://libvirt.org/manpages/libvirtd.html" target="_blank" rel="noopener noreffer "><strong>libvirt</strong></a>是一个通用的开源工具包，在我探索虚拟化技术的过程中成为我的忠实伙伴。</p>
+<p>它对 QEMU/KVM、Xen 和 LXC 等一系列管理程序的广泛支持简化了虚拟化平台的协调和管理，为虚拟化功能和基础设施管理提供了一个整体视角。</p>
+<p>我与 libvirt 的合作历程凸显了适应性强、功能多样的虚拟化工具在现代社会的重要作用，重新定义了基础架构管理和资源优化的范式。</p>
+<hr>
+<p>这些虚拟化技术具有多种功能和应用，不仅加深了我在云计算方面的专业知识，还拓宽了我的视野，让我对高效资源利用和基础设施协调有了细致入微的了解。</p>
+<p>虚拟化之旅是一次不折不扣的变革，为驾驭云基础设施和数字环境的动态景观奠定了坚实的基础。</p>
+<h3 id="docker">Docker</h3>
+<p>拥抱<a href="https://www.docker.com" target="_blank" rel="noopener noreffer "><strong>Docker</strong></a>的世界是一次变革之旅，它重新定义了我对待软件开发和部署的方式。从潜心研究Docker的创新容器化方法，到挖掘其创建轻量级、可移植和自给自足环境的潜力，我的探索过程令人振奋。</p>
+<p>去年，我撰写了一篇[<em><strong>文章</strong></em>]（/zh-cn/posts/浅尝docker/），揭示了使用Docker的这一历程。</p>
+<h3 id="openstack">OpenStack</h3>
+<p>最近，我开始涉足<a href="https://www.openstack.org" target="_blank" rel="noopener noreffer "><strong>OpenStack</strong></a>领域，为云计算基础设施管理打开了一扇潜力巨大的大门。</p>
+<p>虽然我目前只是在一台 Linux 服务器上进行了安装，但我已经准备好开始一段丰富的学习之旅，揭开 OpenStack 功能的神秘面纱。</p>
+<p>这次旅程已经彰显了 OpenStack 在重塑可扩展和可定制云环境动态方面的威力，我期待着在进一步深入研究其功能和应用时记录下我的发现。</p>
+<h2 id="新设备">新设备</h2>
+<h3 id="108-客制化键盘">108 客制化键盘</h3>
+<ul>
+<li>极地狐狸轴用于字母区，午夜翡翠轴用于大按键，BOX白色轴用于其他按键。</li>
+<li>支持三模式和 RGB</li>
+</ul>
+<p>我购买这款键盘是为了获得更好的打字体验、更好的外观和游戏体验。</p>
+<h3 id="87-客制化键盘">87 客制化键盘</h3>
+<ul>
+<li>空格键采用蓝莓冰淇淋轴，其他按键采用灰木 V4 轴</li>
+<li>仅限单模式，白色背光</li>
+</ul>
+<p>我购买这款键盘是为了编程和尝试不同的键入体验。</p>
+<p>另外，它的轻巧总是能帮我取代学校计算机教室里的薄膜键盘。
+没有状态良好的键盘&hellip; 大多数键盘都因为学生上课无聊而出现不同程度的损坏
+甚至还有键帽被抠掉的&hellip; 那我得自己带键盘去上实验课了。</p>
+<h3 id="viewsonic-显示器">ViewSonic 显示器</h3>
+<ul>
+<li>23.8 英寸，1080P，165Hz，Fast-IPS 面板，支持 HDR10</li>
+</ul>
+<p>我在开学时买了它，起初以为在大屏幕上可以阅读更多行代码&hellip;</p>
+<h3 id="华硕路由器ax-56u">华硕路由器AX-56U</h3>
+<p>不知道什么疯买的华硕路由器，支持双频WiFi6，千兆有线，没刷系统，还在用官方固件，目前在家里当AP用。</p>
+<h3 id="从-mukihttpstmemukixi-那里收的小主机">从 <a href="https://t.me/Mukixi" target="_blank" rel="noopener noreffer ">muki</a> 那里收的小主机</h3>
+<p>其实它的来历有故事，但我说过不好的回忆没有任何意义。R5-1400+RX580，8GB RAM，目前放在家作为 Me0w00f Technology 团队的内部服务器使用。</p>
+<h3 id="pixel-3xl">Pixel 3XL</h3>
+<p><a href="https://t.me/kawaii_fox" target="_blank" rel="noopener noreffer ">某只狐狸</a>捐赠的墙外机，用于墙外社交、有时候看 YouTube 、安装了 <a href="https://www.vrelnir.com/" target="_blank" rel="noopener noreffer ">DOL</a>。
+也没有进行刷机，仍然是 Pixel 官方原生系统摆烂。</p>
+<h1 id="遗憾">遗憾</h1>
+<p>然而，不可能总是一帆风顺。</p>
+<p>无法实现和完成的事情是一种遗憾。</p>
+<h2 id="比赛">比赛</h2>
+<p>首先，也是最大的遗憾是，今年我没能有机会参加大型比赛。</p>
+<p>虽然我进行了训练和准备，学习了很多&hellip;</p>
+<h2 id="技能作品和游戏">技能、作品和游戏。</h2>
+<p>此外&hellip;&hellip;一些技能细节和基本知识还没有掌握。</p>
+<p>遗憾的是，我也没有享受到美好的游戏时光&hellip;</p>
+<h2 id="抑郁">抑郁</h2>
+<p>一切糟糕的事情都来自可怕的原因，我可能在情绪上生病了，比如抑郁症。</p>
+<p>我知道有必要去看医生，但机会很少。
+我想摆脱它，但这很难。</p>
+<p>它就像一块石头，很可能也肯定会阻碍我前进的脚步&hellip;&hellip;</p>
+<h1 id="新友">新友</h1>
+<p>以下是我今年新认识的朋友和他们说的话。</p>
+<h2 id="grassblock">GrassBlock</h2>
+<blockquote>
+<p>&ldquo;新的一年希望狗子能够开心的活着，不要把自己想的太低而给自己压力。&rdquo;</p>
+</blockquote>
+<h2 id="riiina">Riiina</h2>
+<blockquote>
+<p>&ldquo;看医生。&rdquo;</p>
+</blockquote>
+<h2 id="epsoide33">Epsoide33</h2>
+<blockquote>
+<p>&ldquo;你啊<br>
+还是考虑下怎么好好活着吧,至少在我看来你是挺有前景的。&rdquo;</p>
+</blockquote>
+<h1 id="2024-年的计划">2024 年的计划</h1>
+<ul>
+<li>完成***《Computer Systems A Programmer’s Perspective》***一书的阅读。</li>
+<li>学习使用 Vuetify 或 PrimeVue。</li>
+<li>学习更多有关虚拟化、编程和网络的知识。</li>
+<li>准备专升本。</li>
+<li>参加一次比赛。</li>
+<li><del>找到对象</del>(还是算了吧)</li>
+</ul>
+<h1 id="结语">结语</h1>
+<p>终于，我记录下了这一年。即使有失败的遗憾，我还是收获了很多，以至于在年末时从不感到悲伤。</p>]]></description>
+</item>
+<item>
     <title>解决 NVIDIA 和 Intel GPU 双屏问题</title>
     <link>http://weepingdogel.github.io/zh-cn/posts/solve_the_problem_of_dual_screen_with_nvidia_and_intel_gpus/</link>
     <pubDate>Thu, 21 Sep 2023 23:06:09 &#43;0800</pubDate>
@@ -3811,17 +4738,6 @@
 <blockquote>
 <p><strong>FUCK YOU NVIDIA!</strong></p>
 </blockquote>]]></description>
-</item>
-<item>
-    <title>已将评论系统换成 Utterances</title>
-    <link>http://weepingdogel.github.io/zh-cn/posts/%E5%B7%B2%E5%B0%86%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%8D%A2%E6%88%90utterances/</link>
-    <pubDate>Sat, 25 Sep 2021 16:11:55 &#43;0800</pubDate>
-    <author>WeepingDogel</author>
-    <guid>http://weepingdogel.github.io/zh-cn/posts/%E5%B7%B2%E5%B0%86%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E6%8D%A2%E6%88%90utterances/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://w.wallhaven.cc/full/y8/wallhaven-y8622k.jpg" referrerpolicy="no-referrer">
-            </div><p>之前都是使用 Gitalk 做评论系统的，但是 Diary 主题在夜间模式下对 Gitalk 的显示有 bug。</p>
-<p><a href="https://github.com/AmazingRise/hugo-theme-diary/issues/96" target="_blank" rel="noopener noreffer ">目前开发者也在修复中</a></p>]]></description>
 </item>
 </channel>
 </rss>
