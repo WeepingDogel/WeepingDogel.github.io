@@ -173,13 +173,13 @@ $ msfconsole
 
 启用模块
 ```txt
-use exploit/windows/browser/ms14_064_ole_code_execution
+> use exploit/windows/browser/ms14_064_ole_code_execution
 ```
 
 看看模块的描述
 
 ```txt
-info 
+> info 
 ```
 
 >Description:

