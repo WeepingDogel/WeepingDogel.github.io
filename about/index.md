@@ -255,3 +255,5 @@ Some articles use screenshots as covers, most article cover images are from [wal
 
 [Episode 33's Blog](http://blog.episode33.pro/)
 
+[Jinze's blog](https://jinze.me0w00f.tech/)
+

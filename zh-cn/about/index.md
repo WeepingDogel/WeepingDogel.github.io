@@ -250,4 +250,7 @@
 
 [Episode 33's Blog](http://blog.episode33.pro/)
 
-[芈渡](https://www.lllomh.com/)
+[Jinze 的博客](https://jinze.me0w00f.tech/)
+
+
+
