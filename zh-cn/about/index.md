@@ -147,10 +147,12 @@
 </html>
 
 # 简介 
-是一只大专笨狗
+
+全栈狗子
+
 * Arch User 
 * Python 初学者 
-* Telegram 频道 [@WeepingDogel](https://t.me/WeepingDogel)
+
 
 
 ## 技能
