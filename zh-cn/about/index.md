@@ -140,7 +140,7 @@
 <body>
 <div class="card">
   <div class="card__content">
-  <img  src="/img/photo_2021-02-15_20-22-35.png"/>
+  <img  src="/ciel_avatar.jpg"/>
   <div>
 </div></div></div>
 </body>
@@ -153,9 +153,7 @@
 * Arch User 
 * Python 初学者 
 
-
-
-## 技能
+# 技能
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -171,30 +169,33 @@
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![Jinja](https://img.shields.io/badge/jinja-white.svg?style=for-the-badge&logo=jinja&logoColor=black)
 
-## 学习中
+# 学习中
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![OpenStack](https://img.shields.io/badge/Openstack-%23f01742.svg?style=for-the-badge&logo=openstack&logoColor=white)
 
-## 操作系统
+# 操作系统
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![Arch](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge)
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 
-## 编辑器
+# 编辑器
 ![Vim](https://img.shields.io/badge/VIM-%2311AB00.svg?style=for-the-badge&logo=vim&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/VisualStudioCode-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![PyCharm](https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green)
 
-## 浏览器
+# 浏览器
 ![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white)
 
 
-## 联系我
+# 联系我
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:weepingdogel@gmail.com)
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/WeepingDogel)
-[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/weepingdogel_me)
-<a rel="me" href="https://zone.liolok.com/@WeepingDogel"><img src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&amp;logo=mastodon&amp;logoColor=white" alt="Mastodon"></a>
+
+
+# 关于我的头像
+
+夏尔·凡多姆海恩是凡多姆海恩贵族家族年轻的当家，同时也是一位神秘且充满魅力的贵族。他身为Funtom公司的掌门人以及女王的密使，经常佩戴着黑色眼罩，只露出一只深邃的宝蓝色眼睛，那眼神中透露着他复杂的个性和那些深藏不露的秘密工作。这张头像表现出夏尔不可捉摸的气质与沉静的态度，非常适合代表一个既有教养又带着神秘色彩的形象。
+
 
 # 版权声明
 

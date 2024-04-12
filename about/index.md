@@ -140,7 +140,7 @@
 <body>
 <div class="card">
   <div class="card__content">
-  <img  src="/img/photo_2021-02-15_20-22-35.png"/>
+  <img  src="/ciel_avatar.jpg"/>
   <div>
 </div></div></div>
 </body>
@@ -158,7 +158,7 @@ I'm
 * Python beginner
 
 
-## Skills
+# Skills
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -174,30 +174,31 @@ I'm
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![Jinja](https://img.shields.io/badge/jinja-white.svg?style=for-the-badge&logo=jinja&logoColor=black)
 
-## Learning
+# Learning
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![OpenStack](https://img.shields.io/badge/Openstack-%23f01742.svg?style=for-the-badge&logo=openstack&logoColor=white)
 
-## Operating System
+# Operating System
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![Arch](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff&style=for-the-badge)
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 
-## Editor
+# Editor
 ![Vim](https://img.shields.io/badge/VIM-%2311AB00.svg?style=for-the-badge&logo=vim&logoColor=white)
 ![Visual Studio Code](https://img.shields.io/badge/VisualStudioCode-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![PyCharm](https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green)
 
-## Browser
+# Browser
 ![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white)
 
-
-## Contact
+# Contact
 [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:weepingdogel@gmail.com)
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/WeepingDogel)
-[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/weepingdogel_me)
-<a rel="me" href="https://zone.liolok.com/@WeepingDogel"><img src="https://img.shields.io/badge/-MASTODON-%232B90D9?style=for-the-badge&amp;logo=mastodon&amp;logoColor=white" alt="Mastodon"></a>
+
+
+# About My Avatar
+
+Ciel Phantomhive is the young head of the Phantomhive family and a nobleman shrouded in mystery and elegance. As the owner of Funtom Corporation and the Queen's Watchdog, his royal blue eye, which peers from beneath his dark eyepatch, hints at his complex nature and the darker, hidden facets of his work. This avatar captures Ciel's enigmatic presence and poised demeanor, perfect for showcasing a persona of sophistication with an undertone of intrigue.
 
 # Copyright Statement
 
