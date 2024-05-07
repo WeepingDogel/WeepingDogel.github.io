@@ -99,7 +99,7 @@ async def root():
 ```
 
 While the client recevied the data to render the page, it will still access the server to get the static files.
-So let's mount the staitc direcotry.
+So let's mount the staitc directory.
 
 ```commandline
 $ ls src/static/ -lh
