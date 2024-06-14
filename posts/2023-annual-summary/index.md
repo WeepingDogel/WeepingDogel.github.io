@@ -587,7 +587,7 @@ Here are my new accquaintance or friends I met this year with something they say
 > "In the new year I hope WeepingDogel can live happily and not stress himself out by thinking too lowly of himself!"
 ## Riiina
 > "See a doctor"
-## Epsoide33
+## Episode33
 > "You.  
 > Think about how to live, at least you seem promising to me."
 # Plans in 2024
