@@ -140,7 +140,7 @@
 <body>
 <div class="card">
   <div class="card__content">
-  <img  src="/ciel_avatar.jpg"/>
+  <img  src="/avatar_2024.jpg"/>
   <div>
 </div></div></div>
 </body>
