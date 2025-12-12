@@ -1,6 +1,8 @@
 # 用 Python 和 Vue3 制作的简单客户端服务器项目
 
 
+<!--more-->
+
 # 简介
 ![图 01](/img/figure_01.drawio.png)
 
