@@ -1,6 +1,8 @@
 # A Simple Client Server Project Made by Python and Vue3
 
 
+<!--more-->
+
 # Introduction
 
 ![Figure 01](/img/figure_01.drawio.png)

@@ -1,113 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Friends</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Set theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      })();
+    </script>
   </head>
-  <body>
-    <div class="top">
-      <h1>Friends</h1>
-      <a href="https://weepingdogel.github.io/">Back</a>
+  <body class="min-h-screen bg-base-200">
+    <!-- Navigation -->
+    <div class="navbar bg-base-100 shadow-lg">
+      <div class="flex-1">
+        <h1 class="text-2xl font-bold ml-4">Friends</h1>
+      </div>
+      <div class="flex-none gap-2">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost">
+            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-5 w-5 stroke-current md:h-6 md:w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+            </svg>
+            <span class="hidden md:inline">Theme</span>
+          </div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow-2xl">
+            <li><a data-theme="light" class="theme-selector">Light</a></li>
+            <li><a data-theme="dark" class="theme-selector">Dark</a></li>
+            <li><a data-theme="cupcake" class="theme-selector">Cupcake</a></li>
+            <li><a data-theme="bumblebee" class="theme-selector">Bumblebee</a></li>
+            <li><a data-theme="emerald" class="theme-selector">Emerald</a></li>
+            <li><a data-theme="corporate" class="theme-selector">Corporate</a></li>
+            <li><a data-theme="synthwave" class="theme-selector">Synthwave</a></li>
+            <li><a data-theme="retro" class="theme-selector">Retro</a></li>
+            <li><a data-theme="cyberpunk" class="theme-selector">Cyberpunk</a></li>
+            <li><a data-theme="valentine" class="theme-selector">Valentine</a></li>
+            <li><a data-theme="halloween" class="theme-selector">Halloween</a></li>
+            <li><a data-theme="garden" class="theme-selector">Garden</a></li>
+            <li><a data-theme="forest" class="theme-selector">Forest</a></li>
+            <li><a data-theme="aqua" class="theme-selector">Aqua</a></li>
+            <li><a data-theme="lofi" class="theme-selector">Lofi</a></li>
+            <li><a data-theme="pastel" class="theme-selector">Pastel</a></li>
+            <li><a data-theme="fantasy" class="theme-selector">Fantasy</a></li>
+            <li><a data-theme="wireframe" class="theme-selector">Wireframe</a></li>
+            <li><a data-theme="black" class="theme-selector">Black</a></li>
+            <li><a data-theme="luxury" class="theme-selector">Luxury</a></li>
+            <li><a data-theme="dracula" class="theme-selector">Dracula</a></li>
+            <li><a data-theme="cmyk" class="theme-selector">CMYK</a></li>
+            <li><a data-theme="autumn" class="theme-selector">Autumn</a></li>
+            <li><a data-theme="business" class="theme-selector">Business</a></li>
+            <li><a data-theme="acid" class="theme-selector">Acid</a></li>
+            <li><a data-theme="lemonade" class="theme-selector">Lemonade</a></li>
+            <li><a data-theme="night" class="theme-selector">Night</a></li>
+            <li><a data-theme="coffee" class="theme-selector">Coffee</a></li>
+            <li><a data-theme="winter" class="theme-selector">Winter</a></li>
+          </ul>
+        </div>
+        <a href="../" class="btn btn-ghost">Back</a>
+      </div>
     </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/440661" />
-      <h1>依云's Blog</h1>
-      <p>Happy coding, happy living!</p>
-      <a href="https://blog.lilydjwg.me/">传送</a>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+      <div id="friends-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Friends will be rendered here by JavaScript -->
+      </div>
     </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/34574198" />
-      <h1>李皓奇</h1>
-      <p>岂有文章倾社稷，从来佞幸覆乾坤。</p>
-      <a href="https://liolok.com/zhs/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/32677240" />
-      <h1>Esonhugh's Blog</h1>
-      <p>__清闲悠哉快活日，俯首不问世间事。</p>
-      <a href="https://esonhugh.me/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/70447830" />
-      <h1>CRZY ZONE</h1>
-      <p>_无可奉告。</p>
-      <a href="https://crzy233.github.io/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/54034088" />
-      <h1>mushin2k的博客</h1>
-      <p>
-        一般刷机爱好者兼音游休闲玩家，偶尔玩文具，博客不常更新 音ゲー大好き（
-      </p>
-      <a href="https://mushin2k.github.io/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/61851016" />
-      <h1>Piggy's Blog</h1>
-      <p>Piggy’s random stuff</p>
-      <a href="https://blog.piggy.moe/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/54669781" />
-      <h1>欠陥電気の摸鱼小池</h1>
-      <p>划水摸鱼最快乐啦～写blog什么的才不要呢</p>
-      <a href="https://blog.atri.tk/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/59352355" />
-      <h1>111的 Blog</h1>
-      <p></p>
-      <a href="https://lzwsb.github.io/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/54489701" />
-      <h1>zhyjc6's Blog</h1>
-      <p></p>
-      <a href="https://zhyjc6.github.io/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/78380885" />
-      <h1>安井齐桜的文学小屋</h1>
-      <p>《常識》不可不讀也。</p>
-      <a href="https://zangjiucheng.wixsite.com/website-project">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/12439321" />
-      <h1>⑨BIE</h1>
-      <p>伪技术宅的迷之地</p>
-      <a href="https://9bie.org/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/17158086" />
-      <h1>YuutaW 的自言语</h1>
-      <p>一个萌新在探索世界的道路上留下的些许见解</p>
-      <a href="https://blog.yuuta.moe/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://ci.cncn3.cn/b14f1cc92b39a12e69a4fe62b4dbcc41.png" />
-      <h1>血牙的个人博客</h1>
-      <p>血牙，04年，严重中二病</p>
-      <a href="https://xueya.me/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/36183551" />
-      <h1>欧式的Blog</h1>
-      <p>来呀，来玩呀~</p>
-      <a href="https://blog.ous50.moe">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/36557882" />
-      <h1>我🐎没了</h1>
-      <p>Everything is game.</p>
-      <a href="https://kekeimiku.github.io/">传送</a>
-    </div>
-    <div class="friend">
-      <img src="https://avatars.githubusercontent.com/u/36188023" />
-      <h1>KiraPGR's Blog</h1>
-      <p>/* Life Runs On Code */</p>
-      <a href="https://kira-pgr.github.io/">传送</a>
-    </div>
+
+    <script>
+      // Friends data
+      const friends = [
+        {
+          name: "依云's Blog",
+          avatar: "https://avatars.githubusercontent.com/u/440661",
+          description: "Happy coding, happy living!",
+          url: "https://blog.lilydjwg.me/"
+        },
+        {
+          name: "李皓奇",
+          avatar: "https://avatars.githubusercontent.com/u/34574198",
+          description: "岂有文章倾社稷，从来佞幸覆乾坤。",
+          url: "https://liolok.com/zhs/"
+        },
+        {
+          name: "Esonhugh's Blog",
+          avatar: "https://avatars.githubusercontent.com/u/32677240",
+          description: "__清闲悠哉快活日，俯首不问世间事。",
+          url: "https://esonhugh.me/"
+        },
+        {
+          name: "CRZY ZONE",
+          avatar: "https://avatars.githubusercontent.com/u/70447830",
+          description: "_无可奉告。",
+          url: "https://crzy233.github.io/"
+        },
+        {
+          name: "mushin2k的博客",
+          avatar: "https://avatars.githubusercontent.com/u/54034088",
+          description: "一般刷机爱好者兼音游休闲玩家，偶尔玩文具，博客不常更新 音ゲー大好き（",
+          url: "https://mushin2k.github.io/"
+        },
+        {
+          name: "Piggy's Blog",
+          avatar: "https://avatars.githubusercontent.com/u/61851016",
+          description: "Piggy's random stuff",
+          url: "https://blog.piggy.moe/"
+        },
+        {
+          name: "欠陥電気の摸鱼小池",
+          avatar: "https://avatars.githubusercontent.com/u/54669781",
+          description: "划水摸鱼最快乐啦～写blog什么的才不要呢",
+          url: "https://blog.atri.tk/"
+        },
+        {
+          name: "111的 Blog",
+          avatar: "https://avatars.githubusercontent.com/u/59352355",
+          description: "",
+          url: "https://lzwsb.github.io/"
+        },
+        {
+          name: "zhyjc6's Blog",
+          avatar: "https://avatars.githubusercontent.com/u/54489701",
+          description: "",
+          url: "https://zhyjc6.github.io/"
+        },
+        {
+          name: "安井齐桜的文学小屋",
+          avatar: "https://avatars.githubusercontent.com/u/78380885",
+          description: "《常識》不可不讀也。",
+          url: "https://zangjiucheng.wixsite.com/website-project"
+        },
+        {
+          name: "⑨BIE",
+          avatar: "https://avatars.githubusercontent.com/u/12439321",
+          description: "伪技术宅的迷之地",
+          url: "https://9bie.org/"
+        },
+        {
+          name: "YuutaW 的自言语",
+          avatar: "https://avatars.githubusercontent.com/u/17158086",
+          description: "一个萌新在探索世界的道路上留下的些许见解",
+          url: "https://blog.yuuta.moe/"
+        },
+        {
+          name: "血牙的个人博客",
+          avatar: "https://ci.cncn3.cn/b14f1cc92b39a12e69a4fe62b4dbcc41.png",
+          description: "血牙，04年，严重中二病",
+          url: "https://xueya.me/"
+        },
+        {
+          name: "欧式的Blog",
+          avatar: "https://avatars.githubusercontent.com/u/36183551",
+          description: "来呀，来玩呀~",
+          url: "https://blog.ous50.moe"
+        },
+        {
+          name: "我🐎没了",
+          avatar: "https://avatars.githubusercontent.com/u/36557882",
+          description: "Everything is game.",
+          url: "https://kekeimiku.github.io/"
+        },
+        {
+          name: "KiraPGR's Blog",
+          avatar: "https://avatars.githubusercontent.com/u/36188023",
+          description: "/* Life Runs On Code */",
+          url: "https://kira-pgr.github.io/"
+        },
+        {
+          name: "pluie",
+          avatar: "https://avatars.githubusercontent.com/u/22406910?v=4",
+          description: "Heya~ I'm Leah! ·",
+          url: "https://pluie.me/"
+        },
+        {
+          name: "Noa Virellia",
+          avatar: "https://avatars.githubusercontent.com/u/54884471?v=4",
+          description: "<i>尽情闪耀</i>",
+          url: "https://herbarium.requiem.garden/"
+        }
+      ];
+
+      // Function to render a single friend card
+      function renderFriendCard(friend) {
+        return `
+          <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+            <figure class="px-6 pt-6 pb-4">
+              <div class="avatar">
+                <div class="w-24 rounded-full ring ring-purple-500 ring-offset-base-100 ring-offset-2">
+                  <img src="${friend.avatar}" alt="${friend.name}" />
+                </div>
+              </div>
+            </figure>
+            <div class="card-body items-center text-center pb-6">
+              <h2 class="card-title">${friend.name}</h2>
+              <p class="text-sm text-base-content/70">${friend.description}</p>
+              <div class="card-actions mt-4">
+                <a href="${friend.url}" class="btn bg-purple-500 hover:bg-purple-600 text-white border-none btn-sm">传送</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Function to render all friends
+      function renderFriends() {
+        const container = document.getElementById('friends-container');
+        if (container) {
+          container.innerHTML = friends.map(friend => renderFriendCard(friend)).join('');
+        }
+      }
+
+      // Render friends when page loads
+      document.addEventListener('DOMContentLoaded', () => {
+        renderFriends();
+      });
+
+      // Theme selector functionality
+      document.querySelectorAll('.theme-selector').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const theme = link.getAttribute('data-theme');
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+        });
+      });
+    </script>
   </body>
 </html>

@@ -1,41 +1,42 @@
-# If Only I...
+# 如果我...
 
 
-### PAST
+<!--more-->
+### 过去
 
-**If only I had been stronger,**
+**如果我当时更强壮，**
 
-**I wouldn't have been damaged by the WIND.**
+**我就不会被风吹伤。**
 
-**If only I had been smarter,**
+**如果我当时更聪明，**
 
-**I wouldn't have been cheated by the CROWD.**
+**我就不会被人群欺骗。**
 
-**If only I had been more brave,**
+**如果我当时更勇敢，**
 
-**I wouldn't have been thought to be a SLAVE.**
+**我就不会被当成奴隶。**
 
-### PRESENT
+### 现在
 
-**If only I were more fortunate,**
+**如果我更幸运一些，**
 
-**I wouldn't drop into a CAGE.**
+**我就不会掉进牢笼。**
 
-**If only I were more cautious,**
+**如果我更谨慎一些，**
 
-**I wouldn't have to be sure if it's DANGEROUS.**
+**我就不用担心是否危险。**
 
-**If only I worked harder,**
+**如果我更努力一些，**
 
-**I wouldn't be said to be a LOSER.**
+**我就不会被说成是失败者。**
 
-### Future
+### 未来
 
-**If only I should have a future....**
+**如果我还能有未来…**
 
-**I would write the story continuously...**
+**我会把故事继续写下去…**
 
 
-> *If only I....*
+> *如果我…*
 >
->*I would...*
+>*我会…*

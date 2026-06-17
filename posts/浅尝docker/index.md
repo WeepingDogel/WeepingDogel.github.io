@@ -1,78 +1,83 @@
-# 浅尝 Docker
+# A Taste of Docker
 
 
 <!--more-->
-# 序
+# Preface
 
-嗯，未雨绸缪，提前学一下怎么玩 docker 。
+Well, preparing for the future, learning how to play with docker early.
 
-~~卷死他们~~
+~~Gonna crush them~~
 
-# docker 是什么？
+# What is Docker?
 
-{{< admonition type=tip title="官方英文简介" open=true >}}
-Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
+{{< admonition type=tip title="Official English Introduction" open=true >}}
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker's methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
 {{< /admonition >}}
-根据官方文档的说明和通俗的理解， docker 能够提供快速部署软件项目的容器，它相当于一个可以模拟项目所需环境的虚拟机，但又和我们理解的一般的虚拟机又不同。
+According to the official documentation and in simple terms, Docker provides containers for quickly deploying software projects. It's like a virtual machine that can simulate the environment needed by a project, but it's different from the typical virtual machines we know.
 
-一般的虚拟机需要安装整个操作系统，会对我们的计算机占用大量的资源，而 docker 只需要模拟出项目所需要的运行环境，占用率非常低，这可以大大提高开发效率。
+Regular virtual machines require installing an entire operating system, which consumes a lot of resources from our computer. Docker only simulates the runtime environment needed by the project, with very low resource usage — this can greatly improve development efficiency.
 
-它可以按照我们的需求模拟出软件环境，并且能够快速部署我们开发好的项目实例（比如 Mastodon），并且一定程度上它具有环境隔离功能，运行环境与操作系统相分离，而且可以同时运行多个容器。
+It can simulate software environments according to our needs, quickly deploy project instances we've developed (like Mastodon), and to some extent provides environment isolation — the runtime environment is separated from the operating system, and multiple containers can run simultaneously.
 
-并且我们可以把容器封装成镜像，进行反复利用。
+We can also package containers into images for repeated use.
 
-就像这条运着集装箱的鲸鱼一样，游到哪都是开箱即用。
-
+Like this whale carrying containers, wherever it swims — it's ready to use out of the box.
 
 ![](https://www.runoob.com/wp-content/uploads/2016/04/docker01.png)
 
-# 怎么安装 docker
+# How to Install Docker
 
-各个平台装 docker 都非常简单。
+Installing Docker on various platforms is very easy.
 
-Linux 平台可能对初学者稍微难一些，但是对熟悉的用户来说， Linux 安装 docker 非常快。
+The Linux platform might be a bit harder for beginners, but for experienced users, installing Docker on Linux is very fast.
 
-直接从相应发行版的包管理器安装就行。
+Just install it directly from your distribution's package manager.
 
 ## Arch
 
-比如咱 Arch 可以让 pacman 把这条鲸鱼给带回来。
+For example, on Arch we can have pacman bring this whale home.
 
 ```
 sudo pacman -S docker
 ```
-{{< admonition type=note title="注意" open=true >}}
-如果运行时出现以下报错
+
+{{< admonition type=note title="Note" open=true >}}
+If you get the following error when running:
 
 ```
 docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.
 See 'docker run --help'.
 ```
-请使用 `systemctl` 启动 `docker` 的系统进程。
+
+Please use `systemctl` to start the `docker` system service:
 
 ```
 sudo systemctl start docker
 ```
-如果有必要，设置其开机自启
+
+If necessary, enable it to start on boot:
+
 ```
 sudo systemctl enable docker
 ```
-
 {{< /admonition >}}
+
 ## Debian
 
-如果是用 deb 系的发行版，可以参考[官方文档](https://docs.docker.com/engine/install/debian/#install-docker-engine)用 apt 来安装。
+If you're using a Debian-based distribution, you can refer to the [official documentation](https://docs.docker.com/engine/install/debian/#install-docker-engine) to install using apt.
 
-### 设置仓库
-1. 更新 apt 仓库，并安装一些依赖来允许 apt 通过 https 使用第三方仓库。 
+### Set up the Repository
+1. Update the apt repository and install some dependencies to allow apt to use third-party repositories over HTTPS.
+
 ```
 sudo apt update
 ```
+
 ```
 sudo apt install ca-certificates curl gnupg lsb-release
 ```
 
-2. 添加 Docker 官方 GPG 密钥
+2. Add Docker's official GPG key:
 
 ```
 sudo mkdir -p /etc/apt/keyrings
@@ -82,22 +87,23 @@ sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
-3. 设置 Docker 仓库
+3. Set up the Docker repository:
+
 ```bash
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-### 安装 docker
+### Install Docker
 
-1. 更新软件包仓库
+1. Update the package repository:
 
 ```
 sudo apt update
 ```
 
-如果更新的时候发生了 GPG 错误，可以参考官网的[这个提示](https://docs.docker.com/engine/install/debian/#install-docker-engine)：
+If you encounter a GPG error during the update, refer to this [official note](https://docs.docker.com/engine/install/debian/#install-docker-engine):
 
 {{< admonition type=tip title="Receiving a GPG error when running apt-get update?" open=true >}}
 Your default [umask](https://en.wikipedia.org/wiki/Umask) may be incorrectly configured, preventing detection of the repository public key file. Try granting read permission for the Docker public key file before updating the package index:
@@ -109,153 +115,157 @@ Your default [umask](https://en.wikipedia.org/wiki/Umask) may be incorrectly con
 ```
 {{< /admonition >}}
 
-2. 安装 Docker Engine 、 containerd 和 Docker Compose.
+2. Install Docker Engine, containerd, and Docker Compose:
 
 ```
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-3. 通过运行 hello-world 镜像来验证 docker 是否安装成功
+3. Verify Docker is installed correctly by running the hello-world image:
 
 ```
 sudo docker run hello-world
 ```
 
-## rpm 系列
+## RPM-based Systems
 
-其实说实话，这类发行版我个人不太喜欢，就拿 CentOS 为例吧，CentOS 7 以上的版本也是可以直接用 yum 安装的。
+To be honest, I don't particularly like these distributions. Taking CentOS as an example, CentOS 7 and above can also be installed directly using yum.
 
-### 设置仓库
+### Set up the Repository
 
-一样是设置第三方仓库。
+Same as above — set up a third-party repository.
 
-不过要先安装 `yum-utils` 才能用 `yum-config-manager`。
+But first, install `yum-utils` to use `yum-config-manager`:
 
 ```
 sudo yum install -y yum-utils
 ```
 
-然后设置仓库
+Then set up the repository:
+
 ```
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 ```
-### 安装
 
-一样是使用 yum 命令来安装 docker 的软件包和依赖。
+### Install
+
+Install Docker packages and dependencies using yum:
 
 ```
 sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-## 对于 Linux 平台再提一嘴
+## One More Thing for Linux Platforms
 
-上述的方法都是在 Linux 平台安装 docker 的最新版本，如果需要安装特定的版本，可以[参考 docker 的官方文档](https://docs.docker.com/engine/)进行操作。
+The methods above install the latest version of Docker on Linux platforms. If you need to install a specific version, refer to the [official Docker documentation](https://docs.docker.com/engine/).
 
 ## Windows
 
-在 Windows 平台可以直接安装 docker-desktop，这也非常简单，直接通过 [docker 官方文档](https://docs.docker.com/desktop/install/windows-install/)[下载](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)安装包就行了。
+On Windows, you can directly install Docker Desktop. It's very simple — just [download](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) the installer from the [official Docker documentation](https://docs.docker.com/desktop/install/windows-install/).
 
-# 我能怎么玩 docker？
+# What Can I Do with Docker?
 
+Docker can do a lot of things.
 
-docker 能干的事多着呢。 
-
-最常用的就是在 docker 容器里运行应用程序了。
+The most common use is running applications in Docker containers.
 
 ## HelloWorld
 
-比如我们来运行一个 Hello World
+For example, let's run a Hello World:
 
 ```
 sudo docker run ubuntu /bin/echo "hello world"
 ```
 
-如图所见，它输出一系列字符后，在最后输出了 hello world
+As you can see, it outputs a series of characters, and finally prints "hello world".
 
 ![](/img/2022-11-07-07-53-37屏幕截图.png)
 
-那么来解释一下命令的含义吧
+Let me explain the meaning of this command:
 
-* `docker` -- 运行 docker 的二进制文件, 这个没什么好说的
-* `run` -- 运行容器
-* `ubuntu` -- 要运行的镜像名称
-* `/bin/echo "hello world"` - 在容器里面要执行的命令
+* `docker` — runs the Docker binary file, nothing special
+* `run` — runs a container
+* `ubuntu` — the image name to run
+* `/bin/echo "hello world"` — the command to execute inside the container
 
-{{< admonition type=tip title="提示" open=true >}}
-如果出现了以下信息，可能是因为在启动容器的时候没有下载好相关的镜像
+{{< admonition type=tip title="Tip" open=true >}}
+If you see the following message, it means the relevant image hasn't been downloaded yet when starting the container:
+
 ```
 Unable to find image 'ubuntu:latest' locally
 latest: Pulling from library/ubuntu
 e96e057aae67: Pull complete 
 ```
-默认情况下 docker 会自动下载，但最好养成启动之前下载好镜像的习惯。
+
+By default, Docker will download it automatically, but it's a good habit to download the image before starting it:
+
 ```
 sudo docker pull ubuntu
 ```
 {{< /admonition>}}
 
-## 交互式容器
+## Interactive Containers
 
-当然,我们也可以创建一个可以交互的容器,意思就是可以用 bash 来控制它
+Of course, we can also create an interactive container, meaning we can control it with bash:
 
 ```
 sudo docker run -i -t ubuntu /bin/bash
 ```
 
-{{< admonition type=tip title="参数含义" open=true >}}
-* `-i`: 交互式操作。
-* `-t`: 终端。
-
-[引自菜鸟教程](https://www.runoob.com/docker/docker-image-usage.html)
+{{< admonition type=tip title="Parameter Meanings" open=true >}}
+* `-i`: Interactive operation.
+* `-t`: Terminal.
 {{< /admonition >}}
 
-这样我们创建容器之后,我们的 shell 也变成了容器里的 shell
+After creating the container this way, our shell becomes the container's shell:
 
 ![](/img/2022-11-08-14-22-05屏幕截图.png)
 
-我们可以对它进行一些操作命令,随便打几个吧.
+We can run some commands on it:
 
 ![](/img/2022-11-08-14-27-39屏幕截图.png)
 
-而且我们执行的命令是不会影响到主系统的
+The commands we execute won't affect the host system.
 
-然后我们可以使用 `exit` 命令来退出这个系统.
+We can use the `exit` command to exit:
 
 ![](/img/2022-11-08-14-26-41屏幕截图.png)
 
-这样一来容器的操作系统就退出了,同时容器也停止运行了, 因为这个容器不是以 daemon 模式来运行的.
+When you exit, the container stops running because it wasn't started in daemon mode.
 
-## 以 daemon 模式来运行容器
+## Running Containers in Daemon Mode
 
-接下来我要说的是,为啥上文中用 `exit` 退出容器 shell 之后还不算完.
+Next, I want to explain why exiting the container shell with `exit` isn't the end of the story.
 
-这次我们再打开一个容器,不过这次加一个参数 `-d`
+This time, let's start another container, but add the `-d` parameter.
 
-这个参数的意思是以 Daemon 模式运行, 那么 Daemon 是什么意思呢?
+This parameter means running in Daemon mode. So what does Daemon mean?
 
-通过搜索引擎得到的答案往往是什么 系统守护进程巴拉巴拉的,其实它类似于后台运行的意思.
+Search engine answers usually say something like "system daemon process" etc. Basically, it's similar to running in the background.
 
-接下来我们用这个命令来开个容器
+Let's start a container with this command:
+
 ```
 sudo docker run -i -t -d ubuntu /bin/bash
 ```
+
 ![](/img/2022-11-08-14-27-39屏幕截图.png)
 
-这时我们发现,我们并没有得一个 shell, 而是得到来一串字符串.
+This time, we don't get a shell, but a string of characters.
 
-我们试试用 docker 的 ps 命令来查看一下正在运行的容器:
+Let's use Docker's ps command to view running containers:
 
 ```
 sudo docker ps
 ```
-我们得到来这样的结果
+
+We get this result:
 
 ![](/img/2022-11-08-14-36-23屏幕截图.png)
 
-图片可能不太清楚? 这里还是贴出来吧
-
+Image might not be clear? Let me paste it here:
 
 ```
 [weepingdogel@WeepingDogel-Arch ~]$ sudo docker ps
@@ -263,40 +273,40 @@ CONTAINER ID   IMAGE     COMMAND       CREATED              STATUS              
 2f4976200305   ubuntu    "/bin/bash"   About a minute ago   Up About a minute             funny_pare
 ```
 
-然后发现了返回的结果中容器 ID 只有上面返回字符串的前面一部分,这个往往是我们会用的容器 ID
+We can see that the container ID in the result is only the first part of the returned string — this is what we'll use as the container ID.
 
-要怎样才能控制它的 shell 呢?
+How do we control its shell?
 
-又要接触新的 docker 命令了
+Time to learn some new Docker commands:
 
 * attach
 * exec
 
-exec 需要加上 `-i` 和 `-t` 参数以及命令,比如 `/bin/bash` .
+`exec` needs the `-i` and `-t` parameters along with a command, like `/bin/bash`.
 
-所以执行格式是这样的
+So the format is:
 
 ```
-sudo docker exec -it 容器ID 命令
+sudo docker exec -it containerID command
 ```
 
-然后我们需要执行 bash
+Then we need to run bash:
 
 ```
 sudo docker exec -it 2f4976200305 /bin/bash
 ```
 
-很快,我们就进入了容器的 shell.
+We quickly enter the container's shell:
 
 ![](/img/2022-11-08-15-03-59屏幕截图.png)
 
-我们可以用 `cat /etc/os-release` 来查看系统信息.
+We can use `cat /etc/os-release` to check system info:
 
 ![](/img/2022-11-08-15-05-52屏幕截图.png)
 
-我们可以很清晰的看到,上面返回的是 Ubuntu 而我用的是 Arch, 因此我们可以确定容器里的东西不会影响到操作系统.
+We can clearly see that the result above shows Ubuntu while I'm using Arch, confirming that things inside the container don't affect the host OS.
 
-什么?不清晰?那再看清楚一点吧
+Not clear? Let me show you more clearly:
 
 ```
 PRETTY_NAME="Ubuntu 22.04.1 LTS"
@@ -313,21 +323,21 @@ PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-poli
 UBUNTU_CODENAME=jammy
 ```
 
-退出还是一样的可以用 `exit` , 但是此时的 exit 只是退出这个 bash, 它并不会关闭容器.
+Exiting is still done with `exit`, but this time `exit` only exits bash — it doesn't stop the container.
 
-执行 `docker ps` 我们可以看到它还在运行.
+Run `docker ps` and you'll see it's still running:
 
 ![](/img/2022-11-08-15-47-58屏幕截图.png)
 
-那么我们接下来试试 attach
+Now let's try `attach`:
 
-它的用法是
+Its usage is:
 
 ```
-sudo docker attach 容器ID
+sudo docker attach containerID
 ```
 
-所以我需要执行
+So I need to run:
 
 ```
 sudo docker attach 2f4976200305
@@ -335,24 +345,24 @@ sudo docker attach 2f4976200305
 
 ![](/img/2022-11-08-16-07-28屏幕截图.png)
 
-这样一来我们也可以得到一个shell,但是如果我们执行了 `exit`, 这个容器是会被停止的.
+This also gives us a shell, but if we run `exit`, the container will be stopped.
 
-来试试看?
+Let's try?
 
-很明显,当 `exit` 被执行之后用 `docker ps` 命令看不到正在运行的容器ID,这说明容器被停止了.
+Clearly, after `exit` is executed, `docker ps` doesn't show the running container ID — this means the container has stopped.
 
 ![](/img/2022-11-08-16-13-36屏幕截图.png)
 
-如果需要再次启动这个容器呢,我们可以使用 start 或者 restart 命令来重启.
+If we need to restart this container, we can use the `start` or `restart` command:
 
 ```
 sudo docker restart 2f4976200305
 ```
 
-此时我们用 `docker ps` 就又能看到它在运行了
+Now `docker ps` will show it running again.
 
-{{< admonition type=tip title="提示" open=true >}}
-使用 `docker ps -a`命令可以查看所有的容器,无论是否正在运行
+{{< admonition type=tip title="Tip" open=true >}}
+Use `docker ps -a` to view all containers, regardless of whether they are running:
 
 ```
 sudo docker ps -a
@@ -361,34 +371,33 @@ sudo docker ps -a
 ![](/img/2022-11-09-17-27-47屏幕截图.png)
 {{< /admonition >}}
 
+## Deleting Containers
 
-## 删除容器
+What if we don't need these containers anymore?
 
-如果这些容器不需要了怎么办,
+~~Like if we broke them and need to delete them~~
 
-~~比如玩坏了,要把它删掉~~
-
-那就要用 `docker rm` 命令
+Then use the `docker rm` command:
 
 ```
-sudo docker rm 容器ID
+sudo docker rm containerID
 ```
 
-后面接上容器 ID 就能删除, 可以删除多个
+Just append the container ID to delete. You can delete multiple at once:
 
 ```
 sudo docker rm 6c8c8d9f5540 6c49bc1fdc49 eb71e810ee50 5a84d067d769 2addaf3666ef
 ```
 
-然后在用 `docker ps -a` 来查看, 就看不到任何容器 ID 了
+Then check with `docker ps -a` — no container IDs will be shown:
 
 ![](/img/2022-11-09-19-05-22屏幕截图.png)
 
-## 镜像
+## Images
 
-docker 容器运行的前提条件是它需要相应的镜像.
+The prerequisite for running a Docker container is having the corresponding image.
 
-可以用 `docker images` 来查看本地已经有的镜像, 如果需要的别的镜像可以用 `docker pull` 来获取
+Use `docker images` to view locally available images. If you need other images, use `docker pull` to get them:
 
 ```
 sudo docker images
@@ -396,7 +405,7 @@ sudo docker images
 
 ![](/img/2022-11-10-12-44-18屏幕截图.png)
 
-我们来获取 php 的镜像
+Let's get the PHP image:
 
 ```
 sudo docker pull php
@@ -404,11 +413,12 @@ sudo docker pull php
 
 ![](/img/2022-11-10-18-01-21屏幕截图.png)
 
-等待他们自动下载完成,镜像就可以用了.
+Wait for the automatic download to complete, then the image is ready to use.
 
-如果你运行容器的时候没有事先拉取镜像的话, docker 则会在运行容器的时候临时进行拉取.
+If you don't pull the image before running the container, Docker will pull it temporarily when you run it.
 
-下载进程完成之后, 我们查看一下现有的镜像
+After the download is complete, let's check the existing images:
+
 ```
 sudo docker images
 ```
@@ -420,72 +430,59 @@ php          latest    30e567f030d3   12 days ago   484MB
 httpd        latest    fe8735c23ec5   2 weeks ago   145MB
 ```
 
-{{< admonition type=tip title="各个选项说明:" open=true >}}
+{{< admonition type=tip title="Field Descriptions:" open=true >}}
+* REPOSITORY: The image repository source
+* TAG: The image tag
+* IMAGE ID: The image ID
+* CREATED: The image creation time
+* SIZE: The image size
 
-* REPOSITORY：表示镜像的仓库源
-
-* TAG：镜像的标签
-
-* IMAGE ID：镜像ID
-
-* CREATED：镜像创建时间
-
-* SIZE：镜像大小
-
-同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如 ubuntu 仓库源里，有 `15.10`、`14.04` 等多个不同的版本，我们使用 `REPOSITORY:TAG` 来定义不同的镜像。
-
-
-[引自菜鸟教程](https://www.runoob.com/docker/docker-image-usage.html)
-
+The same repository source can have multiple TAGs representing different versions. For example, the ubuntu repository has versions like `15.10`, `14.04`, etc. We use `REPOSITORY:TAG` to define different images.
 {{< /admonition>}}
 
-## 删除镜像
+## Deleting Images
 
-当然, 不需要的镜像也是可以删除的.
+Of course, unwanted images can also be deleted:
 
 ```
-sudo docker rmi 镜像ID
+sudo docker rmi imageID
 ```
 
 ![](/img/2022-11-10--19-35-17屏幕截图.png)
 
-如图,这样就把不需要的镜像删除了
+As shown, the unwanted image is deleted.
 
+## Dockerfile
 
-## dockerfile
+What is a Dockerfile? A Dockerfile is a text file used to build images. It contains a series of instructions and explanations, similar to shell scripts (like PKGBUILD).
 
-啥是 dockerfile? Dockerfile 是用来构建镜像文件的文本文件, 文件里面包含的是一条条指令和说明, 和一些 shell 脚本类似(比如 PKGBUILD )
-
-
-而一个简单的 Dockerfile 是长这样的
+A simple Dockerfile looks like this:
 
 ```dockerfile
 FROM nginx
 RUN echo 'Hello World!' > /usr/share/nginx/html/index.html
 ```
 
-{{< admonition type=tip title="来自菜鸟教程的提示" >}}
-* `FROM` 定制的镜像都是基于 FROM 的镜像, 这里的 nginx 就是定制需要的基础镜像。后续的操作都是基于 nginx。
-* `RUN` 用于执行后面跟着的命令行命令。有以下俩种格式：
+{{< admonition type=tip title="Tip from Tutorial" >}}
+* `FROM`: Custom images are all based on the FROM image. Here, nginx is the base image for customization. All subsequent operations are based on nginx.
+* `RUN`: Used to execute the command that follows. There are two formats:
 
-shell 格式：
+Shell format:
 ```dockerfile
-RUN <命令行命令>
-# <命令行命令> 等同于，在终端操作的 shell 命令。
+RUN <command>
+# <command> is equivalent to the shell command run in the terminal.
 ```
 
-exec 格式:
+Exec format:
 ```dockerfile
-RUN ["可执行文件", "参数1", "参数2"]
-# 例如：
-# RUN ["./test.php", "dev", "offline"] 等价于 RUN ./test.php dev offline
+RUN ["executable", "param1", "param2"]
 ```
 {{< /admonition >}}
 
-熟悉 Linux 操作的话, 上手这玩意也就很简单了, 但是值得注意的是菜鸟教程当中说的这一段:
+If you're familiar with Linux operations, picking this up is easy. But it's worth noting what the tutorial says:
 
-{{< admonition type=note title="注意" open=true >}}
-Dockerfile 的指令每执行一次都会在 docker 上新建一层。所以过多无意义的层，会造成镜像膨胀过大。例如：
+{{< admonition type=note title="Note" open=true >}}
+Each instruction in a Dockerfile creates a new layer in Docker. So too many meaningless layers will cause the image to bloat. For example:
 
 ```dockerfile
 FROM centos
@@ -494,7 +491,7 @@ RUN wget -O redis.tar.gz "http://download.redis.io/releases/redis-5.0.3.tar.gz"
 RUN tar -xvf redis.tar.gz
 ```
 
-以上执行会创建 3 层镜像。可简化为以下格式：
+The above creates 3 layers. It can be simplified to:
 
 ```dockerfile
 FROM centos
@@ -504,50 +501,47 @@ RUN yum -y install wget \
 ```
 {{< /admonition >}}
 
-也就是说我们要尽量在 RUN 当中写命令脚本的时候尽量写并列语句.
+That means we should try to write parallel statements in RUN command scripts.
 
+## A Simple Web Server
 
+Now I want to try running a simple webpage with Docker.
 
+Let me run that [login page](/simpleLogin/index.html) I wrote when I was bored.
 
-## 一个简单的 Web 服务器.
-
-现在我想试试用 docker 来跑一个简单的网页了.
-
-就跑一下我之前闲着没事干写的[登录页面](/simpleLogin/index.html)吧.
-
-首先我们要创建一个目录
+First, create a directory:
 
 ```
 mkdir webtest
 ```
 
-先把前端的静态文件复制进去
+Copy the static frontend files into it:
 
 ```
 cp test/* webtest/ -rv
 ```
 
-然后进入该目录
+Then enter the directory:
 
 ```
 cd webtest
 ```
 
-检查一下文件
+Check the files:
 
 ```
 ls -lh
 ```
 
 ```
-总计 4.0K
-drwxr-xr-x 2 weepingdogel weepingdogel   23 11月10日 21:30 css
-drwxr-xr-x 2 weepingdogel weepingdogel    6 11月10日 21:30 img
--rw-r--r-- 1 weepingdogel weepingdogel 1.4K 11月10日 21:30 index.html
-drwxr-xr-x 2 weepingdogel weepingdogel   21 11月10日 21:30 js
+Total 4.0K
+drwxr-xr-x 2 weepingdogel weepingdogel   23 Nov 10 21:30 css
+drwxr-xr-x 2 weepingdogel weepingdogel    6 Nov 10 21:30 img
+-rw-r--r-- 1 weepingdogel weepingdogel 1.4K Nov 10 21:30 index.html
+drwxr-xr-x 2 weepingdogel weepingdogel   21 Nov 10 21:30 js
 ```
 
-ok ,现在我们来写一个 dockerfile
+OK, now let's write a Dockerfile:
 
 ```dockerfile
 FROM nginx
@@ -556,83 +550,78 @@ COPY ./css/style.css /usr/share/nginx/html/css/style.css
 COPY ./js/main.js /usr/share/nginx/html/js/main.js
 ```
 
-{{< admonition type=tip title="指令详解" open=true >}}
-
+{{< admonition type=tip title="Instruction Details" open=true >}}
 * COPY
 
-复制指令，从上下文目录中复制文件或者目录到容器里指定路径。
+Copies files or directories from the context directory to a specified path in the container.
 
-格式：
+Format:
 ```dockerfile
-COPY [--chown=<user>:<group>] <源路径1>...  <目标路径>
-COPY [--chown=<user>:<group>] ["<源路径1>",...  "<目标路径>"]
+COPY [--chown=<user>:<group>] <source_path>...  <target_path>
+COPY [--chown=<user>:<group>] ["<source_path>",...  "<target_path>"]
 ```
 
-**`[--chown=<user>:<group>]`**：可选参数，用户改变复制到容器内文件的拥有者和属组。
+**`[--chown=<user>:<group>]`**: Optional parameter to change the owner and group of files copied into the container.
 
-**`<源路径>`**：源文件或者源目录，这里可以是通配符表达式，其通配符规则要满足 Go 的 filepath.Match 规则。例如：
-```dockerfile
-COPY hom* /mydir/
-COPY hom?.txt /mydir/
-```
-**`<目标路径>`**：容器内的指定路径，该路径不用事先建好，路径不存在的话，会自动创建。
+**`<source_path>`**: Source file or directory, can use wildcards that follow Go's filepath.Match rules.
+
+**`<target_path>`**: The specified path inside the container — it doesn't need to exist beforehand; it will be created automatically.
 {{< /admonition >}}
 
-我的思路和正常的搭建方式一样,安装 nginx 之后再把写好的静态文件复制到web根目录就行, 但是用 docker 的效率高很多.
+My approach is the same as normal setup — install nginx and then copy the static files to the web root. But with Docker, the efficiency is much higher.
 
-但是如果不用 docker 的话, 我至少要多花半个小时的时间去配置一个虚拟机, 配置软件源 安装 nginx 什么的, 花的时间就更多了, 而现在我只需要写一个脚本就能一键部署, 而且还能保存为镜像分享给别人,一劳永逸~
+Without Docker, I'd have to spend at least half an hour configuring a virtual machine, setting up software sources, installing nginx, etc. With Docker, I just need to write a script for one-click deployment, and I can save it as an image to share with others — a one-time effort for long-term gain!
 
-好了, 话不多说, 开始构建镜像
+Alright, enough talk — let's build the image.
 
-使用 `docker build` 命令通过目录下的 `dockerfile` 文件构建一个镜像, 
+Use the `docker build` command to build an image from the `dockerfile` in the directory.
 
-`-t` 的属性值是指 **`<镜像名称:镜像标签>`**
+The `-t` attribute value refers to **`<image_name:image_tag>`**:
 
 ```
 sudo docker build -t webtest:latest .
 ```
 
-注意了, 我在最后面还加了一个 `.` , 这个叫做上写文路径, 也是指相对路径
+Note the `.` at the end — this is called the context path, and it refers to the relative path.
 
-{{< admonition type=note title="什么叫上下文路径?" open=true >}}
-上下文路径，是指 docker 在构建镜像，有时候想要使用到本机的文件（比如复制），docker build 命令得知这个路径后，会将路径下的所有内容打包。
+{{< admonition type=note title="What is the Context Path?" open=true >}}
+The context path is used by Docker during image building. When you want to use files from the local machine (like for COPY), the `docker build` command packages all content under this path.
 {{< /admonition >}}
 
-然后我们查看一下镜像列表
+Now let's check the image list:
 
 ```
 sudo docker images
 ```
+
 ![](/img/2022-11-10-22-19-24屏幕截图.png)
 
-很明显,我们可以看到我们刚刚创建的镜像, 镜像 ID 是 `9acd8c30bd5b`.
+Clearly, we can see the image we just created, with image ID `9acd8c30bd5b`.
 
-那么接下来把它部署到容器里~ 用 `-p` 来指定端口绑定 **`<外部端口:内部端口>`**
+Now let's deploy it to a container! Use `-p` to specify port binding — **`<external_port:internal_port>`**:
 
 ```
 sudo docker run -p 8080:80 -d 9acd8c30bd5b
 ```
 
-现在我们已经把容器的 80 端口映射到了宿主机的 8080 端口~
+Now we've mapped the container's port 80 to the host's port 8080.
 
-然后访问我们的本地 IP + 8080 就可以访问到那个页面了, 我这里用 `127.0.0.1:8080` 访问
+Then access our local IP + 8080 to reach that page. I'll use `127.0.0.1:8080`:
 
 ![](/img/2022-11-10-22-27-24屏幕截图.png)
 
-成功访问!
+Successfully accessed!
 
-这样一来,快速部署 nginx 就完成了!
+And just like that, quickly deploying nginx is done!
 
-# 结语
+# Conclusion
 
-经过对 docker 初学习和初体验, 我也浅尝到了它的高效率和便捷性, 收获还是比较多的.
+After this initial learning and experience with Docker, I've gotten a taste of its high efficiency and convenience. I've gained quite a bit.
 
-但目前还是一个入门的阶段,更多高级应用方法还等着去探索~
+But I'm still at an entry-level stage — there are many more advanced applications waiting to be explored.
 
-诶? 你问我难不难? QwQ ~
+Eh? Are you asking if it's difficult? QwQ ~
 
-对 Linux 熟悉的人来玩这个没几天应该就能玩会了, 不过要做到深入的了解还是需要时间的.
+For those familiar with Linux, it shouldn't take more than a few days to get the hang of it. But deep understanding will still take time.
 
-那 就这样吧
-
-
+That's all for now.

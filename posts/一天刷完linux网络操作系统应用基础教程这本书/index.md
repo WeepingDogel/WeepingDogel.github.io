@@ -1,24 +1,24 @@
-# 一天刷完《Linux网络操作系统应用基础教程》这本书
+# Finishing 'Linux Network Operating System Application Basics' in One Day
 
 
-# 序
+<!--more-->
+# Preface
 
+Long time no see, I've missed you all.
 
-多日不见，甚是想念。
+School started recently, and I've been busy — haven't updated the blog in a while.
 
-这段时间开学了，忙了一阵， 好久没更新博客了。
+In the textbook, I came across this book (pictured above) called "Linux Network Operating System Application Basics." At first glance, the cover looks nice — the simple color scheme gives it a premium feel... However, after flipping through a few pages, I realized it's a basic-level book.
 
-教科书当中看到了这么一本书（上图），叫做《Linux网络操作系统应用基础教程》。第一眼感觉封面挺好看的，这种简约配色显得这本书有高级感...然而，翻了几页看了，发现这是一本基础书籍。
+For someone who's been using Arch for two years and doesn't like reading books, the content in this book should be quick to learn.
 
-对于一个用了两年 Arch 又不喜欢看书的人来说，这本书里的内容学起来应该会很快吧。
+With a "let's give it a try" attitude, I wanted to finish this book in one day.
 
-抱着试试看的态度，我想一天肝完这本书。
+# Full Table of Contents
 
-# 全书目录
+First, let's look at the table of contents. I almost laughed out loud.
 
-首先来看一下目录， 差点笑出声。
-
-很明显，这确实是一些基础内容。其中很大部分在两年 Arch 使用经验中也接触过。
+Clearly, these are indeed some basic topics. I've encountered a large part of them during my two years of Arch usage.
 
 ![](/img/photo_2022-09-30_20-37-22.jpg)
 
@@ -26,136 +26,133 @@
 
 ![](/img/photo_2022-09-30_20-44-12.jpg)
 
-看起来都是一些概念+基础+实践操作
+Looks like a mix of concepts + basics + practical operations.
 
-# 概念内容
+# Conceptual Content
 
-大概是项目一到项目二的 2.1 的内容，讲了 Linux 的案例、历史、以及流行的发行版。
+Roughly projects 1 through 2.1, covering Linux use cases, history, and popular distributions.
 
-书中居然没有 Arch, 差评。
+The book doesn't mention Arch — bad review.
 
-但是也描述了 Linux 可以用来运行各种服务，比如 DNS（[Domain Name System](https://zh.wikipedia.org/zh-cn/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F)）服务、Web 服务器（Apache Nginx 这些提供基于HTTP协议的网页服务的）、基于 SMTP 协议的邮件服务器、以及 FTP 协议的文件传输服务器、基于 Samba 协议的文件共享服务器、[DHCP](https://zh.wikipedia.org/zh-ctiaoguo%B8%BB%E6%9C%BA%E8%AE%BE%E7%BD%AE%E5%8D%8F%E8%AE%AE) 服务器 还有 VPN 服务器。
+But it does describe how Linux can run various services, like DNS ([Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System)) services, Web servers (Apache Nginx — those providing HTTP-based web services), SMTP-based mail servers, FTP-based file transfer servers, Samba-based file sharing servers, [DHCP](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) servers, and VPN servers.
 
-总之就是讲了 Linux 能干啥、Linux 的优点等， 这些可以通过搜索引擎查到，不多赘述。
+In short, it talks about what Linux can do, its advantages, etc. — things you can find through search engines, so I won't elaborate.
 
-# 实操性内容
+# Practical Content
 
-往后都是一些操作性的内容，比如 Linux 的安装和搭建各种服务等
+After that, it's all operational content, like installing Linux and setting up various services.
 
-## 安装 Linux 操作系统
+## Installing Linux OS
 
-书中讲用 VMware 装一个 CentOS 虚拟机。
+The book talks about using VMware to install a CentOS virtual machine.
 
-高中的时候就会了，跳过。
+I learned that in high school — skip.
 
-## Linux 基础操作
+## Linux Basic Operations
 
-关于基础操作方面，我在初中的时候就写过一丢丢[基础命令的笔记](https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/)
+For basic operations, I actually wrote some [basic command notes](https://weepingdogel.github.io/posts/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/) back in middle school.
 
-书里也介绍了两种打开终端的方式，一个是在图形界面打开终端，另一种是按 `Ctrl` + `Alt` + `(F1 ~F6)` 来切换 tty。
+The book also introduces two ways to open a terminal — opening it in the GUI, or pressing `Ctrl` + `Alt` + `(F1~F6)` to switch to a tty.
 
-然后是命令，大部分是加了 `-h` 参数以后的中文翻译，对于英语不太好的人来说，需要的时候翻阅一下也是一件美事。
+Then there are commands, mostly Chinese translations with the `-h` parameter. For those who aren't good at English, flipping through it when needed is a pleasant experience.
 
-另外我需要补充一些初中发的那篇文章当中没有写到的一些命令。
+I also need to supplement some commands that weren't in my middle school article.
 
 ### cat
 
-输出一个文件的内容，书中写的用法是
-
+Outputs the content of a file. The book's usage is:
 ```
-cat [选项] [文件名]
+cat [options] [filename]
 ```
-
-但我们一般的用法是
-
+But our usual usage is:
 ```
-cat [文件名]
+cat [filename]
 ```
 
-这个没什么好说的，也是常用的，但是遇到太长的文本就不太好了。
+Nothing special here — it's commonly used. But it's not ideal for very long text.
 
-### less 和 more
+### less and more
 
-我几乎没见过有人用 more， 命令的使用方式都是一样的，但是效果可能不同吧。
+I've hardly seen anyone use `more`. The usage is the same, but the effects might differ.
 
 ```
-more [选项] [文件名]
+more [options] [filename]
 ```
 
 ```
-less [选项] [文件名]
+less [options] [filename]
 ```
 
-一般来说我们都不加什么选项的...
+Generally, we don't add any options...
 
-### head 和 tail
+### head and tail
 
-这个也没啥好说的，参数用法都一样，不过~~前者看头后者看屁股~~。
-
-```
-head [option] [文件名]
-```
+Nothing special here either — same parameter usage, though ~~the former looks at the head, the latter at the tail~~.
 
 ```
-tail [option] [文件名]
+head [option] [filename]
 ```
-参数选项
-* -n num 显示指定文件的末尾 num 行
-* -c num 显示指定文件的末尾 num 个字符。
+
+```
+tail [option] [filename]
+```
+
+Options:
+* `-n num` — display the last `num` lines of the file
+* `-c num` — display the last `num` characters of the file
 
 ### rmdir
 
-用来删除目录，用这个的话，删除的目录必须是空的。
+Used to delete directories. The directory must be empty.
 
-否则会报错，和 `mkdir` 一样，可以加 `-p` 来进行递归删除。
+Otherwise, it'll report an error. Like `mkdir`, you can add `-p` for recursive deletion.
 
-递归是什么意思？就是一级一级往下删。
+What does recursive mean? It means deleting level by level.
 
 ```
-rmdir [option] [文件名]
+rmdir [option] [filename]
 ```
 
-然而我平时不喜欢用这个，我喜欢用 `rm -r` 或者 `rm -rfv` 。
+But I don't usually like using this — I prefer `rm -r` or `rm -rfv`.
 
 ### touch
 
-touch 命令可以生成一个普通文件。
+The touch command can generate a regular file.
 
 ```
-touch [文件名]
+touch [filename]
 ```
 
 ### grep
 
-这个用来查看文件中包含指定字符串的行，常用。
+Used to find lines in a file that contain a specified string. Commonly used.
 
 ```
-grep [选项] [要查找的字符串] [文件名]
+grep [options] [search string] [filename]
 ```
 
-### tar 
+### tar
 
-这个 tar 我平时就用来解压。
+I usually use tar just for extraction:
 ```
-tar xvf [文件名]
+tar xvf [filename]
 ```
-然而这是个打包命令， 相当于压缩文档。
+But it's actually a packaging command, equivalent to compressed archives.
 
 ```
-tar [选项] [档案文件] [文件列表]
+tar [options] [archive file] [file list]
 ```
 
-* -c 生成档案文件
-* -v 列出归档文件解档的详细过程
-* -f 指定档案文件名称
-* -r 将文件追加到档案文件末尾
-* -z 以 gzip 格式压缩或解压
-* -j 以 bzip2 格式压缩或解压
-* -d 比较档案与当前目录中的文件
-* -x 解开档案文件
+* `-c` — create an archive file
+* `-v` — list the detailed process of archiving/de-archiving
+* `-f` — specify the archive file name
+* `-r` — append files to the end of an archive
+* `-z` — compress or decompress in gzip format
+* `-j` — compress or decompress in bzip2 format
+* `-d` — compare the archive with files in the current directory
+* `-x` — extract an archive file
 
-
-可以用 `man` 来查看 `tar` 的更多信息。
+You can use `man` to view more information about `tar`:
 
 ```
 man tar
@@ -163,144 +160,114 @@ man tar
 
 ### rpm
 
-rpm 系发行版的离线软件包安装器。至少我是这么理解的。
+The offline package installer for RPM-based distributions. At least, that's how I understand it.
 
 ```
-rpm [选项] [软件包名字]
+rpm [options] [package name]
 ```
 
-这个软件包名字是指一个文件名哦， 一些 `.rpm` 后缀结尾的文件，就是 rpm 系的软件包。
+The package name refers to a filename — files ending with `.rpm` are RPM packages.
 
-安装好像是这样的
+Installing goes like this:
 
 ```
-rpm -i [软件包名字]
+rpm -i [package name]
 ```
 
-其他的参数
+Other parameters:
 
-* -v 安装过程显示详细信息
-* -h 安装过程中显示`#`号进度条
-* -e 删除软件包
-* -q 查看软件包是否已经安装
+* `-v` — display detailed information during installation
+* `-h` — display `#` progress bar during installation
+* `-e` — delete a package
+* `-q` — check if a package is installed
 
-也可以通过 `man` 来阅读手册
+You can also read the manual with `man`:
 
 ```
 man rpm
 ```
 
-现在都是直接用 `yum` 或者 `dnf` 这种包管理器了，使用远程仓库来安装和管理软件包。
+Nowadays, everyone uses package managers like `yum` or `dnf` to install and manage packages from remote repositories.
 
-## 文档编辑
+## Document Editing
 
-至于文档编辑，就需要用 `vi` 或者 `vim`。
+For document editing, you need `vi` or `vim`.
 
-这个也是常有的事
+This is also common:
 
 ```
-vim [文件名]
+vim [filename]
 ```
 
-引用一个[菜鸟教程的链接吧](https://www.runoob.com/linux/linux-vim.html)
+I normally just use `i` to edit, `ESC` to exit edit mode, `:w` to save, and `:q` to exit.
 
-我平常就用个 `i` 来编辑文档， `ESC` 来退出编辑模式， `:w` 保存， `:q` 来退出。
+Sometimes I need to add `!` to force execution.
 
-有时候要加个 `!` 强制执行。
+Save and exit is `:wq`.
 
-保存退出是 `:wq`
-
-如果有其他需求我会用 `man` 来看文档。
+If I have other needs, I use `man` to read the documentation:
 
 ```
 man vim
 ```
 
-## 用户和组的管理
+## User and Group Management
 
-安装 Arch 的时候要干的事，就是用 `useradd` 添加用户。
+Something you do when installing Arch — adding users with `useradd`.
 
-桌面系统往往不使用 root 用户， 会添加一个或多个普通用户。
+Desktop systems often don't use the root user and will add one or more regular users.
 
-有些多人协作部署的服务器也会利用 Linux 多用户的特性。
-
-{{< admonition tip "提示" true >}}
-GNU/Linux 系统中的每一个文件都从属一个用户（属主）和一个用户组（属组）。另外，还有三种类型的访问权限：读（read）、写（write）、运行（execute）。我们可以针对文件的属主、属组、而设置相应的访问权限。
-
-—— 摘自&&详见 [ArchWiki](https://wiki.archlinux.org/title/Users_and_groups_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%9D%83%E9%99%90%E4%B8%8E%E5%B1%9E%E4%B8%BB)
-{{</ admonition >}}
+Some servers deployed for multi-person collaboration also utilize Linux's multi-user features.
 
 ### useradd
 
-这个命令用来添加用户
+This command is used to add users:
 
 ```
-useradd [选项] 用户名
+useradd [options] username
 ```
 
-先把参数用法贴上
+First, let's list the parameters:
 
-* `-m` / `--create-home` 创建用户主目录`/home/[用户名]`；在自己的主目录内，即使不是root用户也可以读写文件、安装程序等等。
-* `-G` / `--groups` 用户要加入的附加组列表；使用逗号分隔多个组，不要添加空格；如果不设置，用户仅仅加入初始组。
-* `-s` / `--shell` 用户默认登录shell的路径；启动过程结束后，默认启动的登录shell在此处设定；请确保使用的shell已经安装，默认是 Bash。
+* `-m` / `--create-home` — create the user's home directory `/home/[username]`; within your own home directory, even non-root users can read/write files and install programs.
+* `-G` / `--groups` — list of supplementary groups for the user to join; separate multiple groups with commas, no spaces; if not set, the user only joins the initial group.
+* `-s` / `--shell` — the path to the user's default login shell; sets the default login shell after startup; make sure the shell is installed, default is Bash.
 
-{{< admonition tip "提示" true >}}
-使用 `useradd --defaults` 可以查看 shell 的默认值。默认是 Bash。使用 `-s` / `--shell` 选项可以设置其他值。`/etc/shells` 记录了可以使用的登录 shell。
-
-—— 摘自 [ArchWiki](https://wiki.archlinux.org/title/Users_and_groups_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-{{< /admonition >}}
-
-
-比如我要在一个新机器上创建一个用户，用户名为 `weepingdogel` 且需要创建用户主目录 `/home/weepingdogel`， **而且加入到 `wheel` 这个组** ,默认 **shell** 设置为 **Bash** 。
-
-我就会执行这条命令：
+For example, if I want to create a user named `weepingdogel` on a new machine with a home directory `/home/weepingdogel`, **and add them to the `wheel` group**, with the default **shell** set to **Bash**:
 
 ```
 useradd -G wheel -m -s /bin/bash weepingdogel
 ```
 
-那如果我要 `zsh` 呢？
+What if I want `zsh`?
 
 ```
-useradd -G wheel -m -s /bin/bash weepingdogel
+useradd -G wheel -m -s /bin/zsh weepingdogel
 ```
 
-就像这样咯～
-
-{{< admonition warning "警告" true >}}
-1. 新增用户不能与已存在用户的用户名相同;
-2. 用户创建后，用户名或组需被 `/etc/sudoers` 文件包含，否则无法使用 `sudo` 调取 root 权限;
-3. ~~别瞎j8乱创建一堆没卵用的用户~~
-4. 请确保使用的shell已经安装，默认是 Bash。 没装上的 shell 没法用，用户创建不了。
-{{</ admonition >}}
+Just like that~
 
 ### userdel
 
-这个命令用来删除用户
+This command is used to delete users:
 
 ```
-userdel [选项] 用户名
+userdel [options] username
 ```
 
-加上 `-r` 选项可以一并删除用户主目录
+Adding `-r` will also delete the user's home directory:
 ```
-userdel -r 用户名
+userdel -r username
 ```
-{{< admonition warning "警告" true >}}
-**~~别瞎j8乱删用户~~**
-{{</ admonition >}}
-
-没什么好说的，详见 [man userdel](https://linux.die.net/man/8/userdel) 。
-
 
 ### groups
 
-这个命令用来查看用户属于哪些组。
+This command is used to view which groups a user belongs to:
 ```
-groups [用户名]
+groups [username]
 ```
 
-当然我们也可以通过查看 `/etc/group` 来查看所有组。
+Of course, we can also view all groups by checking `/etc/group`:
 
 ```
 cat /etc/group
@@ -308,228 +275,193 @@ cat /etc/group
 
 ### id
 
-这个命令可以显示用户的一些额外信息，比如 `UID` 、 `GID` 等等。
+This command displays additional user information, such as `UID`, `GID`, etc.
 
 ```
-id [用户名]
+id [username]
 ```
 
-### groupadd 和 groupdel
+### groupadd and groupdel
 
-前者是创建新组，后者是删除一个组。
+The former creates a new group, the latter deletes a group.
 
-
-创建一个新组：
-
+Create a new group:
 ```
-groupadd [组名]
+groupadd [groupname]
 ```
 
-删除一个用户组：
-
+Delete a user group:
 ```
-groupdel [组名]
+groupdel [groupname]
 ```
-
-{{< admonition warning "警告" true >}}
-**~~别瞎j8乱删组~~**
-{{</ admonition >}}
 
 ### groupmod
 
-往往用来更改用户所属组的名字，但不变更 `GID`。
+Often used to change the name of a group a user belongs to, without changing the `GID`.
 
 ```
-groupmod -n [新名字] [旧名字]
+groupmod -n [new name] [old name]
 ```
 
 ### gpasswd
 
-往往用来变更用户所属于哪个组的情况。
+Often used to change which group a user belongs to.
 
-比如将某个用户添加到某个组：
+For example, adding a user to a group:
 
 ```
-gpasswd -a [用户名] [组名]
+gpasswd -a [username] [groupname]
 ```
 
-或者将用户从某个组中移除：
+Or removing a user from a group:
 ```
-gpasswd -d [用户名] [组名]
+gpasswd -d [username] [groupname]
 ```
 
-其他的用法也可以参考 [man gpasswd](https://linux.die.net/man/1/gpasswd)
+### Some Related File Lists
 
+* `/etc/shadow` — stores user security information
+* `/etc/passwd` — user account information
+* `/etc/gshadow` — stores group account security information
+* `/etc/group` — defines which group a user belongs to
+* `/etc/sudoers` — users who can run sudo
+* `/home/*` — home directories
 
-{{< admonition tip "提示" true >}}
-如果用户已经处于登录状态，必须重新登录才能更改生效。 
-{{</ admonition >}}
+Make sure to remember them well.
 
-### 一些相关文件列表
+## Basic Disk Management
 
-* `/etc/shadow` 	保存用户安全信息
-* `/etc/passwd` 	用户账户信息
-* `/etc/gshadow` 	保存组账号的安全信息
-* `/etc/group` 	    定义用户所属的组
-* `/etc/sudoers` 	可以运行 sudo 的用户
-* `/home/* `	    主目录 
+This also involves disk management, which comes up a lot when installing Arch.
 
-要好好记住它们。
+### Viewing Partitions
 
-## 基本磁盘管理
-
-当然也涉及到了磁盘的管理，这个其实在安装 Arch 的时候就能接触不少。
-
-### 查看分区情况
-
-当 Linux 识别到磁盘，就会将其分配为一个块设备， 在系统里是个文件，比如 `/dev/sda`、`/dev/nvme0n1` 或 `/dev/mmcblk0`。可以使用 `lsblk` 或者 `fdisk` 查看： 
+When Linux recognizes a disk, it assigns it as a block device, which is a file in the system — like `/dev/sda`, `/dev/nvme0n1`, or `/dev/mmcblk0`. You can use `lsblk` or `fdisk` to view:
 
 ```
 fdisk -l
 ```
-{{< admonition tip "提示" true >}}
-不同的设备当中，磁盘的块设备表示也不同，比如使用 SATA 接口的硬盘会被显示为 `/dev/sd*X`， 而使用 NVME 硬盘则会显示为 `/dev/nvme*n*`
-{{</ admonition >}}
 
-### 创建编辑分区
+### Creating/Editing Partitions
 
-你可以去搜索引擎找 `fdisk` 的说明，按照它来创建、编辑分区，可以用简单的 `cfdisk`。
+You can search for `fdisk` instructions online to create and edit partitions, or use the simpler `cfdisk`.
 
-![](/img/截图_2022-10-01_14-31-22.png)
+You can even use the graphical partitioning tools that come with some distributions.
 
-甚至可以用一些发行版自带的图形化分区工具。
+### Formatting
 
-### 格式化
+After creating partitions, you need to choose an appropriate filesystem and format.
 
-分区创建好以后，就要选择合适的文件系统来进行格式化。
+Linux often uses EXT4.
 
-文件系统有哪些？具体可以参考[这个页面](https://wiki.archlinux.org/title/File_systems_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-
-Linux 往往用 EXT4
-
-使用 mkfs
+Use `mkfs`:
 
 ```
 mkfs.ext4 /dev/partition
 ```
 
-挂载分区
+Mount a partition:
 ```
-mount [被挂载的分区] [要挂载到的地方]
+mount [partition to mount] [mount point]
 ```
 
-当然也可以写 `/etc/fstab` 来进行自动挂载，详情可以看[这里](https://wiki.archlinux.org/title/Fstab_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BD)
+Of course, you can also write `/etc/fstab` for automatic mounting.
 
-
-## 资源共享服务
+## Resource Sharing Services
 
 ### FTP
-搭建 FTP 服务器
+Setting up an FTP server.
 
+First, use the package manager to install `vsftpd`:
 
-首先使用包管理器安装 `vsftpd`
-
-deb
+deb:
 ```
 sudo apt install vsftpd
 ```
 
-centos
+centos:
 ```
 sudo yum install vsftpd
 ```
 
-通过编辑 `/etc/vsftpd.conf` 来配置
+Configure by editing `/etc/vsftpd.conf`.
 
-比如允许匿名登录，以及允许无密码登录
+For example, allowing anonymous login and passwordless login:
 ```conf
 anonymous_enable=YES
 no_anon_password=YES
 ```
 
-然后通过 systemd 启动
-
+Then start it with systemd:
 ```
 sudo systemctl start vsftpd
 ```
 
-通过客户端连接
-
-
-![](/img/截图_2022-10-01_15-58-41.png)
-
-参考[Arch Wiki](https://wiki.archlinux.org/title/Very_Secure_FTP_Daemon_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E9%85%8D%E7%BD%AE)， 可根据实际情况调整配置。
+Connect with a client.
 
 ### Samba
 
-不搞这玩意，太危险了。
+Not touching that — too dangerous.
 
-## DHCP 服务器
+## DHCP Server
 
-直接安装 dhcpd
+Just install dhcpd:
 
-deb
+deb:
 ```
 sudo apt install dhcpd
 ```
-centos
+centos:
 ```
 yum install -y dhcpd
 ```
-
-pacman
+pacman:
 ```
 sudo pacman -S dhcpd
 ```
 
-
-写配置文件 `/etc/dhcpd.conf`:
-
+Write the config file `/etc/dhcpd.conf`:
 ```conf
 # No DHCP service in DMZ network (192.168.2.0/24)
 subnet 192.168.2.0 netmask 255.255.255.0 
 ```
 
-然后通过 systemd 来启动服务
+Then start the service with systemd:
 ```
 sudo systemctl start dhcpd4
 ```
 
-## DNS 服务器
+## DNS Server
 
-懒得搞了，不难
+Can't be bothered — it's not difficult.
 
-参考 [https://wiki.archlinux.org/title/BIND_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)](https://wiki.archlinux.org/title/BIND_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+## Apache Server
 
-## Apache 服务器
+This one's simple.
 
-这个简单
-
-deb
+deb:
 ```
 sudo apt install apache2
 ```
-
-pacman
+pacman:
 ```
 sudo pacman -S apache
 ```
-
-rpm
+rpm:
 ```
 sudo yum install -y apache2
 ```
-直接启动服务
 
+Just start the service:
 ```
 sudo systemctl start httpd
 ```
 
-然后访问 `http://127.0.0.1:80`就行。
-# 总结
+Then visit `http://127.0.0.1:80`.
 
-~~什么垃圾书！~~
+# Summary
 
-很简单，但是太老了，跟不上时代了。
+~~What a garbage book!~~
 
-还是自己去网上找资料来得快。
+It's simple, but too old — it doesn't keep up with the times.
+
+Better to find your own resources online — that's faster.

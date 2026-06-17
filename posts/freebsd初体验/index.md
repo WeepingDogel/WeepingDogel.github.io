@@ -1,206 +1,179 @@
-# FreeBSD 初♂体验
+# FreeBSD First♂ Experience
 
 
-## 开场白
+<!--more-->
+## Opening Remarks
 
-闲着无聊我又来~~水文章~~更新了，这次准备~~水~~写一篇比较长的，然后就想对FreeBSD下手了,嘿嘿。 
+I was bored and decided to ~~write some filler~~ update my blog again. This time I planned to ~~add some filler~~ write a longer post, and then I thought I'd try my hand at FreeBSD, hehe.
 
-## FreeBSD介绍
+## Introduction to FreeBSD
 
-FreeBSD是一个类Unix的操作系统，它与Linux还是有区别的...... 
+FreeBSD is a Unix-like operating system, which is different from Linux...
 
-Unix...感觉很少人用吧..估计比Linux还少，不过服务器用用应该还不错吧... 
+Unix... I feel like few people use it... probably even fewer than Linux, but it should be pretty good for servers...
 
-维基百科是这么说的 :
+Wikipedia says:
 
->FreeBSD是一个类Unix的操作系统，也是FreeBSD项目的发展成果。[2]FreeBSD是第一个开放源代码的系统，他是由基于BSD Unix的源代码派生而来的。BSD Unix是加州大学伯克利分校在1975年至1993年开发的操作系统。FreeBSD被开发为自由软件，这意味着其源代码开放，人人都可以使用FreeBSD。任何人都可以获得并使用它来满足各种需求，也可以修改它，然后再重发布它。此功能专为个人和公司量身定制，可用于创建各种基于FreeBSD的商业和非商业产品。尽管FreeBSD直接从BSD派生，但是从法律的角度来看，FreeBSD为 unix 系统，但它并不是“UNIX”。因为现在“UNIX”商标是属于国际开放标准组织的。[3]FreeBSD的第一个版本于1993年发布。 
-
-
->FreeBSD是一个支持许多硬件和体系架构的企业级系统。和其他BSD家族的操作系统一样， FreeBSD其核心、驱动程序以及所有的用户层（Userland）应用程序（如Unix shell和cat和ps等命令）都存储在源代码库中。[4]FreeBSD也可以运行其他二进制软件，比如Linux的。借助ports和FreeBSD软件包管理器，你可以在其上安装各种应用程序。根据2005年的调查，77％的BSD用户使用FreeBSD，因此FreeBSD拥有BSD系列中最大的用户社区。[5]
-
-
->在今天，个人和企业都将FreeBSD用于多种用途，包括Yahoo! [6]，苹果[7]，Juniper网络公司，诺基亚，IBM， Yandex的，Apache软件基金会，Hotmail，索尼和许多其他用途
+> FreeBSD is a free and open-source Unix-like operating system descended from the Berkeley Software Distribution (BSD), which was based on Research Unix. The first version of FreeBSD was released in 1993. FreeBSD is the most widely used open-source BSD distribution, accounting for over three-quarters of all installed BSD systems.
 >
->[[Read More]](https://zh.wikipedia.org/wiki/FreeBSD)
+> FreeBSD is an enterprise-level system supporting many hardware and architectures. Like other BSD operating systems, FreeBSD's core, drivers, and all userland applications (like Unix shell and commands like cat and ps) are stored in the source repository. FreeBSD can also run other binary software, such as Linux programs. With the ports and FreeBSD package manager, you can install various applications on it.
 
-## 安装
+## Installation
 
-### 准备工作
+### Preparation
 
-我打算在虚拟机里玩玩就好啦～ 
+I planned to just play around with it in a virtual machine~
 
-> 问:是VirtualBox吗？
+> Q: Is it VirtualBox?
 
-对，之前介绍过的**VirtualBox**，也应该没什么好讲的了，创建一个虚拟机应该不是问题，问题是接下来如何进行安装。 
+Yes, the **VirtualBox** I mentioned before. There's not much to say about it — creating a virtual machine shouldn't be a problem. The question is how to proceed with the installation.
 
-除了虚拟机我们还要准备的东西就是FreeBSD的安装镜像了，可以去官方的源下载，但是考虑到速度问题，也可以去墙内的一些镜像站下载。 
+Besides the virtual machine, we also need to prepare the FreeBSD installation image. You can download it from the official source, but considering speed issues, you can also get it from some domestic mirrors.
 
 [USTC Mirror](http://mirrors.ustc.edu.cn/freebsd/releases/)
 
-**注意：下载的时候要确定你的架构，别下错了**(应该大部分都是amd64吧) 
+**Note: Make sure to determine your architecture when downloading—don't get it wrong** (most should be amd64).
 
-什么？你说配置要求？嘛... 
+What? You're asking about system requirements? Well...
 
-看看官网怎么说 
+Let's see what the official site says:
 
-> FreeBSD/i386 和 FreeBSD/pc98 版本， 都需要 486 或更高的处理器，以及至少 24 MB 的 RAM。 您需要至少 150 MB 的空闲硬盘空间， 才能完成最小的安装配置。
+> FreeBSD/i386 and FreeBSD/pc98 versions require a 486 or higher processor and at least 24 MB of RAM. You need at least 150 MB of free hard disk space to complete the minimal installation configuration.
 
-至于amd64架构嘛，一句话，你有处理器有内存有硬盘就能用，而且我们都用虚拟机了 
+For the amd64 architecture, in a word, if you have a processor, memory, and a hard drive, you can use it. And since we're using a virtual machine...
 
-### 安装过程
+### Installation Process
 
-首先肯定是先把镜像导入虚拟机啦，这个我就不再写一遍了，百度谷歌能搜到的... 
+First, import the image into the virtual machine. I won't go over this again — you can find it through Baidu or Google...
 
-然后我们启动，就会看到这个可爱的画面.. 
+Then we start it up and see this lovely screen...
 
-你可以直接按回车，也可以等10秒让它自动启动... 
+You can press Enter directly, or wait 10 seconds for it to auto-start.
 
 ![](/img/freebsd.png)
 
-启动之后就会来到这个界面 
+After booting, we come to this screen:
 
 ![](/img/FreeBSD_Install.png)
 
-选择Install按回车啦 
+Select Install and press Enter.
 
-然后是选择键盘类型，这里选`United States Of America`
+Then choose the keyboard type — here select `United States of America`:
+
 ![](/img/FreeBSD_keymap.png)
 
-选完以后回到第一项回车即可，当然你也可以在第二项那里测试你的键盘是否有效 
+After selecting, go back to the first option and press Enter. Of course, you can also test your keyboard at the second option:
 
 ![](/img/2020-03-30_17-02.png)
 
-什么？你看不懂英文？ 
+What? Can't understand English?
 
-第一项是`继续` 
+The first option is `Continue`
+The second is `Test Keyboard`
+The ones below are region or country names.
 
-第二项是`测试键盘` 
-
-下面的就是地区或者国家名称了 
-
-接下来输入你的主机名 
+Next, enter your hostname:
 
 ![](/img/2020-03-30_17-08.png)
 
-我就随便输入一个`localhost`吧 
+I'll just enter `localhost`.
 
-然后回车 
+Then press Enter.
 
-然后我就懵逼了。。 
+Then I was confused...
 
 ![](/img/2020-03-30_17-11.png)
 
-然后看了下英文手册，这里是选择要安装的组件 
+After checking the English manual, this is where you choose the components to install.
 
-根据官方的指引，这里来翻译一下...
+According to the official guide, here's a translation:
 
-* base-dbg 
-> 一些基础的软件包,比如'cat'这样的（debugging）
+* base-dbg — some basic packages, like 'cat' etc. (debugging)
+* kernel-dbg — kernel and kernel modules (debugging)
+* lib32-dbg — 32-bit dependencies, with (debugging)
+* lib32 — same as above but without (debugging)
+* ports — similar to Gentoo's portage, must install
+* src — some source code, better to select
+* tests — some test code, no need to select
 
-* kernel-dbg 
-> 内核和内核模块（debugging）
+I thought for a moment and chose this way. You might ask why I chose this — I used my experience.
 
-* lib32-dbg
-> 32位的依赖吧好像是，带（debugging）的
-
-* lib32
-> 同上，但是不带（debugging）
-
-* ports
-> 嗯..类似于Gentoo的portage，必须装
-
-* src
-> 一些源代码，最好选上吧
-
-* tests
-> 一些测试代码，没必要选了
-
-想了一会儿，然后决定这样选了，你问凭什么这样选，我凭经验 
-
-那你就应该凭借翻译软件把官方的手册翻译完看一遍了 
+Then you should use a translation tool to go through the official manual.
 
 ![](/img/2020-03-30_17-36.png)
 
-接下来是分区 
+Next is partitioning:
 
 ![](/img/2020-03-30_17-48.png)
 
-这里有四种方式啊... 
+There are four methods here:
 
-* Auto(UFS)
-> 以`UFS`文件系统自动进行分区
+* Auto(UFS) — automatic partitioning with UFS filesystem
+* Manual — manual partitioning
+* Shell — partition using commands
+* Auto(ZFS) — automatic partitioning with ZFS filesystem
 
-* Manual
-> 手动对硬盘进行分区
+Alright, I'll choose the second option, manual.
 
-* shell
-> 使用命令对硬盘进行分区
-
-* Auto(ZFS)
-> 用`ZFS`文件系统自动分区
-
-行吧，选第二项，手动 
-
-然后就进了这里 
+Then we get here:
 
 ![](/img/2020-03-30_18-00.png)
 
-然后，选`create`创建一个分区表，官方手册有说明要创建一个`GPT`分区表，但这里由于我没有开启`EFI`所以我用`MBR`  
+Select `create` to create a partition table. The official manual explains to create a GPT partition table, but since I didn't enable EFI, I'll use MBR.
 
 ![](/img/2020-03-30_18-12.png)
 
-这里的图形操作会有提示的，看不懂英文的可以用翻译器看一下 
+The graphical operations here have prompts. If you can't understand English, you can use a translator.
 
-什么？还是不会？这玩意跟cfdisk差不多的 
+What? Still can't do it? This thing is similar to cfdisk.
 
-总之详细过程我就不截图出来了，只需要把分区分成这样就行 
+Anyway, I won't show the detailed process with screenshots. Just make sure the partitions look like this:
 
 ![](/img/2020-03-30_18-21.png)
 
-接下来选择`Finish`,再选择`Commit`  
+Then select `Finish`, followed by `Commit`:
 
 ![](/img/2020-03-30_18-22.png)
 
-然后就会慢慢安装了 
+Then it will slowly install:
 
 ![](/img/2020-03-30_18-23.png)
 
-接下来就需要设置一个密码了，毕竟Unix的系统是不能空口令登录的 
+Next, you need to set a password. Unix systems don't allow empty password logins.
 
 ![](/img/2020-03-30_18-35.png)
 
-跟Linux一样，设置一个能记住的就可以了，然后会让你确认网卡 
+Just like Linux, set one you can remember. Then it will ask you to confirm the network card:
 
 ![](/img/2020-03-30_18-43.png)
 
-后面一路选`yes`，不多说 
+After that, select `yes` all the way through — no need to elaborate.
 
 ![](/img/2020-03-30_18-56.png)
 
-这里直接全选 
+Here, select all:
 
 ![](/img/2020-03-30_19-40.png)
 
-然后回车，这里把`6`勾选上，继续按回车 
+Then press Enter, check `6`, and continue pressing Enter:
 
 ![](/img/2020-03-30_19-47.png)
 
-最后一个提示，`yes`，然后回车 
+Last prompt, `yes`, then press Enter.
 
-然后重启，自动启动，再登录root，就完成啦 
+Then reboot, it will auto-start, log in as root, and you're done!
 
 ![](/img/2020-03-30_19-56.png)
 
-## 装完后的感想
+## Post-Installation Thoughts
 
-FreeBSD注定是适合服务器的，或许也适合拿来玩，但日常使用的话就会出现很多问题让人头疼 
+FreeBSD is definitely suitable for servers, and maybe for tinkering, but for daily use, there are many frustrating issues.
 
-反正我是不会玩啦..连个顺手的文本编辑器都没有...vi我是真用不来...要修改很多配置文件的说.. 
+Anyway, I can't play around with it... not even a decent text editor... I really can't use vi... and there are many configuration files to modify...
 
-如果你有什么主意的话，就在下面留言吧 
+If you have any ideas, leave a comment below.
 
-## 参考链接
+## Reference Links
 
-* [FreeBSD 使用手册（英文）](https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/using-bsdinstall.html)
-
-* [FreeBSD 官网](https://www.freebsd.org/)
+* [FreeBSD Handbook (English)](https://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/using-bsdinstall.html)
+* [FreeBSD Official Website](https://www.freebsd.org/)
