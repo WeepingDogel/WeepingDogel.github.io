@@ -2,7 +2,7 @@
 
 
 <!--more-->
-## Introduction in通俗 terms,
+## Introduction in simple terms,
 
 This boy actually did such a thing at home, shocking everyone!
 
