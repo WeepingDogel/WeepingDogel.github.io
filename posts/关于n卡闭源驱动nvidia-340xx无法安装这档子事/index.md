@@ -1,59 +1,60 @@
-# 关于N卡闭源驱动 nvidia-340xx 无法安装这档子事
+# On the Matter of the NVIDIA 340xx Proprietary Driver Not Installing
 
 
-# 序
+<!--more-->
+# Preface
 
-首先容我说一句
+First of all, let me say this:
 
 > **FUCK YOU NVIDIA!**
 
-由于我现在时间比较少，Arch 经常好几天不滚，前两天滚了一下，驱动炸了
+Since I don't have much time lately, I often go days without updating Arch. I rolled the system a couple of days ago, and the driver broke.
 
-内核更新到了 5.15.3 
+The kernel was updated to 5.15.3.
 
-一开始我觉得问题不大，更新一下就好了
+Initially, I didn't think it was a big deal—just an update away from being fixed.
 
-于是我就
+So I ran:
 
 ```
 $ yay -S nvidia-340xx
 ```
 
-但是没想到，它给我来这一出
+But I didn't expect this to happen:
 
 ![](/img/fucknvidia1.jpg)
 
-呜呜呜！！！为什么编译不出来！！！
+Wahhh!!! Why can't it compile!!!
 
-**~~黄仁勋 NMSL!!!~~**
+**~~Jensen Huang NMSL!!!~~**
 
+# The Solution Process
 
-# 解决过程
+Ahem, despite this, I took a day to calm down, and then started trying to manually `makepkg` to see if it would work.
 
-咳咳，尽管如此我还是花了一天的时间冷静了下来，然后开始试试看手动 `makepkg` 行不行。
+As usual, I should git the PKGBUILD from the AUR.
 
-按照惯例我应该去 aur 把 PKGBUILD 给 git 下来。
+But just as I was opening the AUR page for the `nvidia-340xx` package, I saw this comment:
 
-不过正当我打开 `nvidia-340xx` 这个包的 aur 界面时，我在评论那里看到了这句话。
 > Users of this package should block automatic update of their kernel. There is not enough man power to update it as fast as newer kernels are released.
 
 ![](/img/fucknvidia2.png)
 
-康不懂嘤语？ 给你翻译一下
+Can't understand English? Let me translate for you:
 
-> 这个软件包的用户应该阻止其内核的自动更新。没有足够的人力来更新它，因为更新内核的速度太快了。
+> Users of this package should block automatic updates of their kernel. There isn't enough manpower to update it as fast as newer kernels are released.
 
-我当场就想说
+Right then and there, I wanted to say:
 
 > **FUCK YOU NVIDIA!**
 
-然后我就想着要不用回旧版本的内核？一边想一边往下翻，我就又看到了一条对我有用的评论
+Then I thought about reverting to an older kernel. As I scrolled down, I found another useful comment:
 
 > Patch for kernel 5.15 https://pastebin.com/uYP9J2Cw Found here https://github.com/warpme/minimyth2/issues/15
 
 ![](/img/2021-11-22-13-58-14屏幕截图.png)
 
-然后我观察了一下这个包的文件目录..
+Then I looked at the package's file directory:
 
 ```
 .
@@ -70,17 +71,15 @@ $ yay -S nvidia-340xx
 0 directories, 9 files
 ```
 
-虽然我不太懂，但我发现这个 `*.patch` 文件的文件名似乎对应着各个内核版本。
+Although I'm not very experienced with this, I noticed that the `*.patch` filenames seem to correspond to various kernel versions.
 
-而这条评论给出了[新 `patch` 文件的链接](https://pastebin.com/uYP9J2Cw)，以及[一个 issue 链接](https://github.com/warpme/minimyth2/issues/15)。
+And that comment provided a [new patch file link](https://pastebin.com/uYP9J2Cw) and [an issue link](https://github.com/warpme/minimyth2/issues/15).
 
-我瞬间知道怎么回事了，打包所需的文件是更新了，但还没有提交到 aur..
+I immediately understood what was going on—the files needed for packaging had been updated, but hadn't been committed to the AUR yet...
 
-淦，我只能自己试试看了
+Damn, I had to try it myself.
 
-于是抱着试试看的态度
-
-我打开了它的 PKGBUILD
+So, with a "let's give it a try" attitude, I opened its PKGBUILD.
 
 ```
 pkgbase=nvidia-340xx
@@ -106,13 +105,13 @@ source=("https://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Li
 )
 ```
 
-确实发现了这么一行文件，我在想，是不是把这个新的文件下下来，放到编译目录然后在这个列表加上就能编译了？
+I noticed that line in the file. I wondered—if I download this new file, put it in the build directory, and add it to this list, would it compile?
 
-于是我把这个文件下载了下来，放进了编译目录
+So I downloaded the file and placed it in the build directory.
 
-（具体过程就略过了，都是 wget cp cd 之类的事情）
+(I'll skip the specific steps—they were just wget, cp, cd, and such.)
 
-并且把文件名加上了
+And I added the filename:
 
 ```
 source=("https://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run"
@@ -127,39 +126,38 @@ source=("https://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Li
 )
 ```
 
-接下来
+Next:
 
 ```
 $ makepkg
 ```
 
-不过很快我就收到了报错
+But I quickly got an error:
 
 ```
-==> 正在创建软件包：nvidia-340xx 340.108-25 (Mon 22 Nov 2021 02:08:12 PM CST)
-==> 正在检查运行时依赖关系...
-==> 正在检查编译时依赖关系
-==> 获取源代码...
-  -> 找到 NVIDIA-Linux-x86_64-340.108-no-compat32.run
-  -> 找到 20-nvidia.conf
-  -> 找到 0001-kernel-5.7.patch
-  -> 找到 0002-kernel-5.8.patch
-  -> 找到 0003-kernel-5.9.patch
-  -> 找到 0004-kernel-5.10.patch
-  -> 找到 0005-kernel-5.11.patch
-  -> 找到 0006-kernel-5.14.patch
-  -> 找到 0007-kernel-5.15.patch
-==> 错误： 对这些文件的完整性检查缺失: source
-
+==> Creating package: nvidia-340xx 340.108-25 (Mon 22 Nov 2021 02:08:12 PM CST)
+==> Checking runtime dependencies...
+==> Checking build dependencies
+==> Fetching sources...
+  -> Found NVIDIA-Linux-x86_64-340.108-no-compat32.run
+  -> Found 20-nvidia.conf
+  -> Found 0001-kernel-5.7.patch
+  -> Found 0002-kernel-5.8.patch
+  -> Found 0003-kernel-5.9.patch
+  -> Found 0004-kernel-5.10.patch
+  -> Found 0005-kernel-5.11.patch
+  -> Found 0006-kernel-5.14.patch
+  -> Found 0007-kernel-5.15.patch
+==> ERROR: Integrity checks missing for: source
 ```
 
-然后我试了一下重新生成校验码
+Then I tried regenerating the checksums:
 
 ```
 makepkg -g
 ```
 
-然后把返回来的数据复制粘贴进 `PKGBUILD` (注意，返回内容不唯一)
+And I copied the returned data into the `PKGBUILD` (note: the returned content is not unique):
 
 ```
 b2sums=('6538bbec53b10f8d20977f9b462052625742e9709ef06e24cf2e55de5d0c55f1620a4bb21396cfd89ebc54c32f921ea17e3e47eaa95abcbc24ecbd144fb89028'
@@ -173,18 +171,17 @@ b2sums=('6538bbec53b10f8d20977f9b462052625742e9709ef06e24cf2e55de5d0c55f1620a4bb
         'a26426488f6e105f546e091ce4d2e9587cc41a0fb05b0dffeb1c523d8d06782bda3004352655c9c019224091f7bc7903939e53ede73f64553f14be8e8a47793a')
 ```
 
-
-接下来再次执行 `makepkg` 就能成功编译了
+Then I ran `makepkg` again, and it compiled successfully.
 
 ![](/img/screenshot-2021-nov-22.png)
 
-接下来用 `pacman` 装上
+Next, install it with `pacman`:
 
 ```
 sudo pacman -U nvidia-340xx-dkms-340.108-25-x86_64.pkg.tar.zst
 ```
 
-最后 pacman 提示我们
+Finally, pacman gave us this message:
 
 ```
 >>> You must tell Xorg to use the nvidia driver with kernels >=5.11.0.
@@ -193,21 +190,22 @@ sudo pacman -U nvidia-340xx-dkms-340.108-25-x86_64.pkg.tar.zst
     which you should manually place in /etc/X11/xorg.conf.d/
 ```
 
-这个好搞
+That's easy enough.
 
-复制一下文件就可以了
+Just copy the file:
+
 ```
 cp /usr/share/nvidia-340xx/20-nvidia.conf /etc/X11/xorg.conf.d/
 ```
 
-然后重启
+Then reboot.
 
 ![](/img/image_2021-11-22_14-17-46.png)
 
-完美解决～
+Problem solved~
 
+# Conclusion
 
-# 总结
-最后再说一句
+One last thing:
 
 > **FUCK YOU NVIDIA!**

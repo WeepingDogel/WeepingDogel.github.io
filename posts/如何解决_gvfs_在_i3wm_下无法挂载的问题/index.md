@@ -1,122 +1,118 @@
-# 如何解决 gvfs 在 i3wm 下无法挂载的问题
+# How to Fix gvfs Not Mounting Under i3wm
 
 
-## 序
-呃... 前面其实没什么可以说的废话，就是出问题了嘛...
+<!--more-->
+## Preface
+Uh... there's really nothing much to say before this—a problem came up...
 
-然后就去群里问了，弄好了，然后写一下怎么弄好的...
+So I asked in the group, got it fixed, and now I'm writing down how it was done...
 
-换 i3wm 了，然后使用文件管理器挂载别的分区的时候，突然弹出这个报错...
+I switched to i3wm, and when I tried to mount another partition using a file manager, this error popped up:
 
 ![](/img/image_2021-01-09_16-24-45.png)
 
-这个问题一般是缺包，
+This issue is usually caused by a missing package.
 
-好吧其实就是少装了东西。
+Well, basically I just forgot to install something.
 
-我们需要装的是 `polkit` 这个东西...
+What we need is `polkit`...
 
-如果不知道它是啥的话，看 Arch Wiki 的这个页面。
+If you don't know what it is, check out this page on the Arch Wiki:
 
- * [Polkit - ArchWiki](https://wiki.archlinux.org/index.php/Polkit)
+* [Polkit - ArchWiki](https://wiki.archlinux.org/index.php/Polkit)
 
+## The Solution Process
 
-## 解决过程
-
-首先安装 `polkit` ，
+First, install `polkit`:
 
 ```txt
 $ sudo pacman -S polkit
 ```
 
-装完后，我们还需要安装其对应的图形前端。
+After installation, we also need to install its graphical frontend.
 
-如图，我们有很多可以选择。
+As shown, there are many to choose from:
 
 ![](/img/2021-01-16_23-40.png)
 
-我这里选择 Gnome 的，比较习惯..
+I'll go with Gnome's — it's what I'm used to...
 
-用 `pacman` 就可以装了，
+You can install it with `pacman`:
 
 ```txt
 $ sudo pacman -S polkit-gnome 
 ```
 
-如果想用其他的，把 `polkit-gnome` 替换成其他包名即可。 
+If you want to use another one, just replace `polkit-gnome` with the other package name.
 
-但是装完还不行，还得设置启动项，原因？ 在这：
+But installing it isn't enough — you also need to set it to start automatically. Why? Here's the reason:
 
 > If you are using a graphical environment, make sure that a graphical authentication agent is installed and [autostarted](https://wiki.archlinux.org/index.php/Autostarting) on login.
 >
-> ——[Arch Wiki 里写的](https://wiki.archlinux.org/index.php/Polkit#Authentication_agents)
+> — [Arch Wiki](https://wiki.archlinux.org/index.php/Polkit#Authentication_agents)
 
-大意就是，如果你要用的话，得保持这个程序运行...
+In short, if you want to use it, you need to keep this program running...
 
-大概是这样吧，想看完整意思就去谷歌翻译吧..
+That's about it. If you want the full meaning, go ask Google Translate.
 
-接下来我要做的是想办法启动...
+Next, I need to figure out how to start it...
 
-其实我们在终端里直接输入 wiki 上对应的路径就可以用了
+Actually, you can just run the path listed on the wiki directly in the terminal:
 
 ```txt
 $ /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 ```
 
-但这样的话每次都要打一遍，反正我是觉得麻烦～ rua～
+But you'd have to type that every time, and I think that's a hassle — rua～
 
-所以要设置开机启动，一般是可以这样的..
+So we need to set it to start on boot. Generally, you can do it like this:
 
 ![](/img/photo_2021-01-16_23-59-36.jpg)
 
-嘛... i3wm 的话，要参考这个文档了。
+Well... for i3wm, you'll need to refer to this documentation:
 
- * [i3: i3 User’s Guide](https://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup)
+* [i3: i3 User's Guide](https://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup)
 
-接下来呢，我就直接编辑 `~/.config/i3/config` 这个文件。
+So I directly edited the `~/.config/i3/config` file:
 
 ```txt
 $ vim ~/.config/i3/config
 ```
 
-然后在里面加入...
+Then added this:
 
 ```sh
-# 登录时，启动 polkit-gnome 
+# Start polkit-gnome on login
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
 ```
 
 ![](/img/photo_2021-01-17_00-02-51.jpg)
 
-然后我就重启了。
+Then I rebooted.
 
-嗯，可以用了。
+It worked.
 
 ![](/img/2021-01-16_23-52.png)
 
-然后我试着输入密码，敲下去之后... 嗯，又报错了..
+Then I tried entering the password and hitting enter... and got another error...
 
 ![](/img/photo_2021-01-16_23-53-31.jpg)
 
-看英文就知道.. 这其实是另一个问题了.. 
+From the English, you can tell it's actually another problem...
 
-其实它 balabla 一大堆，只不过是 `ntfs-3g` 这个包我又忘了装而已啦..
+It blabbered on and on, but it's just that I forgot to install the `ntfs-3g` package again...
 
 ```txt
 $ sudo pacman -S ntfs-3g
 ```
 
-然后就好了...
+And then it was fixed...
 
-不过截图是我今晚截的..
+But the screenshots were taken tonight...
 
 ![](/img/2021-01-17_00-00.png)
 
-## 结尾
+## Conclusion
 
-然后我就又可以快乐地使用 `i3wm` 啦～
-
-
-
+And then I can happily use `i3wm` again～

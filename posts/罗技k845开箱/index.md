@@ -1,95 +1,95 @@
-# 罗技 K845 开箱
+# Logitech K845 Unboxing
 
 
-# 序
-> 注意，这不是专业详细的评测，只是个人的开箱体验感受
+<!--more-->
+# Preface
+> Note: This is not a professional detailed review, just a personal unboxing experience.
 
-关注我 [tg 频道](https://t.me/WeepingDogel)的读者可能知道，之前我一直在考虑入手一把机械键盘。最终我选择了[罗技的 k845](https://www.logitech.com.cn/zh-cn/products/keyboards/k845-mechanical-illuminated.html?crid=27)。
+Followers of my [Telegram channel](https://t.me/WeepingDogel) may know that I've been considering getting a mechanical keyboard for a while. I ended up choosing the [Logitech K845](https://www.logitech.com/en-us/products/keyboards/k845-mechanical-illuminated.html).
 
-昨天下午收到了快递代收点发来的到货短信，它终于来了，内心同时存在两种感觉：一个是键盘来了的欢喜，一个是暂时无法去取快递的尴尬。
+Yesterday afternoon I received the delivery SMS from the parcel pickup point—it had finally arrived. I felt two things at once: the joy of the keyboard arriving, and the awkwardness of not being able to pick it up right away.
 
-今天返城到家，一下车我就迫不及待的跑去拿快递。 包了一层塑料纸和一层瓦楞纸，但是没有泡泡纸，不能戳戳戳了。 QAQ
+Today I returned to the city and got home. As soon as I got off the car, I couldn't wait to grab the package. It was wrapped in a layer of plastic and a layer of corrugated cardboard, but no bubble wrap—so I couldn't pop it. QAQ
 
-多重？据说这个键盘不太重，连包装一起... 大概和一瓶 2L 的可乐差不多吧..
+How heavy is it? I heard this keyboard isn't very heavy, with the packaging... probably about as much as a 2L bottle of Coke.
 
-# 包装与外观
+# Packaging and Appearance
 
-
-一跑回家就开始拆快递了，带着一点点急切和一点点期待..... Emmmm..... 就打开了...
+As soon as I got home, I started unpacking—with a little eagerness and a little anticipation... Emmmm... I opened it.
 
 ![](/img/logi/photo_2021-01-17_00-02-51.jpg)
 ![](/img/logi/IMG_20210830_205724.jpg)
-~~啊这，罗技作为一个大品牌怎么可以这么抠啊~~
+~~Come on, how can a big brand like Logitech be so stingy~~
 
-嗯... 简约低调朴实无华的牛皮纸外包装，完美地体现了罗技的环保品牌形象！
+Well... a simple, low-key, plain brown kraft paper box that perfectly reflects Logitech's eco-friendly brand image!
 
 ![](/img/logi/IMG_20210830_205715.jpg)
-密封方式照样也很简约环保，沾了一层透明的胶，只需要简简单单的用指甲划开，就能打开盒子了。
+The sealing method was also simple and eco-friendly—a layer of clear tape that you could just cut open with your fingernail to open the box.
 
-打开盒子之后，里面直接就是一把键盘，啥都没有...
+After opening the box, there was just the keyboard inside, nothing else...
 
 ![](/img/logi/IMG_20210830_211208.jpg)
 
-这环保，简直做到了极致啊。**堪比某果不送充电器～**
+This is eco-friendliness taken to the extreme. **Comparable to a certain fruit company not including a charger~**
 
-不过包装并不能代表什么，罗技这样的大厂肯定是把预算都花在了品质上。
+But packaging isn't everything. A big company like Logitech must have put the budget into quality.
 
-没有泡沫绵缓冲这个事实就表明了罗技对键盘的可靠性充满了自信，这是一项加分项。
+The absence of foam padding shows that Logitech is confident in the keyboard's reliability—that's a plus.
 
-键盘采用悬浮式设计，银色磨砂外观的铝制底板，一股商务风扑面而来
+The keyboard has a floating key design with a silver brushed aluminum backplate, giving off a business vibe.
 
 ![](/img/logi/IMG_20210830_212111_759.jpg)
 
-图片是我直接上机点亮后拍的，不得不说这个灯光确实跟我想象的一样，在房间开灯的时候键盘上的灯光跟几乎没有一样.. 很微弱。
+The photo was taken after I powered it on. I have to say the lighting is exactly as I imagined—when the room lights are on, the keyboard's backlight is almost invisible... very faint.
 
-于是我就关上了灯，想看看它在关灯的时候是什么效果。
+So I turned off the lights to see what it looked like in the dark.
 
 ![](/img/logi/IMG_20210830_212407_648.jpg)
 
-嗯.. 亮度刚刚好，不刺眼，~~正好适合晚上偷偷的写代码嘿嘿～~~
+Well... the brightness is just right, not harsh, ~~perfect for sneaking in some coding at night hehe~~~
 
-> （照片看上去可能很亮，但实际上并没有图上那么刺眼。）
+> (The photo may look bright, but it's not as harsh in person.)
 
-键冒的话.. 是 ABS 黑色键冒，配上这个白色的背光.. 感觉有点性冷淡的感觉，233
+The keycaps are black ABS, paired with the white backlight... gives off a bit of a cold aesthetic, lol.
 
-如果把键冒换成粉色的就完美了，嘿嘿
+If I could swap the keycaps for pink ones, it'd be perfect.
 
-然后右上角有三个指示灯，分别是数字键、大小写、滚动锁定，这样传统的设计还是比较适合我的。qwq
+In the top right corner, there are three indicator lights for Num Lock, Caps Lock, and Scroll Lock. Such a traditional design suits me just fine. qwq
 
-背后有两个脚架，打开之后大概是这样
+There are two stands on the back. When opened, it looks like this:
 
 ![](/img/logi/IMG_20210830_213133_526.jpg)
 
-我个人是很喜欢打开脚架的，不过打开这个脚架需要稍微用一点力，打开之后的高度差也不是很大，正好~~适合狗爪子（bushi）~~。
+I personally like using the stands, though opening them requires a bit of force. The height difference isn't huge—perfect ~~for dog paws (not)~~.
 
-# 手感
+# Feel
 
-日常打字的话，概括一下：
+For everyday typing, here's a summary:
 
-1. 清脆的声音很带感，嘿嘿。 qwq
+1. The crisp sound is very satisfying, hehe. qwq
 
-2. 但是造成的噪音也很大，毕竟青轴号称室友快乐轴嘛～ ~~但是我喜欢~~ （逃
+2. But it also generates a lot of noise—after all, blue switches are known as "roommate happiness" switches~ ~~But I like them~~ (runs away)
 
-3. 青轴的触感很强，段落感很到位～ 
+3. The tactile feedback from blue switches is strong, and the bump feel is spot on.
 
-4. 长期输入的情况下都不会疲劳。
+4. No fatigue even during long typing sessions.
 
-游戏方面，我玩了会 Minecraft ，对比薄膜差异还是很大的 QAQ，但平时也很少玩其他游戏了。
+For gaming, I played some Minecraft. The difference compared to membrane keyboards is huge, QAQ. But I rarely play other games anyway.
 
-总的来说比薄膜强太多了，我可能回不去了。 QAQ
+Overall, it's way better than membrane keyboards. I might never go back. QAQ
 
-希望它能够耐用吧，毕竟它是我的第一把机械键盘。
+Hopefully it'll be durable—it is my first mechanical keyboard after all.
 
-# 总结
+# Conclusion
 
-这个键盘，244，值！
+This keyboard, 244 RMB—worth it!
 
-耐用程度上我是看好它的，打算用个四年五年的应该没问题（？）
+I'm optimistic about its durability. I reckon it should last four or five years without issues (?)
 
-虽然这个价位的它没有炫酷的 RGB，没有键线分离，音乐律动这些花里胡哨的东西...
+Sure, at this price point it doesn't have flashy RGB, detachable cable, music-reactive lighting, or other fancy features...
 
->（然而作为 Arch 用户的我连驱动都不想装，嗯，它也没驱动）
+> (But as an Arch user, I don't even want to install drivers—well, it doesn't have any anyway.)
 
-但是其他方面足够满足我的需求，柔和的背光和优秀的按键触感让我觉得这两百多花得也值了。
+But everything else meets my needs. The soft backlight and excellent key feel make the 200+ yuan well spent.
 
-~~嗯... 如果有空的话把键冒换成粉色（逃~~
+~~Well... if I have time, I'll swap the keycaps for pink ones.~~

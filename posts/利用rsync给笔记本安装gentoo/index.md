@@ -1,136 +1,133 @@
-# 利用 rsync 给笔记本安装 Gentoo
+# Installing Gentoo on a Laptop via rsync
 
 
-# 序
+<!--more-->
+# Preface
 
-半年不见，甚是想念～
+Long time no see, I've missed you all~
 
-我有一台性能羸弱不堪的 ChromeBook，
+I have a ChromeBook with terribly weak performance.
 
-2GB 的 RAM 和一颗 只有 2.6 GHz 的双核老低压 U 对于现在的流行发行版来说已经完全不够用了，目前跑个 Mint 也是 CPU 经常性的 100% 占用。
+With 2GB of RAM and a dual-core old low-voltage CPU running at only 2.6 GHz, it's completely insufficient for today's popular distributions. Even running Mint frequently hits 100% CPU usage.
 
 ![](/img/photo_2022-01-04_13-39-29.jpg)
 
-于是我想着能不能给他装个 Gentoo？
+So I wondered—could I install Gentoo on it?
 
-然而就这乌龟U，估计得连续开机一周才能编译完吧...
+But with this turtle of a CPU, it'd probably take a week of continuous uptime just to compile everything...
 
-嗯，不过我想试试能不能通过台式机编译完 Gentoo 再通过 rsync 给它传输到 ChromeBook。
+Well, I thought I'd try compiling Gentoo on my desktop and then transferring it to the ChromeBook via rsync.
 
 ![](/img/2022-01-04-13-46-55屏幕截图.png)
 
-论编译，我感觉哪怕是在 2022 年 E3 神教也不会让我失望吧。
+When it comes to compilation, I feel like even in 2022, the E3 powerhouse won't let me down.
 
-起码比这颗小赛扬快多了。
+At least it's much faster than this little Celeron.
 
-# 准备工作
+# Preparation
 
-废话不多说，直接开搞。
+Enough rambling, let's get started.
 
-但我们要准备好这些东西
+But we need to prepare these things:
 
 * [Gentoo Wiki](https://wiki.gentoo.org/wiki/Main_Page)
-  * 安装过程中需要用到官方的指引和文档，必备
-* 翻译工具
-  * 由于 Gentoo 的用户群体较小，文档汉化可能不是很全面，因此可以借助翻译工具，这里推荐 [deepl](https://www.deepl.com/zh/translator)
-* 一个 U 盘
-  * 用来装一个临时的 Linux 作为笔记本的 rsync 接收端。
-  * 这个没什么好说的，最好支持 USB 3.0～
-* 下载好 Gentoo 官方提供的 stage 包
-  * 这个会在下文中写出过程
-* 一个能够操作的 Linux 终端
+  * You'll need the official guides and documentation during installation—essential.
+* Translation tools
+  * Since the Gentoo user base is relatively small, the documentation may not be fully translated. I recommend [DeepL](https://www.deepl.com/translator).
+* A USB drive
+  * Used to boot a temporary Linux system as the rsync receiver on the laptop.
+  * Nothing special, preferably supporting USB 3.0~
+* Download the official Gentoo stage tarball
+  * I'll detail this process below.
+* A Linux terminal you can operate
 
-# 下载 stage 压缩包
+# Download the Stage Tarball
 
-由于我们的安装手段比较特殊，因此可以直接跳到官方 wiki 的这一步
+Since our installation method is a bit special, we can jump directly to this step in the official wiki.
 
-按照官方 wiki 给出的文档，我们进行以下操作:
+Following the official wiki documentation, let's proceed:
 
-首先开启 root
+First, become root:
 
 ```
 weepingdogel $ sudo -i
 ```
 
-接下来，你可以挂载一个分区到 `mnt` ，也可以直接创建文件夹，我这边空间很充足就直接空载操作了。
+Next, you can mount a partition to `/mnt` or just create a folder. I have plenty of space, so I'll just work directly.
 
-至于如何挂载？可以去参考 Arch Wiki。
+As for how to mount it? Refer to the Arch Wiki.
 
 ```
 root # cd /mnt/gentoo
 ```
 
-然后我们需要用 wget 下载 stage 包，打开[这个页面](https://www.gentoo.org/downloads/#other-arches)，这里我们选择 stage3 
+Then we need to download the stage tarball with wget. Open [this page](https://www.gentoo.org/downloads/#other-arches). Here we'll choose stage3.
 
-因为我懒，喜欢用 systemd ， 可以根据需要选择。
+Since I'm lazy and prefer systemd, you can choose according to your needs.
 
-**注意：右键 stage3 systemd ，复制链接**
+**Note: Right-click stage3 systemd and copy the link.**
 
 ![](/img/2022-01-04-22-58-13屏幕截图.png)
 
-将链接粘贴到终端上
+Paste the link into the terminal:
 
 ```
 root # wget https://bouncer.gentoo.org/fetch/root/all/releases/amd64/autobuilds/20220605T170549Z/stage3-amd64-systemd-20220605T170549Z.tar.xz
 ```
 
-等待下载。
+Wait for the download.
 
 ![](/img/2022-01-04-23-02-53屏幕截图.png)
 
-下载完成之后可以进行一下文件校验，可以参考一下官方的[这个条目](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn)
+After downloading, you can verify the file. Refer to the official [documentation](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage).
 
 ![](/img/2022-01-04-23-04-47屏幕截图.png)
 
-一般情况下我这边不会损坏，所以我这里就不写出来了，接下来我们直接进入解压 stage 文件这一步。
+Generally, file corruption doesn't happen on my end, so I won't elaborate. Let's move on to extracting the stage file.
 
-# 解压 stage 压缩包
+# Extract the Stage Tarball
 
-我们使用 tar 来进行解压，这是官方 wiki 给出的命令：
+We'll use tar to extract it. Here's the official wiki command:
 
 ```
-root #tar xpvf stage3-*.tar.bz2 --xattrs-include='*.*' --numeric-owner
+root # tar xpvf stage3-*.tar.bz2 --xattrs-include='*.*' --numeric-owner
 ```
 
-有些读者可能看不懂中间那一串，那一串其实是个通配符，不过这个通配符可能跟你下载到的文件不一样，因此我们将中间那段改成准确的文件名。
+Some readers might not understand the wildcard in the middle—it's just a glob pattern. But it might not match your downloaded file exactly, so let's change it to the exact filename.
 
-这一步操作很简单，只需要按一下 Tab 键即可。
+This is simple—just press the Tab key.
 
 ```
 root # tar xpvf stage3-amd64-systemd-20220102T170545Z.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-等待解压，一会儿就好，~~除非你用 IDE 硬盘~~。
+Wait for extraction, it'll be done in a moment. ~~Unless you're using an IDE hard drive.~~
 
 ![](/img/2022-01-04-23-10-11屏幕截图.png)
 
-# 配置编译选项
+# Configure Compilation Options
 
-这一步官方是这么解释的：
+The official documentation explains this step as follows:
 
->为了优化Gentoo，可以设置一些影响Portage的变量，Gentoo官方支持包管理器。 所有这些变量可以设置为环境变量（使用export），但这不是永久的。 为了保留设置，Portage读入/etc/portage/make.conf文件 ，一个用于Portage的配置文件。 
+> To optimize Gentoo, you can set some variables that affect Portage, Gentoo's officially supported package manager. All these variables can be set as environment variables (using export), but this isn't permanent. To keep the settings, Portage reads the `/etc/portage/make.conf` file, a configuration file for Portage.
 >
->> 附注
->>
->>所有可能的变量的注释列表可以在 /mnt/gentoo/usr/share/portage/config/make.conf.example中找到。要成功安装Gentoo，只需要设置下面提到的变量。
+> A commented list of all possible variables can be found in `/mnt/gentoo/usr/share/portage/config/make.conf.example`. To successfully install Gentoo, only the variables mentioned below need to be set.
 >
->启动编辑器（在本指南中，我们使用 nano）来更改我们将在下面讨论的优化变量。
->```txt
->root #nano -w /mnt/gentoo/etc/portage/make.conf
->```
->从make.conf.example文件中可以明显看出文件的结构：注释行以 "#"开头，其他行使用 VARIABLE="content 语法定义变量。 接下来选取其中的几个进行讨论。 
->
->
+> Start an editor (in this guide, we'll use nano) to change the optimization variables we'll discuss below.
+> ```
+> root # nano -w /mnt/gentoo/etc/portage/make.conf
+> ```
+> From the make.conf.example file, the structure is obvious: comment lines start with "#", and other lines define variables using the VARIABLE="content" syntax. We'll discuss a few of them next.
 
-这里我们用 vim 写一下
+Here, I'll use vim:
 
 ```
 root # vim /mnt/gentoo/etc/portage/make.conf
 ```
 
-将里面的 `COMMON_FLAGS=` 加入 `-march=silvermont` 的选项，这样就能让编译器给 `silvermont` 架构的垃圾 CPU 进行优化了。
+Add the `-march=silvermont` option to `COMMON_FLAGS=`, so the compiler can optimize for the Silvermont architecture's garbage CPU.
 
-完整文件如下：
+The complete file looks like this:
 
 ```conf
 # These settings were set by the catalyst build script that automatically
@@ -151,49 +148,49 @@ PKGDIR="/var/cache/binpkgs"
 # This sets the language of build output to English.
 # Please keep this setting intact when reporting bugs.
 LC_MESSAGES=C
-
 ```
 
-# 安装 Gentoo 基础系统
+# Install the Gentoo Base System
 
-上面已经完成了第一阶段的操作，可以开始安装基本系统了，诶嘿嘿。
+We've completed the first phase. Now we can start installing the base system, ehehe.
 
-接下来要做的是选择镜像源，我们可以参考 ustc mirror 给出的帮助文档：
+Next, we need to select a mirror. We can refer to the USTC mirror's help documentation:
 
-* [Gentoo 源使用帮助 — USTC Mirror Help  文档](https://mirrors.ustc.edu.cn/help/gentoo.html)
-* [Gentoo Portage 源使用帮助 — USTC Mirror Help  文档](https://mirrors.ustc.edu.cn/help/gentoo-portage.html)
+* [Gentoo Mirror Usage Help — USTC Mirror Help Documentation](https://mirrors.ustc.edu.cn/help/gentoo.html)
+* [Gentoo Portage Mirror Usage Help — USTC Mirror Help Documentation](https://mirrors.ustc.edu.cn/help/gentoo-portage.html)
 
-直接按照 ustc 给出的帮助设置这两个源地址就好啦～
+Just set up these two mirror addresses according to the USTC help guide~
 
 ![](/img/2022-01-04-23-27-27屏幕截图.png)
 
 ![](/img/2022-01-04-23-27-54屏幕截图.png)
 
-然后复制 DNS 信息
+Then copy the DNS information:
 
 ```
 root # cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
 ```
 
-## 挂载必要的文件系统
+## Mount Necessary Filesystems
 
-这里要注意一下了，我这边要打好几条命令
+Pay attention here—I need to run several commands.
 
-Why？
+Why?
 
-官方的解释：
->稍等片刻，Linux 的根目录将变更到新的位置。为了确保新环境正常工作，需要确保一些文件系统可以正常使用。
->
->需要提供的文件系统是：
->
-> *    /proc/ 一个pseudo文件系统（看起来像是常规文件，事实上却是实时生成的），由Linux内核暴露的一些环境信息
-> *    /sys/ 一个pseudo文件系统，像要被取代的/proc/一样，比/proc/更加有结构
-> *    /dev/ 是一个包含全部设备文件的常规文件系统，一部分由Linux设备管理器（通常是udev）管理
->
->/proc/位置将要挂载到/mnt/gentoo/proc/，而其它的两个都是绑定挂载。字面上的意思是，例如/mnt/gentoo/sys/事实上就是/sys/（它只是同一个文件系统的第二个条目点），而/mnt/gentoo/proc/是（可以说是）文件系统的一个新的挂载。 
->
+The official explanation:
 
-因此按顺序执行以下命令进行挂载：
+> In a moment, the Linux root will be changed to the new location. To ensure the new environment works correctly, we need to make sure some filesystems are available.
+>
+> The filesystems that need to be provided are:
+>
+> * /proc/: a pseudo-filesystem (appearing as regular files but generated in real-time) that exposes some environment information from the Linux kernel
+> * /sys/: a pseudo-filesystem, like /proc/, but more structured
+> * /dev/: a regular filesystem containing all device files, partly managed by the Linux device manager (usually udev)
+>
+> /proc/ will be mounted at /mnt/gentoo/proc/, while the other two are bind mounts. In practice, /mnt/gentoo/sys/ is actually /sys/ (it's just a second entry point to the same filesystem).
+
+Now execute the following commands in order:
+
 ```
 root # mount --types proc /proc /mnt/gentoo/proc
 root # mount --rbind /sys /mnt/gentoo/sys
@@ -202,11 +199,11 @@ root # mount --rbind /dev /mnt/gentoo/dev
 root # mount --make-rslave /mnt/gentoo/dev 
 ```
 
-然而，这还没完
+However, that's not all.
 
 ![](/img/2022-01-04-23-33-37屏幕截图.png)
 
-因此，接下来要加上这三条
+So, we also need to add these three:
 
 ```
 root # test -L /dev/shm && rm /dev/shm && mkdir /dev/shm
@@ -214,9 +211,9 @@ root # mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm
 root # chmod 1777 /dev/shm
 ```
 
-## Chroot : 进入新环境
+## Chroot: Enter the New Environment
 
-当挂载好一切后，就可以 chroot 进去了
+Once everything is mounted, we can chroot in:
 
 ```
 root # chroot /mnt/gentoo /bin/bash 
@@ -230,21 +227,21 @@ root # source /etc/profile
 root # export PS1="(chroot) ${PS1}"
 ```
 
-接下来终端会变成这样
+The terminal will look like this:
 
 ![](/img/2022-01-04-23-37-35屏幕截图.png)
 
-## 挂载 boot 分区
+## Mount the Boot Partition
 
-这一步我们直接略过，因为最终安装的设备不是本机，而是另一台笔记本。
+We'll skip this step, as the final installation target isn't this machine but the laptop.
 
-之后我们再进行手动安装引导介质。
+We'll manually install the boot medium later.
 
-## 从网站安装 Gentoo ebuild 数据库快照
+## Install the Gentoo ebuild Repository Snapshot from the Web
 
-官方其实这个就相当于 Arch 里面的 `sudo pacman -Syyu`
+This is essentially equivalent to Arch's `sudo pacman -Syyu`.
 
-不多说，复制粘贴吧。
+Enough said, copy and paste:
 
 ```txt
 root # emerge-webrsync
@@ -252,13 +249,11 @@ root # emerge-webrsync
 
 ![](/img/2022-01-04-23-42-07屏幕截图.png)
 
+## Select a Profile
 
-##  选择配置文件
+~~I feel like I'm just copying wiki content...~~
 
-~~我怎么感觉像是在复制 wiki 的内容呢...~~
-
-> 配置文件是任何一个Gentoo系统的积木。它不仅指定USE、CFLAGS和其它重要变量的默认值，还会锁定系统的包版本范围。这些设定全是由Gentoo的Portage开发者们来维护。 
-
+> A profile is a building block for any Gentoo system. Not only does it specify default values for USE, CFLAGS, and other important variables, but it also locks the package version range for the system. These settings are all maintained by Gentoo's Portage developers.
 
 ```
 # eselect profile list
@@ -270,39 +265,39 @@ Available profile symlink targets:
   [2]   default/linux/amd64/17.1/desktop
   [3]   default/linux/amd64/17.1/desktop/gnome
   [4]   default/linux/amd64/17.1/desktop/kde
-
 ```
 
-然后输入以下命令即可：
+Then input the following command:
 
 ```
-# eselect profile set [对应的数字]
+# eselect profile set [corresponding number]
 ```
 
-其实它会列出很多选项，我们需要选择含有 `desktop/system` 的版本
+It will actually list many options. We need to select the version containing `desktop/system`.
 
-## 设置时区
+## Set Timezone
 
-这里直接用 Arch 的方法
+Here, I'll just use Arch's method:
 
 ```
-# ln -sf /usr/share/zoneinfo/Region（地区名）/City（城市名） /etc/localtime
+# ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
 ```
 
-根据我的情况，我应该这样写：
+For my situation, I should write:
 
 ```
 # ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
-然后运行 hwclock 以生成 /etc/adjtime：
+
+Then run hwclock to generate /etc/adjtime:
 
 ```
 # hwclock --systohc
 ```
 
-## 设置 USE
+## Set USE Flags
 
-对于 Gentoo 这个系统来说， USE 标记是必备的，因此在编译之前，我们需要设置好全局 USE 标记
+For Gentoo, USE flags are essential. Before compilation, we need to set the global USE flags:
 
 ```
 # vim /etc/portage/make.conf
@@ -313,102 +308,102 @@ USE="alsa udev dbus icu systemd gles2 sound video intel -kde tiff x265"
 VIDEO_CARDS="intel"
 ```
 
-## 更新 @world 集合
+## Update the @world Set
 
-其实就是跟 Arch 的“滚”差不多，但是它会是一个比较漫长的过程。
+This is similar to Arch's "rolling update", but it will be a long process.
 
 ```
 # emerge --ask --verbose --update --deep --newuse @world
 ```
 
-除此之外，在更改USE标记之后，这条命令也用来动态调整系统功能。
+Additionally, this command is used to dynamically adjust system functionality after changing USE flags.
 
-## 配置 locale 
+## Configure Locale
 
-麻了，参考这个 [Installation guide (简体中文) - ArchWiki](https://wiki.archlinux.org/title/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%9C%AC%E5%9C%B0%E5%8C%96)
+I'm tired, refer to the [Installation Guide - ArchWiki](https://wiki.archlinux.org/title/Installation_guide#Localization).
 
-# 配置内核
+# Configure the Kernel
 
-嗯哼，你以为我那么傻又编译八个小时？不！这次我选择用 bin 内核！
+Hmph, do you think I'm dumb enough to compile for 8 hours again? No! This time I'm choosing the binary kernel!
 
 ```
 # emerge --ask sys-kernel/installkernel-systemd-boot
 ```
 
-节省不少时间呢。
+Saves a lot of time.
 
 ```
 # emerge --ask sys-kernel/gentoo-kernel-bin
 ```
-哎呀不想写了... 写了都是复制粘贴
 
-自己看吧
+Ah, I don't want to write anymore... it's all copy-paste anyway.
+
+Check it out for yourself:
 
 ![](/img/2022-01-11-12-46-51屏幕截图.png)
 
-# 安装固件
+# Install Firmware
 
-> 一些驱动需要先在系统上安装附加的固件才能工作。经常网络接口上会使用，特别是无线网络接口。此外，来自 AMD 、 NVidia 和 Intel 等供应商的现代视频芯片在使用开源驱动程序时，通常也需要外部固件文件。大多数固件都打包在 sys-kernel/linux-firmware 里
+> Some drivers require additional firmware to be installed on the system before they work. This is often the case for network interfaces, especially wireless network interfaces. In addition, modern video chips from vendors such as AMD, NVIDIA, and Intel often require external firmware files when using open-source drivers. Most firmware is packaged in sys-kernel/linux-firmware.
 
-大多数设备的驱动都依赖于 `linux-firmware` 这个包
+Drivers for most devices depend on the `linux-firmware` package.
 
 ```
 # emerge --ask sys-kernel/linux-firmware
 ```
 
-# 配置 fstab
+# Configure fstab
 
-这一步操作是在系统启动的时候，让内核认识分区
+This step is to let the kernel recognize partitions at system startup.
 
-但是 Gentoo 好像不能用 `genfstab`
+But Gentoo doesn't seem to support `genfstab`.
 
-只能手写了
+I'll have to write it manually.
 
-先在笔记本获取 UUID
+First, get the UUID on the laptop:
 
 ```
 ls /dev/disk/by-uuid/ -l
 ```
 
-接下来将 `/` 分区对应分区的 `UUID` 按如下格式写在 `/etc/fstab` 这个文件里面 
+Then write the UUID of the `/` partition's corresponding partition into the `/etc/fstab` file in the following format:
 
 ```fstab
 # /dev/mmcblk1p2
 UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx	/         	xfs       	default,rw,relatime	0 1
 ```
 
-# 通过 rsync 将系统灌到笔记本上
+# Transfer the System to the Laptop via rsync
 
-这个时候需要给笔记本插入一个 ArchISO 的 U 盘，启动到 ISO，**并连接 WIFI 和 开启 ssh 服务。**
+At this point, insert an ArchISO USB drive into the laptop, boot into the ISO, **connect to WiFi, and enable the SSH service.**
 
-接下来将其原有的分区格式化
+Next, format its existing partition:
 
 ```
 # mkfs.btrfs /dev/mmcblk1p2 -f
 ```
 
-然后挂载它，并将刚刚做好的文件用 rsync 灌进去
-
+Then mount it and use rsync to transfer the prepared files:
 
 ```
 # mount /dev/mmcblk1p2 /mnt 
 ```
 
-接下来笔记本这一端开启 ssh 服务
+Now, enable the SSH service on the laptop side:
 
 ```
 # systemctl start sshd
 ```
 
-然后使用 rsync 将编译好的文件传输至笔记本的系统分区。
+Then use rsync to transfer the compiled files to the laptop's system partition:
 
 ```
 # rsync -aAXHv -P -vi --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found"} ./mnt/gentoo/. root@192.168.0.109:/mnt
 ```
 
-# 在笔记本安装启动引导器
+# Install the Bootloader on the Laptop
 
-这个也是很熟悉的操作了。
+This is also a familiar operation.
 
 ```
 # grub-install --target=x86_64-efi --efi-directory=/dev/mmcblk1p1 --bootloader-id=GRUB
@@ -417,20 +412,20 @@ UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx	/         	xfs       	default,rw,relati
 ```
 # grub-mkconfig -o /boot/grub/grub.cfg
 ```
-# 结语
 
+# Conclusion
 
-通过一系列的折腾，这台老本子终于能发挥其最大的性能了。
+After a series of tinkering, this old laptop can finally perform at its maximum potential.
 
-由此看来通过 rsync 复制 Linux 发行版系统文件到其他的设备看起来是可行的。
+It seems that copying Linux distribution system files to other devices via rsync is feasible.
 
-不过也折腾了挺久的
+But it did take quite a while...
 
-# 参考链接
+# Reference Links
 
 * [Gentoo Wiki](https://wiki.gentoo.org/wiki/Main_Page)
-* [Downloads â Gentoo Linux](https://www.gentoo.org/downloads/#other-arches)
-* [安装Gentoo安装文件 - Gentoo Wiki](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage/zh-cn)
-* [Gentoo 源使用帮助 — USTC Mirror Help  文档](https://mirrors.ustc.edu.cn/help/gentoo.html)
-* [Gentoo Portage 源使用帮助 — USTC Mirror Help  文档](https://mirrors.ustc.edu.cn/help/gentoo-portage.html)
-* [Installation guide (简体中文) - ArchWiki](https://wiki.archlinux.org/title/Installation_guide_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#%E6%9C%AC%E5%9C%B0%E5%8C%96)
+* [Downloads – Gentoo Linux](https://www.gentoo.org/downloads/#other-arches)
+* [Installation Guide - Gentoo Wiki](https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Stage)
+* [Gentoo Mirror Usage Help — USTC Mirror Help](https://mirrors.ustc.edu.cn/help/gentoo.html)
+* [Gentoo Portage Mirror Usage Help — USTC Mirror Help](https://mirrors.ustc.edu.cn/help/gentoo-portage.html)
+* [Installation Guide - ArchWiki](https://wiki.archlinux.org/title/Installation_guide#Localization)

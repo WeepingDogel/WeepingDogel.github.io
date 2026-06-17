@@ -1,75 +1,53 @@
-# [笔记整理]将来进行时
+# [Notes] Future Continuous Tense
 
 
-## 简介
+<!--more-->
+## Introduction
 
-个人笔记，仅供参考。
-## 基本结构
+Personal notes, for reference only.
 
-* 陈述句
-  * 肯定:
-    > 主语 will be doing sth
-  * 否定:
-    > 主语 won’t / will not be doing sth
-* 疑问句
-    > Will 主语 be doing sth?
+## Basic Structure
 
-## 例句
+* Declarative Sentences
+  * Affirmative:
+    > Subject will be doing sth
+  * Negative:
+    > Subject won't / will not be doing sth
+* Interrogative Sentences
+    > Will subject be doing sth?
 
-* 表示将来某段时间持续做的动作
+## Examples
 
-    > Eg:Toby will be climbing in the Himalayas all next week.
-    >
-    >Toby下个星期将会爬一整周的喜马拉雅山
+* An action that will be ongoing for a period of time in the future
 
-* 表示将来的某个时间点前已经开始做的动作，并有可能继续下去
+    > Eg: Toby will be climbing in the Himalayas all next week.
 
-    > Eg:Toby will not be in London next Tuesday. He will be climbing the Himalayas.
-    >
-    >Toby下周二不会在伦敦，他将要攀爬喜马拉雅山
+* An action that will begin before a certain point in the future and may continue
 
-* (预测)表示自然发生的事情，不是人为安排的
+    > Eg: Toby will not be in London next Tuesday. He will be climbing the Himalayas.
 
-    > Eg:The weather report says that it will be raining when we arrive in London.
-    >
-    >天气预报说我们到达伦敦的时候会下雨
+* (Prediction) Describing something that will naturally happen, not arranged by people
 
-* 有礼貌地询问关于别人的未来计划
+    > Eg: The weather report says that it will be raining when we arrive in London.
 
-    > Eg:Will you be visiting your uncle in London?
-    >
-    > 你要去拜访在伦敦的叔叔嘛?
+* Politely asking about someone's future plans
 
-* 表示原因、结果或推测
-  * 推测
-    > Eg:If I fail to show up at 7:00, I won’t be coming.
-    >
-    > 如果我7点还没来，那我就不会来了
+    > Eg: Will you be visiting your uncle in London?
 
-    > Eg:The advanced technology will be helping us explore the outer space
-    >
-    > 先进的技术将帮助我们探索太空
-  * 原因
-    > Please come tomorrow afternoon. Tomorrow morning I’ll be having a meeting.
-    >
-    > 请明天下午来。因为我明天早上在开会。
-  * 结果
-    >Stop the child or he will be falling over
-    >
-    > 让那个孩子停下否则他会摔倒
+* Expressing reasons, results, or speculations
+  * Speculation
+    > Eg: If I fail to show up at 7:00, I won't be coming.
 
-## 参考短语
+    > Eg: The advanced technology will be helping us explore the outer space.
+  * Reason
+    > Please come tomorrow afternoon. Tomorrow morning I'll be having a meeting.
+  * Result
+    > Stop the child or he will be falling over.
+
+## Reference Phrases
 
 > fail to do sth
->
-> 未能做到某事
 
-> from…to..
->
-> 从…到
+> from…to…
 
 > According to
->
-> 根据…
-
-

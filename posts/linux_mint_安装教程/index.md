@@ -1,49 +1,49 @@
-# Linux Mint 安装教程
+# Linux Mint Installation Guide
 
 
-## 简介
+<!--more-->
+## Introduction
 
-Linux Mint是一款由Linux Mint Team团队从2006年开始发行，是基于Debian和Ubuntu的发行版。
+Linux Mint is a Linux distribution based on Debian and Ubuntu, first released by the Linux Mint Team in 2006.
 
-其目的是提供一种更加完整的即刻可用体验，它诞生的目的是为家庭用户和企业提供一个免费的，易用的，舒适而优雅的桌面操作系统。
+Its purpose is to provide a more complete out-of-the-box experience, offering a free, easy-to-use, comfortable, and elegant desktop operating system for home users and businesses.
 
-包括了浏览器 多媒体播放器 DVD播放支持 Java和其他组件，它有三个桌面环境版本，分别是Cinnamon，MATE，xfce。
+It includes a browser, multimedia player, DVD playback support, Java, and other components. It comes in three desktop environment versions: Cinnamon, MATE, and Xfce.
 
-## 下载
+## Download
 
-Linux Mint可以去官网下载，官网有两种下载方式，一种是通过所在国家对应的镜像站进行HTTP下载，还有一种就是通过种子下载的。
+You can download Linux Mint from the official website. The official site offers two download methods: HTTP download via mirror sites in your country, or torrent download.
 
-由于官网上的上海大学开源镜像站进不去所以我只好选择了种子下载，但是本篇博客将会提供xfce版本的下载地址。
+Linux Mint official website: [https://www.linuxmint.com/](https://www.linuxmint.com/)
 
-Linux Mint官网：[https://www.linuxmint.com/](https://www.linuxmint.com/)
+Users inside China can quickly download Linux Mint from these mirror sources:
 
-墙内用户可以从以下两个镜像源快速下载Linux Mint:
-
-* [清华开源镜像站](https://mirrors.tuna.tsinghua.edu.cn/linuxmint-cd/stable/)
-* [中科大开源镜像站](http://mirrors.ustc.edu.cn/linuxmint-cd/stable/)
+* [Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/linuxmint-cd/stable/)
+* [USTC Open Source Mirror](http://mirrors.ustc.edu.cn/linuxmint-cd/stable/)
 
 ![](/img/截图_2019-06-23_13-59-22.png)
 
 ![](/img/截图_2019-06-23_14-07-11.png)
 
-## 安装
+## Installation
 
-**xfce版本安装条件：至少512MB或以上的内存，15GB或以上的磁盘空间**
+**Xfce version requirements: at least 512MB or more RAM, 15GB or more disk space.**
 
-你可以选择安装在**物理机**上，也可以安装在**虚拟机**上。
+You can choose to install it on a **physical machine** or on a **virtual machine**.
 
-如果你需要安装在**物理机**则需要使用**refus**等类似的**U盘启动制作工具**制作**启动盘**。
+If you need to install it on a **physical machine**, you need to use **Rufus** or similar **USB boot creation tools** to make a **bootable USB drive**.
 
-本篇博客将使用虚拟机作为演示。
+This blog post will use a virtual machine as a demonstration.
 
 ![](/img/截图_2019-06-23_14-09-13.png)
 
 ![](/img/截图_2019-06-23_15-44-12.png)
 
-### 安装过程
-#### 挂载安装介质
+### Installation Process
 
-首先将下载好的**镜像文件**加入**虚拟机**的启动，如果是**物理机**则插入你**制作好的启动盘**。
+#### Mount the Installation Media
+
+First, add the downloaded **ISO file** to the **virtual machine's** boot drive. If on a **physical machine**, insert your **prepared bootable USB drive**.
 
 ![](/img/截图_2019-06-23_15-47-56.png)
 
@@ -51,31 +51,31 @@ Linux Mint官网：[https://www.linuxmint.com/](https://www.linuxmint.com/)
 
 ![](/img/截图_2019-06-23_15-51-26.png)
 
-选择好之后，点击**确定**
+After selecting, click **OK**.
 
-然后启动虚拟机即可。而物理机则需要重启然后按相应的键，ESC F12 F11之类的，这些百度上都有，搜索“你电脑的品牌或者主板的品牌+U盘启动”就可以查到
+Then start the virtual machine. For a physical machine, you need to restart and press the corresponding key (ESC, F12, F11, etc.) — you can search for these online.
 
 ![](/img/截图_2019-06-23_15-59-20.png)
 
-然后虚拟机将会自动切换到虚拟CD进行启动，等待即可。
+The virtual machine will automatically boot from the virtual CD. Just wait.
 
-接下来就会出现这个画面，等待10秒后进入了CD Live即可。
+You'll see this screen, and after 10 seconds, you'll enter the CD Live environment.
 
 ![](/img/截图_2019-06-23_15-59-47.png)
 
-10秒后，将会进入开机动画，不用多解释（还挺好看的哈）
+After 10 seconds, you'll see the boot animation — it's actually quite nice to look at!
 
 ![](/img/截图_2019-06-23_16-00-08.png)
 
-再过了一会儿，就进入这个界面了，这就是我上文说的CD Live。
+After a moment, you'll enter this interface — this is the CD Live I mentioned.
 
 ![](/img/截图_2019-06-23_16-00-31.png)
 
-哈哈哈哈吐嘈一下这个时间显示，为什么是8点呢，而我发布这篇博客的时间是下午两点啊，其实是因为这个CD Live的默认时区不一样，不用理会他，我们继续操作即可。
+(Just a side note: the time shown might be different because the CD Live's default timezone might not be yours. Don't worry about it.)
 
-#### 选择语言，习惯和安装需要
+#### Select Language and Preferences
 
-那么接下来点击这个 **“Install Linux Mint”** ，然后就会弹出这个安装界面了，第一页这里是选择语言，我们选择简体中文（当然你看得懂什么语言就选什么语言）。
+Click **"Install Linux Mint"** to start the installation wizard. The first page asks you to select a language. I'll choose Simplified Chinese (choose whatever language you understand).
 
 ![](/img/截图_2019-06-23_16-06-03.png)
 
@@ -83,7 +83,7 @@ Linux Mint官网：[https://www.linuxmint.com/](https://www.linuxmint.com/)
 
 ![](/img/截图_2019-06-23_16-06-39.png)
 
-然后就是选择键盘布局了，这里默认就好，或者选择美式，但都差不多是一样的。
+Then choose the keyboard layout — the default or US layout should be fine.
 
 ![](/img/截图_2019-06-23_16-06-58.png)
 
@@ -91,120 +91,116 @@ Linux Mint官网：[https://www.linuxmint.com/](https://www.linuxmint.com/)
 
 ![](/img/截图_2019-06-23_16-15-18.png)
 
-#### 分区
+#### Partitioning
 
-然后就是一个**重头戏**了,你一定要**认真看！认真看！认真看！**
+Now comes the **main event**. You must **pay close attention! Pay close attention! Pay close attention!**
 
-（重要的事情说三遍）
+(Said three times for emphasis)
 
-这里会给你两个选项来进行分区，其中第一个单选框的意思是把你的**整个硬盘全部格式化**然后再安装Linux Mint，如果你是虚拟机的话选这个无所谓，但是如果你是**物理机**的话就要**慎重**了,无论安装成功或失败你的原有数据都会丢失。
+You'll be given two options for partitioning. The first radio button means **formatting your entire hard drive** and then installing Linux Mint. This is fine for a virtual machine, but if you're on a **physical machine**, be **very careful** — whether the installation succeeds or fails, your original data will be lost.
 
-下面两个勾不用理会，因为大部分人都不会选择第一个单选框，所以这两个勾毫无意义了。本篇博客也将选择 **“其他选项”** 。 那么我们选择下面那个 **“其他选项”** 。
+The two checkboxes below don't matter because most people won't choose the first option anyway. This blog will choose **"Something else"**. So select the second option.
 
 ![](/img/截图_2019-06-23_16-15-56.png)
 
-选择其他选项后，就会进入这个页面，这里就是建立分区表的地方（废话，下面都写着呢，还用你说）了。
+After selecting "Something else", you'll enter this page, where you can create a partition table.
 
 ![](/img/截图_2019-06-23_16-33-55.png)
 
-那么，因为教程演示是虚拟机，所以点击新建分区表，如果是物理机则不需要了。
+Since this is a virtual machine demonstration, click "New Partition Table". For a physical machine, this isn't needed.
 
-这时候会弹出一个提示，这个也不必理会它，直接点`继续`即可。
+A prompt will appear — just click `Continue`.
 
 ![](/img/截图_2019-06-23_16-35-03.png)
 
-接下来一个空的分区表就建立好了。
+An empty partition table will be created.
 
 ![](/img/截图_2019-06-23_16-35-14.png)
 
-那么，要怎样分区呢？
+So, how do you partition?
 
-我们知道Linux必须分的区有`根(/)分区`、`/boot分区`和`swap分区`，那么该分多少呢?
+Linux requires at least the `/` (root), `/boot`, and `swap` partitions. How much space should each get?
 
-从`/boot`说起，这个分区是存放系统启动引导文件的，只需要500MB左右，但别小看了这个小分区，如果没有这个，根分区一旦被写满，系统将无法启动。
+`/boot`: This partition stores system boot files. It only needs about 500MB. Don't underestimate this small partition — without it, if the root partition fills up, the system won't boot.
 
-`SWAP分区`：用于给内存交换空间，当内存要爆了的时候系统会把一部分进程转移到SWAP里面，它所需的大小可以是内存大小的一半，也可以与内存大小相等，也可以是内存的两倍，但是太大也不好，如果内存够用的话，swap分太大会浪费不少的硬盘存储空间。
+`SWAP partition`: Used for memory swap space. When memory is about to run out, the system moves some processes to SWAP. It can be half the size of your RAM, equal to it, or twice as much. But too large isn't good — if you have enough RAM, allocating too much to swap wastes disk space.
 
-最后是根分区了，这个好理解，就是系统分区，应该将剩下的全都分给它。
+`Root partition`: This is straightforward — it's the system partition. Give it all the remaining space.
 
-那么具体怎么分呢，参考我操作咯
+Here's how to do it:
 
-点击那个`+`,将会弹出一个创建分区的窗口
+Click the `+` button to create a partition.
 
 ![](/img/截图_2019-06-23_16-55-46.png)
 
 ![](/img/截图_2019-06-23_16-56-14.png)
 
-先创建一个`/boot`分区，大小500MB，文件系统为EXT4文件系统，挂载点为`/boot`。
+First, create a `/boot` partition: 500MB, EXT4 filesystem, mount point `/boot`.
 
 ![](/img/截图_2019-06-23_17-00-20.png)
 
-然后发现左下角的`+`，变成了灰色？不用怕，继续选择空闲空间它就会变成可选择的了。
-
-那么同上操作，我们分SWAP，但是注意了：SWAP不是挂载点，应该在文件系统里选择 **“交换空间”**
-
-类型为主分区，大小1024MB，文件系统为交换空间，挂载点不用选择
+Then create the SWAP partition: Primary partition, 1024MB, filesystem type "swap area", no mount point needed.
 
 ![](/img/截图_2019-06-23_17-13-14.png)
 
 ![](/img/截图_2019-06-23_17-13-28.png)
 
-那么同上操作，我们来分`根分区`，类型主分区，文件系统EXT4，挂载点`/`，大小将剩下的容量全部给它。
+Then create the root partition: Primary partition, EXT4 filesystem, mount point `/`, give it all the remaining space.
 
 ![](/img/截图_2019-06-23_17-19-40.png)
 
-之后分区基本上就完成了
+The partition setup is essentially complete.
 
 ![](/img/截图_2019-06-23_17-19-59.png)
 
-#### 开始全自动安装
+#### Begin Automatic Installation
 
-现在我们可以安装了，点击 **“现在安装”** 即可，接下来会弹出一个提示，内容如图，点击 **“继续”** 即可。
+Now we can install. Click **"Install Now"**. A prompt will appear — click **"Continue"**.
 
 ![](/img/截图_2019-06-23_17-23-47.png)
 
-接下来就会要你选择地区了，这个决定了系统的时区，一定要根据实际情况选择，我们选择上海。然后点击 **“继续”**
+Next, you'll be asked to select your region. This determines the system's timezone. Choose based on your actual location. For China, select Shanghai. Then click **"Continue"**.
 
 ![](/img/截图_2019-06-23_17-27-27.png)
 
-然后设置什么姓名啊计算机名啊用户名啊密码啊什么的，这些可以随便写，但是你一定要记住你写的用户名和密码是什么。
+Then set your name, computer name, username, and password. These can be anything, but make sure you remember your username and password.
 
-下面有一个加密主目录，可选可不选，意思是把你的用户目录进行加密，我就不选了，没必要。
+There's a "Encrypt Home Directory" option — optional. I won't select it since it's not necessary for me.
 
-写好选好以后，点击继续即可。
+After filling everything in, click "Continue".
 
 ![](/img/截图_2019-06-23_17-32-21.png)
 
-接下来就会开始安装了，全自动哦～去喝杯奶茶慢慢等吧。
+The installation will start — fully automatic! Go grab a cup of milk tea and wait.
 
 ![](/img/截图_2019-06-23_17-34-43.png)
 
 ![](/img/截图_2019-06-23_17-35-02.png)
 
-一直等就好。
+Just keep waiting.
 
-直到出现了这个窗口
+Until this window appears:
 
 ![](/img/截图_2019-06-23_17-53-00.png)
 
-那么恭喜你，你安装成功了！点击**现在重启**。 如果你出现了这个，虚拟机把虚拟光驱卸掉按回车即可，物理机则拔掉U盘按回车即可。
+Congratulations, you've successfully installed! Click **"Restart Now"**. If you're using a VM, remove the virtual optical drive and press Enter. Physical machine users should remove the USB drive and press Enter.
 
-（物理机一般不会出现这个）
+(Physical machines usually won't see this prompt.)
 
 ![](/img/截图_2019-06-23_17-58-03.png)
 
-接下来如果没出问题的话，就进入系统了。
+If everything went smoothly, you'll boot into the system.
 
-登录你刚刚设置的用户和密码，好好享受吧。
+Log in with the username and password you set, and enjoy.
 
 ![](/img/截图_2019-06-23_18-05-27.png)
 
 ---
 
-## 总结
+## Summary
 
-稍微总结一下，Linux Mint是对新手比较友好的一份Linux发行版，它的安装过程也是非常简单的，基本上都是图形操作点点点。所以非常推荐新手学习使用
+To summarize, Linux Mint is a very beginner-friendly Linux distribution. Its installation process is very simple — mostly just clicking through graphical operations. So I highly recommend it for beginners.
 
-另外，本博客仅供参考和学习，如果出现其他问题请自行百度。
+This blog is for reference and learning purposes only. If other issues arise, please search for solutions yourself.
 
-如需转载，请注明出处。
+If reprinting, please indicate the source.
