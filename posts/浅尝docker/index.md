@@ -13,7 +13,7 @@ Well, preparing for the future, learning how to play with docker early.
 {{< admonition type=tip title="Official English Introduction" open=true >}}
 Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker's methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
 {{< /admonition >}}
-According to the official documentation and in通俗 terms, docker provides containers for quickly deploying software projects. It's like a virtual machine that can simulate the environment needed by a project, but it's different from the typical virtual machines we know.
+According to the official documentation and in simple terms, Docker provides containers for quickly deploying software projects. It's like a virtual machine that can simulate the environment needed by a project, but it's different from the typical virtual machines we know.
 
 Regular virtual machines require installing an entire operating system, which consumes a lot of resources from our computer. Docker only simulates the runtime environment needed by the project, with very low resource usage — this can greatly improve development efficiency.
 
